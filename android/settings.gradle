@@ -1,0 +1,3 @@
+rootProject.name = 'magento_react_native'
+
+include ':app'
