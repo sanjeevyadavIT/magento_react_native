@@ -1,14 +1,14 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import DashboardScreen from '../containers/Dashboard';
 import DetailScreen from '../containers/DetailScreen';
 
 const Navigator = createStackNavigator(
   {
     DashboardScreen,
-    DetailSreen
+    DetailScreen
   }
 )
 
-const RootStack = createAppContainer(RootStack)
+const RootStack = createAppContainer(Navigator)
 
 export default RootStack;
