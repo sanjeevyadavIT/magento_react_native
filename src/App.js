@@ -9,13 +9,16 @@
 
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
+import { Provider } from 'react-redux';
+import { Navigator } from './navigation/Navigator';
+import store from './store';
 
 class App extends Component{
   render() {
     return (
-      <View>
-        <Text>Magento 2 React Native</Text>
-      </View>
+      <Provider store ={store}>
+        <Navigator/>
+      </Provider>
     );
   }
 }
