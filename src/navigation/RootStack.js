@@ -1,11 +1,13 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import DashboardScreen from '../containers/Dashboard';
-import DetailScreen from '../containers/DetailScreen';
+import CategoryTree from '../components/catalog/CategoryTree';
+import CategoryList from '../components/catalog/CategoryList';
 
 const Navigator = createStackNavigator(
   {
     DashboardScreen,
-    DetailScreen
+    CategoryTree,
+    category: CategoryList
   }
 )
 
