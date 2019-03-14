@@ -53,7 +53,6 @@ export const getProduct = async (sku) => {
     }
   });
 
-  console.log(`${BASE_URL}${WEB_SERVICE_PRODUCT}/${sku}`)
   const productResult = await axios.get(`${BASE_URL}${WEB_SERVICE_PRODUCT}/${sku}`,{
       headers: {
         Authorization: `Bearer ${tokenResult.data}`,
