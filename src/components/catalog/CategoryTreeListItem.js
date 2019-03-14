@@ -45,7 +45,6 @@ class CategoryTreeListItem extends React.Component{
 
     renderItem = () => {
         const { category } = this.props;
-        console.log(category)
         let space = '';
         for(let i = 0; i < category.level*4; i++){
             space+=' ';
