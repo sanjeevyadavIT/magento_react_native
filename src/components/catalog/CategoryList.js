@@ -16,6 +16,7 @@ class CategoryList extends React.Component {
 
 		const { navigation } = this.props;
 		const categoryId = navigation.getParam('categoryId', 0);
+		console.log(categoryId)
 		//const categoryName = navigation.getParam('categoryName', '-')
 
 		getProducts(categoryId).then(data => {

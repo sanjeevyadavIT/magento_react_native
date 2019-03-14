@@ -21,7 +21,7 @@ export const getCategories = async () => {
 }
 
 function createProductsUrl(categoryId){
-  return `${BASE_URL}${WEB_SERVICE_PRODUCT_LIST_FOR_CATEGORY}${categoryId}&searchCriteria[filterGroups][0][filters][0][field]=visibility&searchCriteria[filterGroups][0][filters][0][value]=4&searchCriteria[filterGroups][0][filters][0][conditionType]=eq`;
+  return `${BASE_URL}${WEB_SERVICE_PRODUCT_LIST_FOR_CATEGORY}${categoryId}&searchCriteria[filterGroups][0][filters][1][field]=visibility&searchCriteria[filterGroups][0][filters][1][value]=4`;
 }
 
 export const getProducts = async (categoryId) => {
