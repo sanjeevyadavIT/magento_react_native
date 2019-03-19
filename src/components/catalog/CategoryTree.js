@@ -1,42 +1,37 @@
 import React from 'react';
-import { View, ActivityIndicator} from  'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import CategoryTreeList from './CategoryTreeList';
-import {getCategories} from '../../magento';
+import { getCategoryTree } from '../../actions/RestActions';
+import {
+    CATEGORY_TREE,
+} from '../../reducers/types';
 
-class CategoryTree extends React.Component{
+import { connect } from 'react-redux';
 
-    constructor(props){
-        super(props);
-        this.state = {
-            categories: null,
+class CategoryTree extends React.Component {
+
+    renderContent() {
+        const categories = this.props[CATEGORY_TREE];
+        if (categories) {
+            return <CategoryTreeList categories={categories} navigate={this.props.navigation.navigate} />
         }
-    }
-
-    componentDidMount(){
-    
-        getCategories().then( data => {
-            this.setState({categories: data })
-          })
-          .catch(function(error){
-            console.log(error)
-          })
-    }
-
-
-    renderContent(){
-        if(this.state.categories){
-            return <CategoryTreeList categories={this.state.categories} navigate={this.props.navigation.navigate} />
-        }
+        this.props.dispatch(getCategoryTree());
         return <ActivityIndicator />
     }
 
-    render(){
-        return(
-            <View style={{flex:1}}>
+    render() {
+        return (
+            <View style={{ flex: 1 }}>
                 {this.renderContent()}
             </View>
         )
-    }    
+    }
 }
 
-export default CategoryTree;
+const mapStateToProps = (state) => {
+    return {
+        [CATEGORY_TREE]: state[CATEGORY_TREE],
+    }
+}
+
+export default connect(mapStateToProps)(CategoryTree);

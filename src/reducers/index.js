@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
-
-const temp = () => ({});
+import CategoryTreeReducer from './CategoryTreeReducer';
+import {
+  CATEGORY_TREE,
+} from './types';
 
 export default combineReducers({
-  temp
+  [CATEGORY_TREE]: CategoryTreeReducer,
 })

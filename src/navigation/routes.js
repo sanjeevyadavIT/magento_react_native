@@ -5,7 +5,7 @@ import CategoryList from '../components/catalog/CategoryList';
 import Product from '../components/catalog/Product';
 
 
-const Navigator = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
     DashboardScreen,
     CategoryTree,
@@ -14,6 +14,6 @@ const Navigator = createStackNavigator(
   }
 )
 
-const RootStack = createAppContainer(Navigator)
+const Navigator = createAppContainer(HomeStack)
 
-export default RootStack;
+export default Navigator;

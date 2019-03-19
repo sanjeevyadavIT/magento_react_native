@@ -17,11 +17,13 @@
     "react-navigation": "^3.3.2",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "24.3.1",
+    "eslint": "^5.15.1",
     "jest": "24.3.1",
     "metro-react-native-babel-preset": "0.53.0",
     "react-test-renderer": "16.8.4"
