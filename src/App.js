@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { View, Text} from 'react-native';
+import React from 'react';
 import { Provider } from 'react-redux';
-import Navigator from './navigation/routes';
+import Navigator from './routes';
 import store from './config/store';
 
 const App = () => (
@@ -9,6 +8,5 @@ const App = () => (
     <Navigator />
   </Provider>
 );
-
 
 export default App;

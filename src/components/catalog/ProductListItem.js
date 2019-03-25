@@ -9,7 +9,8 @@ class ProductListItem extends React.Component {
 
 	rowPressed = (sku) => {
 		console.log(`row pressed ${sku}`)
-		const { navigate } = this.props;
+    const { navigate } = this.props;
+    this.props.setCurrentProductSku(sku);
 		navigate('product', {
 			sku
 		});

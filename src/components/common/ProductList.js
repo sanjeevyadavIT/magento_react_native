@@ -3,9 +3,9 @@ import { View, FlatList, ActivityIndicator} from 'react-native';
 import ProductListItem from '../catalog/ProductListItem';
 
 class ProductList extends React.Component{
-	
+
 	renderChild = (product) => {
-		return <ProductListItem product={product.item} navigate={this.props.navigate}/>
+		return <ProductListItem product={product.item} navigate={this.props.navigate} setCurrentProductSku={this.props.setCurrentProductSku}/>
 	}
 
 	renderContent = () => {
@@ -21,7 +21,7 @@ class ProductList extends React.Component{
 					numColumns={2}
 				/>
 				</View>
-				
+
 			)
 		}
 	}
