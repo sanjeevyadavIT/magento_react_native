@@ -38,9 +38,33 @@ export default magento => ({
       'searchCriteria[filterGroups][1][filters][0][field]': 'visibility',
       'searchCriteria[filterGroups][1][filters][0][value]': '4',
       'searchCriteria[filterGroups][1][filters][0][conditionType]': 'eq',
-      // TODO: Implement pagination
-      /*  'searchCriteria[pageSize]': pageSize,
-          'searchCriteria[currentPage]': currentPage,
+      /*
+        // TODO: Implement pagination
+        'searchCriteria[pageSize]': pageSize,
+        'searchCriteria[currentPage]': currentPage,
+      */
+    };
+    return magento.admin.getProductsWithSearchCritaria(params);
+  },
+
+  getProductsWithAttribute: (
+    attributeCode,
+    attributeValue,
+    pageSize = 10,
+    offset = 0,
+    conditionType = 'like'
+  ) => {
+    const params = {
+      'searchCriteria[filterGroups][0][filters][0][field]': attributeCode,
+      'searchCriteria[filterGroups][0][filters][0][value]': attributeValue,
+      'searchCriteria[filterGroups][0][filters][0][conditionType]': conditionType,
+      'searchCriteria[filterGroups][1][filters][0][field]': 'visibility',
+      'searchCriteria[filterGroups][1][filters][0][value]': '4',
+      'searchCriteria[filterGroups][1][filters][0][conditionType]': 'eq',
+      /*
+        // TODO: Implement pagination
+        'searchCriteria[pageSize]': pageSize,
+        'searchCriteria[currentPage]': currentPage
       */
     };
     return magento.admin.getProductsWithSearchCritaria(params);

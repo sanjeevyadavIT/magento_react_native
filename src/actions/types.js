@@ -13,3 +13,7 @@ export const MAGENTO_SET_CURRENT_PRODUCT_SKU = 'magento_set_current_product_sku'
 export const MAGENTO_GET_PRODUCT_DETAIL = 'magento_get_product_detail';
 export const MAGENTO_SET_PRODUCT_DETAIL = 'magento_set_product_detail';
 export const MAGENTO_ERROR_PRODUCT_DETAIL = 'magento_error_product_detail';
+
+export const MAGENTO_GET_SEARCH_PRODUCTS = 'magento_get_search_products';
+export const MAGENTO_SET_SEARCH_PRODUCTS = 'magento_set_search_products';
+export const MAGENTO_ERROR_SEARCH_PRODUCTS = 'magento_error_search_products';

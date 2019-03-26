@@ -14,6 +14,9 @@ import {
   MAGENTO_GET_PRODUCT_DETAIL,
   MAGENTO_SET_PRODUCT_DETAIL,
   MAGENTO_ERROR_PRODUCT_DETAIL,
+  MAGENTO_GET_SEARCH_PRODUCTS,
+  MAGENTO_SET_SEARCH_PRODUCTS,
+  MAGENTO_ERROR_SEARCH_PRODUCTS,
 } from '../actions/types';
 import { magento } from '../magento';
 import { magentoOptions } from './magento';
@@ -65,11 +68,23 @@ const getProductDetail = function* fetchProductDetail(action) {
   }
 };
 
+const getSearchProducts = function* fetchSearchProducts(action) {
+  try {
+    const payload = yield call({ context: magento, fn: magento.admin.getProductsWithAttribute }, 'name', `%${action.payload}%`);
+    // dispatch an action to set products data
+    yield put({ type: MAGENTO_SET_SEARCH_PRODUCTS, payload: { searchInput: action.payload, products: payload, totalCount: payload.total_count } });
+  } catch (error) {
+    yield put({ type: MAGENTO_ERROR_SEARCH_PRODUCTS, error });
+    console.log(error);
+  }
+};
+
 const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_INIT, initMagento);
   yield takeEvery(MAGENTO_GET_CATEGORY_TREE, getCategoryTree);
   yield takeEvery(MAGENTO_GET_CATEGORY_PRODUCTS, getCategoryProducts);
   yield takeEvery(MAGENTO_GET_PRODUCT_DETAIL, getProductDetail);
+  yield takeEvery(MAGENTO_GET_SEARCH_PRODUCTS, getSearchProducts);
 };
 
 export default rootSaga;

@@ -5,6 +5,7 @@ import {
   MAGENTO_GET_CATEGORY_PRODUCTS,
   MAGENTO_SET_CURRENT_PRODUCT_SKU,
   MAGENTO_GET_PRODUCT_DETAIL,
+  MAGENTO_GET_SEARCH_PRODUCTS,
 } from './types';
 
 export const initMagento = () => ({
@@ -33,4 +34,9 @@ export const setCurrentProductSku = sku => ({
 export const getProductDetail = sku => ({
   type: MAGENTO_GET_PRODUCT_DETAIL,
   payload: sku,
+});
+
+export const getSearchProducts = searchInput => ({
+  type: MAGENTO_GET_SEARCH_PRODUCTS,
+  payload: searchInput,
 });
