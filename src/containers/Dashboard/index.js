@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Button, TextInput } from 'react-native';
+import { View, Text, Button, TextInput, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { initMagento } from '../../actions';
+import { HOME } from '../../reducers/types';
 import {
   NAVIGATION_CATEGORY_TREE_PATH,
   NAVIGATION_SEARCH_SCREEN_PATH,
@@ -33,6 +34,18 @@ class DashboardScreen extends React.Component {
     });
   }
 
+  renderHomeContent = () => {
+    if (this.props[HOME].content) {
+      return (
+        <Text>{JSON.stringify(this.props[HOME])}</Text>
+      );
+    }
+
+    if (this.props[HOME].loading === false) return null;
+
+    return <ActivityIndicator />;
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -52,11 +65,16 @@ class DashboardScreen extends React.Component {
             title="Search"
           />
         </View>
+        <View style={{ marginTop: 16 }}>
+          {this.renderHomeContent()}
+        </View>
       </View>
     );
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  [HOME]: state[HOME]
+});
 
 export default connect(mapStateToProps)(DashboardScreen);

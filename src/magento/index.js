@@ -87,8 +87,19 @@ class Magento {
     });
   }
 
+  isConfigured() {
+    return this.access_token != null;
+  }
+
   setStoreConfig(config) {
     this.storeConfig = config[0];
+  }
+
+  getHomeData() {
+    if (this.configuration.home_cms_block_id) {
+      return this.admin.getCmsBlock(this.configuration.home_cms_block_id);
+    }
+    return false;
   }
 }
 

@@ -5,6 +5,10 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import {
   MAGENTO_INIT,
+  MAGENTO_GET_HOME_DATA,
+  MAGENTO_SET_HOME_DATA,
+  MAGENTO_NO_HOME_DATA,
+  MAGENTO_ERROR_HOME_DATA,
   MAGENTO_GET_CATEGORY_TREE,
   MAGENTO_SET_CATEGORY_TREE,
   MAGENTO_ERROR_CATEGORY_TREE,
@@ -23,6 +27,8 @@ import { magentoOptions } from './magento';
 
 
 const initMagento = function* initializeMagento() {
+  if (magento.isConfigured()) return;
+
   try {
     // Set magento url and admin access
     magento.setOptions(magentoOptions);
@@ -30,10 +36,30 @@ const initMagento = function* initializeMagento() {
     yield call({ context: magento, fn: magento.init });
     // Fetch store configuration details
     yield call(magento.admin.getStoreConfig);
+    // fetch HomeData
+    yield put({ type: MAGENTO_GET_HOME_DATA });
   } catch (error) {
     console.log(error);
   }
 };
+
+const getHomeData = function* fetchHomeData() {
+  try {
+    // Fetch the cms block
+    const payload = yield call({ context: magento, fn: magento.getHomeData });
+    // if false, no CMS block is configured
+    if (payload !== false) {
+      payload.content = payload.content.replace(/<\/?[^>]+(>|$)/g, '');
+      yield put({ type: MAGENTO_SET_HOME_DATA, payload });
+    } else {
+      yield put({ type: MAGENTO_NO_HOME_DATA });
+    }
+  } catch (error) {
+    yield put({ type: MAGENTO_ERROR_HOME_DATA, error });
+    console.log(error);
+  }
+};
+
 
 const getCategoryTree = function* fetchCategoryTree() {
   try {
@@ -81,6 +107,7 @@ const getSearchProducts = function* fetchSearchProducts(action) {
 
 const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_INIT, initMagento);
+  yield takeEvery(MAGENTO_GET_HOME_DATA, getHomeData);
   yield takeEvery(MAGENTO_GET_CATEGORY_TREE, getCategoryTree);
   yield takeEvery(MAGENTO_GET_CATEGORY_PRODUCTS, getCategoryProducts);
   yield takeEvery(MAGENTO_GET_PRODUCT_DETAIL, getProductDetail);

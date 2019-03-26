@@ -97,4 +97,18 @@ export default magento => ({
         });
     })
   ),
+
+  getCmsBlock: id => (
+    new Promise((resolve, reject) => {
+      const path = `/V1/cmsBlock/${id}`;
+
+      magento.get(path, undefined, undefined, ADMIN_TYPE)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
+  ),
 });

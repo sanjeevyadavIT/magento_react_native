@@ -1,4 +1,8 @@
 export const MAGENTO_INIT = 'magento_init';
+export const MAGENTO_GET_HOME_DATA = 'magento_get_home_data';
+export const MAGENTO_SET_HOME_DATA = 'magento_set_home_data';
+export const MAGENTO_NO_HOME_DATA = 'magento_no_cms_block_set';
+export const MAGENTO_ERROR_HOME_DATA = 'magento_error_home_data';
 
 export const MAGENTO_GET_CATEGORY_TREE = 'magento_get_category_tree';
 export const MAGENTO_SET_CATEGORY_TREE = 'magento_set_category_tree';

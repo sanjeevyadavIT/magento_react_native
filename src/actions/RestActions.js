@@ -1,5 +1,6 @@
 import {
   MAGENTO_INIT,
+  MAGENTO_GET_HOME_DATA,
   MAGENTO_GET_CATEGORY_TREE,
   MAGENTO_SET_CURRENT_CATEGORY,
   MAGENTO_GET_CATEGORY_PRODUCTS,
@@ -10,6 +11,10 @@ import {
 
 export const initMagento = () => ({
   type: MAGENTO_INIT,
+});
+
+export const getHomeData = () => ({
+  type: MAGENTO_GET_HOME_DATA,
 });
 
 export const getCategoryTree = () => ({
