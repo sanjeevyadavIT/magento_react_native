@@ -2,10 +2,15 @@ import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import ProductList from '../common/ProductList';
+import { SEARCH_PAGE_TITLE } from '../../constants';
 import { getSearchProducts, setCurrentProduct } from '../../actions';
 import { SEARCH } from '../../reducers/types';
 
 class SearchScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('search', SEARCH_PAGE_TITLE),
+  })
+
   renderContent = () => {
     const {
       navigation,
