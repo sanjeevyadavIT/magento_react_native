@@ -12,6 +12,7 @@ class CategoryTreeListItem extends React.Component {
     this.state = {
       expanded: false,
     };
+    this.onRowPress = this.onRowPress.bind(this);
   }
 
   onExpandPress = () => {
@@ -21,11 +22,11 @@ class CategoryTreeListItem extends React.Component {
     }));
   }
 
-  onRowPress = () => {
-    const { category, navigate } = this.props;
-    this.props.setCurrentCategory(category.id);
+  onRowPress() {
+    const { category, setCurrentCategory: _setCurrentCategory, navigate } = this.props;
+    _setCurrentCategory(category.id);
     navigate(NAVIGATION_CATEGORY_PATH, {
-      categoryName: category.name,
+      title: category.name,
     });
   }
 

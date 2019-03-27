@@ -3,12 +3,17 @@ import { View, Text, Button, TextInput, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { initMagento } from '../../actions';
 import { HOME } from '../../reducers/types';
+import { BRAND_NAME } from '../../constants';
 import {
   NAVIGATION_CATEGORY_TREE_PATH,
   NAVIGATION_SEARCH_SCREEN_PATH,
 } from '../../routes/types';
 
 class DashboardScreen extends React.Component {
+  static navigationOptions = {
+    title: BRAND_NAME,
+  }
+
   constructor(props) {
     super(props);
     this.state = {

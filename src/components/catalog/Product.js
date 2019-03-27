@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Text, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { BASE_MEDIA_URL } from '../../constants';
+import { BASE_MEDIA_URL, BRAND_NAME } from '../../constants';
 import { PRODUCT } from '../../reducers/types';
 import { getProductDetail } from '../../actions/RestActions';
 
 class Product extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('title', BRAND_NAME),
+  })
+
   renderImage = (images) => {
     images.map(image => console.log(`${BASE_MEDIA_URL}/catalog/product${image.file}`))
     return (

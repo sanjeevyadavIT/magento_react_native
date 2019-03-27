@@ -4,8 +4,13 @@ import { connect } from 'react-redux';
 import ProductList from '../common/ProductList';
 import { getCategoryProducts, setCurrentProductSku } from '../../actions';
 import { CATEGORY } from '../../reducers/types';
+import { BRAND_NAME } from '../../constants';
 
 class CategoryList extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('title', BRAND_NAME),
+  })
+
   renderContent = () => {
     const {
       navigation,
