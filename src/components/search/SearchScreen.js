@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import ProductList from '../common/ProductList';
-import { getSearchProducts, setCurrentProductSku } from '../../actions';
+import { getSearchProducts, setCurrentProduct } from '../../actions';
 import { SEARCH } from '../../reducers/types';
 
 class SearchScreen extends React.Component {
@@ -11,7 +11,7 @@ class SearchScreen extends React.Component {
       navigation,
       [SEARCH]: searchData,
       getSearchProducts: _getSearchProducts,
-      setCurrentProductSku: _setCurrentProductSku,
+      setCurrentProduct: _setCurrentProduct,
     } = this.props;
 
     const currentSearchInput = navigation.getParam('search', 'ABCDE');
@@ -21,7 +21,7 @@ class SearchScreen extends React.Component {
           <ProductList
             products={searchData.products.items}
             navigate={navigation.navigate}
-            setCurrentProductSku={_setCurrentProductSku}
+            setCurrentProduct={_setCurrentProduct}
           />
         );
       }
@@ -48,5 +48,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   getSearchProducts,
-  setCurrentProductSku,
+  setCurrentProduct,
 })(SearchScreen);
