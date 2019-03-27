@@ -15,9 +15,9 @@ import {
   MAGENTO_GET_CATEGORY_PRODUCTS,
   MAGENTO_SET_CATEGORY_PRODUCTS,
   MAGENTO_ERROR_CATEGORY_PRODUCTS,
-  MAGENTO_GET_PRODUCT_DETAIL,
-  MAGENTO_SET_PRODUCT_DETAIL,
-  MAGENTO_ERROR_PRODUCT_DETAIL,
+  MAGENTO_GET_PRODUCT_MEDIA,
+  MAGENTO_SET_PRODUCT_MEDIA,
+  MAGENTO_ERROR_PRODUCT_MEDIA,
   MAGENTO_GET_SEARCH_PRODUCTS,
   MAGENTO_SET_SEARCH_PRODUCTS,
   MAGENTO_ERROR_SEARCH_PRODUCTS,
@@ -83,13 +83,25 @@ const getCategoryProducts = function* fetchCategoryProducts(action) {
   }
 };
 
-const getProductDetail = function* fetchProductDetail(action) {
+/*
+  const getProductDetail = function* fetchProductDetail(action) {
+    try {
+      const payload = yield call({ context: magento, fn: magento.admin.getProductBySku }, action.payload);
+      // dispatch an action to set products data
+      yield put({ type: MAGENTO_SET_PRODUCT_DETAIL, payload });
+    } catch (error) {
+      yield put({ type: MAGENTO_ERROR_PRODUCT_DETAIL, error });
+      console.log(error);
+    }
+  };
+*/
+
+const getProductMedia = function* fetchProductMedia({ payload: sku }) {
   try {
-    const payload = yield call({ context: magento, fn: magento.admin.getProductBySku }, action.payload);
-    // dispatch an action to set products data
-    yield put({ type: MAGENTO_SET_PRODUCT_DETAIL, payload });
+    const payload = yield call({ content: magento, fn: magento.admin.getProductMedia }, sku);
+    yield put({ type: MAGENTO_SET_PRODUCT_MEDIA, payload: { sku, media: payload } });
   } catch (error) {
-    yield put({ type: MAGENTO_ERROR_PRODUCT_DETAIL, error });
+    yield put({ type: MAGENTO_ERROR_PRODUCT_MEDIA, error });
     console.log(error);
   }
 };
@@ -110,7 +122,7 @@ const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_GET_HOME_DATA, getHomeData);
   yield takeEvery(MAGENTO_GET_CATEGORY_TREE, getCategoryTree);
   yield takeEvery(MAGENTO_GET_CATEGORY_PRODUCTS, getCategoryProducts);
-  yield takeEvery(MAGENTO_GET_PRODUCT_DETAIL, getProductDetail);
+  yield takeEvery(MAGENTO_GET_PRODUCT_MEDIA, getProductMedia);
   yield takeEvery(MAGENTO_GET_SEARCH_PRODUCTS, getSearchProducts);
 };
 

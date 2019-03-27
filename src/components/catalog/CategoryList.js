@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import ProductList from '../common/ProductList';
-import { getCategoryProducts, setCurrentProductSku } from '../../actions';
+import { getCategoryProducts, setCurrentProduct } from '../../actions';
 import { CATEGORY } from '../../reducers/types';
 import { BRAND_NAME } from '../../constants';
 
@@ -16,7 +16,7 @@ class CategoryList extends React.Component {
       navigation,
       [CATEGORY]: categoryData,
       getCategoryProducts: _getCategoryProducts,
-      setCurrentProductSku: _setCurrentProductSku,
+      setCurrentProduct: _setCurrentProduct,
     } = this.props;
     if (categoryData.currentCategoryId) {
       if (categoryData.products) {
@@ -24,7 +24,7 @@ class CategoryList extends React.Component {
           <ProductList
             products={categoryData.products.items}
             navigate={navigation.navigate}
-            setCurrentProductSku={_setCurrentProductSku}
+            setCurrentProduct={_setCurrentProduct}
           />
         );
       }
@@ -49,5 +49,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   getCategoryProducts,
-  setCurrentProductSku,
+  setCurrentProduct,
 })(CategoryList);

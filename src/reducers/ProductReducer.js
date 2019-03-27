@@ -1,32 +1,33 @@
 import {
-  MAGENTO_SET_CURRENT_PRODUCT_SKU,
-  MAGENTO_SET_PRODUCT_DETAIL,
-  MAGENTO_ERROR_PRODUCT_DETAIL,
+  MAGENTO_SET_CURRENT_PRODUCT,
+  MAGENTO_SET_PRODUCT_MEDIA,
 } from '../actions/types';
 
-const getInitialState = (productId, productSku) => ({
-  currentProductSku: productSku,
-  currentProductid: productId,
-  product: null,
+const initialState = {
+  current: null,
+  medias: {},
   attributes: {},
   qtyInput: 1,
   selectedOptions: {}
-});
+};
 
-export default (state = getInitialState(null, null), action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case MAGENTO_SET_CURRENT_PRODUCT_SKU:
+    case MAGENTO_SET_CURRENT_PRODUCT:
       return {
         ...state,
-        ...getInitialState(null, action.payload),
+        selectedOptions: {},
+        current: action.payload,
       };
-    case MAGENTO_SET_PRODUCT_DETAIL:
+    case MAGENTO_SET_PRODUCT_MEDIA:
       return {
         ...state,
-        product: action.payload,
+        medias: {
+          ...state.medias,
+          [action.payload.sku]: action.payload.media,
+        }
       };
-    case MAGENTO_ERROR_PRODUCT_DETAIL:
     default:
       return state;
   }
-}
+};

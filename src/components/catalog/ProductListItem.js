@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { BASE_MEDIA_URL } from '../../constants'
+import { magento } from '../../magento';
 
 class ProductListItem extends React.Component {
   constructor(props) {
@@ -9,10 +9,9 @@ class ProductListItem extends React.Component {
   }
 
   onRowPress() {
-    const { product, setCurrentProductSku, navigate } = this.props;
-    setCurrentProductSku(product.sku);
+    const { product, setCurrentProduct, navigate } = this.props;
+    setCurrentProduct(product);
     navigate('product', {
-      sku: product.sku,
       title: product.name,
     });
   }
@@ -26,7 +25,7 @@ class ProductListItem extends React.Component {
         break;
       }
     }
-    return `${BASE_MEDIA_URL}/catalog/product${imageUrl}`.trim();
+    return `${magento.getProductMediaUrl()}${imageUrl}`.trim();
   }
 
   render() {

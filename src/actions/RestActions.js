@@ -4,8 +4,8 @@ import {
   MAGENTO_GET_CATEGORY_TREE,
   MAGENTO_SET_CURRENT_CATEGORY,
   MAGENTO_GET_CATEGORY_PRODUCTS,
-  MAGENTO_SET_CURRENT_PRODUCT_SKU,
-  MAGENTO_GET_PRODUCT_DETAIL,
+  MAGENTO_SET_CURRENT_PRODUCT,
+  MAGENTO_GET_PRODUCT_MEDIA,
   MAGENTO_GET_SEARCH_PRODUCTS,
 } from './types';
 
@@ -31,13 +31,13 @@ export const getCategoryProducts = categoryId => ({
   payload: categoryId,
 });
 
-export const setCurrentProductSku = sku => ({
-  type: MAGENTO_SET_CURRENT_PRODUCT_SKU,
-  payload: sku,
+export const setCurrentProduct = product => ({
+  type: MAGENTO_SET_CURRENT_PRODUCT,
+  payload: product,
 });
 
-export const getProductDetail = sku => ({
-  type: MAGENTO_GET_PRODUCT_DETAIL,
+export const getProductMedia = sku => ({
+  type: MAGENTO_GET_PRODUCT_MEDIA,
   payload: sku,
 });
 

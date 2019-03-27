@@ -4,7 +4,7 @@ import ProductListItem from '../catalog/ProductListItem';
 
 class ProductList extends React.Component {
   renderChild = (product) => {
-    return <ProductListItem product={product.item} navigate={this.props.navigate} setCurrentProductSku={this.props.setCurrentProductSku} />
+    return <ProductListItem product={product.item} navigate={this.props.navigate} setCurrentProduct={this.props.setCurrentProduct} />
   }
 
   renderContent = () => {

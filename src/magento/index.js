@@ -95,6 +95,10 @@ class Magento {
     this.storeConfig = config[0];
   }
 
+  getProductMediaUrl() {
+    return `${this.storeConfig.base_media_url}catalog/product`;
+  }
+
   getHomeData() {
     if (this.configuration.home_cms_block_id) {
       return this.admin.getCmsBlock(this.configuration.home_cms_block_id);
