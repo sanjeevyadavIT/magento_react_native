@@ -2,7 +2,6 @@ import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import CategoryTreeList from './CategoryTreeList';
-import { getCategoryTree } from '../../actions';
 import { CATEGORY_TREE_PAGE_TITLE } from '../../constants';
 import { CATEGORY_TREE } from '../../reducers/types';
 
@@ -13,11 +12,11 @@ class CategoryTree extends React.Component {
   };
 
   renderContent() {
-    const { [CATEGORY_TREE]: categories, navigation, dispatch } = this.props;
+    const { [CATEGORY_TREE]: categories, navigate } = this.props;
     if (categories) {
-      return <CategoryTreeList categories={categories} navigate={navigation.navigate} />;
+      return <CategoryTreeList categories={categories} navigate={navigate} />;
     }
-    dispatch(getCategoryTree());
+    // dispatch(getCategoryTree());
     return <ActivityIndicator />;
   }
 

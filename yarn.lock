@@ -5585,6 +5585,11 @@ react-native-keyboard-aware-scroll-view@0.8.0:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
+react-native-platform-touchable@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
+  integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
+
 react-native-safe-area-view@^0.13.0:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.13.1.tgz#834bbb6d22f76a7ff07de56725ee5667ba1386b0"
@@ -5694,6 +5699,13 @@ react-navigation-drawer@1.3.0:
   integrity sha512-IDOaMseBeH1PutxRXkqDZTboZ/1mXVd4991JetsE5VmYvedmeh6z1AtBaCJu2rwRdV4U9K2I0xMyjwI0Nijqjg==
   dependencies:
     react-native-tab-view "^1.2.0"
+
+react-navigation-header-buttons@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-navigation-header-buttons/-/react-navigation-header-buttons-2.2.0.tgz#41e2c94051a33907b3a3c31172c832aa17d21afc"
+  integrity sha512-Dv1GBcs6gxBVm6rVR81EdHlBYCmbmOJKiE5OoRRLLwKzalAMDbv68zQv7+TkgpqBDHXfhUB++KMuM7/8nXfM8w==
+  dependencies:
+    react-native-platform-touchable "^1.1.1"
 
 react-navigation-stack@1.1.1:
   version "1.1.1"

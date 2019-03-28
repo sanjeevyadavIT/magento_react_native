@@ -34,13 +34,13 @@ class CategoryTreeListItem extends React.Component {
     const { category } = this.props;
     const { expanded } = this.state;
     if (category.children_data.length) {
-      const icon = expanded ? 'arrow-circle-o-up' : 'arrow-circle-o-down';
+      const icon = expanded ? 'caret-up' : 'caret-down';
       return (
         <Icon
-          style={{ padding: 2, paddingRight: 15 }}
+          style={{ padding: 2, paddingTop: 8, paddingRight: 15 }}
           name={icon}
-          color="#999"
-          size={30}
+          color="#222"
+          size={20}
           onPress={this.onExpandPress}
         />
       );
@@ -56,7 +56,7 @@ class CategoryTreeListItem extends React.Component {
       space += ' ';
     }
     return (
-      <View style={{ height: 40, borderWidth: 1, borderColor: '#222' }}>
+      <View style={{ height: 40, borderBottomWidth: 1, borderColor: '#222' }}>
         <TouchableOpacity
           onPress={this.onRowPress}
           style={{ flexDirection: 'row', justifyContent: 'space-between' }}

@@ -1,29 +1,39 @@
 import React from 'react';
-import { View, Text, Button, TextInput, ActivityIndicator } from 'react-native';
+import {
+  View, Text, Button, TextInput, ActivityIndicator
+} from 'react-native';
 import { connect } from 'react-redux';
-import { initMagento } from '../../actions';
-import { HOME } from '../../reducers/types';
+import { initMagento, getCategoryTree } from '../../actions';
+import { HOME, CATEGORY_TREE } from '../../reducers/types';
 import { BRAND_NAME } from '../../constants';
+import { MaterialHeaderButtons, Item } from '../../components/common';
 import {
   NAVIGATION_CATEGORY_TREE_PATH,
   NAVIGATION_SEARCH_SCREEN_PATH,
 } from '../../routes/types';
 
 class DashboardScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: BRAND_NAME,
-  }
+    headerLeft: (
+      <MaterialHeaderButtons>
+        <Item title="menu" iconName="menu" onPress={navigation.getParam('toggleDrawer')} />
+      </MaterialHeaderButtons>
+    )
+  })
 
   constructor(props) {
     super(props);
     this.state = {
       text: '',
     };
+    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(initMagento());
+    const { navigation, initMagento: _initMagento } = this.props;
+    _initMagento();
+    navigation.setParams({ toggleDrawer: this.toggleDrawer });
   }
 
   openCategoryTreeScreen = () => {
@@ -37,6 +47,18 @@ class DashboardScreen extends React.Component {
     navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH, {
       search: this.state.text
     });
+  }
+
+  toggleDrawer() {
+    const {
+      navigation,
+      getCategoryTree: _getCategoryTree,
+      [CATEGORY_TREE]: categoryTree,
+    } = this.props;
+    if (!categoryTree) {
+      _getCategoryTree();
+    }
+    navigation.toggleDrawer();
   }
 
   renderHomeContent = () => {
@@ -54,13 +76,11 @@ class DashboardScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Button
-          onPress={this.openCategoryTreeScreen}
-          title="All Categories"
-        />
         <View style={{ flexDirection: 'row', marginTop: 16 }}>
           <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1, flex: 7 }}
+            style={{
+              height: 40, borderColor: 'gray', borderWidth: 1, flex: 7
+            }}
             onChangeText={text => this.setState({ text })}
             value={this.state.text}
           />
@@ -79,7 +99,11 @@ class DashboardScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  [HOME]: state[HOME]
+  [HOME]: state[HOME],
+  [CATEGORY_TREE]: state[CATEGORY_TREE],
 });
 
-export default connect(mapStateToProps)(DashboardScreen);
+export default connect(mapStateToProps, {
+  initMagento,
+  getCategoryTree
+})(DashboardScreen);

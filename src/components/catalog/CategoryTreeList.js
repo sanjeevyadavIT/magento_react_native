@@ -3,13 +3,13 @@ import { FlatList } from 'react-native';
 import CategoryTreeListItem from './CategoryTreeListItem';
 
 class CategoryTreeList extends React.Component {
-  renderItem = category => (
-    <CategoryTreeListItem
+  renderItem = category => {
+    return <CategoryTreeListItem
       category={category.item}
       expanded={false}
       navigate={this.props.navigate}
     />
-  )
+  }
 
   render() {
     const { categories } = this.props;
