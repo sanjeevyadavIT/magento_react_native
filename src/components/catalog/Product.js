@@ -3,7 +3,7 @@ import { View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { BRAND_NAME } from '../../constants';
 import { PRODUCT } from '../../reducers/types';
-import { getProductMedia } from '../../actions/RestActions';
+import { getProductMedia, getConfigurableProductOptions } from '../../actions/RestActions';
 import { Spinner } from '../common';
 import ProductMedia from './ProductMedia';
 
@@ -13,7 +13,16 @@ class Product extends React.Component {
   })
 
   componentDidMount() {
-    const { product, medias, getProductMedia: _getProductMedia } = this.props;
+    const {
+      product,
+      medias,
+      getProductMedia: _getProductMedia,
+      getConfigurableProductOptions: _getConfigurableProductOptions,
+    } = this.props;
+
+    if (product.type_id === 'configurable') {
+      _getConfigurableProductOptions(product.sku);
+    }
 
     if (!medias || !medias[product.sku]) {
       _getProductMedia(product.sku);
@@ -73,4 +82,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getProductMedia })(Product);
+export default connect(mapStateToProps, {
+  getProductMedia,
+  getConfigurableProductOptions
+})(Product);

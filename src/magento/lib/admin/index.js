@@ -98,6 +98,34 @@ export default magento => ({
     })
   ),
 
+  getConfigurableProductOptions: sku => (
+    new Promise((resolve, reject) => {
+      const path = `/V1/configurable-products/${sku}/options/all`;
+
+      magento.get(path, undefined, undefined, ADMIN_TYPE)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
+  ),
+
+  getAttributeByCode: attributeId => (
+    new Promise((resolve, reject) => {
+      const path = `/V1/products/attributes/${attributeId}`;
+
+      magento.get(path, undefined, undefined, ADMIN_TYPE)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
+  ),
+
   getProductMedia: sku => (
     new Promise((resolve, reject) => {
       const path = `/V1/products/${sku}/media`;

@@ -18,6 +18,10 @@ import {
   MAGENTO_GET_PRODUCT_MEDIA,
   MAGENTO_SET_PRODUCT_MEDIA,
   MAGENTO_ERROR_PRODUCT_MEDIA,
+  MAGENTO_GET_CONF_OPTIONS,
+  MAGENTO_SET_CONF_OPTIONS,
+  MAGENTO_ERROR_CONF_OPTIONS,
+  MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS,
   MAGENTO_GET_SEARCH_PRODUCTS,
   MAGENTO_SET_SEARCH_PRODUCTS,
   MAGENTO_ERROR_SEARCH_PRODUCTS,
@@ -83,18 +87,29 @@ const getCategoryProducts = function* fetchCategoryProducts(action) {
   }
 };
 
-/*
-  const getProductDetail = function* fetchProductDetail(action) {
-    try {
-      const payload = yield call({ context: magento, fn: magento.admin.getProductBySku }, action.payload);
-      // dispatch an action to set products data
-      yield put({ type: MAGENTO_SET_PRODUCT_DETAIL, payload });
-    } catch (error) {
-      yield put({ type: MAGENTO_ERROR_PRODUCT_DETAIL, error });
-      console.log(error);
+// TODO: Function not optimized
+const getConfigurableProductOptions = function* fetchConfigurableProductOptions({ payload: sku }) {
+  try {
+    const payload = yield call({ content: magento, fn: magento.admin.getConfigurableProductOptions }, sku);
+    yield put({ type: MAGENTO_SET_CONF_OPTIONS, payload });
+    // FIXME: ESlint suggests not to use for loop inside generator
+    // eslint-disable-next-line no-restricted-syntax
+    for (const option of payload) {
+      const attributeOptions = yield call({ content: magento, fn: magento.admin.getAttributeByCode }, option.attribute_id);
+      yield put({
+        type: MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS,
+        payload: {
+          attributeId: option.attribute_id,
+          options: attributeOptions.options,
+          attributeCode: attributeOptions.attribute_code,
+        }
+      });
     }
-  };
-*/
+  } catch (error) {
+    yield put({ type: MAGENTO_ERROR_CONF_OPTIONS, error });
+    console.log(error);
+  }
+};
 
 const getProductMedia = function* fetchProductMedia({ payload: sku }) {
   try {
@@ -122,6 +137,7 @@ const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_GET_HOME_DATA, getHomeData);
   yield takeEvery(MAGENTO_GET_CATEGORY_TREE, getCategoryTree);
   yield takeEvery(MAGENTO_GET_CATEGORY_PRODUCTS, getCategoryProducts);
+  yield takeEvery(MAGENTO_GET_CONF_OPTIONS, getConfigurableProductOptions);
   yield takeEvery(MAGENTO_GET_PRODUCT_MEDIA, getProductMedia);
   yield takeEvery(MAGENTO_GET_SEARCH_PRODUCTS, getSearchProducts);
 };

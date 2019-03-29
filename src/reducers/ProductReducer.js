@@ -1,6 +1,9 @@
 import {
   MAGENTO_SET_CURRENT_PRODUCT,
   MAGENTO_SET_PRODUCT_MEDIA,
+  MAGENTO_SET_CONF_OPTIONS,
+  MAGENTO_ERROR_CONF_OPTIONS,
+  MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS,
 } from '../actions/types';
 
 const initialState = {
@@ -27,6 +30,26 @@ export default (state = initialState, action) => {
           [action.payload.sku]: action.payload.media,
         }
       };
+    case MAGENTO_SET_CONF_OPTIONS: {
+      const current = { ...state.current, options: action.payload };
+      return {
+        ...state,
+        current,
+      };
+    }
+    case MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS: {
+      const attributes = {
+        ...state.attributes,
+        [action.payload.attributeId]: {
+          options: action.payload.options,
+          attributeCode: action.payload.attributeCode,
+        }
+      };
+      return {
+        ...state,
+        attributes,
+      };
+    }
     default:
       return state;
   }
