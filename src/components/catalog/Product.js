@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, Button, Picker, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { BRAND_NAME } from '../../constants';
 import { PRODUCT } from '../../reducers/types';
@@ -11,6 +11,12 @@ class Product extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title', BRAND_NAME),
   })
+
+  constructor(props) {
+    super(props);
+    this.renderOptions = this.renderOptions.bind(this);
+    this.renderPickerOptions = this.renderPickerOptions.bind(this);
+  }
 
   componentDidMount() {
     const {
@@ -41,6 +47,47 @@ class Product extends React.Component {
     return 'Lorem ipseum';
   }
 
+  renderPickerOptions(values) {
+    return values.map(({ label, value }) => <Picker.Item label={label} value={String(value)} />);
+  }
+
+  renderOptions() {
+    const { product, attributes } = this.props;
+    const state = this.state;
+    console.log('===============')
+    console.log(product);
+    const { options } = product;
+
+    if (options && Array.isArray(options)) {
+      return options.sort((first, second) => first.position - second.position)
+        .map((option) => {
+          if (!attributes[option.attribute_id]) {
+            return <Spinner size="small" />
+          }
+
+          console.log("()()()")
+          const optionIds = option.values.map(value => String(value.value_index))
+          console.log(optionIds)
+          const values = attributes[option.attribute_id].options.filter(({ value }) => optionIds.includes(value));
+          console.log(values)
+          return (
+            <View>
+              <Text>Select {option.label}</Text>
+              <Picker
+                style={{ height: 50, flex: 1 }}
+                onValueChange={(itemValue, itemIndex) => {
+                  console.log(itemValue)
+                }}
+              >
+                {this.renderPickerOptions(values)}
+              </Picker>
+            </View >
+          );
+        });
+    }
+    return null;
+  }
+
   renderContent() {
     const { product, medias } = this.props;
     if (!product) {
@@ -59,6 +106,13 @@ class Product extends React.Component {
             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>price </Text>
             <Text style={{ fontSize: 18, color: 'green' }}>${product.price}</Text>
           </View>
+          <View>
+            {this.renderOptions()}
+          </View>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <Button style={{ flex: 1, marginRIght: 16 }} title="Buy now" />
+            <Button style={{ flex: 1 }} title="Add to cart" />
+          </View>
         </View>
       </ScrollView>
     );
@@ -74,10 +128,10 @@ class Product extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const product = state[PRODUCT].current;
-  const medias = state[PRODUCT].medias;
+  const { current: product, medias, attributes } = state[PRODUCT];
   return {
     product,
+    attributes,
     medias,
   };
 };
