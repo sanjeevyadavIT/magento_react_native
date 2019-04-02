@@ -10,6 +10,8 @@ import { MaterialHeaderButtons, Item } from '../../components/common';
 import {
   NAVIGATION_CATEGORY_TREE_PATH,
   NAVIGATION_SEARCH_SCREEN_PATH,
+  NAVIGATION_LOGIN_SCREEN_PATH,
+  NAVIGATION_CART_SCREEN_PATH,
 } from '../../routes/types';
 
 class DashboardScreen extends React.Component {
@@ -19,7 +21,13 @@ class DashboardScreen extends React.Component {
       <MaterialHeaderButtons>
         <Item title="menu" iconName="menu" onPress={navigation.getParam('toggleDrawer')} />
       </MaterialHeaderButtons>
-    )
+    ),
+    headerRight: (
+      <MaterialHeaderButtons>
+        <Item title="account" iconName="account-circle" onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)} />
+        <Item title="cart" iconName="shopping-cart" onPress={() => navigation.navigate(NAVIGATION_CART_SCREEN_PATH)} />
+      </MaterialHeaderButtons>
+    ),
   })
 
   constructor(props) {

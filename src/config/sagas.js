@@ -25,6 +25,10 @@ import {
   MAGENTO_GET_SEARCH_PRODUCTS,
   MAGENTO_SET_SEARCH_PRODUCTS,
   MAGENTO_ERROR_SEARCH_PRODUCTS,
+  MAGENTO_AUTH,
+  MAGENTO_AUTH_ERROR,
+  MAGENTO_AUTH_SUCCESS,
+  MAGENTO_AUTH_LOADING,
 } from '../actions/types';
 import { magento } from '../magento';
 import { magentoOptions } from './magento';
@@ -132,6 +136,21 @@ const getSearchProducts = function* fetchSearchProducts(action) {
   }
 };
 
+const auth = function* auth(action) {
+  yield put({ type: MAGENTO_AUTH_LOADING, payload: true });
+  try {
+    const payload = yield call({ content: magento, fn: magento.guest.auth }, action.payload.email, action.payload.password);
+    if (payload.message) {
+      yield put({ type: MAGENTO_AUTH_ERROR, payload: payload.message });
+    } else {
+      yield put({ type: MAGENTO_AUTH_SUCCESS, payload });
+    }
+  } catch (e) {
+    console.log(e);
+    yield put({ type: MAGENTO_AUTH_ERROR, payload: e.message });
+  }
+};
+
 const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_INIT, initMagento);
   yield takeEvery(MAGENTO_GET_HOME_DATA, getHomeData);
@@ -140,6 +159,7 @@ const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_GET_CONF_OPTIONS, getConfigurableProductOptions);
   yield takeEvery(MAGENTO_GET_PRODUCT_MEDIA, getProductMedia);
   yield takeEvery(MAGENTO_GET_SEARCH_PRODUCTS, getSearchProducts);
+  yield takeEvery(MAGENTO_AUTH, auth);
 };
 
 export default rootSaga;

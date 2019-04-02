@@ -27,3 +27,8 @@ export const UI_PRODUCT_UPDATE_OPTIONS = 'ui_product_update_options';
 export const MAGENTO_GET_SEARCH_PRODUCTS = 'magento_get_search_products';
 export const MAGENTO_SET_SEARCH_PRODUCTS = 'magento_set_search_products';
 export const MAGENTO_ERROR_SEARCH_PRODUCTS = 'magento_error_search_products';
+
+export const MAGENTO_AUTH = 'magento_auth';
+export const MAGENTO_AUTH_SUCCESS = 'magento_auth_success';
+export const MAGENTO_AUTH_ERROR = 'magento_auth_error';
+export const MAGENTO_AUTH_LOADING = 'magento_auth_loading';

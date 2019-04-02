@@ -1,5 +1,6 @@
 import axios from 'axios';
 import admin from './lib/admin';
+import guest from './lib/guest';
 import { ADMIN_TYPE } from './types';
 
 const defaultOptions = {
@@ -24,6 +25,7 @@ class Magento {
     this.base_url = this.configuration.url;
     this.root_path = `/rest/${this.configuration.store}`;
     this.admin = admin(this);
+    this.guest = guest(this);
   }
 
   init() {
