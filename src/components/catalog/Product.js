@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { BRAND_NAME } from '../../constants';
 import { PRODUCT } from '../../reducers/types';
 import { getProductMedia, getConfigurableProductOptions } from '../../actions/RestActions';
+import { uiProductUpdate} from '../../actions/UIActions';
 import { Spinner } from '../common';
 import ProductMedia from './ProductMedia';
 
@@ -52,10 +53,7 @@ class Product extends React.Component {
   }
 
   renderOptions() {
-    const { product, attributes } = this.props;
-    const state = this.state;
-    console.log('===============')
-    console.log(product);
+    const { product, attributes, selectedOptions } = this.props;
     const { options } = product;
 
     if (options && Array.isArray(options)) {
@@ -65,18 +63,16 @@ class Product extends React.Component {
             return <Spinner size="small" />
           }
 
-          console.log("()()()")
-          const optionIds = option.values.map(value => String(value.value_index))
-          console.log(optionIds)
+          const optionIds = option.values.map(value => String(value.value_index));
           const values = attributes[option.attribute_id].options.filter(({ value }) => optionIds.includes(value));
-          console.log(values)
           return (
             <View>
               <Text>Select {option.label}</Text>
               <Picker
+                selectedValue={selectedOptions[option.attribute_id]}
                 style={{ height: 50, flex: 1 }}
                 onValueChange={(itemValue, itemIndex) => {
-                  console.log(itemValue)
+                  this.props.uiProductUpdate({[option.attribute_id]: itemValue});
                 }}
               >
                 {this.renderPickerOptions(values)}
@@ -128,15 +124,17 @@ class Product extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { current: product, medias, attributes } = state[PRODUCT];
+  const { current: product, medias, attributes, selectedOptions } = state[PRODUCT];
   return {
     product,
     attributes,
     medias,
+    selectedOptions,
   };
 };
 
 export default connect(mapStateToProps, {
   getProductMedia,
-  getConfigurableProductOptions
+  getConfigurableProductOptions,
+  uiProductUpdate
 })(Product);

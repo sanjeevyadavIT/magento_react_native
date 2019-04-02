@@ -4,6 +4,7 @@ import {
   MAGENTO_SET_CONF_OPTIONS,
   MAGENTO_ERROR_CONF_OPTIONS,
   MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS,
+  UI_PRODUCT_UPDATE_OPTIONS,
 } from '../actions/types';
 
 const initialState = {
@@ -49,6 +50,16 @@ export default (state = initialState, action) => {
         ...state,
         attributes,
       };
+    }
+    case UI_PRODUCT_UPDATE_OPTIONS: {
+      const selectedOptions = state.selectedOptions;
+      return {
+        ...state,
+        selectedOptions: {
+          ...selectedOptions,
+          ...action.payload,
+        }
+      }
     }
     default:
       return state;

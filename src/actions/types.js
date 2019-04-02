@@ -21,6 +21,8 @@ export const MAGENTO_GET_CONF_OPTIONS = 'magento_get_conf_options';
 export const MAGENTO_SET_CONF_OPTIONS = 'magento_set_conf_options';
 export const MAGENTO_ERROR_CONF_OPTIONS = 'magento_error_conf_options';
 export const MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS = 'magento_set_product_attribute_options';
+export const UI_PRODUCT_UPDATE_OPTIONS = 'ui_product_update_options';
+
 
 export const MAGENTO_GET_SEARCH_PRODUCTS = 'magento_get_search_products';
 export const MAGENTO_SET_SEARCH_PRODUCTS = 'magento_set_search_products';
