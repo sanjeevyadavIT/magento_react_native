@@ -14,6 +14,8 @@ import {
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../routes/types';
 
+import { magento } from '../../magento';
+
 class DashboardScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: BRAND_NAME,
@@ -84,6 +86,7 @@ class DashboardScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Text>Customer Token :: {magento.customerToken}</Text>
         <View style={{ flexDirection: 'row', marginTop: 16 }}>
           <TextInput
             style={{

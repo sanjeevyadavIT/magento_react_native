@@ -2,7 +2,8 @@
  * Don't call any function from this file,
  * all the possible actions are defined in src/actions/RestActions.js
  */
-import { takeEvery, call, put } from 'redux-saga/effects'
+import { takeEvery, call, put } from 'redux-saga/effects';
+import { AsyncStorage } from 'react-native';
 import {
   MAGENTO_INIT,
   MAGENTO_GET_HOME_DATA,
@@ -30,7 +31,7 @@ import {
   MAGENTO_AUTH_SUCCESS,
   MAGENTO_AUTH_LOADING,
 } from '../actions/types';
-import { magento } from '../magento';
+import { magento, CUSTOMER_TOKEN } from '../magento';
 import { magentoOptions } from './magento';
 
 
@@ -44,6 +45,9 @@ const initMagento = function* initializeMagento() {
     yield call({ context: magento, fn: magento.init });
     // Fetch store configuration details
     yield call(magento.admin.getStoreConfig);
+    // get Customer token from local db
+    const customerToken = yield AsyncStorage.getItem(CUSTOMER_TOKEN);
+    magento.setCustomerToken(customerToken);
     // fetch HomeData
     yield put({ type: MAGENTO_GET_HOME_DATA });
   } catch (error) {
@@ -143,6 +147,8 @@ const auth = function* auth(action) {
     if (payload.message) {
       yield put({ type: MAGENTO_AUTH_ERROR, payload: payload.message });
     } else {
+      // Save the key in AsyncStorage
+      yield AsyncStorage.setItem(CUSTOMER_TOKEN, payload);
       yield put({ type: MAGENTO_AUTH_SUCCESS, payload });
     }
   } catch (e) {
@@ -150,6 +156,8 @@ const auth = function* auth(action) {
     yield put({ type: MAGENTO_AUTH_ERROR, payload: e.message });
   }
 };
+
+// TODO: in case of logout, clear CUSTOMER_TOKEN from AsyncStorage
 
 const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_INIT, initMagento);

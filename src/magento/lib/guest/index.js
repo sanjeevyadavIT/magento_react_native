@@ -6,8 +6,9 @@ export default magento => ({
       const path = '/V1/integration/customer/token';
 
       magento.post(path, undefined, { password, username: email }, GUEST_TYPE)
-        .then((data) => {
-          resolve(data);
+        .then((token) => {
+          magento.setCustomerToken(token);
+          resolve(token);
         })
         .catch((e) => {
           reject(e);

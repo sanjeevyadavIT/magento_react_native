@@ -1,12 +1,14 @@
 import axios from 'axios';
 import admin from './lib/admin';
 import guest from './lib/guest';
-import { ADMIN_TYPE } from './types';
+import customer from './lib/customer';
+import { ADMIN_TYPE, CUSTOMER_TYPE } from './types';
 
 const defaultOptions = {
   url: null,
   store: 'default',
-  userAgent: 'Sanjeev Yadav MAgento Library',
+  userAgent: 'Sanjeev Yadav Magento Library',
+  home_cms_block_id: '',
   authentication: {
     login: {
       type: 'admin',
@@ -26,16 +28,20 @@ class Magento {
     this.root_path = `/rest/${this.configuration.store}`;
     this.admin = admin(this);
     this.guest = guest(this);
+    //this.customer = customer(this);
   }
 
   init() {
     return new Promise((resolve, reject) => {
-      if (this.configuration.authentication.access_token) {
-        this.access_token = this.configuration.authentication.access_token;
+      if (this.configuration.authentication.integration.access_token) {
+        this.access_token = this.configuration.authentication.integration.access_token;
         resolve(this);
       } else {
         // Hit rest api to create new access token
-        const { username, password, type } = this.configuration.authentication.login;
+        const { username, password } = this.configuration.authentication.login;
+
+        if (!username) return;
+
         const path = '/V1/integration/admin/token';
         this.post(path, null, { username, password })
           .then((token) => {
@@ -59,15 +65,17 @@ class Magento {
   }
 
   send(path, method, params, data, type) {
-    let url = `${this.base_url}${this.root_path}${path}`;
+    const url = `${this.base_url}${this.root_path}${path}`;
 
     const headers = {
       'User-Agent': this.configuration.userAgent,
       'Content-Type': 'application/json',
     };
 
-    if (this.access_token) {
+    if (this.access_token && type === ADMIN_TYPE) {
       headers.Authorization = `Bearer ${this.access_token}`;
+    } else if (this.customerToken && type === CUSTOMER_TYPE) {
+      headers.Authorization = `Bearer ${this.customerToken}`;
     }
 
     return new Promise((resolve, reject) => {
@@ -93,8 +101,16 @@ class Magento {
     return this.access_token != null;
   }
 
+  isCustomerLogin() {
+    return !!this.customerToken;
+  }
+
   setStoreConfig(config) {
     this.storeConfig = config[0];
+  }
+
+  setCustomerToken(token) {
+    this.customerToken = token;
   }
 
   getProductMediaUrl() {
@@ -108,5 +124,8 @@ class Magento {
     return false;
   }
 }
+
+// Constants
+export const CUSTOMER_TOKEN = 'customerToken';
 
 export const magento = new Magento();
