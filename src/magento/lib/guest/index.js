@@ -16,4 +16,18 @@ export default magento => ({
     })
   ),
 
+  signup: payload => (
+    new Promise((resolve, reject) => {
+      const path = '/V1/customers';
+
+      magento.post(path, undefined, payload, GUEST_TYPE)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    })
+  ),
+
 });

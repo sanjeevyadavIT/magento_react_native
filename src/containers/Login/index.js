@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, TextInput, Text, Button } from 'react-native';
+import { View, TextInput, Text, Button, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { auth } from '../../actions';
-import { CUSTOMER_AUTH } from '../../reducers/types';
+import { LOGIN } from '../../reducers/types';
 import { Spinner } from '../../components/common';
+import { NAVIGATION_SIGNUP_SCREEN_PATH } from '../../routes/types';
 
 class Login extends React.Component {
   static navigationOptions = {
@@ -29,7 +30,12 @@ class Login extends React.Component {
       return <Spinner style={{ marginTop: 16 }} />;
     }
     return (
-      <Button title="login" style={{ marginTop: 16 }} onPress={this.onLoginPress} />
+      <View style={{  flex: 1, flexDirection: 'column', alignItems: 'stretch' }}>
+        <Button title="login" style={{ marginTop: 16 }} onPress={this.onLoginPress} />
+        <TouchableOpacity style={{ marginTop: 16, alignSelf: 'center' }} onPress={() => this.props.navigation.navigate(NAVIGATION_SIGNUP_SCREEN_PATH)}>
+          <Text>Create an account(Signup)</Text>
+        </TouchableOpacity>
+      </View>
     )
   }
 
@@ -48,7 +54,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <TextInput
           placeholder="Email"
           keyboardType="email-address"
@@ -74,7 +80,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { loading, error, success } = state[CUSTOMER_AUTH];
+  const { loading, error, success } = state[LOGIN];
   return {
     loading,
     error,

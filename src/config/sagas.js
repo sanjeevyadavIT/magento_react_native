@@ -2,7 +2,7 @@
  * Don't call any function from this file,
  * all the possible actions are defined in src/actions/RestActions.js
  */
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, takeLatest, call, put } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import {
   MAGENTO_INIT,
@@ -30,6 +30,10 @@ import {
   MAGENTO_AUTH_ERROR,
   MAGENTO_AUTH_SUCCESS,
   MAGENTO_AUTH_LOADING,
+  MAGENTO_SIGNUP,
+  MAGENTO_SIGNUP_LOADING,
+  MAGENTO_SIGNUP_SUCCESS,
+  MAGENTO_SIGNUP_ERROR,
 } from '../actions/types';
 import { magento, CUSTOMER_TOKEN } from '../magento';
 import { magentoOptions } from './magento';
@@ -51,7 +55,7 @@ const initMagento = function* initializeMagento() {
     // fetch HomeData
     yield put({ type: MAGENTO_GET_HOME_DATA });
   } catch (error) {
-    console.log(error);
+    // TODO: throw error action
   }
 };
 
@@ -68,7 +72,6 @@ const getHomeData = function* fetchHomeData() {
     }
   } catch (error) {
     yield put({ type: MAGENTO_ERROR_HOME_DATA, error });
-    console.log(error);
   }
 };
 
@@ -80,7 +83,6 @@ const getCategoryTree = function* fetchCategoryTree() {
     yield put({ type: MAGENTO_SET_CATEGORY_TREE, payload });
   } catch (error) {
     yield put({ type: MAGENTO_ERROR_CATEGORY_TREE, error });
-    console.log(error);
   }
 };
 
@@ -91,7 +93,6 @@ const getCategoryProducts = function* fetchCategoryProducts(action) {
     yield put({ type: MAGENTO_SET_CATEGORY_PRODUCTS, payload: { products: payload, totalCount: payload.total_count } });
   } catch (error) {
     yield put({ type: MAGENTO_ERROR_CATEGORY_PRODUCTS, error });
-    console.log(error);
   }
 };
 
@@ -115,7 +116,6 @@ const getConfigurableProductOptions = function* fetchConfigurableProductOptions(
     }
   } catch (error) {
     yield put({ type: MAGENTO_ERROR_CONF_OPTIONS, error });
-    console.log(error);
   }
 };
 
@@ -125,7 +125,6 @@ const getProductMedia = function* fetchProductMedia({ payload: sku }) {
     yield put({ type: MAGENTO_SET_PRODUCT_MEDIA, payload: { sku, media: payload } });
   } catch (error) {
     yield put({ type: MAGENTO_ERROR_PRODUCT_MEDIA, error });
-    console.log(error);
   }
 };
 
@@ -136,7 +135,6 @@ const getSearchProducts = function* fetchSearchProducts(action) {
     yield put({ type: MAGENTO_SET_SEARCH_PRODUCTS, payload: { searchInput: action.payload, products: payload, totalCount: payload.total_count } });
   } catch (error) {
     yield put({ type: MAGENTO_ERROR_SEARCH_PRODUCTS, error });
-    console.log(error);
   }
 };
 
@@ -152,12 +150,25 @@ const auth = function* auth(action) {
       yield put({ type: MAGENTO_AUTH_SUCCESS, payload });
     }
   } catch (e) {
-    console.log(e);
     yield put({ type: MAGENTO_AUTH_ERROR, payload: e.message });
   }
 };
 
 // TODO: in case of logout, clear CUSTOMER_TOKEN from AsyncStorage
+
+const signup = function* signup(action) {
+  yield put({ type: MAGENTO_SIGNUP_LOADING, payload: true });
+  try {
+    const payload = yield call({ content: magento, fn: magento.guest.signup }, action.payload);
+    if (payload.message) {
+      yield put({ type: MAGENTO_SIGNUP_ERROR, payload: payload.message });
+    } else {
+      yield put({ type: MAGENTO_SIGNUP_SUCCESS, payload });
+    }
+  } catch (e) {
+    yield put({ type: MAGENTO_SIGNUP_ERROR, payload: e.message });
+  }
+};
 
 const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_INIT, initMagento);
@@ -168,6 +179,7 @@ const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_GET_PRODUCT_MEDIA, getProductMedia);
   yield takeEvery(MAGENTO_GET_SEARCH_PRODUCTS, getSearchProducts);
   yield takeEvery(MAGENTO_AUTH, auth);
+  yield takeLatest(MAGENTO_SIGNUP, signup);
 };
 
 export default rootSaga;

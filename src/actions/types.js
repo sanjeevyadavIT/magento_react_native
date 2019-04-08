@@ -28,7 +28,14 @@ export const MAGENTO_GET_SEARCH_PRODUCTS = 'magento_get_search_products';
 export const MAGENTO_SET_SEARCH_PRODUCTS = 'magento_set_search_products';
 export const MAGENTO_ERROR_SEARCH_PRODUCTS = 'magento_error_search_products';
 
+// Actions related to Login screen
 export const MAGENTO_AUTH = 'magento_auth';
 export const MAGENTO_AUTH_SUCCESS = 'magento_auth_success';
 export const MAGENTO_AUTH_ERROR = 'magento_auth_error';
 export const MAGENTO_AUTH_LOADING = 'magento_auth_loading';
+
+// Actions related to Signup screen
+export const MAGENTO_SIGNUP = 'magento_signup';
+export const MAGENTO_SIGNUP_SUCCESS = 'magento_signup_success';
+export const MAGENTO_SIGNUP_ERROR = 'magento_signup_error';
+export const MAGENTO_SIGNUP_LOADING = 'magento_signup_loading';

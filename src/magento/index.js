@@ -4,6 +4,8 @@ import guest from './lib/guest';
 import customer from './lib/customer';
 import { ADMIN_TYPE, CUSTOMER_TYPE } from './types';
 
+const log = process.env.NODE_ENV === 'development' ? console.log : null;
+
 const defaultOptions = {
   url: null,
   store: 'default',
@@ -28,7 +30,7 @@ class Magento {
     this.root_path = `/rest/${this.configuration.store}`;
     this.admin = admin(this);
     this.guest = guest(this);
-    //this.customer = customer(this);
+    // this.customer = customer(this);
   }
 
   init() {
@@ -49,7 +51,6 @@ class Magento {
             resolve(this);
           })
           .catch((error) => {
-            console.log(error);
             reject(error);
           });
       }
@@ -79,7 +80,7 @@ class Magento {
     }
 
     return new Promise((resolve, reject) => {
-      console.log({ url, method, headers, data, ...params });
+      log({ url, method, headers, data, ...params });
       axios({
         url,
         method,
@@ -88,11 +89,27 @@ class Magento {
         data,
       })
         .then((response) => {
-          console.log(response);
+          log(response);
           resolve(response.data);
         })
         .catch((error) => {
-          reject(error);
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            log(error.response.data);
+            log(error.response.status);
+            log(error.response.headers);
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            log('Error', error.message);
+          }
+          log(error.config);
+          reject(error.response.data);
         });
     });
   }
@@ -105,8 +122,8 @@ class Magento {
     return !!this.customerToken;
   }
 
-  setStoreConfig(config) {
-    this.storeConfig = config[0];
+  setStoreConfig([config]) {
+    this.storeConfig = config;
   }
 
   setCustomerToken(token) {

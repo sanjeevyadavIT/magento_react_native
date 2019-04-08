@@ -3,4 +3,5 @@ export const CATEGORY_TREE = 'categoryTree';
 export const CATEGORY = 'category';
 export const PRODUCT = 'product';
 export const SEARCH = 'search';
-export const CUSTOMER_AUTH = 'customerAuth';
+export const LOGIN = 'login';
+export const SIGNUP = 'signup';
