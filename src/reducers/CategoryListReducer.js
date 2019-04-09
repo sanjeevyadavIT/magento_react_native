@@ -1,6 +1,7 @@
 import {
   MAGENTO_SET_CURRENT_CATEGORY,
   MAGENTO_SET_CATEGORY_PRODUCTS,
+  MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS,
   MAGENTO_ERROR_CATEGORY_PRODUCTS,
 } from '../actions/types';
 
@@ -19,11 +20,18 @@ export default (state = getInitialState(null), action) => {
         ...state,
         ...getInitialState(action.payload),
       };
-    case MAGENTO_SET_CATEGORY_PRODUCTS:
+    case MAGENTO_SET_CATEGORY_PRODUCTS: {
+      const products = state.products ? state.products : [];
       return {
         ...state,
-        products: action.payload.products,
+        products: [...products, ...action.payload.items],
         totalCount: action.payload.totalCount,
+      };
+    }
+    case MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS:
+      return {
+        ...state,
+        loadingMore: action.payload,
       };
     case MAGENTO_ERROR_CATEGORY_PRODUCTS:
     default:

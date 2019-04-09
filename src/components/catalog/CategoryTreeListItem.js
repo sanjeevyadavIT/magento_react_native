@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CategoryTreeList from './CategoryTreeList';
-import { NAVIGATION_CATEGORY_PATH } from '../../routes/types';
+import { NAVIGATION_CATEGORY_LIST_PATH } from '../../routes/types';
 import { setCurrentCategory } from '../../actions';
 
 class CategoryTreeListItem extends React.Component {
@@ -25,7 +25,7 @@ class CategoryTreeListItem extends React.Component {
   onRowPress() {
     const { category, setCurrentCategory: _setCurrentCategory, navigate } = this.props;
     _setCurrentCategory(category.id);
-    navigate(NAVIGATION_CATEGORY_PATH, {
+    navigate(NAVIGATION_CATEGORY_LIST_PATH, {
       title: category.name,
     });
   }

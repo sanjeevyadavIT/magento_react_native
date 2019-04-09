@@ -18,7 +18,7 @@ class CategoryTreeList extends React.Component {
         style={{ flex: 1 }}
         data={categories.children_data}
         renderItem={this.renderItem}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item, index) => String(item.id)}
       />
     );
   }

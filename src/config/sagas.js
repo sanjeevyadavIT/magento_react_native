@@ -16,6 +16,7 @@ import {
   MAGENTO_GET_CATEGORY_PRODUCTS,
   MAGENTO_SET_CATEGORY_PRODUCTS,
   MAGENTO_ERROR_CATEGORY_PRODUCTS,
+  MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS,
   MAGENTO_GET_PRODUCT_MEDIA,
   MAGENTO_SET_PRODUCT_MEDIA,
   MAGENTO_ERROR_PRODUCT_MEDIA,
@@ -87,10 +88,14 @@ const getCategoryTree = function* fetchCategoryTree() {
 };
 
 const getCategoryProducts = function* fetchCategoryProducts(action) {
+  if (action.payload.offset) {
+    yield put({ type: MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS, payload: true });
+  }
   try {
-    const payload = yield call({ context: magento, fn: magento.admin.getCategoryProducts }, action.payload);
+    const payload = yield call({ context: magento, fn: magento.admin.getCategoryProducts }, action.payload.categoryId, action.payload.offset);
     // dispatch an action to set products data
-    yield put({ type: MAGENTO_SET_CATEGORY_PRODUCTS, payload: { products: payload, totalCount: payload.total_count } });
+    yield put({ type: MAGENTO_SET_CATEGORY_PRODUCTS, payload: { items: payload.items, totalCount: payload.total_count } });
+    yield put({ type: MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS, payload: false });
   } catch (error) {
     yield put({ type: MAGENTO_ERROR_CATEGORY_PRODUCTS, error });
   }

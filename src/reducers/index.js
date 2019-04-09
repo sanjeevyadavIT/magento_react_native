@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import CategoryTreeReducer from './CategoryTreeReducer';
-import CategoryReducer from './CategoryReducer';
+import CategoryListReducer from './CategoryListReducer';
 import ProductReducer from './ProductReducer';
 import SearchReducer from './SearchReducer';
 import HomeReducer from './HomeReducer';
@@ -9,7 +9,7 @@ import SignupReducer from './SignupReducer';
 import {
   HOME,
   CATEGORY_TREE,
-  CATEGORY,
+  CATEGORY_LIST,
   PRODUCT,
   SEARCH,
   LOGIN,
@@ -19,7 +19,7 @@ import {
 export default combineReducers({
   [HOME]: HomeReducer,
   [CATEGORY_TREE]: CategoryTreeReducer,
-  [CATEGORY]: CategoryReducer,
+  [CATEGORY_LIST]: CategoryListReducer,
   [PRODUCT]: ProductReducer,
   [SEARCH]: SearchReducer,
   [LOGIN]: LoginReducer,

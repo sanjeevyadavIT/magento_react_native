@@ -1,3 +1,4 @@
+export * from './color';
 export const BRAND_NAME = 'MageCart';
 export const CATEGORY_TREE_PAGE_TITLE = 'Categories';
 export const SEARCH_PAGE_TITLE = 'Search result';

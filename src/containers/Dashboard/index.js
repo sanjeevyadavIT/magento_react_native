@@ -1,6 +1,10 @@
 import React from 'react';
 import {
-  View, Text, Button, TextInput, ActivityIndicator
+  View,
+  Text,
+  Button,
+  TextInput,
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import { initMagento, getCategoryTree } from '../../actions';
@@ -13,10 +17,9 @@ import {
   NAVIGATION_LOGIN_SCREEN_PATH,
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../routes/types';
-
 import { magento } from '../../magento';
 
-class DashboardScreen extends React.Component {
+class Dashboard extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: BRAND_NAME,
     headerLeft: (
@@ -117,4 +120,4 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   initMagento,
   getCategoryTree
-})(DashboardScreen);
+})(Dashboard);

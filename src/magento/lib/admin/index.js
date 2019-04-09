@@ -1,5 +1,7 @@
 import { ADMIN_TYPE } from '../../types';
 
+const PAGE_SIZE = 5;
+
 export default magento => ({
   getStoreConfig: () => (
     new Promise((resolve, reject) => {
@@ -30,7 +32,8 @@ export default magento => ({
     })
   ),
 
-  getCategoryProducts: (id) => {
+  getCategoryProducts: (id, offset = 1, pageSize = PAGE_SIZE) => {
+    const currentPage = parseInt(offset / pageSize, 10) + 1;
     const params = {
       'searchCriteria[filterGroups][0][filters][0][field]': 'category_id',
       'searchCriteria[filterGroups][0][filters][0][value]': id,
@@ -38,11 +41,8 @@ export default magento => ({
       'searchCriteria[filterGroups][1][filters][0][field]': 'visibility',
       'searchCriteria[filterGroups][1][filters][0][value]': '4',
       'searchCriteria[filterGroups][1][filters][0][conditionType]': 'eq',
-      /*
-        // TODO: Implement pagination
-        'searchCriteria[pageSize]': pageSize,
-        'searchCriteria[currentPage]': currentPage,
-      */
+      'searchCriteria[pageSize]': pageSize,
+      'searchCriteria[currentPage]': currentPage,
     };
     return magento.admin.getProductsWithSearchCritaria(params);
   },
@@ -50,8 +50,8 @@ export default magento => ({
   getProductsWithAttribute: (
     attributeCode,
     attributeValue,
-    pageSize = 10,
     offset = 0,
+    pageSize = PAGE_SIZE,
     conditionType = 'like'
   ) => {
     const params = {

@@ -27,9 +27,9 @@ export const setCurrentCategory = categoryId => ({
   payload: categoryId,
 });
 
-export const getCategoryProducts = categoryId => ({
+export const getCategoryProducts = (categoryId, offset) => ({
   type: MAGENTO_GET_CATEGORY_PRODUCTS,
-  payload: categoryId,
+  payload: { categoryId, offset },
 });
 
 export const setCurrentProduct = product => ({

@@ -12,6 +12,8 @@ export const MAGENTO_SET_CURRENT_CATEGORY = 'magento_set_current_category';
 export const MAGENTO_GET_CATEGORY_PRODUCTS = 'magento_get_category_products';
 export const MAGENTO_SET_CATEGORY_PRODUCTS = 'magento_set_category_products';
 export const MAGENTO_ERROR_CATEGORY_PRODUCTS = 'magento_error_category_products';
+export const MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS = 'magento_load_more_category_products';
+
 // Action related to product detailed page
 export const MAGENTO_SET_CURRENT_PRODUCT = 'magento_set_current_product';
 export const MAGENTO_GET_PRODUCT_MEDIA = 'magento_get_product_media';

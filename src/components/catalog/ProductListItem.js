@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { magento } from '../../magento';
+import { BORDER_COLOR } from '../../constants';
 
 class ProductListItem extends React.Component {
   constructor(props) {
@@ -30,18 +31,30 @@ class ProductListItem extends React.Component {
 
   render() {
     return (
-      <View style={{ borderWidth: 1, borderColor: '#222', flexDirection: 'row', flex: 1, height: 150, justifyContent: 'center' }}>
-        <TouchableOpacity onPress={this.onRowPress}>
-          <Image
-            style={{ height: 120, width: 120, }}
-            resizeMode="contain"
-            source={{ uri: this.image() }}
-          />
-          <Text>{this.props.product.name}</Text>
-        </TouchableOpacity>
-      </View>
-    )
+      <TouchableOpacity
+        style={styles.container}
+        onPress={this.onRowPress}
+      >
+        <Image
+          style={{ flex: 1, height: 120, }}
+          resizeMode="contain"
+          source={{ uri: this.image() }}
+        />
+        <Text>{this.props.product.name}</Text>
+      </TouchableOpacity>
+    );
   }
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    borderColor: BORDER_COLOR,
+    height: 160,
+    alignItems: 'stretch',
+  },
+};
 
 export default ProductListItem;
