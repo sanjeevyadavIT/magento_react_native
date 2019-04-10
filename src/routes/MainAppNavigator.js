@@ -6,6 +6,8 @@ import Product from '../components/catalog/Product';
 import SearchScreen from '../components/search/SearchScreen';
 import Login from '../containers/Login';
 import Signup from '../containers/Signup';
+import WishList from '../containers/WishList';
+import Account from '../containers/Account';
 import {
   NAVIGATION_HOME_PATH,
   NAVIGATION_CATEGORY_TREE_PATH,
@@ -13,6 +15,8 @@ import {
   NAVIGATION_SEARCH_SCREEN_PATH,
   NAVIGATION_LOGIN_SCREEN_PATH,
   NAVIGATION_SIGNUP_SCREEN_PATH,
+  NAVIGATION_WISHLIST_SCREEN_PATH,
+  NAVIGATION_ACCOUNT_SCREEN_PATH,
 } from './types';
 
 
@@ -24,6 +28,8 @@ const MainAppNavigator = createStackNavigator(
     [NAVIGATION_SEARCH_SCREEN_PATH]: SearchScreen,
     [NAVIGATION_LOGIN_SCREEN_PATH]: Login,
     [NAVIGATION_SIGNUP_SCREEN_PATH]: Signup,
+    [NAVIGATION_WISHLIST_SCREEN_PATH]: WishList,
+    [NAVIGATION_ACCOUNT_SCREEN_PATH]: Account,
     product: Product
   }
 );

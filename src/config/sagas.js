@@ -3,7 +3,7 @@
  * all the possible actions are defined in src/actions/RestActions.js
  */
 import { takeEvery, takeLatest, call, put } from 'redux-saga/effects';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   MAGENTO_INIT,
   MAGENTO_GET_HOME_DATA,

@@ -4,4 +4,6 @@ export const NAVIGATION_CATEGORY_LIST_PATH = 'CategoryList';
 export const NAVIGATION_SEARCH_SCREEN_PATH = 'SearchScreen';
 export const NAVIGATION_LOGIN_SCREEN_PATH = 'LoginScreen';
 export const NAVIGATION_SIGNUP_SCREEN_PATH = 'SignupScreen';
+export const NAVIGATION_WISHLIST_SCREEN_PATH = 'WishListScreen';
+export const NAVIGATION_ACCOUNT_SCREEN_PATH = 'AccountScreen';
 export const NAVIGATION_CART_SCREEN_PATH = 'CartScreen';
