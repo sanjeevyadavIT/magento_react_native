@@ -17,6 +17,7 @@ import {
   MAGENTO_SET_CATEGORY_PRODUCTS,
   MAGENTO_ERROR_CATEGORY_PRODUCTS,
   MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS,
+  MAGENTO_LOAD_SORTED_CATEGORY_PRODUCTS,
   MAGENTO_GET_PRODUCT_MEDIA,
   MAGENTO_SET_PRODUCT_MEDIA,
   MAGENTO_ERROR_PRODUCT_MEDIA,
@@ -90,9 +91,11 @@ const getCategoryTree = function* fetchCategoryTree() {
 const getCategoryProducts = function* fetchCategoryProducts(action) {
   if (action.payload.offset) {
     yield put({ type: MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS, payload: true });
+  } else if (action.payload.sortOrder) {
+    yield put({ type: MAGENTO_LOAD_SORTED_CATEGORY_PRODUCTS, payload: action.payload.categoryId });
   }
   try {
-    const payload = yield call({ context: magento, fn: magento.admin.getCategoryProducts }, action.payload.categoryId, action.payload.offset);
+    const payload = yield call({ context: magento, fn: magento.admin.getCategoryProducts }, action.payload.categoryId, action.payload.offset, action.payload.sortOrder);
     // dispatch an action to set products data
     yield put({ type: MAGENTO_SET_CATEGORY_PRODUCTS, payload: { items: payload.items, totalCount: payload.total_count } });
     yield put({ type: MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS, payload: false });

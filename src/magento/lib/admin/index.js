@@ -2,6 +2,32 @@ import { ADMIN_TYPE } from '../../types';
 
 const PAGE_SIZE = 5;
 
+const getSortFieldName = (sortOrder) => {
+  switch (sortOrder) {
+    case '0':
+    case '1':
+      return 'name';
+    case '2':
+    case '3':
+      return 'price';
+    default:
+      return '';
+  }
+};
+
+const getSortDirection = (sortOrder) => {
+  switch (sortOrder) {
+    case '0':
+    case '2':
+      return 'ASC';
+    case '1':
+    case '3':
+      return 'DESC';
+    default:
+      return '';
+  }
+};
+
 export default magento => ({
   getStoreConfig: () => (
     new Promise((resolve, reject) => {
@@ -32,7 +58,7 @@ export default magento => ({
     })
   ),
 
-  getCategoryProducts: (id, offset = 1, pageSize = PAGE_SIZE) => {
+  getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) => {
     const currentPage = parseInt(offset / pageSize, 10) + 1;
     const params = {
       'searchCriteria[filterGroups][0][filters][0][field]': 'category_id',
@@ -44,6 +70,10 @@ export default magento => ({
       'searchCriteria[pageSize]': pageSize,
       'searchCriteria[currentPage]': currentPage,
     };
+    if (sortOrder) {
+      params['searchCriteria[sortOrders][0][field]'] = getSortFieldName(sortOrder);
+      params['searchCriteria[sortOrders][0][direction]'] = getSortDirection(sortOrder);
+    }
     return magento.admin.getProductsWithSearchCritaria(params);
   },
 

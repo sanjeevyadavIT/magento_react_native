@@ -2,6 +2,7 @@ import {
   MAGENTO_SET_CURRENT_CATEGORY,
   MAGENTO_SET_CATEGORY_PRODUCTS,
   MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS,
+  MAGENTO_LOAD_SORTED_CATEGORY_PRODUCTS,
   MAGENTO_ERROR_CATEGORY_PRODUCTS,
 } from '../actions/types';
 
@@ -16,6 +17,7 @@ const getInitialState = categoryId => ({
 export default (state = getInitialState(null), action) => {
   switch (action.type) {
     case MAGENTO_SET_CURRENT_CATEGORY:
+    case MAGENTO_LOAD_SORTED_CATEGORY_PRODUCTS:
       return {
         ...state,
         ...getInitialState(action.payload),

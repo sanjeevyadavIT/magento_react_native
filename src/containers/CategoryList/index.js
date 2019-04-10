@@ -1,28 +1,44 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, TouchableHighlight, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import ProductList from '../../components/common/ProductList';
 import { getCategoryProducts, setCurrentProduct } from '../../actions';
 import { CATEGORY_LIST } from '../../reducers/types';
-import { BRAND_NAME } from '../../constants';
-import { Spinner } from '../../components/common';
+import { BRAND_NAME, BORDER_COLOR } from '../../constants';
+import { Spinner, MaterialHeaderButtons, Item } from '../../components/common';
 
 class CategoryList extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title', BRAND_NAME),
+    headerRight: (
+      <MaterialHeaderButtons>
+        <Item title="sort" iconName="sort" onPress={navigation.getParam('showSortDialog')} />
+      </MaterialHeaderButtons>
+    ),
   })
 
   constructor(props) {
     super(props);
     this.onEndReached = this.onEndReached.bind(this);
+    this.showSortDialog = this.showSortDialog.bind(this);
+    this.state = {
+      sortDialogVisible: false,
+      sortOrder: null,
+    };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {
+      navigation,
       categoryId,
       getCategoryProducts: _getCategoryProducts,
     } = this.props;
     _getCategoryProducts(categoryId);
+    navigation.setParams({ showSortDialog: this.showSortDialog });
+  }
+
+  componentWillUnmount() {
+    this.setState({ sortDialogVisible: false });
   }
 
   onEndReached() {
@@ -33,11 +49,54 @@ class CategoryList extends React.Component {
       canLoadMoreContent,
       getCategoryProducts: _getCategoryProducts,
     } = this.props;
+    const { sortOrder } = this.state;
 
     if (!loadingMore && canLoadMoreContent) {
-      _getCategoryProducts(categoryId, products.length);
+      _getCategoryProducts(categoryId, products.length, sortOrder);
     }
   }
+
+  showSortDialog() {
+    console.log('muhaaa!')
+    this.setState({ sortDialogVisible: true });
+  }
+
+  performSort(val) {
+    const { categoryId, getCategoryProducts: _getCategoryProducts } = this.props;
+    _getCategoryProducts(categoryId, null, val);
+    this.setState({ sortOrder: val, sortDialogVisible: false });
+  }
+
+  // TODO: Dirty code, need to abstract it into a dialog
+  renderSortDialog() {
+    const { sortDialogVisible } = this.state;
+    return (
+      <Modal
+        transparent
+        animationType="slide"
+        visible={sortDialogVisible}
+      >
+        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#0000004d' }}>
+          <View style={{ backgroundColor: '#fff', padding: 8 }}>
+            <TouchableHighlight style={{ height: 30, justifyContent: 'center', alignItems: 'center', padding: 24, borderBottomWidth: 1, borderColor: BORDER_COLOR }} onPress={() => this.performSort('0')}>
+              <Text>name: A to Z</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={{ height: 30, justifyContent: 'center', alignItems: 'center', padding: 24, borderBottomWidth: 1, borderColor: BORDER_COLOR }} onPress={() => this.performSort('1')}>
+              <Text>name: Z to A</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={{ height: 30, justifyContent: 'center', alignItems: 'center', padding: 24, borderBottomWidth: 1, borderColor: BORDER_COLOR }} onPress={() => this.performSort('2')}>
+              <Text>price: Low to High</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={{ height: 30, justifyContent: 'center', alignItems: 'center', padding: 24, borderBottomWidth: 1, borderColor: BORDER_COLOR }} onPress={() => this.performSort('3')}>
+              <Text>price: High to Low</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+    );
+  }
+
+
 
   render() {
     const {
@@ -52,14 +111,18 @@ class CategoryList extends React.Component {
     }
 
     return (
-      <ProductList
-        products={products}
-        columnCount={2}
-        onEndReached={this.onEndReached}
-        navigate={navigation.navigate}
-        setCurrentProduct={_setCurrentProduct}
-        canLoadMoreContent={canLoadMoreContent}
-      />
+      <View style={{ flex: 1 }}>
+        <ProductList
+          products={products}
+          columnCount={2}
+          onEndReached={this.onEndReached}
+          navigate={navigation.navigate}
+          setCurrentProduct={_setCurrentProduct}
+          canLoadMoreContent={canLoadMoreContent}
+        />
+        {this.renderSortDialog()}
+      </View>
+
     );
   }
 }
