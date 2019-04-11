@@ -4,6 +4,7 @@ import CategoryListReducer from './CategoryListReducer';
 import ProductReducer from './ProductReducer';
 import SearchReducer from './SearchReducer';
 import HomeReducer from './HomeReducer';
+import AccountReducer from './AccountReducer';
 import LoginReducer from './LoginReducer';
 import SignupReducer from './SignupReducer';
 import {
@@ -12,6 +13,7 @@ import {
   CATEGORY_LIST,
   PRODUCT,
   SEARCH,
+  ACCOUNT,
   LOGIN,
   SIGNUP,
 } from './types';
@@ -22,6 +24,7 @@ export default combineReducers({
   [CATEGORY_LIST]: CategoryListReducer,
   [PRODUCT]: ProductReducer,
   [SEARCH]: SearchReducer,
+  [ACCOUNT]: AccountReducer,
   [LOGIN]: LoginReducer,
   [SIGNUP]: SignupReducer,
 });

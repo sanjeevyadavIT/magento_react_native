@@ -30,7 +30,7 @@ class Magento {
     this.root_path = `/rest/${this.configuration.store}`;
     this.admin = admin(this);
     this.guest = guest(this);
-    // this.customer = customer(this);
+    this.customer = customer(this);
   }
 
   init() {

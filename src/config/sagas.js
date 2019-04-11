@@ -28,6 +28,10 @@ import {
   MAGENTO_GET_SEARCH_PRODUCTS,
   MAGENTO_SET_SEARCH_PRODUCTS,
   MAGENTO_ERROR_SEARCH_PRODUCTS,
+  MAGENTO_CURRENT_USER,
+  MAGENTO_CURRENT_USER_LOADING,
+  MAGENTO_CURRENT_USER_SUCCESS,
+  MAGENTO_CURRENT_USER_ERROR,
   MAGENTO_AUTH,
   MAGENTO_AUTH_ERROR,
   MAGENTO_AUTH_SUCCESS,
@@ -146,6 +150,20 @@ const getSearchProducts = function* fetchSearchProducts(action) {
   }
 };
 
+const getCurrentUser = function* fetchCurrentUser() {
+  yield put({ type: MAGENTO_CURRENT_USER_LOADING, payload: true });
+  try {
+    const payload = yield call({ content: magento, fn: magento.customer.getCurrentCustomer });
+    if (payload.message) {
+      yield put({ type: MAGENTO_CURRENT_USER_ERROR, payload: payload.message });
+    } else {
+      yield put({ type: MAGENTO_CURRENT_USER_SUCCESS, payload });
+    }
+  } catch (e) {
+    yield put({ type: MAGENTO_CURRENT_USER_ERROR, payload: e.message });
+  }
+};
+
 const auth = function* auth(action) {
   yield put({ type: MAGENTO_AUTH_LOADING, payload: true });
   try {
@@ -186,6 +204,7 @@ const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_GET_CONF_OPTIONS, getConfigurableProductOptions);
   yield takeEvery(MAGENTO_GET_PRODUCT_MEDIA, getProductMedia);
   yield takeEvery(MAGENTO_GET_SEARCH_PRODUCTS, getSearchProducts);
+  yield takeEvery(MAGENTO_CURRENT_USER, getCurrentUser);
   yield takeEvery(MAGENTO_AUTH, auth);
   yield takeLatest(MAGENTO_SIGNUP, signup);
 };

@@ -31,6 +31,12 @@ export const MAGENTO_GET_SEARCH_PRODUCTS = 'magento_get_search_products';
 export const MAGENTO_SET_SEARCH_PRODUCTS = 'magento_set_search_products';
 export const MAGENTO_ERROR_SEARCH_PRODUCTS = 'magento_error_search_products';
 
+// Actions related to account screen
+export const MAGENTO_CURRENT_USER = 'magento_current_user';
+export const MAGENTO_CURRENT_USER_LOADING = 'magento_current_user_loading';
+export const MAGENTO_CURRENT_USER_SUCCESS = 'magento_current_user_success';
+export const MAGENTO_CURRENT_USER_ERROR = 'magento_current_user_error';
+
 // Actions related to Login screen
 export const MAGENTO_AUTH = 'magento_auth';
 export const MAGENTO_AUTH_SUCCESS = 'magento_auth_success';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TextInput, Text, Button, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { auth } from '../../actions';
+import { auth, getCurrentCustomer } from '../../actions';
 import { LOGIN } from '../../reducers/types';
 import { Spinner } from '../../components/common';
 import { NAVIGATION_SIGNUP_SCREEN_PATH } from '../../routes/types';
@@ -40,13 +40,15 @@ class Login extends React.Component {
   }
 
   renderMessages() {
-    const { error, success } = this.props;
+    const { error, success, navigation, getCurrentCustomer: _getCurrentCustomer } = this.props;
     if (error) {
       return <Text style={{ fontSize: 20, color: 'red' }}>{error}</Text>;
     }
 
     if (success) {
-      return <Text style={{ fontSize: 20, color: 'green' }}>{success}</Text>;
+      _getCurrentCustomer();
+      navigation.popToTop();
+      return null;
     }
 
     return null;
@@ -89,5 +91,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  auth
+  auth,
+  getCurrentCustomer
 })(Login);
