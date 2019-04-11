@@ -1,9 +1,9 @@
 import { createStackNavigator } from 'react-navigation';
-import Dashboard from '../containers/Dashboard';
+import Home from '../containers/Home';
 import CategoryTree from '../components/catalog/CategoryTree';
 import CategoryList from '../containers/CategoryList';
 import Product from '../components/catalog/Product';
-import SearchScreen from '../components/search/SearchScreen';
+import Search from '../containers/Search';
 import Login from '../containers/Login';
 import Signup from '../containers/Signup';
 import WishList from '../containers/WishList';
@@ -22,10 +22,10 @@ import {
 
 const MainAppNavigator = createStackNavigator(
   {
-    [NAVIGATION_HOME_PATH]: Dashboard,
+    [NAVIGATION_HOME_PATH]: Home,
     [NAVIGATION_CATEGORY_TREE_PATH]: CategoryTree,
     [NAVIGATION_CATEGORY_LIST_PATH]: CategoryList,
-    [NAVIGATION_SEARCH_SCREEN_PATH]: SearchScreen,
+    [NAVIGATION_SEARCH_SCREEN_PATH]: Search,
     [NAVIGATION_LOGIN_SCREEN_PATH]: Login,
     [NAVIGATION_SIGNUP_SCREEN_PATH]: Signup,
     [NAVIGATION_WISHLIST_SCREEN_PATH]: WishList,

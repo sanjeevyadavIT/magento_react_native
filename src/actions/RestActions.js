@@ -7,7 +7,7 @@ import {
   MAGENTO_SET_CURRENT_PRODUCT,
   MAGENTO_GET_CONF_OPTIONS,
   MAGENTO_GET_PRODUCT_MEDIA,
-  MAGENTO_GET_SEARCH_PRODUCTS,
+  MAGENTO_SEARCH_PRODUCTS,
 } from './types';
 
 export const initMagento = () => ({
@@ -48,6 +48,6 @@ export const getProductMedia = sku => ({
 });
 
 export const getSearchProducts = searchInput => ({
-  type: MAGENTO_GET_SEARCH_PRODUCTS,
+  type: MAGENTO_SEARCH_PRODUCTS,
   payload: searchInput,
 });

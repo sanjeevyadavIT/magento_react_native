@@ -25,9 +25,10 @@ import {
   MAGENTO_SET_CONF_OPTIONS,
   MAGENTO_ERROR_CONF_OPTIONS,
   MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS,
-  MAGENTO_GET_SEARCH_PRODUCTS,
-  MAGENTO_SET_SEARCH_PRODUCTS,
-  MAGENTO_ERROR_SEARCH_PRODUCTS,
+  MAGENTO_SEARCH_PRODUCTS,
+  MAGENTO_SEARCH_PRODUCTS_LOADING,
+  MAGENTO_SEARCH_PRODUCTS_SUCCESS,
+  MAGENTO_SEARCH_PRODUCTS_ERROR,
   MAGENTO_CURRENT_USER,
   MAGENTO_CURRENT_USER_LOADING,
   MAGENTO_CURRENT_USER_SUCCESS,
@@ -141,12 +142,18 @@ const getProductMedia = function* fetchProductMedia({ payload: sku }) {
 };
 
 const getSearchProducts = function* fetchSearchProducts(action) {
+  yield put({ type: MAGENTO_SEARCH_PRODUCTS_LOADING, payload: true });
   try {
     const payload = yield call({ context: magento, fn: magento.admin.getProductsWithAttribute }, 'name', `%${action.payload}%`);
     // dispatch an action to set products data
-    yield put({ type: MAGENTO_SET_SEARCH_PRODUCTS, payload: { searchInput: action.payload, products: payload, totalCount: payload.total_count } });
+    if (payload.message) {
+      yield put({ type: MAGENTO_SEARCH_PRODUCTS_ERROR, payload: payload.message });
+    } else {
+      yield put({ type: MAGENTO_SEARCH_PRODUCTS_SUCCESS, payload });
+    }
+    // yield put({ type: MAGENTO_SET_SEARCH_PRODUCTS, payload: { searchInput: action.payload, products: payload, totalCount: payload.total_count } });
   } catch (error) {
-    yield put({ type: MAGENTO_ERROR_SEARCH_PRODUCTS, error });
+    yield put({ type: MAGENTO_SEARCH_PRODUCTS_ERROR, error });
   }
 };
 
@@ -203,7 +210,7 @@ const rootSaga = function* processActionDispatch() {
   yield takeEvery(MAGENTO_GET_CATEGORY_PRODUCTS, getCategoryProducts);
   yield takeEvery(MAGENTO_GET_CONF_OPTIONS, getConfigurableProductOptions);
   yield takeEvery(MAGENTO_GET_PRODUCT_MEDIA, getProductMedia);
-  yield takeEvery(MAGENTO_GET_SEARCH_PRODUCTS, getSearchProducts);
+  yield takeLatest(MAGENTO_SEARCH_PRODUCTS, getSearchProducts);
   yield takeEvery(MAGENTO_CURRENT_USER, getCurrentUser);
   yield takeEvery(MAGENTO_AUTH, auth);
   yield takeLatest(MAGENTO_SIGNUP, signup);

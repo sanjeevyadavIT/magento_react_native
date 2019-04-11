@@ -26,10 +26,11 @@ export const MAGENTO_ERROR_CONF_OPTIONS = 'magento_error_conf_options';
 export const MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS = 'magento_set_product_attribute_options';
 export const UI_PRODUCT_UPDATE_OPTIONS = 'ui_product_update_options';
 
-
-export const MAGENTO_GET_SEARCH_PRODUCTS = 'magento_get_search_products';
-export const MAGENTO_SET_SEARCH_PRODUCTS = 'magento_set_search_products';
-export const MAGENTO_ERROR_SEARCH_PRODUCTS = 'magento_error_search_products';
+// Actions related to search screen
+export const MAGENTO_SEARCH_PRODUCTS = 'magento_search_products';
+export const MAGENTO_SEARCH_PRODUCTS_LOADING = 'magento_search_products_loading';
+export const MAGENTO_SEARCH_PRODUCTS_SUCCESS = 'magent_search_products_success';
+export const MAGENTO_SEARCH_PRODUCTS_ERROR = 'magent_search_products_error';
 
 // Actions related to account screen
 export const MAGENTO_CURRENT_USER = 'magento_current_user';

@@ -19,7 +19,7 @@ import {
 } from '../../routes/types';
 import { magento } from '../../magento';
 
-class Dashboard extends React.Component {
+class Home extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: BRAND_NAME,
     headerLeft: (
@@ -29,6 +29,7 @@ class Dashboard extends React.Component {
     ),
     headerRight: (
       <MaterialHeaderButtons>
+        <Item title="Search" iconName="search" onPress={() => navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH)} />
         <Item title="Wishlist" iconName="bookmark" onPress={() => navigation.navigate(NAVIGATION_WISHLIST_SCREEN_PATH)} />
         <Item title="cart" iconName="shopping-cart" onPress={() => navigation.navigate(NAVIGATION_CART_SCREEN_PATH)} />
       </MaterialHeaderButtons>
@@ -37,9 +38,6 @@ class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      text: '',
-    };
     this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
@@ -52,14 +50,6 @@ class Dashboard extends React.Component {
   openCategoryTreeScreen = () => {
     const { navigation } = this.props;
     navigation.navigate(NAVIGATION_CATEGORY_TREE_PATH);
-  }
-
-  onSearchClick = () => {
-    const { navigation } = this.props;
-    this.setState({ text: '' });
-    navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH, {
-      search: this.state.text
-    });
   }
 
   toggleDrawer() {
@@ -89,21 +79,6 @@ class Dashboard extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Text>Customer Token :: {magento.customerToken}</Text>
-        <View style={{ flexDirection: 'row', marginTop: 16 }}>
-          <TextInput
-            style={{
-              height: 40, borderColor: 'gray', borderWidth: 1, flex: 7
-            }}
-            onChangeText={text => this.setState({ text })}
-            value={this.state.text}
-          />
-          <Button
-            style={{ flex: 2 }}
-            onPress={this.onSearchClick}
-            title="Search"
-          />
-        </View>
         <View style={{ marginTop: 16 }}>
           {this.renderHomeContent()}
         </View>
@@ -120,4 +95,4 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   initMagento,
   getCategoryTree
-})(Dashboard);
+})(Home);
