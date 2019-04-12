@@ -31,6 +31,8 @@ export const MAGENTO_SEARCH_PRODUCTS = 'magento_search_products';
 export const MAGENTO_SEARCH_PRODUCTS_LOADING = 'magento_search_products_loading';
 export const MAGENTO_SEARCH_PRODUCTS_SUCCESS = 'magent_search_products_success';
 export const MAGENTO_SEARCH_PRODUCTS_ERROR = 'magent_search_products_error';
+export const MAGENTO_LOAD_MORE_SEARCH_PRODUCTS = 'magent_load_more_search_products';
+
 
 // Actions related to account screen
 export const MAGENTO_CURRENT_USER = 'magento_current_user';

@@ -47,7 +47,7 @@ export const getProductMedia = sku => ({
   payload: sku,
 });
 
-export const getSearchProducts = searchInput => ({
+export const getSearchProducts = (searchInput, offset, sortOrder) => ({
   type: MAGENTO_SEARCH_PRODUCTS,
-  payload: searchInput,
+  payload: { searchInput, offset, sortOrder },
 });

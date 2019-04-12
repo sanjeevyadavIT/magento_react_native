@@ -58,12 +58,21 @@ export default magento => ({
     })
   ),
 
-  getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) => {
+  getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) => this.getProductsWithAttribute('category_id', id, offset, sortOrder, pageSize, 'eq'),
+
+  getProductsWithAttribute: (
+    attributeCode,
+    attributeValue,
+    offset = 1,
+    sortOrder,
+    pageSize = PAGE_SIZE,
+    conditionType = 'like'
+  ) => {
     const currentPage = parseInt(offset / pageSize, 10) + 1;
     const params = {
-      'searchCriteria[filterGroups][0][filters][0][field]': 'category_id',
-      'searchCriteria[filterGroups][0][filters][0][value]': id,
-      'searchCriteria[filterGroups][0][filters][0][conditionType]': 'eq',
+      'searchCriteria[filterGroups][0][filters][0][field]': attributeCode,
+      'searchCriteria[filterGroups][0][filters][0][value]': attributeValue,
+      'searchCriteria[filterGroups][0][filters][0][conditionType]': conditionType,
       'searchCriteria[filterGroups][1][filters][0][field]': 'visibility',
       'searchCriteria[filterGroups][1][filters][0][value]': '4',
       'searchCriteria[filterGroups][1][filters][0][conditionType]': 'eq',
@@ -74,29 +83,6 @@ export default magento => ({
       params['searchCriteria[sortOrders][0][field]'] = getSortFieldName(sortOrder);
       params['searchCriteria[sortOrders][0][direction]'] = getSortDirection(sortOrder);
     }
-    return magento.admin.getProductsWithSearchCritaria(params);
-  },
-
-  getProductsWithAttribute: (
-    attributeCode,
-    attributeValue,
-    offset = 0,
-    pageSize = PAGE_SIZE,
-    conditionType = 'like'
-  ) => {
-    const params = {
-      'searchCriteria[filterGroups][0][filters][0][field]': attributeCode,
-      'searchCriteria[filterGroups][0][filters][0][value]': attributeValue,
-      'searchCriteria[filterGroups][0][filters][0][conditionType]': conditionType,
-      'searchCriteria[filterGroups][1][filters][0][field]': 'visibility',
-      'searchCriteria[filterGroups][1][filters][0][value]': '4',
-      'searchCriteria[filterGroups][1][filters][0][conditionType]': 'eq',
-      /*
-        // TODO: Implement pagination
-        'searchCriteria[pageSize]': pageSize,
-        'searchCriteria[currentPage]': currentPage
-      */
-    };
     return magento.admin.getProductsWithSearchCritaria(params);
   },
 

@@ -96,8 +96,6 @@ class CategoryList extends React.Component {
     );
   }
 
-
-
   render() {
     const {
       navigation,

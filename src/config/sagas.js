@@ -27,6 +27,7 @@ import {
   MAGENTO_SET_PRODUCT_ATTRIBUTE_OPTIONS,
   MAGENTO_SEARCH_PRODUCTS,
   MAGENTO_SEARCH_PRODUCTS_LOADING,
+  MAGENTO_LOAD_MORE_SEARCH_PRODUCTS,
   MAGENTO_SEARCH_PRODUCTS_SUCCESS,
   MAGENTO_SEARCH_PRODUCTS_ERROR,
   MAGENTO_CURRENT_USER,
@@ -142,16 +143,19 @@ const getProductMedia = function* fetchProductMedia({ payload: sku }) {
 };
 
 const getSearchProducts = function* fetchSearchProducts(action) {
-  yield put({ type: MAGENTO_SEARCH_PRODUCTS_LOADING, payload: true });
+  if (action.payload.offset) {
+    yield put({ type: MAGENTO_LOAD_MORE_SEARCH_PRODUCTS, payload: true });
+  } else {
+    yield put({ type: MAGENTO_SEARCH_PRODUCTS_LOADING, payload: true });
+  }
   try {
-    const payload = yield call({ context: magento, fn: magento.admin.getProductsWithAttribute }, 'name', `%${action.payload}%`);
+    const payload = yield call({ context: magento, fn: magento.admin.getProductsWithAttribute }, 'name', `%${action.payload.searchInput}%`, action.payload.offset, action.payload.sortOrder);
     // dispatch an action to set products data
     if (payload.message) {
       yield put({ type: MAGENTO_SEARCH_PRODUCTS_ERROR, payload: payload.message });
     } else {
       yield put({ type: MAGENTO_SEARCH_PRODUCTS_SUCCESS, payload });
     }
-    // yield put({ type: MAGENTO_SET_SEARCH_PRODUCTS, payload: { searchInput: action.payload, products: payload, totalCount: payload.total_count } });
   } catch (error) {
     yield put({ type: MAGENTO_SEARCH_PRODUCTS_ERROR, error });
   }

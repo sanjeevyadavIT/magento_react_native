@@ -2,36 +2,43 @@ import {
   MAGENTO_SEARCH_PRODUCTS_ERROR,
   MAGENTO_SEARCH_PRODUCTS_SUCCESS,
   MAGENTO_SEARCH_PRODUCTS_LOADING,
+  MAGENTO_LOAD_MORE_SEARCH_PRODUCTS,
 } from '../actions/types';
 
-const INITIAL_STATE = {
+const getInitialState = loadingStatus => ({
   products: null,
   totalCount: 0,
   error: null,
-  loading: false,
-};
+  loading: loadingStatus,
+});
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = getInitialState(false), action) => {
   switch (action.type) {
     case MAGENTO_SEARCH_PRODUCTS_LOADING:
       return {
         ...state,
-        loading: action.payload,
-        totalCount: 0,
-        products: null,
-        error: null,
+        ...getInitialState(action.payload),
       };
-    case MAGENTO_SEARCH_PRODUCTS_SUCCESS:
+    case MAGENTO_SEARCH_PRODUCTS_SUCCESS: {
+      const products = state.products ? state.products : [];
       return {
         ...state,
         loading: false,
-        products: action.payload.items,
+        loadingMore: false,
+        products: [...products, ...action.payload.items],
         totalCount: action.payload.total_count
+      };
+    }
+    case MAGENTO_LOAD_MORE_SEARCH_PRODUCTS:
+      return {
+        ...state,
+        loadingMore: action.payload,
       };
     case MAGENTO_SEARCH_PRODUCTS_ERROR:
       return {
         ...state,
         loading: false,
+        loadingMore: false,
         products: null,
         totalCount: 0,
         error: action.payload
