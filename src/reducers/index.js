@@ -3,7 +3,7 @@ import CategoryTreeReducer from './CategoryTreeReducer';
 import CategoryListReducer from './CategoryListReducer';
 import ProductReducer from './ProductReducer';
 import SearchReducer from './SearchReducer';
-import HomeReducer from './HomeReducer';
+import HomeReducer from './home';
 import AccountReducer from './AccountReducer';
 import LoginReducer from './LoginReducer';
 import SignupReducer from './SignupReducer';

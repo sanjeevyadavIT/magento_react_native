@@ -58,7 +58,7 @@ export default magento => ({
     })
   ),
 
-  getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) => this.getProductsWithAttribute('category_id', id, offset, sortOrder, pageSize, 'eq'),
+  getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) => magento.admin.getProductsWithAttribute('category_id', id, offset, sortOrder, pageSize, 'eq'),
 
   getProductsWithAttribute: (
     attributeCode,

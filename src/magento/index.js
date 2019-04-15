@@ -2,6 +2,7 @@ import axios from 'axios';
 import admin from './lib/admin';
 import guest from './lib/guest';
 import customer from './lib/customer';
+import { isNumber } from '../utils';
 import { ADMIN_TYPE, CUSTOMER_TYPE } from './types';
 
 const log = process.env.NODE_ENV === 'development' ? console.log : null;
@@ -135,10 +136,11 @@ class Magento {
   }
 
   getHomeData() {
-    if (this.configuration.home_cms_block_id) {
+    if (isNumber(this.configuration.home_cms_block_id)) {
       return this.admin.getCmsBlock(this.configuration.home_cms_block_id);
     }
-    return false;
+    // TODO: Extract all error strings into a single file
+    throw new Error('Configure correct CMS block id in config/magneto.js');
   }
 }
 

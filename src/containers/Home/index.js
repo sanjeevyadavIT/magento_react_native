@@ -2,22 +2,18 @@ import React from 'react';
 import {
   View,
   Text,
-  Button,
-  TextInput,
-  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import { initMagento, getCategoryTree } from '../../actions';
 import { HOME, CATEGORY_TREE } from '../../reducers/types';
 import { BRAND_NAME } from '../../constants';
-import { MaterialHeaderButtons, Item } from '../../components/common';
+import { Spinner, MaterialHeaderButtons, Item } from '../../components/common';
 import {
   NAVIGATION_CATEGORY_TREE_PATH,
   NAVIGATION_SEARCH_SCREEN_PATH,
   NAVIGATION_WISHLIST_SCREEN_PATH,
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../routes/types';
-import { magento } from '../../magento';
 
 class Home extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -47,16 +43,11 @@ class Home extends React.Component {
     navigation.setParams({ toggleDrawer: this.toggleDrawer });
   }
 
-  openCategoryTreeScreen = () => {
-    const { navigation } = this.props;
-    navigation.navigate(NAVIGATION_CATEGORY_TREE_PATH);
-  }
-
   toggleDrawer() {
     const {
       navigation,
+      categoryTree,
       getCategoryTree: _getCategoryTree,
-      [CATEGORY_TREE]: categoryTree,
     } = this.props;
     if (!categoryTree) {
       _getCategoryTree();
@@ -64,33 +55,64 @@ class Home extends React.Component {
     navigation.toggleDrawer();
   }
 
-  renderHomeContent = () => {
-    if (this.props[HOME].content) {
+  renderHomeContent() {
+    const { loading, error, content } = this.props;
+
+    if (error) {
       return (
-        <Text>{JSON.stringify(this.props[HOME])}</Text>
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
       );
     }
 
-    if (this.props[HOME].loading === false) return null;
+    if (loading) {
+      return <Spinner />;
+    }
 
-    return <ActivityIndicator />;
+    if (content) {
+      return (
+        <Text>{JSON.stringify(content)}</Text>
+      );
+    }
+
+    return null;
   }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <View style={{ marginTop: 16 }}>
-          {this.renderHomeContent()}
-        </View>
+      <View style={styles.mainContainer}>
+        {this.renderHomeContent()}
       </View>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  [HOME]: state[HOME],
-  [CATEGORY_TREE]: state[CATEGORY_TREE],
-});
+const styles = {
+  mainContainer: {
+    flex: 1,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 8,
+  },
+  errorText: {
+    textAlign: 'center',
+  },
+};
+
+const mapStateToProps = (state) => {
+  const { loading, error, content } = state[HOME];
+  const categoryTree = state[CATEGORY_TREE];
+
+  return {
+    loading,
+    error,
+    content,
+    categoryTree,
+  };
+};
 
 export default connect(mapStateToProps, {
   initMagento,

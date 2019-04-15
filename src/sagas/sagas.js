@@ -1,15 +1,11 @@
-/**
- * Don't call any function from this file,
- * all the possible actions are defined in src/actions/RestActions.js
- */
-import { takeEvery, takeLatest, call, put } from 'redux-saga/effects';
+import {
+  takeEvery,
+  takeLatest,
+  call,
+  put
+} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
-  MAGENTO_INIT,
-  MAGENTO_GET_HOME_DATA,
-  MAGENTO_SET_HOME_DATA,
-  MAGENTO_NO_HOME_DATA,
-  MAGENTO_ERROR_HOME_DATA,
   MAGENTO_GET_CATEGORY_TREE,
   MAGENTO_SET_CATEGORY_TREE,
   MAGENTO_ERROR_CATEGORY_TREE,
@@ -44,45 +40,6 @@ import {
   MAGENTO_SIGNUP_ERROR,
 } from '../actions/types';
 import { magento, CUSTOMER_TOKEN } from '../magento';
-import { magentoOptions } from './magento';
-
-
-const initMagento = function* initializeMagento() {
-  if (magento.isConfigured()) return;
-
-  try {
-    // Set magento url and admin access
-    magento.setOptions(magentoOptions);
-    // Fetch access token using admin credentials
-    yield call({ context: magento, fn: magento.init });
-    // Fetch store configuration details
-    yield call(magento.admin.getStoreConfig);
-    // get Customer token from local db
-    const customerToken = yield AsyncStorage.getItem(CUSTOMER_TOKEN);
-    magento.setCustomerToken(customerToken);
-    // fetch HomeData
-    yield put({ type: MAGENTO_GET_HOME_DATA });
-  } catch (error) {
-    // TODO: throw error action
-  }
-};
-
-const getHomeData = function* fetchHomeData() {
-  try {
-    // Fetch the cms block
-    const payload = yield call({ context: magento, fn: magento.getHomeData });
-    // if false, no CMS block is configured
-    if (payload !== false) {
-      payload.content = payload.content.replace(/<\/?[^>]+(>|$)/g, '');
-      yield put({ type: MAGENTO_SET_HOME_DATA, payload });
-    } else {
-      yield put({ type: MAGENTO_NO_HOME_DATA });
-    }
-  } catch (error) {
-    yield put({ type: MAGENTO_ERROR_HOME_DATA, error });
-  }
-};
-
 
 const getCategoryTree = function* fetchCategoryTree() {
   try {
@@ -207,17 +164,15 @@ const signup = function* signup(action) {
   }
 };
 
-const rootSaga = function* processActionDispatch() {
-  yield takeEvery(MAGENTO_INIT, initMagento);
-  yield takeEvery(MAGENTO_GET_HOME_DATA, getHomeData);
-  yield takeEvery(MAGENTO_GET_CATEGORY_TREE, getCategoryTree);
-  yield takeEvery(MAGENTO_GET_CATEGORY_PRODUCTS, getCategoryProducts);
-  yield takeEvery(MAGENTO_GET_CONF_OPTIONS, getConfigurableProductOptions);
-  yield takeEvery(MAGENTO_GET_PRODUCT_MEDIA, getProductMedia);
-  yield takeLatest(MAGENTO_SEARCH_PRODUCTS, getSearchProducts);
-  yield takeEvery(MAGENTO_CURRENT_USER, getCurrentUser);
-  yield takeEvery(MAGENTO_AUTH, auth);
-  yield takeLatest(MAGENTO_SIGNUP, signup);
-};
+const sagas = [
+  takeEvery(MAGENTO_GET_CATEGORY_TREE, getCategoryTree),
+  takeEvery(MAGENTO_GET_CATEGORY_PRODUCTS, getCategoryProducts),
+  takeEvery(MAGENTO_GET_CONF_OPTIONS, getConfigurableProductOptions),
+  takeEvery(MAGENTO_GET_PRODUCT_MEDIA, getProductMedia),
+  takeLatest(MAGENTO_SEARCH_PRODUCTS, getSearchProducts),
+  takeEvery(MAGENTO_CURRENT_USER, getCurrentUser),
+  takeEvery(MAGENTO_AUTH, auth),
+  takeLatest(MAGENTO_SIGNUP, signup),
+];
 
-export default rootSaga;
+export default sagas;
