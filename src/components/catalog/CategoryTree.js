@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import CategoryTreeList from './CategoryTreeList';
+import { Spinner } from '../common';
 import { CATEGORY_TREE_PAGE_TITLE } from '../../constants';
 import { CATEGORY_TREE } from '../../reducers/types';
 
@@ -12,25 +13,45 @@ class CategoryTree extends React.Component {
   };
 
   renderContent() {
-    const { [CATEGORY_TREE]: categories, navigate } = this.props;
-    if (categories) {
-      return <CategoryTreeList categories={categories} navigate={navigate} />;
+    const { loading, error, childrenData } = this.props;
+
+    if (error) {
+      return <Text>{error}</Text>;
     }
-    // dispatch(getCategoryTree());
-    return <ActivityIndicator />;
+
+    if (loading) {
+      return <Spinner />;
+    }
+
+    if (childrenData) {
+      return <CategoryTreeList categories={childrenData} />;
+    }
+
+    return null;
   }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.mainContainer}>
         {this.renderContent()}
       </View>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  [CATEGORY_TREE]: state[CATEGORY_TREE],
-});
+const styles = {
+  mainContainer: {
+    flex: 1,
+  }
+};
+
+const mapStateToProps = (state) => {
+  const { loading, error, children_data: childrenData } = state[CATEGORY_TREE];
+  return {
+    loading,
+    error,
+    childrenData,
+  };
+};
 
 export default connect(mapStateToProps)(CategoryTree);

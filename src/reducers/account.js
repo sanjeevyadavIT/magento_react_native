@@ -1,31 +1,27 @@
-import {
-  MAGENTO_SIGNUP_ERROR,
-  MAGENTO_SIGNUP_SUCCESS,
-  MAGENTO_SIGNUP_LOADING,
-} from '../actions/types';
+import { MAGENTO } from '../actions/actionsTypes';
 
 const INITIAL_STATE = {
-  success: null,
+  customer: null,
   error: null,
   loading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case MAGENTO_SIGNUP_LOADING:
+    case MAGENTO.CURRENT_USER_LOADING:
       return {
         ...state,
         loading: action.payload,
         error: null,
         success: null,
       };
-    case MAGENTO_SIGNUP_SUCCESS:
+    case MAGENTO.CURRENT_USER_SUCCESS:
       return {
         ...state,
         loading: false,
-        success: action.payload,
+        customer: action.payload,
       };
-    case MAGENTO_SIGNUP_ERROR:
+    case MAGENTO.CURRENT_USER_FAILURE:
       return {
         ...state,
         loading: false,

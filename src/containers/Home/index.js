@@ -1,19 +1,15 @@
 import React from 'react';
-import {
-  View,
-  Text,
-} from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { initMagento, getCategoryTree } from '../../actions';
 import { HOME, CATEGORY_TREE } from '../../reducers/types';
 import { BRAND_NAME } from '../../constants';
 import { Spinner, MaterialHeaderButtons, Item } from '../../components/common';
 import {
-  NAVIGATION_CATEGORY_TREE_PATH,
   NAVIGATION_SEARCH_SCREEN_PATH,
   NAVIGATION_WISHLIST_SCREEN_PATH,
   NAVIGATION_CART_SCREEN_PATH,
-} from '../../routes/types';
+} from '../../navigation/types';
 
 class Home extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -27,7 +23,7 @@ class Home extends React.Component {
       <MaterialHeaderButtons>
         <Item title="Search" iconName="search" onPress={() => navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH)} />
         <Item title="Wishlist" iconName="bookmark" onPress={() => navigation.navigate(NAVIGATION_WISHLIST_SCREEN_PATH)} />
-        <Item title="cart" iconName="shopping-cart" onPress={() => navigation.navigate(NAVIGATION_CART_SCREEN_PATH)} />
+        <Item title="Cart" iconName="shopping-cart" onPress={() => navigation.navigate(NAVIGATION_CART_SCREEN_PATH)} />
       </MaterialHeaderButtons>
     ),
   })
@@ -43,13 +39,15 @@ class Home extends React.Component {
     navigation.setParams({ toggleDrawer: this.toggleDrawer });
   }
 
+  // FIXME: Having catgeory state here, causes Home to rerender, not needed
   toggleDrawer() {
     const {
       navigation,
-      categoryTree,
+      categoryTreeData,
+      categoryLoading,
       getCategoryTree: _getCategoryTree,
     } = this.props;
-    if (!categoryTree) {
+    if (!categoryTreeData && !categoryLoading) {
       _getCategoryTree();
     }
     navigation.toggleDrawer();
@@ -104,13 +102,14 @@ const styles = {
 
 const mapStateToProps = (state) => {
   const { loading, error, content } = state[HOME];
-  const categoryTree = state[CATEGORY_TREE];
+  const { children_data: categoryTreeData, loading: categoryLoading } = state[CATEGORY_TREE];
 
   return {
     loading,
     error,
     content,
-    categoryTree,
+    categoryTreeData,
+    categoryLoading
   };
 };
 

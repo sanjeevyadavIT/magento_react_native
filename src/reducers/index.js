@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import CategoryTreeReducer from './CategoryTreeReducer';
-import CategoryListReducer from './CategoryListReducer';
-import ProductReducer from './ProductReducer';
-import SearchReducer from './SearchReducer';
+import CategoryListReducer from './categoryList';
 import HomeReducer from './home';
-import AccountReducer from './AccountReducer';
-import LoginReducer from './LoginReducer';
-import SignupReducer from './SignupReducer';
+import CategoryTreeReducer from './categoryTree';
+import ProductReducer from './product';
+import SearchReducer from './search';
+import AccountReducer from './account';
+import LoginReducer from './login';
+import SignupReducer from './signup';
 import {
   HOME,
   CATEGORY_TREE,

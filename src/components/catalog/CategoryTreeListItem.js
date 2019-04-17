@@ -1,18 +1,34 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
+import {
+  UIManager,
+  Platform,
+  LayoutAnimation,
+  View,
+  Text,
+  TouchableOpacity
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CategoryTreeList from './CategoryTreeList';
-import { NAVIGATION_CATEGORY_LIST_PATH } from '../../routes/types';
-import { setCurrentCategory } from '../../actions';
+import NavigationService from '../../navigation/NavigationService';
+import { NAVIGATION_CATEGORY_LIST_PATH } from '../../navigation/types';
 
 class CategoryTreeListItem extends React.Component {
   constructor(props) {
     super(props);
+
+    if (Platform.OS === 'android') {
+      // eslint-disable-next-line no-unused-expressions
+      UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+
     this.state = {
       expanded: false,
     };
     this.onRowPress = this.onRowPress.bind(this);
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.easeInEaseOut();
   }
 
   onExpandPress = () => {
@@ -23,10 +39,10 @@ class CategoryTreeListItem extends React.Component {
   }
 
   onRowPress() {
-    const { category, setCurrentCategory: _setCurrentCategory, navigate } = this.props;
-    _setCurrentCategory(category.id);
-    navigate(NAVIGATION_CATEGORY_LIST_PATH, {
+    const { category } = this.props;
+    NavigationService.navigate(NAVIGATION_CATEGORY_LIST_PATH, {
       title: category.name,
+      id: category.id
     });
   }
 
@@ -71,12 +87,12 @@ class CategoryTreeListItem extends React.Component {
   }
 
   renderChildren() {
-    const { category, navigate } = this.props;
+    const { category } = this.props;
     const { expanded } = this.state;
     if (expanded) {
       return (
         <View>
-          <CategoryTreeList categories={category} navigate={navigate} />
+          <CategoryTreeList categories={category.children_data} />
         </View>
       );
     }
@@ -94,4 +110,4 @@ class CategoryTreeListItem extends React.Component {
 }
 
 
-export default connect(null, { setCurrentCategory })(CategoryTreeListItem);
+export default CategoryTreeListItem;

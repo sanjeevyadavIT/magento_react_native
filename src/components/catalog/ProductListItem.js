@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { magento } from '../../magento';
+import NavigationService from '../../navigation/NavigationService';
+import { NAVIGATION_PRODUCT_DETAIL_PATH } from '../../navigation/types';
 import { BORDER_COLOR } from '../../constants';
 
 class ProductListItem extends React.Component {
@@ -10,9 +12,9 @@ class ProductListItem extends React.Component {
   }
 
   onRowPress() {
-    const { product, setCurrentProduct, navigate } = this.props;
+    const { product, setCurrentProduct } = this.props;
     setCurrentProduct(product);
-    navigate('product', {
+    NavigationService.navigate(NAVIGATION_PRODUCT_DETAIL_PATH, {
       title: product.name,
     });
   }

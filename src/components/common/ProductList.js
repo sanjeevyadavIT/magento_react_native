@@ -4,15 +4,24 @@ import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 import ProductListItem from '../catalog/ProductListItem';
 
+// TODO: Make it a functional component
 class ProductList extends React.Component {
   renderChild = ({ item, index }) => {
-    return <ProductListItem product={item} navigate={this.props.navigate} setCurrentProduct={this.props.setCurrentProduct} index={index} columnCount={this.props.columns} />;
+    const { setCurrentProduct, columns } = this.props;
+    return (
+      <ProductListItem
+        product={item}
+        setCurrentProduct={setCurrentProduct}
+        index={index}
+        columnCount={columns}
+      />
+    );
   }
 
   renderFooter = () => {
     const { canLoadMoreContent } = this.props;
     if (canLoadMoreContent) {
-      return <Spinner />;
+      return <Spinner size="small" />;
     }
     return null;
   }
@@ -31,7 +40,6 @@ class ProductList extends React.Component {
         ListFooterComponent={this.renderFooter}
       />
     );
-
   }
 
   render() {
@@ -48,7 +56,6 @@ ProductList.propTypes = {
   products: PropTypes.array.isRequired,
   columnCount: PropTypes.number.isRequired,
   onEndReached: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired,
   setCurrentProduct: PropTypes.func.isRequired,
   canLoadMoreContent: PropTypes.bool.isRequired,
 };

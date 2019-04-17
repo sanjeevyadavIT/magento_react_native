@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { auth, getCurrentCustomer } from '../../actions';
 import { LOGIN } from '../../reducers/types';
 import { Spinner } from '../../components/common';
-import { NAVIGATION_SIGNUP_SCREEN_PATH } from '../../routes/types';
+import { NAVIGATION_SIGNUP_SCREEN_PATH } from '../../navigation/types';
 
 class Login extends React.Component {
   static navigationOptions = {

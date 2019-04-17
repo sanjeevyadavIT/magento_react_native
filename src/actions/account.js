@@ -1,5 +1,5 @@
-import { MAGENTO_CURRENT_USER } from './types';
+import { MAGENTO } from './actionsTypes';
 
 export const getCurrentCustomer = () => ({
-  type: MAGENTO_CURRENT_USER,
+  type: MAGENTO.CURRENT_USER_REQUEST,
 });

@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, Modal } from 'react-native';
 import { connect } from 'react-redux';
-import ProductList from '../../components/common/ProductList';
 import { getCategoryProducts, setCurrentProduct } from '../../actions';
 import { CATEGORY_LIST } from '../../reducers/types';
 import { BRAND_NAME, BORDER_COLOR } from '../../constants';
-import { Spinner, MaterialHeaderButtons, Item } from '../../components/common';
+import { ProductList, Spinner, MaterialHeaderButtons, Item } from '../../components/common';
 
 class CategoryList extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -22,6 +21,7 @@ class CategoryList extends React.Component {
     this.onEndReached = this.onEndReached.bind(this);
     this.showSortDialog = this.showSortDialog.bind(this);
     this.state = {
+      categoryId: props.navigation.getParam('id', -1),
       sortDialogVisible: false,
       sortOrder: null,
     };
@@ -30,9 +30,9 @@ class CategoryList extends React.Component {
   componentDidMount() {
     const {
       navigation,
-      categoryId,
       getCategoryProducts: _getCategoryProducts,
     } = this.props;
+    const { categoryId } = this.state;
     _getCategoryProducts(categoryId);
     navigation.setParams({ showSortDialog: this.showSortDialog });
   }
@@ -43,12 +43,12 @@ class CategoryList extends React.Component {
 
   onEndReached() {
     const {
-      categoryId,
       products,
       loadingMore,
       canLoadMoreContent,
       getCategoryProducts: _getCategoryProducts,
     } = this.props;
+    const { categoryId } = this.state;
     const { sortOrder } = this.state;
 
     if (!loadingMore && canLoadMoreContent) {
@@ -62,7 +62,8 @@ class CategoryList extends React.Component {
   }
 
   performSort(val) {
-    const { categoryId, getCategoryProducts: _getCategoryProducts } = this.props;
+    const { getCategoryProducts: _getCategoryProducts } = this.props;
+    const { categoryId } = this.state;
     _getCategoryProducts(categoryId, null, val);
     this.setState({ sortOrder: val, sortDialogVisible: false });
   }
@@ -130,12 +131,11 @@ const mapStateToProps = (state) => {
     totalCount,
     products,
     loadingMore,
-    currentCategoryId: categoryId
   } = state[CATEGORY_LIST];
   const canLoadMoreContent = products ? products.length < totalCount : false;
 
   return {
-    categoryId, products, totalCount, canLoadMoreContent, loadingMore
+    products, totalCount, canLoadMoreContent, loadingMore
   };
 };
 

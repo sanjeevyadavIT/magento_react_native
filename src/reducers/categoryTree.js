@@ -1,31 +1,26 @@
-import {
-  MAGENTO_CURRENT_USER_LOADING,
-  MAGENTO_CURRENT_USER_SUCCESS,
-  MAGENTO_CURRENT_USER_ERROR,
-} from '../actions/types';
+import { MAGENTO } from '../actions/actionsTypes';
 
 const INITIAL_STATE = {
-  customer: null,
-  error: null,
   loading: false,
+  error: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case MAGENTO_CURRENT_USER_LOADING:
+    case MAGENTO.CATEGORY_TREE_LOADING:
       return {
         ...state,
-        loading: action.payload,
+        loading: true,
         error: null,
-        success: null,
       };
-    case MAGENTO_CURRENT_USER_SUCCESS:
+    case MAGENTO.CATEGORY_TREE_SUCCESS:
       return {
         ...state,
         loading: false,
-        customer: action.payload,
+        error: null,
+        ...action.payload,
       };
-    case MAGENTO_CURRENT_USER_ERROR:
+    case MAGENTO.CATEGORY_TREE_FAILURE:
       return {
         ...state,
         loading: false,

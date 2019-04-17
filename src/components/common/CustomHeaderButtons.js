@@ -1,11 +1,16 @@
-import * as React from 'react';
+import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { HeaderButtons, HeaderButton } from 'react-navigation-header-buttons';
+import { ACCENT_COLOR } from '../../constants';
 
-const HEADER_BUTTON_COLOR = 'black';
 // define IconComponent, color, sizes and OverflowIcon in one place
 const MaterialHeaderButton = props => (
-  <HeaderButton {...props} IconComponent={MaterialIcons} iconSize={23} color={HEADER_BUTTON_COLOR} />
+  <HeaderButton
+    IconComponent={MaterialIcons}
+    iconSize={23}
+    color={ACCENT_COLOR}
+    {...props}
+  />
 );
 
 export const MaterialHeaderButtons = props => (
@@ -16,4 +21,4 @@ export const MaterialHeaderButtons = props => (
   />
 );
 
-export const Item = HeaderButtons.Item;
+export const { Item } = HeaderButtons;

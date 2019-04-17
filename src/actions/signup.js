@@ -1,6 +1,6 @@
-import { MAGENTO_SIGNUP } from './types';
+import { MAGENTO } from './actionsTypes';
 
 export const signup = payload => ({
-  type: MAGENTO_SIGNUP,
+  type: MAGENTO.SIGNUP_REQUEST,
   payload,
 });

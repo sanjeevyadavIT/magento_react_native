@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { signup } from '../../actions';
 import { SIGNUP } from '../../reducers/types';
 import { Spinner } from '../../components/common';
-import { NAVIGATION_LOGIN_SCREEN_PATH } from '../../routes/types';
+import { NAVIGATION_LOGIN_SCREEN_PATH } from '../../navigation/types';
 
 class Signup extends React.Component {
   static navigationOptions = {

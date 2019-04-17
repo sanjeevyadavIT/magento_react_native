@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { getCurrentCustomer } from '../../actions';
 import { CUSTOMER_TOKEN, magento } from '../../magento';
-import { NAVIGATION_HOME_PATH } from '../../routes/types';
+import { NAVIGATION_HOME_PATH } from '../../navigation/types';
 import { ACCOUNT } from '../../reducers/types';
 import { Spinner } from '../../components/common';
 
