@@ -42,9 +42,26 @@ const getProductMedia = function* fetchProductMedia({ payload: sku }) {
     yield put({ type: MAGENTO.PRODUCT_MEDIA_FAILURE, payload: extractErrorMessage(error) });
   }
 };
+
+const addToCart = function* addTocart({ payload }) {
+  try {
+    yield put({ type: MAGENTO.ADD_TO_CART_LOADING, payload: true });
+    if (payload.cartItem.quote_id) {
+      const response = yield call({ content: magento, fn: magento.customer.addToCart }, payload);
+      yield put({ type: MAGENTO.ADD_TO_CART_SUCCESS, payload: response });
+      yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // refresh cart
+    } else {
+      throw new Error('Guest cart not implemented');
+    }
+  } catch (error) {
+    yield put({ type: MAGENTO.PADD_TO_CART_FAILURE, payload: extractErrorMessage(error) });
+  }
+};
+
 const productSagas = [
   takeEvery(MAGENTO.CONF_OPTIONS_REQUEST, getConfigurableProductOptions),
   takeEvery(MAGENTO.PRODUCT_MEDIA_REQUEST, getProductMedia),
+  takeEvery(MAGENTO.ADD_TO_CART_REQUEST, addToCart),
 ];
 
 export default productSagas;

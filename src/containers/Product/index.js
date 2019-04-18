@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, Button, Picker, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { BRAND_NAME } from '../../constants';
-import { PRODUCT } from '../../reducers/types';
-import { getProductMedia, getConfigurableProductOptions, uiProductUpdate } from '../../actions';
+import { BRAND_NAME, BORDER_COLOR } from '../../constants';
+import { PRODUCT, CART } from '../../reducers/types';
+import { getProductMedia, getConfigurableProductOptions, uiProductUpdate, addToCart } from '../../actions';
 import { Spinner } from '../../components/common';
 import ProductMedia from '../../components/catalog/ProductMedia';
 
@@ -16,6 +16,7 @@ class Product extends React.Component {
     super(props);
     this.renderOptions = this.renderOptions.bind(this);
     this.renderPickerOptions = this.renderPickerOptions.bind(this);
+    this.onPressAddToCart = this.onPressAddToCart.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +33,17 @@ class Product extends React.Component {
 
     if (!medias || !medias[product.sku]) {
       _getProductMedia(product.sku);
+    }
+  }
+
+  onPressAddToCart() {
+    const { product, cartQuoteId, addToCart: _addToCart } = this.props;
+    const qty = 1;
+    if (product.type_id === 'simple') {
+      const cartItem = { sku: product.sku, qty, quote_id: cartQuoteId };
+      _addToCart(cartItem);
+    } else {
+      console.log('Implement functionality for configurable products and downloadable');
     }
   }
 
@@ -114,9 +126,9 @@ class Product extends React.Component {
           <View>
             {this.renderOptions()}
           </View>
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            <Button style={{ flex: 1, marginRIght: 16 }} title="Buy now" />
-            <Button style={{ flex: 1 }} title="Add to cart" />
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 8 }}>
+            <Button style={{ flex: 1, marginRight: 8 }} title="Add to Wishlist" />
+            <Button style={{ flex: 1 }} title="Add to cart" onPress={this.onPressAddToCart} />
           </View>
         </View>
       </ScrollView>
@@ -143,6 +155,8 @@ const mapStateToProps = (state) => {
     selectedOptions,
     current: product,
   } = state[PRODUCT];
+  const { cart } = state[CART];
+  const cartQuoteId = cart.id;
   return {
     product,
     attributes,
@@ -152,11 +166,13 @@ const mapStateToProps = (state) => {
     confOptionsLoading,
     confOptionsError,
     selectedOptions,
+    cartQuoteId,
   };
 };
 
 export default connect(mapStateToProps, {
   getProductMedia,
   getConfigurableProductOptions,
-  uiProductUpdate
+  uiProductUpdate,
+  addToCart,
 })(Product);

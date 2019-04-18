@@ -22,6 +22,7 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'CATEGORY_TREE', // Fetch category tree
   'CONF_OPTIONS', // Product is configurable type, fetch all options
   'PRODUCT_MEDIA', // Fetch images related to products
+  'ADD_TO_CART', // Add item to cart
   'AUTH', // Login
   'SIGNUP', // Create new user account
   'CURRENT_USER', // Fetch details of current logged in user

@@ -13,12 +13,6 @@ class Cart extends React.Component {
   })
 
   componentDidMount() {
-    const { getCustomerCart: _getCustomerCart } = this.props;
-    _getCustomerCart(); // Fetch cutsomer cart
-  }
-
-  // FIXME: Same request is being made multiple times
-  componentDidUpdate() {
     const {
       items,
       products,

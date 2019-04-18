@@ -23,3 +23,10 @@ export const uiProductUpdate = selectedOptions => ({
   type: UI_PRODUCT_UPDATE_OPTIONS,
   payload: selectedOptions,
 });
+
+export const addToCart = cartItem => ({
+  type: MAGENTO.ADD_TO_CART_REQUEST,
+  payload: {
+    cartItem
+  }
+});

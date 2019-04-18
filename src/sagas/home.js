@@ -22,6 +22,9 @@ const initMagento = function* initializeMagento() {
     yield put({ type: MAGENTO.INIT_APP_SUCCESS });
     // fetch HomeBanner and featured product
     yield put({ type: MAGENTO.HOME_DATA_REQUEST });
+    if (customerToken) {
+      yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Fetch cart details
+    }
     // yield app ready
   } catch (error) {
     yield put({ type: MAGENTO.INIT_APP_FAILURE, payload: extractErrorMessage(error) });
