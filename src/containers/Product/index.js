@@ -37,13 +37,24 @@ class Product extends React.Component {
   }
 
   onPressAddToCart() {
-    const { product, cartQuoteId, addToCart: _addToCart } = this.props;
+    const { product, selectedOptions, cartQuoteId, addToCart: _addToCart } = this.props;
     const qty = 1;
+    const cartItem = { sku: product.sku, qty, quote_id: cartQuoteId };
     if (product.type_id === 'simple') {
-      const cartItem = { sku: product.sku, qty, quote_id: cartQuoteId };
+      _addToCart(cartItem);
+    } else if (product.type_id === 'configurable') {
+      cartItem.product_option = {};
+      cartItem.product_option.extension_attributes = {};
+      cartItem.product_option.extension_attributes.configurable_item_options = [];
+      Object.keys(selectedOptions).map((key, index) => {
+        cartItem.product_option.extension_attributes.configurable_item_options.push({
+          option_id: key,
+          option_value: selectedOptions[key],
+        });
+      });
       _addToCart(cartItem);
     } else {
-      console.log('Implement functionality for configurable products and downloadable');
+      console.log('Implement functionality for other types of products');
     }
   }
 
