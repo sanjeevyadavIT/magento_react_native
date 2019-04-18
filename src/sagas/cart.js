@@ -22,9 +22,21 @@ const getCartItemProduct = function* fetchCartItemProduct(action) {
   }
 };
 
+const removeItemFromCart = function* deleteItemFromCart(action) {
+  try {
+    yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_LOADING, payload: true });
+    const payload = yield call({ content: magento, fn: magento.customer.removeItemFromCart }, action.payload);
+    yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_SUCCESS, payload });
+    yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST, payload: true }); // Refetch the cart
+  } catch (error) {
+    yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_FAILURE, payload: extractErrorMessage(error) });
+  }
+};
+
 const cartSagas = [
   takeLatest(MAGENTO.CUSTOMER_CART_REQUEST, getCustomerCart),
   takeEvery(MAGENTO.CART_ITEM_PRODUCT_REQUEST, getCartItemProduct),
+  takeEvery(MAGENTO.REMOVE_ITEM_FROM_CART_REQUEST, removeItemFromCart),
 ];
 
 export default cartSagas;

@@ -31,6 +31,7 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'MORE_SEARCH_PRODUCTS', // pagination in search
   'CUSTOMER_CART', // Get cart of logged in user
   'CART_ITEM_PRODUCT', // fetch details of items present in cart
+  'REMOVE_ITEM_FROM_CART', // Remove an item from a cart
 ], suffixTypes);
 
 export const UI_SET_CURRENT_PRODUCT = 'SET_CURRENT_PRODUCT';

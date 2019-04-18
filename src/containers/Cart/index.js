@@ -83,9 +83,11 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { cart, products } = state[CART];
+  const { cart, products, loading, error } = state[CART];
   const { items } = cart;
   return {
+    loading,
+    error,
     items, // Product list from cart API
     products, // Product Detail data, fetched manually
   };

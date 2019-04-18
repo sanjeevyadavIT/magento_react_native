@@ -31,4 +31,19 @@ export default magento => ({
     })
   ),
 
+  removeItemFromCart: itemId => (
+    // GET /rest/V1/carts/mine/items/${itemId}
+    new Promise((resolve, reject) => {
+      const path = `/V1/carts/mine/items/${itemId}`;
+
+      magento.delete(path, undefined, undefined, CUSTOMER_TYPE)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
+  ),
+
 });

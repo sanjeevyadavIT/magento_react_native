@@ -66,6 +66,10 @@ class Magento {
     return this.send(path, 'GET', params, data, type);
   }
 
+  delete(path, params, data, type = ADMIN_TYPE) {
+    return this.send(path, 'DELETE', params, data, type);
+  }
+
   send(path, method, params, data, type) {
     const url = `${this.base_url}${this.root_path}${path}`;
 

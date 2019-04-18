@@ -9,10 +9,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case MAGENTO.REMOVE_ITEM_FROM_CART_LOADING:
     case MAGENTO.CUSTOMER_CART_LOADING:
       return {
         ...state,
-        loading: action.payload,
+        loading: true,
         error: null,
       };
     case MAGENTO.CUSTOMER_CART_SUCCESS:
@@ -23,6 +24,7 @@ export default (state = INITIAL_STATE, action) => {
           ...action.payload
         },
       };
+    case MAGENTO.REMOVE_ITEM_FROM_CART_FAILURE:
     case MAGENTO.CUSTOMER_CART_FAILURE:
       return {
         ...state,
