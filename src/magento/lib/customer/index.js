@@ -16,4 +16,19 @@ export default magento => ({
     })
   ),
 
+  getCustomerCart: () => (
+    // GET /rest/V1/carts/mine
+    new Promise((resolve, reject) => {
+      const path = '/V1/carts/mine';
+
+      magento.get(path, undefined, undefined, CUSTOMER_TYPE)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
+  ),
+
 });

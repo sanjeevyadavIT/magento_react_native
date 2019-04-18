@@ -7,6 +7,7 @@ import SearchReducer from './search';
 import AccountReducer from './account';
 import LoginReducer from './login';
 import SignupReducer from './signup';
+import CartReducer from './cart';
 import {
   HOME,
   CATEGORY_TREE,
@@ -16,6 +17,7 @@ import {
   ACCOUNT,
   LOGIN,
   SIGNUP,
+  CART,
 } from './types';
 
 export default combineReducers({
@@ -27,4 +29,5 @@ export default combineReducers({
   [ACCOUNT]: AccountReducer,
   [LOGIN]: LoginReducer,
   [SIGNUP]: SignupReducer,
+  [CART]: CartReducer,
 });

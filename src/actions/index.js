@@ -6,3 +6,4 @@ export * from './account';
 export * from './login';
 export * from './signup';
 export * from './search';
+export * from './cart';

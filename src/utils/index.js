@@ -1,3 +1,5 @@
+export * from './products';
+
 // eslint-disable-next-line import/prefer-default-export
 export const extractErrorMessage = (error) => {
   // TODO: Write code to extract error message and replace placeholder in string

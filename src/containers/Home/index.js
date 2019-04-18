@@ -5,9 +5,11 @@ import { initMagento, getCategoryTree } from '../../actions';
 import { HOME, CATEGORY_TREE } from '../../reducers/types';
 import { BRAND_NAME } from '../../constants';
 import { Spinner, MaterialHeaderButtons, Item } from '../../components/common';
+import { magento } from '../../magento';
 import {
   NAVIGATION_SEARCH_SCREEN_PATH,
   NAVIGATION_WISHLIST_SCREEN_PATH,
+  NAVIGATION_LOGIN_SCREEN_PATH,
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../navigation/types';
 
@@ -22,8 +24,8 @@ class Home extends React.Component {
     headerRight: (
       <MaterialHeaderButtons>
         <Item title="Search" iconName="search" onPress={() => navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH)} />
-        <Item title="Wishlist" iconName="bookmark" onPress={() => navigation.navigate(NAVIGATION_WISHLIST_SCREEN_PATH)} />
-        <Item title="Cart" iconName="shopping-cart" onPress={() => navigation.navigate(NAVIGATION_CART_SCREEN_PATH)} />
+        <Item title="Wishlist" iconName="bookmark" onPress={() => magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_WISHLIST_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)} />
+        <Item title="Cart" iconName="shopping-cart" onPress={() => magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH) } />
       </MaterialHeaderButtons>
     ),
   })
