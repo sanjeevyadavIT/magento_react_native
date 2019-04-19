@@ -54,7 +54,7 @@ const addToCart = function* addTocart({ payload }) {
       throw new Error('Guest cart not implemented');
     }
   } catch (error) {
-    yield put({ type: MAGENTO.PADD_TO_CART_FAILURE, payload: extractErrorMessage(error) });
+    yield put({ type: MAGENTO.ADD_TO_CART_FAILURE, payload: extractErrorMessage(error) });
   }
 };
 

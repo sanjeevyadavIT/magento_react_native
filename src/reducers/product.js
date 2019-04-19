@@ -12,6 +12,8 @@ const getInitialState = product => ({
   mediaError: null,
   confOptionsLoading: false,
   confOptionsError: null,
+  addToCartLoading: false,
+  addToCartError: null,
   attributes: {},
   qtyInput: 1,
   selectedOptions: {}
@@ -27,6 +29,8 @@ export default (state = getInitialState(null), action) => {
         mediaError: null,
         confOptionsLoading: false,
         confOptionsError: null,
+        addToCartLoading: false,
+        addToCartError: null,
         qtyInput: 1,
         selectedOptions: {},
       };
@@ -86,12 +90,31 @@ export default (state = getInitialState(null), action) => {
       const { selectedOptions } = state;
       return {
         ...state,
+        addToCartError: null,
         selectedOptions: {
           ...selectedOptions,
           ...action.payload,
         }
       };
     }
+    case MAGENTO.ADD_TO_CART_LOADING:
+      return {
+        ...state,
+        addToCartLoading: true,
+        addToCartError: null,
+      };
+    case MAGENTO.ADD_TO_CART_SUCCESS:
+      return {
+        ...state,
+        addToCartLoading: false,
+        addToCartError: null,
+      };
+    case MAGENTO.ADD_TO_CART_FAILURE:
+      return {
+        ...state,
+        addToCartLoading: false,
+        addToCartError: action.payload,
+      }
     default:
       return state;
   }

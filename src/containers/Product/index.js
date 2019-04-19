@@ -116,6 +116,27 @@ class Product extends React.Component {
     return null;
   }
 
+  renderActionButtons() {
+    const { addToCartLoading, addToCartError } = this.props;
+    let addtoCartButton = <Button style={{ flex: 1 }} title="Add to cart" onPress={this.onPressAddToCart} />;
+    if (addToCartLoading) {
+      addtoCartButton = <Spinner />;
+    }
+    let addToCartErrorMessage = null;
+    if (addToCartError) {
+      addToCartErrorMessage = <Text style={{ fontSize: 14, color: 'red' }}>{addToCartError}</Text>;
+    }
+    return (
+      <View>
+        {addToCartErrorMessage}
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 8 }}>
+          <Button style={{ flex: 1, marginRight: 8 }} title="Add to Wishlist" />
+          {addtoCartButton}
+        </View>
+      </View>
+    );
+  }
+
   renderContent() {
     const { product, medias, mediaLoading, mediaError } = this.props;
     if (!product) {
@@ -134,13 +155,8 @@ class Product extends React.Component {
             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>price </Text>
             <Text style={{ fontSize: 18, color: 'green' }}>${product.price}</Text>
           </View>
-          <View>
-            {this.renderOptions()}
-          </View>
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 8 }}>
-            <Button style={{ flex: 1, marginRight: 8 }} title="Add to Wishlist" />
-            <Button style={{ flex: 1 }} title="Add to cart" onPress={this.onPressAddToCart} />
-          </View>
+          {this.renderOptions()}
+          {this.renderActionButtons()}
         </View>
       </ScrollView>
     );
@@ -162,6 +178,8 @@ const mapStateToProps = (state) => {
     confOptionsLoading,
     confOptionsError,
     mediaError,
+    addToCartLoading,
+    addToCartError,
     attributes,
     selectedOptions,
     current: product,
@@ -174,6 +192,8 @@ const mapStateToProps = (state) => {
     medias,
     mediaLoading,
     mediaError,
+    addToCartLoading,
+    addToCartError,
     confOptionsLoading,
     confOptionsError,
     selectedOptions,
