@@ -5,7 +5,8 @@ import {
 const initialState = {
   loading: false,
   error: null,
-  cmsBlockConfigured: false
+  slider: [],
+  featuredProducts: {},
 };
 
 export default (state = initialState, action) => {
@@ -40,7 +41,14 @@ export default (state = initialState, action) => {
         loading: false,
         ...action.payload,
       };
-
+    case MAGENTO.FEATURED_CATEGORY_PRODUCTS_SUCCESS: {
+      const { categoryId, categoryTitle, products } = action.payload;
+      const featuredProducts = { ...state.featuredProducts, [categoryId]: { categoryTitle, ...products } };
+      return {
+        ...state,
+        featuredProducts,
+      };
+    }
     default:
       return state;
   }

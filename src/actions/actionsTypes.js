@@ -19,6 +19,7 @@ function createRequestTypes(prefix = '', bases, suffixes = suffixTypes) {
 export const MAGENTO = createRequestTypes('MAGENTO', [
   'INIT_APP', // Configure magento with admin credentials, access token and base url
   'HOME_DATA', // Fetch HomeBanner and featured products for home page
+  'FEATURED_CATEGORY_PRODUCTS', // Fetch featured categories for home page
   'CATEGORY_TREE', // Fetch category tree
   'CONF_OPTIONS', // Product is configurable type, fetch all options
   'PRODUCT_MEDIA', // Fetch images related to products

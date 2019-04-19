@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { initMagento, getCategoryTree } from '../../actions';
+import HomeSlider from '../../components/home/HomeSlider';
+import FeaturedProductList from '../../components/home/FeaturedProductList';
+import { initMagento, getCategoryTree, setCurrentProduct } from '../../actions';
 import { HOME, CATEGORY_TREE } from '../../reducers/types';
 import { BRAND_NAME } from '../../constants';
 import { Spinner, MaterialHeaderButtons, Item } from '../../components/common';
@@ -25,7 +27,7 @@ class Home extends React.Component {
       <MaterialHeaderButtons>
         <Item title="Search" iconName="search" onPress={() => navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH)} />
         <Item title="Wishlist" iconName="bookmark" onPress={() => magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_WISHLIST_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)} />
-        <Item title="Cart" iconName="shopping-cart" onPress={() => magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH) } />
+        <Item title="Cart" iconName="shopping-cart" onPress={() => magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)} />
       </MaterialHeaderButtons>
     ),
   })
@@ -55,6 +57,25 @@ class Home extends React.Component {
     navigation.toggleDrawer();
   }
 
+  renderSlider() {
+    const { content } = this.props;
+    const homeData = JSON.parse(content);
+    return <HomeSlider images={homeData.slider} />
+  }
+
+  renderFeaturedCategories() {
+    const { featuredProducts, setCurrentProduct: _setCurrentProduct } = this.props;
+
+    return Object.keys(featuredProducts).map(key => (
+      <FeaturedProductList
+        key={key}
+        products={featuredProducts[key].items}
+        title={featuredProducts[key].categoryTitle}
+        setCurrentProduct={_setCurrentProduct}
+      />
+    ));
+  }
+
   renderHomeContent() {
     const { loading, error, content } = this.props;
 
@@ -72,7 +93,10 @@ class Home extends React.Component {
 
     if (content) {
       return (
-        <Text>{JSON.stringify(content)}</Text>
+        <ScrollView>
+          {this.renderSlider()}
+          {this.renderFeaturedCategories()}
+        </ScrollView>
       );
     }
 
@@ -91,6 +115,7 @@ class Home extends React.Component {
 const styles = {
   mainContainer: {
     flex: 1,
+    backgroundColor: '#F7F6F4'
   },
   errorContainer: {
     flex: 1,
@@ -103,13 +128,14 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { loading, error, content } = state[HOME];
+  const { loading, error, content, featuredProducts } = state[HOME];
   const { children_data: categoryTreeData, loading: categoryLoading } = state[CATEGORY_TREE];
 
   return {
     loading,
     error,
     content,
+    featuredProducts,
     categoryTreeData,
     categoryLoading
   };
@@ -117,5 +143,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   initMagento,
-  getCategoryTree
+  getCategoryTree,
+  setCurrentProduct,
 })(Home);

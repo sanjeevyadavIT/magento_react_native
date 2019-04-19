@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CategoryTreeList from './CategoryTreeList';
 import NavigationService from '../../navigation/NavigationService';
 import { NAVIGATION_CATEGORY_LIST_PATH } from '../../navigation/types';
+import { BORDER_COLOR } from '../../constants';
 
 class CategoryTreeListItem extends React.Component {
   constructor(props) {
@@ -53,9 +54,9 @@ class CategoryTreeListItem extends React.Component {
       const icon = expanded ? 'caret-up' : 'caret-down';
       return (
         <Icon
-          style={{ padding: 2, paddingTop: 8, paddingRight: 15 }}
+          style={{ padding: 2, paddingRight: 15 }}
           name={icon}
-          color="#222"
+          color="#888"
           size={20}
           onPress={this.onExpandPress}
         />
@@ -72,7 +73,7 @@ class CategoryTreeListItem extends React.Component {
       space += ' ';
     }
     return (
-      <View style={{ height: 40, borderBottomWidth: 1, borderColor: '#222' }}>
+      <View style={{ height: 40, justifyContent: 'center', flex: 1, borderBottomWidth: 1, borderColor: BORDER_COLOR }}>
         <TouchableOpacity
           onPress={this.onRowPress}
           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
