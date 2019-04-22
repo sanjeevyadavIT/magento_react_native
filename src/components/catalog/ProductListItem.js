@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { magento } from '../../magento';
+import { Text, Image, TouchableOpacity } from 'react-native';
 import NavigationService from '../../navigation/NavigationService';
 import { NAVIGATION_PRODUCT_DETAIL_PATH } from '../../navigation/types';
 import { BORDER_COLOR } from '../../constants';
+import { getProductThumbnailFromAttribute } from '../../utils/products';
 
 class ProductListItem extends React.Component {
   constructor(props) {
@@ -19,19 +19,8 @@ class ProductListItem extends React.Component {
     });
   }
 
-  image = () => {
-    let imageUrl = '';
-    for (let i = 0; i < this.props.product.custom_attributes.length; i++) {
-      const customAttribute = this.props.product.custom_attributes[i];
-      if (customAttribute.attribute_code === 'thumbnail') {
-        imageUrl = customAttribute.value;
-        break;
-      }
-    }
-    return `${magento.getProductMediaUrl()}${imageUrl}`.trim();
-  }
-
   render() {
+    const { product } = this.props;
     return (
       <TouchableOpacity
         style={styles.container}
@@ -40,9 +29,9 @@ class ProductListItem extends React.Component {
         <Image
           style={{ flex: 1, height: 120, }}
           resizeMode="contain"
-          source={{ uri: this.image() }}
+          source={{ uri: getProductThumbnailFromAttribute(product) }}
         />
-        <Text>{this.props.product.name}</Text>
+        <Text>{product.name}</Text>
       </TouchableOpacity>
     );
   }

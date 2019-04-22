@@ -8,8 +8,6 @@ class HomeSlider extends React.Component {
   renderImages() {
     const { images } = this.props;
 
-    images.forEach(a => console.log(`${magento.getProductMediaUrl()}${a.image}`))
-
     return images.map((item, index) => (
       <Image
         key={String(index)}

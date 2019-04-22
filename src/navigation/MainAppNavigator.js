@@ -10,6 +10,7 @@ import WishList from '../containers/WishList';
 import Account from '../containers/Account';
 import Cart from '../containers/Cart';
 import {
+  defaultHeader,
   NAVIGATION_HOME_PATH,
   NAVIGATION_CATEGORY_TREE_PATH,
   NAVIGATION_CATEGORY_LIST_PATH,
@@ -35,6 +36,9 @@ const MainAppNavigator = createStackNavigator(
     [NAVIGATION_ACCOUNT_SCREEN_PATH]: Account,
     [NAVIGATION_PRODUCT_DETAIL_PATH]: Product,
     [NAVIGATION_CART_SCREEN_PATH]: Cart,
+  },
+  {
+    defaultNavigationOptions: defaultHeader,
   }
 );
 
