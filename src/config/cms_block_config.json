@@ -1,0 +1,24 @@
+{
+    "slider":[
+       {
+          "title":"Roadaster sale",
+          "image":"wysiwyg/home/banner1.jpg"
+       },
+       {
+          "title":"Sunglasses sale",
+          "image":"wysiwyg/home/banner2.jpg"
+       },
+       {
+          "title":"jeans, trouser, Skirts & more",
+          "image":"wysiwyg/home/banner3.jpg"
+       }
+    ],
+    "featuredCategories":{
+       "30":{
+          "title":"Woman Sale"
+       },
+       "31":{
+          "title":"Man Sale"
+       }
+    }
+ }
