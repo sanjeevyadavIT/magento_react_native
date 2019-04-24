@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, Image, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 import NavigationService from '../../navigation/NavigationService';
 import { NAVIGATION_PRODUCT_DETAIL_PATH } from '../../navigation/types';
 import { BORDER_COLOR } from '../../constants';
@@ -19,8 +20,27 @@ class ProductListItem extends React.Component {
     });
   }
 
+  getPrice() {
+    const { product, extraData } = this.props;
+    let price = 0;
+    switch (product.type_id) {
+      case 'configurable':
+        price = extraData.price ? extraData.price : price;
+        break;
+      case 'simple':
+        price = product.price;
+        break;
+      default:
+        price = 0;
+    }
+    return price;
+  }
+
   render() {
     const { product } = this.props;
+    const { name } = product;
+    const price = this.getPrice();
+
     return (
       <TouchableOpacity
         style={styles.container}
@@ -31,7 +51,8 @@ class ProductListItem extends React.Component {
           resizeMode="contain"
           source={{ uri: getProductThumbnailFromAttribute(product) }}
         />
-        <Text>{product.name}</Text>
+        <Text>{name}</Text>
+        <Text>${price}</Text>
       </TouchableOpacity>
     );
   }
@@ -46,6 +67,16 @@ const styles = {
     height: 160,
     alignItems: 'stretch',
   },
+};
+
+ProductListItem.propTypes = {
+  product: PropTypes.object.isRequired,
+  extraData: PropTypes.object,
+  setCurrentProduct: PropTypes.func.isRequired,
+};
+
+ProductListItem.defaultProps = {
+  extraData: {},
 };
 
 export default ProductListItem;

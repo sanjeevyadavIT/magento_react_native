@@ -101,6 +101,7 @@ class CategoryList extends React.Component {
     const {
       navigation,
       products,
+      extra,
       canLoadMoreContent,
       setCurrentProduct: _setCurrentProduct,
     } = this.props;
@@ -112,6 +113,7 @@ class CategoryList extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <ProductList
+          extra={extra}
           products={products}
           columnCount={2}
           onEndReached={this.onEndReached}
@@ -130,12 +132,13 @@ const mapStateToProps = (state) => {
   const {
     totalCount,
     products,
+    extra,
     loadingMore,
   } = state[CATEGORY_LIST];
   const canLoadMoreContent = products ? products.length < totalCount : false;
 
   return {
-    products, totalCount, canLoadMoreContent, loadingMore
+    products, extra, totalCount, canLoadMoreContent, loadingMore
   };
 };
 

@@ -63,7 +63,8 @@ If you have a feature request or idea which will enhance the user experience of 
 - [x] FEATURE: Display categories and products
 - [x] FEATURE: Add to cart for simple and configurable product
 - [x] FEATURE: Login and Signup Screen
-- [ ] FEATURE: Show Prices in Catgeory List screen.
+- [ ] FEATURE: Show Prices in featured list on Home Screen.
+- [ ] ISSUE: Price not getting shown for end products in Category list
 - [ ] FEATURE: Show and update price for configurable product in Product detail screen.
 - [ ] FEATURE: Billing Address screen
 - [ ] FEATURE: Payment screen and checkout process

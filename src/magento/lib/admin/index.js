@@ -114,6 +114,20 @@ export default magento => ({
     })
   ),
 
+  getConfigurableChildren: sku => (
+    new Promise((resolve, reject) => {
+      const path = `/V1/configurable-products/${sku}/children`;
+      
+      magento.get(path, undefined, undefined, ADMIN_TYPE)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
+  ),
+
   getConfigurableProductOptions: sku => (
     new Promise((resolve, reject) => {
       const path = `/V1/configurable-products/${sku}/options/all`;

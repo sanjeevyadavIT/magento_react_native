@@ -7,10 +7,11 @@ import ProductListItem from '../catalog/ProductListItem';
 // TODO: Make it a functional component
 class ProductList extends React.Component {
   renderChild = ({ item, index }) => {
-    const { setCurrentProduct, columns } = this.props;
+    const { setCurrentProduct, columns, extra } = this.props;
     return (
       <ProductListItem
         product={item}
+        extraData={extra[item.sku]}
         setCurrentProduct={setCurrentProduct}
         index={index}
         columnCount={columns}
@@ -54,10 +55,15 @@ class ProductList extends React.Component {
 ProductList.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   products: PropTypes.array.isRequired,
+  extra: PropTypes.object,
   columnCount: PropTypes.number.isRequired,
   onEndReached: PropTypes.func.isRequired,
   setCurrentProduct: PropTypes.func.isRequired,
   canLoadMoreContent: PropTypes.bool.isRequired,
+};
+
+ProductList.defaultProps = {
+  extra: {},
 };
 
 export default ProductList;

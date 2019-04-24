@@ -24,13 +24,40 @@ const getCategoryProducts = function* fetchCategoryProducts(action) {
       type: MAGENTO.CATEGORY_PRODUCTS_SUCCESS,
       payload: { items: payload.items, totalCount: payload.total_count }
     });
+    for( const product of payload.items ) {
+      yield put({
+        type: MAGENTO.UPDATE_CONF_PRODUCT_REQUEST,
+        payload: product,
+      });
+    }
   } catch (error) {
     yield put({ type: MAGENTO.CATEGORY_PRODUCTS_FAILURE, payload: extractErrorMessage(error) });
   }
 };
 
+const updateConfigurableProductsPrice = function* fetchConfigurableProductPrice({ payload: product }) {
+  if (product.type_id === 'configurable') {
+    try {
+      const children = yield call({ context: magento, fn: magento.admin.getConfigurableChildren }, product.sku);
+      yield put({
+        type: MAGENTO.UPDATE_CONF_PRODUCT_SUCCESS,
+        payload: {
+          children,
+          sku: product.sku,
+        },
+      });
+    } catch (error) {
+      yield put({
+        type: MAGENTO.UPDATE_CONF_PRODUCT_FAILURE,
+        payload: extractErrorMessage(error) 
+      });
+    }
+  }
+}
+
 const catgeoryListSagas = [
   takeEvery(MAGENTO.CATEGORY_PRODUCTS_REQUEST, getCategoryProducts),
+  takeEvery(MAGENTO.UPDATE_CONF_PRODUCT_REQUEST, updateConfigurableProductsPrice),
 ];
 
 export default catgeoryListSagas;

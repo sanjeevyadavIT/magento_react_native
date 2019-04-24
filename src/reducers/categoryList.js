@@ -1,8 +1,9 @@
 import { MAGENTO } from '../actions/actionsTypes';
-
+import { getPriceFromChildren } from '../utils/products';
 
 const getInitialState = loadingStatus => ({
   products: null,
+  extra: {},
   totalCount: 0,
   error: null,
   loading: loadingStatus,
@@ -40,6 +41,20 @@ export default (state = getInitialState(null), action) => {
         totalCount: 0,
         error: action.payload
       };
+    case MAGENTO.UPDATE_CONF_PRODUCT_SUCCESS: {
+      const { sku, children } = action.payload;
+      const extra = {
+        ...state.extra,
+        [sku]: {
+          children,
+          price: getPriceFromChildren(children)
+        }
+      };
+      return {
+        ...state,
+        extra,
+      };
+    }
     default:
       return state;
   }
