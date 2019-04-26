@@ -1,11 +1,24 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import Spinner from './Spinner';
-import ProductListItem from '../catalog/ProductListItem';
+import Spinner from '../atoms';
+import ProductListItem from './ProductListItem';
 
-// TODO: Make it a functional component
 class ProductList extends React.Component {
+  static propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
+    products: PropTypes.array.isRequired,
+    extra: PropTypes.object,
+    columnCount: PropTypes.number.isRequired,
+    onEndReached: PropTypes.func.isRequired,
+    setCurrentProduct: PropTypes.func.isRequired,
+    canLoadMoreContent: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    extra: {},
+  }
+
   renderChild = ({ item, index }) => {
     const { setCurrentProduct, columns, extra } = this.props;
     return (
@@ -51,19 +64,5 @@ class ProductList extends React.Component {
     );
   }
 }
-
-ProductList.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  products: PropTypes.array.isRequired,
-  extra: PropTypes.object,
-  columnCount: PropTypes.number.isRequired,
-  onEndReached: PropTypes.func.isRequired,
-  setCurrentProduct: PropTypes.func.isRequired,
-  canLoadMoreContent: PropTypes.bool.isRequired,
-};
-
-ProductList.defaultProps = {
-  extra: {},
-};
 
 export default ProductList;

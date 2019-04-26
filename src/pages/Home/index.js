@@ -1,10 +1,11 @@
 import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import HomeSlider from '../../components/home/HomeSlider';
+import PropTypes from 'prop-types';
+import ImageSlider, { ImageSliderItem } from '../../components/molecules/ImageSlider';
 import FeaturedProductList from '../../components/home/FeaturedProductList';
 import { initMagento, getCategoryTree, setCurrentProduct } from '../../actions';
-import { HOME, CATEGORY_TREE } from '../../reducers/types';
+import { HOME } from '../../reducers/types';
 import { BRAND_NAME } from '../../constants';
 import { Spinner, MaterialHeaderButtons, Item } from '../../components/common';
 import { magento } from '../../magento';
@@ -57,27 +58,23 @@ class Home extends React.Component {
     navigation.toggleDrawer();
   }
 
-  renderSlider() {
-    const { content } = this.props;
-    const homeData = JSON.parse(content);
-    return <HomeSlider images={homeData.slider} />
-  }
-
   renderFeaturedCategories() {
-    const { featuredProducts, setCurrentProduct: _setCurrentProduct } = this.props;
+    const { featuredCategories, setCurrentProduct: _setCurrentProduct } = this.props;
 
-    return Object.keys(featuredProducts).map(key => (
+    return Object.keys(featuredCategories).map(key => (
       <FeaturedProductList
         key={key}
-        products={featuredProducts[key].items}
-        title={featuredProducts[key].categoryTitle}
+        products={featuredCategories[key].items}
+        title={featuredCategories[key].title}
         setCurrentProduct={_setCurrentProduct}
       />
     ));
   }
 
   renderHomeContent() {
-    const { loading, error, content } = this.props;
+    const { loading, error, slider } = this.props;
+
+    if (loading === null) return null;
 
     if (error) {
       return (
@@ -91,21 +88,19 @@ class Home extends React.Component {
       return <Spinner />;
     }
 
-    if (content) {
-      return (
-        <ScrollView>
-          {this.renderSlider()}
-          {this.renderFeaturedCategories()}
-        </ScrollView>
-      );
-    }
-
-    return null;
+    return (
+      <ScrollView>
+        <ImageSlider loading={false} showTitle={false} imageHeight={180} slider={slider} />
+        {this.renderFeaturedCategories()}
+      </ScrollView>
+    );
   }
 
   render() {
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    console.log(this.props);
     return (
-      <View style={styles.mainContainer}>
+      <View style={styles.container}>
         {this.renderHomeContent()}
       </View>
     );
@@ -113,7 +108,7 @@ class Home extends React.Component {
 }
 
 const styles = {
-  mainContainer: {
+  container: {
     flex: 1,
     backgroundColor: '#F7F6F4'
   },
@@ -128,17 +123,28 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { loading, error, content, featuredProducts } = state[HOME];
-  const { children_data: categoryTreeData, loading: categoryLoading } = state[CATEGORY_TREE];
+  const { loading, error, slider, featuredCategories } = state[HOME];
 
   return {
     loading,
     error,
-    content,
-    featuredProducts,
-    categoryTreeData,
-    categoryLoading
+    slider,
+    featuredCategories,
   };
+};
+
+Home.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+  slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)),
+  featuredCategories: PropTypes.object,
+};
+
+Home.defaultProps = {
+  loading: null,
+  error: null,
+  slider: [],
+  featuredCategories: {},
 };
 
 export default connect(mapStateToProps, {

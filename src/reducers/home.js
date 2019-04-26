@@ -3,7 +3,7 @@ import {
 } from '../actions/actionsTypes';
 
 const initialState = {
-  loading: false,
+  loading: null,
   error: null,
   slider: [],
   featuredProducts: {},
@@ -16,12 +16,6 @@ export default (state = initialState, action) => {
         ...state,
         loading: true,
         error: null,
-      };
-    case MAGENTO.INIT_APP_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        ...action.payload,
       };
     case MAGENTO.INIT_APP_FAILURE:
     case MAGENTO.HOME_DATA_FAILURE:
@@ -42,13 +36,17 @@ export default (state = initialState, action) => {
         ...action.payload,
       };
     case MAGENTO.FEATURED_CATEGORY_PRODUCTS_SUCCESS: {
-      const { categoryId, categoryTitle, products } = action.payload;
-      const featuredProducts = { ...state.featuredProducts, [categoryId]: { categoryTitle, ...products } };
+      const { categoryId, products } = action.payload;
+      const category = { ...state.featuredCategories[categoryId], ...products };
       return {
         ...state,
-        featuredProducts,
+        featuredCategories: {
+          ...state.featuredCategories,
+          [categoryId]: category,
+        },
       };
     }
+    case MAGENTO.INIT_APP_SUCCESS: // Don't perform any action, wait for Home data
     default:
       return state;
   }

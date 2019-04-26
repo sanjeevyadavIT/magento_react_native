@@ -1,7 +1,6 @@
 import { PRIMARY_COLOR, ACCENT_COLOR } from '../constants';
 
 export const NAVIGATION_HOME_PATH = 'DashboardScreen';
-export const NAVIGATION_CATEGORY_TREE_PATH = 'CategoryTree';
 export const NAVIGATION_CATEGORY_LIST_PATH = 'CategoryList';
 export const NAVIGATION_PRODUCT_DETAIL_PATH = 'ProductDetail';
 export const NAVIGATION_SEARCH_SCREEN_PATH = 'SearchScreen';
