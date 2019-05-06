@@ -13,7 +13,8 @@ export default (state = getInitialState(false), action) => {
     case MAGENTO.SEARCH_PRODUCTS_LOADING:
       return {
         ...state,
-        ...getInitialState(action.payload),
+        ...getInitialState(action.payload.loading),
+        searchText: action.payload.searchText,
       };
     case MAGENTO.SEARCH_PRODUCTS_SUCCESS: {
       const products = state.products ? state.products : [];

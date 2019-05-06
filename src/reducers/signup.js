@@ -1,32 +1,30 @@
-import { MAGENTO } from '../actions/actionsTypes';
+import { MAGENTO, RESET_SIGNUP_STATE } from '../actions/actionsTypes';
+import Status from '../magento/Status';
 
 const INITIAL_STATE = {
-  success: null,
-  error: null,
-  loading: false,
+  status: Status.DEFAULT,
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+export default (state = INITIAL_STATE, { type, payload }) => {
+  switch (type) {
     case MAGENTO.SIGNUP_LOADING:
       return {
         ...state,
-        loading: action.payload,
-        error: null,
-        success: null,
+        status: Status.LOADING,
       };
     case MAGENTO.SIGNUP_SUCCESS:
       return {
         ...state,
-        loading: false,
-        success: action.payload,
+        status: Status.SUCCESS,
       };
     case MAGENTO.SIGNUP_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: action.payload
+        status: Status.ERROR,
+        errorMessage: payload.errorMessage,
       };
+    case RESET_SIGNUP_STATE:
+      return INITIAL_STATE;
     default:
       return state;
   }

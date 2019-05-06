@@ -15,14 +15,14 @@ function navigate(routeName, params) {
   );
 }
 
-function closeDrawer() {
-  navigator._navigation.closeDrawer();
+function popToTop() {
+  navigator._navigation.popToTop();
 }
 
 // add other navigation functions that you need and export them
 
 export default {
   navigate,
-  closeDrawer,
+  popToTop,
   setTopLevelNavigator,
 };

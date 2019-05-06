@@ -12,5 +12,5 @@ export const getCartItemProduct = sku => ({
 
 export const removeItemFromCart = itemId => ({
   type: MAGENTO.REMOVE_ITEM_FROM_CART_REQUEST,
-  payload: itemId,
+  payload: { itemId },
 });

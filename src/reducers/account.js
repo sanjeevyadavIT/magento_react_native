@@ -1,31 +1,29 @@
 import { MAGENTO } from '../actions/actionsTypes';
+import Status from '../magento/Status';
 
 const INITIAL_STATE = {
+  status: Status.DEFAULT,
   customer: null,
-  error: null,
-  loading: false,
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+export default (state = INITIAL_STATE, { type, payload }) => {
+  switch (type) {
     case MAGENTO.CURRENT_USER_LOADING:
       return {
         ...state,
-        loading: action.payload,
-        error: null,
-        success: null,
+        status: Status.LOADING,
       };
     case MAGENTO.CURRENT_USER_SUCCESS:
       return {
         ...state,
-        loading: false,
-        customer: action.payload,
+        status: Status.SUCCESS,
+        customer: payload.customer,
       };
     case MAGENTO.CURRENT_USER_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: action.payload
+        status: Status.ERROR,
+        errorMessage: payload.errorMessage,
       };
     default:
       return state;

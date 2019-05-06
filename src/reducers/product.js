@@ -1,15 +1,16 @@
 import {
   MAGENTO,
-  UI_SET_CURRENT_PRODUCT,
+  OPEN_SELECTED_PRODUCT,
   MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS,
   UI_PRODUCT_UPDATE_OPTIONS,
 } from '../actions/actionsTypes';
+import Status from '../magento/Status';
 
 const getInitialState = product => ({
   current: product,
   medias: {},
-  mediaLoading: false,
-  mediaError: null,
+  mediaStatus: Status.DEFAULT,
+  mediaErrorMessage: '',
   confOptionsLoading: false,
   confOptionsError: null,
   addToCartLoading: false,
@@ -21,7 +22,7 @@ const getInitialState = product => ({
 
 export default (state = getInitialState(null), action) => {
   switch (action.type) {
-    case UI_SET_CURRENT_PRODUCT:
+    case OPEN_SELECTED_PRODUCT:
       return {
         ...state,
         current: action.payload,
@@ -37,12 +38,12 @@ export default (state = getInitialState(null), action) => {
     case MAGENTO.PRODUCT_MEDIA_LOADING:
       return {
         ...state,
-        mediaLoading: true,
+        mediaStatus: Status.LOADING,
       };
     case MAGENTO.PRODUCT_MEDIA_SUCCESS:
       return {
         ...state,
-        mediaLoading: false,
+        mediaStatus: Status.SUCCESS,
         medias: {
           ...state.medias,
           [action.payload.sku]: action.payload.media,
@@ -51,8 +52,8 @@ export default (state = getInitialState(null), action) => {
     case MAGENTO.PRODUCT_MEDIA_FAILURE:
       return {
         ...state,
-        mediaLoading: false,
-        mediaError: action.payload,
+        mediaStatus: Status.ERROR,
+        mediaErrorMessage: action.payload.errorMessage,
       };
     case MAGENTO.CONF_OPTIONS_LOADING:
       return {

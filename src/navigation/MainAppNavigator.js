@@ -1,13 +1,15 @@
 import { createStackNavigator } from 'react-navigation';
-import Home from '../pages/Home';
-import CategoryList from '../pages/CategoryList';
-import Product from '../pages/Product';
-import Search from '../pages/Search';
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
-import WishList from '../pages/WishList';
-import Account from '../pages/Account';
-import Cart from '../pages/Cart';
+import {
+  HomePage,
+  WishlistPage,
+  CategoryListPage,
+  LoginPage,
+  SignupPage,
+  AccountPage,
+  CartPage,
+  ProductDetailPage,
+} from '../components';
+import Search from '../containers/Search';
 import {
   defaultHeader,
   NAVIGATION_HOME_PATH,
@@ -21,18 +23,17 @@ import {
   NAVIGATION_CART_SCREEN_PATH,
 } from './types';
 
-
 const MainAppNavigator = createStackNavigator(
   {
-    [NAVIGATION_HOME_PATH]: Home,
-    [NAVIGATION_CATEGORY_LIST_PATH]: CategoryList,
+    [NAVIGATION_HOME_PATH]: HomePage,
+    [NAVIGATION_CATEGORY_LIST_PATH]: CategoryListPage,
     [NAVIGATION_SEARCH_SCREEN_PATH]: Search,
-    [NAVIGATION_LOGIN_SCREEN_PATH]: Login,
-    [NAVIGATION_SIGNUP_SCREEN_PATH]: Signup,
-    [NAVIGATION_WISHLIST_SCREEN_PATH]: WishList,
-    [NAVIGATION_ACCOUNT_SCREEN_PATH]: Account,
-    [NAVIGATION_PRODUCT_DETAIL_PATH]: Product,
-    [NAVIGATION_CART_SCREEN_PATH]: Cart,
+    [NAVIGATION_LOGIN_SCREEN_PATH]: LoginPage,
+    [NAVIGATION_SIGNUP_SCREEN_PATH]: SignupPage,
+    [NAVIGATION_WISHLIST_SCREEN_PATH]: WishlistPage,
+    [NAVIGATION_ACCOUNT_SCREEN_PATH]: AccountPage,
+    [NAVIGATION_PRODUCT_DETAIL_PATH]: ProductDetailPage,
+    [NAVIGATION_CART_SCREEN_PATH]: CartPage,
   },
   {
     defaultNavigationOptions: defaultHeader,

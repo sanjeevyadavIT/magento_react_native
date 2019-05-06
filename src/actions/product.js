@@ -1,11 +1,11 @@
 import {
-  UI_SET_CURRENT_PRODUCT,
+  OPEN_SELECTED_PRODUCT,
   MAGENTO,
   UI_PRODUCT_UPDATE_OPTIONS,
 } from './actionsTypes';
 
-export const setCurrentProduct = product => ({
-  type: UI_SET_CURRENT_PRODUCT,
+export const openSelectedProduct = product => ({
+  type: OPEN_SELECTED_PRODUCT,
   payload: product,
 });
 
@@ -16,7 +16,7 @@ export const getConfigurableProductOptions = sku => ({
 
 export const getProductMedia = sku => ({
   type: MAGENTO.PRODUCT_MEDIA_REQUEST,
-  payload: sku,
+  payload: { sku },
 });
 
 export const uiProductUpdate = selectedOptions => ({

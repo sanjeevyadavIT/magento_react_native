@@ -4,18 +4,19 @@ import { magento, CUSTOMER_TOKEN } from '../magento';
 import { MAGENTO } from '../actions/actionsTypes';
 import { extractErrorMessage } from '../utils';
 
-const auth = function* auth(action) {
+const auth = function* auth({ payload }) {
   try {
-    yield put({ type: MAGENTO.AUTH_LOADING, payload: true });
-    const payload = yield call(
+    yield put({ type: MAGENTO.AUTH_LOADING });
+    const token = yield call(
       { content: magento, fn: magento.guest.auth },
-      action.payload.email,
-      action.payload.password
+      payload.email,
+      payload.password
     );
-    yield AsyncStorage.setItem(CUSTOMER_TOKEN, payload);
-    yield put({ type: MAGENTO.AUTH_SUCCESS, payload });
+    yield AsyncStorage.setItem(CUSTOMER_TOKEN, token);
+    yield put({ type: MAGENTO.AUTH_SUCCESS, payload: { token } });
+    yield put({ type: MAGENTO.CURRENT_USER_REQUEST }); // Fetch details of current user
   } catch (error) {
-    yield put({ type: MAGENTO.AUTH_FAILURE, payload: extractErrorMessage(error) });
+    yield put({ type: MAGENTO.AUTH_FAILURE, payload: { errorMessage: extractErrorMessage(error) } });
   }
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import Spinner from '../../atoms';
+import Spinner from '../../atoms/Spinner';
 import { ACCENT_COLOR, TRANSPARENT_COLOR } from '../../../constants';
 
 const LoadingView = ({ size, color, backgroundColor }) => (

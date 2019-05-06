@@ -7,7 +7,7 @@ const getSearchProducts = function* fetchSearchProducts(action) {
   if (action.payload.offset) {
     yield put({ type: MAGENTO.MORE_SEARCH_PRODUCTS_LOADING, payload: true });
   } else {
-    yield put({ type: MAGENTO.SEARCH_PRODUCTS_LOADING, payload: true });
+    yield put({ type: MAGENTO.SEARCH_PRODUCTS_LOADING, payload: { loading: true, searchText: action.payload.searchInput } });
   }
   try {
     const payload = yield call(

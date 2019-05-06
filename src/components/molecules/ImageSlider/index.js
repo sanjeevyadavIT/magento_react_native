@@ -1,9 +1,8 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
 import Image from '../../atoms/Image';
-import { LoadingView } from '..';
-import { magento } from '../../../magento';
 
 // TODO: Show title over the image
 // TODO: Open url, when image pressed
@@ -16,52 +15,54 @@ class ImageSliderItem {
 }
 
 const ImageSlider = ({
-  loading,
   showTitle,
   imageHeight,
   slider,
+  baseUrl,
+  resizeMode,
+  style,
+  ...props
 }) => {
   const renderImages = () => (
     slider.map((item, index) => (
       <Image
         key={String(index)}
         style={[styles.imageStyle, { height: imageHeight }]}
-        resizeMode="cover"
-        source={{ uri: `${magento.getMediaUrl()}${item.imageUrl}` }}
+        resizeMode={resizeMode}
+        source={{ uri: `${baseUrl}${item.imageUrl}` }}
       />
     ))
   );
 
-  if (loading) {
-    return <LoadingView />;
-  }
-
   return (
-    <Swiper style={{ height: imageHeight }}>
+    <Swiper style={[{ height: imageHeight }, style]}>
       {renderImages()}
     </Swiper>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   imageStyle: {
     top: 0
   }
-};
+});
 
 ImageSlider.propTypes = {
-  showTitle: PropTypes.bool,
-  imageHeight: PropTypes.number.isRequired,
-  loading: PropTypes.bool, // redux prop
   slider: PropTypes.arrayOf(
     PropTypes.instanceOf(ImageSliderItem)
   ), // redux prop
+  imageHeight: PropTypes.number.isRequired,
+  showTitle: PropTypes.bool,
+  baseUrl: PropTypes.string.isRequired,
+  resizeMode: PropTypes.string,
+  style: PropTypes.object,
 };
 
 ImageSlider.defaultProps = {
   slider: [],
-  loading: false,
   showTitle: false,
+  resizeMode: 'cover',
+  style: {},
 };
 
 export default ImageSlider;

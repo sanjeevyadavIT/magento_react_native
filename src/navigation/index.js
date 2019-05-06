@@ -1,6 +1,6 @@
 import { createAppContainer } from 'react-navigation';
-import DrawerScreenNavigator from './DrawerScreenNavigator';
+import DrawerNavigator from './DrawerNavigator';
 
-const Navigator = createAppContainer(DrawerScreenNavigator);
+const Navigator = createAppContainer(DrawerNavigator);
 
 export default Navigator;

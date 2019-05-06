@@ -5,11 +5,11 @@ import { extractErrorMessage } from '../utils';
 
 const getCustomerCart = function* fetchCustomerCart() {
   try {
-    yield put({ type: MAGENTO.CUSTOMER_CART_LOADING, payload: true });
-    const payload = yield call({ content: magento, fn: magento.customer.getCustomerCart });
-    yield put({ type: MAGENTO.CUSTOMER_CART_SUCCESS, payload });
+    yield put({ type: MAGENTO.CUSTOMER_CART_LOADING });
+    const cart = yield call({ content: magento, fn: magento.customer.getCustomerCart });
+    yield put({ type: MAGENTO.CUSTOMER_CART_SUCCESS, payload: { cart } });
   } catch (error) {
-    yield put({ type: MAGENTO.CUSTOMER_CART_FAILURE, payload: extractErrorMessage(error) });
+    yield put({ type: MAGENTO.CUSTOMER_CART_FAILURE, payload: { errorMessage: extractErrorMessage(error) } });
   }
 };
 
@@ -22,12 +22,12 @@ const getCartItemProduct = function* fetchCartItemProduct(action) {
   }
 };
 
-const removeItemFromCart = function* deleteItemFromCart(action) {
+const removeItemFromCart = function* deleteItemFromCart({ payload }) {
   try {
-    yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_LOADING, payload: true });
-    const payload = yield call({ content: magento, fn: magento.customer.removeItemFromCart }, action.payload);
-    yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_SUCCESS, payload });
-    yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST, payload: true }); // Refetch the cart
+    yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_LOADING });
+    const isSuccessfullyRemoved = yield call({ content: magento, fn: magento.customer.removeItemFromCart }, payload.itemId);
+    yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_SUCCESS, payload: { isSuccessfullyRemoved } });
+    yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Refetch the cart
   } catch (error) {
     yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_FAILURE, payload: extractErrorMessage(error) });
   }

@@ -1,35 +1,33 @@
-import { MAGENTO } from '../actions/actionsTypes';
+import { MAGENTO, ACTION_USER_LOGOUT } from '../actions/actionsTypes';
+import Status from '../magento/Status';
 
 const INITIAL_STATE = {
-  customer: null,
-  token: null,
-  success: null,
-  error: null,
-  loading: false,
+  status: Status.DEFAULT,
+  errorMessage: '',
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+export default (state = INITIAL_STATE, { type, payload }) => {
+  switch (type) {
     case MAGENTO.AUTH_LOADING:
       return {
         ...state,
-        loading: action.payload,
-        error: null,
-        success: null,
+        status: Status.LOADING,
+        errorMessage: '',
       };
     case MAGENTO.AUTH_SUCCESS:
       return {
         ...state,
-        loading: false,
-        token: action.payload,
-        success: 'Login successfully!!!'
+        status: Status.SUCCESS,
+        token: payload.token, // TODO: find out whether it is used any where or not
       };
     case MAGENTO.AUTH_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: action.payload
+        status: Status.ERROR,
+        errorMessage: payload.errorMessage
       };
+    case ACTION_USER_LOGOUT:
+      return INITIAL_STATE;
     default:
       return state;
   }

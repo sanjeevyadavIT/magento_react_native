@@ -1,31 +1,26 @@
 import { MAGENTO } from '../actions/actionsTypes';
+import Status from '../magento/Status';
 
 const INITIAL_STATE = {
-  loading: false,
-  error: null,
+  status: Status.LOADING,
+  errorMessage: '',
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case MAGENTO.CATEGORY_TREE_LOADING:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
+export default (state = INITIAL_STATE, { type, payload }) => {
+  switch (type) {
     case MAGENTO.CATEGORY_TREE_SUCCESS:
       return {
         ...state,
-        loading: false,
-        error: null,
-        ...action.payload,
+        status: Status.SUCCESS,
+        ...payload.categoryTree,
       };
     case MAGENTO.CATEGORY_TREE_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: action.payload
+        status: Status.ERROR,
+        errorMessage: payload.errorMessage
       };
+    case MAGENTO.CATEGORY_TREE_LOADING:
     default:
       return state;
   }

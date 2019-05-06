@@ -7,11 +7,11 @@ import { extractErrorMessage } from '../utils';
 
 const signup = function* signup(action) {
   try {
-    yield put({ type: MAGENTO.SIGNUP_LOADING, payload: true });
+    yield put({ type: MAGENTO.SIGNUP_LOADING });
     const payload = yield call({ content: magento, fn: magento.guest.signup }, action.payload);
     yield put({ type: MAGENTO.SIGNUP_SUCCESS, payload });
   } catch (error) {
-    yield put({ type: MAGENTO.SIGNUP_FAILURE, payload: extractErrorMessage(error) });
+    yield put({ type: MAGENTO.SIGNUP_FAILURE, payload: { errorMessage: extractErrorMessage(error) } });
   }
 };
 const signupSagas = [

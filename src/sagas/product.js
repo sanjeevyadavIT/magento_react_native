@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { magento } from '../magento';
 import { MAGENTO, MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS } from '../actions/actionsTypes';
-import { extractErrorMessage } from '../utils';
+import { extractErrorMessage, parseImageArray } from '../utils';
 
 // TODO: Function not optimized
 const getConfigurableProductOptions = function* fetchConfigurableProductOptions({ payload: sku }) {
@@ -33,13 +33,14 @@ const getConfigurableProductOptions = function* fetchConfigurableProductOptions(
   }
 };
 
-const getProductMedia = function* fetchProductMedia({ payload: sku }) {
+const getProductMedia = function* fetchProductMedia({ payload }) {
   try {
-    yield put({ type: MAGENTO.PRODUCT_MEDIA_LOADING, payload: true });
-    const payload = yield call({ content: magento, fn: magento.admin.getProductMedia }, sku);
-    yield put({ type: MAGENTO.PRODUCT_MEDIA_SUCCESS, payload: { sku, media: payload } });
+    yield put({ type: MAGENTO.PRODUCT_MEDIA_LOADING });
+    const response = yield call({ content: magento, fn: magento.admin.getProductMedia }, payload.sku);
+    const imageArray = parseImageArray(response);
+    yield put({ type: MAGENTO.PRODUCT_MEDIA_SUCCESS, payload: { sku: payload.sku, media: imageArray } });
   } catch (error) {
-    yield put({ type: MAGENTO.PRODUCT_MEDIA_FAILURE, payload: extractErrorMessage(error) });
+    yield put({ type: MAGENTO.PRODUCT_MEDIA_FAILURE, payload: { errorMessage: extractErrorMessage(error) } });
   }
 };
 

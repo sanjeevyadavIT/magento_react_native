@@ -1,4 +1,5 @@
 import { magento } from '../magento';
+import { ImageSliderItem } from '../components';
 
 export const getProductThumbnailFromAttribute = (product) => {
   let result = magento.getProductMediaUrl();
@@ -27,3 +28,5 @@ export const getPriceFromChildren = (products) => {
   }
   return 0;
 };
+
+export const parseImageArray = slider => slider.map(item => new ImageSliderItem(item.label, item.file, ''));

@@ -9,9 +9,9 @@ import { extractErrorMessage } from '../utils';
 
 const getCategoryProducts = function* fetchCategoryProducts(action) {
   if (action.payload.offset) {
-    yield put({ type: MAGENTO.MORE_CATEGORY_PRODUCTS_LOADING, payload: true });
+    yield put({ type: MAGENTO.MORE_CATEGORY_PRODUCTS_LOADING });
   } else {
-    yield put({ type: MAGENTO.CATEGORY_PRODUCTS_LOADING, payload: true });
+    yield put({ type: MAGENTO.CATEGORY_PRODUCTS_LOADING, payload: { categoryId: action.payload.categoryId } });
   }
   try {
     const payload = yield call(
@@ -24,14 +24,14 @@ const getCategoryProducts = function* fetchCategoryProducts(action) {
       type: MAGENTO.CATEGORY_PRODUCTS_SUCCESS,
       payload: { items: payload.items, totalCount: payload.total_count }
     });
-    for( const product of payload.items ) {
+    /*for( const product of payload.items ) {
       yield put({
         type: MAGENTO.UPDATE_CONF_PRODUCT_REQUEST,
         payload: product,
       });
-    }
+    }*/
   } catch (error) {
-    yield put({ type: MAGENTO.CATEGORY_PRODUCTS_FAILURE, payload: extractErrorMessage(error) });
+    yield put({ type: MAGENTO.CATEGORY_PRODUCTS_FAILURE, payload:{ errorMessage: extractErrorMessage(error) } });
   }
 };
 
