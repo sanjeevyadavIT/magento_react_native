@@ -25,7 +25,6 @@ import HomePageTemplate from './templates/HomePageTemplate';
 import DrawerTemplate from './templates/DrawerTemplate';
 // Pages
 import HomePage from './pages/HomePage';
-import WishlistPage from './pages/WishlistPage';
 import CategoryListPage from './pages/CategoryListPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -33,6 +32,9 @@ import AccountPage from './pages/AccountPage';
 import CartPage from './pages/CartPage';
 import DrawerPage from './pages/DrawerPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import AddressPage from './pages/AddressPage';
+import ShippingPage from './pages/ShippingPage';
+import PaymentPage from './pages/PaymentPage';
 
 export {
   Text,
@@ -60,7 +62,6 @@ export {
   HomePageTemplate,
   DrawerTemplate,
   HomePage,
-  WishlistPage,
   CategoryListPage,
   LoginPage,
   SignupPage,
@@ -68,4 +69,7 @@ export {
   CartPage,
   DrawerPage,
   ProductDetailPage,
+  AddressPage,
+  ShippingPage,
+  PaymentPage,
 };

@@ -32,9 +32,15 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'MORE_CATEGORY_PRODUCTS', // Pagination in category list
   'SEARCH_PRODUCTS', // Load search products
   'MORE_SEARCH_PRODUCTS', // pagination in search
+  'CREATE_QUOTE_ID', // Create new quote id for cart
   'CUSTOMER_CART', // Get cart of logged in user
   'CART_ITEM_PRODUCT', // fetch details of items present in cart
   'REMOVE_ITEM_FROM_CART', // Remove an item from a cart
+  'COUNTRIES', // Get all available countries along with their state
+  'ADD_CART_BILLING_ADDRESS', // Add new billing address for a cart
+  'GET_SHIPPING_METHOD', // Get shipping method
+  'ADD_CART_SHIPPING_INFO', // Send billing, shipping, shipping method
+  'PLACE_CART_ORDER', // Place cart order
 ], suffixTypes);
 
 export const OPEN_SELECTED_PRODUCT = 'OPEN_SELECTED_PRODUCT';

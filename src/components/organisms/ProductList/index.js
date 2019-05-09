@@ -16,16 +16,26 @@ const ProductList = ({
   loadFactor,
   errorMessage,
 }) => {
+  console.log('-------------------------');
+  console.log('Inside ProductList render');
+  console.log('-------------------------');
   useEffect(() => {
     // componentDidMount
     if (status === Status.DEFAULT) {
-      console.log('MNMNMN')
       loadProducts(loadFactor);
     }
   }, []);
-  console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
-  console.log('Inside ProductList render')
-  console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
+
+  const getLayoutManager = () => {
+    const layoutManager = {};
+    if (showHorizontalList) {
+      layoutManager.horizontal = true;
+      layoutManager.showsHorizontalScrollIndicator = false;
+    } else {
+      layoutManager.numColumns = columnCount;
+    }
+    return layoutManager;
+  };
 
   const renderRow = ({ item, index }) => {
     return (
@@ -52,13 +62,6 @@ const ProductList = ({
     }
   };
 
-  const flatListLayout = {};
-  if (showHorizontalList) {
-    flatListLayout.horizontal = true;
-  } else {
-    flatListLayout.numColumns = columnCount;
-  }
-
   return (
     <GenericTemplate
       isScrollable={false}
@@ -67,7 +70,7 @@ const ProductList = ({
       style={styles.container}
     >
       <FlatList
-        {...flatListLayout}
+        {...getLayoutManager()}
         data={products}
         renderItem={renderRow}
         keyExtractor={item => String(item.id)}

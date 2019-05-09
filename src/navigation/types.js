@@ -6,9 +6,11 @@ export const NAVIGATION_PRODUCT_DETAIL_PATH = 'ProductDetail';
 export const NAVIGATION_SEARCH_SCREEN_PATH = 'SearchScreen';
 export const NAVIGATION_LOGIN_SCREEN_PATH = 'LoginScreen';
 export const NAVIGATION_SIGNUP_SCREEN_PATH = 'SignupScreen';
-export const NAVIGATION_WISHLIST_SCREEN_PATH = 'WishListScreen';
 export const NAVIGATION_ACCOUNT_SCREEN_PATH = 'AccountScreen';
 export const NAVIGATION_CART_SCREEN_PATH = 'CartScreen';
+export const NAVIGATION_ADDRESS_SCREEN_PATH = 'AddressScreen';
+export const NAVIGATION_SHIPPING_SCREEN_PATH = 'ShippingScreen';
+export const NAVIGATION_PAYMENT_SCREEN_PATH = 'PaymentScreen';
 
 export const defaultHeader = {
   headerStyle: {

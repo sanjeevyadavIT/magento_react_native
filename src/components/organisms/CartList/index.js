@@ -2,6 +2,8 @@ import React from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { CartListItem, Text, Button, MessageView } from '../..';
+import NavigationService from '../../../navigation/NavigationService';
+import { NAVIGATION_ADDRESS_SCREEN_PATH } from '../../../navigation/types';
 
 // TODO: Make place order button stick at the bottom
 // TODO: Make ListEmptyComponent center in the view
@@ -24,7 +26,7 @@ const CartList = ({
   const renderFooter = () => (
     <View>
       <Text style={styles.priceText}>Total : {renderTotal()}</Text>
-      <Button title="Place order" onPress={() => console.log('Do something')} />
+      <Button title="Place order" onPress={() => NavigationService.navigate(NAVIGATION_ADDRESS_SCREEN_PATH)} />
     </View>
   );
 

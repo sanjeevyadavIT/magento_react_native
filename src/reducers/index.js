@@ -8,6 +8,7 @@ import AccountReducer from './account';
 import LoginReducer from './login';
 import SignupReducer from './signup';
 import CartReducer from './cart';
+import CheckoutReducer from './checkout';
 import {
   HOME,
   CATEGORY_TREE,
@@ -18,6 +19,7 @@ import {
   LOGIN,
   SIGNUP,
   CART,
+  CHECKOUT,
 } from './types';
 
 export default combineReducers({
@@ -30,4 +32,5 @@ export default combineReducers({
   [LOGIN]: LoginReducer,
   [SIGNUP]: SignupReducer,
   [CART]: CartReducer,
+  [CHECKOUT]: CheckoutReducer,
 });

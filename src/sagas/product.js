@@ -48,7 +48,7 @@ const addToCart = function* addTocart({ payload }) {
   try {
     yield put({ type: MAGENTO.ADD_TO_CART_LOADING, payload: true });
     if (payload.cartItem.quote_id) {
-      const response = yield call({ content: magento, fn: magento.customer.addToCart }, payload);
+      const response = yield call({ content: magento, fn: magento.customer.addItemToCart }, payload);
       yield put({ type: MAGENTO.ADD_TO_CART_SUCCESS, payload: response });
       yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // refresh cart
     } else {

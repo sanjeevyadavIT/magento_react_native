@@ -8,6 +8,7 @@ import signupSagas from './signup';
 import searchSagas from './search';
 import categoryListSagas from './categoryList';
 import cartSagas from './cart';
+import checkoutSagas from './checkout';
 
 export default function* rootSaga() {
   yield all([
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     ...searchSagas,
     ...categoryListSagas,
     ...cartSagas,
+    ...checkoutSagas,
   ]);
 }

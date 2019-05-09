@@ -9,7 +9,6 @@ import { magento } from '../../../magento';
 import Status from '../../../magento/Status';
 import {
   NAVIGATION_SEARCH_SCREEN_PATH,
-  NAVIGATION_WISHLIST_SCREEN_PATH,
   NAVIGATION_LOGIN_SCREEN_PATH,
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../../navigation/types';
@@ -46,7 +45,6 @@ HomePage.navigationOptions = ({ navigation }) => ({
   headerRight: (
     <MaterialAppbarButtons>
       <Item title="Search" iconName="search" onPress={() => navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH)} />
-      <Item title="Wishlist" iconName="bookmark" onPress={() => magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_WISHLIST_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)} />
       <Item title="Cart" iconName="shopping-cart" onPress={() => magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)} />
     </MaterialAppbarButtons>
   ),

@@ -3,6 +3,18 @@ import { magento } from '../magento';
 import { MAGENTO } from '../actions/actionsTypes';
 import { extractErrorMessage } from '../utils';
 
+const createQuoteId = function* createQuoteId() {
+  try {
+    yield put({ type: MAGENTO.CREATE_QUOTE_ID_LOADING });
+    const quoteId = yield call({ content: magento, fn: magento.customer.createQuoteId });
+    yield put({ type: MAGENTO.CREATE_QUOTE_ID_SUCCESS, payload: { quoteId } });
+    yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST });
+  } catch (error) {
+    yield put({ type: MAGENTO.CREATE_QUOTE_ID_FAILURE, payload: { errorMessage: extractErrorMessage(error) } });
+  }
+};
+
+// FIXME: Potential infinite loop, cart error => calls create quote => create quote calls again this function
 const getCustomerCart = function* fetchCustomerCart() {
   try {
     yield put({ type: MAGENTO.CUSTOMER_CART_LOADING });
@@ -10,6 +22,9 @@ const getCustomerCart = function* fetchCustomerCart() {
     yield put({ type: MAGENTO.CUSTOMER_CART_SUCCESS, payload: { cart } });
   } catch (error) {
     yield put({ type: MAGENTO.CUSTOMER_CART_FAILURE, payload: { errorMessage: extractErrorMessage(error) } });
+    if (error.message === 'No such entity with %fieldName = %fieldValue') {
+      yield put({ type: MAGENTO.CREATE_QUOTE_ID_REQUEST });
+    }
   }
 };
 
@@ -34,6 +49,7 @@ const removeItemFromCart = function* deleteItemFromCart({ payload }) {
 };
 
 const cartSagas = [
+  takeLatest(MAGENTO.CREATE_QUOTE_ID_REQUEST, createQuoteId),
   takeLatest(MAGENTO.CUSTOMER_CART_REQUEST, getCustomerCart),
   takeEvery(MAGENTO.CART_ITEM_PRODUCT_REQUEST, getCartItemProduct),
   takeEvery(MAGENTO.REMOVE_ITEM_FROM_CART_REQUEST, removeItemFromCart),

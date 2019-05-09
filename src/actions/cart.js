@@ -1,5 +1,9 @@
 import { MAGENTO } from './actionsTypes';
 
+export const createQuoteId = () => ({
+  type: MAGENTO.CREATE_QUOTE_ID_REQUEST
+});
+
 export const getCustomerCart = () => ({
   type: MAGENTO.CUSTOMER_CART_REQUEST
 });

@@ -7,6 +7,7 @@ import { BACKGROUND_COLOR } from '../../../constants';
 
 const GenericTemplate = ({
   children,
+  footer,
   isScrollable,
   status,
   errorMessage,
@@ -23,9 +24,14 @@ const GenericTemplate = ({
   }
 
   return (
-    <ViewGroup style={[styles.container, style]} {...props}>
-      {children}
-    </ViewGroup>
+    <View style={styles.container}>
+      <ViewGroup style={[styles.content, style]} {...props}>
+        {children}
+      </ViewGroup>
+      <View style={styles.stickyFooter}>
+        {footer}
+      </View>
+    </View>
   );
 };
 
@@ -33,11 +39,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND_COLOR,
-  }
+  },
+  content: {
+    flex: 1,
+  },
+  stickyFooter: {
+    alignSelf: 'flex-end'
+  },
 });
 
 GenericTemplate.propTypes = {
   children: PropTypes.any.isRequired,
+  footer: PropTypes.element,
   isScrollable: PropTypes.bool.isRequired,
   status: PropTypes.oneOf(Object.values(Status)),
   errorMessage: PropTypes.string,
@@ -48,6 +61,7 @@ GenericTemplate.defaultProps = {
   status: Status.SUCCESS,
   errorMessage: '',
   style: {},
+  footer: <></>
 };
 
 export default GenericTemplate;
