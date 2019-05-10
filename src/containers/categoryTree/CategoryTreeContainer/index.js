@@ -4,9 +4,18 @@ import { CATEGORY_TREE } from '../../../reducers/types';
 import { GenericTemplate, CategoryTree } from '../../../components';
 
 const CategoryTreeContainer = () => {
-  const status = useSelector(state => state[CATEGORY_TREE].status);
-  const errorMessage = useSelector(state => state[CATEGORY_TREE].errorMessage);
-  const categories = useSelector(state => "children_data" in state[CATEGORY_TREE] ? state[CATEGORY_TREE].children_data : null);
+  const {
+    status,
+    errorMessage,
+    children_data: categories
+  } = useSelector(state => state[CATEGORY_TREE]);
+
+  const renderChildren = () => {
+    if (categories) {
+      return <CategoryTree categories={categories} />;
+    }
+    return <></>;
+  };
 
   return (
     <GenericTemplate
@@ -14,7 +23,7 @@ const CategoryTreeContainer = () => {
       status={status}
       errorMessage={errorMessage}
     >
-      <CategoryTree categories={categories} />
+      {renderChildren()}
     </GenericTemplate>
   );
 };

@@ -20,7 +20,6 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         status: Status.ERROR,
         errorMessage: payload.errorMessage
       };
-    case MAGENTO.CATEGORY_TREE_LOADING:
     default:
       return state;
   }
