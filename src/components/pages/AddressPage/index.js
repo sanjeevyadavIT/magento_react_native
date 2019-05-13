@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Picker, TouchableOpacity, StyleSheet } from 'react-native';
-import { useSelector, useActions } from 'react-redux';
+import { View, Picker, StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { getCountries, addCartBillingAddress, getCurrentCustomer, getShippingMethod, getCustomerCart } from '../../../actions';
 import { ACCOUNT, CHECKOUT } from '../../../reducers/types';
 import { Spinner, Text, Button, TextInput } from '../..';
@@ -11,8 +11,7 @@ import Status from '../../../magento/Status';
 // TODO: Use KeyboardAvoidingView
 // TODO: Refactor code and make it optimize, it's higly messy
 const AddressPage = ({ navigation }) => {
-  const { countries, countryStatus, billingAddressStatus, shippingMethodStatus, errorMessage } = useSelector(state => state[CHECKOUT]);
-  const { customer, status: customerStatus } = useSelector(state => state[ACCOUNT]); // Can be move out of this component
+  const dispatch = useDispatch();
   const [form, setValues] = useState({
     firstName: '',
     lastName: '',
@@ -23,11 +22,17 @@ const AddressPage = ({ navigation }) => {
     zipCode: '43245',
     state: 'AL',
   });
-  const dispatchGetCountriesAction = useActions(() => getCountries(), []);
-  const dispatchAddCartBillingAddressAction = useActions(address => addCartBillingAddress(address), []);
-  const dispatchGetCurrentCustomerAction = useActions(() => getCurrentCustomer(), []);
-  const dispatchGetShippingMethodAction = useActions(address => getShippingMethod(address), []);
-  const dispatchUpdateCustomerCartAction = useActions(() => getCustomerCart(), []);
+  const {
+    countries,
+    countryStatus,
+    billingAddressStatus,
+    shippingMethodStatus,
+    errorMessage
+  } = useSelector(state => state[CHECKOUT]);
+  const {
+    customer,
+    status: customerStatus
+  } = useSelector(state => state[ACCOUNT]); 
 
   if (customerStatus === Status.SUCCESS) {
     if (form.firstName === '' && form.lastName === '') {
@@ -42,10 +47,10 @@ const AddressPage = ({ navigation }) => {
   useEffect(() => {
     // componentDidMount
     if (countryStatus === Status.DEFAULT) {
-      dispatchGetCountriesAction();
+      dispatch(getCountries());
     }
     if (customerStatus === Status.DEFAULT) {
-      dispatchGetCurrentCustomerAction();
+      dispatch(getCurrentCustomer());
     }
   }, []);
 
@@ -91,7 +96,7 @@ const AddressPage = ({ navigation }) => {
       useForShipping: true,
     };
     customer ? address.address.email = customer.email : '';
-    dispatchAddCartBillingAddressAction(address);
+    dispatch(addCartBillingAddress(address));
   };
 
   // TODO: cache this value
@@ -169,8 +174,8 @@ const AddressPage = ({ navigation }) => {
       },
     };
     customer ? address.address.email = customer.email : '';
-    dispatchUpdateCustomerCartAction();
-    dispatchGetShippingMethodAction(address);
+    dispatch(getCustomerCart());
+    dispatch(getShippingMethod(address));
     if (shippingMethodStatus === Status.DEFAULT) {
       navigation.navigate(NAVIGATION_SHIPPING_SCREEN_PATH);
     }

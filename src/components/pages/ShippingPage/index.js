@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Picker, StyleSheet } from 'react-native';
-import { useSelector, useActions } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addCartShippingInfo } from '../../../actions';
 import { CHECKOUT, CART } from '../../../reducers/types';
 import { Spinner, Text, Button, TextInput, GenericTemplate } from '../..';
@@ -8,10 +8,10 @@ import { NAVIGATION_PAYMENT_SCREEN_PATH } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 
 const ShippingPage = ({ navigation }) => {
-  const { shippingMethodStatus: status, errorMessage, shipping, paymentMethodStatus } = useSelector(state => state[CHECKOUT]);
-  const { billing_address: billingAddress } = useSelector(state => state[CART].cart);
+  const dispatch = useDispatch();
   const [shippingCode, setShippingCode] = useState();
-  const dispatchAddCartShippingInfoAction = useActions(address => addCartShippingInfo(address), []);
+  const { errorMessage, shipping, paymentMethodStatus, shippingMethodStatus: status } = useSelector(state => state[CHECKOUT]);
+  const { billing_address: billingAddress } = useSelector(state => state[CART].cart);
 
   const renderShippingMethod = () => {
     if (!shipping || !shipping.length) {
@@ -68,7 +68,7 @@ const ShippingPage = ({ navigation }) => {
           extension_attributes: {},
         }
       };
-      dispatchAddCartShippingInfoAction(address);
+      dispatch(addCartShippingInfo(address));
     }
   };
   

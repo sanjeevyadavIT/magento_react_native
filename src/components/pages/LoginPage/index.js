@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { useSelector, useActions } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { auth } from '../../../actions';
 import { LOGIN } from '../../../reducers/types';
 import { Spinner, Text, Button, TextInput } from '../..';
@@ -10,17 +10,16 @@ import Status from '../../../magento/Status';
 // TODO: create Button to have a style of no background and border
 // TODO: Use KeyboardAvoidingView
 const LoginPage = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [form, setValues] = useState({
     email: '',
     password: '',
   });
-  const status = useSelector(state => state[LOGIN].status);
-  const errorMessage = useSelector(state => state[LOGIN].errorMessage);
-  const login = useActions(({ email, password }) => auth(email, password), []);
+  const { status, errorMessage } = useSelector(state => state[LOGIN]);
 
   const onLoginPress = () => {
     // TODO: Do validation
-    login(form);
+    dispatch(auth(form.email, form.password));
   };
 
   const renderButtons = () => {

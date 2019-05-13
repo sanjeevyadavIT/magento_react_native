@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useActions } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentCustomer, logout } from '../../../actions';
 import { NAVIGATION_HOME_PATH } from '../../../navigation/types';
 import { ACCOUNT } from '../../../reducers/types';
@@ -8,21 +8,18 @@ import Status from '../../../magento/Status';
 
 // TODO: Disable logout button, once clicked
 const AccountPage = ({ navigation }) => {
-  const status = useSelector(state => state[ACCOUNT].status);
-  const errorMessage = useSelector(state => state[ACCOUNT].errorMessage);
-  const customer = useSelector(state => state[ACCOUNT].customer);
-  const fetchCurrentCustomer = useActions(() => getCurrentCustomer(), []);
-  const userLogout = useActions(() => logout(), []);
+  const dispatch = useDispatch();
+  const { status, errorMessage, customer } = useSelector(state => state[ACCOUNT]);
 
   useEffect(() => {
     // ComponentDidMount
     if (status === Status.DEFAULT && !customer) {
-      fetchCurrentCustomer();
+      dispatch(getCurrentCustomer());
     }
   }, []);
 
   const onLogoutPress = () => {
-    userLogout();
+    dispatch(logout());
     navigation.navigate(NAVIGATION_HOME_PATH);
   };
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { useSelector, useActions } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { magento } from '../../../magento';
 import { ImageSlider, GenericTemplate } from '../../../components';
 import { PRODUCT } from '../../../reducers/types';
@@ -13,15 +13,14 @@ const ProductSliderContainer = ({
   style,
   ...props
 }) => {
-  const status = useSelector(state => state[PRODUCT].mediaStatus);
-  const errorMessage = useSelector(state => state[PRODUCT].mediaErrorMessage);
-  const slider = useSelector(state => sku in state[PRODUCT].medias ? state[PRODUCT].medias[sku] : null);
-  const dispatchGetProductMediaAction = useActions(() => getProductMedia(sku), []);
+  const dispatch = useDispatch();
+  const { mediaStatus: status, mediaErrorMessage: errorMessage } = useSelector(state => state[PRODUCT]);
+  const { [sku]: slider } = useSelector(state => state[PRODUCT].medias);
 
   useEffect(() => {
     // componentDidMount
     if (!slider) {
-      dispatchGetProductMediaAction();
+      dispatch(getProductMedia(sku));
     }
   }, []);
 

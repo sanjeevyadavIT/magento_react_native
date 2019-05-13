@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Picker, StyleSheet } from 'react-native';
-import { useSelector, useActions } from 'react-redux';
+import { Picker, StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { placeCartOrder, createQuoteId } from '../../../actions';
 import { CHECKOUT, CART } from '../../../reducers/types';
-import { Spinner, Text, Button, TextInput, GenericTemplate } from '../..';
-import { NAVIGATION_PAYMENT_SCREEN_PATH } from '../../../navigation/types';
+import { Spinner, Text, Button, GenericTemplate } from '../..';
 import Status from '../../../magento/Status';
 
 const PaymentPage = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [paymentCode, setPaymentCode] = useState();
   const { payment, orderStatus } = useSelector(state => state[CHECKOUT]);
   const { billing_address: billingAddress } = useSelector(state => state[CART].cart);
-  const [paymentCode, setPaymentCode] = useState();
-  const dispatchPlaceCartOrderAction = useActions(paymentInformation => placeCartOrder(paymentInformation), []);
-  const dispatchCreateQuoteIdAction = useActions(() => createQuoteId(), []);
 
   const placeOrder = () => {
     if (!paymentCode) return;
@@ -35,7 +33,7 @@ const PaymentPage = ({ navigation }) => {
         method: paymentCode
       }
     };
-    dispatchPlaceCartOrderAction(paymentInformation);
+    dispatch(placeCartOrder(paymentInformation))
   };
 
   const renderPaymentMethods = () => {
@@ -62,7 +60,7 @@ const PaymentPage = ({ navigation }) => {
     }
 
     if (orderStatus === Status.SUCCESS) {
-      dispatchCreateQuoteIdAction();
+      dispatch(createQuoteId());
       navigation.popToTop();
     }
 

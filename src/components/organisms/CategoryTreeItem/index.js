@@ -6,7 +6,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import { useActions } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { CategoryTree, Text, Card, CardMode } from '../..';
@@ -16,12 +16,9 @@ import { BORDER_COLOR } from '../../../constants';
 import { setNewCategory } from '../../../actions';
 
 // TODO: Hide category which don't have product and children_data
-const CategoryTreeItem = ({
-  category,
-  ...props,
-}) => {
+const CategoryTreeItem = ({ category }) => {
+  const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(0);
-  const dispatchSetNewCategoryAction = useActions(() => setNewCategory(category.id), []);
 
   useEffect(() => {
     // componentDidMount
@@ -39,7 +36,7 @@ const CategoryTreeItem = ({
 
   const onRowPress = () => {
     if (category.product_count !== 0) {
-      dispatchSetNewCategoryAction();
+      dispatch(setNewCategory(category.id));
       NavigationService.navigate(NAVIGATION_CATEGORY_LIST_PATH, {
         title: category.name,
         id: category.id

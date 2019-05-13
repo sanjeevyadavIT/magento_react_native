@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { useSelector, useActions } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { signup, resetSignupState } from '../../../actions';
 import { SIGNUP } from '../../../reducers/types';
 import { Spinner, Text, Button, TextInput } from '../..';
@@ -9,27 +9,25 @@ import Status from '../../../magento/Status';
 
 // TODO: Use KeyboardAvoidingView
 const SignupPage = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [form, setValues] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
   });
-  const status = useSelector(state => state[SIGNUP].status);
-  const errorMessage = useSelector(state => state[SIGNUP].errorMessage);
-  const doSignup = useActions(payload => signup(payload), []);
-  const dispatchResetStateAction = useActions(() => resetSignupState(), []);
+  const { status, errorMessage } = useSelector(state => state[SIGNUP]);
 
   useEffect(() => (() => {
     // componentDidMount
-    dispatchResetStateAction();
+    dispatch(resetSignupState());
   }), []);
 
   const onSignupPress = () => {
     // TODO: Implement validation
     const customer = { firstname: form.firstName, lastname: form.lastName, email: form.email };
     const payload = { customer, password: form.password };
-    doSignup(payload);
+    dispatch(signup(payload));
   };
 
   const renderButtons = () => {

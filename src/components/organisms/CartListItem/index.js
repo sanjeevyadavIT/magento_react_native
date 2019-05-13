@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
-import { useSelector, useActions } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { getCartItemProduct ,removeItemFromCart } from '../../../actions';
+import { getCartItemProduct, removeItemFromCart } from '../../../actions';
 import { getProductThumbnailFromAttribute } from '../../../utils';
 import { CART } from '../../../reducers/types';
 import { Card, Image, Text, CardMode } from '../..';
 
 // NOTE: Is it better to create a wapper around CartListItem and extract state in it?
 // It is in organisms folder because it is state aware
+// TODO: Extract strings in strings.js
 const CartListItem = ({ item }) => {
-  const product = useSelector(state => item.sku in state[CART].products ? state[CART].products[item.sku] : null);
-  // TODO: Find a better way to name this variable
-  const dispatchGetCartProductDetailAction = useActions(sku => getCartItemProduct(sku), []);
-  const dispatchRemoveItemFromCartAction = useActions(() => removeItemFromCart(item.item_id), []);
+  const dispatch = useDispatch();
+  const { [item.sku]: product } = useSelector(state => state[CART].products);
 
   useEffect(() => {
     // componentDidMount
     if (!item.thumbnail && !product) {
-      dispatchGetCartProductDetailAction(item.sku);
+      dispatch(getCartItemProduct(item.sku));
     }
   }, []);
 
@@ -29,7 +28,7 @@ const CartListItem = ({ item }) => {
       `Just double-checking you wanted to remove the item: ${item.name}`,
       [
         { text: 'Cancel', onPress: () => console.log('Cancel pressed'), style: 'cancel' },
-        { text: 'Remove it', onPress: () => dispatchRemoveItemFromCartAction() },
+        { text: 'Remove it', onPress: () => dispatch(removeItemFromCart(item.item_id)) },
       ],
       { cancelable: true }
     );

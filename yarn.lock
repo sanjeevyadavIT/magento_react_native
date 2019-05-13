@@ -5879,10 +5879,10 @@ react-proxy@^1.1.7:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
 
-react-redux@7.1.0-alpha.3:
-  version "7.1.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.0-alpha.3.tgz#89ab7ea118bf73e867260885c7498d15a3692d6e"
-  integrity sha512-Nhbdq9SbxxhJnGVIyBxkrmInXzPaQKzg93uEwB6Z55pyr35d1K34YDSl6YI47iErPwTj+SmZX5t1HdsSHIgZcw==
+react-redux@7.1.0-alpha.4:
+  version "7.1.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.0-alpha.4.tgz#103bab23e336ce18951bc76a8c9567ce0607fc44"
+  integrity sha512-Vxk6F1ibo2EC/cThTVUbvhTyltUFg7iLnEtro+QwOfOCygKpvwUtag1a8MPWPGv+BLWMXHniOaeo0sy6INhzFg==
   dependencies:
     "@babel/runtime" "^7.4.3"
     hoist-non-react-statics "^3.3.0"

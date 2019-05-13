@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
-import { connect, useSelector, useActions } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CART } from '../../../reducers/types';
 import { CART_PAGE_TITLE } from '../../../constants';
-// import CartList from '../../components/cart/CartList';
 import { getCustomerCart } from '../../../actions';
-import Status from '../../../magento/Status';
-import { GenericTemplate, Text } from '../..';
+import { GenericTemplate } from '../..';
 import { CartListContainer } from '../../../containers';
+import Status from '../../../magento/Status';
 
 // FIXME: If new user try to get cart, it return error
 const CartPage = ({ navigation }) => {
-  const status = useSelector(state => state[CART].status);
-  const errorMessage = useSelector(state => state[CART].errorMessage);
-  const getCurrentCustomerCart = useActions(() => getCustomerCart(), []);
+  const dispatch = useDispatch();
+  const { status, errorMessage } = useSelector(state => state[CART]);
 
   useEffect(() => {
     // componentDidMount
     if (status === Status.DEFAULT) {
-      getCurrentCustomerCart();
+      dispatch(getCustomerCart());
     }
   }, []);
 

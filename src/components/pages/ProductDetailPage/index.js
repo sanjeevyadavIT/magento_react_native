@@ -54,16 +54,14 @@ class ProductDetailPage extends React.Component {
   }
 
   getDescription = (customAttributes) => {
-    for (let i = 0; i < customAttributes.length; i++) {
+    for (let i = 0; i < customAttributes.length; i += 1) {
       const customAttribute = customAttributes[i];
       if (customAttribute.attribute_code === 'description') return customAttribute.value;
     }
     return 'Lorem ipseum';
   }
 
-  renderPickerOptions = (values) => {
-    return values.map(({ label, value }) => <Picker.Item label={label} value={String(value)} key={String(value)} />);
-  }
+  renderPickerOptions = (values, title) => ([{ label: `Select ${title}`, value: null }, ...values].map(({ label, value }) => <Picker.Item label={label} value={String(value)} key={String(value)} />));
 
   // TODO: extract this into own component
   renderOptions() {
@@ -98,7 +96,7 @@ class ProductDetailPage extends React.Component {
                   this.props.uiProductUpdate({ [option.attribute_id]: itemValue });
                 }}
               >
-                {this.renderPickerOptions(values)}
+                {this.renderPickerOptions(values, option.label)}
               </Picker>
             </View >
           );

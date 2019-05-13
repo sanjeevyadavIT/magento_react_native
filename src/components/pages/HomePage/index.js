@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useActions } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { HomePageTemplate, MaterialAppbarButtons, Item } from '../..';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from '../../../containers';
 import { initMagento } from '../../../actions';
@@ -13,15 +13,15 @@ import {
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../../navigation/types';
 
+// NOTE: It would be better, if each page gets dispatch as a prop
 const HomePage = () => {
-  const status = useSelector(state => state[HOME].status);
-  const errorMessage = useSelector(state => state[HOME].errorMessage);
-  const initializeApp = useActions(() => initMagento(), []);
+  const dispatch = useDispatch();
+  const { status, errorMessage } = useSelector(state => state[HOME]);
 
   useEffect(() => {
     // componentDidMount
     if (status === Status.DEFAULT) {
-      initializeApp();
+      dispatch(initMagento());
     }
   }, []);
 
@@ -45,7 +45,7 @@ HomePage.navigationOptions = ({ navigation }) => ({
   headerRight: (
     <MaterialAppbarButtons>
       <Item title="Search" iconName="search" onPress={() => navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH)} />
-      <Item title="Cart" iconName="shopping-cart" onPress={() => magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)} />
+      <Item title="Cart" iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH))} />
     </MaterialAppbarButtons>
   ),
 });
