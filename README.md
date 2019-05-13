@@ -66,10 +66,10 @@ If you have a feature request or idea which will enhance the user experience of 
 - [ ] FEATURE: Show Prices in featured list on Home Screen.
 - [ ] ISSUE: Price not getting shown for end products in Category list
 - [ ] FEATURE: Show and update price for configurable product in Product detail screen.
-- [ ] FEATURE: Billing Address screen
-- [ ] FEATURE: Payment screen and checkout process
+- [x] FEATURE: Billing Address screen
+- [x] FEATURE: Payment screen and checkout process
 - [ ] FEATURE: Display description and other details in Product detail screen.
-- [ ] FEATURE: Show Review screen for a product
+- [ ] FEATURE: Show Reviews screen for a product
 - [ ] FEATURE: Add New Review screen
 - [ ] FEATURE: My orders screen
 - [ ] FEATURE: Add to wishlist functionality and whislist screen
