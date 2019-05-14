@@ -98,7 +98,7 @@ ProductList.propTypes = {
   showHorizontalList: PropTypes.bool.isRequired,
   columnCount: PropTypes.number,
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
-  isLoadingMoreProducts: PropTypes.bool.isRequired,
+  isLoadingMoreProducts: PropTypes.oneOf(Object.values(Status)).isRequired,
   canLoadMoreProducts: PropTypes.bool.isRequired,
   loadProducts: PropTypes.func.isRequired,
   loadFactor: PropTypes.oneOfType([

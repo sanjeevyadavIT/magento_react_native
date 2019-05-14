@@ -19,7 +19,7 @@ const ProductListItem = ({
 
   useEffect(() => {
     // componentDidMount
-    if (item.type_id === 'configurable') {
+    if (!extra && item.type_id === 'configurable') {
       dispatch(updateItem(item.sku));
     }
   }, []);
@@ -38,7 +38,6 @@ const ProductListItem = ({
         price = extra && extra.price ? extra.price : 0;
         break;
       default:
-        price = 0;
     }
     return price;
   };

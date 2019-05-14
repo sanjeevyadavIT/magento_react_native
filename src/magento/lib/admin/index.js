@@ -1,6 +1,6 @@
 import { ADMIN_TYPE } from '../../types';
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 10;
 
 const getSortFieldName = (sortOrder) => {
   switch (sortOrder) {

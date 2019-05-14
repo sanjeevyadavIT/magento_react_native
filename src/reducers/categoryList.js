@@ -44,7 +44,7 @@ export default (state = initialState, { type, payload }) => {
         loading: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
-    case MAGENTO.UPDATE_CONF_PRODUCT_SUCCESS: {
+    case MAGENTO.CATEGORY_UPDATE_CONF_PRODUCT_SUCCESS: {
       const { sku, children } = payload;
       const extra = {
         ...state.extra,
