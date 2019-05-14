@@ -13,9 +13,11 @@ import {
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../../navigation/types';
 
+// NOTE: Don't use destructring while accessing state from useSelector
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { status, errorMessage } = useSelector(state => state[HOME]);
+  const status = useSelector(state => state[HOME].status);
+  const errorMessage = useSelector(state => state[HOME].errorMessage);
 
   useEffect(() => {
     // componentDidMount

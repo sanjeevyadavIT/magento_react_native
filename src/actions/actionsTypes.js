@@ -20,6 +20,7 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'INIT_APP', // Configure magento with admin credentials, access token and base url
   'HOME_DATA', // Fetch HomeBanner and featured products for home page
   'FEATURED_CATEGORY_PRODUCTS', // Fetch featured categories for home page
+  'HOME_UPDATE_CONF_PRODUCT', // For each configurable product in featured category, fetch it's children, to calculate price
   'CATEGORY_TREE', // Fetch category tree
   'CONF_OPTIONS', // Product is configurable type, fetch all options
   'PRODUCT_MEDIA', // Fetch images related to products

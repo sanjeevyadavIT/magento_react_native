@@ -67,10 +67,27 @@ const getFeaturedCategoryProducts = function* fetchFeaturedCategoryProducts({ pa
   }
 };
 
+const updateConfigurableProductsPrice = function* updateConfigurableProductsPrice({ payload }) {
+  const { sku } = payload;
+  try {
+    const children = yield call({ context: magento, fn: magento.admin.getConfigurableChildren }, sku);
+    yield put({
+      type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_SUCCESS,
+      payload: {
+        sku,
+        children,
+      }
+    });
+  } catch (error) {
+    yield put({ type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_ERROR, payload: { sku, errorMessage: extractErrorMessage(error) } });
+  }
+};
+
 const homeSagas = [
   takeLatest(MAGENTO.INIT_APP_REQUEST, initMagento),
   takeLatest(MAGENTO.HOME_DATA_REQUEST, getHomeData),
   takeEvery(MAGENTO.FEATURED_CATEGORY_PRODUCTS_REQUEST, getFeaturedCategoryProducts),
+  takeEvery(MAGENTO.HOME_UPDATE_CONF_PRODUCT_REQUEST, updateConfigurableProductsPrice),
 ];
 
 export default homeSagas;

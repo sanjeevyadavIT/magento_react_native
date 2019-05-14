@@ -6,6 +6,7 @@ import Status from '../../../magento/Status';
 
 const ProductList = ({
   products, // Change it to items
+  stateAccessor,
   showHorizontalList,
   columnCount,
   status,
@@ -13,6 +14,7 @@ const ProductList = ({
   canLoadMoreProducts,
   loadProducts,
   openSelectedProduct,
+  updateItem,
   loadFactor,
   errorMessage,
 }) => {
@@ -40,10 +42,11 @@ const ProductList = ({
   const renderRow = ({ item, index }) => {
     return (
       <ProductListItem
-        product={item}
+        item={item}
+        stateAccessor={stateAccessor}
         openSelectedProduct={openSelectedProduct}
-        index={index}
         columnCount={columnCount}
+        updateItem={updateItem}
       />
     );
   };
@@ -91,6 +94,7 @@ const styles = StyleSheet.create({
 ProductList.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   products: PropTypes.array,
+  stateAccessor: PropTypes.string.isRequired,
   showHorizontalList: PropTypes.bool.isRequired,
   columnCount: PropTypes.number,
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
@@ -101,6 +105,7 @@ ProductList.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
+  updateItem: PropTypes.func.isRequired,
   openSelectedProduct: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };
