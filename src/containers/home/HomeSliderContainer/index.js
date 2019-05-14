@@ -13,7 +13,7 @@ import { HOME } from '../../../reducers/types';
  * const HomeSliderContainer = connect(mapStateToProps)(ImageSlider);
  */
 const HomeSliderContainer = ({ imageHeight }) => {
-  const slider = useSelector(state => state[HOME].slider);
+  const { slider } = useSelector(state => state[HOME]);
   return (
     <ImageSlider imageHeight={imageHeight} slider={slider} baseUrl={magento.getMediaUrl()} />
   );

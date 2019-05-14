@@ -15,10 +15,10 @@ class ImageSliderItem {
 }
 
 const ImageSlider = ({
+  imageHeight, // Required prop
+  slider, // Required prop
+  baseUrl, // Required prop
   showTitle,
-  imageHeight,
-  slider,
-  baseUrl,
   resizeMode,
   style,
   ...props
@@ -48,18 +48,15 @@ const styles = StyleSheet.create({
 });
 
 ImageSlider.propTypes = {
-  slider: PropTypes.arrayOf(
-    PropTypes.instanceOf(ImageSliderItem)
-  ), // redux prop
   imageHeight: PropTypes.number.isRequired,
-  showTitle: PropTypes.bool,
+  slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired, // redux prop
   baseUrl: PropTypes.string.isRequired,
+  showTitle: PropTypes.bool,
   resizeMode: PropTypes.string,
   style: PropTypes.object,
 };
 
 ImageSlider.defaultProps = {
-  slider: [],
   showTitle: false,
   resizeMode: 'cover',
   style: {},

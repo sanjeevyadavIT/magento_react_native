@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { HomePageTemplate, MaterialAppbarButtons, Item } from '../..';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from '../../../containers';
-import { initMagento } from '../../../actions';
+import { initializeApp } from '../../../actions';
 import { HOME } from '../../../reducers/types';
 import { BRAND_NAME, HOME_PAGE_SLIDER_HEIGHT } from '../../../constants';
 import { magento } from '../../../magento';
@@ -13,7 +13,6 @@ import {
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../../navigation/types';
 
-// NOTE: It would be better, if each page gets dispatch as a prop
 const HomePage = () => {
   const dispatch = useDispatch();
   const { status, errorMessage } = useSelector(state => state[HOME]);
@@ -21,7 +20,7 @@ const HomePage = () => {
   useEffect(() => {
     // componentDidMount
     if (status === Status.DEFAULT) {
-      dispatch(initMagento());
+      dispatch(initializeApp());
     }
   }, []);
 

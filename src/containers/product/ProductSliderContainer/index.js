@@ -35,9 +35,9 @@ const ProductSliderContainer = ({
       <ImageSlider 
         style={styles.imageContainer}
         imageHeight={imageHeight}
-        resizeMode="contain"
-        baseUrl={magento.getProductMediaUrl()}
         slider={slider}
+        baseUrl={magento.getProductMediaUrl()}
+        resizeMode="contain"
       />
     </GenericTemplate>
   );

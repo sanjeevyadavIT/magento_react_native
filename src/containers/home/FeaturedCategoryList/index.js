@@ -5,7 +5,6 @@ import { ProductList } from '../../../components';
 import { HOME } from '../../../reducers/types';
 import { openSelectedProduct, getFeaturedProducts } from '../../../actions';
 
-// TODO: No need of this file, extract everything in FeaturedCateg
 // Here FeaturedCategoriesContainer(connected to redux) is hosting FeaturedCategoryList(connected to redux) which in turn hosting Productlist(dumb component)
 const FeaturedCategoryList = ({ categoryId }) => {
   const dispatch = useDispatch();

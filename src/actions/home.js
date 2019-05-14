@@ -1,6 +1,6 @@
 import { MAGENTO } from './actionsTypes';
 
-export const initMagento = () => ({
+export const initializeApp = () => ({
   type: MAGENTO.INIT_APP_REQUEST,
 });
 
