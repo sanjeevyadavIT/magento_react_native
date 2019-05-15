@@ -5,6 +5,7 @@ import { LoadingView, MessageView } from '../..';
 import Status from '../../../magento/Status';
 import { BACKGROUND_COLOR } from '../../../constants';
 
+// NOTE: Can add functionality to show some fallback message in case of empty view
 const GenericTemplate = ({
   children,
   footer,

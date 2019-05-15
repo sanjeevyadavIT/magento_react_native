@@ -21,6 +21,8 @@ const mapStateToProps = (state) => {
     products,
     canLoadMoreProducts,
     loadingMore,
+    stateAccessor: SEARCH,
+    updateItem: () => ({ type: 'IMPLEMENT SEARCH PRICING' }),
   };
 };
 

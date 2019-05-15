@@ -40,7 +40,7 @@ _Follow these instructions to build and run the project_
 
 ### Prerequisites
 
-Basic knowledge of [React Native](https://facebook.github.io/react-native/), [Redux](https://redux.js.org/), [React Navigation](https://reactnavigation.org/) along with [Redux-Sagas](https://redux-saga.js.org/).There is tons of functionality to implement, checkout [Roadmap section](#roadmap). We follow [Git flow](https://www.youtube.com/watch?v=aJnFGMclhU8) for branch management.
+Basic knowledge of [React Native](https://facebook.github.io/react-native/), [Redux](https://redux.js.org/), [React Navigation](https://reactnavigation.org/) along with [Redux-Sagas](https://redux-saga.js.org/). App is architect using [Atomic Architecture](http://bradfrost.com/blog/post/atomic-web-design/) and React hooks are used to write functional component. There is tons of functionality to implement, checkout [Roadmap section](#roadmap). We follow [Git flow](https://www.youtube.com/watch?v=aJnFGMclhU8) for branch management.
 
 ## Contributing
 
@@ -63,15 +63,15 @@ If you have a feature request or idea which will enhance the user experience of 
 - [x] FEATURE: Display categories and products
 - [x] FEATURE: Add to cart for simple and configurable product
 - [x] FEATURE: Login and Signup Screen
-- [ ] FEATURE: Show Prices in featured list on Home Screen.
-- [ ] ISSUE: Price not getting shown for end products in Category list
+- [x] FEATURE: Show Prices in featured list on Home Screen.
+- [x] ISSUE: Price not getting shown for end products in Category list
 - [ ] FEATURE: Show and update price for configurable product in Product detail screen.
 - [x] FEATURE: Billing Address screen
 - [x] FEATURE: Payment screen and checkout process
 - [ ] FEATURE: Display description and other details in Product detail screen.
 - [ ] FEATURE: Show Reviews screen for a product
 - [ ] FEATURE: Add New Review screen
-- [ ] FEATURE: My orders screen
+- [x] FEATURE: My orders screen
 - [ ] FEATURE: Add to wishlist functionality and whislist screen
 - [ ] FEATURE: Show applicable filter in Category List screen
 - [ ] FEATURE: Forgot password screen

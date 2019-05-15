@@ -28,6 +28,7 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'AUTH', // Login
   'SIGNUP', // Create new user account
   'CURRENT_USER', // Fetch details of current logged in user
+  'GET_ORDERS', // Fetch all order placed by current customer
   'CATEGORY_PRODUCTS', // Fetch all products in a category
   'CATEGORY_UPDATE_CONF_PRODUCT', // Fetch price of configurable product in category list
   'MORE_CATEGORY_PRODUCTS', // Pagination in category list

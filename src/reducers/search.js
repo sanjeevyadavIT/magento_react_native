@@ -4,6 +4,7 @@ const getInitialState = loadingStatus => ({
   products: null,
   totalCount: 0,
   error: null,
+  extra: {},
   loading: loadingStatus,
   loadingMore: false,
 });
