@@ -29,9 +29,7 @@ const GenericTemplate = ({
       <ViewGroup style={[styles.content, style]} {...props}>
         {children}
       </ViewGroup>
-      <View style={styles.stickyFooter}>
-        {footer}
-      </View>
+      {footer}
     </View>
   );
 };
@@ -45,7 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   stickyFooter: {
-    alignSelf: 'flex-end'
   },
 });
 
