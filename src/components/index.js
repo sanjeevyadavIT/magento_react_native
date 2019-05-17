@@ -31,13 +31,14 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import AccountPage from './pages/AccountPage';
 import OrdersPage from './pages/OrdersPage';
-import OrderPage from './pages/OrderPage';
+import OrderDetailPage from './pages/OrderDetailPage';
 import CartPage from './pages/CartPage';
 import DrawerPage from './pages/DrawerPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import AddressPage from './pages/AddressPage';
 import ShippingPage from './pages/ShippingPage';
 import PaymentPage from './pages/PaymentPage';
+import OrderAcknowledgementPage from './pages/OrderAcknowledgementPage';
 
 export {
   Text,
@@ -71,11 +72,12 @@ export {
   SignupPage,
   AccountPage,
   OrdersPage,
-  OrderPage,
+  OrderDetailPage,
   CartPage,
   DrawerPage,
   ProductDetailPage,
   AddressPage,
   ShippingPage,
   PaymentPage,
+  OrderAcknowledgementPage,
 };

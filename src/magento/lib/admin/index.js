@@ -217,4 +217,18 @@ export default magento => ({
     })
   ),
 
+  getOrderDetail: orderId => (
+    new Promise((resolve, reject) => {
+      const path = `/V1/orders/${orderId}`;
+
+      magento.get(path, undefined, undefined, ADMIN_TYPE)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
+  ),
+
 });

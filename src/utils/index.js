@@ -1,4 +1,5 @@
 export * from './products';
+export * from './order';
 
 // eslint-disable-next-line import/prefer-default-export
 export const extractErrorMessage = (error) => {

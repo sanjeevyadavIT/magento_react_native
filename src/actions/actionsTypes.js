@@ -43,6 +43,7 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'GET_SHIPPING_METHOD', // Get shipping method
   'ADD_CART_SHIPPING_INFO', // Send billing, shipping, shipping method
   'PLACE_CART_ORDER', // Place cart order
+  'ORDER_DETAIL', // Fetch order detail, using orderId
 ], suffixTypes);
 
 export const OPEN_SELECTED_PRODUCT = 'OPEN_SELECTED_PRODUCT';

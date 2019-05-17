@@ -23,3 +23,8 @@ export const placeCartOrder = paymentInformation => ({
   type: MAGENTO.PLACE_CART_ORDER_REQUEST,
   payload: { paymentInformation },
 });
+
+export const getOrderDetail = orderId => ({
+  type: MAGENTO.ORDER_DETAIL_REQUEST,
+  payload: { orderId },
+});

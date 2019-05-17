@@ -13,7 +13,15 @@ import {
   NAVIGATION_CART_SCREEN_PATH,
 } from '../../../navigation/types';
 
-// NOTE: Don't use destructring while accessing state from useSelector
+/**
+ * ===================================================================
+ * ========================= GUIDELINES ==============================
+ * ===================================================================
+ *
+ * 1. Don't use destructring while accessing state from useSelector
+ * 2. In any page, access only those variable from store that don't change again and again
+ * for state that change often, extract it into a container, to reduce entire rendering of page
+ */
 const HomePage = () => {
   const dispatch = useDispatch();
   const status = useSelector(state => state[HOME].status);

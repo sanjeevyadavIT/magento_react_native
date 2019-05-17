@@ -7,6 +7,7 @@ import { ACCOUNT } from '../../../reducers/types';
 import { GenericTemplate, OrderListItem } from '../..';
 import Status from '../../../magento/Status';
 
+// TODO: Refresh orders, to reflect new orders
 const OrdersPage = ({
   navigation,
 }) => {

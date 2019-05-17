@@ -13,6 +13,7 @@ export const NAVIGATION_CART_SCREEN_PATH = 'CartScreen';
 export const NAVIGATION_ADDRESS_SCREEN_PATH = 'AddressScreen';
 export const NAVIGATION_SHIPPING_SCREEN_PATH = 'ShippingScreen';
 export const NAVIGATION_PAYMENT_SCREEN_PATH = 'PaymentScreen';
+export const NAVIGATION_ORDER_ACKNOWLEDGEMENT_PAGE = 'OrderAcknowledgementPage';
 
 export const defaultHeader = {
   headerStyle: {
