@@ -4,7 +4,7 @@ import { CartList } from '../../../components';
 import { CART } from '../../../reducers/types';
 
 const CartListContainer = () => {
-  const { items } = useSelector(state => state[CART].cart);
+  const items = useSelector(state => state[CART].cart.items);
   return (
     <CartList items={items} />
   );

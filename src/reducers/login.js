@@ -18,7 +18,6 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         status: Status.SUCCESS,
-        token: payload.token, // TODO: find out whether it is used any where or not
       };
     case MAGENTO.AUTH_FAILURE:
       return {

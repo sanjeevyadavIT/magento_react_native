@@ -15,7 +15,8 @@ const LoginPage = ({ navigation }) => {
     email: '',
     password: '',
   });
-  const { status, errorMessage } = useSelector(state => state[LOGIN]);
+  const status = useSelector(state => state[LOGIN].status);
+  const errorMessage = useSelector(state => state[LOGIN].errorMessage);
 
   const onLoginPress = () => {
     // TODO: Do validation

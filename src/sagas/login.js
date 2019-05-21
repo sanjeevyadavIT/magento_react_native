@@ -13,8 +13,9 @@ const auth = function* auth({ payload }) {
       payload.password
     );
     yield AsyncStorage.setItem(CUSTOMER_TOKEN, token);
-    yield put({ type: MAGENTO.AUTH_SUCCESS, payload: { token } });
+    yield put({ type: MAGENTO.AUTH_SUCCESS });
     yield put({ type: MAGENTO.CURRENT_USER_REQUEST }); // Fetch details of current user
+    yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Fetch current user cart
   } catch (error) {
     yield put({ type: MAGENTO.AUTH_FAILURE, payload: { errorMessage: extractErrorMessage(error) } });
   }

@@ -14,12 +14,13 @@ const ProductSliderContainer = ({
   ...props
 }) => {
   const dispatch = useDispatch();
-  const { mediaStatus: status, mediaErrorMessage: errorMessage } = useSelector(state => state[PRODUCT]);
-  const { [sku]: slider } = useSelector(state => state[PRODUCT].medias);
+  const status = useSelector(state => state[PRODUCT].mediaStatus);
+  const errorMessage = useSelector(state => state[PRODUCT].mediaErrorMessage);
+  const slider = useSelector(state => (sku in state[PRODUCT].medias ? state[PRODUCT].medias[sku] : []));
 
   useEffect(() => {
     // componentDidMount
-    if (!slider) {
+    if (!slider.length) {
       dispatch(getProductMedia(sku));
     }
   }, []);

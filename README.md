@@ -1,4 +1,5 @@
 # MageCart : Magento 2 React Native project
+**MAGECART IS CURRENTLY IN EARLY DEVELOPMENT, NOT READY TO BE USED!**
 This project is inspired from [troublediehard/magento-react-native](https://github.com/troublediehard/magento-react-native). MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 REST API](https://devdocs.magento.com/guides/v2.3/get-started/rest_front.html) to display catalog, products, add products to cart and let you place order. Checkout [getting started](#getting-started) section for installation.
 
 ## Screenshots

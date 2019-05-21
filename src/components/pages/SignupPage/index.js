@@ -16,7 +16,8 @@ const SignupPage = ({ navigation }) => {
     email: '',
     password: '',
   });
-  const { status, errorMessage } = useSelector(state => state[SIGNUP]);
+  const status = useSelector(state => state[SIGNUP].status);
+  const errorMessage = useSelector(state => state[SIGNUP].errorMessage);
 
   useEffect(() => (() => {
     // componentDidMount

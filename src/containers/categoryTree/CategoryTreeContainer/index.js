@@ -4,11 +4,9 @@ import { CATEGORY_TREE } from '../../../reducers/types';
 import { GenericTemplate, CategoryTree } from '../../../components';
 
 const CategoryTreeContainer = () => {
-  const {
-    status,
-    errorMessage,
-    children_data: categories
-  } = useSelector(state => state[CATEGORY_TREE]);
+  const status = useSelector(state => state[CATEGORY_TREE].status);
+  const errorMessage = useSelector(state => state[CATEGORY_TREE].errorMessage);
+  const categories = useSelector(state => state[CATEGORY_TREE].children_data);
 
   const renderChildren = () => {
     if (categories) {
