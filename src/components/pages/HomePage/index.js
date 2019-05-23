@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { HomePageTemplate, MaterialAppbarButtons, Item } from '../..';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from '../../../containers';
-import { initializeApp } from '../../../actions';
-import { HOME } from '../../../reducers/types';
+import { initializeApp } from '../../../store/actions';
 import { BRAND_NAME, HOME_PAGE_SLIDER_HEIGHT } from '../../../constants';
 import { magento } from '../../../magento';
 import Status from '../../../magento/Status';
@@ -24,8 +23,8 @@ import {
  */
 const HomePage = () => {
   const dispatch = useDispatch();
-  const status = useSelector(state => state[HOME].status);
-  const errorMessage = useSelector(state => state[HOME].errorMessage);
+  const status = useSelector(state => state.home.status);
+  const errorMessage = useSelector(state => state.home.errorMessage);
 
   useEffect(() => {
     // componentDidMount

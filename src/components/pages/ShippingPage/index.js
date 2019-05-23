@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Picker, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { addCartShippingInfo } from '../../../actions';
-import { CHECKOUT, CART } from '../../../reducers/types';
+import { addCartShippingInfo } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput, GenericTemplate } from '../..';
 import { NAVIGATION_PAYMENT_SCREEN_PATH } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 
+// TODO: Create a cutom picker component
 const ShippingPage = ({ navigation }) => {
   const dispatch = useDispatch();
   const [shippingCode, setShippingCode] = useState();
-  const { errorMessage, shipping, paymentMethodStatus, shippingMethodStatus: status } = useSelector(state => state[CHECKOUT]);
-  const { billing_address: billingAddress } = useSelector(state => state[CART].cart);
+  const errorMessage = useSelector(state => state.checkout.errorMessage);
+  const shipping = useSelector(state => state.checkout.shipping);
+  const paymentMethodStatus = useSelector(state => state.checkout.paymentMethodStatus);
+  const status = useSelector(state => state.checkout.shippingMethodStatus);
+  const billingAddress = useSelector(state => state.cart.cart.billing_address);
 
   const renderShippingMethod = () => {
     if (!shipping || !shipping.length) {

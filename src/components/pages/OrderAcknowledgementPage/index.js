@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { CHECKOUT } from '../../../reducers/types';
 import { GenericTemplate, Text, Button } from '../..';
 import { NAVIGATION_ORDER_DETAIL_SCREEN_PATH } from '../../../navigation/types';
 import Status from '../../../magento/Status';
@@ -11,7 +10,7 @@ import Status from '../../../magento/Status';
 const OrderAcknowledgementPage = ({ navigation }) => {
   const status = navigation.getParam('status', Status.ERROR);
   const errorMessage = navigation.getParam('errorMessage', 'Sorry for the inconvenience, unable to place your order!');
-  const orderId = useSelector(state => state[CHECKOUT].orderId);
+  const orderId = useSelector(state => state.checkout.orderId);
 
   const renderFooter = () => (
     <View>

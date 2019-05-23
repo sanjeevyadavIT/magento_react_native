@@ -13,7 +13,7 @@ import { CategoryTree, Text, Card, CardMode } from '../..';
 import NavigationService from '../../../navigation/NavigationService';
 import { NAVIGATION_CATEGORY_LIST_PATH } from '../../../navigation/types';
 import { BORDER_COLOR } from '../../../constants';
-import { setNewCategory } from '../../../actions';
+import { setNewCategory } from '../../../store/actions';
 
 // TODO: Hide category which don't have product and children_data
 const CategoryTreeItem = ({ category }) => {

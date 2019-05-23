@@ -1,8 +1,8 @@
-import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import {
   HomePage,
   CategoryListPage,
-  LoginPage,
+  SignInPage,
   SignupPage,
   AccountPage,
   OrdersPage,
@@ -38,7 +38,7 @@ const MainAppNavigator = createStackNavigator(
     [NAVIGATION_HOME_PATH]: HomePage,
     [NAVIGATION_CATEGORY_LIST_PATH]: CategoryListPage,
     [NAVIGATION_SEARCH_SCREEN_PATH]: Search,
-    [NAVIGATION_LOGIN_SCREEN_PATH]: LoginPage,
+    [NAVIGATION_LOGIN_SCREEN_PATH]: SignInPage,
     [NAVIGATION_SIGNUP_SCREEN_PATH]: SignupPage,
     [NAVIGATION_ACCOUNT_SCREEN_PATH]: AccountPage,
     [NAVIGATION_ORDERS_SCREEN_PATH]: OrdersPage,

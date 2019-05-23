@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Picker, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { StackActions, NavigationActions } from 'react-navigation';
-import { placeCartOrder, createQuoteId } from '../../../actions';
-import { CHECKOUT, CART } from '../../../reducers/types';
+import { placeCartOrder, createQuoteId } from '../../../store/actions';
 import { Spinner, Text, Button, GenericTemplate } from '../..';
 import { NAVIGATION_HOME_PATH, NAVIGATION_ORDER_ACKNOWLEDGEMENT_PAGE } from '../../../navigation/types';
 import Status from '../../../magento/Status';
@@ -13,8 +12,9 @@ import Status from '../../../magento/Status';
 const PaymentPage = ({ navigation }) => {
   const dispatch = useDispatch();
   const [paymentCode, setPaymentCode] = useState();
-  const { payment, orderStatus } = useSelector(state => state[CHECKOUT]);
-  const { billing_address: billingAddress } = useSelector(state => state[CART].cart);
+  const payment = useSelector(state => state.checkout.payment);
+  const orderStatus = useSelector(state => state.checkout.orderStatus);
+  const billingAddress = useSelector(state => state.cart.cart.billing_address);
 
   const placeOrder = () => {
     if (!paymentCode) return;

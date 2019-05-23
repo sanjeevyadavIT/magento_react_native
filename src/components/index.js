@@ -27,7 +27,7 @@ import DrawerTemplate from './templates/DrawerTemplate';
 // Pages
 import HomePage from './pages/HomePage';
 import CategoryListPage from './pages/CategoryListPage';
-import LoginPage from './pages/LoginPage';
+import SignInPage from './pages/SignInPage';
 import SignupPage from './pages/SignupPage';
 import AccountPage from './pages/AccountPage';
 import OrdersPage from './pages/OrdersPage';
@@ -68,7 +68,7 @@ export {
   DrawerTemplate,
   HomePage,
   CategoryListPage,
-  LoginPage,
+  SignInPage,
   SignupPage,
   AccountPage,
   OrdersPage,

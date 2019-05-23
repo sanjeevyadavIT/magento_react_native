@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
-import { HOME } from '../../../reducers/types';
 import FeaturedCategoryList from '../FeaturedCategoryList';
 
 // TODO: Container is hosting another container: FeaturedCategoryList which in turn is a container in itself
 // TODO: Find it, is there any use of using memo here, as state is getting from hook
 const FeaturedCategoriesContainer = React.memo(() => {
-  const featuredCategories = useSelector(state => state[HOME].featuredCategories);
+  const featuredCategories = useSelector(state => state.home.featuredCategories);
   return (
     <>
       {Object.keys(featuredCategories).map(key => (

@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, Modal, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import SearchProductList from '../SearchProductList';
-import { getSearchProducts, setCurrentProduct } from '../../actions';
-import { SEARCH } from '../../reducers/types';
+import { getSearchProducts, setCurrentProduct } from '../../store/actions';
 import { BORDER_COLOR } from '../../constants';
 import { Spinner, MaterialAppbarButtons, Item } from '../../components';
 
@@ -176,7 +175,7 @@ class Search extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { products, totalCount, loading, loadingMore, error } = state[SEARCH];
+  const { products, totalCount, loading, loadingMore, error } = state.search;
   const canLoadMoreContent = products ? products.length < totalCount : false;
   return {
     products,

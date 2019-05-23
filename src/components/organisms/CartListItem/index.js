@@ -3,9 +3,8 @@ import { View, Alert, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { getCartItemProduct, removeItemFromCart } from '../../../actions';
+import { getCartItemProduct, removeItemFromCart } from '../../../store/actions';
 import { getProductThumbnailFromAttribute } from '../../../utils';
-import { CART } from '../../../reducers/types';
 import { Card, Image, Text, CardMode } from '../..';
 
 // NOTE: Is it better to create a wapper around CartListItem and extract state in it?
@@ -13,7 +12,7 @@ import { Card, Image, Text, CardMode } from '../..';
 // TODO: Extract strings in strings.js
 const CartListItem = ({ item }) => {
   const dispatch = useDispatch();
-  const { [item.sku]: product } = useSelector(state => state[CART].products);
+  const { [item.sku]: product } = useSelector(state => state.cart.products);
 
   useEffect(() => {
     // componentDidMount

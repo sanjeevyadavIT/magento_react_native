@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Picker, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCountries, addCartBillingAddress, getCurrentCustomer, getShippingMethod, getCustomerCart } from '../../../actions';
-import { ACCOUNT, CHECKOUT } from '../../../reducers/types';
+import { getCountries, addCartBillingAddress, getCurrentCustomer, getShippingMethod, getCustomerCart } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput } from '../..';
 import { NAVIGATION_SHIPPING_SCREEN_PATH } from '../../../navigation/types';
 import Status from '../../../magento/Status';
@@ -22,17 +21,13 @@ const AddressPage = ({ navigation }) => {
     zipCode: '43245',
     state: 'AL',
   });
-  const {
-    countries,
-    countryStatus,
-    billingAddressStatus,
-    shippingMethodStatus,
-    errorMessage
-  } = useSelector(state => state[CHECKOUT]);
-  const {
-    customer,
-    status: customerStatus
-  } = useSelector(state => state[ACCOUNT]); 
+  const countries = useSelector(state => state.checkout.countries);
+  const countryStatus = useSelector(state => state.checkout.countryStatus);
+  const billingAddressStatus = useSelector(state => state.checkout.billingAddressStatus);
+  const shippingMethodStatus = useSelector(state => state.checkout.shippingMethodStatus);
+  const errorMessage = useSelector(state => state.checkout.errorMessage);
+  const customer = useSelector(state => state.account.customer);
+  const customerStatus = useSelector(state => state.account.status);
 
   if (customerStatus === Status.SUCCESS) {
     if (form.firstName === '' && form.lastName === '') {

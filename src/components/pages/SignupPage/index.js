@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { signup, resetSignupState } from '../../../actions';
-import { SIGNUP } from '../../../reducers/types';
+import { signUp, resetAuthState } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput } from '../..';
 import { NAVIGATION_LOGIN_SCREEN_PATH } from '../../../navigation/types';
 import Status from '../../../magento/Status';
@@ -16,19 +15,19 @@ const SignupPage = ({ navigation }) => {
     email: '',
     password: '',
   });
-  const status = useSelector(state => state[SIGNUP].status);
-  const errorMessage = useSelector(state => state[SIGNUP].errorMessage);
+  const status = useSelector(state => state.auth.signUpStatus);
+  const errorMessage = useSelector(state => state.auth.signUpErrorMessage);
 
   useEffect(() => (() => {
-    // componentDidMount
-    dispatch(resetSignupState());
+    // componentWillUnmount
+    dispatch(resetAuthState());
   }), []);
 
-  const onSignupPress = () => {
+  const onSignUpPress = () => {
     // TODO: Implement validation
     const customer = { firstname: form.firstName, lastname: form.lastName, email: form.email };
     const payload = { customer, password: form.password };
-    dispatch(signup(payload));
+    dispatch(signUp(payload));
   };
 
   const renderButtons = () => {
@@ -37,7 +36,7 @@ const SignupPage = ({ navigation }) => {
     }
     return (
       <View style={styles.linkContainer}>
-        <Button title="Signup" style={[styles.defaultMargin]} onPress={onSignupPress} />
+        <Button title="Signup" style={[styles.defaultMargin]} onPress={onSignUpPress} />
         <TouchableOpacity style={[styles.defaultMargin, styles.center]} onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)}>
           <Text>Already have an account(Login)</Text>
         </TouchableOpacity>

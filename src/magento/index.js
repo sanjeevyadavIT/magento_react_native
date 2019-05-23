@@ -101,22 +101,33 @@ class Magento {
           if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
-            log(error.response.data);
-            log(error.response.status);
-            log(error.response.headers);
+            log('error.response.data: ', error.response.data);
+            log('error.response.status: ', error.response.status);
+            log('error.response.headers: ', error.response.headers);
           } else if (error.request) {
             // The request was made but no response was received
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
             // http.ClientRequest in node.js
-            log(error.request);
+            log('No response received, error.request: ', error.request);
           } else {
             // Something happened in setting up the request that triggered an Error
-            log('Error', error.message);
+            log('Unknown error, error.message: ', error.message);
           }
-          log(error.config);
-          reject(error.response.data);
+          log('error.config: ', error.config);
+          const customError = Magento.extractErrorMessage(error.response.data);
+          reject(customError);
         });
     });
+  }
+
+  static extractErrorMessage(data) {
+    let { message, parameters } = data;
+    if (typeof parameters !== 'undefined' && parameters.length > 0) {
+      data.parameters.forEach((item, index) => {
+        message = message.replace(`%${index + 1}`, item);
+      });
+    }
+    return { message };
   }
 
   isConfigured() {

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { magento } from '../../../magento';
 import { ImageSlider, GenericTemplate } from '../../../components';
-import { PRODUCT } from '../../../reducers/types';
-import { getProductMedia } from '../../../actions';
+import { getProductMedia } from '../../../store/actions';
 
 const ProductSliderContainer = ({
   sku,
@@ -14,9 +13,9 @@ const ProductSliderContainer = ({
   ...props
 }) => {
   const dispatch = useDispatch();
-  const status = useSelector(state => state[PRODUCT].mediaStatus);
-  const errorMessage = useSelector(state => state[PRODUCT].mediaErrorMessage);
-  const slider = useSelector(state => (sku in state[PRODUCT].medias ? state[PRODUCT].medias[sku] : []));
+  const status = useSelector(state => state.product.mediaStatus);
+  const errorMessage = useSelector(state => state.product.mediaErrorMessage);
+  const slider = useSelector(state => (sku in state.product.medias ? state.product.medias[sku] : []));
 
   useEffect(() => {
     // componentDidMount

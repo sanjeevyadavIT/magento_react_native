@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentCustomer, logout } from '../../../actions';
+import { getCurrentCustomer, logout } from '../../../store/actions';
 import { NAVIGATION_ORDERS_SCREEN_PATH } from '../../../navigation/types';
-import { ACCOUNT } from '../../../reducers/types';
 import { Text, Button, GenericTemplate } from '../..';
 import Status from '../../../magento/Status';
 
 // TODO: Disable logout button, once clicked
 const AccountPage = ({ navigation }) => {
   const dispatch = useDispatch();
-  const status = useSelector(state => state[ACCOUNT].status);
-  const errorMessage = useSelector(state => state[ACCOUNT].errorMessage);
-  const customer = useSelector(state => state[ACCOUNT].customer);
+  const status = useSelector(state => state.account.status);
+  const errorMessage = useSelector(state => state.account.errorMessage);
+  const customer = useSelector(state => state.account.customer);
 
   useEffect(() => {
     // ComponentDidMount

@@ -4,8 +4,7 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text, Image, Card, CardMode } from '../..';
 import { priceSignByCode } from '../../../utils/price';
-import { CHECKOUT } from '../../../reducers/types';
-import { getOrderDetail } from '../../../actions';
+import { getOrderDetail } from '../../../store/actions';
 import Status from '../../../magento/Status';
 
 // TODO: Show product image in place of placeholder
@@ -17,9 +16,9 @@ const OrderDetailPage = ({
   const dispatch = useDispatch();
   const orderId = navigation.getParam('orderId', -1); // Used when coming from OrderAcknowledgementPage
   let item = navigation.getParam('item', null);
-  const status = !item ? useSelector(state => state[CHECKOUT].orderDetailStatus) : Status.SUCCESS;
-  const errorMessage = useSelector(state => state[CHECKOUT].errorMessage);
-  const orderDetail = useSelector(state => state[CHECKOUT].order);
+  const status = !item ? useSelector(state => state.checkout.orderDetailStatus) : Status.SUCCESS;
+  const errorMessage = useSelector(state => state.checkout.errorMessage);
+  const orderDetail = useSelector(state => state.checkout.order);
   let currency = priceSignByCode(item && item.order_currency_code);
 
   if (!item && status === Status.DEFAULT) {

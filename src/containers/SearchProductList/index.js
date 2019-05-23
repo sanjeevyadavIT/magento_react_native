@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { ProductList } from '../../components';
-import { openSelectedProduct, getSearchProducts } from '../../actions';
-import { SEARCH } from '../../reducers/types';
+import { openSelectedProduct, getSearchProducts } from '../../store/actions';
 
 const mapStateToProps = (state) => {
   const {
@@ -9,7 +8,7 @@ const mapStateToProps = (state) => {
     products,
     totalCount,
     loadingMore,
-  } = state[SEARCH];
+  } = state.search;
   const canLoadMoreProducts = products ? products.length < totalCount : false;
   const showHorizontalList = false;
   const columnCount = 2;
@@ -21,7 +20,7 @@ const mapStateToProps = (state) => {
     products,
     canLoadMoreProducts,
     loadingMore,
-    stateAccessor: SEARCH,
+    stateAccessor: 'search',
     updateItem: () => ({ type: 'IMPLEMENT SEARCH PRICING' }),
   };
 };

@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Picker, ScrollView, StyleSheet } from 'react-native';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { BRAND_NAME, PRODUCT_DETAIL_PAGE_SLIDER_HEIGHT } from '../../../constants';
-import { PRODUCT, CART } from '../../../reducers/types';
-import { getConfigurableProductOptions, uiProductUpdate, addToCart } from '../../../actions';
+import { getConfigurableProductOptions, uiProductUpdate, addToCart } from '../../../store/actions';
 import { Spinner, Text, Button } from '../..';
 import { ProductSliderContainer } from '../../../containers';
 
@@ -176,8 +175,8 @@ const mapStateToProps = (state) => {
     attributes,
     selectedOptions,
     current: product,
-  } = state[PRODUCT];
-  const { cart } = state[CART];
+  } = state.product;
+  const { cart } = state.cart;
   const cartQuoteId = cart.id;
   return {
     product,

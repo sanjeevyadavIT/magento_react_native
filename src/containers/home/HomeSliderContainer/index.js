@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { magento } from '../../../magento';
 import { ImageSlider } from '../../../components';
-import { HOME } from '../../../reducers/types';
 
 /**
  * Note: When using connect instead of creating it as a component,
@@ -13,7 +12,7 @@ import { HOME } from '../../../reducers/types';
  * const HomeSliderContainer = connect(mapStateToProps)(ImageSlider);
  */
 const HomeSliderContainer = ({ imageHeight }) => {
-  const slider = useSelector(state => state[HOME].slider);
+  const slider = useSelector(state => state.home.slider);
   return (
     <ImageSlider imageHeight={imageHeight} slider={slider} baseUrl={magento.getMediaUrl()} />
   );
