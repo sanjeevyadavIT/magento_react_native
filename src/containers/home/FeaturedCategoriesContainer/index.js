@@ -11,7 +11,7 @@ const FeaturedCategoriesContainer = React.memo(() => {
     <>
       {Object.keys(featuredCategories).map(key => (
         <View style={styles.container} key={key}>
-          <Text style={styles.title}>{featuredCategories[key].title}</Text>
+          <Text type="label" bold style={styles.title}>{featuredCategories[key].title}</Text>
           <FeaturedCategoryList categoryId={parseInt(key, 10)} />
         </View>
       ))}
@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   title: {
-    fontSize: 13,
-    fontWeight: 'bold',
     marginTop: 8,
     marginLeft: 8
   }

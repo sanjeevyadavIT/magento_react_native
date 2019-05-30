@@ -43,7 +43,7 @@ const SignInPage = ({ navigation }) => {
 
   const handleStatusChange = () => {
     if (status === Status.ERROR) {
-      return <Text style={styles.errorText}>{errorMessage}</Text>;
+      return <Text type="subheading" style={styles.errorText}>{errorMessage}</Text>;
     }
     if (status === Status.SUCCESS) {
       navigation.popToTop();
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   errorText: {
-    fontSize: 20,
     color: 'red',
   },
   linkContainer: {

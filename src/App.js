@@ -1,17 +1,20 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider as StoreProvider } from 'react-redux';
+import { ThemeProvider, theme } from './config';
 import Navigator from './navigation';
 import NavigationService from './navigation/NavigationService';
 import store from './store';
 
 const App = () => (
-  <Provider store={store}>
-    <Navigator
-      ref={(navigatorRef) => {
-        NavigationService.setTopLevelNavigator(navigatorRef);
-      }}
-    />
-  </Provider>
+  <StoreProvider store={store}>
+    <ThemeProvider theme={theme}>
+      <Navigator
+        ref={(navigatorRef) => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+      />
+    </ThemeProvider>
+  </StoreProvider>
 );
 
 export default App;

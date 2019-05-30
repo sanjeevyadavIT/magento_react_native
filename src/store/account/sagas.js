@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento, CUSTOMER_TOKEN } from '../../magento';
-import { MAGENTO, ACTION_USER_LOGOUT } from '../../constants/actionsTypes';
+import { MAGENTO, ACTION_USER_LOGOUT } from '../../constants';
 import { parseOrderDetail } from '../../utils';
 
 // worker saga: Add description

@@ -1,6 +1,6 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { magento } from '../../magento';
-import { MAGENTO, MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS } from '../../constants/actionsTypes';
+import { MAGENTO, MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS } from '../../constants';
 import { parseImageArray } from '../../utils';
 
 // worker saga: Add Description

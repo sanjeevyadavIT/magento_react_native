@@ -1,4 +1,4 @@
-import { MAGENTO } from '../../constants/actionsTypes';
+import { MAGENTO } from '../../constants';
 
 const getInitialState = loadingStatus => ({
   products: null,

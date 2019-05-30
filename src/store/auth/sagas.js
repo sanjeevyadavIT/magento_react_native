@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento, CUSTOMER_TOKEN } from '../../magento';
-import { MAGENTO } from '../../constants/actionsTypes';
+import { MAGENTO } from '../../constants';
 
 // worker saga: Add description
 function* signIn({ payload }) {

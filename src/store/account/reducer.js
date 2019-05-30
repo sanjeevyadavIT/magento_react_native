@@ -1,4 +1,4 @@
-import { MAGENTO, ACTION_USER_LOGOUT } from '../../constants/actionsTypes';
+import { MAGENTO, ACTION_USER_LOGOUT } from '../../constants';
 import Status from '../../magento/Status';
 
 const initialState = {

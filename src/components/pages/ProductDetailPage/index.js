@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Picker, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { BRAND_NAME, PRODUCT_DETAIL_PAGE_SLIDER_HEIGHT } from '../../../constants';
+import { BRAND_NAME } from '../../../constants';
 import { getConfigurableProductOptions, uiProductUpdate, addToCart } from '../../../store/actions';
 import { Spinner, Text, Button } from '../..';
 import { ProductSliderContainer } from '../../../containers';
 
 // TODO: Improve the render cycle
+// TODO: Reference Slider height from theme
 class ProductDetailPage extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title', BRAND_NAME),
@@ -97,7 +98,7 @@ class ProductDetailPage extends React.Component {
               >
                 {this.renderPickerOptions(values, option.label)}
               </Picker>
-            </View >
+            </View>
           );
         });
     }
@@ -126,7 +127,7 @@ class ProductDetailPage extends React.Component {
   }
 
   renderContent() {
-    const { product } = this.props;
+    const { product, theme } = this.props;
     if (!product) {
       return <Spinner />;
     }
@@ -134,8 +135,8 @@ class ProductDetailPage extends React.Component {
     return (
       <ScrollView>
         <View>
-          <View style={{ height: PRODUCT_DETAIL_PAGE_SLIDER_HEIGHT }}>
-            <ProductSliderContainer sku={product.sku} imageHeight={PRODUCT_DETAIL_PAGE_SLIDER_HEIGHT} />
+          <View style={{ height: 300 }}>
+            <ProductSliderContainer sku={product.sku} imageHeight={300} />
           </View>
           <View>
             <Text>{this.getDescription(product.custom_attributes)}</Text>
@@ -162,9 +163,7 @@ class ProductDetailPage extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});
 
 const mapStateToProps = (state) => {
   const {

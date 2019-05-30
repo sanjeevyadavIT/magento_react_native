@@ -7,19 +7,23 @@ import Image from './atoms/Image';
 import Spinner from './atoms/Spinner';
 // Molecules
 import { MaterialAppbarButtons, Item } from './molecules/AppbarButtons';
-import Card, { CardMode } from './molecules/Card';
+import Card from './molecules/Card';
 import ImageSlider, { ImageSliderItem } from './molecules/ImageSlider';
-import MessageView, { MessageMode } from './molecules/MessageView';
+import MessageView from './molecules/MessageView';
 import LoadingView from './molecules/LoadingView';
 // Organisms
-import DrawerHeader from './organisms/DrawerHeader';
-import CartList from './organisms/CartList';
-import CartListItem from './organisms/CartListItem';
-import CategoryTree from './organisms/CategoryTree';
-import CategoryTreeItem from './organisms/CategoryTreeItem';
-import OrderListItem from './organisms/OrderListItem';
-import ProductList from './organisms/ProductList';
-import ProductListItem from './organisms/ProductListItem';
+// =========> cart
+import CartList from './organisms/cart/CartList';
+import CartListItem from './organisms/cart/CartListItem';
+// =========> categoryList
+import ProductList from './organisms/categoryList/ProductList';
+import ProductListItem from './organisms/categoryList/ProductListItem';
+// =========> drawer
+import DrawerHeader from './organisms/drawer/DrawerHeader';
+import CategoryTree from './organisms/drawer/CategoryTree';
+import CategoryTreeItem from './organisms/drawer/CategoryTreeItem';
+// =========> order
+import OrderListItem from './organisms/order/OrderListItem';
 // Templates
 import GenericTemplate from './templates/GenericTemplate';
 import HomePageTemplate from './templates/HomePageTemplate';
@@ -49,11 +53,9 @@ export {
   MaterialAppbarButtons,
   Item, // Icon shown in Appbar
   Card,
-  CardMode, // Constant not a component
   ImageSlider,
   ImageSliderItem,
   MessageView,
-  MessageMode,
   LoadingView,
   ProductListItem,
   DrawerHeader,

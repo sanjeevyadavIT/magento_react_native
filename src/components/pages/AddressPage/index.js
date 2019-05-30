@@ -116,7 +116,7 @@ const AddressPage = ({ navigation }) => {
       if ('available_regions' in getCountryData()) {
         return (
           <>
-            <Text>Select state</Text>
+            <Text type="label">Select state</Text>
             <Picker
               selectedValue={form.state}
               style={{ height: 50 }}
@@ -129,7 +129,7 @@ const AddressPage = ({ navigation }) => {
       }
       return (
         <>
-          <Text>Enter state</Text>
+          <Text type="label">Enter state</Text>
           <TextInput
             placeholder="State"
             autoCorrect={false}
@@ -178,7 +178,7 @@ const AddressPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Contact Information</Text>
+      <Text type="label">Contact Information</Text>
       <TextInput
         placeholder="First Name"
         autoCorrect={false}
@@ -198,7 +198,7 @@ const AddressPage = ({ navigation }) => {
         value={form.phoneNumber}
         onChangeText={value => setValues({ ...form, phoneNumber: value })}
       />
-      <Text>Address</Text>
+      <Text type="label">Address</Text>
       <TextInput
         placeholder="Street Address"
         autoCorrect={false}
@@ -211,7 +211,7 @@ const AddressPage = ({ navigation }) => {
         value={form.city}
         onChangeText={value => setValues({ ...form, city: value })}
       />
-      <Text>Select Country</Text>
+      <Text type="label">Select Country</Text>
       {renderCountries()}
       <TextInput
         placeholder="zip code"
@@ -234,10 +234,6 @@ const styles = StyleSheet.create({
   },
   center: {
     alignSelf: 'center',
-  },
-  errorText: {
-    fontSize: 20,
-    color: 'red',
   },
   linkContainer: {
     flex: 1,

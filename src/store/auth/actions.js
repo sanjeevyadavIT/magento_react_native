@@ -1,4 +1,4 @@
-import { MAGENTO, RESET_AUTH_STATE } from '../../constants/actionsTypes';
+import { MAGENTO, RESET_AUTH_STATE } from '../../constants';
 
 export const signIn = (email, password) => ({
   type: MAGENTO.SIGN_IN_REQUEST,

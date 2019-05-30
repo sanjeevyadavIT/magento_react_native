@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { HomePageTemplate, MaterialAppbarButtons, Item } from '../..';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from '../../../containers';
 import { initializeApp } from '../../../store/actions';
-import { BRAND_NAME, HOME_PAGE_SLIDER_HEIGHT } from '../../../constants';
+import { BRAND_NAME } from '../../../constants';
 import { magento } from '../../../magento';
 import Status from '../../../magento/Status';
 import {
@@ -21,6 +21,8 @@ import {
  * 2. In any page, access only those variable from store that don't change again and again
  * for state that change often, extract it into a container, to reduce entire rendering of page
  */
+// TODO: imageHeight should be referenced from theme.dimens
+
 const HomePage = () => {
   const dispatch = useDispatch();
   const status = useSelector(state => state.home.status);
@@ -37,7 +39,7 @@ const HomePage = () => {
     <HomePageTemplate
       status={status}
       errorMessage={errorMessage}
-      imageSlider={<HomeSliderContainer imageHeight={HOME_PAGE_SLIDER_HEIGHT} />}
+      imageSlider={<HomeSliderContainer imageHeight={200} />}
       featuredCategories={<FeaturedCategoriesContainer />}
     />
   );

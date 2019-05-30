@@ -3,7 +3,7 @@ import {
   call,
   put
 } from 'redux-saga/effects';
-import { MAGENTO } from '../../constants/actionsTypes';
+import { MAGENTO } from '../../constants';
 import { magento } from '../../magento';
 
 // worker saga: Add Description

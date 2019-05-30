@@ -1,4 +1,4 @@
-import { MAGENTO } from '../../constants/actionsTypes';
+import { MAGENTO } from '../../constants';
 
 export const createQuoteId = () => ({
   type: MAGENTO.CREATE_QUOTE_ID_REQUEST

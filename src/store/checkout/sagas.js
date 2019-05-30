@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { magento } from '../../magento';
-import { MAGENTO } from '../../constants/actionsTypes';
+import { MAGENTO } from '../../constants';
 import { parseOrderDetail } from '../../utils';
 
 // worker saga: Add Description

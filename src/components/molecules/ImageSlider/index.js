@@ -52,7 +52,7 @@ ImageSlider.propTypes = {
   slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired, // redux prop
   baseUrl: PropTypes.string.isRequired,
   showTitle: PropTypes.bool,
-  resizeMode: PropTypes.string,
+  resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch', 'repeat', 'center']),
   style: PropTypes.object,
 };
 

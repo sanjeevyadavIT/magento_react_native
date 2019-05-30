@@ -1,66 +1,51 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
 import { Text } from '../..';
-import {
-  DEFAULT_TEXT_COLOR,
-  SUCCESS_TEXT_COLOR,
-  ERROR_TEXT_COLOR,
-  ERROR_TEXT_SIZE
-} from '../../../constants';
+import { withTheme } from '../../../config';
 
-const DEFAULT_MODE = 'INFO_MODE';
-const SUCCESS_MODE = 'SUCCESS_MODE';
-const ERROR_MODE = 'ERROR_MODE';
+const INFO = 'info';
+const SUCCESS = 'success';
+const ERROR = 'error';
 
-const MessageMode = { DEFAULT_MODE, SUCCESS_MODE, ERROR_MODE };
+const MessageView = React.memo(({ message, type, theme }) => (
+  <View style={styles.container}>
+    <Text type="body" style={styles.text(type, theme)}>{message}</Text>
+  </View>
+));
 
-const MessageView = React.memo(({ message, mode }) => {
-  let textStyle = {};
-  switch (mode) {
-    case MessageMode.SUCCESS_MODE:
-      textStyle = styles.success;
-      break;
-    case MessageMode.ERROR_MODE:
-      textStyle = styles.error;
-      break;
+const getTextColor = (type, theme) => {
+  switch (type) {
+    case SUCCESS:
+      return theme.colors.success;
+    case ERROR:
+      return theme.colors.error;
     default:
+      return theme.colors.bodyText;
   }
-  return (
-    <View style={styles.container}>
-      <Text style={[styles.textDefault, textStyle]}>{message}</Text>
-    </View>
-  );
-});
+};
 
-const styles = {
+// TODO: Is there any benefit of using StyleSheet when styles are function?
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  textDefault: {
+  text: (type, theme) => ({
     textAlign: 'center',
-    padding: 8,
-    fontSize: ERROR_TEXT_SIZE,
-    color: DEFAULT_TEXT_COLOR,
-  },
-  success: {
-    color: SUCCESS_TEXT_COLOR,
-  },
-  error: {
-    color: ERROR_TEXT_COLOR,
-  },
-};
+    padding: theme.padding.eight,
+    color: getTextColor(type, theme),
+  }),
+});
 
 MessageView.propTypes = {
   message: PropTypes.string.isRequired,
-  mode: PropTypes.oneOf(Object.values(MessageMode)),
+  type: PropTypes.oneOf([INFO, SUCCESS, ERROR]),
 };
 
 MessageView.defaultProps = {
-  mode: MessageMode.DEFAULT_MODE,
+  type: INFO,
 };
 
-export default MessageView;
-export { MessageMode };
+export default withTheme(MessageView);

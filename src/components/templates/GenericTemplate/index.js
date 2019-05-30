@@ -1,9 +1,15 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import {
+  ScrollView,
+  View,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { LoadingView, MessageView } from '../..';
 import Status from '../../../magento/Status';
-import { BACKGROUND_COLOR } from '../../../constants';
+import { withTheme } from '../../../config';
 
 // NOTE: Can add functionality to show some fallback message in case of empty view
 const GenericTemplate = ({
@@ -13,11 +19,11 @@ const GenericTemplate = ({
   status,
   errorMessage,
   style,
-  ...props
+  theme,
 }) => {
   const ViewGroup = isScrollable ? ScrollView : View;
   if (status === Status.ERROR) {
-    return <MessageView message={errorMessage} />;
+    return <MessageView type="error" message={errorMessage} />;
   }
 
   if (status === Status.DEFAULT || status === Status.LOADING) {
@@ -25,20 +31,24 @@ const GenericTemplate = ({
   }
 
   return (
-    <View style={styles.container}>
-      <ViewGroup style={[styles.content, style]} {...props}>
+    <SafeAreaView style={styles.container(theme)}>
+      <StatusBar
+        barStyle="default"
+        backgroundColor={theme.colors.statusBarColor}
+      />
+      <ViewGroup style={[styles.content, style]}>
         {children}
       </ViewGroup>
       {footer}
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: theme => ({
     flex: 1,
-    backgroundColor: BACKGROUND_COLOR,
-  },
+    backgroundColor: theme.colors.background,
+  }),
   content: {
     flex: 1,
   },
@@ -62,4 +72,4 @@ GenericTemplate.defaultProps = {
   footer: <></>
 };
 
-export default GenericTemplate;
+export default withTheme(GenericTemplate);

@@ -46,7 +46,7 @@ const SignupPage = ({ navigation }) => {
 
   const renderMessages = () => {
     if (status === Status.ERROR) {
-      return <Text style={[styles.errorText]}>{errorMessage}</Text>;
+      return <Text type="subheading" style={[styles.errorText]}>{errorMessage}</Text>;
     }
 
     if (status === Status.SUCCESS) {
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     alignItems: 'stretch'
   },
   errorText: {
-    fontSize: 20,
     color: 'red',
   },
   successText: {

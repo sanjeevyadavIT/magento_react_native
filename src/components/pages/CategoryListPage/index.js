@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { BRAND_NAME} from '../../../constants';
+import { BRAND_NAME } from '../../../constants';
 import { MaterialAppbarButtons, Item } from '../..';
 import { CategoryListContainer } from '../../../containers';
 

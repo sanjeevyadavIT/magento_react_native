@@ -1,4 +1,4 @@
-import { MAGENTO, SET_NEW_CATEGORY } from '../../constants/actionsTypes';
+import { MAGENTO, SET_NEW_CATEGORY } from '../../constants';
 
 export const setNewCategory = categoryId => ({
   type: SET_NEW_CATEGORY,

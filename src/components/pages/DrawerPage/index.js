@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { DrawerHeader, DrawerTemplate } from '../..';
 import { CategoryTreeContainer } from '../../../containers';
 

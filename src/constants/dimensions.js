@@ -1,3 +1,0 @@
-export const HOME_PAGE_SLIDER_HEIGHT = 200;
-export const PRODUCT_DETAIL_PAGE_SLIDER_HEIGHT = 300;
-export const ERROR_TEXT_SIZE = 18;

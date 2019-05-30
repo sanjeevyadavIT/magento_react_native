@@ -3,7 +3,7 @@ import {
   OPEN_SELECTED_PRODUCT,
   MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS,
   UI_PRODUCT_UPDATE_OPTIONS,
-} from '../../constants/actionsTypes';
+} from '../../constants';
 import Status from '../../magento/Status';
 
 const getInitialState = product => ({

@@ -1,4 +1,4 @@
-import { PRIMARY_COLOR, ACCENT_COLOR } from '../constants';
+import { theme } from '../config';
 
 export const NAVIGATION_HOME_PATH = 'DashboardScreen';
 export const NAVIGATION_CATEGORY_LIST_PATH = 'CategoryList';
@@ -17,11 +17,11 @@ export const NAVIGATION_ORDER_ACKNOWLEDGEMENT_PAGE = 'OrderAcknowledgementPage';
 
 export const defaultHeader = {
   headerStyle: {
-    backgroundColor: PRIMARY_COLOR,
+    backgroundColor: theme.colors.primary,
   },
   headerTitleStyle: {
-    color: ACCENT_COLOR,
+    ...theme.typography.titleTextBold,
   },
   headerBackTitle: null,
-  headerTintColor: ACCENT_COLOR,
+  headerTintColor: theme.colors.appbarTintColor,
 };

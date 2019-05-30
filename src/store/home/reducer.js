@@ -1,6 +1,6 @@
 import {
   MAGENTO,
-} from '../../constants/actionsTypes';
+} from '../../constants';
 import Status from '../../magento/Status';
 import { getPriceFromChildren } from '../../utils/products';
 

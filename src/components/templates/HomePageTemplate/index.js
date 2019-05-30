@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { GenericTemplate } from '../..';
 import Status from '../../../magento/Status';
-import { HOME_PAGE_SLIDER_HEIGHT } from '../../../constants';
+import { withTheme } from '../../../config';
 
 const HomePageTemplate = ({
   imageSlider,
@@ -25,9 +25,9 @@ const HomePageTemplate = ({
 );
 
 const styles = StyleSheet.create({
-  imageSliderContainer: {
-    height: HOME_PAGE_SLIDER_HEIGHT,
-  },
+  imageSliderContainer: theme => ({
+    height: theme.dimens.homePageSliderHeight,
+  }),
   featuredCategoriesContainer: {}
 });
 
@@ -45,4 +45,4 @@ HomePageTemplate.defaultProps = {
   errorMessage: '',
 };
 
-export default HomePageTemplate;
+export default withTheme(HomePageTemplate);

@@ -1,4 +1,4 @@
-import { MAGENTO, ACTION_USER_LOGOUT, RESET_AUTH_STATE } from '../../constants/actionsTypes';
+import { MAGENTO, ACTION_USER_LOGOUT, RESET_AUTH_STATE } from '../../constants';
 import Status from '../../magento/Status';
 
 // TODO: SignIn need to be reset if user hit back from SignInPage

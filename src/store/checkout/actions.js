@@ -1,4 +1,4 @@
-import { MAGENTO } from '../../constants/actionsTypes';
+import { MAGENTO } from '../../constants';
 
 export const getCountries = () => ({
   type: MAGENTO.COUNTRIES_REQUEST

@@ -1,24 +1,24 @@
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { HeaderButtons, HeaderButton } from 'react-navigation-header-buttons';
-import { ACCENT_COLOR } from '../../../constants';
+import { withTheme } from '../../../config';
 
-// TODO: Extract size, color into constants folder
-const MaterialAppbarButton = props => (
+const MaterialAppbarButton = withTheme(({ theme, ...props }) => (
   <HeaderButton
     IconComponent={MaterialIcons}
-    iconSize={23}
-    color={ACCENT_COLOR}
+    iconSize={theme.dimens.appbarButtonHeight}
+    color={theme.colors.appbarTintColor}
     {...props}
   />
-);
+));
 
-export const MaterialAppbarButtons = props => (
+const MaterialAppbarButtons = withTheme(({ theme, ...props }) => (
   <HeaderButtons
     HeaderButtonComponent={MaterialAppbarButton}
-    OverflowIcon={<MaterialIcons name="more-vert" size={23} color="white" />}
+    OverflowIcon={<MaterialIcons name="more-vert" size={theme.dimens.appbarButtonHeight} color={theme.colors.appbarTintColor} />}
     {...props}
   />
-);
+));
 
-export const { Item } = HeaderButtons;
+const { Item } = HeaderButtons;
+export { MaterialAppbarButtons, Item };

@@ -1,4 +1,4 @@
-import { MAGENTO, SET_NEW_CATEGORY } from '../../constants/actionsTypes';
+import { MAGENTO, SET_NEW_CATEGORY } from '../../constants';
 import { getPriceFromChildren } from '../../utils/products';
 import Status from '../../magento/Status';
 

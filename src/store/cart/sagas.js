@@ -1,6 +1,6 @@
 import { takeLatest, takeEvery, call, put } from 'redux-saga/effects';
 import { magento } from '../../magento';
-import { MAGENTO } from '../../constants/actionsTypes';
+import { MAGENTO } from '../../constants';
 
 // wroker saga: Add description
 function* createQuoteId() {

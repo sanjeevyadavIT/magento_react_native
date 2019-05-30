@@ -2,7 +2,7 @@ import {
   OPEN_SELECTED_PRODUCT,
   MAGENTO,
   UI_PRODUCT_UPDATE_OPTIONS,
-} from '../../constants/actionsTypes';
+} from '../../constants';
 
 export const openSelectedProduct = product => ({
   type: OPEN_SELECTED_PRODUCT,

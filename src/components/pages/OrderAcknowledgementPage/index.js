@@ -29,7 +29,7 @@ const OrderAcknowledgementPage = ({ navigation }) => {
     >
       <View style={styles.container}>
         <Icon name="verified-user" size={30} color="#4caf50" />
-        <Text style={styles.text}>Order Confirmed</Text>
+        <Text type="subheading" bold>Order Confirmed</Text>
         <Text>You will receive an order confirmation email shortly.</Text>
       </View>
     </GenericTemplate>
@@ -41,10 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  text: {
-    fontWeight: 'bold',
-    fontSize: 18,
   },
   space: {
     flex: 1,

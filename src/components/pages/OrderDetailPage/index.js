@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import { GenericTemplate, Text, Image, Card, CardMode } from '../..';
+import { GenericTemplate, Text, Image, Card } from '../..';
 import { priceSignByCode } from '../../../utils/price';
 import { getOrderDetail } from '../../../store/actions';
 import Status from '../../../magento/Status';
@@ -29,7 +29,7 @@ const OrderDetailPage = ({
   }
 
   const renderItem = ({ item: product }) => (
-    <Card mode={CardMode.OUTLINE_MODE} style={styles.card}>
+    <Card style={styles.card}>
       <Image style={styles.imageStyle} source={{ uri: 'https://via.placeholder.com/100' }} />
       <View>
         <Text>{product.name}</Text>
