@@ -22,56 +22,7 @@ MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 RE
 
 ## :rocket: Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-**Create new user in Magento Admin to receive store data in API**
-
-1. *goto* System > User Roles > Add New role
-2. Enter role name (Ex. Mobile) in 'Role Info' tab
-3. Select Resource Access to 'All' under 'Role Resource' tab
-4. Save Role
-5. *goto* System > All users > Add New User
-6. Enter username, password and other details in 'User Info' tab
-7. Select newly created user role(Ex. mobile) in 'User Role' tab
-8. Save User
-
-**Setup new CMS block in Magento Admin which will be used in MageCart HomePage**
-
-1. *goto* Content > Blocks > Add New Block
-2. Put your config inside `Content` section ([config sample](src/config/cms_block_config.json))
-3. save your block and put this newely created cms `ID` in `src/config/magento.js` to `home_cms_block_id` parameter
-
-### Installing
-
-1. Get the code
-
-    ```bash
-    git clone https://github.com/alexakasanjeev/magento_react_native.git && cd magento_react_native
-    ```
-
-2. Install dependencies
-
-    ```bash
-    npm install
-    ```
-
-3. Change Magento base url to your magento website url in `src/config/magento.js`
-
-4. Replace username and password in `magento.js` with above created username and password
-
-5. Run the project
-
-    ```bash
-    # for iOS
-    react-native run-ios
-    ```
-
-    ```bash
-    # for android
-    react-native run-android
-    ```
+Follow this [Documentaion](https://github.com/alexakasanjeev/magento_react_native/wiki/Setup) for detail step by step instructions on how to setup project locally and run the project.
 
 ## 🤝 Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 
