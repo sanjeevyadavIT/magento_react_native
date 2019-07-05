@@ -4,6 +4,12 @@ import guest from './lib/guest';
 import customer from './lib/customer';
 import { isNumber } from '../utils';
 import { ADMIN_TYPE, CUSTOMER_TYPE } from './types';
+import {
+  HOME_CMS_BLOCK_ID_ERROR,
+  HOME_CMS_BLOCK_ID_MESSAGE,
+  INTEGRATION_TOKEN_REQUIRED_ERROR,
+  INTEGRATION_TOKEN_REQUIRED_MESSAGE,
+} from '../constants';
 
 const log = process.env.NODE_ENV === 'development' ? console.log : null;
 
@@ -13,11 +19,6 @@ const defaultOptions = {
   userAgent: 'Sanjeev Yadav Magento Library',
   home_cms_block_id: '',
   authentication: {
-    login: {
-      type: 'admin',
-      username: undefined,
-      password: undefined,
-    },
     integration: {
       access_token: undefined,
     }
@@ -39,22 +40,8 @@ class Magento {
       if (this.configuration.authentication.integration.access_token) {
         this.access_token = this.configuration.authentication.integration.access_token;
         resolve(this);
-      } else {
-        // Hit rest api to create new access token
-        const { username, password } = this.configuration.authentication.login;
-
-        if (!username) return;
-
-        const path = '/V1/integration/admin/token';
-        this.post(path, null, { username, password })
-          .then((token) => {
-            this.access_token = token;
-            resolve(this);
-          })
-          .catch((error) => {
-            reject(error);
-          });
       }
+      reject(integrationTokenError());
     });
   }
 
@@ -158,9 +145,23 @@ class Magento {
     if (isNumber(this.configuration.home_cms_block_id)) {
       return this.admin.getCmsBlock(this.configuration.home_cms_block_id);
     }
-    // TODO: Extract all error strings into a single file
-    throw new Error('Configure correct CMS block id in config/magneto.js');
+    throw homeCmsBlockError();
   }
+}
+
+function homeCmsBlockError() {
+  return createError(HOME_CMS_BLOCK_ID_ERROR, HOME_CMS_BLOCK_ID_MESSAGE);
+}
+
+function integrationTokenError() {
+  return createError(INTEGRATION_TOKEN_REQUIRED_ERROR, INTEGRATION_TOKEN_REQUIRED_MESSAGE);
+}
+
+function createError(name, message) {
+  const error = new Error();
+  error.name = name;
+  error.message = message;
+  return error;
 }
 
 // Constants
