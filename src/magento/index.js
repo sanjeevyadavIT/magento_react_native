@@ -36,13 +36,11 @@ class Magento {
   }
 
   init() {
-    return new Promise((resolve, reject) => {
-      if (this.configuration.authentication.integration.access_token) {
-        this.access_token = this.configuration.authentication.integration.access_token;
-        resolve(this);
-      }
-      reject(integrationTokenError());
-    });
+    if (this.configuration.authentication.integration.access_token) {
+      this.access_token = this.configuration.authentication.integration.access_token;
+      return;
+    }
+    throw integrationTokenError();
   }
 
   post(path, params, data, type = ADMIN_TYPE) {

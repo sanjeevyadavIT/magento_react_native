@@ -11,16 +11,17 @@ function* initMagento() {
 
   try {
     yield put({ type: MAGENTO.INIT_APP_LOADING });
-    // Set magento base url and admin access
+    // Set magento base url
     magento.setOptions(magentoOptions);
+    // Set magento integration token
+    magento.init();
     // Get Customer token from local db
     const customerToken = yield AsyncStorage.getItem(CUSTOMER_TOKEN);
     magento.setCustomerToken(customerToken);
-    // Fetch admin access token using credentials
-    yield call({ context: magento, fn: magento.init });
     // Fetch store config, containing base media url path
-    yield call({ context: magento, fn: magento.admin.getStoreConfig });
-    yield put({ type: MAGENTO.INIT_APP_SUCCESS });
+    const storeConfig = yield call({ context: magento, fn: magento.admin.getStoreConfig });
+    magento.setStoreConfig(storeConfig);
+    yield put({ type: MAGENTO.INIT_APP_SUCCESS, payload: { storeConfig } });
     // fetch HomeBanner and featured product
     yield put({ type: MAGENTO.HOME_DATA_REQUEST });
     if (customerToken) {

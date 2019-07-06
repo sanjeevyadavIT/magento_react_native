@@ -29,34 +29,9 @@ const getSortDirection = (sortOrder) => {
 };
 
 export default magento => ({
-  getStoreConfig: () => (
-    new Promise((resolve, reject) => {
-      const path = '/V1/store/storeConfigs';
+  getStoreConfig: () => magento.get('/V1/store/storeConfigs', undefined, undefined, ADMIN_TYPE),
 
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-          magento.setStoreConfig(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
-
-  getCategoryTree: () => (
-    new Promise((resolve, reject) => {
-      const path = '/V1/categories';
-
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
+  getCategoryTree: () => magento.get('/V1/categories', undefined, undefined, ADMIN_TYPE),
 
   getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) => magento.admin.getProductsWithAttribute('category_id', id, offset, sortOrder, pageSize, 'eq'),
 
@@ -86,149 +61,33 @@ export default magento => ({
     return magento.admin.getProductsWithSearchCritaria(params);
   },
 
-  getProductsWithSearchCritaria: params => (
-    new Promise((resolve, reject) => {
-      const path = '/V1/products';
+  getProductsWithSearchCritaria: params => magento.get('/V1/products', params, undefined, ADMIN_TYPE),
 
-      magento.get(path, params, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
+  getProductBySku: sku => magento.get(`/V1/products/${sku}`, undefined, undefined, ADMIN_TYPE),
 
-  getProductBySku: sku => (
-    new Promise((resolve, reject) => {
-      const path = `/V1/products/${sku}`;
+  getConfigurableChildren: sku => magento.get(`/V1/configurable-products/${sku}/children`, undefined, undefined, ADMIN_TYPE),
 
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
+  getConfigurableProductOptions: sku => magento.get(`/V1/configurable-products/${sku}/options/all`, undefined, undefined, ADMIN_TYPE),
 
-  getConfigurableChildren: sku => (
-    new Promise((resolve, reject) => {
-      const path = `/V1/configurable-products/${sku}/children`;
-      
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
+  getAttributeByCode: attributeId => magento.get(`/V1/products/attributes/${attributeId}`, undefined, undefined, ADMIN_TYPE),
 
-  getConfigurableProductOptions: sku => (
-    new Promise((resolve, reject) => {
-      const path = `/V1/configurable-products/${sku}/options/all`;
+  getProductMedia: sku => magento.get(`/V1/products/${sku}/media`, undefined, undefined, ADMIN_TYPE),
 
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
+  getCmsBlock: id => magento.get(`/V1/cmsBlock/${id}`, undefined, undefined, ADMIN_TYPE),
 
-  getAttributeByCode: attributeId => (
-    new Promise((resolve, reject) => {
-      const path = `/V1/products/attributes/${attributeId}`;
+  getCountries: () => magento.get('/V1/directory/countries', undefined, undefined, ADMIN_TYPE),
 
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
+  getOrderList: (customerId) => {
+    const path = '/V1/orders';
 
-  getProductMedia: sku => (
-    new Promise((resolve, reject) => {
-      const path = `/V1/products/${sku}/media`;
+    const params = {
+      'searchCriteria[filterGroups][0][filters][0][field]': 'customer_id',
+      'searchCriteria[filterGroups][0][filters][0][value]': customerId
+    };
 
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
+    return magento.get(path, params, undefined, ADMIN_TYPE);
+  },
 
-  getCmsBlock: id => (
-    new Promise((resolve, reject) => {
-      const path = `/V1/cmsBlock/${id}`;
-
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
-
-  getCountries: () => (
-    new Promise((resolve, reject) => {
-      const path = '/V1/directory/countries';
-
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
-
-  getOrderList: customerId => (
-    new Promise((resolve, reject) => {
-      const path = '/V1/orders';
-
-      const params = {
-        'searchCriteria[filterGroups][0][filters][0][field]': 'customer_id',
-        'searchCriteria[filterGroups][0][filters][0][value]': customerId
-      };
-
-      magento.get(path, params, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
-
-  getOrderDetail: orderId => (
-    new Promise((resolve, reject) => {
-      const path = `/V1/orders/${orderId}`;
-
-      magento.get(path, undefined, undefined, ADMIN_TYPE)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    })
-  ),
+  getOrderDetail: orderId => magento.get(`/V1/orders/${orderId}`, undefined, undefined, ADMIN_TYPE),
 
 });
