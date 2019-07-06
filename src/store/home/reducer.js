@@ -13,13 +13,12 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case MAGENTO.INIT_APP_LOADING:
     case MAGENTO.HOME_DATA_LOADING:
       return {
         ...state,
         status: Status.LOADING,
       };
-    case MAGENTO.INIT_APP_FAILURE:
+    case MAGENTO.INIT_APP_FAILURE: // This will display error message on HomePage
     case MAGENTO.HOME_DATA_FAILURE:
       return {
         ...state,
@@ -72,7 +71,6 @@ export default (state = initialState, { type, payload }) => {
         extra,
       };
     }
-    case MAGENTO.INIT_APP_SUCCESS: // Don't perform any action, wait for Home data
     default:
       return state;
   }

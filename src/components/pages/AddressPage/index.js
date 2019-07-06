@@ -21,8 +21,9 @@ const AddressPage = ({ navigation }) => {
     zipCode: '43245',
     state: 'AL',
   });
-  const countries = useSelector(state => state.checkout.countries);
-  const countryStatus = useSelector(state => state.checkout.countryStatus);
+  const countries = useSelector(state => state.magento.countries);
+  const countryStatus = useSelector(state => state.magento.countryStatus);
+  const countryErrorMessage = useSelector(state => state.magento.errorMessage);
   const billingAddressStatus = useSelector(state => state.checkout.billingAddressStatus);
   const shippingMethodStatus = useSelector(state => state.checkout.shippingMethodStatus);
   const errorMessage = useSelector(state => state.checkout.errorMessage);
@@ -98,7 +99,8 @@ const AddressPage = ({ navigation }) => {
   const getCountryData = () => countries.find(country => country.id === form.country);
 
   const renderCountries = () => {
-    if (countryStatus === Status.LOADING) return <Spinner size="small" />;
+    if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT) return <Spinner size="small" />;
+    if (countryStatus === Status.ERROR) throw new Exception('Unable to fetch country data');
     return (
       <Picker
         selectedValue={form.country}
@@ -112,7 +114,7 @@ const AddressPage = ({ navigation }) => {
   
   // TODO: cache region value
   const renderState = () => {
-    if (form.country && countries.length > 0) {
+    if (form.country && countries && countries.length > 0) {
       if ('available_regions' in getCountryData()) {
         return (
           <>

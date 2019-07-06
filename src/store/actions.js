@@ -1,3 +1,4 @@
+export * from './magento/actions';
 export * from './home/actions';
 export * from './categoryTree/actions';
 export * from './auth/actions';

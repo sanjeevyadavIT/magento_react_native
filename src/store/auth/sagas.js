@@ -12,6 +12,7 @@ function* signIn({ payload }) {
       payload.email,
       payload.password
     );
+    magento.setCustomerToken(token);
     yield AsyncStorage.setItem(CUSTOMER_TOKEN, token);
     yield put({ type: MAGENTO.SIGN_IN_SUCCESS });
     yield put({ type: MAGENTO.CURRENT_USER_REQUEST }); // Fetch details of current user

@@ -4,17 +4,6 @@ import { MAGENTO } from '../../constants';
 import { parseOrderDetail } from '../../utils';
 
 // worker saga: Add Description
-function* getCountries() {
-  try {
-    yield put({ type: MAGENTO.COUNTRIES_LOADING });
-    const countries = yield call({ content: magento, fn: magento.admin.getCountries });
-    yield put({ type: MAGENTO.COUNTRIES_SUCCESS, payload: { countries } });
-  } catch (error) {
-    yield put({ type: MAGENTO.COUNTRIES_FAILURE, payload: { errorMessage: error.message } });
-  }
-};
-
-// worker saga: Add Description
 function* addCartBillingAddress({ payload }) {
   try {
     yield put({ type: MAGENTO.ADD_CART_BILLING_ADDRESS_LOADING });
@@ -23,7 +12,7 @@ function* addCartBillingAddress({ payload }) {
   } catch (error) {
     yield put({ type: MAGENTO.ADD_CART_BILLING_ADDRESS_FAILURE, payload: { errorMessage: error.message } });
   }
-};
+}
 
 // worker saga: Add Description
 function* getShippingMethod({ payload }) {
@@ -34,7 +23,7 @@ function* getShippingMethod({ payload }) {
   } catch (error) {
     yield put({ type: MAGENTO.GET_SHIPPING_METHOD_FAILURE, payload: { errorMessage: error.message } });
   }
-};
+}
 
 // worker saga: Add Description
 function* addCartShippingInfo({ payload }) {
@@ -45,7 +34,7 @@ function* addCartShippingInfo({ payload }) {
   } catch (error) {
     yield put({ type: MAGENTO.ADD_CART_SHIPPING_INFO_FAILURE, payload: { errorMessage: error.message } });
   }
-};
+}
 
 // worker saga: Add Description
 function* placeCartOrder({ payload }) {
@@ -56,7 +45,7 @@ function* placeCartOrder({ payload }) {
   } catch (error) {
     yield put({ type: MAGENTO.PLACE_CART_ORDER_FAILURE, payload: { errorMessage: error.message } });
   }
-};
+}
 
 // worker saga: Add Description
 function* getOrderDetail({ payload }) {
@@ -68,11 +57,10 @@ function* getOrderDetail({ payload }) {
   } catch (error) {
     yield put({ type: MAGENTO.ORDER_DETAIL_FAILURE, payload: { errorMessage: error.message } });
   }
-};
+}
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
-  yield takeLatest(MAGENTO.COUNTRIES_REQUEST, getCountries);
   yield takeLatest(MAGENTO.ADD_CART_BILLING_ADDRESS_REQUEST, addCartBillingAddress);
   yield takeLatest(MAGENTO.GET_SHIPPING_METHOD_REQUEST, getShippingMethod);
   yield takeLatest(MAGENTO.ADD_CART_SHIPPING_INFO_REQUEST, addCartShippingInfo);

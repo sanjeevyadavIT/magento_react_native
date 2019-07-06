@@ -1,5 +1,6 @@
 import { fork } from 'redux-saga/effects';
 
+import magentoSagas from './magento/sagas';
 import homeSagas from './home/sagas';
 import categoryTreeSagas from './categoryTree/sagas';
 import authSagas from './auth/sagas';
@@ -14,6 +15,7 @@ import searchSagas from './search/sagas';
  * rootSaga
  */
 export default function* root() {
+  yield fork(magentoSagas);
   yield fork(homeSagas);
   yield fork(categoryTreeSagas);
   yield fork(authSagas);

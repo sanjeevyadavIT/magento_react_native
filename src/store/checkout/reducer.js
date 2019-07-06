@@ -3,37 +3,19 @@ import Status from '../../magento/Status';
 
 const INITIAL_STATE = {
   status: Status.DEFAULT,
-  countryStatus: Status.DEFAULT,
   billingAddressStatus: Status.DEFAULT,
   shippingMethodStatus: Status.DEFAULT,
   paymentMethodStatus: Status.DEFAULT,
   orderStatus: Status.DEFAULT,
   orderDetailStatus: Status.DEFAULT,
-  countries: [],
   shipping: null,
   payment: null,
   errorMessage: '',
 };
 
+// TODO: Clean up reducer, too crowded
 export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
-    case MAGENTO.COUNTRIES_LOADING:
-      return {
-        ...state,
-        countryStatus: Status.LOADING,
-      };
-    case MAGENTO.COUNTRIES_SUCCESS:
-      return {
-        ...state,
-        countries: payload.countries,
-        countryStatus: Status.SUCCESS,
-      };
-    case MAGENTO.COUNTRIES_FAILURE:
-      return {
-        ...state,
-        countryStatus: Status.ERROR,
-        errorMessage: payload.errorMessage,
-      };
     case MAGENTO.ADD_CART_BILLING_ADDRESS_LOADING:
       return {
         ...state,
