@@ -4,8 +4,9 @@ import { CartList } from '../../../components';
 
 const CartListContainer = () => {
   const items = useSelector(state => state.cart.cart.items);
+  const currencySymbol = useSelector(state => state.magento.currency.default_display_currency_symbol);
   return (
-    <CartList items={items} />
+    <CartList items={items} currencySymbol={currencySymbol} />
   );
 };
 

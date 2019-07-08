@@ -6,6 +6,7 @@ import Status from '../../../../magento/Status';
 
 const ProductList = ({
   products, // Change it to items
+  currencySymbol,
   stateAccessor,
   showHorizontalList,
   columnCount,
@@ -47,6 +48,7 @@ const ProductList = ({
         openSelectedProduct={openSelectedProduct}
         columnCount={columnCount}
         updateItem={updateItem}
+        currencySymbol={currencySymbol}
       />
     );
   };
@@ -94,6 +96,7 @@ const styles = StyleSheet.create({
 ProductList.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   products: PropTypes.array,
+  currencySymbol: PropTypes.string.isRequired,
   stateAccessor: PropTypes.string.isRequired,
   showHorizontalList: PropTypes.bool.isRequired,
   columnCount: PropTypes.number,

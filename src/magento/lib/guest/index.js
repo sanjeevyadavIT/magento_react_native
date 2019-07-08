@@ -5,4 +5,6 @@ export default magento => ({
 
   signup: payload => magento.post('/V1/customers', undefined, payload, GUEST_TYPE),
 
+  getCurrency: () => magento.get('/V1/directory/currency', undefined, undefined, GUEST_TYPE),
+
 });

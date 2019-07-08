@@ -2,8 +2,13 @@ import { MAGENTO } from '../../constants';
 import Status from '../../magento/Status';
 
 const INITIAL_STATE = {
-  status: Status.DEFAULT,
+  storeConfigStatus: Status.DEFAULT,
+  currencyStatus: Status.DEFAULT,
   countryStatus: Status.DEFAULT,
+  currency: {
+    default_display_currency_code: '',
+    default_display_currency_symbol: '',
+  }
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
@@ -11,18 +16,39 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case MAGENTO.INIT_APP_LOADING:
       return {
         ...state,
-        status: Status.LOADING,
+        storeConfigStatus: Status.LOADING,
       };
     case MAGENTO.INIT_APP_SUCCESS:
       return {
         ...state,
         status: Status.SUCCESS,
-        storeConfig: payload.storeConfig[0],
+        storeConfigStatus: payload.storeConfig[0],
       };
     case MAGENTO.INIT_APP_FAILURE:
       return {
         ...state,
+        storeConfigStatus: Status.ERROR,
+        errorMessage: payload.errorMessage,
+      };
+    case MAGENTO.CURRENCY_LOADING:
+      return {
+        ...state,
+        status: Status.LOADING,
+      };
+    case MAGENTO.CURRENCY_SUCCESS:
+      return {
+        ...state,
+        status: Status.SUCCESS,
+        currency: {
+          ...state.currency,
+          ...payload.currency
+        },
+      };
+    case MAGENTO.CURRENCY_FAILURE:
+      return {
+        ...state,
         status: Status.ERROR,
+        errorMessage: payload.errorMessage,
       };
     case MAGENTO.COUNTRIES_LOADING:
       return {

@@ -9,6 +9,7 @@ import { openSelectedProduct, getCategoryProducts, getCategoryConfigurableProduc
 const CategoryListContainer = ({ categoryId }) => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.categoryList.items);
+  const currencySymbol = useSelector(state => state.magento.currency.default_display_currency_symbol);
   const totalCount = useSelector(state => state.categoryList.totalCount);
   const status = useSelector(state => state.categoryList.status);
   const errorMessage = useSelector(state => state.categoryList.errorMessage);
@@ -24,6 +25,7 @@ const CategoryListContainer = ({ categoryId }) => {
   return (
     <ProductList
       loadFactor={categoryId}
+      currencySymbol={currencySymbol}
       stateAccessor={stateAccessor}
       updateItem={getCategoryConfigurableProductOptions}
       products={items}

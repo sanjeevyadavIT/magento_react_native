@@ -127,7 +127,7 @@ class ProductDetailPage extends React.Component {
   }
 
   renderContent() {
-    const { product, theme } = this.props;
+    const { product, currencySymbol, theme } = this.props;
     if (!product) {
       return <Spinner />;
     }
@@ -143,7 +143,7 @@ class ProductDetailPage extends React.Component {
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ fontSize: 20, fontWeight: 'bold' }}>price </Text>
-            <Text style={{ fontSize: 18, color: 'green' }}>${product.price}</Text>
+            <Text style={{ fontSize: 18, color: 'green' }}>{currencySymbol + product.price}</Text>
           </View>
           {this.renderOptions()}
           {this.renderActionButtons()}
@@ -175,10 +175,12 @@ const mapStateToProps = (state) => {
     selectedOptions,
     current: product,
   } = state.product;
+  const { default_display_currency_symbol: currencySymbol } = state.magento.currency;
   const { cart } = state.cart;
   const cartQuoteId = cart.id;
   return {
     product,
+    currencySymbol,
     attributes,
     addToCartLoading,
     addToCartError,

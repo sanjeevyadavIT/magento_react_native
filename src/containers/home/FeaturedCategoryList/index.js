@@ -10,6 +10,7 @@ const FeaturedCategoryList = ({ categoryId }) => {
   const status = useSelector(state => state.home[categoryId].status);
   const errorMesage = useSelector(state => state.home[categoryId].errorMesage);
   const items = useSelector(state => state.home[categoryId].items);
+  const currencySymbol = useSelector(state => state.magento.currency.default_display_currency_symbol);
   const dispatchOpenSelectedProductAction = product => dispatch(openSelectedProduct(product));
   const loadProducts = _categoryId => dispatch(getFeaturedProducts(_categoryId));
   const showHorizontalList = true;
@@ -21,6 +22,7 @@ const FeaturedCategoryList = ({ categoryId }) => {
   return (
     <ProductList
       products={items}
+      currencySymbol={currencySymbol}
       stateAccessor={stateAccessor}
       loadFactor={categoryId}
       status={status}
