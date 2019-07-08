@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text, Image, Card } from '../..';
-import { priceSignByCode } from '../../../utils/price';
 import { getOrderDetail } from '../../../store/actions';
 import Status from '../../../magento/Status';
 
 // TODO: Show product image in place of placeholder
 // TODO: Extract strings in strings.js
 // TODO: Handle orderId, when coming for OrderAcknowledgementPage, fetch data
+// TODO: use currency symbol from magento reducer
 const OrderDetailPage = ({
   navigation,
 }) => {
@@ -19,13 +19,12 @@ const OrderDetailPage = ({
   const status = !item ? useSelector(state => state.checkout.orderDetailStatus) : Status.SUCCESS;
   const errorMessage = useSelector(state => state.checkout.errorMessage);
   const orderDetail = useSelector(state => state.checkout.order);
-  let currency = priceSignByCode(item && item.order_currency_code);
+  let currency = '$';
 
   if (!item && status === Status.DEFAULT) {
     dispatch(getOrderDetail(orderId));
   } else if (!item && status === Status.SUCCESS) {
     item = orderDetail;
-    currency = priceSignByCode(item.order_currency_code);
   }
 
   const renderItem = ({ item: product }) => (

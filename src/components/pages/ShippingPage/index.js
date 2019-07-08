@@ -12,6 +12,7 @@ const ShippingPage = ({ navigation }) => {
   const [shippingCode, setShippingCode] = useState();
   const errorMessage = useSelector(state => state.checkout.errorMessage);
   const shipping = useSelector(state => state.checkout.shipping);
+  const currencySymbol = useSelector(state => state.magento.currency.default_display_currency_symbol);
   const paymentMethodStatus = useSelector(state => state.checkout.paymentMethodStatus);
   const status = useSelector(state => state.checkout.shippingMethodStatus);
   const billingAddress = useSelector(state => state.cart.cart.billing_address);
@@ -28,7 +29,7 @@ const ShippingPage = ({ navigation }) => {
           style={{ height: 50 }}
           onValueChange={(itemValue, itemIndex) => setShippingCode(itemValue)}
         >
-          {[{ carrier_title: 'Select a shipping method', method_title: '', amount: '', carrier_code: 'NO_OPTION' }, ...shipping].map(item => <Picker.Item label={`${item.carrier_title} : ${item.method_title} : $${item.amount}`} value={item.carrier_code} key={item.carrier_code} />)}
+          {[{ carrier_title: 'Select a shipping method', method_title: '', amount: '', carrier_code: 'NO_OPTION' }, ...shipping].map(item => <Picker.Item label={`${item.carrier_title} : ${item.method_title} : ${currencySymbol + item.amount}`} value={item.carrier_code} key={item.carrier_code} />)}
         </Picker>
       </>
     );

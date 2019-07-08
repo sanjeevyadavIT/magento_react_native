@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Card, Text } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_ORDER_DETAIL_SCREEN_PATH } from '../../../../navigation/types';
-import { priceSignByCode } from '../../../../utils/price';
 
 const OrderListItem = ({ item }) => {
+  const currencySymbol = useSelector(state => (state.magento.currency.default_display_currency_code === item.order_currency_code ? state.magento.currency.default_display_currency_symbol : item.order_currency_code));
   const onPress = () => {
     NavigationService.navigate(
       NAVIGATION_ORDER_DETAIL_SCREEN_PATH,
@@ -28,7 +29,7 @@ const OrderListItem = ({ item }) => {
           {`Ship to ${item.customer_firstname} ${item.customer_lastname}`}
         </Text>
         <Text>
-          {`Order Total: ${priceSignByCode(item.order_currency_code)} ${item.grand_total}`}
+          {`Order Total: ${currencySymbol} ${item.grand_total}`}
         </Text>
         <Text>{`Status: ${item.status}`}</Text>
       </View>

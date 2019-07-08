@@ -10,7 +10,7 @@ import { Card, Image, Text } from '../../..';
 // NOTE: Is it better to create a wapper around CartListItem and extract state in it?
 // It is in organisms folder because it is state aware
 // TODO: Extract strings in strings.js
-const CartListItem = ({ item }) => {
+const CartListItem = ({ item, currencySymbol }) => {
   const dispatch = useDispatch();
   const { [item.sku]: product } = useSelector(state => state.cart.products);
 
@@ -44,7 +44,7 @@ const CartListItem = ({ item }) => {
       />
       <View style={styles.infoContainer}>
         <Text>{item.name}</Text>
-        <Text>price : {item.price}</Text>
+        <Text>price : {currencySymbol + item.price}</Text>
         <Text>qty : {item.qty}</Text>
       </View>
       <Icon name="close" size={30} color="#000" onPress={onPressRemoveItem} />
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
 
 CartListItem.propTypes = {
   item: PropTypes.object.isRequired,
+  currencySymbol: PropTypes.string.isRequired,
 };
 
 CartListItem.defaultProps = {};

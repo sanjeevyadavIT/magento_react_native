@@ -18,6 +18,7 @@ function createRequestTypes(prefix = '', bases, suffixes = suffixTypes) {
 // Events related to Magento REST API
 export const MAGENTO = createRequestTypes('MAGENTO', [
   'INIT_APP', // Configure magento with admin credentials, access token and base url
+  'CURRENCY', // Default currency, currency symbol, exchange rates
   'HOME_DATA', // Fetch HomeBanner and featured products for home page
   'FEATURED_CATEGORY_PRODUCTS', // Fetch featured categories for home page
   'HOME_UPDATE_CONF_PRODUCT', // For each configurable product in featured category, fetch it's children, to calculate price

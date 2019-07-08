@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
     totalCount,
     loadingMore,
   } = state.search;
+  const { default_display_currency_symbol: currencySymbol } = state.magento.currency;
   const canLoadMoreProducts = products ? products.length < totalCount : false;
   const showHorizontalList = false;
   const columnCount = 2;
@@ -18,6 +19,7 @@ const mapStateToProps = (state) => {
     showHorizontalList,
     columnCount,
     products,
+    currencySymbol,
     canLoadMoreProducts,
     loadingMore,
     stateAccessor: 'search',

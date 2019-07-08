@@ -9,6 +9,7 @@ import { BORDER_COLOR } from '../../../../constants';
 import { getProductThumbnailFromAttribute } from '../../../../utils/products';
 
 const ProductListItem = ({
+  currencySymbol,
   item, // Required prop
   openSelectedProduct, // Required prop
   stateAccessor,
@@ -54,7 +55,7 @@ const ProductListItem = ({
       />
       <View style={styles.detail}>
         <Text>{item.name}</Text>
-        <Text>${getPrice()}</Text>
+        <Text>{currencySymbol + getPrice()}</Text>
       </View>
     </Card>
   );

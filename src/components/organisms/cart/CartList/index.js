@@ -10,8 +10,9 @@ import { NAVIGATION_ADDRESS_SCREEN_PATH } from '../../../../navigation/types';
 // TODO: Extract strings into string.js
 const CartList = ({
   items,
+  currencySymbol,
 }) => {
-  const renderRow = ({ item, index }) => (<CartListItem item={item} index={index} />);
+  const renderRow = ({ item, index }) => (<CartListItem item={item} index={index} currencySymbol={currencySymbol} />);
 
   const renderTotal = () => {
     let sum = 0;
@@ -25,7 +26,7 @@ const CartList = ({
 
   const renderFooter = () => (
     <View>
-      <Text type="heading" bold>Total : {renderTotal()}</Text>
+      <Text type="heading" bold>Total : {currencySymbol + renderTotal()}</Text>
       <Button title="Place order" onPress={() => NavigationService.navigate(NAVIGATION_ADDRESS_SCREEN_PATH)} />
     </View>
   );
