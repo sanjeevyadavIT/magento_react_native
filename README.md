@@ -38,7 +38,7 @@ See also the list of [contributors](https://github.com/alexakasanjeev/magento_re
 
 This project is licensed under the GNU v3 Public License License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## :bulb: Acknowledgments
+## :bulb: Acknowledgements
 
 * [troublediehard/magento-react-native](https://github.com/troublediehard/magento-react-native) created by [Dmytro Portenko](https://github.com/troublediehard)
 * [README-Template.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) by [Billie Thompson](https://github.com/PurpleBooth)
