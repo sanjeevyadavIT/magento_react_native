@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { ProductListItem, LoadingView, GenericTemplate } from '../../..';
+import { CatalogGridItem, LoadingView, GenericTemplate } from '../../..';
 import Status from '../../../../magento/Status';
+
+// Distance between two list item
+const SEPERATOR_SPACE = 12;
 
 const ProductList = ({
   products, // Change it to items
   currencySymbol,
   stateAccessor,
+  /**
+   * Show all products in single row
+   */
   showHorizontalList,
   columnCount,
   status,
@@ -34,24 +40,24 @@ const ProductList = ({
     if (showHorizontalList) {
       layoutManager.horizontal = true;
       layoutManager.showsHorizontalScrollIndicator = false;
+      layoutManager.ItemSeparatorComponent = () => <View style={{ width: SEPERATOR_SPACE }} />;
+      layoutManager.contentContainerStyle = { padding: SEPERATOR_SPACE };
     } else {
       layoutManager.numColumns = columnCount;
     }
     return layoutManager;
   };
 
-  const renderRow = ({ item, index }) => {
-    return (
-      <ProductListItem
-        item={item}
-        stateAccessor={stateAccessor}
-        openSelectedProduct={openSelectedProduct}
-        columnCount={columnCount}
-        updateItem={updateItem}
-        currencySymbol={currencySymbol}
-      />
-    );
-  };
+  const renderRow = ({ item }) => (
+    <CatalogGridItem
+      product={item}
+      stateAccessor={stateAccessor}
+      openSelectedProduct={openSelectedProduct}
+      columnCount={columnCount}
+      updateItem={updateItem}
+      currencySymbol={currencySymbol}
+    />
+  );
 
   const renderFooter = () => {
     if (canLoadMoreProducts) {
