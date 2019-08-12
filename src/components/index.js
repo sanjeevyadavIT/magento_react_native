@@ -15,9 +15,9 @@ import LoadingView from './molecules/LoadingView';
 // =========> cart
 import CartList from './organisms/cart/CartList';
 import CartListItem from './organisms/cart/CartListItem';
-// =========> categoryList
-import ProductList from './organisms/categoryList/ProductList';
-import ProductListItem from './organisms/categoryList/ProductListItem';
+// =========> product
+import ProductList from './organisms/product/ProductList';
+import CatalogGridItem from './organisms/product/CatalogGridItem';
 // =========> drawer
 import DrawerHeader from './organisms/drawer/DrawerHeader';
 import CategoryTree from './organisms/drawer/CategoryTree';
@@ -57,7 +57,7 @@ export {
   ImageSliderItem,
   MessageView,
   LoadingView,
-  ProductListItem,
+  CatalogGridItem,
   DrawerHeader,
   CartList,
   CartListItem,
