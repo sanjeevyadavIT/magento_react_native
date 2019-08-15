@@ -6,8 +6,8 @@ import NavigationService from '../../../../navigation/NavigationService';
 import { Text, Image, Card } from '../../..';
 import { NAVIGATION_PRODUCT_DETAIL_PATH } from '../../../../navigation/types';
 import { getProductThumbnailFromAttribute } from '../../../../utils/products';
+import { withTheme } from '../../../../config';
 
-// TODO: If name is in one line, price is appearing just after and if the name occupies two line, price is appearing down, ceating uneven view
 const CatalogGridItem = ({
   /**
    * Product to dispaly
@@ -26,9 +26,14 @@ const CatalogGridItem = ({
    */
   stateAccessor,
   /**
-   * TODO: Add description
+   * product data doesn't contain price for configurable product,
+   * fetch price manually for configurable product using sku
    */
-  updateItem
+  updateItem,
+  /**
+   * base theme for the app
+   */
+  theme
 }) => {
   const dispatch = useDispatch();
   const extra = useSelector(state => ([product.sku] in state[stateAccessor].extra ? state[stateAccessor].extra[product.sku] : null));
@@ -61,15 +66,15 @@ const CatalogGridItem = ({
   return (
     <Card
       type="outline"
-      style={styles.container}
+      style={styles.container(theme)}
       onPress={onRowPress}
     >
       <Image
-        style={styles.imageStyle}
-        resizeMode="contain"
         source={{ uri: getProductThumbnailFromAttribute(product) }}
+        style={styles.imageStyle(theme)}
+        resizeMode="contain"
       />
-      <View style={styles.detail}>
+      <View style={styles.detail(theme)}>
         <Text ellipsizeMode="tail" numberOfLines={2}>{product.name}</Text>
         <Text>{currencySymbol + getPrice()}</Text>
       </View>
@@ -78,16 +83,18 @@ const CatalogGridItem = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: 150,
-    height: 200,
-  },
-  imageStyle: {
-    height: 120,
-  },
-  detail: {
-    padding: 8,
-  }
+  container: theme => ({
+    width: theme.dimens.catalogGridItemWidth,
+    height: theme.dimens.catalogGridItemHeight,
+  }),
+  imageStyle: theme => ({
+    height: theme.dimens.catalogGridItemImageHeight,
+  }),
+  detail: theme => ({
+    padding: theme.spacing.eight,
+    flex: 1,
+    justifyContent: 'space-between',
+  })
 });
 
 CatalogGridItem.propTypes = {
@@ -104,8 +111,9 @@ CatalogGridItem.propTypes = {
   openSelectedProduct: PropTypes.func.isRequired,
   stateAccessor: PropTypes.string.isRequired,
   updateItem: PropTypes.func.isRequired,
+  theme: PropTypes.object.isRequired,
 };
 
 CatalogGridItem.defaultProps = {};
 
-export default CatalogGridItem;
+export default withTheme(CatalogGridItem);

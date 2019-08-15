@@ -54,7 +54,7 @@ const Button = ({
 
 const styles = StyleSheet.create({
   button: (type, theme) => ({
-    padding: theme.padding.eight,
+    padding: theme.spacing.eight,
     alignItems: 'center',
     backgroundColor: type === SOLID ? theme.colors.secondary : theme.colors.transparent,
     borderWidth: type === OUTLINE ? 1 : 0,

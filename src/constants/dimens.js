@@ -3,6 +3,9 @@ export default {
    * App level constants
    */
   borderRadius: 2,
+  catalogGridItemWidth: 150,
+  catalogGridItemHeight: 200,
+  catalogGridItemImageHeight: 120,
   /**
    * Appbar constants
    */
