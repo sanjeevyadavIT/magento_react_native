@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import NavigationService from '../../../../navigation/NavigationService';
-import { Text, Image, Card } from '../../..';
+import { Text, Image, Card, Price } from '../../..';
 import { NAVIGATION_PRODUCT_DETAIL_PATH } from '../../../../navigation/types';
 import { getProductThumbnailFromAttribute } from '../../../../utils/products';
 import { withTheme } from '../../../../config';
@@ -76,7 +76,7 @@ const CatalogGridItem = ({
       />
       <View style={styles.detail(theme)}>
         <Text ellipsizeMode="tail" numberOfLines={2}>{product.name}</Text>
-        <Text>{currencySymbol + getPrice()}</Text>
+        <Price displayPrice={getPrice()} currencySymbol={currencySymbol} />
       </View>
     </Card>
   );
