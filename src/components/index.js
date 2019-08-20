@@ -17,6 +17,7 @@ import CartList from './organisms/cart/CartList';
 import CartListItem from './organisms/cart/CartListItem';
 // =========> product
 import ProductList from './organisms/product/ProductList';
+import Price from './organisms/product/Price';
 import CatalogGridItem from './organisms/product/CatalogGridItem';
 // =========> drawer
 import DrawerHeader from './organisms/drawer/DrawerHeader';
@@ -57,7 +58,6 @@ export {
   ImageSliderItem,
   MessageView,
   LoadingView,
-  CatalogGridItem,
   DrawerHeader,
   CartList,
   CartListItem,
@@ -65,6 +65,8 @@ export {
   CategoryTreeItem,
   OrderListItem,
   ProductList,
+  Price,
+  CatalogGridItem,
   GenericTemplate,
   HomePageTemplate,
   DrawerTemplate,
