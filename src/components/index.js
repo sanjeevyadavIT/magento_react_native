@@ -11,13 +11,13 @@ import Card from './molecules/Card';
 import ImageSlider, { ImageSliderItem } from './molecules/ImageSlider';
 import MessageView from './molecules/MessageView';
 import LoadingView from './molecules/LoadingView';
+import Price from './molecules/Price';
 // Organisms
 // =========> cart
 import CartList from './organisms/cart/CartList';
 import CartListItem from './organisms/cart/CartListItem';
 // =========> product
 import ProductList from './organisms/product/ProductList';
-import Price from './organisms/product/Price';
 import CatalogGridItem from './organisms/product/CatalogGridItem';
 // =========> drawer
 import DrawerHeader from './organisms/drawer/DrawerHeader';
@@ -57,6 +57,7 @@ export {
   ImageSlider,
   ImageSliderItem,
   MessageView,
+  Price,
   LoadingView,
   DrawerHeader,
   CartList,
@@ -65,7 +66,6 @@ export {
   CategoryTreeItem,
   OrderListItem,
   ProductList,
-  Price,
   CatalogGridItem,
   GenericTemplate,
   HomePageTemplate,

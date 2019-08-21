@@ -76,7 +76,7 @@ const CatalogGridItem = ({
       />
       <View style={styles.detail(theme)}>
         <Text ellipsizeMode="tail" numberOfLines={2}>{product.name}</Text>
-        <Price displayPrice={getPrice()} currencySymbol={currencySymbol} />
+        <Price basePrice={getPrice()} currencySymbol={currencySymbol} />
       </View>
     </Card>
   );
