@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   text: (type, theme) => ({
     textAlign: 'center',
-    padding: theme.padding.eight,
+    padding: theme.spacing.eight,
     color: getTextColor(type, theme),
   }),
 });
