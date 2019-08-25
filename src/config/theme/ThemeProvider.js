@@ -16,4 +16,3 @@ ThemeProvider.propTypes = {
 ThemeProvider.defaultProps = {};
 
 export default ThemeProvider;
-export const ThemeConsumer = ThemeContext.Consumer;

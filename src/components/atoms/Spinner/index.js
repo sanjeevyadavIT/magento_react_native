@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
-import { withTheme } from '../../../config';
+import { ThemeContext } from '../../../config';
 
 const Spinner = ({
   /**
@@ -10,13 +10,15 @@ const Spinner = ({
    * 2. 'small'
    */
   size,
-  theme,
-}) => (
-  <ActivityIndicator
-    size={size}
-    color={theme.colors.secondary}
-  />
-);
+}) => {
+  const theme = useContext(ThemeContext);
+  return (
+    <ActivityIndicator
+      size={size}
+      color={theme.colors.secondary}
+    />
+  );
+};
 
 Spinner.propTypes = {
   size: PropTypes.oneOf(['large', 'small']),
@@ -26,4 +28,4 @@ Spinner.defaultProps = {
   size: 'large',
 };
 
-export default withTheme(Spinner);
+export default Spinner;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   ScrollView,
   View,
@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import { LoadingView, MessageView } from '../..';
 import Status from '../../../magento/Status';
-import { withTheme } from '../../../config';
+import { ThemeContext } from '../../../config';
 
 // NOTE: Can add functionality to show some fallback message in case of empty view
 const GenericTemplate = ({
@@ -19,8 +19,8 @@ const GenericTemplate = ({
   status,
   errorMessage,
   style,
-  theme,
 }) => {
+  const theme = useContext(ThemeContext);
   const ViewGroup = isScrollable ? ScrollView : View;
   if (status === Status.ERROR) {
     return <MessageView type="error" message={errorMessage} />;
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 });
 
 GenericTemplate.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.element.isRequired,
   footer: PropTypes.element,
   isScrollable: PropTypes.bool.isRequired,
   status: PropTypes.oneOf(Object.values(Status)),
@@ -72,4 +72,4 @@ GenericTemplate.defaultProps = {
   footer: <></>
 };
 
-export default withTheme(GenericTemplate);
+export default GenericTemplate;

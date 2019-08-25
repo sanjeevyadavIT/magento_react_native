@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text, Image, Card } from '../..';
 import { getOrderDetail } from '../../../store/actions';
 import Status from '../../../magento/Status';
+import { ThemeContext } from '../../../config';
 
 // TODO: Show product image in place of placeholder
 // TODO: Extract strings in strings.js
@@ -20,6 +21,7 @@ const OrderDetailPage = ({
   const errorMessage = useSelector(state => state.checkout.errorMessage);
   const orderDetail = useSelector(state => state.checkout.order);
   let currency = '$';
+  const theme = useContext(ThemeContext);
 
   if (!item && status === Status.DEFAULT) {
     dispatch(getOrderDetail(orderId));
@@ -28,8 +30,8 @@ const OrderDetailPage = ({
   }
 
   const renderItem = ({ item: product }) => (
-    <Card style={styles.card}>
-      <Image style={styles.imageStyle} source={{ uri: 'https://via.placeholder.com/100' }} />
+    <Card style={styles.card(theme)}>
+      <Image style={styles.imageStyle(theme)} source={{ uri: 'https://via.placeholder.com/100' }} />
       <View>
         <Text>{product.name}</Text>
         <Text>{`SKU: ${product.sku}`}</Text>
@@ -84,17 +86,17 @@ const OrderDetailPage = ({
 };
 
 const styles = StyleSheet.create({
-  card: {
+  card: theme => ({
     flexDirection: 'row',
     flex: 1,
-    marginHorizontal: 8,
-    marginBottom: 8
-  },
-  imageStyle: {
-    width: 100,
-    height: 100,
-    marginRight: 8,
-  }
+    marginHorizontal: theme.spacing.eight,
+    marginBottom: theme.spacing.eight
+  }),
+  imageStyle: theme => ({
+    width: theme.dimens.orderDetailImageWidth,
+    height: theme.dimens.orderDetailImageHeight,
+    marginRight: theme.spacing.eight,
+  })
 });
 
 OrderDetailPage.navigationOptions = ({ navigation }) => {

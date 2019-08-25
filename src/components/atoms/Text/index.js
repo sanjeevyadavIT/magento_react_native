@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text as RNText, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { withTheme } from '../../../config';
+import { ThemeContext } from '../../../config';
 
 // Possible value for prop "type" for Text
 const HEADING = 'heading';
@@ -13,7 +13,7 @@ const CAPTION = 'caption';
 // NOTE: Improve comments quality
 const Text = ({
   /**
-   * @type prop helps style Text with pre default styling define in 
+   * @type prop helps style Text with pre default styling define in
    * typography.js. Possible value of type can be:
    * 1. 'heading'
    * 2. 'subheading'
@@ -30,24 +30,22 @@ const Text = ({
    */
   bold,
   /**
-   * @style prop will overwrite the predefined styling for Text defined by 
+   * @style prop will overwrite the predefined styling for Text defined by
    * @type prop
-   * 
+   *
    * default value: false
    */
   style,
-  /**
-   * @theme prop contains, all the typography style, will be provided using
-   * withTheme High Order Component
-   */
-  theme,
   ...props
-}) => (
-  <RNText
-    style={StyleSheet.flatten([styles.text(type, bold, theme), style])}
-    {...props}
-  />
-);
+}) => {
+  const theme = useContext(ThemeContext);
+  return (
+    <RNText
+      style={StyleSheet.flatten([styles.text(type, bold, theme), style])}
+      {...props}
+    />
+  );
+};
 
 const getTextStyle = (type, bold, theme) => {
   let style = '';
@@ -92,4 +90,4 @@ Text.defaultProps = {
   style: {},
 };
 
-export default withTheme(Text);
+export default Text;

@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import NavigationService from '../../../../navigation/NavigationService';
-import { Text, Image, Card, Price } from '../../..';
+import {
+  Text,
+  Image,
+  Card,
+  Price
+} from '../../..';
 import { NAVIGATION_PRODUCT_DETAIL_PATH } from '../../../../navigation/types';
 import { getProductThumbnailFromAttribute } from '../../../../utils/products';
-import { withTheme } from '../../../../config';
+import { ThemeContext } from '../../../../config';
 
 const CatalogGridItem = ({
   /**
@@ -30,11 +35,8 @@ const CatalogGridItem = ({
    * fetch price manually for configurable product using sku
    */
   updateItem,
-  /**
-   * base theme for the app
-   */
-  theme
 }) => {
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const extra = useSelector(state => ([product.sku] in state[stateAccessor].extra ? state[stateAccessor].extra[product.sku] : null));
 
@@ -111,9 +113,8 @@ CatalogGridItem.propTypes = {
   openSelectedProduct: PropTypes.func.isRequired,
   stateAccessor: PropTypes.string.isRequired,
   updateItem: PropTypes.func.isRequired,
-  theme: PropTypes.object.isRequired,
 };
 
 CatalogGridItem.defaultProps = {};
 
-export default withTheme(CatalogGridItem);
+export default CatalogGridItem;

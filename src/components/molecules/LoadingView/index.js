@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Spinner from '../../atoms/Spinner';
-import { withTheme } from '../../../config';
+import { ThemeContext } from '../../../config';
 
-const LoadingView = ({ size, backgroundColor, theme }) => (
-  <View style={styles.container(backgroundColor, theme)}>
-    <Spinner size={size} />
-  </View>
-);
+const LoadingView = ({
+  /**
+   * size of the spinner in LoadingView, can be
+   * 1. 'large'
+   * 2. 'small'
+   */
+  size,
+  /**
+   * background that will appear behind spinner,
+   * by default: transparent
+   */
+  backgroundColor
+}) => {
+  const theme = useContext(ThemeContext);
+  return (
+    <View style={styles.container(backgroundColor, theme)}>
+      <Spinner size={size} />
+    </View>
+  );
+};
 
 const styles = {
   container: (backgroundColor, theme) => ({
@@ -29,4 +44,4 @@ LoadingView.defaultProps = {
   backgroundColor: null,
 };
 
-export default withTheme(LoadingView);
+export default LoadingView;

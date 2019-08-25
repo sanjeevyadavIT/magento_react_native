@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Card, Text } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_ORDER_DETAIL_SCREEN_PATH } from '../../../../navigation/types';
+import { ThemeContext } from '../../../../config';
 
 const OrderListItem = ({ item }) => {
+  const theme = useContext(ThemeContext);
   const currencySymbol = useSelector(state => (state.magento.currency.default_display_currency_code === item.order_currency_code ? state.magento.currency.default_display_currency_symbol : item.order_currency_code));
+
   const onPress = () => {
     NavigationService.navigate(
       NAVIGATION_ORDER_DETAIL_SCREEN_PATH,
@@ -19,10 +22,10 @@ const OrderListItem = ({ item }) => {
 
   return (
     <Card
-      style={styles.mainContainer}
+      style={styles.mainContainer(theme)}
       onPress={onPress}
     >
-      <View style={styles.infoContainer}>
+      <View style={styles.infoContainer(theme)}>
         <Text>{`Order # ${item.increment_id}`}</Text>
         <Text>{`Created: ${item.created_at}`}</Text>
         <Text>
@@ -38,18 +41,18 @@ const OrderListItem = ({ item }) => {
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: 'white',
+  mainContainer: theme => ({
+    backgroundColor: theme.colors.white,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: 8,
-    marginRight: 8,
-    marginBottom: 8,
-  },
-  infoContainer: {
+    marginLeft: theme.spacing.eight,
+    marginRight: theme.spacing.eight,
+    marginBottom: theme.spacing.eight,
+  }),
+  infoContainer: theme => ({
     flex: 1,
-    padding: 8,
-  }
+    padding: theme.spacing.eight,
+  })
 });
 
 OrderListItem.propTypes = {

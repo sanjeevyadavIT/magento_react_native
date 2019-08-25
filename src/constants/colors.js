@@ -21,9 +21,9 @@ export default {
    * primary: to be used as a background color for appbar(toolbar)
    * appBarTintColor: to be used for appbar title text, appbar icons color and for back button
    */
-  statusBarColor: '#fff',
-  primary: '#fff',
-  appbarTintColor: '#595959',
+  statusBarColor: '#0D5DC8',
+  primary: '#1C6CD1',
+  appbarTintColor: '#fff',
   /**
    * ========================= Secondary color =========================
    * secondaryLight: to be used for hover state

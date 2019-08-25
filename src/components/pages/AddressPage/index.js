@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Picker, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCountries, addCartBillingAddress, getCurrentCustomer, getShippingMethod, getCustomerCart } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput } from '../..';
 import { NAVIGATION_SHIPPING_SCREEN_PATH } from '../../../navigation/types';
 import Status from '../../../magento/Status';
+import { ThemeContext } from '../../../config';
 
 // TODO: create Button to have a style of no background and border
 // TODO: Use KeyboardAvoidingView
@@ -29,6 +30,7 @@ const AddressPage = ({ navigation }) => {
   const errorMessage = useSelector(state => state.checkout.errorMessage);
   const customer = useSelector(state => state.account.customer);
   const customerStatus = useSelector(state => state.account.status);
+  const theme = useContext(ThemeContext);
 
   if (customerStatus === Status.SUCCESS) {
     if (form.firstName === '' && form.lastName === '') {
@@ -111,7 +113,7 @@ const AddressPage = ({ navigation }) => {
       </Picker>
     );
   };
-  
+
   // TODO: cache region value
   const renderState = () => {
     if (form.country && countries && countries.length > 0) {
@@ -145,12 +147,12 @@ const AddressPage = ({ navigation }) => {
 
   const renderButtons = () => {
     if (billingAddressStatus === Status.LOADING) {
-      return <Spinner style={[styles.defaultMargin]} />;
+      return <Spinner style={[styles.defaultMargin(theme)]} />;
     }
 
     return (
       <View style={styles.linkContainer}>
-        <Button title="Save" style={[styles.defaultMargin]} onPress={onSaveAddress} />
+        <Button title="Save" style={[styles.defaultMargin(theme)]} onPress={onSaveAddress} />
       </View>
     );
   };
@@ -231,9 +233,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  defaultMargin: {
-    marginTop: 16,
-  },
+  defaultMargin: theme => ({
+    marginTop: theme.spacing.sixteen,
+  }),
   center: {
     alignSelf: 'center',
   },

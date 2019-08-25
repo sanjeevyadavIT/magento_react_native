@@ -1,7 +1,13 @@
-import React from 'react';
-import { TouchableNativeFeedback, TouchableOpacity, View, Platform, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import {
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+  View
+} from 'react-native';
 import PropTypes from 'prop-types';
-import { withTheme } from '../../../config';
+import { ThemeContext } from '../../../config';
 
 const OUTLINE = 'outline';
 const CLEAR = 'clear';
@@ -30,13 +36,10 @@ const Card = ({
   /**
    * Children to render inside Card
    */
-  children,
-  /**
-   * Global theme
-   */
-  theme,
+  children
 }) => {
   const ViewGroup = onPress ? TouchReceptor : View;
+  const theme = useContext(ThemeContext);
 
   return (
     <ViewGroup onPress={onPress}>
@@ -71,4 +74,4 @@ Card.defaultProps = {
   onPress: null,
 };
 
-export default withTheme(Card);
+export default Card;

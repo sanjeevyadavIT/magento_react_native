@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { CatalogGridItem, LoadingView, GenericTemplate } from '../../..';
 import Status from '../../../../magento/Status';
+import { ThemeContext } from '../../../../config';
 
 // Distance between two list item
 const SEPERATOR_SPACE = 12;
@@ -28,6 +29,7 @@ const ProductList = ({
   console.log('-------------------------');
   console.log('Inside ProductList render');
   console.log('-------------------------');
+  const theme = useContext(ThemeContext);
   useEffect(() => {
     // componentDidMount
     if (status === Status.DEFAULT) {
@@ -78,7 +80,7 @@ const ProductList = ({
       isScrollable={false}
       status={status}
       errorMessage={errorMessage}
-      style={styles.container}
+      style={styles.container(theme)}
     >
       <FlatList
         {...getLayoutManager()}
@@ -94,9 +96,9 @@ const ProductList = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-  },
+  container: theme => ({
+    backgroundColor: theme.colors.white,
+  }),
 });
 
 ProductList.propTypes = {

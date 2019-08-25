@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   UIManager,
   Platform,
@@ -12,11 +12,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { CategoryTree, Text, Card } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_CATEGORY_LIST_PATH } from '../../../../navigation/types';
-import { BORDER_COLOR } from '../../../../constants';
 import { setNewCategory } from '../../../../store/actions';
+import { ThemeContext } from '../../../../config';
 
 // TODO: Hide category which don't have product and children_data
 const CategoryTreeItem = ({ category }) => {
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(0);
 
@@ -51,7 +52,7 @@ const CategoryTreeItem = ({ category }) => {
       const icon = expanded ? 'caret-up' : 'caret-down';
       return (
         <Icon
-          style={styles.expandIcon}
+          style={styles.expandIcon(theme)}
           name={icon}
           color="#888"
           size={20}
@@ -65,7 +66,7 @@ const CategoryTreeItem = ({ category }) => {
   const renderItem = () => (
     <Card
       onPress={onRowPress}
-      style={styles.card}
+      style={styles.card(theme)}
     >
       <Text>{category.name}</Text>
       {renderExpandButton()}
@@ -81,7 +82,7 @@ const CategoryTreeItem = ({ category }) => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container(theme)}>
       {renderItem()}
       {renderChildren()}
     </View>
@@ -89,22 +90,22 @@ const CategoryTreeItem = ({ category }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginLeft: 16,
-  },
-  card: {
+  container: theme => ({
+    marginLeft: theme.spacing.sixteen,
+  }),
+  card: theme => ({
     borderWidth: 0,
     height: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: BORDER_COLOR,
-  },
-  expandIcon: {
+    borderColor: theme.colors.border,
+  }),
+  expandIcon: theme => ({
     padding: 2,
-    paddingRight: 15
-  },
+    paddingRight: theme.spacing.sixteen
+  }),
 });
 
 CategoryTreeItem.propTypes = {

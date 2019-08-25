@@ -1,18 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text } from '../..';
-import { withTheme } from '../../../config';
+import { ThemeContext } from '../../../config';
 
 const INFO = 'info';
 const SUCCESS = 'success';
 const ERROR = 'error';
 
-const MessageView = React.memo(({ message, type, theme }) => (
-  <View style={styles.container}>
-    <Text type="body" style={styles.text(type, theme)}>{message}</Text>
-  </View>
-));
+const MessageView = React.memo(({
+  /**
+   * @param {String} message text to be displayed
+   */
+  message,
+  /**
+   * @param {String} type determines styling of the text
+   * type value can be
+   * 1. 'info'
+   * 2. 'success'
+   * 3. 'error'
+   */
+  type
+}) => {
+  const theme = useContext(ThemeContext);
+  return (
+    <View style={styles.container}>
+      <Text type="body" style={styles.text(type, theme)}>{message}</Text>
+    </View>
+  );
+});
 
 const getTextColor = (type, theme) => {
   switch (type) {
@@ -48,4 +64,4 @@ MessageView.defaultProps = {
   type: INFO,
 };
 
-export default withTheme(MessageView);
+export default MessageView;

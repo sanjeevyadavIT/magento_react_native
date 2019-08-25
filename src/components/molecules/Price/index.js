@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../../atoms/Text';
 import { formatPrice } from './utils';
-import { withTheme } from '../../../config';
+import { ThemeContext } from '../../../config';
 
 const Price = ({
   /**
@@ -18,11 +18,8 @@ const Price = ({
    * Currency symbol to display along side of prices
    */
   currencySymbol,
-  /**
-   * App level theme
-   */
-  theme,
 }) => {
+  const theme = useContext(ThemeContext);
   const isBold = () => discountPrice && discountPrice < basePrice;
   const renderDiscountPrice = () => (discountPrice === basePrice ? null : <Text type="label" bold={isBold()} style={styles.discountPriceText(theme)}>{`${currencySymbol}${formatPrice(discountPrice)}`}</Text>);
   return (
@@ -56,4 +53,4 @@ Price.defaultProps = {
   discountPrice: 0,
 };
 
-export default withTheme(Price);
+export default Price;

@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text, Card } from '../../..';
 import { magento } from '../../../../magento';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_LOGIN_SCREEN_PATH, NAVIGATION_ACCOUNT_SCREEN_PATH } from '../../../../navigation/types';
+import { ThemeContext } from '../../../../config';
 
 const DrawerHeader = () => {
   let welcomeText = '';
   let NAVIGATION_PATH = null;
-  const { container, lowerContainer } = styles;
+  const theme = useContext(ThemeContext);
 
   if (magento.isCustomerLogin()) {
     welcomeText = 'Hello user!';
@@ -21,28 +22,31 @@ const DrawerHeader = () => {
 
   return (
     <Card
-      style={container}
+      style={styles.container(theme)}
       onPress={() => NavigationService.navigate(NAVIGATION_PATH)}
     >
-      <View style={lowerContainer}>
-        <Text>{welcomeText}</Text>
-        <Icon name="chevron-right" size={30} color="#fff" />
+      <View style={styles.lowerContainer(theme)}>
+        <Text style={styles.text(theme)}>{welcomeText}</Text>
+        <Icon name="chevron-right" size={30} color={theme.colors.white} />
       </View>
     </Card>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#607d8b',
+  container: theme => ({
+    backgroundColor: theme.colors.primary,
     borderWidth: 0,
-  },
-  lowerContainer: {
+  }),
+  lowerContainer: theme => ({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-  }
+    padding: theme.spacing.sixteen,
+  }),
+  text: theme => ({
+    color: theme.colors.white,
+  }),
 });
 
 export default DrawerHeader;

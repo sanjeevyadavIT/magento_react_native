@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   TouchableNativeFeedback,
@@ -8,13 +8,15 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text';
-import { withTheme } from '../../../config';
+import { ThemeContext } from '../../../config';
 
 const SOLID = 'solid';
 const OUTLINE = 'outline';
 
 const TouchReceptor = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
-
+/**
+ * @todo Add different styling of @param disabled is true
+ */
 const Button = ({
   /**
    * type can be
@@ -31,25 +33,28 @@ const Button = ({
    */
   onPress,
   /**
-   * TODO: Implement way to incorporate children
+   * set true to disable onPress and custom style
    */
-  children,
+  disabled,
   /**
-   * will be provided by withTheme High order component
+   * custom style for button
    */
-  theme,
-  ...props
-}) => (
-  <TouchReceptor onPress={onPress} {...props}>
-    <View
-      style={StyleSheet.flatten([
-        styles.button(type, theme),
-      ])}
-    >
-      <Text style={styles.text(type, theme)}>{title}</Text>
-    </View>
-  </TouchReceptor>
-);
+  style,
+}) => {
+  const theme = useContext(ThemeContext);
+  return (
+    <TouchReceptor onPress={onPress} disabled={disabled}>
+      <View
+        style={StyleSheet.flatten([
+          styles.button(type, theme),
+          style
+        ])}
+      >
+        <Text style={styles.text(type, theme)}>{title}</Text>
+      </View>
+    </TouchReceptor>
+  );
+};
 
 
 const styles = StyleSheet.create({
@@ -71,11 +76,15 @@ Button.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf([SOLID, OUTLINE]),
   onPress: PropTypes.func,
+  disabled: PropTypes.bool,
+  style: PropTypes.object,
 };
 
 Button.defaultProps = {
   type: SOLID,
-  onPress: () => {},
+  onPress: () => { },
+  disabled: false,
+  style: {},
 };
 
-export default withTheme(Button);
+export default Button;

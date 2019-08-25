@@ -15,7 +15,21 @@ export default {
    */
   homePageSliderHeight: 200,
   /**
+   * Drawer Navigation constants
+   */
+  headerViewHeight: 100,
+  /**
    * ProductDetailpage constants
    */
   productDetailPageSliderHeight: 300,
+  /**
+   * CartPage constants
+   */
+  cartListImageHeight: 120,
+  cartListImageWidth: 120,
+  /**
+   * OrderDetailPage constants
+   */
+  orderDetailImageWidth: 100,
+  orderDetailImageHeight: 100,
 };

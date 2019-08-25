@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,11 +6,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getCartItemProduct, removeItemFromCart } from '../../../../store/actions';
 import { getProductThumbnailFromAttribute } from '../../../../utils';
 import { Card, Image, Text } from '../../..';
+import { ThemeContext } from '../../../../config';
 
 // NOTE: Is it better to create a wapper around CartListItem and extract state in it?
 // It is in organisms folder because it is state aware
 // TODO: Extract strings in strings.js
 const CartListItem = ({ item, currencySymbol }) => {
+  const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const { [item.sku]: product } = useSelector(state => state.cart.products);
 
@@ -36,15 +38,15 @@ const CartListItem = ({ item, currencySymbol }) => {
   const getImageUrl = () => (product ? getProductThumbnailFromAttribute(product) : product);
 
   return (
-    <Card style={styles.mainContainer}>
+    <Card style={styles.mainContainer(theme)}>
       <Image
-        style={styles.image}
+        style={styles.image(theme)}
         resizeMode="contain"
         source={{ uri: getImageUrl() }}
       />
       <View style={styles.infoContainer}>
         <Text>{item.name}</Text>
-        <Text>price : {currencySymbol + item.price}</Text>
+        <Text>{`Price: ${currencySymbol}${product ? product.price : item.price}`}</Text>
         <Text>qty : {item.qty}</Text>
       </View>
       <Icon name="close" size={30} color="#000" onPress={onPressRemoveItem} />
@@ -53,20 +55,20 @@ const CartListItem = ({ item, currencySymbol }) => {
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  mainContainer: theme => ({
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: 8,
-    marginRight: 8,
-    marginBottom: 8,
-  },
-  image: {
+    marginLeft: theme.spacing.eight,
+    marginRight: theme.spacing.eight,
+    marginBottom: theme.spacing.eight,
+  }),
+  image: theme => ({
     flex: 1,
     left: 0,
-    height: 120,
-    width: 120,
-  },
+    height: theme.dimens.cartListImageHeight,
+    width: theme.dimens.cartListImageWidth,
+  }),
   infoContainer: {
     flex: 1,
   }

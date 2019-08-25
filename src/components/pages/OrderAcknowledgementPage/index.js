@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { GenericTemplate, Text, Button } from '../..';
 import { NAVIGATION_ORDER_DETAIL_SCREEN_PATH } from '../../../navigation/types';
 import Status from '../../../magento/Status';
+import { ThemeContext } from '../../../config';
 
 // TODO: Extract strings in strings.js
 const OrderAcknowledgementPage = ({ navigation }) => {
   const status = navigation.getParam('status', Status.ERROR);
   const errorMessage = navigation.getParam('errorMessage', 'Sorry for the inconvenience, unable to place your order!');
   const orderId = useSelector(state => state.checkout.orderId);
+  const theme = useContext(ThemeContext);
 
   const renderFooter = () => (
     <View>
       <Button title="View Order" onPress={() => navigation.navigate(NAVIGATION_ORDER_DETAIL_SCREEN_PATH, { orderId })} />
-      <View style={styles.space} />
+      <View style={styles.space(theme)} />
       <Button title="Continue Shopping" onPress={() => navigation.popToTop()} />
     </View>
   );
@@ -42,10 +44,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  space: {
+  space: theme => ({
     flex: 1,
-    marginTop: 8,
-  }
+    marginTop: theme.spacing.eight,
+  })
 });
 
 OrderAcknowledgementPage.navigationOptions = {
