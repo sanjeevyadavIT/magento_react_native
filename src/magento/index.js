@@ -11,8 +11,6 @@ import {
   INTEGRATION_TOKEN_REQUIRED_MESSAGE,
 } from '../constants';
 
-const log = process.env.NODE_ENV === 'development' ? console.log : null;
-
 const defaultOptions = {
   url: null,
   store: 'default',
@@ -70,7 +68,7 @@ class Magento {
     }
 
     return new Promise((resolve, reject) => {
-      log({ url, method, headers, data, ...params });
+      console.log({ url, method, headers, data, ...params });
       axios({
         url,
         method,
@@ -79,26 +77,26 @@ class Magento {
         data,
       })
         .then((response) => {
-          log(response);
+          console.log(response);
           resolve(response.data);
         })
         .catch((error) => {
           if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
-            log('error.response.data: ', error.response.data);
-            log('error.response.status: ', error.response.status);
-            log('error.response.headers: ', error.response.headers);
+            console.log('error.response.data: ', error.response.data);
+            console.log('error.response.status: ', error.response.status);
+            console.log('error.response.headers: ', error.response.headers);
           } else if (error.request) {
             // The request was made but no response was received
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
             // http.ClientRequest in node.js
-            log('No response received, error.request: ', error.request);
+            console.log('No response received, error.request: ', error.request);
           } else {
             // Something happened in setting up the request that triggered an Error
-            log('Unknown error, error.message: ', error.message);
+            console.log('Unknown error, error.message: ', error.message);
           }
-          log('error.config: ', error.config);
+          console.log('error.config: ', error.config);
           const customError = Magento.extractErrorMessage(error.response.data);
           reject(customError);
         });
