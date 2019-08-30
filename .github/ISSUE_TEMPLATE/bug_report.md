@@ -1,8 +1,8 @@
 ---
-name: Bug Report
-about: Create a report to help us improve
+name: '🐛 Bug Report'
+about: Report a reproducible bug
 title: ''
-labels: bug
+labels: 'Type: Bug'
 assignees: alexakasanjeev
 
 ---

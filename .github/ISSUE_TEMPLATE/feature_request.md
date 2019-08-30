@@ -1,8 +1,8 @@
 ---
-name: Feature Request
+name: '✨ Feature Reques'
 about: Suggest an idea for this mobile app
 title: ''
-labels: enhancement
+labels: 'Type: Enhancement'
 assignees: alexakasanjeev
 
 ---
