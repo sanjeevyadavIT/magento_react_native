@@ -25,7 +25,7 @@ storiesOf('Price', module)
   .add('with startingPrice', () => (
     <Price startingPrice={299} currencySymbol="$" />
   ))
-  .add('with startingPrice mentioned, other price won\'t render', () => (
+  .add('with startingPrice mentioned, basePrice & discountPrice won\'t render', () => (
     <Price startingPrice={299} basePrice={299} discountPrice={149} currencySymbol="$" />
   ))
   .add('with startingPrice and endingPrice', () => (

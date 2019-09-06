@@ -22,6 +22,7 @@ export default {
    * ProductDetailpage constants
    */
   productDetailPageSliderHeight: 300,
+  optionBoxMinHeight: 100,
   /**
    * CartPage constants
    */

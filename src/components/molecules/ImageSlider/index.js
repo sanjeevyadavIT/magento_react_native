@@ -21,7 +21,6 @@ const ImageSlider = ({
   showTitle,
   resizeMode,
   style,
-  ...props
 }) => {
   const renderImages = () => (
     slider.map((item, index) => (

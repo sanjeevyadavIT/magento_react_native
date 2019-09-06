@@ -10,22 +10,23 @@ import { ThemeContext } from '../../../config';
  * If {@link startingPrice} is mentioned, {@link basePrice} & {@link discountPrice}
  * will not be rendered.
  *
- * @param {number} [basePrice = 0]             - default selling price of the product type `simple`
- * @param {number} [startingPrice = undefined] - in case of `configurable` type product,
- *                                               show lowest price, as configurable type product
- *                                               can have different prices, based on option selected
- * @param {number} [endingPrice = undefined]   - in case of `configurable` type product, maximum price of it's child
- * @param {number} [discountPrice = 0]         - special or discount price for the product
- * @param {string} currencySymbol              - currency symbol to append before price
+ * @param {Object} props                             - props of the component
+ * @param {number} [props.basePrice = 0]             - default selling price of the product type `simple`
+ * @param {number} [props.startingPrice = undefined] - in case of `configurable` type product,
+ *                                                     show lowest price, as configurable type product
+ *                                                     can have different prices, based on option selected
+ * @param {number} [props.endingPrice = undefined]   - in case of `configurable` type product, maximum price of it's child
+ * @param {number} [props.discountPrice = 0]         - special or discount price for the product
+ * @param {string} props.currencySymbol              - currency symbol to append before price
  *
- * @return {PropTypes.element}
+ * @return React component
  */
 const Price = ({
+  currencySymbol,
   basePrice,
+  discountPrice,
   startingPrice,
   endingPrice,
-  discountPrice,
-  currencySymbol,
 }) => {
   const theme = useContext(ThemeContext);
   const isBold = () => discountPrice && discountPrice < basePrice;
@@ -62,18 +63,24 @@ const styles = {
 };
 
 Price.propTypes = {
-  basePrice: PropTypes.number,
-  startingPrice: PropTypes.oneOf([PropTypes.number, undefined]),
-  endingPrice: PropTypes.oneOf([PropTypes.number, undefined]),
-  discountPrice: PropTypes.number,
   currencySymbol: PropTypes.string.isRequired,
+  basePrice: PropTypes.number,
+  discountPrice: PropTypes.number,
+  startingPrice: PropTypes.oneOfType([
+    PropTypes.number,
+    undefined
+  ]),
+  endingPrice: PropTypes.oneOfType([
+    PropTypes.number,
+    undefined
+  ]),
 };
 
 Price.defaultProps = {
   basePrice: 0,
+  discountPrice: 0,
   startingPrice: undefined,
   endingPrice: undefined,
-  discountPrice: 0,
 };
 
 export default Price;

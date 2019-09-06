@@ -1,17 +1,25 @@
 import {
-  OPEN_SELECTED_PRODUCT,
   MAGENTO,
-  UI_PRODUCT_UPDATE_OPTIONS,
+  UI,
+  UI_PRODUCT_UPDATE_OPTIONS_REQUEST,
 } from '../../constants';
 
-export const openSelectedProduct = product => ({
-  type: OPEN_SELECTED_PRODUCT,
-  payload: product,
+export const openSelectedProduct = (productDetail, children) => ({
+  type: UI.OPEN_SELECTED_PRODUCT_REQUEST,
+  payload: {
+    productDetail,
+    children,
+  },
 });
 
 export const getConfigurableProductOptions = sku => ({
   type: MAGENTO.CONF_OPTIONS_REQUEST,
-  payload: sku,
+  payload: { sku },
+});
+
+export const getConfigurableChildren = sku => ({
+  type: MAGENTO.CONFIGURABLE_CHILDREN_REQUEST,
+  payload: { sku }
 });
 
 export const getProductMedia = sku => ({
@@ -19,9 +27,9 @@ export const getProductMedia = sku => ({
   payload: { sku },
 });
 
-export const uiProductUpdate = selectedOptions => ({
-  type: UI_PRODUCT_UPDATE_OPTIONS,
-  payload: selectedOptions,
+export const uiProductUpdateOptions = selectedOption => ({
+  type: UI_PRODUCT_UPDATE_OPTIONS_REQUEST,
+  payload: { selectedOption },
 });
 
 export const addToCart = cartItem => ({

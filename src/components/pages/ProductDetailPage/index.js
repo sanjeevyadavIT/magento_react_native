@@ -1,198 +1,81 @@
 import React from 'react';
-import { View, Picker, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { BRAND_NAME } from '../../../constants';
-import { getConfigurableProductOptions, uiProductUpdate, addToCart } from '../../../store/actions';
-import { Spinner, Text, Button } from '../..';
-import { ProductSliderContainer } from '../../../containers';
+import PropTypes from 'prop-types';
+import {
+  ProductDetailPageTemplate,
+  Button,
+  MaterialAppbarButtons,
+  Item,
+} from '../..';
+import {
+  SliderContainer,
+  PriceContainer,
+  OptionsContainer,
+  DescriptionContainer,
+  CTAButtons
+} from './containers';
+import { magento } from '../../../magento';
+import { PRODUTC_DETAIL_PAGE_TITLE } from '../../../constants';
+import {
+  NAVIGATION_LOGIN_SCREEN_PATH,
+  NAVIGATION_CART_SCREEN_PATH,
+} from '../../../navigation/types';
 
-// TODO: Improve the render cycle
-// TODO: Reference Slider height from theme
-class ProductDetailPage extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('title', BRAND_NAME),
-  })
+/**
+ * Screen to display product description and detail.
+ * Uses {@link ProductDetailPageTemplate} for styling and structuring
+ * and indivdiual containers component that have access to state
+ *
+ * @todo - Fix WebView height
+ *
+ * @todo - No check in `configurable` type product to disable certain
+ *         options which are not available
+ *         Example: suppose in size `s` color `red` is not avilable,
+ *         so when user select size `s`, `red` option should be disabled.
+ *
+ * @todo - No check written to check whether product is out of stock or not,
+ *         if out of stock, disable `add-to-cart` button
+ *
+ * @todo - Add input box to let user enter quantity of that product for cart
+ *         currently defaults to 1
+ *
+ * @param {Object}  props            - props associated with the component
+ * @param {boolean} props.hasOptions - (From Redux) In case of `configurable` type product,
+ *                                     show picker to choose options.
+ */
+const ProductDetailPage = ({
+  hasOptions
+}) => (
+  <ProductDetailPageTemplate
+    sliderContainer={<SliderContainer />}
+    priceContainer={<PriceContainer />}
+    hasOptions={hasOptions}
+    optionsContainer={<OptionsContainer />}
+    descriptionContainer={<DescriptionContainer />}
+    footer={<CTAButtons />}
+  />
+);
 
-  constructor(props) {
-    super(props);
-    this.renderOptions = this.renderOptions.bind(this);
-    this.renderPickerOptions = this.renderPickerOptions.bind(this);
-    this.onPressAddToCart = this.onPressAddToCart.bind(this);
-  }
+ProductDetailPage.navigationOptions = ({ navigation }) => ({
+  title: navigation.getParam('title', PRODUTC_DETAIL_PAGE_TITLE),
+  headerRight: (
+    <MaterialAppbarButtons>
+      <Item title="Cart" iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH))} />
+    </MaterialAppbarButtons>
+  ),
+});
 
-  componentDidMount() {
-    const {
-      product,
-      getConfigurableProductOptions: _getConfigurableProductOptions,
-    } = this.props;
+ProductDetailPage.propTypes = {
+  hasOptions: PropTypes.bool.isRequired, // Redux
+};
 
-    if (product.type_id === 'configurable') {
-      _getConfigurableProductOptions(product.sku);
-    }
-  }
-
-  onPressAddToCart() {
-    const { product, selectedOptions, cartQuoteId, addToCart: _addToCart } = this.props;
-    const qty = 1;
-    const cartItem = { sku: product.sku, qty, quote_id: cartQuoteId };
-    if (product.type_id === 'simple') {
-      _addToCart(cartItem);
-    } else if (product.type_id === 'configurable') {
-      cartItem.product_option = {};
-      cartItem.product_option.extension_attributes = {};
-      cartItem.product_option.extension_attributes.configurable_item_options = [];
-      Object.keys(selectedOptions).map((key, index) => {
-        cartItem.product_option.extension_attributes.configurable_item_options.push({
-          option_id: key,
-          option_value: selectedOptions[key],
-        });
-      });
-      _addToCart(cartItem);
-    } else {
-      console.log('Implement functionality for other types of products');
-    }
-  }
-
-  getDescription = (customAttributes) => {
-    for (let i = 0; i < customAttributes.length; i += 1) {
-      const customAttribute = customAttributes[i];
-      if (customAttribute.attribute_code === 'description') return customAttribute.value;
-    }
-    return 'Lorem ipseum';
-  }
-
-  renderPickerOptions = (values, title) => ([{ label: `Select ${title}`, value: null }, ...values].map(({ label, value }) => <Picker.Item label={label} value={String(value)} key={String(value)} />));
-
-  // TODO: extract this into own component
-  renderOptions() {
-    const { product, confOptionsLoading, confOptionsError, attributes, selectedOptions } = this.props;
-    const { options } = product;
-
-    if (confOptionsLoading) {
-      return <Spinner size="small" />;
-    }
-
-    if (confOptionsError) {
-      // TODO: Disable add to cart and buy now button
-      return <Text>{confOptionsError}</Text>
-    }
-
-    if (options && Array.isArray(options)) {
-      return options.sort((first, second) => first.position - second.position)
-        .map((option, index) => {
-          if (!attributes[option.attribute_id]) {
-            return <Spinner size="small" key={String(index)} />;
-          }
-
-          const optionIds = option.values.map(value => String(value.value_index));
-          const values = attributes[option.attribute_id].options.filter(({ value }) => optionIds.includes(value));
-          return (
-            <View key={String(index)}>
-              <Text>Select {option.label}</Text>
-              <Picker
-                selectedValue={selectedOptions[option.attribute_id]}
-                style={{ height: 50, flex: 1 }}
-                onValueChange={(itemValue, itemIndex) => {
-                  this.props.uiProductUpdate({ [option.attribute_id]: itemValue });
-                }}
-              >
-                {this.renderPickerOptions(values, option.label)}
-              </Picker>
-            </View>
-          );
-        });
-    }
-    return null;
-  }
-
-  renderActionButtons() {
-    const { addToCartLoading, addToCartError } = this.props;
-    let addtoCartButton = <Button style={{ flex: 1 }} title="Add to cart" onPress={this.onPressAddToCart} />;
-    if (addToCartLoading) {
-      addtoCartButton = <Spinner />;
-    }
-    let addToCartErrorMessage = null;
-    if (addToCartError) {
-      addToCartErrorMessage = <Text style={{ fontSize: 14, color: 'red' }}>{addToCartError}</Text>;
-    }
-    return (
-      <View>
-        {addToCartErrorMessage}
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 8 }}>
-          <Button style={{ flex: 1, marginRight: 8 }} title="Add to Wishlist" />
-          {addtoCartButton}
-        </View>
-      </View>
-    );
-  }
-
-  renderContent() {
-    const { product, currencySymbol, theme } = this.props;
-    if (!product) {
-      return <Spinner />;
-    }
-
-    return (
-      <ScrollView>
-        <View>
-          <View style={{ height: 300 }}>
-            <ProductSliderContainer sku={product.sku} imageHeight={300} />
-          </View>
-          <View>
-            <Text>{this.getDescription(product.custom_attributes)}</Text>
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>price </Text>
-            <Text style={{ fontSize: 18, color: 'green' }}>{currencySymbol + product.price}</Text>
-          </View>
-          {this.renderOptions()}
-          {this.renderActionButtons()}
-        </View>
-      </ScrollView>
-    );
-  }
-
-  render() {
-    console.log('Rendering productDetail page')
-    console.log(this.props)
-    return (
-      <View style={{ flex: 1 }}>
-        {this.renderContent()}
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({});
+ProductDetailPage.defaultProps = {};
 
 const mapStateToProps = (state) => {
-  const {
-    confOptionsLoading,
-    confOptionsError,
-    addToCartLoading,
-    addToCartError,
-    attributes,
-    selectedOptions,
-    current: product,
-  } = state.product;
-  const { default_display_currency_symbol: currencySymbol } = state.magento.currency;
-  const { cart } = state.cart;
-  const cartQuoteId = cart.id;
+  const { hasOptions } = state.product;
   return {
-    product,
-    currencySymbol,
-    attributes,
-    addToCartLoading,
-    addToCartError,
-    confOptionsLoading,
-    confOptionsError,
-    selectedOptions,
-    cartQuoteId,
+    hasOptions
   };
 };
 
-export default connect(mapStateToProps, {
-  getConfigurableProductOptions,
-  uiProductUpdate,
-  addToCart,
-})(ProductDetailPage);
+export default connect(mapStateToProps)(ProductDetailPage);

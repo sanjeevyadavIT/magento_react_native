@@ -14,7 +14,7 @@ const CategoryListContainer = ({ categoryId }) => {
   const status = useSelector(state => state.categoryList.status);
   const errorMessage = useSelector(state => state.categoryList.errorMessage);
   const loadingMoreStatus = useSelector(state => state.categoryList.loadingMoreStatus);
-  const dispatchOpenSelectedProductAction = product => dispatch(openSelectedProduct(product));
+  const dispatchOpenSelectedProductAction = (product, children) => dispatch(openSelectedProduct(product, children));
   const loadProducts = (_categoryId, offset, sortOrder) => dispatch(getCategoryProducts(_categoryId, offset, sortOrder));
   const showHorizontalList = false;
   const columnCount = 2;
