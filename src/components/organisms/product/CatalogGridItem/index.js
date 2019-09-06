@@ -39,7 +39,6 @@ const CatalogGridItem = ({
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const extra = useSelector(state => ([product.sku] in state[stateAccessor].extra ? state[stateAccessor].extra[product.sku] : null));
-
   useEffect(() => {
     // componentDidMount
     if (!extra && product.type_id === 'configurable') {
@@ -48,21 +47,33 @@ const CatalogGridItem = ({
   }, []);
 
   const onRowPress = () => {
-    openSelectedProduct(product);
+    openSelectedProduct(product, extra ? extra.children : undefined);
     NavigationService.navigate(NAVIGATION_PRODUCT_DETAIL_PATH, {
       title: product.name,
     });
   };
 
+  /**
+   * @todo extract it into util function
+   */
   const getPrice = () => {
-    let { price } = product;
+    const priceProps = {};
+    const { price } = product;
+    priceProps.basePrice = price;
     switch (product.type_id) {
       case 'configurable':
-        price = extra && extra.price ? extra.price : 0;
+        if (extra && extra.price) {
+          if (extra.price.starting === extra.price.ending) {
+            priceProps.basePrice = extra.price.starting;
+          } else {
+            priceProps.startingPrice = extra.price.starting;
+            priceProps.endingPrice = extra.price.ending;
+          }
+        }
         break;
       default:
     }
-    return price;
+    return priceProps;
   };
 
   return (
@@ -78,7 +89,7 @@ const CatalogGridItem = ({
       />
       <View style={styles.detail(theme)}>
         <Text ellipsizeMode="tail" numberOfLines={2}>{product.name}</Text>
-        <Price basePrice={getPrice()} currencySymbol={currencySymbol} />
+        <Price {...getPrice()} currencySymbol={currencySymbol} />
       </View>
     </Card>
   );

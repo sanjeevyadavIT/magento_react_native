@@ -23,9 +23,20 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'FEATURED_CATEGORY_PRODUCTS', // Fetch featured categories for home page
   'HOME_UPDATE_CONF_PRODUCT', // For each configurable product in featured category, fetch it's children, to calculate price
   'CATEGORY_TREE', // Fetch category tree
+  /**
+   * ======================================================
+   * ===== {@link ProductDetailPage} related actions ======
+   * ======================================================
+   */
   'CONF_OPTIONS', // Product is configurable type, fetch all options
   'PRODUCT_MEDIA', // Fetch images related to products
+  'CONFIGURABLE_CHILDREN', // Fetch child products of configurable product
   'ADD_TO_CART', // Add item to cart
+  /**
+   * ==========================================
+   * =================== @ ====================
+   * ==========================================
+   */
   'SIGN_IN', // Sign in already existing user
   'SIGN_UP', // Create new user account
   'CURRENT_USER', // Fetch details of current logged in user
@@ -47,9 +58,20 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'ORDER_DETAIL', // Fetch order detail, using orderId
 ], suffixTypes);
 
-export const OPEN_SELECTED_PRODUCT = 'OPEN_SELECTED_PRODUCT';
-export const MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS = 'MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS';
-export const UI_PRODUCT_UPDATE_OPTIONS = 'UI_PRODUCT_UPDATE_OPTIONS';
+// Events related to UI interaction
+export const UI = createRequestTypes('UI', [
+  /**
+   * ======================================================
+   * ===== {@link ProductDetailPage} related actions ======
+   * ======================================================
+   */
+  'OPEN_SELECTED_PRODUCT', // Set the product represented in selected CatalogGridItem into store
+  'CHANGE_PRODUCT_OPTIONS', // Set options of `configurable` type product from picker into store
+], suffixTypes);
+
+export const UI_PRODUCT_UPDATE_OPTIONS_REQUEST = 'UI_PRODUCT_UPDATE_OPTIONS_REQUEST';
+export const UI_PRODUCT_UPDATE_OPTIONS_SUCCESS = 'UI_PRODUCT_UPDATE_OPTIONS_SUCCESS';
+export const UI_PRODUCT_UPDATE_OPTIONS_FAILURE = 'UI_PRODUCT_UPDATE_OPTIONS_FAILURE';
 export const ACTION_USER_LOGOUT = 'USER_LOGOUT';
 export const RESET_AUTH_STATE = 'RESET_AUTH_STATE';
 export const SET_NEW_CATEGORY = 'SET_NEW_CATEGORY';

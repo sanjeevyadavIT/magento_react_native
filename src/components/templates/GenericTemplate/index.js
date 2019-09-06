@@ -57,7 +57,10 @@ const styles = StyleSheet.create({
 });
 
 GenericTemplate.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ]).isRequired,
   footer: PropTypes.element,
   isScrollable: PropTypes.bool.isRequired,
   status: PropTypes.oneOf(Object.values(Status)),

@@ -1,101 +1,131 @@
 import {
   MAGENTO,
-  OPEN_SELECTED_PRODUCT,
-  MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS,
-  UI_PRODUCT_UPDATE_OPTIONS,
+  UI,
+  UI_PRODUCT_UPDATE_OPTIONS_SUCCESS,
 } from '../../constants';
 import Status from '../../magento/Status';
 
-const getInitialState = product => ({
-  current: product,
+const getInitialState = {
+  /**
+   * medias cache the images of the product
+   * by using it's sku as key and images link as property
+   */
   medias: {},
   mediaStatus: Status.DEFAULT,
   mediaErrorMessage: '',
-  confOptionsLoading: false,
-  confOptionsError: null,
+  /**
+   * Holds detail of the product, currently selected
+   * like name, sku, description etc.
+   */
+  detail: {},
+  /**
+   * If product is configurable type, hasOptions will be true and
+   * fetch it's options
+   */
+  hasOptions: false,
+  confOptionsStatus: Status.DEFAULT,
+  confOptionsErrorMessage: '',
+  /**
+   * attributes are cached which conatin attribute code with their name,
+   * so if aattribute set is fetched, it will be used from here.
+   */
+  attributes: {},
+  /**
+   * Saves the attributeId along with it's key which is selcted by user.
+   * Example, if user choose size `s` where attribute_id of size is 97 and key of `s` is 101
+   * ```
+   * selectedOptions = {
+   *    97: 101
+   * }
+   * ```
+   */
+  selectedOptions: {},
+  /**
+   * In case of all options are selected for `configurable` product, find out
+   * `simple` type product that it represent.
+   */
+  selectedProduct: null,
+  //-------------------------
   addToCartLoading: false,
   addToCartError: null,
-  attributes: {},
   qtyInput: 1,
-  selectedOptions: {}
-});
+};
 
-export default (state = getInitialState(null), action) => {
-  switch (action.type) {
-    case OPEN_SELECTED_PRODUCT:
+export default (state = getInitialState, { type, payload }) => {
+  switch (type) {
+    case UI.OPEN_SELECTED_PRODUCT_SUCCESS:
       return {
         ...state,
-        current: action.payload,
-        mediaLoading: false,
-        mediaError: null,
-        confOptionsLoading: false,
-        confOptionsError: null,
+        detail: { ...payload.productDetail, children: payload.children },
+        //-------------------------
+        mediaStatus: Status.DEFAULT,
+        mediaErrorMessage: '',
+        //-------------------------
+        hasOptions: payload.hasOptions,
+        confOptionsStatus: Status.DEFAULT,
+        confOptionsErrorMessage: '',
+        //-------------------------
+        selectedOptions: {},
+        selectedProduct: null,
+        //-------------------------
         addToCartLoading: false,
         addToCartError: null,
         qtyInput: 1,
-        selectedOptions: {},
       };
     case MAGENTO.PRODUCT_MEDIA_LOADING:
       return {
         ...state,
         mediaStatus: Status.LOADING,
       };
-    case MAGENTO.PRODUCT_MEDIA_SUCCESS:
+    case MAGENTO.PRODUCT_MEDIA_SUCCESS: {
+      const medias = { ...state.medias, [payload.sku]: payload.media };
       return {
         ...state,
         mediaStatus: Status.SUCCESS,
-        medias: {
-          ...state.medias,
-          [action.payload.sku]: action.payload.media,
-        }
+        medias,
       };
+    }
     case MAGENTO.PRODUCT_MEDIA_FAILURE:
       return {
         ...state,
         mediaStatus: Status.ERROR,
-        mediaErrorMessage: action.payload.errorMessage,
+        mediaErrorMessage: payload.errorMessage,
       };
     case MAGENTO.CONF_OPTIONS_LOADING:
       return {
         ...state,
-        confOptionsLoading: true,
+        confOptionsStatus: Status.LOADING,
       };
     case MAGENTO.CONF_OPTIONS_SUCCESS: {
-      const current = { ...state.current, options: action.payload };
+      const detail = { ...state.detail, options: payload.options };
+      const attributes = { ...state.attributes, ...payload.attributes };
       return {
         ...state,
-        current,
-        confOptionsLoading: false,
+        detail,
+        attributes,
+        confOptionsStatus: Status.SUCCESS,
       };
     }
     case MAGENTO.CONF_OPTIONS_FAILURE:
       return {
         ...state,
-        confOptionsLoading: false,
-        confOptionsError: action.payload,
+        confOptionsStatus: Status.ERROR,
+        confOptionsErrorMessage: payload.errorMessage,
       };
-    case MAGENTO_SAVE_PRODUCT_ATTRIBUTE_OPTIONS: {
-      const attributes = {
-        ...state.attributes,
-        [action.payload.attributeId]: {
-          options: action.payload.options,
-          attributeCode: action.payload.attributeCode,
-        }
-      };
+    case MAGENTO.CONFIGURABLE_CHILDREN_SUCCESS: {
+      const detail = { ...state.detail, children: payload.children };
       return {
         ...state,
-        attributes,
+        detail,
       };
     }
-    case UI_PRODUCT_UPDATE_OPTIONS: {
-      const { selectedOptions } = state;
+    case UI_PRODUCT_UPDATE_OPTIONS_SUCCESS: {
+      const selectedOptions = { ...state.selectedOptions, ...payload.selectedOption };
       return {
         ...state,
         addToCartError: null,
-        selectedOptions: {
-          ...selectedOptions,
-          ...action.payload,
-        }
+        selectedOptions,
+        selectedProduct: payload.selectedProduct,
       };
     }
     case MAGENTO.ADD_TO_CART_LOADING:
@@ -114,8 +144,8 @@ export default (state = getInitialState(null), action) => {
       return {
         ...state,
         addToCartLoading: false,
-        addToCartError: action.payload,
-      }
+        addToCartError: payload,
+      };
     default:
       return state;
   }

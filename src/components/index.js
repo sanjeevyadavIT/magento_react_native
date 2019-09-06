@@ -29,6 +29,7 @@ import OrderListItem from './organisms/order/OrderListItem';
 import GenericTemplate from './templates/GenericTemplate';
 import HomePageTemplate from './templates/HomePageTemplate';
 import DrawerTemplate from './templates/DrawerTemplate';
+import ProductDetailPageTemplate from './templates/ProductDetailPageTemplate';
 // Pages
 import HomePage from './pages/HomePage';
 import CategoryListPage from './pages/CategoryListPage';
@@ -70,6 +71,7 @@ export {
   GenericTemplate,
   HomePageTemplate,
   DrawerTemplate,
+  ProductDetailPageTemplate,
   HomePage,
   CategoryListPage,
   SignInPage,
