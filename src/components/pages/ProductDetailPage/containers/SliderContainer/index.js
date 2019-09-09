@@ -56,13 +56,15 @@ const SliderContainer = ({
       errorMessage={errorMessage}
       style={style}
     >
-      <ImageSlider
-        style={styles.imageContainer(theme)}
-        imageHeight={theme.dimens.productDetailPageSliderHeight}
-        slider={(selectedProductUrl ? slider.unshift(new ImageSliderItem('', selectedProductUrl, '')) && slider : slider)}
-        baseUrl={magento.getProductMediaUrl()}
-        resizeMode="contain"
-      />
+      {(slider ? (
+        <ImageSlider
+          style={styles.imageContainer(theme)}
+          imageHeight={theme.dimens.productDetailPageSliderHeight}
+          slider={(selectedProductUrl ? slider.unshift(new ImageSliderItem('', selectedProductUrl, '')) && slider : slider)}
+          baseUrl={magento.getProductMediaUrl()}
+          resizeMode="contain"
+        />
+      ) : <></>)}
     </GenericTemplate>
   );
 };

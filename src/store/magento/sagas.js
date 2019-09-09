@@ -5,7 +5,7 @@ import { MAGENTO } from '../../constants';
 import { magentoOptions } from '../../config/magento';
 
 // worker saga: Add Description
-function* initMagento() {
+function* initializeApp() {
   if (magento.isConfigured()) return;
 
   try {
@@ -58,7 +58,7 @@ function* getCurrency() {
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
-  yield takeLatest(MAGENTO.INIT_APP_REQUEST, initMagento);
+  yield takeLatest(MAGENTO.INIT_APP_REQUEST, initializeApp);
   yield takeLatest(MAGENTO.CURRENCY_REQUEST, getCurrency);
   yield takeLatest(MAGENTO.COUNTRIES_REQUEST, getCountries);
 }

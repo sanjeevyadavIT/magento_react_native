@@ -5,17 +5,23 @@ import { GenericTemplate } from '../..';
 import Status from '../../../magento/Status';
 import { ThemeContext } from '../../../config';
 
+/**
+ * This template describes the layout of Home Page
+ */
 const HomePageTemplate = ({
   imageSlider,
   featuredCategories,
   children,
   status,
   errorMessage,
-  ...props,
 }) => {
   const theme = useContext(ThemeContext);
   return (
-    <GenericTemplate isScrollable status={status} errorMessage={errorMessage} {...props}>
+    <GenericTemplate
+      isScrollable
+      status={status}
+      errorMessage={errorMessage}
+    >
       <View style={styles.imageSliderContainer(theme)}>
         {imageSlider}
       </View>

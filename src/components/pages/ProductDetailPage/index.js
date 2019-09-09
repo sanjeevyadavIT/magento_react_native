@@ -28,6 +28,10 @@ import {
  *
  * @todo - Fix WebView height
  *
+ * @todo - Use `type_id === 'configurable'` logic to check it has options
+ *
+ * @todo - No message is shown when user hit add to cart button
+ *
  * @todo - No check in `configurable` type product to disable certain
  *         options which are not available
  *         Example: suppose in size `s` color `red` is not avilable,
