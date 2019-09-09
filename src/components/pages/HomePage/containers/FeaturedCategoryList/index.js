@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { ProductList } from '../../../components';
-import Status from '../../../magento/Status';
-import { openSelectedProduct, getFeaturedProducts, getHomeConfigurableProductOptions } from '../../../store/actions';
+import { useNetInfo } from '@react-native-community/netinfo';
+import { ProductList } from '../../../../index';
+import Status from '../../../../../magento/Status';
+import { openSelectedProduct, getFeaturedProducts, getHomeConfigurableProductOptions } from '../../../../../store/actions';
 
 // Here FeaturedCategoriesContainer(connected to redux) is hosting FeaturedCategoryList(connected to redux) which in turn hosting Productlist(dumb component)
 const FeaturedCategoryList = ({ categoryId }) => {
   const dispatch = useDispatch();
+  const netInfo = useNetInfo();
   const status = useSelector(state => state.home[categoryId].status);
   const errorMesage = useSelector(state => state.home[categoryId].errorMesage);
   const items = useSelector(state => state.home[categoryId].items);

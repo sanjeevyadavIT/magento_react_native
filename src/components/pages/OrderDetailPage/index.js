@@ -76,6 +76,7 @@ const OrderDetailPage = ({
 
   return (
     <GenericTemplate
+      networkConnected
       isScrollable={false}
       status={status}
       errorMessage={errorMessage}

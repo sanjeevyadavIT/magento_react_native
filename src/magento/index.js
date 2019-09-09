@@ -114,7 +114,7 @@ class Magento {
   }
 
   isConfigured() {
-    return this.access_token != null;
+    return this.access_token != null && this.storeConfig != null;
   }
 
   isCustomerLogin() {

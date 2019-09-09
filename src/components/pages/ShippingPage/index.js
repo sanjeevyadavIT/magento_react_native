@@ -6,7 +6,10 @@ import { Spinner, Text, Button, TextInput, GenericTemplate } from '../..';
 import { NAVIGATION_PAYMENT_SCREEN_PATH } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 
-// TODO: Create a cutom picker component
+/**
+ * @todo Instead of picker, shipping method can be a radio option, to reduce number of click
+ * @todo Check internet connection and disable button id no internet
+ */
 const ShippingPage = ({ navigation }) => {
   const dispatch = useDispatch();
   const [shippingCode, setShippingCode] = useState();
@@ -75,7 +78,7 @@ const ShippingPage = ({ navigation }) => {
       dispatch(addCartShippingInfo(address));
     }
   };
-  
+
   const renderButton = () => {
     if (paymentMethodStatus === Status.LOADING) {
       return <Spinner />;
@@ -91,7 +94,8 @@ const ShippingPage = ({ navigation }) => {
   };
 
   return (
-    <GenericTemplate 
+    <GenericTemplate
+      networkConnected
       isScrollable={false}
       status={status}
       errorMessage={errorMessage}

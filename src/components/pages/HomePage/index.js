@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useNetInfo } from '@react-native-community/netinfo';
 import { HomePageTemplate, MaterialAppbarButtons, Item } from '../..';
-import { SliderContainer } from './containers';
-import { FeaturedCategoriesContainer } from '../../../containers';
+import {
+  SliderContainer,
+  FeaturedCategoriesContainer
+} from './containers';
 import { onAppStart } from '../../../store/actions';
 import { BRAND_NAME } from '../../../constants';
 import { magento } from '../../../magento';
@@ -35,16 +38,17 @@ const HomePage = ({
   errorMessage,
   onAppStart: _onAppStart
 }) => {
-  console.log('HomePage render()');
+  const netInfo = useNetInfo();
   useEffect(() => {
     // componentDidMount
-    if (status === Status.DEFAULT) {
+    if ((status === Status.DEFAULT || status === Status.ERROR)) {
       _onAppStart();
     }
-  }, []);
+  }, [netInfo.isConnected]);
 
   return (
     <HomePageTemplate
+      networkConnected={netInfo.isConnected}
       status={status}
       errorMessage={errorMessage}
       imageSlider={<SliderContainer />}

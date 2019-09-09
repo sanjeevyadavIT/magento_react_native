@@ -24,6 +24,7 @@ const OrderAcknowledgementPage = ({ navigation }) => {
 
   return (
     <GenericTemplate
+      networkConnected
       isScrollable={false}
       status={status}
       errorMessage={errorMessage}

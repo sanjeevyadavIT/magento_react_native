@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { CatalogGridItem, LoadingView, GenericTemplate } from '../../..';
+import { CatalogGridItem, LoadingView, Resource } from '../../..';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../config';
 
@@ -76,8 +76,7 @@ const ProductList = ({
   };
 
   return (
-    <GenericTemplate
-      isScrollable={false}
+    <Resource
       status={status}
       errorMessage={errorMessage}
       style={styles.container(theme)}
@@ -91,7 +90,7 @@ const ProductList = ({
         onEndReachedThreshold={0.1}
         ListFooterComponent={renderFooter}
       />
-    </GenericTemplate>
+    </Resource>
   );
 };
 

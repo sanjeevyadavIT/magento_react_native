@@ -7,8 +7,13 @@ import { Spinner, Text, Button, GenericTemplate } from '../..';
 import { NAVIGATION_HOME_PATH, NAVIGATION_ORDER_ACKNOWLEDGEMENT_PAGE } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 
-// FIXME: Reset all status variable in checkout reducer,
-// if order placed, unable to place second order after first has been placed
+/**
+ * @todo - if order placed, unable to place second order after first has been placed (check, if still valid)
+ *
+ * @todo - disable button if network connection is not there
+ *
+ * @fixme - Reset all status variable in checkout reducer,
+ */
 const PaymentPage = ({ navigation }) => {
   const dispatch = useDispatch();
   const [paymentCode, setPaymentCode] = useState();
@@ -87,6 +92,7 @@ const PaymentPage = ({ navigation }) => {
 
   return (
     <GenericTemplate
+      networkConnected
       isScrollable={false}
       footer={renderButton()}
     >

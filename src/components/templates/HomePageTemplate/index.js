@@ -13,6 +13,7 @@ const HomePageTemplate = ({
   featuredCategories,
   children,
   status,
+  networkConnected,
   errorMessage,
 }) => {
   const theme = useContext(ThemeContext);
@@ -20,6 +21,7 @@ const HomePageTemplate = ({
     <GenericTemplate
       isScrollable
       status={status}
+      networkConnected={networkConnected}
       errorMessage={errorMessage}
     >
       <View style={styles.imageSliderContainer(theme)}>
@@ -44,6 +46,7 @@ HomePageTemplate.propTypes = {
   imageSlider: PropTypes.element.isRequired,
   featuredCategories: PropTypes.element.isRequired,
   children: PropTypes.element,
+  networkConnected: PropTypes.bool,
   status: PropTypes.oneOf(Object.values(Status)),
   errorMessage: PropTypes.string,
 };
@@ -51,6 +54,7 @@ HomePageTemplate.propTypes = {
 HomePageTemplate.defaultProps = {
   children: <></>,
   status: Status.SUCCESS,
+  networkConnected: false,
   errorMessage: '',
 };
 

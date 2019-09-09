@@ -1,6 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNetInfo } from '@react-native-community/netinfo';
+import PropTypes from 'prop-types';
 import { getCurrentCustomer, logout } from '../../../store/actions';
 import { NAVIGATION_ORDERS_SCREEN_PATH } from '../../../navigation/types';
 import { Text, Button, GenericTemplate } from '../..';
@@ -10,6 +12,7 @@ import { ThemeContext } from '../../../config';
 // TODO: Disable logout button, once clicked
 const AccountPage = ({ navigation }) => {
   const dispatch = useDispatch();
+  const netInfo = useNetInfo();
   const theme = useContext(ThemeContext);
   const status = useSelector(state => state.account.status);
   const errorMessage = useSelector(state => state.account.errorMessage);
@@ -20,7 +23,7 @@ const AccountPage = ({ navigation }) => {
     if (status === Status.DEFAULT && !customer) {
       dispatch(getCurrentCustomer());
     }
-  }, []);
+  }, [netInfo.isConnected]);
 
   const onLogoutPress = () => {
     dispatch(logout());
@@ -28,7 +31,12 @@ const AccountPage = ({ navigation }) => {
   };
 
   return (
-    <GenericTemplate isScrollable={false} status={status} errorMessage={errorMessage}>
+    <GenericTemplate
+      networkConnected={netInfo.isConnected}
+      isScrollable={false}
+      status={status}
+      errorMessage={errorMessage}
+    >
       <Text style={styles.space(theme)}>{customer && `${customer.firstname} ${customer.lastname}`}</Text>
       <Text style={styles.space(theme)}>{customer && customer.email}</Text>
       <Button title="My Orders" onPress={() => navigation.navigate(NAVIGATION_ORDERS_SCREEN_PATH, { customerId: customer.id })} />

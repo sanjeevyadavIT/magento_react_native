@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { GenericTemplate, CategoryTree } from '../../../components';
+import { Resource, CategoryTree } from '../../../components';
 import { ThemeContext } from '../../../config';
 
 const CategoryTreeContainer = () => {
@@ -17,14 +17,13 @@ const CategoryTreeContainer = () => {
   };
 
   return (
-    <GenericTemplate
-      isScrollable={false}
+    <Resource
       status={status}
       errorMessage={errorMessage}
       style={styles.container(theme)}
     >
       {renderChildren()}
-    </GenericTemplate>
+    </Resource>
   );
 };
 

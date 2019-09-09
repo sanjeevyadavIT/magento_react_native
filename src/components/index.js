@@ -13,6 +13,7 @@ import MessageView from './molecules/MessageView';
 import LoadingView from './molecules/LoadingView';
 import Price from './molecules/Price';
 // Organisms
+import Resource from './organisms/Resource';
 // =========> cart
 import CartList from './organisms/cart/CartList';
 import CartListItem from './organisms/cart/CartListItem';
@@ -61,6 +62,7 @@ export {
   Price,
   LoadingView,
   DrawerHeader,
+  Resource,
   CartList,
   CartListItem,
   CategoryTree,

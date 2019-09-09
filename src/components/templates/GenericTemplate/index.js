@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { LoadingView, MessageView } from '../..';
 import Status from '../../../magento/Status';
 import { ThemeContext } from '../../../config';
+import { NO_NETWORK_CONNECTION_MESSAGE } from '../../../constants';
 
 // NOTE: Can add functionality to show some fallback message in case of empty view
 const GenericTemplate = ({
@@ -18,10 +19,15 @@ const GenericTemplate = ({
   isScrollable,
   status,
   errorMessage,
+  networkConnected,
   style,
 }) => {
   const theme = useContext(ThemeContext);
   const ViewGroup = isScrollable ? ScrollView : View;
+  if ((status === Status.DEFAULT || status === Status.ERROR) && !networkConnected) {
+    return <MessageView type="error" message={NO_NETWORK_CONNECTION_MESSAGE} />;
+  }
+
   if (status === Status.ERROR) {
     return <MessageView type="error" message={errorMessage} />;
   }
@@ -65,12 +71,14 @@ GenericTemplate.propTypes = {
   isScrollable: PropTypes.bool.isRequired,
   status: PropTypes.oneOf(Object.values(Status)),
   errorMessage: PropTypes.string,
+  networkConnected: PropTypes.bool,
   style: PropTypes.object,
 };
 
 GenericTemplate.defaultProps = {
   status: Status.SUCCESS,
   errorMessage: '',
+  networkConnected: false,
   style: {},
   footer: <></>
 };

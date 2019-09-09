@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import FeaturedCategoryList from '../FeaturedCategoryList';
-import { Text } from '../../../components';
+import { Text } from '../../../..';
 
 // TODO: Container is hosting another container: FeaturedCategoryList which in turn is a container in itself
 // TODO: Find it, is there any use of using memo here, as state is getting from hook

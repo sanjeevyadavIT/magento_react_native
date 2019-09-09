@@ -80,6 +80,7 @@ const OptionsContainer = ({
 
   return (
     <GenericTemplate
+      networkConnected
       isScrollable={false}
       status={status}
       errorMessage={errorMessage}

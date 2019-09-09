@@ -20,6 +20,7 @@ const ProductDetailPageTemplate = ({
   const theme = useContext(ThemeContext);
   return (
     <GenericTemplate
+      networkConnected
       isScrollable
       status={Status.SUCCESS}
       footer={footer}
