@@ -15,6 +15,7 @@ const HomePageTemplate = ({
   status,
   networkConnected,
   errorMessage,
+  footer,
 }) => {
   const theme = useContext(ThemeContext);
   return (
@@ -23,6 +24,7 @@ const HomePageTemplate = ({
       status={status}
       networkConnected={networkConnected}
       errorMessage={errorMessage}
+      footer={footer}
     >
       <View style={styles.imageSliderContainer(theme)}>
         {imageSlider}
@@ -45,7 +47,11 @@ const styles = StyleSheet.create({
 HomePageTemplate.propTypes = {
   imageSlider: PropTypes.element.isRequired,
   featuredCategories: PropTypes.element.isRequired,
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ]),
+  footer: PropTypes.element,
   networkConnected: PropTypes.bool,
   status: PropTypes.oneOf(Object.values(Status)),
   errorMessage: PropTypes.string,
@@ -55,6 +61,7 @@ HomePageTemplate.defaultProps = {
   children: <></>,
   status: Status.SUCCESS,
   networkConnected: false,
+  footer: <></>,
   errorMessage: '',
 };
 
