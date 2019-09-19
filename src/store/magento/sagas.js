@@ -1,7 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento, CUSTOMER_TOKEN } from '../../magento';
-import { MAGENTO } from '../../constants';
+import Status from '../../magento/Status';
+import { MAGENTO, USER_LOGGED_IN_STATUS } from '../../constants';
 import { magentoOptions } from '../../config/magento';
 
 // worker saga: Add Description
@@ -27,6 +28,7 @@ function* initMagento() {
     yield put({ type: MAGENTO.HOME_DATA_REQUEST });
     if (customerToken) {
       yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Fetch cart details
+      yield put({ type: USER_LOGGED_IN_STATUS, payload: { status: Status.SUCCESS } })
     }
   } catch (error) {
     yield put({ type: MAGENTO.INIT_APP_FAILURE, payload: { errorMessage: error.message } });

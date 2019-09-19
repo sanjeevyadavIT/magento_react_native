@@ -1,7 +1,8 @@
-import { MAGENTO, ACTION_USER_LOGOUT } from '../../constants';
+import { MAGENTO, ACTION_USER_LOGOUT, USER_LOGGED_IN_STATUS } from '../../constants';
 import Status from '../../magento/Status';
 
 const initialState = {
+  userLoggedInStatus: Status.DEFAULT,
   status: Status.DEFAULT, // customer info
   orderStatus: Status.DEFAULT,
 
@@ -23,12 +24,14 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         status: Status.SUCCESS,
+        userLoggedInStatus: Status.SUCCESS,
         customer: payload.customer,
       };
     case MAGENTO.CURRENT_USER_FAILURE:
       return {
         ...state,
         status: Status.ERROR,
+        userLoggedInStatus: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
     case MAGENTO.GET_ORDERS_LOADING:
@@ -48,6 +51,11 @@ export default (state = initialState, { type, payload }) => {
         orderStatus: Status.ERROR,
         ordersErrorMessage: payload.errorMessage,
       };
+    case USER_LOGGED_IN_STATUS:
+      return {
+        ...state,
+        userLoggedInStatus: payload.status,
+      }
     case ACTION_USER_LOGOUT:
       return initialState;
     default:
