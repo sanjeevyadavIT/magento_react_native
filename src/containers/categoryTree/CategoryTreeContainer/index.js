@@ -38,4 +38,4 @@ CategoryTreeContainer.propTypes = {};
 
 CategoryTreeContainer.defaultPorps = {};
 
-export default CategoryTreeContainer;
+export default React.memo(CategoryTreeContainer);
