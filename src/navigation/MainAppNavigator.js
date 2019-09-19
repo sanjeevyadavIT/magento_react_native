@@ -54,5 +54,16 @@ const MainAppNavigator = createStackNavigator(
     defaultNavigationOptions: defaultHeader,
   }
 );
+// Disable drawer on all screen except Home Page
+MainAppNavigator.navigationOptions = ({ navigation }) => {
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    drawerLockMode = 'locked-closed';
+  }
+
+  return {
+    drawerLockMode,
+  };
+};
 
 export default MainAppNavigator;
