@@ -59,7 +59,7 @@ You can help the team even more and [submit a Pull Request with a fix](#pull-req
 
 ### <a name="feature"></a> Suggesting Enhancements
 
-Feature suggestions are tracked as [GitHub issues](https://github.com/alexakasanjeev/magento_react_native/issues). Feature requests are welcome. **But first, already open issues marked as [`enhancement`](https://github.com/alexakasanjeev/magento_react_native/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement) will take priority**. So take a moment to find out whether your idea fits with the scope and aims of the project. Please provide as much detail and [context](.github/ISSUE_TEMPLATE/feature_request.md) as possible.
+Feature suggestions are tracked as [GitHub issues](https://github.com/alexakasanjeev/magento_react_native/issues). Feature requests are welcome. **But first, already open issues marked as [`Type: enhancement`](https://github.com/alexakasanjeev/magento_react_native/issues?q=is%3Aopen+is%3Aissue+label%3A%22Type%3A+Enhancement%22) will take priority**. So take a moment to find out whether your idea fits with the scope and aims of the project. Please provide as much detail and [context](.github/ISSUE_TEMPLATE/feature_request.md) as possible.
 
 - Make a [new feature request](https://github.com/alexakasanjeev/magento_react_native/issues/new?&labels=enhancement&template=feature_request.md&title=)
 
