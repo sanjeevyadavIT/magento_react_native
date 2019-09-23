@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentCustomer, logout } from '../../../store/actions';
-import { NAVIGATION_ORDERS_SCREEN_PATH } from '../../../navigation/types';
+import { NAVIGATION_ORDERS_SCREEN } from '../../../navigation/types';
 import { Text, Button, GenericTemplate } from '../..';
 import Status from '../../../magento/Status';
 import { ThemeContext } from '../../../config';
@@ -31,7 +31,7 @@ const AccountPage = ({ navigation }) => {
     <GenericTemplate isScrollable={false} status={status} errorMessage={errorMessage}>
       <Text style={styles.space(theme)}>{customer && `${customer.firstname} ${customer.lastname}`}</Text>
       <Text style={styles.space(theme)}>{customer && customer.email}</Text>
-      <Button title="My Orders" onPress={() => navigation.navigate(NAVIGATION_ORDERS_SCREEN_PATH, { customerId: customer.id })} />
+      <Button title="My Orders" onPress={() => navigation.navigate(NAVIGATION_ORDERS_SCREEN, { customerId: customer.id })} />
       <View style={styles.space(theme)} />
       <Button title="Logout" onPress={onLogoutPress} />
     </GenericTemplate>

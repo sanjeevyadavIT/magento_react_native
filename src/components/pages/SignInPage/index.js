@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, resetAuthState } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput } from '../..';
-import { NAVIGATION_SIGNUP_SCREEN_PATH } from '../../../navigation/types';
+import { NAVIGATION_SIGNUP_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 import { ThemeContext } from "../../../config";
 
@@ -36,7 +36,7 @@ const SignInPage = ({ navigation }) => {
     return (
       <View style={styles.linkContainer}>
         <Button title="signin" style={[styles.defaultMargin(theme)]} onPress={onSignInPress} />
-        <TouchableOpacity style={[styles.defaultMargin(theme), styles.center]} onPress={() => navigation.navigate(NAVIGATION_SIGNUP_SCREEN_PATH)}>
+        <TouchableOpacity style={[styles.defaultMargin(theme), styles.center]} onPress={() => navigation.navigate(NAVIGATION_SIGNUP_SCREEN)}>
           <Text>Create an account(Signup)</Text>
         </TouchableOpacity>
       </View>

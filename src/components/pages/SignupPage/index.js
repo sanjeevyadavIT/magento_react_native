@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { signUp, resetAuthState } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput } from '../..';
-import { NAVIGATION_LOGIN_SCREEN_PATH } from '../../../navigation/types';
+import { NAVIGATION_LOGIN_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 import { ThemeContext } from '../../../config';
 
@@ -39,7 +39,7 @@ const SignupPage = ({ navigation }) => {
     return (
       <View style={styles.linkContainer}>
         <Button title="Signup" style={[styles.defaultMargin(theme)]} onPress={onSignUpPress} />
-        <TouchableOpacity style={[styles.defaultMargin(theme), styles.center]} onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH)}>
+        <TouchableOpacity style={[styles.defaultMargin(theme), styles.center]} onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN)}>
           <Text>Already have an account(Login)</Text>
         </TouchableOpacity>
       </View>

@@ -4,6 +4,9 @@ import { ThemeProvider, theme } from './config';
 import Navigator from './navigation';
 import NavigationService from './navigation/NavigationService';
 import store from './store';
+import { initializeApp } from './store/actions';
+
+store.dispatch(initializeApp());
 
 const App = () => (
   <StoreProvider store={store}>

@@ -7,7 +7,7 @@ import { Text, Card } from '../../..';
 import { magento } from '../../../../magento';
 import Status from '../../../../magento/Status';
 import NavigationService from '../../../../navigation/NavigationService';
-import { NAVIGATION_LOGIN_SCREEN_PATH, NAVIGATION_ACCOUNT_SCREEN_PATH } from '../../../../navigation/types';
+import { NAVIGATION_LOGIN_SCREEN, NAVIGATION_ACCOUNT_SCREEN } from '../../../../navigation/types';
 import { ThemeContext } from '../../../../config';
 /**
  * @param status need to be passed, so that {@link DrawerHeader} can refresh
@@ -25,10 +25,10 @@ const DrawerHeader = ({
 
   if (magento.isCustomerLogin()) {
     welcomeText = 'Hello user!';
-    NAVIGATION_PATH = NAVIGATION_ACCOUNT_SCREEN_PATH;
+    NAVIGATION_PATH = NAVIGATION_ACCOUNT_SCREEN;
   } else {
     welcomeText = 'Login!';
-    NAVIGATION_PATH = NAVIGATION_LOGIN_SCREEN_PATH;
+    NAVIGATION_PATH = NAVIGATION_LOGIN_SCREEN;
   }
 
   return (

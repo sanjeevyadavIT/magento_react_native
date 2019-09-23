@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { GenericTemplate, Text, Button } from '../..';
-import { NAVIGATION_ORDER_DETAIL_SCREEN_PATH } from '../../../navigation/types';
+import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 import { ThemeContext } from '../../../config';
 
@@ -16,7 +16,7 @@ const OrderAcknowledgementPage = ({ navigation }) => {
 
   const renderFooter = () => (
     <View>
-      <Button title="View Order" onPress={() => navigation.navigate(NAVIGATION_ORDER_DETAIL_SCREEN_PATH, { orderId })} />
+      <Button title="View Order" onPress={() => navigation.navigate(NAVIGATION_ORDER_DETAIL_SCREEN, { orderId })} />
       <View style={styles.space(theme)} />
       <Button title="Continue Shopping" onPress={() => navigation.popToTop()} />
     </View>

@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Picker, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCartShippingInfo } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput, GenericTemplate } from '../..';
-import { NAVIGATION_PAYMENT_SCREEN_PATH } from '../../../navigation/types';
+import { NAVIGATION_PAYMENT_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 
 // TODO: Create a cutom picker component
@@ -75,14 +75,14 @@ const ShippingPage = ({ navigation }) => {
       dispatch(addCartShippingInfo(address));
     }
   };
-  
+
   const renderButton = () => {
     if (paymentMethodStatus === Status.LOADING) {
       return <Spinner />;
     }
 
     if (paymentMethodStatus === Status.SUCCESS) {
-      navigation.navigate(NAVIGATION_PAYMENT_SCREEN_PATH);
+      navigation.navigate(NAVIGATION_PAYMENT_SCREEN);
     }
 
     return (
@@ -91,7 +91,7 @@ const ShippingPage = ({ navigation }) => {
   };
 
   return (
-    <GenericTemplate 
+    <GenericTemplate
       isScrollable={false}
       status={status}
       errorMessage={errorMessage}

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Card, Text } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
-import { NAVIGATION_ORDER_DETAIL_SCREEN_PATH } from '../../../../navigation/types';
+import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../../../navigation/types';
 import { ThemeContext } from '../../../../config';
 
 const OrderListItem = ({ item }) => {
@@ -13,7 +13,7 @@ const OrderListItem = ({ item }) => {
 
   const onPress = () => {
     NavigationService.navigate(
-      NAVIGATION_ORDER_DETAIL_SCREEN_PATH,
+      NAVIGATION_ORDER_DETAIL_SCREEN,
       {
         item
       }

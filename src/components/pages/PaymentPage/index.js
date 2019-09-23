@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { placeCartOrder, createQuoteId } from '../../../store/actions';
 import { Spinner, Text, Button, GenericTemplate } from '../..';
-import { NAVIGATION_HOME_PATH, NAVIGATION_ORDER_ACKNOWLEDGEMENT_PAGE } from '../../../navigation/types';
+import { NAVIGATION_HOME_SCREEN, NAVIGATION_ORDER_CONFIRMATION_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 
 // FIXME: Reset all status variable in checkout reducer,
@@ -69,15 +69,15 @@ const PaymentPage = ({ navigation }) => {
         index: 1,
         actions: [
           NavigationActions.navigate(
-            { routeName: NAVIGATION_HOME_PATH }
+            { routeName: NAVIGATION_HOME_SCREEN }
           ),
           NavigationActions.navigate(
-            { routeName: NAVIGATION_ORDER_ACKNOWLEDGEMENT_PAGE, params: { status: Status.SUCCESS } },
+            { routeName: NAVIGATION_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } },
           ),
         ],
       });
       navigation.dispatch(resetAction);
-      // navigation.navigate(NAVIGATION_ORDER_ACKNOWLEDGEMENT_PAGE, { status: Status.SUCCESS });
+      // navigation.navigate(NAVIGATION_ORDER_CONFIRMATION_SCREEN, { status: Status.SUCCESS });
     }
 
     return (

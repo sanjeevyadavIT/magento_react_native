@@ -3,7 +3,7 @@ import { View, Picker, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCountries, addCartBillingAddress, getCurrentCustomer, getShippingMethod, getCustomerCart } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput } from '../..';
-import { NAVIGATION_SHIPPING_SCREEN_PATH } from '../../../navigation/types';
+import { NAVIGATION_SHIPPING_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
 import { ThemeContext } from '../../../config';
 
@@ -176,7 +176,7 @@ const AddressPage = ({ navigation }) => {
     dispatch(getCustomerCart());
     dispatch(getShippingMethod(address));
     if (shippingMethodStatus === Status.DEFAULT) {
-      navigation.navigate(NAVIGATION_SHIPPING_SCREEN_PATH);
+      navigation.navigate(NAVIGATION_SHIPPING_SCREEN);
     }
   }
 

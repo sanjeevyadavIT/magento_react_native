@@ -17,8 +17,8 @@ import {
 import { magento } from '../../../magento';
 import { PRODUTC_DETAIL_PAGE_TITLE } from '../../../constants';
 import {
-  NAVIGATION_LOGIN_SCREEN_PATH,
-  NAVIGATION_CART_SCREEN_PATH,
+  NAVIGATION_LOGIN_SCREEN,
+  NAVIGATION_CART_SCREEN,
 } from '../../../navigation/types';
 
 /**
@@ -60,7 +60,7 @@ ProductDetailPage.navigationOptions = ({ navigation }) => ({
   title: navigation.getParam('title', PRODUTC_DETAIL_PAGE_TITLE),
   headerRight: (
     <MaterialAppbarButtons>
-      <Item title="Cart" iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN_PATH) : navigation.navigate(NAVIGATION_LOGIN_SCREEN_PATH))} />
+      <Item title="Cart" iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN) : navigation.navigate(NAVIGATION_LOGIN_SCREEN))} />
     </MaterialAppbarButtons>
   ),
 });

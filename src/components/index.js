@@ -27,11 +27,9 @@ import CategoryTreeItem from './organisms/drawer/CategoryTreeItem';
 import OrderListItem from './organisms/order/OrderListItem';
 // Templates
 import GenericTemplate from './templates/GenericTemplate';
-import HomePageTemplate from './templates/HomePageTemplate';
 import DrawerTemplate from './templates/DrawerTemplate';
 import ProductDetailPageTemplate from './templates/ProductDetailPageTemplate';
 // Pages
-import HomePage from './pages/HomePage';
 import CategoryListPage from './pages/CategoryListPage';
 import SignInPage from './pages/SignInPage';
 import SignupPage from './pages/SignupPage';
@@ -69,10 +67,8 @@ export {
   ProductList,
   CatalogGridItem,
   GenericTemplate,
-  HomePageTemplate,
   DrawerTemplate,
   ProductDetailPageTemplate,
-  HomePage,
   CategoryListPage,
   SignInPage,
   SignupPage,
