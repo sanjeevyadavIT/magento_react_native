@@ -1,20 +1,23 @@
 import { createStackNavigator } from 'react-navigation';
-import { HomeScreen } from '../screens';
 import {
-  CategoryListPage,
-  SignInPage,
-  SignupPage,
-  AccountPage,
-  OrdersPage,
-  OrderDetailPage,
-  CartPage,
-  ProductDetailPage,
-  AddressPage,
-  ShippingPage,
-  PaymentPage,
-  OrderAcknowledgementPage,
+  HomeScreen,
+  ProductScreen,
+  SearchScreen,
+  CartScreen,
+  CategoryListScreen,
+  AccountScreen,
+  AddressScreen,
+  SignInScreen,
+  SignUpScreen,
+  ShippingScreen,
+  PaymentScreen,
+  OrdersScreen,
+  OrderDetailScreen,
+  OrderAcknowledgementScreen,
+} from '../screens';
+import {
+
 } from '../components';
-import Search from '../containers/Search';
 import {
   defaultHeader,
   NAVIGATION_HOME_SCREEN,
@@ -36,19 +39,19 @@ import {
 const MainAppNavigator = createStackNavigator(
   {
     [NAVIGATION_HOME_SCREEN]: HomeScreen,
-    [NAVIGATION_CATEGORY_LIST_SCREEN]: CategoryListPage,
-    [NAVIGATION_SEARCH_SCREEN]: Search,
-    [NAVIGATION_LOGIN_SCREEN]: SignInPage,
-    [NAVIGATION_SIGNUP_SCREEN]: SignupPage,
-    [NAVIGATION_ACCOUNT_SCREEN]: AccountPage,
-    [NAVIGATION_ORDERS_SCREEN]: OrdersPage,
-    [NAVIGATION_ORDER_DETAIL_SCREEN]: OrderDetailPage,
-    [NAVIGATION_PRODUCT_SCREEN]: ProductDetailPage,
-    [NAVIGATION_CART_SCREEN]: CartPage,
-    [NAVIGATION_ADDRESS_SCREEN]: AddressPage,
-    [NAVIGATION_SHIPPING_SCREEN]: ShippingPage,
-    [NAVIGATION_PAYMENT_SCREEN]: PaymentPage,
-    [NAVIGATION_ORDER_CONFIRMATION_SCREEN]: OrderAcknowledgementPage,
+    [NAVIGATION_CATEGORY_LIST_SCREEN]: CategoryListScreen,
+    [NAVIGATION_SEARCH_SCREEN]: SearchScreen,
+    [NAVIGATION_LOGIN_SCREEN]: SignInScreen,
+    [NAVIGATION_SIGNUP_SCREEN]: SignUpScreen,
+    [NAVIGATION_ACCOUNT_SCREEN]: AccountScreen,
+    [NAVIGATION_ORDERS_SCREEN]: OrdersScreen,
+    [NAVIGATION_ORDER_DETAIL_SCREEN]: OrderDetailScreen,
+    [NAVIGATION_PRODUCT_SCREEN]: ProductScreen,
+    [NAVIGATION_CART_SCREEN]: CartScreen,
+    [NAVIGATION_ADDRESS_SCREEN]: AddressScreen,
+    [NAVIGATION_SHIPPING_SCREEN]: ShippingScreen,
+    [NAVIGATION_PAYMENT_SCREEN]: PaymentScreen,
+    [NAVIGATION_ORDER_CONFIRMATION_SCREEN]: OrderAcknowledgementScreen,
   },
   {
     defaultNavigationOptions: defaultHeader,

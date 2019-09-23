@@ -13,6 +13,7 @@ import MessageView from './molecules/MessageView';
 import LoadingView from './molecules/LoadingView';
 import Price from './molecules/Price';
 // Organisms
+import GenericTemplate from './organisms/GenericTemplate';
 // =========> cart
 import CartList from './organisms/cart/CartList';
 import CartListItem from './organisms/cart/CartListItem';
@@ -25,24 +26,6 @@ import CategoryTree from './organisms/drawer/CategoryTree';
 import CategoryTreeItem from './organisms/drawer/CategoryTreeItem';
 // =========> order
 import OrderListItem from './organisms/order/OrderListItem';
-// Templates
-import GenericTemplate from './templates/GenericTemplate';
-import DrawerTemplate from './templates/DrawerTemplate';
-import ProductDetailPageTemplate from './templates/ProductDetailPageTemplate';
-// Pages
-import CategoryListPage from './pages/CategoryListPage';
-import SignInPage from './pages/SignInPage';
-import SignupPage from './pages/SignupPage';
-import AccountPage from './pages/AccountPage';
-import OrdersPage from './pages/OrdersPage';
-import OrderDetailPage from './pages/OrderDetailPage';
-import CartPage from './pages/CartPage';
-import DrawerPage from './pages/DrawerPage';
-import ProductDetailPage from './pages/ProductDetailPage';
-import AddressPage from './pages/AddressPage';
-import ShippingPage from './pages/ShippingPage';
-import PaymentPage from './pages/PaymentPage';
-import OrderAcknowledgementPage from './pages/OrderAcknowledgementPage';
 
 export {
   Text,
@@ -67,19 +50,4 @@ export {
   ProductList,
   CatalogGridItem,
   GenericTemplate,
-  DrawerTemplate,
-  ProductDetailPageTemplate,
-  CategoryListPage,
-  SignInPage,
-  SignupPage,
-  AccountPage,
-  OrdersPage,
-  OrderDetailPage,
-  CartPage,
-  DrawerPage,
-  ProductDetailPage,
-  AddressPage,
-  ShippingPage,
-  PaymentPage,
-  OrderAcknowledgementPage,
 };

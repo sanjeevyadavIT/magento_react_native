@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   }),
 });
 
-DrawerHeader.propTypes ={
-  status: PropTypes.oneOf(Object.values(Status)).isRequired
+DrawerHeader.propTypes = {
+  status: PropTypes.oneOf(Object.values(Status)).isRequired,
 };
 
 const mapStatetoProps = ({ account }) => {
