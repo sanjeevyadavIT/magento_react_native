@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import Image from '.';
-import { ThemeProvider, theme } from '../../../config';
+import { ThemeProvider, theme } from '../../../theme';
 
 storiesOf('Image', module)
   .addDecorator(getStory => (

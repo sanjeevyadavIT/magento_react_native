@@ -6,7 +6,7 @@ import { magento } from '../../../../../magento';
 import { ImageSlider, ImageSliderItem, GenericTemplate } from '../../../..';
 import { getProductMedia } from '../../../../../store/actions';
 import Status from '../../../../../magento/Status';
-import { ThemeContext } from '../../../../../config';
+import { ThemeContext } from '../../../../../theme';
 
 const SliderContainer = ({
   /**

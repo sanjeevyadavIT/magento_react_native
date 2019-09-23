@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../../atoms/Text';
 import { isNumber, formatPrice } from './utils';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 /**
  * Component to display price of the product
@@ -55,7 +55,7 @@ const styles = {
     flexDirection: 'row'
   },
   discountPriceText: theme => ({
-    marginEnd: theme.spacing.four,
+    marginEnd: theme.spacing.tiny,
   }),
   basePriceText: (basePrice, discountPrice) => ({
     textDecorationLine: discountPrice && discountPrice < basePrice ? 'line-through' : 'none',

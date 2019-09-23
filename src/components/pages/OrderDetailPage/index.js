@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { GenericTemplate, Text, Image, Card } from '../..';
 import { getOrderDetail } from '../../../store/actions';
 import Status from '../../../magento/Status';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 // TODO: Show product image in place of placeholder
 // TODO: Extract strings in strings.js
@@ -89,13 +89,13 @@ const styles = StyleSheet.create({
   card: theme => ({
     flexDirection: 'row',
     flex: 1,
-    marginHorizontal: theme.spacing.eight,
-    marginBottom: theme.spacing.eight
+    marginHorizontal: theme.spacing.small,
+    marginBottom: theme.spacing.small
   }),
   imageStyle: theme => ({
     width: theme.dimens.orderDetailImageWidth,
     height: theme.dimens.orderDetailImageHeight,
-    marginRight: theme.spacing.eight,
+    marginRight: theme.spacing.small,
   })
 });
 

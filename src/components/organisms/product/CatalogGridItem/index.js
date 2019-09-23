@@ -11,7 +11,7 @@ import {
 } from '../../..';
 import { NAVIGATION_PRODUCT_SCREEN } from '../../../../navigation/types';
 import { getProductThumbnailFromAttribute } from '../../../../utils/products';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 
 const CatalogGridItem = ({
   /**
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     height: theme.dimens.catalogGridItemImageHeight,
   }),
   detail: theme => ({
-    padding: theme.spacing.eight,
+    padding: theme.spacing.small,
     flex: 1,
     justifyContent: 'space-between',
   })

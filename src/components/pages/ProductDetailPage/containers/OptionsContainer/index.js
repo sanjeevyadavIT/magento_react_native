@@ -9,7 +9,7 @@ import {
   uiProductUpdateOptions,
 } from '../../../../../store/actions';
 import Status from '../../../../../magento/Status';
-import { ThemeContext } from '../../../../../config';
+import { ThemeContext } from '../../../../../theme';
 import { DEFAULT_PICKER_LABEL } from '../../../../../constants';
 /**
  * For `configurable` type product, show selection box,

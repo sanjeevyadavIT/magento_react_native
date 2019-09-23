@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Spinner from '../../atoms/Spinner';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 const LoadingView = ({
   /**

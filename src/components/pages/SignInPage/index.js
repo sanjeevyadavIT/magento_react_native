@@ -5,7 +5,7 @@ import { signIn, resetAuthState } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput } from '../..';
 import { NAVIGATION_SIGNUP_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
-import { ThemeContext } from "../../../config";
+import { ThemeContext } from '../../../theme';
 
 // TODO: create Button to have a style of no background and border
 // TODO: Use KeyboardAvoidingView
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.sixteen,
+    marginTop: theme.spacing.large,
   }),
   center: {
     alignSelf: 'center',

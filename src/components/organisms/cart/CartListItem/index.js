@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getCartItemProduct, removeItemFromCart } from '../../../../store/actions';
 import { getProductThumbnailFromAttribute } from '../../../../utils';
 import { Card, Image, Text } from '../../..';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 
 // NOTE: Is it better to create a wapper around CartListItem and extract state in it?
 // It is in organisms folder because it is state aware
@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: theme.spacing.eight,
-    marginRight: theme.spacing.eight,
-    marginBottom: theme.spacing.eight,
+    marginLeft: theme.spacing.small,
+    marginRight: theme.spacing.small,
+    marginBottom: theme.spacing.small,
   }),
   image: theme => ({
     flex: 1,

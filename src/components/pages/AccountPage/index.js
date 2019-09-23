@@ -5,7 +5,7 @@ import { getCurrentCustomer, logout } from '../../../store/actions';
 import { NAVIGATION_ORDERS_SCREEN } from '../../../navigation/types';
 import { Text, Button, GenericTemplate } from '../..';
 import Status from '../../../magento/Status';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 // TODO: Disable logout button, once clicked
 const AccountPage = ({ navigation }) => {
@@ -40,7 +40,7 @@ const AccountPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   space: theme => ({
-    marginBottom: theme.spacing.eight,
+    marginBottom: theme.spacing.small,
   })
 });
 

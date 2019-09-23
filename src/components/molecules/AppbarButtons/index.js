@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { HeaderButtons, HeaderButton } from 'react-navigation-header-buttons';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 const MaterialAppbarButton = (props) => {
   const theme = useContext(ThemeContext);

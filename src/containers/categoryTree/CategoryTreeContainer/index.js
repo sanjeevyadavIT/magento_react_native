@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { GenericTemplate, CategoryTree } from '../../../components';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 const CategoryTreeContainer = () => {
   const status = useSelector(state => state.categoryTree.status);

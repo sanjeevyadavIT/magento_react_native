@@ -1,4 +1,4 @@
-import { theme } from '../config';
+import { theme } from '../theme';
 
 export const NAVIGATION_HOME_SCREEN = 'HomeScreen';
 export const NAVIGATION_CATEGORY_LIST_SCREEN = 'CategoryListScreen';

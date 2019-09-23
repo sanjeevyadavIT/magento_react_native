@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import { LoadingView, MessageView } from '../..';
 import Status from '../../../magento/Status';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 // NOTE: Can add functionality to show some fallback message in case of empty view
 const GenericTemplate = ({
@@ -34,7 +34,7 @@ const GenericTemplate = ({
     <SafeAreaView style={styles.container(theme)}>
       <StatusBar
         barStyle="default"
-        backgroundColor={theme.colors.statusBarColor}
+        backgroundColor={theme.colors.primaryDark}
       />
       <ViewGroup style={[styles.content, style]}>
         {children}

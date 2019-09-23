@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 const DrawerTemplate = ({
   headerView,

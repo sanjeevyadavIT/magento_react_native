@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GenericTemplate, MaterialAppbarButtons, Item } from '../../components';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from './containers';
-import { ThemeContext } from '../../config';
+import { ThemeContext } from '../../theme';
 import { BRAND_NAME } from '../../constants';
 import { magento } from '../../magento';
 import Status from '../../magento/Status';

@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { GenericTemplate } from '../..';
 import Status from '../../../magento/Status';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 const HomePageTemplate = ({
   imageSlider,

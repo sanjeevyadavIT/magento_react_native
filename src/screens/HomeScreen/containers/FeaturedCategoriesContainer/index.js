@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import FeaturedCategoryList from '../FeaturedCategoryList';
 import { Text } from '../../../../components';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 
 
 /**
@@ -33,14 +33,14 @@ const FeaturedCategoriesContainer = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    marginTop: theme.spacing.sixteen,
+    marginTop: theme.spacing.large,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: theme.colors.surface,
   }),
   title: theme => ({
-    marginTop: theme.spacing.eight,
-    marginLeft: theme.spacing.twelve,
+    marginTop: theme.spacing.small,
+    marginLeft: theme.spacing.medium,
   }),
 });
 

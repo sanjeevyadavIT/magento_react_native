@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { magento } from '../../../../magento';
 import { ImageSlider, ImageSliderItem } from '../../../../components';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 
 /**
  * Container component for {@link ImageSlider} mounted to HomeScreen

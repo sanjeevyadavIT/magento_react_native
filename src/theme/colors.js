@@ -2,9 +2,14 @@ export default {
   // grey scale
   black: '#000000',
   white: '#ffffff',
+  /**
+   * A helper for making something see-thru. Use sparingly as many layers of transparency
+   * can cause older Android devices to slow down due to the excessive compositing required
+   * by their under-powered GPUs.
+   */
   transparent: 'transparent',
   /**
-   * Background color to be used for a page
+   * The screen background.
    */
   background: '#F7F6F4',
   /**
@@ -17,11 +22,13 @@ export default {
   border: '#d9d9d9',
   /**
    * ========================= Primary color : (Brand color) =========================
-   * statusBarColor: color for the status bar
+   * primaryDark: color for the status bar and for dark tint
    * primary: to be used as a background color for appbar(toolbar)
    * appBarTintColor: to be used for appbar title text, appbar icons color and for back button
+   *
+   * Example: If primary color is dark, make appbarTintColor light
    */
-  statusBarColor: '#0D5DC8',
+  primaryDark: '#0D5DC8',
   primary: '#1C6CD1',
   appbarTintColor: '#fff',
   /**
@@ -34,10 +41,8 @@ export default {
   secondary: '#1CB0F6',
   secondaryDark: '#0999dd',
   /**
+   * The default color of text in many components.
    * To be used for heading, subheading, label text
-   *
-   * Also, This same color will be used for Appbar tint color for
-   * icons, back button.
    */
   titleText: '#595959',
   /**
@@ -48,7 +53,12 @@ export default {
    * To be used for hint text component
    */
   captionText: '#8c8c8c',
-  // Others
+  /**
+   * Success messages and icons.
+   */
   success: '#52c41a',
+  /**
+   * Error messages and icons.
+   */
   error: '#ff190c',
 };

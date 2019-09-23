@@ -5,7 +5,7 @@ import { signUp, resetAuthState } from '../../../store/actions';
 import { Spinner, Text, Button, TextInput } from '../..';
 import { NAVIGATION_LOGIN_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 // TODO: Use KeyboardAvoidingView
 const SignupPage = ({ navigation }) => {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.sixteen,
+    marginTop: theme.spacing.large,
   }),
   center: {
     alignSelf: 'center',

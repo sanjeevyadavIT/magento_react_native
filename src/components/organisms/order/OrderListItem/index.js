@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Card, Text } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../../../navigation/types';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 
 const OrderListItem = ({ item }) => {
   const theme = useContext(ThemeContext);
@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: theme.spacing.eight,
-    marginRight: theme.spacing.eight,
-    marginBottom: theme.spacing.eight,
+    marginLeft: theme.spacing.small,
+    marginRight: theme.spacing.small,
+    marginBottom: theme.spacing.small,
   }),
   infoContainer: theme => ({
     flex: 1,
-    padding: theme.spacing.eight,
+    padding: theme.spacing.small,
   })
 });
 

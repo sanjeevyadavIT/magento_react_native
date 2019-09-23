@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { GenericTemplate, Text, Button } from '../..';
 import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../../navigation/types';
 import Status from '../../../magento/Status';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 // TODO: Extract strings in strings.js
 const OrderAcknowledgementPage = ({ navigation }) => {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   space: theme => ({
     flex: 1,
-    marginTop: theme.spacing.eight,
+    marginTop: theme.spacing.small,
   })
 });
 

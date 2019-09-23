@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { WebView } from 'react-native-webview';
 import { Text } from '../../../..';
-import { ThemeContext } from '../../../../../config';
+import { ThemeContext } from '../../../../../theme';
 import {
   PRODUCT_DESCRIPTION_SECTION_TITLE,
   NO_PRODUCT_DESCRIPTION_AVAILABLE
@@ -48,7 +48,7 @@ const DescriptionContainer = ({
 
 const styles = {
   productDetailTitle: theme => ({
-    marginBottom: theme.spacing.four,
+    marginBottom: theme.spacing.tiny,
   }),
 };
 

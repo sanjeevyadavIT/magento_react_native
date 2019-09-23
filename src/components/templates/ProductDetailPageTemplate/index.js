@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { GenericTemplate } from '../..';
 import Status from '../../../magento/Status';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 /**
  * This template describes the layout of Product Detail page
@@ -46,8 +46,8 @@ const ProductDetailPageTemplate = ({
 const styles = StyleSheet.create({
   defaultStyles: theme => ({
     backgroundColor: theme.colors.surface,
-    marginTop: theme.spacing.sixteen,
-    padding: theme.spacing.sixteen,
+    marginTop: theme.spacing.large,
+    padding: theme.spacing.large,
   }),
   imageContainer: height => ({
     height

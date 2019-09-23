@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import HomePageTemplate from '.';
 import Text from '../../atoms/Text';
-import { ThemeProvider, theme } from '../../../config';
+import { ThemeProvider, theme } from '../../../theme';
 
 const ImageSlider = () => (
   <View style={{ backgroundColor: 'pink' }}>

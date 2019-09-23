@@ -13,7 +13,7 @@ import { CategoryTree, Text, Card } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_CATEGORY_LIST_SCREEN } from '../../../../navigation/types';
 import { setNewCategory } from '../../../../store/actions';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 
 // TODO: Hide category which don't have product and children_data
 const CategoryTreeItem = ({ category }) => {
@@ -91,7 +91,7 @@ const CategoryTreeItem = ({ category }) => {
 
 const styles = StyleSheet.create({
   container: theme => ({
-    marginLeft: theme.spacing.sixteen,
+    marginLeft: theme.spacing.large,
   }),
   card: theme => ({
     borderWidth: 0,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   }),
   expandIcon: theme => ({
     padding: 2,
-    paddingRight: theme.spacing.sixteen
+    paddingRight: theme.spacing.large
   }),
 });
 

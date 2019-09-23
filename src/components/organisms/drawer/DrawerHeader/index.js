@@ -8,7 +8,7 @@ import { magento } from '../../../../magento';
 import Status from '../../../../magento/Status';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_LOGIN_SCREEN, NAVIGATION_ACCOUNT_SCREEN } from '../../../../navigation/types';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 /**
  * @param status need to be passed, so that {@link DrawerHeader} can refresh
  * when user is logged in
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: theme.spacing.sixteen,
+    padding: theme.spacing.large,
   }),
   text: theme => ({
     color: theme.colors.white,
