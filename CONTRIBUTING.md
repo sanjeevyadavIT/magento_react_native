@@ -2,10 +2,10 @@
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
-We would love for you to contribute to MageCart and help make it even better! As a contributor, here are the guidelines we would like you to follow:
+We would love for you to contribute to MageCart and help make it even better. As a contributor, here are some guidelines which will help you to understand the project:
 
- - [Code of Conduct](#coc)
- - [What should I know before I get started?](#prerequisite)
+ - [About Project](#about)
+ - [Project Management](#management)
     - [Technology Stack](#tech)
     - [Branch organization](#branch)
  - [How Can I Contribute?](#contribute)
@@ -18,11 +18,19 @@ We would love for you to contribute to MageCart and help make it even better! As
    - [Commit Message Convention](#commit)
    - [JavaScript Styleguide](#javascript-styleguide)
  - [Community](#community)
+ - [Code of Conduct](#coc)
 
-## <a name="coc"></a> Code of Conduct
-Help us keep MageCart open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+## <a name="about"></a> About Project
+Magecart is an eCommerce App written in React Native written for [Magento 2](https://devdocs.magento.com/). Magento is an open-source e-commerce platform written in PHP. The app uses [Magento 2 API](https://devdocs.magento.com/guides/v2.3/rest/bk-rest.html) to fetch and display data.
 
-## <a name="prerequisite"></a> What should I know before I get started?
+Learn basics of Magento [here](https://www.youtube.com/playlist?list=PLju9v8YUzEuzYxXrF8ucXwxW_Xcgu1dYd). If you are familiar with magento then checkout the magento [API docs](https://devdocs.magento.com/redoc/2.3/) to understand the APIs.
+
+All API are imported into [Postman](https://www.getpostman.com/) as a collection, which you can test at your end.
+
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3575fb0356059b379d8e)
+
+## <a name="management"></a> Project Management
 
 We use [Github issues](https://github.com/alexakasanjeev/magento_react_native/issues) to track all the features and bug. We follow this project management strategy.
 
@@ -190,3 +198,6 @@ All JavaScript must adhere to [Airbnb's JS Style Guide](https://github.com/airbn
 If you have any questions or if you would like to get involved in the MageCart community or just want say *Hi!*, you can check out:
  
  - Join us on [Magecart Slack Team](https://join.slack.com/t/magecart/shared_invite/enQtNjU5MTc5ODM4NjE0LTBjZThjMjg3Zjk0MzJlNGE1MDRkMDBlYThjNzA3NzRlMTViMGVhYzY1ZGUyOTIzZWQ1ZjAyMzk1OTIzZTFlMTM)
+
+ ## <a name="coc"></a> Code of Conduct
+Help us keep MageCart open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
