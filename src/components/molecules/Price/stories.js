@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import Price from '.';
-import { ThemeProvider, theme } from '../../../config';
+import { ThemeProvider, theme } from '../../../theme';
 
 storiesOf('Price', module)
   .addDecorator(getStory => (

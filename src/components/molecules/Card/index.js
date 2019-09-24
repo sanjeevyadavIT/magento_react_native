@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 const OUTLINE = 'outline';
 const CLEAR = 'clear';

@@ -23,10 +23,8 @@ function loadStories() {
   require('../src/components/organisms/drawer/DrawerHeader/stories');
   require('../src/components/organisms/product/CatalogGridItem/stories');
   require('../src/components/organisms/product/ProductList/stories');
-  require('../src/components/templates/DrawerTemplate/stories');
-  require('../src/components/templates/GenericTemplate/stories');
-  require('../src/components/templates/HomePageTemplate/stories');
-  
+  require('../src/components/organisms/GenericTemplate/stories');
+
 }
 
 const stories = [
@@ -51,7 +49,7 @@ const stories = [
   '../src/components/templates/DrawerTemplate/stories',
   '../src/components/templates/GenericTemplate/stories',
   '../src/components/templates/HomePageTemplate/stories',
-  
+
 ];
 
 module.exports = {

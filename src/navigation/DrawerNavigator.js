@@ -1,13 +1,13 @@
 import { createDrawerNavigator } from 'react-navigation';
 import MainAppNavigator from './MainAppNavigator';
-import { DrawerPage } from '../components';
+import { DrawerScreen } from '../screens';
 
 const DrawerNavigator = createDrawerNavigator(
   {
     MainAppNavigator,
   },
   {
-    contentComponent: DrawerPage,
+    contentComponent: DrawerScreen,
   }
 );
 

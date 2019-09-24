@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { magento, CUSTOMER_TOKEN } from '../../magento';
 import Status from '../../magento/Status';
 import { MAGENTO, USER_LOGGED_IN_STATUS } from '../../constants';
-import { magentoOptions } from '../../config/magento';
+import { magentoOptions } from '../../../config/magento';
 
 // worker saga: Add Description
 function* initMagento() {

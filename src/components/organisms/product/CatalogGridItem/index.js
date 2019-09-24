@@ -9,9 +9,9 @@ import {
   Card,
   Price
 } from '../../..';
-import { NAVIGATION_PRODUCT_DETAIL_PATH } from '../../../../navigation/types';
+import { NAVIGATION_PRODUCT_SCREEN } from '../../../../navigation/types';
 import { getProductThumbnailFromAttribute } from '../../../../utils/products';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 
 const CatalogGridItem = ({
   /**
@@ -48,7 +48,7 @@ const CatalogGridItem = ({
 
   const onRowPress = () => {
     openSelectedProduct(product, extra ? extra.children : undefined);
-    NavigationService.navigate(NAVIGATION_PRODUCT_DETAIL_PATH, {
+    NavigationService.navigate(NAVIGATION_PRODUCT_SCREEN, {
       title: product.name,
     });
   };
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     height: theme.dimens.catalogGridItemImageHeight,
   }),
   detail: theme => ({
-    padding: theme.spacing.eight,
+    padding: theme.spacing.small,
     flex: 1,
     justifyContent: 'space-between',
   })

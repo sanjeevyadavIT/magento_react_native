@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text } from '../..';
-import { ThemeContext } from '../../../config';
+import { ThemeContext } from '../../../theme';
 
 const INFO = 'info';
 const SUCCESS = 'success';
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   text: (type, theme) => ({
     textAlign: 'center',
-    padding: theme.spacing.eight,
+    padding: theme.spacing.small,
     color: getTextColor(type, theme),
   }),
 });

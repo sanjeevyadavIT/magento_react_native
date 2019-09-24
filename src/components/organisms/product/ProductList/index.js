@@ -3,7 +3,7 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { CatalogGridItem, LoadingView, GenericTemplate } from '../../..';
 import Status from '../../../../magento/Status';
-import { ThemeContext } from '../../../../config';
+import { ThemeContext } from '../../../../theme';
 
 // Distance between two list item
 const SEPERATOR_SPACE = 12;

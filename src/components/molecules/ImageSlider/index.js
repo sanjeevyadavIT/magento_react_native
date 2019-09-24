@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 
 ImageSlider.propTypes = {
   imageHeight: PropTypes.number.isRequired,
-  slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired, // redux prop
+  slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired,
   baseUrl: PropTypes.string.isRequired,
   showTitle: PropTypes.bool,
   resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch', 'repeat', 'center']),

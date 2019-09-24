@@ -1,19 +1,19 @@
-import { theme } from '../config';
+import { theme } from '../theme';
 
-export const NAVIGATION_HOME_PATH = 'DashboardScreen';
-export const NAVIGATION_CATEGORY_LIST_PATH = 'CategoryList';
-export const NAVIGATION_PRODUCT_DETAIL_PATH = 'ProductDetail';
-export const NAVIGATION_SEARCH_SCREEN_PATH = 'SearchScreen';
-export const NAVIGATION_LOGIN_SCREEN_PATH = 'LoginScreen';
-export const NAVIGATION_SIGNUP_SCREEN_PATH = 'SignupScreen';
-export const NAVIGATION_ACCOUNT_SCREEN_PATH = 'AccountScreen';
-export const NAVIGATION_ORDERS_SCREEN_PATH = 'OrdersScreen';
-export const NAVIGATION_ORDER_DETAIL_SCREEN_PATH = 'OrderDetailPage';
-export const NAVIGATION_CART_SCREEN_PATH = 'CartScreen';
-export const NAVIGATION_ADDRESS_SCREEN_PATH = 'AddressScreen';
-export const NAVIGATION_SHIPPING_SCREEN_PATH = 'ShippingScreen';
-export const NAVIGATION_PAYMENT_SCREEN_PATH = 'PaymentScreen';
-export const NAVIGATION_ORDER_ACKNOWLEDGEMENT_PAGE = 'OrderAcknowledgementPage';
+export const NAVIGATION_HOME_SCREEN = 'HomeScreen';
+export const NAVIGATION_CATEGORY_LIST_SCREEN = 'CategoryListScreen';
+export const NAVIGATION_PRODUCT_SCREEN = 'ProductDetailScreen';
+export const NAVIGATION_SEARCH_SCREEN = 'SearchScreen';
+export const NAVIGATION_LOGIN_SCREEN = 'LoginScreen';
+export const NAVIGATION_SIGNUP_SCREEN = 'SignupScreen';
+export const NAVIGATION_ACCOUNT_SCREEN = 'AccountScreen';
+export const NAVIGATION_ORDERS_SCREEN = 'OrdersScreen';
+export const NAVIGATION_ORDER_DETAIL_SCREEN = 'OrderDetailScreen';
+export const NAVIGATION_CART_SCREEN = 'CartScreen';
+export const NAVIGATION_ADDRESS_SCREEN = 'AddressScreen';
+export const NAVIGATION_SHIPPING_SCREEN = 'ShippingScreen';
+export const NAVIGATION_PAYMENT_SCREEN = 'PaymentScreen';
+export const NAVIGATION_ORDER_CONFIRMATION_SCREEN = 'OrderConfirmationScreen';
 
 export const defaultHeader = {
   headerStyle: {

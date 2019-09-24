@@ -3,7 +3,7 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { CartListItem, Text, Button, MessageView, Spinner } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
-import { NAVIGATION_ADDRESS_SCREEN_PATH } from '../../../../navigation/types';
+import { NAVIGATION_ADDRESS_SCREEN } from '../../../../navigation/types';
 
 // TODO: Make place order button stick at the bottom
 // TODO: Make ListEmptyComponent center in the view
@@ -47,7 +47,7 @@ const CartList = ({
 
   const handlePlaceOrder = () => {
     if (allItemPricesAvailable()) {
-      NavigationService.navigate(NAVIGATION_ADDRESS_SCREEN_PATH)
+      NavigationService.navigate(NAVIGATION_ADDRESS_SCREEN)
     } else {
       // TODO: Show toast: Please wait...
       console.log('Price not there');

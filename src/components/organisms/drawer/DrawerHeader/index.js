@@ -7,8 +7,8 @@ import { Text, Card } from '../../..';
 import { magento } from '../../../../magento';
 import Status from '../../../../magento/Status';
 import NavigationService from '../../../../navigation/NavigationService';
-import { NAVIGATION_LOGIN_SCREEN_PATH, NAVIGATION_ACCOUNT_SCREEN_PATH } from '../../../../navigation/types';
-import { ThemeContext } from '../../../../config';
+import { NAVIGATION_LOGIN_SCREEN, NAVIGATION_ACCOUNT_SCREEN } from '../../../../navigation/types';
+import { ThemeContext } from '../../../../theme';
 /**
  * @param status need to be passed, so that {@link DrawerHeader} can refresh
  * when user is logged in
@@ -25,10 +25,10 @@ const DrawerHeader = ({
 
   if (magento.isCustomerLogin()) {
     welcomeText = 'Hello user!';
-    NAVIGATION_PATH = NAVIGATION_ACCOUNT_SCREEN_PATH;
+    NAVIGATION_PATH = NAVIGATION_ACCOUNT_SCREEN;
   } else {
     welcomeText = 'Login!';
-    NAVIGATION_PATH = NAVIGATION_LOGIN_SCREEN_PATH;
+    NAVIGATION_PATH = NAVIGATION_LOGIN_SCREEN;
   }
 
   return (
@@ -53,15 +53,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: theme.spacing.sixteen,
+    padding: theme.spacing.large,
   }),
   text: theme => ({
     color: theme.colors.white,
   }),
 });
 
-DrawerHeader.propTypes ={
-  status: PropTypes.oneOf(Object.values(Status)).isRequired
+DrawerHeader.propTypes = {
+  status: PropTypes.oneOf(Object.values(Status)).isRequired,
 };
 
 const mapStatetoProps = ({ account }) => {
