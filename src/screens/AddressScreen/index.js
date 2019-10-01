@@ -9,7 +9,7 @@ import {
   getShippingMethod,
   getCustomerCart,
 } from '../../store/actions';
-import { Spinner, Text, Button, TextInput } from '../../components';
+import { GenericTemplate, Spinner, Text, Button, TextInput } from '../../components';
 import { NAVIGATION_SHIPPING_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -36,12 +36,12 @@ const AddressScreen = ({
   const [form, setValues] = useState({
     firstName: '',
     lastName: '',
-    phoneNumber: '123456789',
-    streetAddress: '234 warington',
-    city: 'noida',
-    country: 'US',
-    zipCode: '43245',
-    state: 'AL',
+    phoneNumber: '',
+    streetAddress: '',
+    city: '',
+    country: '',
+    zipCode: '',
+    state: '',
   });
   const theme = useContext(ThemeContext);
 
@@ -64,6 +64,17 @@ const AddressScreen = ({
       _getCurrentCustomer();
     }
   }, []);
+
+  useEffect(() => {
+    // If countries is not null, set first country selected
+    if (countries != null && countries.length > 0) {
+      setValues({
+        ...form,
+        country: countries[0].id,
+        state: ''
+      });
+    }
+  }, [countries]);
 
   // TODO: Function not optimized
   const getRegion = () => {
@@ -88,8 +99,24 @@ const AddressScreen = ({
     };
   };
 
+  const validation = () => {
+    if (form.firstName === ''
+      || form.lastName === ''
+      || form.phoneNumber === ''
+      || form.streetAddress === ''
+      || form.city === ''
+      || form.zipCode === ''
+      || form.state === ''
+    ) return false;
+
+    return true;
+  };
+
   const onSaveAddress = () => {
-    // TODO: Do validation
+    if (!validation()) {
+      console.log('Enter valid data!');
+      return;
+    }
     const address = {
       address: {
         // id: 0,
@@ -111,7 +138,7 @@ const AddressScreen = ({
   };
 
   // TODO: cache this value
-  const getCountryData = () => countries.find(country => country.id === form.country);
+  const getCountryData = () => countries.find(country => country.id === form.country) || {};
 
   const renderCountries = () => {
     if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT) return <Spinner size="small" />;
@@ -133,7 +160,7 @@ const AddressScreen = ({
       if ('available_regions' in getCountryData()) {
         return (
           <>
-            <Text type="label">Select state</Text>
+            <Text type="label" bold>Select state</Text>
             <Picker
               selectedValue={form.state}
               style={{ height: 50 }}
@@ -146,7 +173,7 @@ const AddressScreen = ({
       }
       return (
         <>
-          <Text type="label">Enter state</Text>
+          <Text type="label" bold>Enter state</Text>
           <TextInput
             placeholder="State"
             autoCorrect={false}
@@ -164,9 +191,7 @@ const AddressScreen = ({
     }
 
     return (
-      <View style={styles.linkContainer}>
-        <Button title="Save" style={[styles.defaultMargin(theme)]} onPress={onSaveAddress} />
-      </View>
+      <Button title="Save" style={[styles.defaultMargin(theme)]} onPress={onSaveAddress} />
     );
   };
 
@@ -194,20 +219,28 @@ const AddressScreen = ({
   }
 
   return (
-    <View style={styles.container}>
+    <GenericTemplate
+      isScrollable
+      status={Status.SUCCESS}
+      style={styles.container}
+      footer={renderButtons()}
+    >
       <Text type="label">Contact Information</Text>
+      <Text type="label" bold>First Name</Text>
       <TextInput
         placeholder="First Name"
         autoCorrect={false}
         value={form.firstName}
         onChangeText={value => setValues({ ...form, firstName: value })}
       />
+      <Text type="label" bold>Last Name</Text>
       <TextInput
         placeholder="Last Name"
         autoCorrect={false}
         value={form.lastName}
         onChangeText={value => setValues({ ...form, lastName: value })}
       />
+      <Text type="label" bold>Phone Number</Text>
       <TextInput
         placeholder="Phone Number"
         autoCorrect={false}
@@ -215,21 +248,23 @@ const AddressScreen = ({
         value={form.phoneNumber}
         onChangeText={value => setValues({ ...form, phoneNumber: value })}
       />
-      <Text type="label">Address</Text>
+      <Text type="label" bold>Address</Text>
       <TextInput
         placeholder="Street Address"
         autoCorrect={false}
         value={form.streetAddress}
         onChangeText={value => setValues({ ...form, streetAddress: value })}
       />
+      <Text type="label" bold>City</Text>
       <TextInput
         placeholder="City"
         autoCorrect={false}
         value={form.city}
         onChangeText={value => setValues({ ...form, city: value })}
       />
-      <Text type="label">Select Country</Text>
+      <Text type="label" bold>Select Country</Text>
       {renderCountries()}
+      <Text type="label" bold>Zip Code</Text>
       <TextInput
         placeholder="zip code"
         autoCorrect={false}
@@ -237,8 +272,7 @@ const AddressScreen = ({
         onChangeText={value => setValues({ ...form, zipCode: value })}
       />
       {renderState()}
-      {renderButtons()}
-    </View>
+    </GenericTemplate>
   );
 };
 
@@ -289,7 +323,7 @@ AddressScreen.defaultProps = {
 const mapStateToProps = ({ magento, checkout, account }) => {
   const { countries, countryStatus, errorMessage: countryErrorMessage } = magento;
   const { billingAddressStatus, shippingMethodStatus, errorMessage } = checkout;
-  const { customer, customerStatus } = account;
+  const { customer, status: customerStatus } = account;
   return {
     countries,
     countryStatus,
