@@ -22,7 +22,7 @@ MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 RE
 
 ## :rocket: Getting Started
 
-Follow this [Documentaion](https://github.com/alexakasanjeev/magento_react_native/wiki/Setup) for detail step by step instructions on how to setup project locally and run the project.
+Follow this [Documentation](https://github.com/alexakasanjeev/magento_react_native/wiki/Setup) for detailed step by step instructions on how to setup project locally and run the project.
 
 ## 🤝 Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 
