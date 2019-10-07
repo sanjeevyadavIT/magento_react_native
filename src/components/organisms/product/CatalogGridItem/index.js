@@ -35,6 +35,10 @@ const CatalogGridItem = ({
    * fetch price manually for configurable product using sku
    */
   updateItem,
+  /**
+   * Number of columns displayed in FlatList
+   */
+  columnCount,
 }) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
@@ -124,6 +128,7 @@ CatalogGridItem.propTypes = {
   openSelectedProduct: PropTypes.func.isRequired,
   stateAccessor: PropTypes.string.isRequired,
   updateItem: PropTypes.func.isRequired,
+  columnCount: PropTypes.number.isRequired,
 };
 
 CatalogGridItem.defaultProps = {};
