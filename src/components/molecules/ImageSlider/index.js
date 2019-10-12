@@ -34,7 +34,7 @@ const ImageSlider = ({
   );
 
   return (
-    <Swiper style={[{ height: imageHeight }, style]}>
+    <Swiper containerStyle={[{ height: imageHeight }, style]}>
       {renderImages()}
     </Swiper>
   );
