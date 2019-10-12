@@ -97,7 +97,7 @@ Please ask first before embarking on any significant pull request (e.g. implemen
     # Navigate to the newly cloned directory
     cd <repo-name>
     # Assign the original repo to a remote called "upstream"
-    git remote add upstream https://github.com/alexakasanjeev/magento_react_native
+    git remote add upstream https://github.com/alexakasanjeev/magento_react_native.git
     ```
 
 3. If you cloned a while ago, get the latest changes from upstream:

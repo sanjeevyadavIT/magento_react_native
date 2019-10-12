@@ -6,7 +6,11 @@
 
 # MageCart : Magento 2 React Native eCommerce App
 
-[![Tweet](https://img.shields.io/twitter/url/https/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Falexakasanjeev%2Fmagento_react_native&via=alexakasanjeev&text=MageCart%3A%20E-commerce%20app%20for%20Magento%202.x%20written%20in%20React%20Native) [![Slack](https://img.shields.io/badge/chat-on%20slack-informational.svg)](https://join.slack.com/t/magecart/shared_invite/enQtNjU5MTc5ODM4NjE0LTBjZThjMjg3Zjk0MzJlNGE1MDRkMDBlYThjNzA3NzRlMTViMGVhYzY1ZGUyOTIzZWQ1ZjAyMzk1OTIzZTFlMTM)
+![React Native](https://img.shields.io/badge/react--native-0.61.2-brightgreen)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/alexakasanjeev/magento_react_native/issues)
+[![Slack](https://img.shields.io/badge/chat-on%20slack-informational.svg)](https://join.slack.com/t/magecart/shared_invite/enQtNjU5MTc5ODM4NjE0LTBjZThjMjg3Zjk0MzJlNGE1MDRkMDBlYThjNzA3NzRlMTViMGVhYzY1ZGUyOTIzZWQ1ZjAyMzk1OTIzZTFlMTM)
+[![Tweet](https://img.shields.io/twitter/url/https/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Falexakasanjeev%2Fmagento_react_native&via=alexakasanjeev&text=MageCart%3A%20E-commerce%20app%20for%20Magento%202.x%20written%20in%20React%20Native) 
+
 
 MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 REST API](https://devdocs.magento.com/guides/v2.3/get-started/rest_front.html) to display catalog, products, add products to cart and let you place order.
 
@@ -25,6 +29,8 @@ MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 RE
 Follow this [Documentation](https://github.com/alexakasanjeev/magento_react_native/wiki/Setup) for detailed step by step instructions on how to setup project locally and run the project.
 
 ## 🤝 Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
+
+:star: If you like what you see, star us on GitHub.
 
 Finding bugs, sending pull requests or improving docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
 
