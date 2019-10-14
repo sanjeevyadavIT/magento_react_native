@@ -24,27 +24,29 @@ MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 RE
   <img style="margin-left:10px;" src="screenshots/5.png" width="19%" >
 </div>
 
-## :rocket: Getting Started
+## 📲 Getting Started
 
 Follow this [Documentation](https://github.com/alexakasanjeev/magento_react_native/wiki/Setup) for detailed step by step instructions on how to setup project locally and run the project.
 
-## 🤝 Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
+## ❤️ Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 
 :star: If you like what you see, star us on GitHub.
 
 Finding bugs, sending pull requests or improving docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
 
-## :man: Authors
+## 👨‍💻 Authors
 
-* **Sanjeev Yadav** - *Initial work* - [alexakasanjeev](https://github.com/alexakasanjeev)
+Sanjeev Yadav | <a href="url"><img src="https://cdn.rawgit.com/alexakasanjeev/ViewAnimator/cf065e96/Resources/twitterLogo.svg" height="17"></a> [@alexakasanjeev](https://twitter.com/alexakasanjeev)
 
-See also the list of [contributors](https://github.com/alexakasanjeev/magento_react_native/contributors) who participated in this project.
+[![Twitter Follow](https://img.shields.io/twitter/follow/alexakasanjeev.svg?style=social)](https://twitter.com/alexakasanjeev)
 
-## :page_facing_up: License
+[![GitHub Follow](https://img.shields.io/github/followers/alexakasanjeev.svg?style=social&label=Follow)](https://github.com/alexakasanjeev)
 
-This project is licensed under the GNU v3 Public License License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## :bulb: Acknowledgements
+## 📣 Acknowledgements
 
 * [troublediehard/magento-react-native](https://github.com/troublediehard/magento-react-native) created by [Dmytro Portenko](https://github.com/troublediehard)
 * [README-Template.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) by [Billie Thompson](https://github.com/PurpleBooth)
+
+## 🛡 License
+
+This project is licensed under the GNU v3 Public License License - see the [LICENSE.md](LICENSE.md) file for details.
