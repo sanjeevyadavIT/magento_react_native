@@ -1,6 +1,7 @@
+import { Platform } from 'react-native';
 import colors from './colors';
 
-const fontFamily = 'sans-serif';
+const fontFamily = Platform.select({ android: 'sans-serif', ios: 'Helvetica' });
 const fontWeightRegular = 'normal';
 const fontWeightSemiBold = '600';
 const fontWeightBold = 'bold';
