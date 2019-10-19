@@ -16,6 +16,7 @@ function loadStories() {
   require('../src/components/molecules/LoadingView/stories');
   require('../src/components/molecules/MessageView/stories');
   require('../src/components/molecules/Price/stories');
+  require('../src/components/organisms/GenericTemplate/stories');
   require('../src/components/organisms/cart/CartList/stories');
   require('../src/components/organisms/cart/CartListItem/stories');
   require('../src/components/organisms/drawer/CategoryTree/stories');
@@ -23,8 +24,7 @@ function loadStories() {
   require('../src/components/organisms/drawer/DrawerHeader/stories');
   require('../src/components/organisms/product/CatalogGridItem/stories');
   require('../src/components/organisms/product/ProductList/stories');
-  require('../src/components/organisms/GenericTemplate/stories');
-
+  
 }
 
 const stories = [
@@ -39,6 +39,7 @@ const stories = [
   '../src/components/molecules/LoadingView/stories',
   '../src/components/molecules/MessageView/stories',
   '../src/components/molecules/Price/stories',
+  '../src/components/organisms/GenericTemplate/stories',
   '../src/components/organisms/cart/CartList/stories',
   '../src/components/organisms/cart/CartListItem/stories',
   '../src/components/organisms/drawer/CategoryTree/stories',
@@ -46,10 +47,7 @@ const stories = [
   '../src/components/organisms/drawer/DrawerHeader/stories',
   '../src/components/organisms/product/CatalogGridItem/stories',
   '../src/components/organisms/product/ProductList/stories',
-  '../src/components/templates/DrawerTemplate/stories',
-  '../src/components/templates/GenericTemplate/stories',
-  '../src/components/templates/HomePageTemplate/stories',
-
+  
 ];
 
 module.exports = {

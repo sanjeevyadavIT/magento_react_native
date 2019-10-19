@@ -36,11 +36,13 @@ Finding bugs, sending pull requests or improving docs - any contribution is welc
 
 ## 👨‍💻 Authors
 
-Sanjeev Yadav | <a href="url"><img src="https://cdn.rawgit.com/alexakasanjeev/ViewAnimator/cf065e96/Resources/twitterLogo.svg" height="17"></a> [@alexakasanjeev](https://twitter.com/alexakasanjeev)
+Sanjeev Yadav
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/alexakasanjeev.svg?style=social)](https://twitter.com/alexakasanjeev)
 
 [![GitHub Follow](https://img.shields.io/github/followers/alexakasanjeev.svg?style=social&label=Follow)](https://github.com/alexakasanjeev)
+
+See also the list of [contributors](https://github.com/alexakasanjeev/magento_react_native/contributors) who participated in this project.
 
 ## 📣 Acknowledgements
 
