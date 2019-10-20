@@ -1,4 +1,5 @@
 <hr>
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 <p align="center">
   <b>MAGECART IS CURRENTLY IN EARLY DEVELOPMENT, NOT READY TO BE USED!</b>
 </p>
@@ -52,3 +53,19 @@ See also the list of [contributors](https://github.com/alexakasanjeev/magento_re
 ## 🛡 License
 
 This project is licensed under the GNU v3 Public License License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="http://twitter.com/alexakasanjeev"><img src="https://avatars0.githubusercontent.com/u/13250741?v=4" width="100px;" alt="Sanjeev yadav"/><br /><sub><b>Sanjeev yadav</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=alexakasanjeev" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
