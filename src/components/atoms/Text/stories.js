@@ -36,10 +36,10 @@ storiesOf('Text', module)
     <Text type="subheading" bold>Hello I am a subHeading bold text!</Text>
   ))
   .add('body', () => (
-    <Text type="bold">Hello I am a body text!</Text>
+    <Text type="body">Hello I am a body text!</Text>
   ))
   .add('body with bold', () => (
-    <Text type="bold" bold>Hello I am a body bold text!</Text>
+    <Text type="body" bold>Hello I am a body bold text!</Text>
   ))
   .add('label', () => (
     <Text type="label">Hello I am a label text!</Text>
