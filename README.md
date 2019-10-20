@@ -1,5 +1,4 @@
 <hr>
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 <p align="center">
   <b>MAGECART IS CURRENTLY IN EARLY DEVELOPMENT, NOT READY TO BE USED!</b>
 </p>
@@ -10,7 +9,8 @@
 ![React Native](https://img.shields.io/badge/react--native-0.61.2-brightgreen)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/alexakasanjeev/magento_react_native/issues)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-informational.svg)](https://join.slack.com/t/magecart/shared_invite/enQtNjU5MTc5ODM4NjE0LTBjZThjMjg3Zjk0MzJlNGE1MDRkMDBlYThjNzA3NzRlMTViMGVhYzY1ZGUyOTIzZWQ1ZjAyMzk1OTIzZTFlMTM)
-[![Tweet](https://img.shields.io/twitter/url/https/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Falexakasanjeev%2Fmagento_react_native&via=alexakasanjeev&text=MageCart%3A%20E-commerce%20app%20for%20Magento%202.x%20written%20in%20React%20Native) 
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat)](#contributors)
+[![Tweet](https://img.shields.io/twitter/url/https/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Falexakasanjeev%2Fmagento_react_native&via=alexakasanjeev&text=MageCart%3A%20E-commerce%20app%20for%20Magento%202.x%20written%20in%20React%20Native)
 
 
 MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 REST API](https://devdocs.magento.com/guides/v2.3/get-started/rest_front.html) to display catalog, products, add products to cart and let you place order.
@@ -35,26 +35,9 @@ Follow this [Documentation](https://github.com/alexakasanjeev/magento_react_nati
 
 Finding bugs, sending pull requests or improving docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
 
-## 👨‍💻 Authors
-
-Sanjeev Yadav
-
-[![Twitter Follow](https://img.shields.io/twitter/follow/alexakasanjeev.svg?style=social)](https://twitter.com/alexakasanjeev)
-
-[![GitHub Follow](https://img.shields.io/github/followers/alexakasanjeev.svg?style=social&label=Follow)](https://github.com/alexakasanjeev)
-
 See also the list of [contributors](https://github.com/alexakasanjeev/magento_react_native/contributors) who participated in this project.
 
-## 📣 Acknowledgements
-
-* [troublediehard/magento-react-native](https://github.com/troublediehard/magento-react-native) created by [Dmytro Portenko](https://github.com/troublediehard)
-* [README-Template.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) by [Billie Thompson](https://github.com/PurpleBooth)
-
-## 🛡 License
-
-This project is licensed under the GNU v3 Public License License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Contributors ✨
+## 👨‍💻 Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -69,3 +52,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## 📣 Acknowledgements
+
+* [troublediehard/magento-react-native](https://github.com/troublediehard/magento-react-native) created by [Dmytro Portenko](https://github.com/troublediehard)
+* [README-Template.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) by [Billie Thompson](https://github.com/PurpleBooth)
+
+## 🛡 License
+
+This project is licensed under the GNU v3 Public License License - see the [LICENSE.md](LICENSE.md) file for details.
