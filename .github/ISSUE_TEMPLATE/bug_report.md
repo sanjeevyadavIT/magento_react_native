@@ -3,7 +3,7 @@ name: '🐛 Bug Report'
 about: Report a reproducible bug
 title: ''
 labels: 'Type: Bug'
-assignees: alexakasanjeev
+assignees: 
 
 ---
 
