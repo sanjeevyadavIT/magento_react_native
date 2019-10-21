@@ -32,6 +32,17 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "josectobar",
+      "name": "Jose Tobar",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/21246524?v=4",
+      "profile": "http://www.jctobar.com",
+      "contributions": [
+        "code",
+        "bug",
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7,
