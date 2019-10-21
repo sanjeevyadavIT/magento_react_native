@@ -42,6 +42,15 @@
         "code",
         "userTesting"
       ]
+    },
+    {
+      "login": "harshitmahendra",
+      "name": "harshit mahendra",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/34433141?v=4",
+      "profile": "https://github.com/harshitmahendra",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
