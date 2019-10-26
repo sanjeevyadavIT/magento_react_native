@@ -1,16 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { magento } from '../../../../magento';
 import { ImageSlider, ImageSliderItem, GenericTemplate } from '../../../../components';
-import { getProductMedia } from '../../../../store/actions';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 
 const SliderContainer = ({
   /**
-   * @redux Currently selected product sku
+   * Currently selected product sku
+   * used in connect function
    */
   sku,
   /**
@@ -26,28 +26,13 @@ const SliderContainer = ({
    */
   slider,
   /**
-   * @redux if all available option has been selected for `configurable` type product,
-   * selectedProductUrl will reflect the `simple` product image deduce from those options
-   */
-  selectedProductUrl,
-  /**
-   * @redux function to fetch images of the product based on the sku
-   */
-  getProductMedia: _getProductMedia,
-  /**
    * Style to modify GenericTemplateView
    */
   style,
 }) => {
-  console.log('^^^^^^^^^^^^^^^^')
-  console.log('SliderContainer', slider, selectedProductUrl);
+  console.log('^^^^^^^^^^^^^^^^');
+  console.log('SliderContainer', slider);
   const theme = useContext(ThemeContext);
-  useEffect(() => {
-    // componentDidMount
-    if (!slider || !slider.length) {
-      _getProductMedia(sku);
-    }
-  }, []);
 
   return (
     <GenericTemplate
@@ -59,7 +44,7 @@ const SliderContainer = ({
       <ImageSlider
         style={styles.imageContainer(theme)}
         imageHeight={theme.dimens.productDetailPageSliderHeight}
-        slider={(selectedProductUrl ? slider.unshift(new ImageSliderItem('', selectedProductUrl, '')) && slider : slider)}
+        slider={slider}
         baseUrl={magento.getProductMediaUrl()}
         resizeMode="contain"
       />
@@ -74,12 +59,10 @@ const styles = StyleSheet.create({
 });
 
 SliderContainer.propTypes = {
-  sku: PropTypes.string.isRequired, // redux
+  sku: PropTypes.string.isRequired,
   status: PropTypes.oneOf(Object.values(Status)).isRequired, // redux
   errorMessage: PropTypes.string, // redux
   slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)), // redux
-  selectedProductUrl: PropTypes.string, // redux
-  getProductMedia: PropTypes.func.isRequired, // redux
   style: PropTypes.object,
 };
 
@@ -87,44 +70,23 @@ SliderContainer.defaultProps = {
   errorMessage: '',
   style: {},
   slider: null,
-  selectedProductUrl: undefined,
 };
 
-/**
- * @todo - mapStateToProps has become too complex, functionality can be extracted out
- */
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ product }, ownProps) => {
   const {
-    detail: { sku, children, options },
-    mediaStatus: status,
-    mediaErrorMessage: errorMessage,
-    medias: { [sku]: sliderData },
-    selectedProduct,
-  } = state.product;
-  let slider;
-  if (sliderData && sliderData.length > 0) {
-    slider = [...sliderData];
-  }
-  let selectedProductUrl;
-  if (selectedProduct) {
-    const { value } = selectedProduct.custom_attributes.find(customAttribute => customAttribute.attribute_code === 'image');
-    selectedProductUrl = value;
-  }
-
-  if (slider && slider.some(sliderItem => sliderItem.imageUrl === selectedProductUrl)) {
-    selectedProductUrl = undefined;
-  }
+    current: {
+      [ownProps.sku]: {
+        medias: slider,
+        mediaStatus: status,
+        mediaErrorMessage: errorMessage,
+      }
+    }
+  } = product;
   return {
-    sku,
-    children,
-    options,
     slider,
-    status: slider ? Status.SUCCESS : status,
+    status,
     errorMessage,
-    selectedProductUrl,
   };
 };
 
-export default connect(mapStateToProps, {
-  getProductMedia
-})(SliderContainer);
+export default connect(mapStateToProps)(SliderContainer);

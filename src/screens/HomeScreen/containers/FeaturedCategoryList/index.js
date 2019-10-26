@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ProductList } from '../../../../components';
+import { CatalogGrid } from '../../../../components';
 import Status from '../../../../magento/Status';
-import { openSelectedProduct, getFeaturedProducts, getHomeConfigurableProductOptions } from '../../../../store/actions';
+import { setCurrentProduct, getFeaturedProducts, getHomeConfigurableProductOptions } from '../../../../store/actions';
 
-// Here FeaturedCategoriesContainer(connected to redux) is hosting FeaturedCategoryList(connected to redux) which in turn hosting Productlist(dumb component)
+// NOTE: Here FeaturedCategoriesContainer(connected to redux) is hosting FeaturedCategoryList(connected to redux) which in turn hosting Productlist(dumb component)
 const FeaturedCategoryList = ({
   categoryId,
   status,
@@ -13,7 +13,7 @@ const FeaturedCategoryList = ({
   items,
   currencySymbol,
   getFeaturedProducts: loadProducts,
-  openSelectedProduct: _openSelectedProduct,
+  setCurrentProduct: _setCurrentProduct,
   /**
    * constants
    */
@@ -21,7 +21,7 @@ const FeaturedCategoryList = ({
   isLoadingMoreProducts = Status.SUCCESS,
   stateAccessor = 'home',
 }) => (
-  <ProductList
+  <CatalogGrid
     showHorizontalList
     products={items}
     currencySymbol={currencySymbol}
@@ -31,14 +31,15 @@ const FeaturedCategoryList = ({
     errorMessage={errorMessage}
     canLoadMoreProducts={canLoadMoreProducts}
     isLoadingMoreProducts={isLoadingMoreProducts}
-    openSelectedProduct={_openSelectedProduct}
+    setCurrentProduct={_setCurrentProduct}
     loadProducts={loadProducts}
     updateItem={getHomeConfigurableProductOptions}
   />
 );
 
 FeaturedCategoryList.propTypes = {
-  categoryId: PropTypes.number.isRequired
+  categoryId: PropTypes.number.isRequired,
+  setCurrentProduct: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ home, magento }, { categoryId }) => {
@@ -54,5 +55,5 @@ const mapStateToProps = ({ home, magento }, { categoryId }) => {
 
 export default connect(mapStateToProps, {
   getFeaturedProducts,
-  openSelectedProduct,
+  setCurrentProduct,
 })(FeaturedCategoryList);

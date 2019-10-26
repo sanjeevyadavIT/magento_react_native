@@ -19,21 +19,21 @@ import { ADD_TO_CART_BUTTON } from '../../../../constants';
 const CTAButtons = ({
   productType,
   sku,
+  quantity,
   selectedProduct,
   cartQuoteId,
   addToCart: _addToCart
 }) => {
   const onBtnClick = () => {
-    const qty = 1;
     if (productType === 'configurable') {
       // Configurable type product
       if (selectedProduct) {
-        const cartItem = { sku: selectedProduct.sku, qty, quote_id: cartQuoteId };
+        const cartItem = { sku: selectedProduct.sku, quantity, quote_id: cartQuoteId };
         _addToCart(cartItem);
       }
     } else if (productType === 'simple') {
       // Simple type product
-      const cartItem = { sku, qty, quote_id: cartQuoteId };
+      const cartItem = { sku, quantity, quote_id: cartQuoteId };
       _addToCart(cartItem);
     } else {
       // product type either virtual, downlodable or bundle
@@ -46,10 +46,10 @@ const CTAButtons = ({
 };
 
 CTAButtons.propTypes = {
-  productType: PropTypes.string.isRequired, // Redux
-  sku: PropTypes.string.isRequired, // Redux
+  productType: PropTypes.string.isRequired,
+  sku: PropTypes.string.isRequired,
   cartQuoteId: PropTypes.number.isRequired,
-  selectedProduct: PropTypes.oneOfType([PropTypes.object, null]), // redux
+  selectedProduct: PropTypes.oneOfType([PropTypes.object, null]),
   addToCart: PropTypes.func.isRequired, // Redux
 };
 
@@ -57,14 +57,9 @@ CTAButtons.defaultProps = {
   selectedProduct: null,
 };
 
-const mapStateToProps = (state) => {
-  const { detail: { sku, type_id: productType }, selectedProduct } = state.product;
-  const { cart } = state.cart;
-  const cartQuoteId = cart.id;
+const mapStateToProps = ({ cart }) => {
+  const { cart: { id: cartQuoteId } } = cart;
   return {
-    productType,
-    sku,
-    selectedProduct,
     cartQuoteId,
   };
 };

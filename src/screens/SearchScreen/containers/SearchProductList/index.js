@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { ProductList } from '../../../../components';
-import { openSelectedProduct, getSearchProducts } from '../../../../store/actions';
+import { CatalogGrid } from '../../../../components';
+import { setCurrentProduct, getSearchProducts } from '../../../../store/actions';
 
 const mapStateToProps = (state) => {
   const {
@@ -28,8 +28,8 @@ const mapStateToProps = (state) => {
 };
 
 const SearchProductList = connect(mapStateToProps, {
-  openSelectedProduct,
+  setCurrentProduct,
   loadProducts: getSearchProducts,
-})(ProductList);
+})(CatalogGrid);
 
 export default SearchProductList;

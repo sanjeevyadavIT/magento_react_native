@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ProductList } from '../../../../components';
-import { openSelectedProduct, getCategoryProducts, getCategoryConfigurableProductOptions } from '../../../../store/actions';
+import { CatalogGrid } from '../../../../components';
+import { setCurrentProduct, getCategoryProducts, getCategoryConfigurableProductOptions } from '../../../../store/actions';
 import Status from '../../../../magento/Status';
 
 // FIXME: Not optimized, everytime more products will load, items and total_count will change,
@@ -16,7 +16,7 @@ const CategoryListContainer = ({
   errorMessage,
   loadingMoreStatus,
   getCategoryProducts: _getCategoryProducts,
-  openSelectedProduct: _openSelectedProduct,
+  setCurrentProduct: _setCurrentProduct,
   /**
    * constants
    */
@@ -27,7 +27,7 @@ const CategoryListContainer = ({
   const canLoadMoreProducts = items.length < totalCount;
 
   return (
-    <ProductList
+    <CatalogGrid
       loadFactor={categoryId}
       currencySymbol={currencySymbol}
       stateAccessor={stateAccessor}
@@ -39,7 +39,7 @@ const CategoryListContainer = ({
       columnCount={columnCount}
       canLoadMoreProducts={canLoadMoreProducts}
       isLoadingMoreProducts={loadingMoreStatus}
-      openSelectedProduct={_openSelectedProduct}
+      setCurrentProduct={_setCurrentProduct}
       loadProducts={_getCategoryProducts}
     />
   );
@@ -53,7 +53,7 @@ CategoryListContainer.propTypes = {
   items: PropTypes.array,
   currencySymbol: PropTypes.string.isRequired,
   totalCount: PropTypes.number,
-  openSelectedProduct: PropTypes.func.isRequired,
+  setCurrentProduct: PropTypes.func.isRequired,
   getCategoryProducts: PropTypes.func.isRequired,
 };
 
@@ -77,6 +77,6 @@ const mapStateToProps = ({ categoryList, magento }) => {
 };
 
 export default connect(mapStateToProps, {
-  openSelectedProduct,
-  getCategoryProducts
+  setCurrentProduct,
+  getCategoryProducts,
 })(CategoryListContainer);

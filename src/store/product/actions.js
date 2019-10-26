@@ -4,10 +4,11 @@ import {
   UI_PRODUCT_UPDATE_OPTIONS_REQUEST,
 } from '../../constants';
 
-export const openSelectedProduct = (productDetail, children) => ({
+export const setCurrentProduct = (productType, sku, children) => ({
   type: UI.OPEN_SELECTED_PRODUCT_REQUEST,
   payload: {
-    productDetail,
+    productType,
+    sku,
     children,
   },
 });

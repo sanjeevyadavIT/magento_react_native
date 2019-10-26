@@ -9,14 +9,11 @@ import { Price as PricePojo, getPriceFromChildren } from '../../../../utils/prod
  * like with or without tax
  */
 const PriceContainer = ({
-  /**
-   * @redux prices of the product
-   */
-  startingPrice,
-  /**
-   * @redux, in case of `configurable type product
-   */
-  endingPrice,
+  sku,
+  price,
+  productType,
+  selectedProduct,
+  children, // redux
   /**
    * @redux currency symbol to display along side price
    */
@@ -24,11 +21,20 @@ const PriceContainer = ({
 }) => {
   const getPriceProps = () => {
     const priceProps = {
-      basePrice: startingPrice,
+      basePrice: price,
     };
-    if (startingPrice !== endingPrice) {
-      priceProps.startingPrice = startingPrice;
-      priceProps.endingPrice = endingPrice;
+    if (productType === 'configurable' && children) {
+      if (selectedProduct) {
+        priceProps.basePrice = selectedProduct.price;
+        return priceProps;
+      }
+      const { starting, ending } = getPriceFromChildren(children);
+      if (starting === ending) {
+        priceProps.basePrice = starting;
+      } else {
+        priceProps.startingPrice = starting;
+        priceProps.endingPrice = ending;
+      }
     }
     return priceProps;
   };
@@ -39,32 +45,25 @@ const PriceContainer = ({
 };
 
 PriceContainer.propTypes = {
-  startingPrice: PropTypes.number, // redux
-  endingPrice: PropTypes.number, // redux
+  children: PropTypes.array, // redux
   currencySymbol: PropTypes.string.isRequired, // redux
 };
 
 PriceContainer.defaultProps = {
-  startingPrice: 0,
-  endingPrice: 0,
+
 };
 
-const mapStateToProps = (state) => {
-  const { detail: { price: basePrice, type_id: type, children }, selectedProduct } = state.product;
-  const { currency: { default_display_currency_symbol: currencySymbol } } = state.magento;
-  let price = new PricePojo(basePrice, basePrice);
-
-  if (type === 'configurable') {
-    if (selectedProduct) {
-      price = new PricePojo(selectedProduct.price, selectedProduct.price);
-    } else if (children) {
-      price = getPriceFromChildren(children);
+const mapStateToProps = ({ product, magento }, { sku }) => {
+  const {
+    current: {
+      [sku]: {
+        children
+      }
     }
-  }
+  } = product;
+  const { currency: { default_display_currency_symbol: currencySymbol } } = magento;
 
   return {
-    startingPrice: price.starting,
-    endingPrice: price.ending,
     currencySymbol,
     children,
   };
