@@ -2,16 +2,16 @@ import React, { useEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import NavigationService from '../../../../navigation/NavigationService';
+import NavigationService from '../../../navigation/NavigationService';
 import {
   Text,
   Image,
   Card,
   Price
-} from '../../..';
-import { NAVIGATION_PRODUCT_SCREEN } from '../../../../navigation/types';
-import { getProductThumbnailFromAttribute } from '../../../../utils/products';
-import { ThemeContext } from '../../../../theme';
+} from '../..';
+import { NAVIGATION_PRODUCT_SCREEN } from '../../../navigation/types';
+import { getProductThumbnailFromAttribute } from '../../../utils/products';
+import { ThemeContext } from '../../../theme';
 
 const CatalogGridItem = ({
   /**
@@ -23,9 +23,9 @@ const CatalogGridItem = ({
    */
   currencySymbol,
   /**
-   * Open ProductDetailPage with current product
+   * Fetch details of current selected product, for viewing
    */
-  openSelectedProduct,
+  setCurrentProduct,
   /**
    * reducer name from where other details about this product need to be taken
    */
@@ -51,8 +51,9 @@ const CatalogGridItem = ({
   }, []);
 
   const onRowPress = () => {
-    openSelectedProduct(product, extra ? extra.children : undefined);
+    setCurrentProduct(product.type_id, product.sku, extra ? extra.children : undefined);
     NavigationService.navigate(NAVIGATION_PRODUCT_SCREEN, {
+      product,
       title: product.name,
     });
   };
@@ -125,9 +126,9 @@ CatalogGridItem.propTypes = {
     }))
   }).isRequired,
   currencySymbol: PropTypes.string.isRequired,
-  openSelectedProduct: PropTypes.func.isRequired,
   stateAccessor: PropTypes.string.isRequired,
   updateItem: PropTypes.func.isRequired,
+  setCurrentProduct: PropTypes.func.isRequired,
   columnCount: PropTypes.number.isRequired,
 };
 

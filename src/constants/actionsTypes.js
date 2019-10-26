@@ -65,7 +65,7 @@ export const UI = createRequestTypes('UI', [
    * ===== {@link ProductDetailPage} related actions ======
    * ======================================================
    */
-  'OPEN_SELECTED_PRODUCT', // Set the product represented in selected CatalogGridItem into store
+  'OPEN_SELECTED_PRODUCT', // Fetch details regarding current selected product for viewing
   'CHANGE_PRODUCT_OPTIONS', // Set options of `configurable` type product from picker into store
 ], suffixTypes);
 

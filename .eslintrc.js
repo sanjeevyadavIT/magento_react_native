@@ -12,6 +12,7 @@ module.exports = {
     "react-hooks"
   ],
   'rules': {
+    'prettier/prettier': 0,
     'linebreak-style': 0,
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': 'off',

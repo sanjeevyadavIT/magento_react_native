@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { WebView } from 'react-native-webview';
 import { Text } from '../../../../components';
@@ -13,7 +12,7 @@ import {
  * Render description of the product into webview
  *
  * @param {Object} props             - props associated with the component
- * @param {Object[]} props.customAttributes - (From Redux) custom attributed of the product
+ * @param {Object[]} props.customAttributes - custom attribute of the product
  */
 const DescriptionContainer = ({
   customAttributes,
@@ -53,18 +52,14 @@ const styles = {
 };
 
 DescriptionContainer.propTypes = {
-  customAttributes: PropTypes.array, // redux
+  customAttributes: PropTypes.arrayOf(PropTypes.shape({
+    attribute_code: PropTypes.string,
+    value: PropTypes.string,
+  })),
 };
 
 DescriptionContainer.defaultProps = {
   customAttributes: [],
 };
 
-const mapStateToProps = (state) => {
-  const { custom_attributes: customAttributes } = state.product.detail;
-  return {
-    customAttributes
-  };
-};
-
-export default connect(mapStateToProps)(DescriptionContainer);
+export default DescriptionContainer;

@@ -11,21 +11,21 @@ import Card from './molecules/Card';
 import ImageSlider, { ImageSliderItem } from './molecules/ImageSlider';
 import MessageView from './molecules/MessageView';
 import LoadingView from './molecules/LoadingView';
-import Price from './molecules/Price';
 // Organisms
 import GenericTemplate from './organisms/GenericTemplate';
 // =========> cart
 import CartList from './organisms/cart/CartList';
 import CartListItem from './organisms/cart/CartListItem';
-// =========> product
-import ProductList from './organisms/product/ProductList';
-import CatalogGridItem from './organisms/product/CatalogGridItem';
 // =========> drawer
 import DrawerHeader from './organisms/drawer/DrawerHeader';
 import CategoryTree from './organisms/drawer/CategoryTree';
 import CategoryTreeItem from './organisms/drawer/CategoryTreeItem';
 // =========> order
 import OrderListItem from './organisms/order/OrderListItem';
+// Product
+import CatalogGrid from './product/CatalogGrid';
+import CatalogGridItem from './product/CatalogGridItem';
+import Price from './product/Price';
 
 export {
   Text,
@@ -39,7 +39,6 @@ export {
   ImageSlider,
   ImageSliderItem,
   MessageView,
-  Price,
   LoadingView,
   DrawerHeader,
   CartList,
@@ -47,7 +46,8 @@ export {
   CategoryTree,
   CategoryTreeItem,
   OrderListItem,
-  ProductList,
+  CatalogGrid,
   CatalogGridItem,
+  Price,
   GenericTemplate,
 };

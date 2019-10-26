@@ -1,14 +1,15 @@
 import React, { useEffect, useContext } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { CatalogGridItem, LoadingView, GenericTemplate } from '../../..';
-import Status from '../../../../magento/Status';
-import { ThemeContext } from '../../../../theme';
+import CatalogGridItem from '../CatalogGridItem';
+import { LoadingView, GenericTemplate } from '../../index';
+import Status from '../../../magento/Status';
+import { ThemeContext } from '../../../theme';
 
 // Distance between two list item
 const SEPERATOR_SPACE = 12;
 
-const ProductList = ({
+const CatalogGrid = ({
   products, // Change it to items
   currencySymbol,
   stateAccessor,
@@ -21,13 +22,13 @@ const ProductList = ({
   isLoadingMoreProducts,
   canLoadMoreProducts,
   loadProducts,
-  openSelectedProduct,
+  setCurrentProduct,
   updateItem,
   loadFactor,
   errorMessage,
 }) => {
   console.log('-------------------------');
-  console.log('Inside ProductList render');
+  console.log('Inside CatalogGrid render');
   console.log('-------------------------');
   const theme = useContext(ThemeContext);
   useEffect(() => {
@@ -54,10 +55,10 @@ const ProductList = ({
     <CatalogGridItem
       product={item}
       stateAccessor={stateAccessor}
-      openSelectedProduct={openSelectedProduct}
       columnCount={columnCount}
       updateItem={updateItem}
       currencySymbol={currencySymbol}
+      setCurrentProduct={setCurrentProduct}
     />
   );
 
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   }),
 });
 
-ProductList.propTypes = {
+CatalogGrid.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   products: PropTypes.array,
   currencySymbol: PropTypes.string.isRequired,
@@ -117,14 +118,14 @@ ProductList.propTypes = {
     PropTypes.number,
   ]).isRequired,
   updateItem: PropTypes.func.isRequired,
-  openSelectedProduct: PropTypes.func.isRequired,
+  setCurrentProduct: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };
 
-ProductList.defaultProps = {
+CatalogGrid.defaultProps = {
   products: [],
   columnCount: 1,
   errorMessage: null,
 };
 
-export default ProductList;
+export default CatalogGrid;

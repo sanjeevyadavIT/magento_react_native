@@ -1,13 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text } from '../../../../components';
-import {
-  getConfigurableProductOptions,
-  getConfigurableChildren,
-  uiProductUpdateOptions,
-} from '../../../../store/actions';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { DEFAULT_PICKER_LABEL } from '../../../../constants';
@@ -17,45 +12,31 @@ import { DEFAULT_PICKER_LABEL } from '../../../../constants';
  * Example: size, color etc
  *
  * @param {Object}    props                   - props associated with the component
- * @param {string}    props.sku               - (From Redux) unique id of the `configurable` type product.
- * @param {boolean}   props.hasOptions        - (From Redux) whether product contains configurable options or not
+ * @param {string}    props.sku               - unique id of the `configurable` type product.
+ * @param {string}    props.children          - all `simple` type products under `configurable` product
  * @param {Status}    props.status            - (From Redux) status of the api request to fetch configurable option
  * @param {string}    props.errorMessage      - (From Redux) error message in case api request failed
- * @param {Object[]}  props.children          - (From Redux) all child(`simple` type) products under `configurable` type product
  * @param {Object[]}  props.options           - (From Redux) different configurable options available
  * @param {Object}    props.attributes        - (From Redux) contain label to the id present in  {@link props.options}
- * @param {Object}    props.selectedOptions   - (From Redux) saves the reference of configurable option selected by user in form of key-value pair
- * @param {function}  props.getConfigurableProductOptions - (From Redux) function to fetch configurable options if {@link props.hasOptions} is true
- * @param {function}  props.getConfigurableChildren       - (From Redux) function to fetch child(`simple` type) products of `configurable` type product
- * @param {function}  props.uiProductUpdateOptions        - (From Redux) function to save selected options from picker
  */
 const OptionsContainer = ({
   sku,
-  hasOptions,
+  children,
   status,
   errorMessage,
-  children,
   options,
   attributes,
   selectedOptions,
-  getConfigurableProductOptions: _getConfigurableProductOptions,
-  getConfigurableChildren: _getConfigurableChildren,
-  uiProductUpdateOptions: _uiProductUpdateOptions,
+  setSelectedOptions,
 }) => {
   const theme = useContext(ThemeContext);
 
-  useEffect(() => {
-    if (hasOptions) {
-      _getConfigurableProductOptions(sku);
-    }
-    if (!children) {
-      _getConfigurableChildren(sku);
-    }
-  }, []);
-
   const onPickerSelect = (attributeId, itemValue) => {
     if (itemValue === 'null') return;
-    _uiProductUpdateOptions({ [attributeId]: itemValue });
+    setSelectedOptions({
+      ...selectedOptions,
+      [attributeId]: itemValue,
+    });
   };
 
   const renderPickerOptions = values => values.map(({ label, value }) => <Picker.Item label={label} value={String(value)} key={String(value)} />);
@@ -85,7 +66,7 @@ const OptionsContainer = ({
       errorMessage={errorMessage}
       style={styles.container(theme)}
     >
-      {options ? renderOptions() : <></>}
+      {status === Status.SUCCESS ? renderOptions() : <></>}
     </GenericTemplate>
   );
 };
@@ -101,55 +82,41 @@ const styles = {
 };
 
 OptionsContainer.propTypes = {
+  sku: PropTypes.string.isRequired,
   status: PropTypes.oneOf(Object.values(Status)).isRequired, // redux
   errorMessage: PropTypes.string, // redux
-  sku: PropTypes.string.isRequired, // redux
   hasOptions: PropTypes.bool, // redux
-  children: PropTypes.array, // redux
   options: PropTypes.array, // redux
   attributes: PropTypes.object, // redux
-  getConfigurableProductOptions: PropTypes.func, // redux
-  getConfigurableChildren: PropTypes.func, // redux
 };
 
 OptionsContainer.defaultProps = {
   errorMessage: '',
-  hasOptions: false,
   options: null,
-  children: null,
   attributes: {},
-  getConfigurableProductOptions: () => { },
-  getConfigurableChildren: () => { },
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ product }, { sku }) => {
   const {
-    confOptionsStatus: status,
-    confOptionsErrorMessage: errorMessage,
-    detail: {
-      sku,
-      options,
-      children,
+    current: {
+      [sku]: {
+        children,
+        options,
+        confOptionsStatus: status,
+        confOptionsErrorMessage: errorMessage,
+      }
     },
     attributes,
-    selectedOptions,
-    hasOptions,
-  } = state.product;
+  } = product;
 
   return {
     status,
+    children,
     errorMessage,
     sku,
-    hasOptions,
-    children,
     options,
     attributes,
-    selectedOptions,
   };
 };
 
-export default connect(mapStateToProps, {
-  getConfigurableProductOptions,
-  getConfigurableChildren,
-  uiProductUpdateOptions,
-})(OptionsContainer);
+export default connect(mapStateToProps)(OptionsContainer);
