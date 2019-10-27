@@ -28,12 +28,20 @@ const CTAButtons = ({
     if (productType === 'configurable') {
       // Configurable type product
       if (selectedProduct) {
-        const cartItem = { sku: selectedProduct.sku, quantity, quote_id: cartQuoteId };
+        const cartItem = {
+          sku: selectedProduct.sku,
+          qty: quantity,
+          quote_id: cartQuoteId
+        };
         _addToCart(cartItem);
       }
     } else if (productType === 'simple') {
       // Simple type product
-      const cartItem = { sku, quantity, quote_id: cartQuoteId };
+      const cartItem = {
+        sku,
+        qty: quantity,
+        quote_id: cartQuoteId
+      };
       _addToCart(cartItem);
     } else {
       // product type either virtual, downlodable or bundle
@@ -49,6 +57,7 @@ CTAButtons.propTypes = {
   productType: PropTypes.string.isRequired,
   sku: PropTypes.string.isRequired,
   cartQuoteId: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
   selectedProduct: PropTypes.oneOfType([PropTypes.object, null]),
   addToCart: PropTypes.func.isRequired, // Redux
 };
