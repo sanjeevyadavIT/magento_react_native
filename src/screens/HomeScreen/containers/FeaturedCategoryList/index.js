@@ -31,7 +31,7 @@ const FeaturedCategoryList = ({
     errorMessage={errorMessage}
     canLoadMoreProducts={canLoadMoreProducts}
     isLoadingMoreProducts={isLoadingMoreProducts}
-    setCurrentProduct={_setCurrentProduct}
+    onItemClick={_setCurrentProduct}
     loadProducts={loadProducts}
     updateItem={getHomeConfigurableProductOptions}
   />

@@ -16,7 +16,7 @@ module.exports = {
     'linebreak-style': 0,
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': 'off',
-    'react/prop-types': 'off',
+    'react/prop-types': 'warn',
     'comma-dangle': 'off',
     'import/prefer-default-export': 'off',
     'react-hooks/rules-of-hooks': 'error',

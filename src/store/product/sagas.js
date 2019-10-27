@@ -9,9 +9,6 @@ import { magento } from '../../magento';
 import {
   MAGENTO,
   UI,
-  UI_PRODUCT_UPDATE_OPTIONS_REQUEST,
-  UI_PRODUCT_UPDATE_OPTIONS_SUCCESS,
-  UI_PRODUCT_UPDATE_OPTIONS_FAILURE
 } from '../../constants';
 import { parseImageArray } from '../../utils';
 
@@ -33,26 +30,53 @@ export const getProductInfoFromStore = (state) => {
 };
 
 /**
- * Interceptor saga: Parse weather configurable options are available in product selected
- * If `simple` type product, hasOptions will be false
- * If `configurable` type product, hasOptions will be true
+ * Interceptor saga:
+ * Fetch configurable children if product is `configurable` type product
+ * Fetch product media
+ * Fetch configurable options for `configurable` type product
  */
-function* openSelectedProduct({ payload: { productDetail, children } }) {
+function* fetchProductDetails({ payload: { productType, sku, children } }) {
   try {
-    const { custom_attributes: customAttributes } = productDetail;
-    const { value } = customAttributes.find(customAttribute => customAttribute.attribute_code === 'has_options');
-    const hasOptions = value !== '0';
-    yield put({ type: UI.OPEN_SELECTED_PRODUCT_SUCCESS, payload: { productDetail, children, hasOptions } });
+    yield all([
+      getProductMedia(sku),
+      productType === 'configurable' && !children && getConfigurableChildren(sku),
+      productType === 'configurable' && getConfigurableProductOptions(sku)
+    ]);
   } catch (error) {
-    yield put({ type: UI.OPEN_SELECTED_PRODUCT_FAILURE, payload: { errorMessage: error.message } });
+    yield put({ type: UI.OPEN_SELECTED_PRODUCT_FAILURE, payload: { sku, errorMessage: error.message } });
+  }
+}
+
+// TODO: don't fetch medias if already cached
+// worker saga: Add Description
+function* getProductMedia(sku) {
+  try {
+    yield put({ type: MAGENTO.PRODUCT_MEDIA_LOADING, payload: { sku } });
+    const response = yield call({ content: magento, fn: magento.admin.getProductMedia }, sku);
+    const imageArray = parseImageArray(response);
+    yield put({ type: MAGENTO.PRODUCT_MEDIA_SUCCESS, payload: { sku, medias: imageArray } });
+  } catch (error) {
+    yield put({ type: MAGENTO.PRODUCT_MEDIA_FAILURE, payload: { sku, errorMessage: error.message } });
+  }
+}
+
+// TODO: don't fetch children, if aldready cached
+// worker saga: Add Description
+function* getConfigurableChildren(sku) {
+  try {
+    yield put({ type: MAGENTO.CONFIGURABLE_CHILDREN_LOADING });
+    const children = yield call({ content: magento, fn: magento.admin.getConfigurableChildren }, sku);
+    yield put({ type: MAGENTO.CONFIGURABLE_CHILDREN_SUCCESS, payload: { sku, children } });
+  } catch (error) {
+    yield put({ type: MAGENTO.CONFIGURABLE_CHILDREN_FAILURE, payload: { sku, errorMessage: error.message } });
   }
 }
 
 // worker saga: Add Description
 // TODO: Function not optimized
-function* getConfigurableProductOptions({ payload: { sku } }) {
+function* getConfigurableProductOptions(sku) {
   try {
-    yield put({ type: MAGENTO.CONF_OPTIONS_LOADING });
+    yield put({ type: MAGENTO.CONF_OPTIONS_LOADING, payload: { sku } });
     const options = yield call(
       { content: magento, fn: magento.admin.getConfigurableProductOptions },
       sku,
@@ -68,9 +92,9 @@ function* getConfigurableProductOptions({ payload: { sku } }) {
         attribute.attribute_id,
       )));
     }
-    yield put({ type: MAGENTO.CONF_OPTIONS_SUCCESS, payload: { options, attributes: formatAttributesResponse(attributesResponse) } });
+    yield put({ type: MAGENTO.CONF_OPTIONS_SUCCESS, payload: { sku, options, attributes: formatAttributesResponse(attributesResponse) } });
   } catch (error) {
-    yield put({ type: MAGENTO.CONF_OPTIONS_FAILURE, payload: { errorMessage: error.message } });
+    yield put({ type: MAGENTO.CONF_OPTIONS_FAILURE, payload: { sku, errorMessage: error.message } });
   }
 }
 
@@ -85,75 +109,6 @@ function formatAttributesResponse(attribtesArray) {
   });
   return attributes;
 }
-
-// worker saga: Add Description
-function* getProductMedia({ payload: { sku } }) {
-  try {
-    yield put({ type: MAGENTO.PRODUCT_MEDIA_LOADING });
-    const response = yield call({ content: magento, fn: magento.admin.getProductMedia }, sku);
-    const imageArray = parseImageArray(response);
-    yield put({ type: MAGENTO.PRODUCT_MEDIA_SUCCESS, payload: { sku, media: imageArray } });
-  } catch (error) {
-    yield put({ type: MAGENTO.PRODUCT_MEDIA_FAILURE, payload: { errorMessage: error.message } });
-  }
-}
-
-// worker saga: Add Description
-function* getConfigurableChildren({ payload: { sku } }) {
-  try {
-    yield put({ type: MAGENTO.CONFIGURABLE_CHILDREN_LOADING });
-    const children = yield call({ content: magento, fn: magento.admin.getConfigurableChildren }, sku);
-    yield put({ type: MAGENTO.CONFIGURABLE_CHILDREN_SUCCESS, payload: { children } });
-  } catch (error) {
-    yield put({ type: MAGENTO.CONFIGURABLE_CHILDREN_FAILURE, payload: { errorMessage: error.message } });
-  }
-}
-
-function isAttributeAndValuePresent(child, attributeCode, attributeValue) {
-  return child.custom_attributes.some(customAttribute => customAttribute.attribute_code === attributeCode && customAttribute.value === attributeValue)
-};
-
-/**
- * Helper function to find out which `simple` type product selected,
- * using @param selectedOptions
- *
- * @param {Objetc[]} children - all `simple` type product of `configurable` product
- * @param {Object} selectedOptions - selected configurable options
- * @param {Object} attributes - contains keys mapped to their names
- */
-function findSelectedProduct(children, selectedOptions, attributes) {
-  const selectedOptionsWithNameAsKey = Object.keys(selectedOptions).reduce((total, selectedOptionKey) => ({
-    ...total,
-    [attributes[selectedOptionKey].attributeCode]: selectedOptions[selectedOptionKey],
-  }), {});
-  return children.find(child => Object.keys(selectedOptionsWithNameAsKey).every(attributeKey => isAttributeAndValuePresent(child, attributeKey, selectedOptionsWithNameAsKey[attributeKey])));
-}
-
-/**
- * Interceptor function, which will find out selcted `simple` product from
- * options selected by user. If some options are not selected, it will
- * return the same payload, else along with payload it will return the
- * `simple` product selected.
- *
- * @param {Object} action                        - action dispatch from UI
- * @param {Object} action.payload.selectedOption - key value pair of option selected in case of
- *                                                 `configurable` type product
- */
-function* calculatedSelectedProduct({ payload: { selectedOption } }) {
-  try {
-    const attributes = yield select(getAttributesFromStore);
-    const { options, children, selectedOptions } = yield select(getProductInfoFromStore);
-    const finalSelectedOptions = { ...selectedOptions, ...selectedOption };
-    let selectedProduct = null;
-    if (options.length !== 0 && options.length === Object.keys(finalSelectedOptions).length) {
-      selectedProduct = findSelectedProduct(children, finalSelectedOptions, attributes);
-    }
-    yield put({ type: UI_PRODUCT_UPDATE_OPTIONS_SUCCESS, payload: { selectedOption, selectedProduct } });
-  } catch (error) {
-    yield put({ type: UI_PRODUCT_UPDATE_OPTIONS_FAILURE, payload: { errorMessage: error.message } });
-  }
-}
-
 
 // worker saga: Add Description
 function* addToCart({ payload }) {
@@ -173,10 +128,10 @@ function* addToCart({ payload }) {
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
-  yield takeEvery(UI.OPEN_SELECTED_PRODUCT_REQUEST, openSelectedProduct);
-  yield takeEvery(MAGENTO.PRODUCT_MEDIA_REQUEST, getProductMedia);
-  yield takeEvery(MAGENTO.CONF_OPTIONS_REQUEST, getConfigurableProductOptions);
-  yield takeEvery(MAGENTO.CONFIGURABLE_CHILDREN_REQUEST, getConfigurableChildren);
-  yield takeEvery(UI_PRODUCT_UPDATE_OPTIONS_REQUEST, calculatedSelectedProduct);
+  yield takeEvery(UI.OPEN_SELECTED_PRODUCT_REQUEST, fetchProductDetails);
+  // yield takeEvery(MAGENTO.PRODUCT_MEDIA_REQUEST, getProductMedia);
+  // yield takeEvery(MAGENTO.CONF_OPTIONS_REQUEST, getConfigurableProductOptions);
+  // yield takeEvery(MAGENTO.CONFIGURABLE_CHILDREN_REQUEST, getConfigurableChildren);
+  // yield takeEvery(UI_PRODUCT_UPDATE_OPTIONS_REQUEST, calculatedSelectedProduct);
   yield takeEvery(MAGENTO.ADD_TO_CART_REQUEST, addToCart);
 }

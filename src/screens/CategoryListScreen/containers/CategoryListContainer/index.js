@@ -39,7 +39,7 @@ const CategoryListContainer = ({
       columnCount={columnCount}
       canLoadMoreProducts={canLoadMoreProducts}
       isLoadingMoreProducts={loadingMoreStatus}
-      setCurrentProduct={_setCurrentProduct}
+      onItemClick={_setCurrentProduct}
       loadProducts={_getCategoryProducts}
     />
   );

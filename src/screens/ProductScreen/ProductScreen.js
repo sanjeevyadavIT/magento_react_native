@@ -22,6 +22,7 @@ import {
 } from '../../navigation/types';
 import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';
+import { ProductType } from '../../types';
 
 /**
  * Screen to display product description and detail.
@@ -43,7 +44,7 @@ const ProductScreen = ({
   children,
   attributes,
   options,
-  navigation,
+  navigation, // From react-navigation
 }) => {
   const theme = useContext(ThemeContext);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -152,9 +153,27 @@ ProductScreen.navigationOptions = ({ navigation }) => ({
   ),
 });
 
-ProductScreen.propTypes = {};
+ProductScreen.propTypes = {
+  children: PropTypes.arrayOf(ProductType),
+  options: PropTypes.arrayOf(PropTypes.shape({
+    attribute_id: PropTypes.string,
+    id: PropTypes.number,
+    label: PropTypes.string,
+    position: PropTypes.number,
+    product_id: PropTypes.number,
+    values: PropTypes.arrayOf(PropTypes.shape({
+      value_index: PropTypes.number.isRequired,
+    })),
+  })),
+  attributes: PropTypes.object,
+  navigation: PropTypes.object.isRequired,
+};
 
-ProductScreen.defaultProps = {};
+ProductScreen.defaultProps = {
+  children: [],
+  options: [],
+  attributes: {},
+};
 
 const mapStateToProps = ({ product }, { navigation }) => {
   const {
