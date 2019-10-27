@@ -21,9 +21,6 @@ function loadStories() {
   require('../src/components/organisms/drawer/CategoryTree/stories');
   require('../src/components/organisms/drawer/CategoryTreeItem/stories');
   require('../src/components/organisms/drawer/DrawerHeader/stories');
-  require('../src/components/product/CatalogGrid/stories');
-  require('../src/components/product/CatalogGridItem/stories');
-  require('../src/components/product/Price/stories');
   
 }
 
@@ -44,9 +41,6 @@ const stories = [
   '../src/components/organisms/drawer/CategoryTree/stories',
   '../src/components/organisms/drawer/CategoryTreeItem/stories',
   '../src/components/organisms/drawer/DrawerHeader/stories',
-  '../src/components/product/CatalogGrid/stories',
-  '../src/components/product/CatalogGridItem/stories',
-  '../src/components/product/Price/stories',
   
 ];
 
