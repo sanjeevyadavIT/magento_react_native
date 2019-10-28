@@ -5,17 +5,6 @@ import {
 } from '../../constants';
 import Status from '../../magento/Status';
 
-/**
- * Saves the attributeId along with it's key which is selcted by user.
- * Example, if user choose size `s` where attribute_id of size is 97 and key of `s` is 101
- * ```
- * selectedOptions = {
- *    97: 101
- * }
- * ```
- */
-// selectedOptions: {},
-
 const getInitialState = {
   current: {
     // This is a dummy object, which mimics an open product in ProductScreen

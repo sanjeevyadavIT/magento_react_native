@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { CatalogGrid } from '../../../../components';
 import { setCurrentProduct, getCategoryProducts, getCategoryConfigurableProductOptions } from '../../../../store/actions';
 import Status from '../../../../magento/Status';
+import { ProductType } from '../../../../types';
 
 // FIXME: Not optimized, everytime more products will load, items and total_count will change,
 // and compoenent will rerender
 const CategoryListContainer = ({
   categoryId,
-  items,
+  products,
   currencySymbol,
   totalCount,
   status,
@@ -17,14 +18,11 @@ const CategoryListContainer = ({
   loadingMoreStatus,
   getCategoryProducts: _getCategoryProducts,
   setCurrentProduct: _setCurrentProduct,
-  /**
-   * constants
-   */
-  showHorizontalList = false,
-  columnCount = 2,
-  stateAccessor = 'categoryList',
 }) => {
-  const canLoadMoreProducts = items.length < totalCount;
+  const canLoadMoreProducts = products.length < totalCount;
+  const showHorizontalList = false;
+  const columnCount = 2;
+  const stateAccessor = 'categoryList';
 
   return (
     <CatalogGrid
@@ -32,7 +30,7 @@ const CategoryListContainer = ({
       currencySymbol={currencySymbol}
       stateAccessor={stateAccessor}
       updateItem={getCategoryConfigurableProductOptions}
-      products={items}
+      products={products}
       status={status}
       errorMessage={errorMessage}
       showHorizontalList={showHorizontalList}
@@ -50,7 +48,7 @@ CategoryListContainer.propTypes = {
   loadingMoreStatus: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,
   categoryId: PropTypes.number.isRequired,
-  items: PropTypes.array,
+  products: PropTypes.arrayOf(ProductType),
   currencySymbol: PropTypes.string.isRequired,
   totalCount: PropTypes.number,
   setCurrentProduct: PropTypes.func.isRequired,
@@ -58,18 +56,24 @@ CategoryListContainer.propTypes = {
 };
 
 CategoryListContainer.defaultProps = {
-  items: [],
+  products: [],
   totalCount: 0,
   errorMessage: '',
 };
 
 const mapStateToProps = ({ categoryList, magento }) => {
-  const { items, totalCount, status, errorMessage, loadingMoreStatus } = categoryList;
+  const {
+    items,
+    totalCount,
+    status,
+    errorMessage,
+    loadingMoreStatus
+  } = categoryList;
   const { default_display_currency_symbol: currencySymbol } = magento.currency;
   return {
     status,
     errorMessage,
-    items,
+    products: items,
     totalCount,
     currencySymbol,
     loadingMoreStatus
