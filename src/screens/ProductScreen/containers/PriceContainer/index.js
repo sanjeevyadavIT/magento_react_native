@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Price } from '../../../../components';
 import { Price as PricePojo, getPriceFromChildren } from '../../../../utils/products';
+import { ProductType } from '../../../../types';
 
 /**
  * @todo In future PriceContianer can show other information,
  * like with or without tax
  */
 const PriceContainer = ({
-  sku,
+  sku, // used in redux to access correct state
   price,
   productType,
   selectedProduct,
@@ -45,12 +46,18 @@ const PriceContainer = ({
 };
 
 PriceContainer.propTypes = {
-  children: PropTypes.array, // redux
+  selectedProduct: PropTypes.oneOfType([ProductType, undefined]),
+  productType: PropTypes.string.isRequired,
+  price: PropTypes.number,
+  sku: PropTypes.string.isRequired,
+  children: PropTypes.arrayOf(ProductType), // redux
   currencySymbol: PropTypes.string.isRequired, // redux
 };
 
 PriceContainer.defaultProps = {
-
+  children: [],
+  selectedProduct: undefined,
+  price: 0,
 };
 
 const mapStateToProps = ({ product, magento }, { sku }) => {

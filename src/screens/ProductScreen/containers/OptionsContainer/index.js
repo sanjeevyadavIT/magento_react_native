@@ -20,8 +20,7 @@ import { DEFAULT_PICKER_LABEL } from '../../../../constants';
  * @param {Object}    props.attributes        - (From Redux) contain label to the id present in  {@link props.options}
  */
 const OptionsContainer = ({
-  sku,
-  children,
+  sku, // used in redux to access state
   status,
   errorMessage,
   options,
@@ -85,22 +84,33 @@ OptionsContainer.propTypes = {
   sku: PropTypes.string.isRequired,
   status: PropTypes.oneOf(Object.values(Status)).isRequired, // redux
   errorMessage: PropTypes.string, // redux
-  hasOptions: PropTypes.bool, // redux
-  options: PropTypes.array, // redux
+  options: PropTypes.arrayOf(PropTypes.shape({
+    attribute_id: PropTypes.string,
+    id: PropTypes.number,
+    label: PropTypes.string,
+    position: PropTypes.number,
+    product_id: PropTypes.number,
+    values: PropTypes.arrayOf(PropTypes.shape({
+      value_index: PropTypes.number.isRequired,
+    })),
+  })),
   attributes: PropTypes.object, // redux
+  selectedOptions: PropTypes.object,
+  setSelectedOptions: PropTypes.func,
 };
 
 OptionsContainer.defaultProps = {
   errorMessage: '',
   options: null,
   attributes: {},
+  selectedOptions: null,
+  setSelectedOptions: () => {},
 };
 
 const mapStateToProps = ({ product }, { sku }) => {
   const {
     current: {
       [sku]: {
-        children,
         options,
         confOptionsStatus: status,
         confOptionsErrorMessage: errorMessage,
@@ -111,7 +121,6 @@ const mapStateToProps = ({ product }, { sku }) => {
 
   return {
     status,
-    children,
     errorMessage,
     sku,
     options,
