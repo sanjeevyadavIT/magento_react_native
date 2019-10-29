@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Text, Card } from '../../..';
+import { Text } from '../../..';
 import { magento } from '../../../../magento';
 import Status from '../../../../magento/Status';
 import NavigationService from '../../../../navigation/NavigationService';
@@ -32,7 +32,7 @@ const DrawerHeader = ({
   }
 
   return (
-    <Card
+    <TouchableOpacity
       style={styles.container(theme)}
       onPress={() => NavigationService.navigate(NAVIGATION_PATH)}
     >
@@ -40,12 +40,13 @@ const DrawerHeader = ({
         <Text style={styles.text(theme)}>{welcomeText}</Text>
         <Icon name="chevron-right" size={30} color={theme.colors.white} />
       </View>
-    </Card>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: theme => ({
+    height: 100,
     backgroundColor: theme.colors.primary,
     borderWidth: 0,
   }),
