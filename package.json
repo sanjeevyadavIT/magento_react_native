@@ -55,7 +55,7 @@
       "searchDir": [
         "./src"
       ],
-      "pattern": "**/stories.js"
+      "pattern": "**/*.stories.js"
     }
   }
 }
