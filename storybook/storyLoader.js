@@ -5,42 +5,50 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
-  require('../src/components/atoms/Button/stories');
-  require('../src/components/atoms/Image/stories');
-  require('../src/components/atoms/Spinner/stories');
-  require('../src/components/atoms/Text/stories');
-  require('../src/components/atoms/TextInput/stories');
-  require('../src/components/molecules/AppbarButtons/stories');
-  require('../src/components/molecules/Card/stories');
-  require('../src/components/molecules/ImageSlider/stories');
-  require('../src/components/molecules/LoadingView/stories');
-  require('../src/components/molecules/MessageView/stories');
-  require('../src/components/organisms/GenericTemplate/stories');
-  require('../src/components/organisms/cart/CartList/stories');
-  require('../src/components/organisms/cart/CartListItem/stories');
-  require('../src/components/organisms/drawer/CategoryTree/stories');
-  require('../src/components/organisms/drawer/CategoryTreeItem/stories');
-  require('../src/components/organisms/drawer/DrawerHeader/stories');
+  require('../src/components/atoms/Button/Button.stories');
+  require('../src/components/atoms/Image/Image.stories');
+  require('../src/components/atoms/Spinner/Spinner.stories');
+  require('../src/components/atoms/Text/Text.stories');
+  require('../src/components/atoms/TextInput/TextInput.stories');
+  require('../src/components/molecules/AppbarButtons/AppbarButtons.stories');
+  require('../src/components/molecules/Card/Card.stories');
+  require('../src/components/molecules/ImageSlider/ImageSlider.stories');
+  require('../src/components/molecules/LoadingView/LoadingView.stories');
+  require('../src/components/molecules/MessageView/MessageView.stories');
+  require('../src/components/organisms/GenericTemplate/GenericTemplate.stories');
+  require('../src/components/organisms/cart/CartList/CartList.stories');
+  require('../src/components/organisms/cart/CartListItem/CartListItem.stories');
+  require('../src/components/organisms/drawer/CategoryTree/CategoryTree.stories');
+  require('../src/components/organisms/drawer/CategoryTreeItem/CategoryTreeItem.stories');
+  require('../src/components/organisms/drawer/DrawerHeader/DrawerHeader.stories');
+  require('../src/components/organisms/order/OrderListItem/OrderListItem.stories');
+  require('../src/components/product/CatalogGrid/CatalogGrid.stories');
+  require('../src/components/product/CatalogGridItem/CatalogGridItem.stories');
+  require('../src/components/product/Price/Price.stories');
   
 }
 
 const stories = [
-  '../src/components/atoms/Button/stories',
-  '../src/components/atoms/Image/stories',
-  '../src/components/atoms/Spinner/stories',
-  '../src/components/atoms/Text/stories',
-  '../src/components/atoms/TextInput/stories',
-  '../src/components/molecules/AppbarButtons/stories',
-  '../src/components/molecules/Card/stories',
-  '../src/components/molecules/ImageSlider/stories',
-  '../src/components/molecules/LoadingView/stories',
-  '../src/components/molecules/MessageView/stories',
-  '../src/components/organisms/GenericTemplate/stories',
-  '../src/components/organisms/cart/CartList/stories',
-  '../src/components/organisms/cart/CartListItem/stories',
-  '../src/components/organisms/drawer/CategoryTree/stories',
-  '../src/components/organisms/drawer/CategoryTreeItem/stories',
-  '../src/components/organisms/drawer/DrawerHeader/stories',
+  '../src/components/atoms/Button/Button.stories',
+  '../src/components/atoms/Image/Image.stories',
+  '../src/components/atoms/Spinner/Spinner.stories',
+  '../src/components/atoms/Text/Text.stories',
+  '../src/components/atoms/TextInput/TextInput.stories',
+  '../src/components/molecules/AppbarButtons/AppbarButtons.stories',
+  '../src/components/molecules/Card/Card.stories',
+  '../src/components/molecules/ImageSlider/ImageSlider.stories',
+  '../src/components/molecules/LoadingView/LoadingView.stories',
+  '../src/components/molecules/MessageView/MessageView.stories',
+  '../src/components/organisms/GenericTemplate/GenericTemplate.stories',
+  '../src/components/organisms/cart/CartList/CartList.stories',
+  '../src/components/organisms/cart/CartListItem/CartListItem.stories',
+  '../src/components/organisms/drawer/CategoryTree/CategoryTree.stories',
+  '../src/components/organisms/drawer/CategoryTreeItem/CategoryTreeItem.stories',
+  '../src/components/organisms/drawer/DrawerHeader/DrawerHeader.stories',
+  '../src/components/organisms/order/OrderListItem/OrderListItem.stories',
+  '../src/components/product/CatalogGrid/CatalogGrid.stories',
+  '../src/components/product/CatalogGridItem/CatalogGridItem.stories',
+  '../src/components/product/Price/Price.stories',
   
 ];
 
