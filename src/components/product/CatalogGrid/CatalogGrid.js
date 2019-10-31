@@ -75,6 +75,7 @@ const CatalogGrid = ({
 
   const renderRow = ({ item }) => (
     <CatalogGridItem
+      columnCount={columnCount}
       product={item}
       stateAccessor={stateAccessor}
       updateItem={updateItem}
