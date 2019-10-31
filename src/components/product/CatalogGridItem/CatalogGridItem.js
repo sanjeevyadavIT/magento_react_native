@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import NavigationService from '../../../navigation/NavigationService';
@@ -15,6 +15,10 @@ import { ThemeContext } from '../../../theme';
 import { ProductType } from '../../../types';
 
 const CatalogGridItem = ({
+/**
+   * No of colums to  dispaly
+   */
+  columnCount,
   /**
    * Product to dispaly
    */
@@ -81,7 +85,7 @@ const CatalogGridItem = ({
   return (
     <Card
       type="outline"
-      style={styles.container(theme)}
+      style={styles.container(theme,columnCount)}
       onPress={onItemPress}
     >
       <Image
@@ -98,8 +102,8 @@ const CatalogGridItem = ({
 };
 
 const styles = StyleSheet.create({
-  container: theme => ({
-    width: theme.dimens.catalogGridItemWidth,
+  container: (theme, columnCount) => ({
+    width: columnCount > 1 ? theme.dimens.WINDOW_WIDTH / columnCount : theme.dimens.catalogGridItemWidth,
     height: theme.dimens.catalogGridItemHeight,
   }),
   imageStyle: theme => ({
