@@ -1,0 +1,11 @@
+{
+  "common": {
+    "ok": "Está bien!",
+    "cancel": "Cancelar",
+    "back": "Trasero",
+    "brandName": "MageCart"
+  },
+  "cartScreen": {
+    "title": "Carrito"
+  }
+}

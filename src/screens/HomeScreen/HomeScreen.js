@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { GenericTemplate, MaterialAppbarButtons, Item } from '../../components';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from './containers';
 import { ThemeContext } from '../../theme';
-import { BRAND_NAME } from '../../constants';
 import { magento } from '../../magento';
 import Status from '../../magento/Status';
 import {
@@ -13,6 +12,7 @@ import {
   NAVIGATION_LOGIN_SCREEN,
   NAVIGATION_CART_SCREEN
 } from '../../navigation/types';
+import { translate } from '../../i18n';
 
 /**
  * First screen which is shown to user, this component is
@@ -38,7 +38,7 @@ const HomeScreen = ({ status, errorMessage }) => {
 };
 
 HomeScreen.navigationOptions = ({ navigation }) => ({
-  title: BRAND_NAME,
+  title: translate('homeScreen.title'),
   headerLeft: (
     <MaterialAppbarButtons>
       <Item

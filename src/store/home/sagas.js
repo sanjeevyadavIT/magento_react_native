@@ -15,7 +15,13 @@ function* getHomeData() {
     yield put({ type: MAGENTO.HOME_DATA_SUCCESS, payload: formattedPayload });
     yield put({ type: MAGENTO.CATEGORY_TREE_REQUEST }); // fetch category tree
   } catch (error) {
-    yield put({ type: MAGENTO.HOME_DATA_FAILURE, payload: { errorMessage: error.message } });
+    yield put({
+      type: MAGENTO.HOME_DATA_FAILURE,
+      payload: {
+        errorCode: error.name,
+        errorMessage: error.message
+      }
+    });
   }
 }
 
@@ -62,7 +68,7 @@ function* updateConfigurableProductsPrice({ payload }) {
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
-  
+
   yield takeLatest(MAGENTO.HOME_DATA_REQUEST, getHomeData);
   yield takeEvery(MAGENTO.FEATURED_CATEGORY_PRODUCTS_REQUEST, getFeaturedCategoryProducts);
   yield takeEvery(MAGENTO.HOME_UPDATE_CONF_PRODUCT_REQUEST, updateConfigurableProductsPrice);

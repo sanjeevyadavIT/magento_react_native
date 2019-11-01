@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { CART_PAGE_TITLE } from '../../constants';
 import { getCustomerCart } from '../../store/actions';
 import { GenericTemplate } from '../../components';
 import { CartListContainer } from './containers';
 import Status from '../../magento/Status';
+import { translate } from '../../i18n';
 
 const CartPage = ({
   status,
@@ -26,7 +26,7 @@ const CartPage = ({
 };
 
 CartPage.navigationOptions = {
-  title: CART_PAGE_TITLE,
+  title: translate('cartScreen.title'),
 };
 
 CartPage.propTypes = {};

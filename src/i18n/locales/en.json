@@ -1,0 +1,20 @@
+{
+  "common": {
+    "ok": "OK!",
+    "cancel": "Cancel",
+    "back": "Back",
+    "brandName": "MageCart"
+  },
+  "errors": {
+    "homeCmsBlockId": "HOME CMS BLOCK ID ERROR",
+    "homeCmsBlockIdMessage": "Please Refer to Step 2 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
+    "integrationTokenRequired": "INTEGRATION TOKEN REQUIRED ERROR",
+    "integrationTokenRequiredMessage": "Please refer to Step 1 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup"
+  },
+  "homeScreen": {
+    "title": "MageCart"
+  },
+  "cartScreen": {
+    "title": "Cart"
+  }
+}
