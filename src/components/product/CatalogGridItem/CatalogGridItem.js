@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import NavigationService from '../../../navigation/NavigationService';
@@ -16,7 +16,14 @@ import { ProductType } from '../../../types';
 
 const CatalogGridItem = ({
 /**
-   * No of colums to  dispaly
+   * No of colums in `CatalogGrid` being displayed,
+   * will effect `CatalogGridItem` width.
+   *
+   * If `CatalogGrid` render items in horizonatl list,
+   * then `CatalogGridItem` has fixed width defined by `theme.dimens.catalogGridItemWidth`
+   *
+   * else if `CatalogGrid` render items in a Grid of row * coulumnCount
+   * then `CataloggridItem` width is (total_screen_width) / (columnCount)
    */
   columnCount,
   /**
@@ -122,8 +129,11 @@ CatalogGridItem.propTypes = {
   stateAccessor: PropTypes.string.isRequired,
   updateItem: PropTypes.func.isRequired,
   onPress: PropTypes.func.isRequired,
+  columnCount: PropTypes.number,
 };
 
-CatalogGridItem.defaultProps = {};
+CatalogGridItem.defaultProps = {
+  columnCount: 1,
+};
 
 export default CatalogGridItem;

@@ -9,6 +9,7 @@ import Status from '../../../../magento/Status';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_LOGIN_SCREEN, NAVIGATION_ACCOUNT_SCREEN } from '../../../../navigation/types';
 import { ThemeContext } from '../../../../theme';
+
 /**
  * @param status need to be passed, so that {@link DrawerHeader} can refresh
  * when user is logged in
@@ -46,7 +47,7 @@ const DrawerHeader = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    height: 100,
+    height: theme.dimens.headerViewHeight,
     backgroundColor: theme.colors.primary,
     borderWidth: 0,
   }),
