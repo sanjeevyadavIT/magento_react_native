@@ -1,0 +1,141 @@
+{
+  "common": {
+    "brandName": "MageCart",
+    "ok": "OK!",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "total": "Total",
+    "subTotal": "Subtotal",
+    "grandTotal": "Grand Total",
+    "price": "Price",
+    "quantity": "Qty",
+    "sku": "SKU",
+    "discount": "Discount",
+    "order": "Order",
+    "select": "Select",
+    "save": "Save",
+    "sortOption": {
+      "aToZ": "name: A to Z",
+      "zToA": "name: Z to A",
+      "priceLowToHigh": "price: Low to High",
+      "priceHighToLow": "price: High to Low"
+    }
+  },
+  "errors": {
+    "homeCmsBlockId": "HOME CMS BLOCK ID ERROR",
+    "homeCmsBlockIdMessage": "Please Refer to Step 2 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
+    "integrationTokenRequired": "INTEGRATION TOKEN REQUIRED ERROR",
+    "integrationTokenRequiredMessage": "Please refer to Step 1 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup"
+  },
+  "accountScreen": {
+    "title": "Account",
+    "myOrderButton": "My Orders",
+    "logoutButton": "Logout"
+  },
+  "addressScreen": {
+    "title": "Address",
+    "selectCountry": "Select Country",
+    "selectState": "Select State",
+    "stateLabel": "Enter State",
+    "stateHint": "State",
+    "formName": "Contact Information",
+    "firstNameLabel": "First Name",
+    "firstNameHint": "First Name",
+    "lastNameLabel": "Last Name",
+    "lastNameHint": "Last Name",
+    "phoneNumberLabel": "Phone Number",
+    "phoneNumberHint": "Phone Number",
+    "addressLabel": "Address",
+    "addressHint": "Address",
+    "cityLabel": "City",
+    "cityHint": "City",
+    "zipCodeLabel": "Zip Code",
+    "zipCodeHint": "Zip Code"
+  },
+  "homeScreen": {
+    "title": "MageCart",
+    "menu": {
+      "drawer": "Main Menu",
+      "search": "Search",
+      "cart": "Cart"
+    }
+  },
+  "categoryListScreen": {
+    "menu": {
+      "sort": "Sort"
+    }
+  },
+  "drawerScreen": {
+    "login": "Login!",
+    "welcomeText": "Hello user!"
+  },
+  "cartScreen": {
+    "title": "Cart",
+    "priceNotAvailable": "Cannot proceed, price for some product is not available!",
+    "placeOrderButton": "Place order",
+    "cartEmptyMessage": "Cart is empty, Add some products",
+    "removeItemDialogTitle": "You sure?",
+    "removeItemDialogMessage": "Just double-checking you wanted to remove the item"
+  },
+  "orderScreen": {
+    "orderPlacedScreenTitle": "Order Confirmation",
+    "orderDetailScreenTitle": "Order no",
+    "ordersScreenTitle": "My Orders",
+    "orderStatus": "Status",
+    "orderNotPlace": "Sorry for the inconvenience, unable to place your order!",
+    "viewOrderButton": "View Order",
+    "continueButton": "Continue Shopping",
+    "orderPlaced": "Order Confirmed",
+    "orderPlacedMessage": "You will receive an order confirmation email shortly.",
+    "shippingAndHandling": "Shipping & Handling",
+    "orderTotal": "Order Total",
+    "shipTo": "Ship to",
+    "orderCreated": "Created"
+  },
+  "paymentScreen": {
+    "title": "Payment",
+    "noPaymentAvailable": "Currently no payment method is available!",
+    "selectOption": "Select a payment option",
+    "placeOrderButton": "Place order"
+  },
+  "productScreen": {
+    "title": "Product detail",
+    "menu": {
+      "cart": "Cart"
+    },
+    "addToCartButton": "Add To Cart",
+    "unsupportedProductType": "App doesn't support",
+    "productDetailLabel": "Product Details",
+    "noProductDetail": "No description available!"
+  },
+  "searchScreen": {
+    "searchHint": "Search for products",
+    "menu": {
+      "sort": "Sort"
+    },
+    "noProduct": "No product found!"
+  },
+  "shippingScreen": {
+    "title": "Shipping method",
+    "noShipping": "Shipping methods not found for selected address",
+    "selectShipping": "Select a shipping method"
+  },
+  "signInScreen": {
+    "title": "Login",
+    "signInButton": "Signin",
+    "createAccount": "Create an account(Signup)",
+    "emailHint": "Email",
+    "passwordHint": "Password"
+  },
+  "signUpScreen": {
+    "title": "Signup",
+    "signUpButton": "Signup",
+    "haveAccount": "Already have an account(Login)",
+    "successMessage": "Signup successful, please login!",
+    "firstNameHint": "First Name",
+    "lastNameHint": "Last name",
+    "emailHint": "Email",
+    "passwordHint": "Password"
+  }
+}

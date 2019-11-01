@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { getOrderList } from '../../store/actions';
 import { GenericTemplate, OrderListItem } from '../../components';
 import Status from '../../magento/Status';
-import { ORDERS_SCREEN_TITLE } from '../../constants';
+import { translate } from '../../i18n';
 
 // TODO: Refresh orders, to reflect new orders
 const OrdersScreen = ({
@@ -39,7 +39,7 @@ const OrdersScreen = ({
 const styles = StyleSheet.create({});
 
 OrdersScreen.navigationOptions = ({ navigation }) => ({
-  title: ORDERS_SCREEN_TITLE,
+  title: translate('orderScreen.ordersScreenTitle'),
 });
 
 OrdersScreen.propTypes = {

@@ -15,7 +15,6 @@ import {
   CTAButtons,
 } from './containers';
 import { magento } from '../../magento';
-import { PRODUTC_DETAIL_PAGE_TITLE } from '../../constants';
 import {
   NAVIGATION_LOGIN_SCREEN,
   NAVIGATION_CART_SCREEN,
@@ -23,6 +22,7 @@ import {
 import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';
 import { ProductType } from '../../types';
+import { translate } from '../../i18n';
 
 /**
  * Screen to display product description and detail.
@@ -145,10 +145,10 @@ const styles = StyleSheet.create({
 });
 
 ProductScreen.navigationOptions = ({ navigation }) => ({
-  title: navigation.getParam('title', PRODUTC_DETAIL_PAGE_TITLE),
+  title: navigation.getParam('title', translate('productScreen.title')),
   headerRight: (
     <MaterialAppbarButtons>
-      <Item title="Cart" iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN) : navigation.navigate(NAVIGATION_LOGIN_SCREEN))} />
+      <Item title={translate('productScreen.menu.cart')} iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN) : navigation.navigate(NAVIGATION_LOGIN_SCREEN))} />
     </MaterialAppbarButtons>
   ),
 });

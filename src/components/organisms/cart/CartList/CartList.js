@@ -1,13 +1,24 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import PropTypes from 'prop-types';
-import { CartListItem, Text, Button, MessageView, Spinner } from '../../..';
+import {
+  CartListItem,
+  Text,
+  Button,
+  MessageView,
+  Spinner
+} from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_ADDRESS_SCREEN } from '../../../../navigation/types';
+import { translate } from '../../../../i18n';
 
 // TODO: Make place order button stick at the bottom
 // TODO: Make ListEmptyComponent center in the view
-// TODO: Extract strings into string.js
 // FIXME: For some products the price in items[i] are 0 and for some actual value, hence need to fetch each item price individually
 // FIXME: The logic has become two complex, extract into smaller components
 const CartList = ({
@@ -15,7 +26,9 @@ const CartList = ({
   extra,
   currencySymbol,
 }) => {
-  const renderRow = ({ item, index }) => (<CartListItem item={item} index={index} currencySymbol={currencySymbol} />);
+  const renderRow = ({ item, index }) => (
+    <CartListItem item={item} index={index} currencySymbol={currencySymbol} />
+  );
 
   const allItemPricesAvailable = () => {
     for (let i = 0; i < items.length; i += 1) {
@@ -47,18 +60,17 @@ const CartList = ({
 
   const handlePlaceOrder = () => {
     if (allItemPricesAvailable()) {
-      NavigationService.navigate(NAVIGATION_ADDRESS_SCREEN)
+      NavigationService.navigate(NAVIGATION_ADDRESS_SCREEN);
     } else {
-      // TODO: Show toast: Please wait...
-      console.log('Price not there');
+      Alert.alert(translate('cartScreen.priceNotAvailable'));
     }
   };
 
   const renderFooter = () => (
     <View>
-      <Text type="heading" bold>Total : {currencySymbol + renderTotal()}</Text>
+      <Text type="heading" bold>{`${translate('common.total')} : ${currencySymbol + renderTotal()}`}</Text>
       <Button
-        title="Place order"
+        title={translate('cartScreen.placeOrderButton')}
         onPress={handlePlaceOrder}
       />
     </View>
@@ -70,7 +82,7 @@ const CartList = ({
       renderItem={renderRow}
       keyExtractor={item => String(item.item_id)}
       ListFooterComponent={!!items.length ? (allItemPricesAvailable() ? renderFooter : <Spinner />) : <></>}
-      ListEmptyComponent={<MessageView message="Cart is empty, Add some products" />}
+      ListEmptyComponent={<MessageView message={translate('cartScreen.cartEmptyMessage')} />}
     />
   );
 };

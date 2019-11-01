@@ -6,7 +6,7 @@ import { addCartShippingInfo } from '../../store/actions';
 import { Spinner, Text, Button, GenericTemplate } from '../../components';
 import { NAVIGATION_PAYMENT_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
-import { NO_SHIPPING_AVAILABLE } from '../../constants';
+import { translate } from '../../i18n';
 
 // TODO: Create a cutom picker component
 const ShippingScreen = ({
@@ -23,7 +23,7 @@ const ShippingScreen = ({
 
   const renderShippingMethod = () => {
     if (!shipping || !shipping.length) {
-      return <Text>{NO_SHIPPING_AVAILABLE}</Text>;
+      return <Text>{translate('shippingScreen.noShipping')}</Text>;
     }
 
     return (
@@ -36,10 +36,10 @@ const ShippingScreen = ({
           {
             [
               {
-                carrier_title: "Select a shipping method",
-                method_title: "",
-                amount: "",
-                carrier_code: "NO_OPTION"
+                carrier_title: translate('shippingScreen.selectShipping'),
+                method_title: '',
+                amount: '',
+                carrier_code: 'NO_OPTION'
               },
               ...shipping
             ].map(item => (
@@ -106,7 +106,7 @@ const ShippingScreen = ({
     }
 
     return (
-      <Button onPress={onPress} title="Continue" />
+      <Button onPress={onPress} title={translate('common.continue')} />
     );
   };
 
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
 });
 
 ShippingScreen.navigationOptions = {
-  title: 'Shipping method'
+  title: translate('shippingScreen.title')
 };
 
 ShippingScreen.propTypes = {

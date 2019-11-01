@@ -1,9 +1,10 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from '../../../../components';
 import { addToCart } from '../../../../store/actions';
-import { ADD_TO_CART_BUTTON } from '../../../../constants';
+import { translate } from '../../../../i18n';
 
 /**
  * CTA stands for Call To Action, which will contain
@@ -45,11 +46,17 @@ const CTAButtons = ({
       _addToCart(cartItem);
     } else {
       // product type either virtual, downlodable or bundle
+      Alert.alert(`${translate('productScreen.unsupportedProductType')} ${productType} products`);
       console.log(`App doesn't support ${productType} products`);
     }
   };
   return (
-    <Button type="solid" disabled={productType === 'configurable' && !selectedProduct} title={ADD_TO_CART_BUTTON} onPress={onBtnClick} />
+    <Button
+      type="solid"
+      title={translate('productScreen.addToCartButton')}
+      disabled={productType === 'configurable' && !selectedProduct}
+      onPress={onBtnClick}
+    />
   );
 };
 

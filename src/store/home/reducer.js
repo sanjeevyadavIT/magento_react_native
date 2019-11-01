@@ -23,7 +23,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         status: Status.ERROR,
-        errorMessage: payload.errorMessage,
+        errorMessage: payload.errorCode ? `${payload.errorCode}\n${payload.errorMessage}` : payload.errorMessage,
       };
     case MAGENTO.HOME_DATA_SUCCESS:
       return {

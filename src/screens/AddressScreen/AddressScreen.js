@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Picker, StyleSheet } from 'react-native';
+import { Picker, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -13,6 +13,7 @@ import { GenericTemplate, Spinner, Text, Button, TextInput } from '../../compone
 import { NAVIGATION_SHIPPING_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
+import { translate } from '../../i18n';
 
 // TODO: create Button to have a style of no background and border
 // TODO: Use KeyboardAvoidingView
@@ -160,7 +161,7 @@ const AddressScreen = ({
       if ('available_regions' in getCountryData()) {
         return (
           <>
-            <Text type="label" bold>Select state</Text>
+            <Text type="label" bold>{translate('addressScreen.selectState')}</Text>
             <Picker
               selectedValue={form.state}
               style={{ height: 50 }}
@@ -173,9 +174,9 @@ const AddressScreen = ({
       }
       return (
         <>
-          <Text type="label" bold>Enter state</Text>
+          <Text type="label" bold>{translate('addressScreen.stateLabel')}</Text>
           <TextInput
-            placeholder="State"
+            placeholder={translate('addressScreen.stateHint')}
             autoCorrect={false}
             value={form.state}
             onChangeText={value => setValues({ ...form, state: value })}
@@ -191,7 +192,11 @@ const AddressScreen = ({
     }
 
     return (
-      <Button title="Save" style={[styles.defaultMargin(theme)]} onPress={onSaveAddress} />
+      <Button
+        title={translate('common.save')}
+        style={[styles.defaultMargin(theme)]}
+        onPress={onSaveAddress}
+      />
     );
   };
 
@@ -225,48 +230,48 @@ const AddressScreen = ({
       style={styles.container}
       footer={renderButtons()}
     >
-      <Text type="label">Contact Information</Text>
-      <Text type="label" bold>First Name</Text>
+      <Text type="label">{translate('addressScreen.formName')}</Text>
+      <Text type="label" bold>{translate('addressScreen.firstNameLabel')}</Text>
       <TextInput
-        placeholder="First Name"
+        placeholder={translate('addressScreen.firstNameHint')}
         autoCorrect={false}
         value={form.firstName}
         onChangeText={value => setValues({ ...form, firstName: value })}
       />
-      <Text type="label" bold>Last Name</Text>
+      <Text type="label" bold>{translate('addressScreen.lastNameLabel')}</Text>
       <TextInput
-        placeholder="Last Name"
+        placeholder={translate('addressScreen.lastNameHint')}
         autoCorrect={false}
         value={form.lastName}
         onChangeText={value => setValues({ ...form, lastName: value })}
       />
-      <Text type="label" bold>Phone Number</Text>
+      <Text type="label" bold>{translate('addressScreen.phoneNumberLabel')}</Text>
       <TextInput
-        placeholder="Phone Number"
+        placeholder={translate('addressScreen.phoneNumberHint')}
         autoCorrect={false}
         keyboardType="numeric"
         value={form.phoneNumber}
         onChangeText={value => setValues({ ...form, phoneNumber: value })}
       />
-      <Text type="label" bold>Address</Text>
+      <Text type="label" bold>{translate('addressScreen.addressLabel')}</Text>
       <TextInput
-        placeholder="Street Address"
+        placeholder={translate('addressScreen.addressHint')}
         autoCorrect={false}
         value={form.streetAddress}
         onChangeText={value => setValues({ ...form, streetAddress: value })}
       />
-      <Text type="label" bold>City</Text>
+      <Text type="label" bold>{translate('addressScreen.cityLabel')}</Text>
       <TextInput
-        placeholder="City"
+        placeholder={translate('addressScreen.cityHint')}
         autoCorrect={false}
         value={form.city}
         onChangeText={value => setValues({ ...form, city: value })}
       />
-      <Text type="label" bold>Select Country</Text>
+      <Text type="label" bold>{translate('addressScreen.selectCountry')}</Text>
       {renderCountries()}
-      <Text type="label" bold>Zip Code</Text>
+      <Text type="label" bold>{translate('addressScreen.zipCodeLabel')}</Text>
       <TextInput
-        placeholder="zip code"
+        placeholder={translate('addressScreen.zipCodeHint')}
         autoCorrect={false}
         value={form.zipCode}
         onChangeText={value => setValues({ ...form, zipCode: value })}
@@ -294,7 +299,7 @@ const styles = StyleSheet.create({
 });
 
 AddressScreen.navigationOptions = {
-  title: 'Address'
+  title: translate('addressScreen.title')
 };
 
 AddressScreen.propTypes = {

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { BRAND_NAME } from '../../constants';
 import { MaterialAppbarButtons, Item } from '../../components';
 import { CategoryListContainer } from './containers';
+import { translate } from '../../i18n';
 
 const CategoryListScreen = ({
   navigation,
@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
 });
 
 CategoryListScreen.navigationOptions = ({ navigation }) => ({
-  title: navigation.getParam('title', BRAND_NAME),
+  title: navigation.getParam('title', translate('common.brandName')),
   headerRight: (
     <MaterialAppbarButtons>
-      <Item title="sort" iconName="sort" onPress={navigation.getParam('showSortDialog')} />
+      <Item title={translate('categoryListScreen.menu.sort')} iconName="sort" onPress={navigation.getParam('showSortDialog')} />
     </MaterialAppbarButtons>
   ),
 });

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { GenericTemplate, MaterialAppbarButtons, Item } from '../../components';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from './containers';
 import { ThemeContext } from '../../theme';
-import { BRAND_NAME } from '../../constants';
 import { magento } from '../../magento';
 import Status from '../../magento/Status';
 import {
@@ -13,6 +12,7 @@ import {
   NAVIGATION_LOGIN_SCREEN,
   NAVIGATION_CART_SCREEN
 } from '../../navigation/types';
+import { translate } from '../../i18n';
 
 /**
  * First screen which is shown to user, this component is
@@ -38,11 +38,11 @@ const HomeScreen = ({ status, errorMessage }) => {
 };
 
 HomeScreen.navigationOptions = ({ navigation }) => ({
-  title: BRAND_NAME,
+  title: translate('homeScreen.title'),
   headerLeft: (
     <MaterialAppbarButtons>
       <Item
-        title="menu"
+        title={translate('homeScreen.menu.drawer')}
         iconName="menu"
         onPress={() => navigation.toggleDrawer()}
       />
@@ -51,12 +51,12 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
   headerRight: (
     <MaterialAppbarButtons>
       <Item
-        title="Search"
+        title={translate('homeScreen.menu.search')}
         iconName="search"
         onPress={() => navigation.navigate(NAVIGATION_SEARCH_SCREEN)}
       />
       <Item
-        title="Cart"
+        title={translate('homeScreen.menu.cart')}
         iconName="shopping-cart"
         onPress={() => (
           magento.isCustomerLogin()
