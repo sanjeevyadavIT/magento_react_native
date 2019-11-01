@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { WebView } from 'react-native-webview';
 import { Text } from '../../../../components';
 import { ThemeContext } from '../../../../theme';
-import {
-  PRODUCT_DESCRIPTION_SECTION_TITLE,
-  NO_PRODUCT_DESCRIPTION_AVAILABLE
-} from '../../../../constants';
+import { translate } from '../../../../i18n';
 
 /**
  * Render description of the product into webview
@@ -28,7 +25,13 @@ const DescriptionContainer = ({
 
   const renderDescription = () => (
     <>
-      <Text type="subheading" bold style={styles.productDetailTitle(theme)}>{PRODUCT_DESCRIPTION_SECTION_TITLE}</Text>
+      <Text
+        bold
+        type="subheading"
+        style={styles.productDetailTitle(theme)}
+      >
+        {translate('productScreen.productDetailLabel')}
+      </Text>
       <WebView
         scrollEnabled
         originWhitelist={['*']}
@@ -40,7 +43,7 @@ const DescriptionContainer = ({
   const description = getDescriptionString();
   return (
     <>
-      {description ? renderDescription() : <Text>{NO_PRODUCT_DESCRIPTION_AVAILABLE}</Text>}
+      {description ? renderDescription() : <Text>{translate('productScreen.noProductDetail')}</Text>}
     </>
   );
 };

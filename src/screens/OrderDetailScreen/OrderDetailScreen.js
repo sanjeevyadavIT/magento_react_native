@@ -6,9 +6,9 @@ import { GenericTemplate, Text, Image, Card } from '../../components';
 import { getOrderDetail } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
+import { translate } from '../../i18n';
 
 // TODO: Show product image in place of placeholder
-// TODO: Extract strings in strings.js
 // TODO: Handle orderId, when coming for OrderAcknowledgementPage, fetch data
 // TODO: use currency symbol from magento reducer
 const OrderDetailScreen = ({
@@ -36,26 +36,26 @@ const OrderDetailScreen = ({
       <Image style={styles.imageStyle(theme)} source={{ uri: 'https://via.placeholder.com/100' }} />
       <View>
         <Text>{product.name}</Text>
-        <Text>{`SKU: ${product.sku}`}</Text>
+        <Text>{`${translate('common.sku')}: ${product.sku}`}</Text>
         <Text>
-          {`Price: ${currency} ${product.price}`}
+          {`${translate('common.price')}: ${currency} ${product.price}`}
         </Text>
-        <Text>{`Qty: ${product.qty_ordered}`}</Text>
-        <Text>{`Subtotal: ${currency} ${product.row_total}`}</Text>
+        <Text>{`${translate('common.quantity')}: ${product.qty_ordered}`}</Text>
+        <Text>{`${translate('common.subTotal')}: ${currency} ${product.row_total}`}</Text>
       </View>
     </Card>
   );
 
   const renderFooter = () => (
     <>
-      <Text>{`Status: ${item.status}`}</Text>
+      <Text>{`${translate('orderScreen.orderStatus')}: ${item.status}`}</Text>
       <Text>
-        {`Subtotal: ${currency} ${item.subtotal}`}
+        {`${translate('common.subTotal')}: ${currency} ${item.subtotal}`}
       </Text>
-      <Text>{`Shipping & Handling: ${currency} ${item.shipping_amount}`}</Text>
-      <Text>{`Discount: - ${currency} ${Math.abs(item.discount_amount)}`}</Text>
+      <Text>{`${translate('orderScreen.shippingAndHandling')}: ${currency} ${item.shipping_amount}`}</Text>
+      <Text>{`${translate('common.discount')}: - ${currency} ${Math.abs(item.discount_amount)}`}</Text>
       <Text style={{ fontWeight: 'bold' }}>
-        {`Grand Total: ${currency} ${item.total_due}`}
+        {`${translate('common.grandTotal')}: ${currency} ${item.total_due}`}
       </Text>
     </>
   );
@@ -105,7 +105,7 @@ OrderDetailScreen.navigationOptions = ({ navigation }) => {
   const item = navigation.getParam('item', null);
   const orderId = !item ? navigation.getParam('orderId', -1) : item.increment_id;
   return {
-    title: `Order no: ${orderId}`
+    title: `${translate('orderScreen.orderDetailScreenTitle')}: ${orderId}`
   };
 };
 

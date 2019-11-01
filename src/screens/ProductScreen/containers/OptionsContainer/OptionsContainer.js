@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text } from '../../../../components';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
-import { DEFAULT_PICKER_LABEL } from '../../../../constants';
+import { translate } from '../../../../i18n';
 /**
  * For `configurable` type product, show selection box,
  * to allow user to choose different configuration available.
@@ -43,7 +43,7 @@ const OptionsContainer = ({
   const renderOptions = () => options.sort((first, second) => first.position - second.position).map((option) => {
     const optionIds = option.values.map(value => String(value.value_index));
     const values = attributes[option.attribute_id].options.filter(({ value }) => optionIds.includes(value));
-    values.unshift({ label: DEFAULT_PICKER_LABEL, value: null }); // title
+    values.unshift({ label: translate('common.select'), value: null }); // title
     return (
       <View key={option.attribute_id}>
         <Text type="subheading" bold>{option.label}</Text>

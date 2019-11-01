@@ -42,7 +42,7 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
   headerLeft: (
     <MaterialAppbarButtons>
       <Item
-        title="menu"
+        title={translate('homeScreen.menu.drawer')}
         iconName="menu"
         onPress={() => navigation.toggleDrawer()}
       />
@@ -51,12 +51,12 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
   headerRight: (
     <MaterialAppbarButtons>
       <Item
-        title="Search"
+        title={translate('homeScreen.menu.search')}
         iconName="search"
         onPress={() => navigation.navigate(NAVIGATION_SEARCH_SCREEN)}
       />
       <Item
-        title="Cart"
+        title={translate('homeScreen.menu.cart')}
         iconName="shopping-cart"
         onPress={() => (
           magento.isCustomerLogin()

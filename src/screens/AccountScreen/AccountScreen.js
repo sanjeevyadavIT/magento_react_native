@@ -7,6 +7,7 @@ import { NAVIGATION_ORDERS_SCREEN } from '../../navigation/types';
 import { Text, Button, GenericTemplate } from '../../components';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
+import { translate } from '../../i18n';
 
 // TODO: Disable logout button, once clicked
 const AccountScreen = ({
@@ -35,9 +36,15 @@ const AccountScreen = ({
     <GenericTemplate isScrollable={false} status={status} errorMessage={errorMessage}>
       <Text style={styles.space(theme)}>{customer && `${customer.firstname} ${customer.lastname}`}</Text>
       <Text style={styles.space(theme)}>{customer && customer.email}</Text>
-      <Button title="My Orders" onPress={() => navigation.navigate(NAVIGATION_ORDERS_SCREEN, { customerId: customer.id })} />
+      <Button
+        title={translate('accountScreen.myOrderButton')}
+        onPress={() => navigation.navigate(NAVIGATION_ORDERS_SCREEN, { customerId: customer.id })}
+      />
       <View style={styles.space(theme)} />
-      <Button title="Logout" onPress={onLogoutPress} />
+      <Button
+        title={translate('accountScreen.logoutButton')}
+        onPress={onLogoutPress}
+      />
     </GenericTemplate>
   );
 };
@@ -49,7 +56,7 @@ const styles = StyleSheet.create({
 });
 
 AccountScreen.navigationOptions = {
-  title: 'Account'
+  title: translate('accountScreen.title')
 };
 
 AccountScreen.propTypes = {

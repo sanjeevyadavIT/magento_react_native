@@ -9,10 +9,13 @@ import Status from '../../../../magento/Status';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_LOGIN_SCREEN, NAVIGATION_ACCOUNT_SCREEN } from '../../../../navigation/types';
 import { ThemeContext } from '../../../../theme';
+import { translate } from '../../../../i18n';
 
 /**
  * @param status need to be passed, so that {@link DrawerHeader} can refresh
  * when user is logged in
+ *
+ * @todo Show "Welcome logged_in_user_name" instead of "Welcome user" message
  *
  * @param {Object} props        - props related to component
  * @param {string} props.status - Status of whether user is logged in or not
@@ -25,10 +28,10 @@ const DrawerHeader = ({
   const theme = useContext(ThemeContext);
 
   if (magento.isCustomerLogin()) {
-    welcomeText = 'Hello user!';
+    welcomeText = translate('drawerScreen.welcomeText');
     NAVIGATION_PATH = NAVIGATION_ACCOUNT_SCREEN;
   } else {
-    welcomeText = 'Login!';
+    welcomeText = translate('drawerScreen.login');
     NAVIGATION_PATH = NAVIGATION_LOGIN_SCREEN;
   }
 

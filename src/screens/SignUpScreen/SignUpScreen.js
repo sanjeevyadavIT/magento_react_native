@@ -7,6 +7,7 @@ import { Spinner, Text, Button, TextInput } from '../../components';
 import { NAVIGATION_LOGIN_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
+import { translate } from '../../i18n';
 
 // TODO: Use KeyboardAvoidingView
 const SignUpScreen = ({
@@ -42,9 +43,16 @@ const SignUpScreen = ({
     }
     return (
       <View style={styles.linkContainer}>
-        <Button title="Signup" style={[styles.defaultMargin(theme)]} onPress={onSignUpPress} />
-        <TouchableOpacity style={[styles.defaultMargin(theme), styles.center]} onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN)}>
-          <Text>Already have an account(Login)</Text>
+        <Button
+          title={translate('signUpScreen.signUpButton')}
+          onPress={onSignUpPress}
+          style={[styles.defaultMargin(theme)]}
+        />
+        <TouchableOpacity
+          style={[styles.defaultMargin(theme), styles.center]}
+          onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN)}
+        >
+          <Text>{translate('signUpScreen.haveAccount')}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -52,11 +60,25 @@ const SignUpScreen = ({
 
   const renderMessages = () => {
     if (status === Status.ERROR) {
-      return <Text type="subheading" style={[styles.errorText(theme)]}>{errorMessage}</Text>;
+      return (
+        <Text
+          type="subheading"
+          style={[styles.errorText(theme)]}
+        >
+          {errorMessage}
+        </Text>
+      );
     }
 
     if (status === Status.SUCCESS) {
-      return <Text type="subheading" style={[styles.successText(theme)]}>Signup successful, please login!</Text>;
+      return (
+        <Text
+          type="subheading"
+          style={[styles.successText(theme)]}
+        >
+          {translate('signUpScreen.successMessage')}
+        </Text>
+      );
     }
 
     return null;
@@ -65,20 +87,20 @@ const SignUpScreen = ({
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="First Name"
+        placeholder={translate('signUpScreen.firstNameHint')}
         autoCorrect={false}
         value={form.firstName}
         onChangeText={value => setValues({ ...form, firstName: value })}
       />
       <TextInput
-        placeholder="Last name"
+        placeholder={translate('signUpScreen.lastNameHint')}
         autoCorrect={false}
         value={form.lastName}
         style={[styles.defaultMargin(theme)]}
         onChangeText={value => setValues({ ...form, lastName: value })}
       />
       <TextInput
-        placeholder="Email"
+        placeholder={translate('signUpScreen.emailHint')}
         keyboardType="email-address"
         autoCorrect={false}
         value={form.email}
@@ -89,7 +111,7 @@ const SignUpScreen = ({
         autoCapitalize="none"
         secureTextEntry
         textContentType="password"
-        placeholder="Password"
+        placeholder={translate('signUpScreen.passwordHint')}
         autoCorrect={false}
         value={form.password}
         style={[styles.defaultMargin(theme)]}
@@ -126,7 +148,7 @@ const styles = StyleSheet.create({
 });
 
 SignUpScreen.navigationOptions = {
-  title: 'Signup'
+  title: translate('signUpScreen.title')
 };
 
 SignUpScreen.propTypes = {

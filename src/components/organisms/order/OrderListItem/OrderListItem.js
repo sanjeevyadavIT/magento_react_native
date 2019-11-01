@@ -6,6 +6,7 @@ import { Card, Text } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../../../navigation/types';
 import { ThemeContext } from '../../../../theme';
+import { translate } from '../../../../i18n';
 
 const OrderListItem = ({ item }) => {
   const theme = useContext(ThemeContext);
@@ -26,15 +27,15 @@ const OrderListItem = ({ item }) => {
       onPress={onPress}
     >
       <View style={styles.infoContainer(theme)}>
-        <Text>{`Order # ${item.increment_id}`}</Text>
-        <Text>{`Created: ${item.created_at}`}</Text>
+        <Text>{`${translate('common.order')} # ${item.increment_id}`}</Text>
+        <Text>{`${translate('orderScreen.orderCreated')}: ${item.created_at}`}</Text>
         <Text>
-          {`Ship to ${item.customer_firstname} ${item.customer_lastname}`}
+          {`${translate('orderScreen.shipTo')} ${item.customer_firstname} ${item.customer_lastname}`}
         </Text>
         <Text>
-          {`Order Total: ${currencySymbol} ${item.grand_total}`}
+          {`${translate('orderScreen.orderTotal')}: ${currencySymbol} ${item.grand_total}`}
         </Text>
-        <Text>{`Status: ${item.status}`}</Text>
+        <Text>{`${translate('orderScreen.orderStatus')}: ${item.status}`}</Text>
       </View>
     </Card>
   );

@@ -7,7 +7,7 @@ import { GenericTemplate, Text, Button } from '../../components';
 import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
-import { ORDER_ACKNOWLEDGEMENT_SCREEN_TITLE } from '../../constants';
+import { translate } from '../../i18n';
 
 // TODO: Extract strings in strings.js
 const OrderAcknowledgementScreen = ({
@@ -15,14 +15,14 @@ const OrderAcknowledgementScreen = ({
   navigation
 }) => {
   const status = navigation.getParam('status', Status.ERROR);
-  const errorMessage = navigation.getParam('errorMessage', 'Sorry for the inconvenience, unable to place your order!');
+  const errorMessage = navigation.getParam('errorMessage', translate('orderScreen.orderNotPlace'));
   const theme = useContext(ThemeContext);
 
   const renderFooter = () => (
     <View>
-      <Button title="View Order" onPress={() => navigation.navigate(NAVIGATION_ORDER_DETAIL_SCREEN, { orderId })} />
+      <Button title={translate('orderScreen.viewOrderButton')} onPress={() => navigation.navigate(NAVIGATION_ORDER_DETAIL_SCREEN, { orderId })} />
       <View style={styles.space(theme)} />
-      <Button title="Continue Shopping" onPress={() => navigation.popToTop()} />
+      <Button title={translate('orderScreen.continueButton')} onPress={() => navigation.popToTop()} />
     </View>
   );
 
@@ -35,8 +35,8 @@ const OrderAcknowledgementScreen = ({
     >
       <View style={styles.container}>
         <Icon name="verified-user" size={30} color="#4caf50" />
-        <Text type="subheading" bold>Order Confirmed</Text>
-        <Text>You will receive an order confirmation email shortly.</Text>
+        <Text type="subheading" bold>{translate('orderScreen.orderPlaced')}</Text>
+        <Text>{translate('orderScreen.orderPlacedMessage')}</Text>
       </View>
     </GenericTemplate>
   );
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 });
 
 OrderAcknowledgementScreen.navigationOptions = {
-  title: ORDER_ACKNOWLEDGEMENT_SCREEN_TITLE,
+  title: translate('orderScreen.orderPlacedScreenTitle'),
 };
 
 OrderAcknowledgementScreen.propTypes = {
