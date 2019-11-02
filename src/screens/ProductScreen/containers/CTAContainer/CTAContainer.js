@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../../../../components';
 import { addToCart } from '../../../../store/actions';
 import { translate } from '../../../../i18n';
+import Status from '../../../../magento/Status';
 
 /**
  * CTA stands for Call To Action, which will contain
@@ -18,64 +19,111 @@ import { translate } from '../../../../i18n';
  * @todo Doesn't handle case when product is `virtual`, `downlodable` or `bundle` case
  */
 const CTAButtons = ({
+  status, // Points to Add To Cart status
+  errorMessage, // Error message if failed to add item to cart
   productType,
   sku,
   quantity,
-  selectedProduct,
+  selectedOptions,
   cartQuoteId,
   addToCart: _addToCart
 }) => {
-  const onBtnClick = () => {
-    if (productType === 'configurable') {
-      // Configurable type product
-      if (selectedProduct) {
-        const cartItem = {
-          sku: selectedProduct.sku,
-          qty: quantity,
-          quote_id: cartQuoteId
-        };
-        _addToCart(cartItem);
-      }
-    } else if (productType === 'simple') {
-      // Simple type product
-      const cartItem = {
-        sku,
-        qty: quantity,
-        quote_id: cartQuoteId
+  const handleSimpleTypeProductAdd = (productOptions = {}) => {
+    const cartItem = {
+      sku,
+      qty: quantity,
+      quote_id: cartQuoteId,
+      ...productOptions,
+    };
+    _addToCart(cartItem);
+  };
+
+  const handleConfigurableTypeProductAdd = () => {
+    const configurableItemOptions = [];
+    Object.keys(selectedOptions).forEach((key) => {
+      configurableItemOptions.push({
+        option_id: key,
+        option_value: selectedOptions[key],
+      });
+    });
+
+    let productOptions = {};
+    if (configurableItemOptions.length) {
+      productOptions = {
+        product_option: {
+          extension_attributes: {
+            configurable_item_options: configurableItemOptions,
+          },
+        },
       };
-      _addToCart(cartItem);
-    } else {
-      // product type either virtual, downlodable or bundle
-      Alert.alert(`${translate('productScreen.unsupportedProductType')} ${productType} products`);
-      console.log(`App doesn't support ${productType} products`);
+    }
+    handleSimpleTypeProductAdd(productOptions);
+  };
+
+  const productTypeNotSupported = () => {
+    // product type either virtual, downlodable or bundle
+    Alert.alert(`${translate('productScreen.unsupportedProductType')} ${productType} products`);
+    console.log(`App doesn't support ${productType} products`);
+  };
+
+  const onAddToCartClick = () => {
+    switch (productType) {
+      case 'simple':
+        handleSimpleTypeProductAdd();
+        break;
+      case 'configurable':
+        handleConfigurableTypeProductAdd();
+        break;
+      default:
+        productTypeNotSupported();
     }
   };
+
+  if (status === Status.SUCCESS) {
+    Alert.alert(translate('productScreen.addToCartSuccess'));
+  } else if (status === Status.ERROR) {
+    Alert.alert(errorMessage);
+  }
+
   return (
     <Button
+      loading={status === Status.LOADING}
       type="solid"
       title={translate('productScreen.addToCartButton')}
-      disabled={productType === 'configurable' && !selectedProduct}
-      onPress={onBtnClick}
+      onPress={onAddToCartClick}
     />
   );
 };
 
 CTAButtons.propTypes = {
+  status: PropTypes.oneOf(Object.values(Status)).isRequired,
+  errorMessage: PropTypes.string,
   productType: PropTypes.string.isRequired,
   sku: PropTypes.string.isRequired,
   cartQuoteId: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
-  selectedProduct: PropTypes.oneOfType([PropTypes.object, null]),
+  selectedOptions: PropTypes.object,
   addToCart: PropTypes.func.isRequired, // Redux
 };
 
 CTAButtons.defaultProps = {
-  selectedProduct: null,
+  selectedOptions: {},
+  errorMessage: '',
 };
 
-const mapStateToProps = ({ cart }) => {
+const mapStateToProps = ({ cart, product }, { sku }) => {
+  const {
+    current: {
+      [sku]: {
+        addToCartStatus: status,
+        addToCartErrorMessage: errorMessage,
+      }
+    }
+  } = product;
   const { cart: { id: cartQuoteId } } = cart;
   return {
+    status,
+    errorMessage,
     cartQuoteId,
   };
 };

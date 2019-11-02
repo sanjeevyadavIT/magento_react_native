@@ -107,7 +107,8 @@
     "addToCartButton": "Add To Cart",
     "unsupportedProductType": "App doesn't support",
     "productDetailLabel": "Product Details",
-    "noProductDetail": "No description available!"
+    "noProductDetail": "No description available!",
+    "addToCartSuccess": "Item Added To Cart!"
   },
   "searchScreen": {
     "searchHint": "Search for products",

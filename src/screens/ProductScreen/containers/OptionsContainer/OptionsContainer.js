@@ -6,6 +6,8 @@ import { GenericTemplate, Text } from '../../../../components';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
+import { resetAddToCartState } from '../../../../store/actions';
+
 /**
  * For `configurable` type product, show selection box,
  * to allow user to choose different configuration available.
@@ -20,18 +22,20 @@ import { translate } from '../../../../i18n';
  * @param {Object}    props.attributes        - (From Redux) contain label to the id present in  {@link props.options}
  */
 const OptionsContainer = ({
-  sku, // used in redux to access state
+  sku,
   status,
   errorMessage,
   options,
   attributes,
   selectedOptions,
   setSelectedOptions,
+  resetAddToCartState: _resetAddToCartState,
 }) => {
   const theme = useContext(ThemeContext);
 
   const onPickerSelect = (attributeId, itemValue) => {
     if (itemValue === 'null') return;
+    _resetAddToCartState(sku);
     setSelectedOptions({
       ...selectedOptions,
       [attributeId]: itemValue,
@@ -97,6 +101,7 @@ OptionsContainer.propTypes = {
   attributes: PropTypes.object, // redux
   selectedOptions: PropTypes.object,
   setSelectedOptions: PropTypes.func,
+  resetAddToCartState: PropTypes.func.isRequired,
 };
 
 OptionsContainer.defaultProps = {
@@ -128,4 +133,6 @@ const mapStateToProps = ({ product }, { sku }) => {
   };
 };
 
-export default connect(mapStateToProps)(OptionsContainer);
+export default connect(mapStateToProps, {
+  resetAddToCartState
+})(OptionsContainer);

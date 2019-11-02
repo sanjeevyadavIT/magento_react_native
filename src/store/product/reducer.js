@@ -1,7 +1,7 @@
 import {
   MAGENTO,
   UI,
-  UI_PRODUCT_UPDATE_OPTIONS_SUCCESS,
+  RESET_ADD_TO_CART_STATE,
 } from '../../constants';
 import Status from '../../magento/Status';
 
@@ -167,33 +167,66 @@ export default (state = getInitialState, { type, payload }) => {
         }
       };
     }
-    case UI_PRODUCT_UPDATE_OPTIONS_SUCCESS: {
-      const selectedOptions = { ...state.selectedOptions, ...payload.selectedOption };
+    case MAGENTO.ADD_TO_CART_LOADING: {
+      const { sku } = payload;
+      const product = state.current[sku];
       return {
         ...state,
-        addToCartError: null,
-        selectedOptions,
-        selectedProduct: payload.selectedProduct,
+        current: {
+          ...state.current,
+          [sku]: {
+            ...product,
+            addToCartStatus: Status.LOADING,
+            addToCartErrorMessage: '',
+          }
+        }
       };
     }
-    case MAGENTO.ADD_TO_CART_LOADING:
+    case MAGENTO.ADD_TO_CART_SUCCESS: {
+      const { sku } = payload;
+      const product = state.current[sku];
       return {
         ...state,
-        addToCartLoading: true,
-        addToCartError: null,
+        current: {
+          ...state.current,
+          [sku]: {
+            ...product,
+            addToCartStatus: Status.SUCCESS,
+            addToCartErrorMessage: '',
+          }
+        }
       };
-    case MAGENTO.ADD_TO_CART_SUCCESS:
+    }
+    case MAGENTO.ADD_TO_CART_FAILURE: {
+      const { sku, errorMessage } = payload;
+      const product = state.current[sku];
       return {
         ...state,
-        addToCartLoading: false,
-        addToCartError: null,
+        current: {
+          ...state.current,
+          [sku]: {
+            ...product,
+            addToCartStatus: Status.ERROR,
+            addToCartErrorMessage: errorMessage,
+          }
+        }
       };
-    case MAGENTO.ADD_TO_CART_FAILURE:
+    }
+    case RESET_ADD_TO_CART_STATE: {
+      const { sku } = payload;
+      const product = state.current[sku];
       return {
         ...state,
-        addToCartLoading: false,
-        addToCartError: payload,
+        current: {
+          ...state.current,
+          [sku]: {
+            ...product,
+            addToCartStatus: Status.DEFAULT,
+            addToCartErrorMessage: '',
+          }
+        }
       };
+    }
     default:
       return state;
   }

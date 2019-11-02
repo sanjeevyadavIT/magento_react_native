@@ -98,6 +98,7 @@ const ProductScreen = ({
           sku={sku}
           productType={productType}
           selectedProduct={selectedProduct}
+          selectedOptions={selectedOptions}
           quantity={quantity}
         />
       )}

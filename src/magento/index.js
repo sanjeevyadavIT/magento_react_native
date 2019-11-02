@@ -8,7 +8,7 @@ import { translate } from '../i18n';
 
 const defaultOptions = {
   url: null,
-  store: 'default',
+  storeCode: 'default',
   userAgent: 'Sanjeev Yadav Magento Library',
   home_cms_block_id: '',
   authentication: {
@@ -22,7 +22,7 @@ class Magento {
   setOptions(options) {
     this.configuration = { ...defaultOptions, ...options };
     this.base_url = this.configuration.url;
-    this.root_path = `/rest/${this.configuration.store}`;
+    this.root_path = `/rest/${this.configuration.storeCode}`;
     this.admin = admin(this);
     this.guest = guest(this);
     this.customer = customer(this);

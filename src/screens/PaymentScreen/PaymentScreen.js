@@ -14,6 +14,7 @@ import { translate } from '../../i18n';
 
 // FIXME: Reset all status variable in checkout reducer,
 // if order placed, unable to place second order after first has been placed
+// TODO: Support `Cash On Delivery` Option, its Configuration name is `cashondelivery`
 const PaymentScreen = ({
   payment,
   orderStatus,

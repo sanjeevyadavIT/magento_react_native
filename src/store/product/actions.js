@@ -1,7 +1,7 @@
 import {
   MAGENTO,
   UI,
-  UI_PRODUCT_UPDATE_OPTIONS_REQUEST,
+  RESET_ADD_TO_CART_STATE,
 } from '../../constants';
 
 export const setCurrentProduct = (productType, sku, children) => ({
@@ -28,14 +28,16 @@ export const getProductMedia = sku => ({
   payload: { sku },
 });
 
-export const uiProductUpdateOptions = selectedOption => ({
-  type: UI_PRODUCT_UPDATE_OPTIONS_REQUEST,
-  payload: { selectedOption },
-});
-
 export const addToCart = cartItem => ({
   type: MAGENTO.ADD_TO_CART_REQUEST,
   payload: {
     cartItem
+  }
+});
+
+export const resetAddToCartState = sku => ({
+  type: RESET_ADD_TO_CART_STATE,
+  payload: {
+    sku
   }
 });
