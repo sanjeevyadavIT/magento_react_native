@@ -127,4 +127,21 @@ export default {
     fontStyle: 'normal',
     fontWeight: fontWeightBold,
   },
+  /**
+   * Text style meant to be used only for Button component
+   */
+  buttonText: {
+    fontSize: 16,
+    textAlign: 'center',
+    paddingTop: 2,
+    paddingBottom: 1,
+    ...Platform.select({
+      android: {
+        fontFamily: 'sans-serif-medium',
+      },
+      default: {
+        fontSize: 18,
+      },
+    }),
+  }
 };

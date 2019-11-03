@@ -41,6 +41,12 @@ export default {
   secondary: '#1CB0F6',
   secondaryDark: '#0999dd',
   /**
+   * Color which will replace secondary color,
+   * when component is in disabled state
+   */
+  disabled: '#E3E6E8',
+  disabledDark: '#99A1A8',
+  /**
    * The default color of text in many components.
    * To be used for heading, subheading, label text
    */

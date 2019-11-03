@@ -4,7 +4,8 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   Platform,
-  StyleSheet
+  StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text';
@@ -13,6 +14,12 @@ import { ThemeContext } from '../../../theme';
 
 const SOLID = 'solid';
 const OUTLINE = 'outline';
+const CLEAR = 'clear';
+
+const defaultLoadingProps = (type, theme) => ({
+  color: type === 'solid' ? theme.colors.white : theme.colors.secondary,
+  size: 'small',
+});
 
 const TouchReceptor = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
 /**
@@ -47,16 +54,31 @@ const Button = ({
   style,
 }) => {
   const theme = useContext(ThemeContext);
+
+  const containerStyle = StyleSheet.flatten([
+    styles.button(type, theme),
+    style,
+    disabled && styles.disabled(type, theme)
+  ]);
+
+  const titleStyle = StyleSheet.flatten([
+    styles.title(type, theme),
+    disabled && styles.disabledTitle(theme),
+  ]);
+
   return (
     <TouchReceptor onPress={!loading && onPress} disabled={disabled}>
       <View
-        style={StyleSheet.flatten([
-          styles.button(type, theme),
-          style
-        ])}
+        style={containerStyle}
       >
         {
-          loading ? <Spinner size="small" color={type === SOLID ? theme.colors.white : ''} /> : <Text style={styles.text(type, theme)}>{title}</Text>
+          (loading && !disabled) ? (
+            <Spinner style={styles.loading} {...defaultLoadingProps(type, theme)} />
+          ) : (
+            <Text style={titleStyle}>
+              {title}
+            </Text>
+          )
         }
       </View>
     </TouchReceptor>
@@ -66,26 +88,38 @@ const Button = ({
 
 const styles = StyleSheet.create({
   button: (type, theme) => ({
+    flexDirection: 'row',
     padding: theme.spacing.small,
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: type === SOLID ? theme.colors.secondary : theme.colors.transparent,
-    borderWidth: type === OUTLINE ? 1 : 0,
+    borderWidth: type === OUTLINE ? StyleSheet.hairlineWidth : 0,
     borderColor: theme.colors.secondary,
     borderRadius: theme.dimens.borderRadius,
   }),
-  text: (type, theme) => ({
-    ...theme.typography.bodyText,
+  disabled: (type, theme) => ({
+    backgroundColor: type === SOLID ? theme.colors.disabled : theme.colors.transparent,
+    borderColor: theme.colors.disabledDark,
+  }),
+  title: (type, theme) => ({
+    ...theme.typography.buttonText,
     color: type === SOLID ? theme.colors.white : theme.colors.secondary,
   }),
+  disabledTitle: theme => ({
+    color: theme.colors.disabledDark,
+  }),
+  loading: {
+    marginVertical: 2,
+  }
 });
 
 Button.propTypes = {
   title: PropTypes.string.isRequired,
-  type: PropTypes.oneOf([SOLID, OUTLINE]),
+  type: PropTypes.oneOf([SOLID, OUTLINE, CLEAR]),
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
-  style: PropTypes.object,
+  style: ViewPropTypes.style,
 };
 
 Button.defaultProps = {
