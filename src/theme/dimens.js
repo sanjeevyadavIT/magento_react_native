@@ -10,6 +10,7 @@ export default {
   WINDOW_WIDTH: screenWidth,
   WINDOW_HEIGHT: screenHeight,
   borderRadius: 2,
+  textInputHeight: 40,
   catalogGridItemWidth: 150,
   catalogGridItemHeight: 200,
   catalogGridItemImageHeight: 120,

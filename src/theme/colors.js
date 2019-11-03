@@ -56,9 +56,9 @@ export default {
    */
   bodyText: '#737373',
   /**
-   * To be used for hint text component
+   * To be used for hint/label text component
    */
-  captionText: '#8c8c8c',
+  labelText: '#86939e',
   /**
    * Success messages and icons.
    */

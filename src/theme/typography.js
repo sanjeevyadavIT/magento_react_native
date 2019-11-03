@@ -9,7 +9,7 @@ const fontWeightBold = 'bold';
 const appbarTitleTextColor = colors.appbarTintColor;
 const titleTextColor = colors.titleText;
 const bodyTextColor = colors.bodyText;
-const captionTextColor = colors.captionText;
+const labelTextColor = colors.labelText;
 
 export default {
   /**
@@ -67,7 +67,7 @@ export default {
   /**
    * The Body text style is used widely throughout the UI.
    * Any text that isn’t a title, heading, subheading, label
-   * or caption would generally use the Body style.
+   * would generally use the Body style.
    */
   bodyText: {
     fontFamily,
@@ -96,34 +96,15 @@ export default {
    */
   labelText: {
     fontFamily,
-    color: titleTextColor,
-    fontSize: 14,
+    color: labelTextColor,
+    fontSize: 16,
     fontStyle: 'normal',
     fontWeight: fontWeightRegular,
   },
   labelTextBold: {
     fontFamily,
-    color: titleTextColor,
-    fontSize: 14,
-    fontStyle: 'normal',
-    fontWeight: fontWeightBold,
-  },
-  /**
-   * Use the Caption style for help/hint text.
-   * It’s used with some form fields which require a description,
-   * and can also be used stand-alone within a card when necessary.
-   */
-  captionText: {
-    fontFamily,
-    color: captionTextColor,
-    fontSize: 12,
-    fontStyle: 'normal',
-    fontWeight: fontWeightRegular,
-  },
-  captionTextBold: {
-    fontFamily,
-    color: captionTextColor,
-    fontSize: 12,
+    color: labelTextColor,
+    fontSize: 16,
     fontStyle: 'normal',
     fontWeight: fontWeightBold,
   },
@@ -143,5 +124,12 @@ export default {
         fontSize: 18,
       },
     }),
+  },
+  /**
+   * Text style meant for TextInput component
+   */
+  textInput: {
+    color: colors.black,
+    fontSize: 18,
   }
 };
