@@ -47,12 +47,6 @@ storiesOf('Text', module)
   .add('label with bold', () => (
     <Text type="label" bold>Hello I am a label bold text!</Text>
   ))
-  .add('caption', () => (
-    <Text type="caption">Hello I am a caption text!</Text>
-  ))
-  .add('caption with bold', () => (
-    <Text type="caption" bold>Hello I am a caption bold text!</Text>
-  ))
   .add('custom style text', () => (
     <Text type="subheading" bold style={styles.customText}>Hello I am a custom styled text, with fontFamily = Roboto, color = green, fontSize = 28, fontStyle = italic and fontWeight 600</Text>
   ));
