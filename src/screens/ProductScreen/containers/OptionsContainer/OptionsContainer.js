@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react';
 import { View, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate, Text } from '../../../../components';
+import { GenericTemplate, Text, ModalSelect } from '../../../../components';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { DEFAULT_PICKER_LABEL } from '../../../../constants';
+
 /**
  * For `configurable` type product, show selection box,
  * to allow user to choose different configuration available.
@@ -30,15 +31,13 @@ const OptionsContainer = ({
 }) => {
   const theme = useContext(ThemeContext);
 
-  const onPickerSelect = (attributeId, itemValue) => {
+  const onPickerSelect = (attributeId, itemValue, index) => {
     if (itemValue === 'null') return;
     setSelectedOptions({
       ...selectedOptions,
       [attributeId]: itemValue,
     });
   };
-
-  const renderPickerOptions = values => values.map(({ label, value }) => <Picker.Item label={label} value={String(value)} key={String(value)} />);
 
   const renderOptions = () => options.sort((first, second) => first.position - second.position).map((option) => {
     const optionIds = option.values.map(value => String(value.value_index));
@@ -47,13 +46,23 @@ const OptionsContainer = ({
     return (
       <View key={option.attribute_id}>
         <Text type="subheading" bold>{option.label}</Text>
-        <Picker
+        {/* <Picker
           selectedValue={selectedOptions[option.attribute_id]}
           style={styles.optionBox(theme)}
           onValueChange={(itemValue, itemIndex) => onPickerSelect(option.attribute_id, itemValue, itemIndex)}
         >
           {renderPickerOptions(values)}
-        </Picker>
+        </Picker> */}
+        <ModalSelect
+          style={styles.optionBox(theme)}
+          disabled={values.length === 0}
+          key={option.attribute_id}
+          label={option.label}
+          attribute={option.attribute_id}
+          value={option.attribute_id}
+          data={values}
+          onChange={(itemValue, itemIndex) => onPickerSelect(option.attribute_id, itemValue, itemIndex)}
+        />
       </View>
     );
   });
@@ -104,7 +113,7 @@ OptionsContainer.defaultProps = {
   options: null,
   attributes: {},
   selectedOptions: null,
-  setSelectedOptions: () => {},
+  setSelectedOptions: () => { },
 };
 
 const mapStateToProps = ({ product }, { sku }) => {

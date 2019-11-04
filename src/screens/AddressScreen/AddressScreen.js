@@ -9,7 +9,7 @@ import {
   getShippingMethod,
   getCustomerCart,
 } from '../../store/actions';
-import { GenericTemplate, Spinner, Text, Button, TextInput } from '../../components';
+import { GenericTemplate, Spinner, Text, Button, TextInput,ModalSelect} from '../../components';
 import { NAVIGATION_SHIPPING_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -139,11 +139,11 @@ const AddressScreen = ({
 
   // TODO: cache this value
   const getCountryData = () => countries.find(country => country.id === form.country) || {};
-
   const renderCountries = () => {
     if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT) return <Spinner size="small" />;
     if (countryStatus === Status.ERROR) throw new Exception('Unable to fetch country data');
     return (
+      <View>
       <Picker
         selectedValue={form.country}
         style={{ height: 50 }}
@@ -151,6 +151,18 @@ const AddressScreen = ({
       >
         {countries.map(country => <Picker.Item label={country.full_name_english} value={country.id} key={country.id} />)}
       </Picker>
+
+      < ModalSelect
+        style={{ height: 50 }}
+        //disabled={values.length === 0}
+        //key={option.attribute_id}
+        label={"Country"}
+        attribute={countries.id}
+        value={countries.id}
+        data={this.data}
+        onChange={(itemValue, itemIndex) => onPickerSelect(countries.id, itemValue, itemIndex)}
+      />
+      </View>
     );
   };
 
