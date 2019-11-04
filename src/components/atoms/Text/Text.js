@@ -8,7 +8,6 @@ const HEADING = 'heading';
 const SUB_HEADING = 'subheading';
 const BODY = 'body';
 const LABEL = 'label';
-const CAPTION = 'caption';
 
 // NOTE: Improve comments quality
 const Text = ({
@@ -19,7 +18,6 @@ const Text = ({
    * 2. 'subheading'
    * 3. 'body'
    * 4. 'label'
-   * 5. 'caption'
    *
    * default value: 'body'
    */
@@ -59,9 +57,6 @@ const getTextStyle = (type, bold, theme) => {
     case LABEL:
       style = 'labelText';
       break;
-    case CAPTION:
-      style = 'captionText';
-      break;
     default:
       style = 'bodyText';
   }
@@ -77,9 +72,9 @@ const styles = {
   }),
 };
 
-Text.propStyles = {
+Text.propTypes = {
   theme: PropTypes.object.isRequired,
-  type: PropTypes.oneOf([HEADING, SUB_HEADING, BODY, LABEL, CAPTION]),
+  type: PropTypes.oneOf([HEADING, SUB_HEADING, BODY, LABEL]),
   bold: PropTypes.bool,
   style: PropTypes.object,
 };
