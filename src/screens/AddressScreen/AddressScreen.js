@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Picker, StyleSheet } from 'react-native';
+import { Picker, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -9,7 +9,7 @@ import {
   getShippingMethod,
   getCustomerCart,
 } from '../../store/actions';
-import { GenericTemplate, Spinner, Text, Button, TextInput,ModalSelect} from '../../components';
+import { GenericTemplate, Spinner, Text, Button, TextInput, ModalSelect } from '../../components';
 import { NAVIGATION_SHIPPING_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -143,44 +143,34 @@ const AddressScreen = ({
   const renderCountries = () => {
     if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT) return <Spinner size="small" />;
     if (countryStatus === Status.ERROR) throw new Exception('Unable to fetch country data');
+    const countriesData = countries.map(country => ({
+      label: country.full_name_english,
+      key: country.id,
+    }))
     return (
-      <View>
-      <Picker
-        selectedValue={form.country}
-        style={{ height: 50 }}
-        onValueChange={(itemValue, itemIndex) => setValues({ ...form, country: itemValue, state: '' })}
-      >
-        {countries.map(country => <Picker.Item label={country.full_name_english} value={country.id} key={country.id} />)}
-      </Picker>
-
       < ModalSelect
-        style={{ height: 50 }}
-        //disabled={values.length === 0}
-        //key={option.attribute_id}
-        label={"Country"}
-        attribute={countries.id}
-        value={countries.id}
-        data={this.data}
-        onChange={(itemValue, itemIndex) => onPickerSelect(countries.id, itemValue, itemIndex)}
+        data={countriesData}
+        onChange={(itemValue, itemKey) => setValues({ ...form, country: itemKey, state: '' })}
       />
-      </View>
     );
   };
 
   // TODO: cache region value
   const renderState = () => {
+
     if (form.country && countries && countries.length > 0) {
       if ('available_regions' in getCountryData()) {
+        const countryData = getCountryData().available_regions.map(state => ({
+          label: state.name,
+          key: state.code,
+        }))
         return (
           <>
             <Text type="label" bold>{translate('addressScreen.selectState')}</Text>
-            <Picker
-              selectedValue={form.state}
-              style={{ height: 50 }}
-              onValueChange={(itemValue, itemIndex) => setValues({ ...form, state: itemValue })}
-            >
-              {getCountryData().available_regions.map(state => <Picker.Item label={state.name} value={state.code} key={state.code} />)}
-            </Picker>
+            <ModalSelect
+              data={countryData}
+              onChange={(itemValue, itemKey) => setValues({ ...form, state: itemKey })}
+            />
           </>
         );
       }

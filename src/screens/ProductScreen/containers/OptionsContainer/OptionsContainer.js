@@ -33,7 +33,7 @@ const OptionsContainer = ({
 }) => {
   const theme = useContext(ThemeContext);
 
-  const onPickerSelect = (attributeId, itemValue, index) => {
+  const onPickerSelect = (attributeId, itemValue, itemKey) => {
     if (itemValue === 'null') return;
     _resetAddToCartState(sku);
     setSelectedOptions({
@@ -49,22 +49,11 @@ const OptionsContainer = ({
     return (
       <View key={option.attribute_id}>
         <Text type="subheading" bold>{option.label}</Text>
-        {/* <Picker
-          selectedValue={selectedOptions[option.attribute_id]}
-          style={styles.optionBox(theme)}
-          onValueChange={(itemValue, itemIndex) => onPickerSelect(option.attribute_id, itemValue, itemIndex)}
-        >
-          {renderPickerOptions(values)}
-        </Picker> */}
         <ModalSelect
           style={styles.optionBox(theme)}
           disabled={values.length === 0}
-          key={option.attribute_id}
-          label={option.label}
-          attribute={option.attribute_id}
-          value={option.attribute_id}
           data={values}
-          onChange={(itemValue, itemIndex) => onPickerSelect(option.attribute_id, itemValue, itemIndex)}
+          onChange={(itemValue, itemKey) => onPickerSelect(option.attribute_id, itemValue, itemKey)}
         />
       </View>
     );

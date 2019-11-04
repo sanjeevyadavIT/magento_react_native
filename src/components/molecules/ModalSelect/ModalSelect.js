@@ -18,7 +18,7 @@ const ModalSelect = ({
   const _onChange = (option) => {
     setValue(`${option.label}`);
     if (onChange) {
-      onChange(option.value, null);
+      onChange(option.value, option.key);
     }
   };
 
