@@ -16,4 +16,10 @@ storiesOf('Button', module)
   ))
   .add('outline', () => (
     <Button type="outline" onPress={action('outline button clicked')} title="Outline button" />
+  ))
+  .add('loading with solid button', () => (
+    <Button loading onPress={action('Loading button clicked')} title="Loading with solid button" />
+  ))
+  .add('loading with outline button', () => (
+    <Button loading type="outline" onPress={action('Loading button clicked')} title="Loading with outline button" />
   ));

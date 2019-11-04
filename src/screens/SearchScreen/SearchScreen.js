@@ -1,11 +1,17 @@
 import React from 'react';
-import { View, Text, TextInput, Modal, TouchableHighlight } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Modal,
+  TouchableHighlight
+} from 'react-native';
 import { connect } from 'react-redux';
 import { SearchProductList } from './containers';
 import { getSearchProducts, setCurrentProduct } from '../../store/actions';
 import { Spinner, MaterialAppbarButtons, Item } from '../../components';
-
-const BORDER_COLOR = '#d9d9d9';
+import { ThemeContext } from '../../theme';
+import { translate } from '../../i18n';
 
 // TODO: Code need to be refactor into functional component
 // TODO: using same business logic as in CategoryList, extract common code
@@ -16,7 +22,7 @@ class Search extends React.Component {
       <View>
         <TextInput
           autoFocus
-          placeholder="Search for products"
+          placeholder={translate('searchScreen.searchHint')}
           onChangeText={navigation.getParam('setSearchText')}
           onSubmitEditing={navigation.getParam('onSubmitted')}
         />
@@ -24,10 +30,16 @@ class Search extends React.Component {
     ),
     headerRight: (
       <MaterialAppbarButtons>
-        <Item title="sort" iconName="sort" onPress={navigation.getParam('showSortDialog')} />
+        <Item
+          iconName="sort"
+          title={translate('searchScreen.menu.sort')}
+          onPress={navigation.getParam('showSortDialog')}
+        />
       </MaterialAppbarButtons>
     ),
   })
+
+  static contextType = ThemeContext;
 
   constructor(props) {
     super(props);
@@ -105,6 +117,7 @@ class Search extends React.Component {
   // TODO: Dirty code, need to abstract it into a dialog
   renderSortDialog() {
     const { sortDialogVisible } = this.state;
+    const theme = this.context;
     return (
       <Modal
         transparent
@@ -113,17 +126,17 @@ class Search extends React.Component {
       >
         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#0000004d' }}>
           <View style={{ backgroundColor: '#fff', padding: 8 }}>
-            <TouchableHighlight style={{ height: 30, justifyContent: 'center', alignItems: 'center', padding: 24, borderBottomWidth: 1, borderColor: BORDER_COLOR }} onPress={() => this.performSort('0')}>
-              <Text>name: A to Z</Text>
+            <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('0')}>
+              <Text>{translate('common.sortOption.aToZ')}</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={{ height: 30, justifyContent: 'center', alignItems: 'center', padding: 24, borderBottomWidth: 1, borderColor: BORDER_COLOR }} onPress={() => this.performSort('1')}>
-              <Text>name: Z to A</Text>
+            <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('1')}>
+              <Text>{translate('searchScreen.sortOption.zToA')}</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={{ height: 30, justifyContent: 'center', alignItems: 'center', padding: 24, borderBottomWidth: 1, borderColor: BORDER_COLOR }} onPress={() => this.performSort('2')}>
-              <Text>price: Low to High</Text>
+            <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('2')}>
+              <Text>{translate('searchScreen.sortOption.priceLowToHigh')}</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={{ height: 30, justifyContent: 'center', alignItems: 'center', padding: 24, borderBottomWidth: 1, borderColor: BORDER_COLOR }} onPress={() => this.performSort('3')}>
-              <Text>price: High to Low</Text>
+            <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('3')}>
+              <Text>{translate('searchScreen.sortOption.priceHighToLow')}</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -160,7 +173,7 @@ class Search extends React.Component {
     }
 
     return (
-      <View><Text>No product found!</Text></View>
+      <View><Text>{translate('searchScreen.noProduct')}</Text></View>
     );
   }
 
@@ -175,8 +188,25 @@ class Search extends React.Component {
   }
 }
 
+const styles = {
+  option: theme => ({
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+    borderBottomWidth: 1,
+    borderColor: theme.colors.border
+  })
+};
+
 const mapStateToProps = (state) => {
-  const { products, totalCount, loading, loadingMore, error } = state.search;
+  const {
+    products,
+    totalCount,
+    loading,
+    loadingMore,
+    error
+  } = state.search;
   const canLoadMoreContent = products ? products.length < totalCount : false;
   return {
     products,

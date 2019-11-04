@@ -10,22 +10,28 @@ const Spinner = ({
    * 2. 'small'
    */
   size,
+  /**
+   * custom color for the spinner
+   */
+  color,
 }) => {
   const theme = useContext(ThemeContext);
   return (
     <ActivityIndicator
       size={size}
-      color={theme.colors.secondary}
+      color={color || theme.colors.secondary}
     />
   );
 };
 
 Spinner.propTypes = {
   size: PropTypes.oneOf(['large', 'small']),
+  color: PropTypes.string,
 };
 
 Spinner.defaultProps = {
   size: 'large',
+  color: '',
 };
 
 export default Spinner;

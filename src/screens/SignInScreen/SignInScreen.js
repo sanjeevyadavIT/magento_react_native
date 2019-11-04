@@ -7,6 +7,7 @@ import { Spinner, Text, Button, TextInput } from '../../components';
 import { NAVIGATION_SIGNUP_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
+import { translate } from '../../i18n';
 
 // TODO: create Button to have a style of no background and border
 // TODO: Use KeyboardAvoidingView
@@ -39,9 +40,16 @@ const SignInScreen = ({
     }
     return (
       <View style={styles.linkContainer}>
-        <Button title="signin" style={[styles.defaultMargin(theme)]} onPress={onSignInPress} />
-        <TouchableOpacity style={[styles.defaultMargin(theme), styles.center]} onPress={() => navigation.navigate(NAVIGATION_SIGNUP_SCREEN)}>
-          <Text>Create an account(Signup)</Text>
+        <Button
+          title={translate('signInScreen.signInButton')}
+          style={[styles.defaultMargin(theme)]}
+          onPress={onSignInPress}
+        />
+        <TouchableOpacity
+          style={[styles.defaultMargin(theme), styles.center]}
+          onPress={() => navigation.navigate(NAVIGATION_SIGNUP_SCREEN)}
+        >
+          <Text>{translate('signInScreen.createAccount')}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -60,7 +68,7 @@ const SignInScreen = ({
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Email"
+        placeholder={translate('signInScreen.emailHint')}
         keyboardType="email-address"
         autoCorrect={false}
         value={form.email}
@@ -70,7 +78,7 @@ const SignInScreen = ({
         autoCapitalize="none"
         secureTextEntry
         textContentType="password"
-        placeholder="Password"
+        placeholder={translate('signInScreen.passwordHint')}
         autoCorrect={false}
         style={[styles.defaultMargin]}
         value={form.password}
@@ -103,7 +111,7 @@ const styles = StyleSheet.create({
 });
 
 SignInScreen.navigationOptions = {
-  title: 'Login'
+  title: translate('signInScreen.title')
 };
 
 SignInScreen.propTypes = {

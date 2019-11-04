@@ -1,6 +1,8 @@
 import { Dimensions } from 'react-native';
+
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
+
 export default {
   /**
    * App level constants
@@ -16,7 +18,7 @@ export default {
    */
   appbarButtonHeight: 23,
   /**
-   * HomePage constnats
+   * HomeScreen constnats
    */
   homePageSliderHeight: 200,
   /**
@@ -24,17 +26,17 @@ export default {
    */
   headerViewHeight: 100,
   /**
-   * ProductDetailpage constants
+   * ProductScreen constants
    */
   productDetailPageSliderHeight: 300,
   optionBoxMinHeight: 100,
   /**
-   * CartPage constants
+   * CartScreen constants
    */
   cartListImageHeight: 120,
   cartListImageWidth: 120,
   /**
-   * OrderDetailPage constants
+   * OrderDetailScreen constants
    */
   orderDetailImageWidth: 100,
   orderDetailImageHeight: 100,

@@ -7,10 +7,10 @@ import { getCartItemProduct, removeItemFromCart } from '../../../../store/action
 import { getProductThumbnailFromAttribute } from '../../../../utils';
 import { Card, Image, Text } from '../../..';
 import { ThemeContext } from '../../../../theme';
+import { translate } from '../../../../i18n';
 
 // NOTE: Is it better to create a wapper around CartListItem and extract state in it?
 // It is in organisms folder because it is state aware
-// TODO: Extract strings in strings.js
 const CartListItem = ({ item, currencySymbol }) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
@@ -25,11 +25,11 @@ const CartListItem = ({ item, currencySymbol }) => {
 
   const onPressRemoveItem = () => {
     Alert.alert(
-      'You sure?',
-      `Just double-checking you wanted to remove the item: ${item.name}`,
+      translate('cartScreen.removeItemDialogTitle'),
+      `${translate('cartScreen.removeItemDialogMessage')}: ${item.name}`,
       [
-        { text: 'Cancel', onPress: () => console.log('Cancel pressed'), style: 'cancel' },
-        { text: 'Remove it', onPress: () => dispatch(removeItemFromCart(item.item_id)) },
+        { text: translate('common.cancel'), onPress: () => console.log('Cancel pressed'), style: 'cancel' },
+        { text: translate('common.ok'), onPress: () => dispatch(removeItemFromCart(item.item_id)) },
       ],
       { cancelable: true }
     );
@@ -46,8 +46,8 @@ const CartListItem = ({ item, currencySymbol }) => {
       />
       <View style={styles.infoContainer}>
         <Text>{item.name}</Text>
-        <Text>{`Price: ${currencySymbol}${product ? product.price : item.price}`}</Text>
-        <Text>qty : {item.qty}</Text>
+        <Text>{`${translate('common.price')}: ${currencySymbol}${product ? product.price : item.price}`}</Text>
+        <Text>{`${translate('common.quantity')} : ${item.qty}`}</Text>
       </View>
       <Icon name="close" size={30} color="#000" onPress={onPressRemoveItem} />
     </Card>

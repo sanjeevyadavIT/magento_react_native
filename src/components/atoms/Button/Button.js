@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text';
+import Spinner from '../Spinner';
 import { ThemeContext } from '../../../theme';
 
 const SOLID = 'solid';
@@ -37,20 +38,26 @@ const Button = ({
    */
   disabled,
   /**
+   *  If true, show spinner
+   */
+  loading,
+  /**
    * custom style for button
    */
   style,
 }) => {
   const theme = useContext(ThemeContext);
   return (
-    <TouchReceptor onPress={onPress} disabled={disabled}>
+    <TouchReceptor onPress={!loading && onPress} disabled={disabled}>
       <View
         style={StyleSheet.flatten([
           styles.button(type, theme),
           style
         ])}
       >
-        <Text style={styles.text(type, theme)}>{title}</Text>
+        {
+          loading ? <Spinner size="small" color={type === SOLID ? theme.colors.white : ''} /> : <Text style={styles.text(type, theme)}>{title}</Text>
+        }
       </View>
     </TouchReceptor>
   );
@@ -77,6 +84,7 @@ Button.propTypes = {
   type: PropTypes.oneOf([SOLID, OUTLINE]),
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
+  loading: PropTypes.bool,
   style: PropTypes.object,
 };
 
@@ -85,6 +93,7 @@ Button.defaultProps = {
   onPress: () => { },
   disabled: false,
   style: {},
+  loading: false,
 };
 
 export default Button;

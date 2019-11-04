@@ -10,9 +10,11 @@ import {
   NAVIGATION_ORDER_CONFIRMATION_SCREEN
 } from '../../navigation/types';
 import Status from '../../magento/Status';
+import { translate } from '../../i18n';
 
 // FIXME: Reset all status variable in checkout reducer,
 // if order placed, unable to place second order after first has been placed
+// TODO: Support `Cash On Delivery` Option, its Configuration name is `cashondelivery`
 const PaymentScreen = ({
   payment,
   orderStatus,
@@ -49,7 +51,7 @@ const PaymentScreen = ({
 
   const renderPaymentMethods = () => {
     if (!payment || !payment.payment_methods.length) {
-      return <Text>Currently no payment method is available!</Text>;
+      return <Text>{translate('paymentScreen.noPaymentAvailable')}</Text>;
     }
 
     return (
@@ -59,7 +61,7 @@ const PaymentScreen = ({
           style={{ height: 50 }}
           onValueChange={(itemValue, itemIndex) => setPaymentCode(itemValue)}
         >
-          {[{ code: 'NO_OPTION', title: 'Select a payment option' }, ...payment.payment_methods].map(item => <Picker.Item label={item.title} value={item.code} key={item.code} />)}
+          {[{ code: 'NO_OPTION', title: translate('paymentScreen.selectOption') }, ...payment.payment_methods].map(item => <Picker.Item label={item.title} value={item.code} key={item.code} />)}
         </Picker>
       </>
     );
@@ -88,7 +90,7 @@ const PaymentScreen = ({
     }
 
     return (
-      <Button title="Place order" onPress={placeOrder} />
+      <Button title={translate('paymentScreen.placeOrderButton')} onPress={placeOrder} />
     );
   };
 
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
 });
 
 PaymentScreen.navigationOptions = {
-  title: 'Payment'
+  title: translate('paymentScreen.title')
 };
 
 PaymentScreen.propTypes = {

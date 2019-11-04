@@ -4,16 +4,11 @@ import guest from './lib/guest';
 import customer from './lib/customer';
 import { isNumber } from '../utils';
 import { ADMIN_TYPE, CUSTOMER_TYPE } from './types';
-import {
-  HOME_CMS_BLOCK_ID_ERROR,
-  HOME_CMS_BLOCK_ID_MESSAGE,
-  INTEGRATION_TOKEN_REQUIRED_ERROR,
-  INTEGRATION_TOKEN_REQUIRED_MESSAGE,
-} from '../constants';
+import { translate } from '../i18n';
 
 const defaultOptions = {
   url: null,
-  store: 'default',
+  storeCode: 'default',
   userAgent: 'Sanjeev Yadav Magento Library',
   home_cms_block_id: '',
   authentication: {
@@ -27,7 +22,7 @@ class Magento {
   setOptions(options) {
     this.configuration = { ...defaultOptions, ...options };
     this.base_url = this.configuration.url;
-    this.root_path = `/rest/${this.configuration.store}`;
+    this.root_path = `/rest/${this.configuration.storeCode}`;
     this.admin = admin(this);
     this.guest = guest(this);
     this.customer = customer(this);
@@ -146,11 +141,15 @@ class Magento {
 }
 
 function homeCmsBlockError() {
-  return createError(HOME_CMS_BLOCK_ID_ERROR, HOME_CMS_BLOCK_ID_MESSAGE);
+  const name = translate('errors.homeCmsBlockId');
+  const message = translate('errors.homeCmsBlockIdMessage');
+  return createError(name, message);
 }
 
 function integrationTokenError() {
-  return createError(INTEGRATION_TOKEN_REQUIRED_ERROR, INTEGRATION_TOKEN_REQUIRED_MESSAGE);
+  const name = translate('errors.integrationTokenRequired');
+  const message = translate('errors.integrationTokenRequiredMessage');
+  return createError(name, message);
 }
 
 function createError(name, message) {

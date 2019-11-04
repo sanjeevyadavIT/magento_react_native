@@ -112,26 +112,35 @@ function formatAttributesResponse(attribtesArray) {
 
 // worker saga: Add Description
 function* addToCart({ payload }) {
+  const { sku } = payload.cartItem;
   try {
-    yield put({ type: MAGENTO.ADD_TO_CART_LOADING, payload: true });
+    yield put({ type: MAGENTO.ADD_TO_CART_LOADING, payload: { sku } });
     if (payload.cartItem.quote_id) {
       const response = yield call({ content: magento, fn: magento.customer.addItemToCart }, payload);
-      yield put({ type: MAGENTO.ADD_TO_CART_SUCCESS, payload: response });
+      yield put({
+        type: MAGENTO.ADD_TO_CART_SUCCESS,
+        payload: {
+          response,
+          sku,
+        }
+      });
       yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // refresh cart
     } else {
       throw new Error('Guest cart not implemented');
     }
   } catch (error) {
-    yield put({ type: MAGENTO.ADD_TO_CART_FAILURE, payload: error.message });
+    yield put({
+      type: MAGENTO.ADD_TO_CART_FAILURE,
+      payload: {
+        sku,
+        errorMessage: error.message
+      }
+    });
   }
 }
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
   yield takeEvery(UI.OPEN_SELECTED_PRODUCT_REQUEST, fetchProductDetails);
-  // yield takeEvery(MAGENTO.PRODUCT_MEDIA_REQUEST, getProductMedia);
-  // yield takeEvery(MAGENTO.CONF_OPTIONS_REQUEST, getConfigurableProductOptions);
-  // yield takeEvery(MAGENTO.CONFIGURABLE_CHILDREN_REQUEST, getConfigurableChildren);
-  // yield takeEvery(UI_PRODUCT_UPDATE_OPTIONS_REQUEST, calculatedSelectedProduct);
   yield takeEvery(MAGENTO.ADD_TO_CART_REQUEST, addToCart);
 }

@@ -28,10 +28,16 @@ function* initMagento() {
     yield put({ type: MAGENTO.HOME_DATA_REQUEST });
     if (customerToken) {
       yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Fetch cart details
-      yield put({ type: USER_LOGGED_IN_STATUS, payload: { status: Status.SUCCESS } })
+      yield put({ type: USER_LOGGED_IN_STATUS, payload: { status: Status.SUCCESS } });
     }
   } catch (error) {
-    yield put({ type: MAGENTO.INIT_APP_FAILURE, payload: { errorMessage: error.message } });
+    yield put({
+      type: MAGENTO.INIT_APP_FAILURE,
+      payload: {
+        errorCode: error.name,
+        errorMessage: error.message
+      }
+    });
   }
 }
 

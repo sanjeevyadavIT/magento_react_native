@@ -69,10 +69,8 @@ export const UI = createRequestTypes('UI', [
   'CHANGE_PRODUCT_OPTIONS', // Set options of `configurable` type product from picker into store
 ], suffixTypes);
 
-export const UI_PRODUCT_UPDATE_OPTIONS_REQUEST = 'UI_PRODUCT_UPDATE_OPTIONS_REQUEST';
-export const UI_PRODUCT_UPDATE_OPTIONS_SUCCESS = 'UI_PRODUCT_UPDATE_OPTIONS_SUCCESS';
-export const UI_PRODUCT_UPDATE_OPTIONS_FAILURE = 'UI_PRODUCT_UPDATE_OPTIONS_FAILURE';
 export const ACTION_USER_LOGOUT = 'USER_LOGOUT';
+export const RESET_ADD_TO_CART_STATE = 'RESET_ADD_TO_CART_STATE';
 export const USER_LOGGED_IN_STATUS = 'IS_USER_LOGGED_IN';
 export const RESET_AUTH_STATE = 'RESET_AUTH_STATE';
 export const SET_NEW_CATEGORY = 'SET_NEW_CATEGORY';

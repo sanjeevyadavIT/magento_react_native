@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text, ModalSelect } from '../../../../components';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
-import { DEFAULT_PICKER_LABEL } from '../../../../constants';
+import { translate } from '../../../../i18n';
+import { resetAddToCartState } from '../../../../store/actions';
 
 /**
  * For `configurable` type product, show selection box,
@@ -21,18 +22,20 @@ import { DEFAULT_PICKER_LABEL } from '../../../../constants';
  * @param {Object}    props.attributes        - (From Redux) contain label to the id present in  {@link props.options}
  */
 const OptionsContainer = ({
-  sku, // used in redux to access state
+  sku,
   status,
   errorMessage,
   options,
   attributes,
   selectedOptions,
   setSelectedOptions,
+  resetAddToCartState: _resetAddToCartState,
 }) => {
   const theme = useContext(ThemeContext);
 
   const onPickerSelect = (attributeId, itemValue, index) => {
     if (itemValue === 'null') return;
+    _resetAddToCartState(sku);
     setSelectedOptions({
       ...selectedOptions,
       [attributeId]: itemValue,
@@ -42,7 +45,7 @@ const OptionsContainer = ({
   const renderOptions = () => options.sort((first, second) => first.position - second.position).map((option) => {
     const optionIds = option.values.map(value => String(value.value_index));
     const values = attributes[option.attribute_id].options.filter(({ value }) => optionIds.includes(value));
-    values.unshift({ label: DEFAULT_PICKER_LABEL, value: null }); // title
+    values.unshift({ label: translate('common.select'), value: null }); // title
     return (
       <View key={option.attribute_id}>
         <Text type="subheading" bold>{option.label}</Text>
@@ -106,6 +109,7 @@ OptionsContainer.propTypes = {
   attributes: PropTypes.object, // redux
   selectedOptions: PropTypes.object,
   setSelectedOptions: PropTypes.func,
+  resetAddToCartState: PropTypes.func.isRequired,
 };
 
 OptionsContainer.defaultProps = {
@@ -137,4 +141,6 @@ const mapStateToProps = ({ product }, { sku }) => {
   };
 };
 
-export default connect(mapStateToProps)(OptionsContainer);
+export default connect(mapStateToProps, {
+  resetAddToCartState
+})(OptionsContainer);

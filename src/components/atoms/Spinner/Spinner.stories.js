@@ -15,4 +15,7 @@ storiesOf('Spinner', module)
   ))
   .add('small', () => (
     <Spinner size="small" />
+  ))
+  .add('custom color', () => (
+    <Spinner color="pink" />
   ));
