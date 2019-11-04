@@ -41,6 +41,12 @@ export default {
   secondary: '#1CB0F6',
   secondaryDark: '#0999dd',
   /**
+   * Color which will replace secondary color,
+   * when component is in disabled state
+   */
+  disabled: '#E3E6E8',
+  disabledDark: '#99A1A8',
+  /**
    * The default color of text in many components.
    * To be used for heading, subheading, label text
    */
@@ -50,9 +56,9 @@ export default {
    */
   bodyText: '#737373',
   /**
-   * To be used for hint text component
+   * To be used for hint/label text component
    */
-  captionText: '#8c8c8c',
+  labelText: '#86939e',
   /**
    * Success messages and icons.
    */

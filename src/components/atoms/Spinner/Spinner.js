@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../../theme';
 
@@ -14,10 +14,15 @@ const Spinner = ({
    * custom color for the spinner
    */
   color,
+  /**
+   * style containing padding & margin
+   */
+  style
 }) => {
   const theme = useContext(ThemeContext);
   return (
     <ActivityIndicator
+      style={style}
       size={size}
       color={color || theme.colors.secondary}
     />
@@ -27,11 +32,13 @@ const Spinner = ({
 Spinner.propTypes = {
   size: PropTypes.oneOf(['large', 'small']),
   color: PropTypes.string,
+  style: ViewPropTypes.style,
 };
 
 Spinner.defaultProps = {
   size: 'large',
   color: '',
+  style: {},
 };
 
 export default Spinner;
