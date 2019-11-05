@@ -28,6 +28,10 @@
     "integrationTokenRequired": "INTEGRATION TOKEN REQUIRED ERROR",
     "integrationTokenRequiredMessage": "Please refer to Step 1 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup"
   },
+  "modalSelect": {
+    "scroll": "Scrollable options",
+    "cancelButton": "Cancel Button"
+  },
   "accountScreen": {
     "title": "Account",
     "myOrderButton": "My Orders",
@@ -35,6 +39,8 @@
   },
   "addressScreen": {
     "title": "Address",
+    "country": "Country",
+    "state": "State",
     "selectCountry": "Select Country",
     "selectState": "Select State",
     "stateLabel": "Enter State",

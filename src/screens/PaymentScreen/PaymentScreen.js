@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
-import { Picker, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { placeCartOrder, createQuoteId } from '../../store/actions';
-import { Spinner, Text, Button, GenericTemplate } from '../../components';
+import {
+  Text,
+  Button,
+  Spinner,
+  ModalSelect,
+  GenericTemplate
+} from '../../components';
 import {
   NAVIGATION_HOME_SCREEN,
   NAVIGATION_ORDER_CONFIRMATION_SCREEN
 } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
+import { ThemeContext } from '../../theme';
 
 // FIXME: Reset all status variable in checkout reducer,
 // if order placed, unable to place second order after first has been placed
 // TODO: Support `Cash On Delivery` Option, its Configuration name is `cashondelivery`
+// TODO: Show the breakdown of all prices, shipping rate summary
 const PaymentScreen = ({
   payment,
   orderStatus,
@@ -23,6 +31,7 @@ const PaymentScreen = ({
   placeCartOrder: _placeCartOrder,
   createQuoteId: _createQuoteId,
 }) => {
+  const theme = useContext(ThemeContext);
   const [paymentCode, setPaymentCode] = useState();
 
   const placeOrder = () => {
@@ -54,16 +63,18 @@ const PaymentScreen = ({
       return <Text>{translate('paymentScreen.noPaymentAvailable')}</Text>;
     }
 
+    const data = payment.payment_methods.map(({ code, title }) => ({
+      label: title,
+      key: code
+    }));
+
     return (
-      <>
-        <Picker
-          selectedValue={paymentCode}
-          style={{ height: 50 }}
-          onValueChange={(itemValue, itemIndex) => setPaymentCode(itemValue)}
-        >
-          {[{ code: 'NO_OPTION', title: translate('paymentScreen.selectOption') }, ...payment.payment_methods].map(item => <Picker.Item label={item.title} value={item.code} key={item.code} />)}
-        </Picker>
-      </>
+      <ModalSelect
+        label={translate('paymentScreen.selectOption')}
+        data={data}
+        style={styles.defaultMargin(theme)}
+        onChange={(itemKey, item) => setPaymentCode(itemKey)}
+      />
     );
   };
 
@@ -108,6 +119,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  defaultMargin: theme => ({
+    marginTop: theme.spacing.large,
+  }),
 });
 
 PaymentScreen.navigationOptions = {

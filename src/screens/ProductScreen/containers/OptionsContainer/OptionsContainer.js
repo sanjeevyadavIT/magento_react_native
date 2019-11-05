@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { View, Picker } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate, Text } from '../../../../components';
+import { GenericTemplate, ModalSelect } from '../../../../components';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
@@ -33,7 +33,7 @@ const OptionsContainer = ({
 }) => {
   const theme = useContext(ThemeContext);
 
-  const onPickerSelect = (attributeId, itemValue) => {
+  const onPickerSelect = (attributeId, itemValue, item) => {
     if (itemValue === 'null') return;
     _resetAddToCartState(sku);
     setSelectedOptions({
@@ -42,22 +42,21 @@ const OptionsContainer = ({
     });
   };
 
-  const renderPickerOptions = values => values.map(({ label, value }) => <Picker.Item label={label} value={String(value)} key={String(value)} />);
-
   const renderOptions = () => options.sort((first, second) => first.position - second.position).map((option) => {
     const optionIds = option.values.map(value => String(value.value_index));
     const values = attributes[option.attribute_id].options.filter(({ value }) => optionIds.includes(value));
-    values.unshift({ label: translate('common.select'), value: null }); // title
+    const data = values.map(({ label, value }) => ({
+      label,
+      key: value
+    }));
     return (
-      <View key={option.attribute_id}>
-        <Text type="subheading" bold>{option.label}</Text>
-        <Picker
-          selectedValue={selectedOptions[option.attribute_id]}
-          style={styles.optionBox(theme)}
-          onValueChange={(itemValue, itemIndex) => onPickerSelect(option.attribute_id, itemValue, itemIndex)}
-        >
-          {renderPickerOptions(values)}
-        </Picker>
+      <View style={styles.optionBox(theme)} key={option.attribute_id}>
+        <ModalSelect
+          data={data}
+          label={`${translate('common.select')} ${option.label}`}
+          disabled={values.length === 0}
+          onChange={(itemKey, selectedOption) => onPickerSelect(option.attribute_id, itemKey, selectedOption)}
+        />
       </View>
     );
   });
@@ -79,8 +78,7 @@ const styles = {
     backgroundColor: theme.colors.surface,
   }),
   optionBox: theme => ({
-    height: 50,
-    flex: 1,
+    marginBottom: theme.spacing.large,
   })
 };
 
@@ -109,7 +107,7 @@ OptionsContainer.defaultProps = {
   options: null,
   attributes: {},
   selectedOptions: null,
-  setSelectedOptions: () => {},
+  setSelectedOptions: () => { },
 };
 
 const mapStateToProps = ({ product }, { sku }) => {

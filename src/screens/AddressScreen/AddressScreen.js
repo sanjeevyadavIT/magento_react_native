@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Picker, StyleSheet } from 'react-native';
+import { Picker, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -9,13 +9,12 @@ import {
   getShippingMethod,
   getCustomerCart,
 } from '../../store/actions';
-import { GenericTemplate, Spinner, Text, Button, TextInput } from '../../components';
+import { GenericTemplate, Spinner, Text, Button, TextInput, ModalSelect } from '../../components';
 import { NAVIGATION_SHIPPING_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 
-// TODO: create Button to have a style of no background and border
 // TODO: Use KeyboardAvoidingView
 // TODO: Refactor code and make it optimize, it's higly messy
 const AddressScreen = ({
@@ -144,14 +143,19 @@ const AddressScreen = ({
   const renderCountries = () => {
     if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT) return <Spinner size="small" />;
     if (countryStatus === Status.ERROR) throw new Exception('Unable to fetch country data');
+    const countriesData = countries.map(country => ({
+      label: country.full_name_english,
+      key: country.id,
+    }));
+
     return (
-      <Picker
-        selectedValue={form.country}
-        style={{ height: 50 }}
-        onValueChange={(itemValue, itemIndex) => setValues({ ...form, country: itemValue, state: '' })}
-      >
-        {countries.map(country => <Picker.Item label={country.full_name_english} value={country.id} key={country.id} />)}
-      </Picker>
+      <ModalSelect
+        attribute={translate('addressScreen.country')}
+        label={translate('addressScreen.selectCountry')}
+        data={countriesData}
+        style={styles.defaultMargin(theme)}
+        onChange={(itemKey, item) => setValues({ ...form, country: itemKey, state: '' })}
+      />
     );
   };
 
@@ -159,31 +163,33 @@ const AddressScreen = ({
   const renderState = () => {
     if (form.country && countries && countries.length > 0) {
       if ('available_regions' in getCountryData()) {
+        const regionData = getCountryData().available_regions.map(state => ({
+          label: state.name,
+          key: state.code,
+        }));
+
         return (
-          <>
-            <Text type="label" bold>{translate('addressScreen.selectState')}</Text>
-            <Picker
-              selectedValue={form.state}
-              style={{ height: 50 }}
-              onValueChange={(itemValue, itemIndex) => setValues({ ...form, state: itemValue })}
-            >
-              {getCountryData().available_regions.map(state => <Picker.Item label={state.name} value={state.code} key={state.code} />)}
-            </Picker>
-          </>
+          <ModalSelect
+            attribute={translate('addressScreen.state')}
+            label={translate('addressScreen.selectState')}
+            data={regionData}
+            style={styles.defaultMargin(theme)}
+            onChange={(itemKey, item) => setValues({ ...form, state: itemKey })}
+          />
         );
       }
       return (
-        <>
-          <Text type="label" bold>{translate('addressScreen.stateLabel')}</Text>
-          <TextInput
-            placeholder={translate('addressScreen.stateHint')}
-            autoCorrect={false}
-            value={form.state}
-            onChangeText={value => setValues({ ...form, state: value })}
-          />
-        </>
+        <TextInput
+          containerStyle={styles.defaultMargin(theme)}
+          label={translate('addressScreen.stateLabel')}
+          placeholder={translate('addressScreen.stateHint')}
+          autoCorrect={false}
+          value={form.state}
+          onChangeText={value => setValues({ ...form, state: value })}
+        />
       );
     }
+    return <></>;
   };
 
   const renderButtons = () => {
@@ -231,51 +237,56 @@ const AddressScreen = ({
       footer={renderButtons()}
     >
       <Text type="label">{translate('addressScreen.formName')}</Text>
-      <Text type="label" bold>{translate('addressScreen.firstNameLabel')}</Text>
       <TextInput
+        containerStyle={styles.defaultMargin(theme)}
+        label={translate('addressScreen.firstNameLabel')}
         placeholder={translate('addressScreen.firstNameHint')}
         autoCorrect={false}
         value={form.firstName}
         onChangeText={value => setValues({ ...form, firstName: value })}
       />
-      <Text type="label" bold>{translate('addressScreen.lastNameLabel')}</Text>
       <TextInput
+        containerStyle={styles.defaultMargin(theme)}
+        label={translate('addressScreen.lastNameLabel')}
         placeholder={translate('addressScreen.lastNameHint')}
         autoCorrect={false}
         value={form.lastName}
         onChangeText={value => setValues({ ...form, lastName: value })}
       />
-      <Text type="label" bold>{translate('addressScreen.phoneNumberLabel')}</Text>
       <TextInput
+        containerStyle={styles.defaultMargin(theme)}
+        label={translate('addressScreen.phoneNumberLabel')}
         placeholder={translate('addressScreen.phoneNumberHint')}
         autoCorrect={false}
         keyboardType="numeric"
         value={form.phoneNumber}
         onChangeText={value => setValues({ ...form, phoneNumber: value })}
       />
-      <Text type="label" bold>{translate('addressScreen.addressLabel')}</Text>
       <TextInput
+        containerStyle={styles.defaultMargin(theme)}
+        label={translate('addressScreen.addressLabel')}
         placeholder={translate('addressScreen.addressHint')}
         autoCorrect={false}
         value={form.streetAddress}
         onChangeText={value => setValues({ ...form, streetAddress: value })}
       />
-      <Text type="label" bold>{translate('addressScreen.cityLabel')}</Text>
       <TextInput
+        containerStyle={styles.defaultMargin(theme)}
+        label={translate('addressScreen.cityLabel')}
         placeholder={translate('addressScreen.cityHint')}
         autoCorrect={false}
         value={form.city}
         onChangeText={value => setValues({ ...form, city: value })}
       />
-      <Text type="label" bold>{translate('addressScreen.selectCountry')}</Text>
-      {renderCountries()}
-      <Text type="label" bold>{translate('addressScreen.zipCodeLabel')}</Text>
       <TextInput
+        containerStyle={styles.defaultMargin(theme)}
+        label={translate('addressScreen.zipCodeLabel')}
         placeholder={translate('addressScreen.zipCodeHint')}
         autoCorrect={false}
         value={form.zipCode}
         onChangeText={value => setValues({ ...form, zipCode: value })}
       />
+      {renderCountries()}
       {renderState()}
     </GenericTemplate>
   );
