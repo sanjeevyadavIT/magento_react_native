@@ -13,6 +13,7 @@ module.exports = {
   ],
   'rules': {
     'prettier/prettier': 0,
+    'no-underscore-dangle': 0,
     'linebreak-style': 0,
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': 'off',

@@ -11,9 +11,13 @@ import { ThemeContext } from '../../../theme';
 
 const TextInput = ({
   /**
-   * Container style that wraps TextInput
+   * Container style that wraps entire TextInput, Erro Text and Label
    */
   containerStyle,
+  /**
+   * Container style that wraps only TextInput
+   */
+  inputContainerStyle,
   /**
    * Text Input style
    */
@@ -30,6 +34,14 @@ const TextInput = ({
    * Error message to be shown
    */
   errorMessage,
+  /**
+   * Render left icon
+   */
+  leftIcon,
+  /**
+   * Render right icon
+   */
+  rightIcon,
   ...props
 }) => {
   const theme = useContext(ThemeContext);
@@ -38,7 +50,18 @@ const TextInput = ({
       {!!label && (
         <Text bold type="label">{label}</Text>
       )}
-      <View style={styles.inputContainer(theme)}>
+      <View style={StyleSheet.flatten([styles.inputContainer(theme), inputContainerStyle])}>
+        {leftIcon && (
+          <View
+            style={StyleSheet.flatten([
+              styles.iconContainer(theme),
+              styles.leftIconContainer(theme)
+            ])}
+          >
+            {leftIcon}
+          </View>
+        )}
+
         <InputComponent
           underlineColorAndroid={theme.colors.transparent}
           editable={!disabled}
@@ -48,6 +71,17 @@ const TextInput = ({
           ]}
           {...props}
         />
+
+        {rightIcon && (
+          <View
+            style={StyleSheet.flatten([
+              styles.iconContainer(theme),
+              styles.rightIconContainer(theme)
+            ])}
+          >
+            {rightIcon}
+          </View>
+        )}
       </View>
       {!!errorMessage && (
         <Text
@@ -82,21 +116,44 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: theme.colors.error,
   }),
+  iconContainer: theme => ({
+    height: theme.dimens.textInputHeight,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }),
+  leftIconContainer: theme => ({
+    marginEnd: theme.spacing.medium
+  }),
+  rightIconContainer: theme => ({
+    marginStart: theme.spacing.medium
+  })
 });
 
 TextInput.propTypes = {
   containerStyle: ViewPropTypes.style,
+  inputContainerStyle: ViewPropTypes.style,
   inputStyle: PropTypes.object,
   disabled: PropTypes.bool,
   label: PropTypes.string,
   errorMessage: PropTypes.string,
+  leftIcon: PropTypes.oneOfType([
+    PropTypes.element,
+    null
+  ]),
+  rightIcon: PropTypes.oneOfType([
+    PropTypes.element,
+    null
+  ])
 };
 
 TextInput.defaultProps = {
   containerStyle: {},
+  inputContainerStyle: {},
   disabled: false,
   label: '',
   errorMessage: '',
+  leftIcon: null,
+  rightIcon: null,
 };
 
 export default TextInput;

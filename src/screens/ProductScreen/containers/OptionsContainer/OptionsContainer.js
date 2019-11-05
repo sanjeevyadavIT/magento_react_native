@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { View, Picker } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate, Text, ModalSelect } from '../../../../components';
+import { GenericTemplate, ModalSelect } from '../../../../components';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
@@ -33,7 +33,7 @@ const OptionsContainer = ({
 }) => {
   const theme = useContext(ThemeContext);
 
-  const onPickerSelect = (attributeId, itemValue, itemKey) => {
+  const onPickerSelect = (attributeId, itemValue, item) => {
     if (itemValue === 'null') return;
     _resetAddToCartState(sku);
     setSelectedOptions({
@@ -45,15 +45,17 @@ const OptionsContainer = ({
   const renderOptions = () => options.sort((first, second) => first.position - second.position).map((option) => {
     const optionIds = option.values.map(value => String(value.value_index));
     const values = attributes[option.attribute_id].options.filter(({ value }) => optionIds.includes(value));
-    values.unshift({ label: translate('common.select'), value: null }); // title
+    const data = values.map(({ label, value }) => ({
+      label,
+      key: value
+    }));
     return (
-      <View key={option.attribute_id}>
-        <Text type="subheading" bold>{option.label}</Text>
+      <View style={styles.optionBox(theme)} key={option.attribute_id}>
         <ModalSelect
-          style={styles.optionBox(theme)}
+          data={data}
+          label={`${translate('common.select')} ${option.label}`}
           disabled={values.length === 0}
-          data={values}
-          onChange={(itemValue, itemKey) => onPickerSelect(option.attribute_id, itemValue, itemKey)}
+          onChange={(itemKey, selectedOption) => onPickerSelect(option.attribute_id, itemKey, selectedOption)}
         />
       </View>
     );
@@ -76,8 +78,7 @@ const styles = {
     backgroundColor: theme.colors.surface,
   }),
   optionBox: theme => ({
-    height: 50,
-    flex: 1,
+    marginBottom: theme.spacing.large,
   })
 };
 

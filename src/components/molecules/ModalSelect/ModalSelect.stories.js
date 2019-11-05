@@ -1,38 +1,72 @@
 import React from 'react';
 import { View } from 'react-native';
-import ModalSelect from './ModalSelect';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react-native';
+import ModalSelect from './ModalSelect';
 import { ThemeProvider, theme } from '../../../theme';
 
-let index = 0;
 const data = [
-  { key: index++, section: true, label: 'Fruits' },
-  { key: index++, label: 'Red Apples' },
-  { key: index++, label: 'Cherries' },
-  { key: index++, label: 'Cranberries', accessibilityLabel: 'Tap here for cranberries' },
-  // etc...
+  { key: 1, label: 'Red Apples' },
+  { key: 2, label: 'Cherries' },
+  { key: 3, label: 'Cranberries', accessibilityLabel: 'Tap here for cranberries' },
   // Can also add additional custom keys which are passed to the onChange callback
-  { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
+  { key: 4, label: 'Vegetable', customKey: 'Not a fruit' }
 ];
+
+const styles = {
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+    paddingTop: 40
+  },
+  customModalStyle: {
+    borderWidth: 2,
+    borderColor: theme.colors.secondaryDark,
+    backgroundColor: theme.colors.secondary,
+  },
+  customTextStyle: {
+    color: 'white'
+  }
+};
 
 storiesOf('ModalSelect', module)
   .addDecorator(getStory => (
     <ThemeProvider theme={theme}>
-      <View style={{ backgroundColor: 'white', flex: 1, minHeight: 200, paddingTop: 40 }}>
+      <View style={styles.container}>
         {getStory()}
       </View>
     </ThemeProvider>
-  )).add('default', () => (
+  ))
+  .add('default', () => (
     <ModalSelect
       data={data}
-      onChange={(option) => { }}
+      label="Select Fruit"
+      onChange={option => action(option)}
     />
-  )).add('disabled', () => (
+  ))
+  .add('with attribute', () => (
     <ModalSelect
-      disabled={true}
       data={data}
-      onChange={(option) => { }}
+      label="Select Fruit"
+      attribute="Fruit"
+      onChange={option => action(option)}
+    />
+  ))
+  .add('disabled', () => (
+    <ModalSelect
+      disabled
+      label="Select Fruit"
+      data={data}
+      onChange={option => action(option)}
+    />
+  ))
+  .add('custom style', () => (
+    <ModalSelect
+      label="Select Fruit"
+      data={data}
+      onChange={option => action(option)}
+      style={styles.customModalStyle}
+      textStyle={styles.customTextStyle}
+      placeholderTextColor="white"
     />
   ));
-

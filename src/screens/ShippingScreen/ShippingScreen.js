@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { Picker, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addCartShippingInfo } from '../../store/actions';
-import { Spinner, Text, Button, GenericTemplate } from '../../components';
+import {
+  Text,
+  Button,
+  Spinner,
+  ModalSelect,
+  GenericTemplate
+} from '../../components';
 import { NAVIGATION_PAYMENT_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
+import { ThemeContext } from '../../theme';
 
-// TODO: Create a cutom picker component
 const ShippingScreen = ({
   status,
   paymentMethodStatus,
@@ -19,6 +25,7 @@ const ShippingScreen = ({
   navigation,
   addCartShippingInfo: _addCartShippingInfo,
 }) => {
+  const theme = useContext(ThemeContext);
   const [shippingCode, setShippingCode] = useState();
 
   const renderShippingMethod = () => {
@@ -26,32 +33,23 @@ const ShippingScreen = ({
       return <Text>{translate('shippingScreen.noShipping')}</Text>;
     }
 
+    const data = shipping.map(({
+      amount,
+      carrier_title: carrierTitle,
+      method_title: methodTitle,
+      carrier_code: carrierCode,
+    }) => ({
+      label: `${carrierTitle} : ${methodTitle} : ${currencySymbol + amount}`,
+      key: carrierCode,
+    }));
+
     return (
-      <>
-        <Picker
-          selectedValue={shippingCode}
-          style={{ height: 50 }}
-          onValueChange={(itemValue, itemIndex) => setShippingCode(itemValue)}
-        >
-          {
-            [
-              {
-                carrier_title: translate('shippingScreen.selectShipping'),
-                method_title: '',
-                amount: '',
-                carrier_code: 'NO_OPTION'
-              },
-              ...shipping
-            ].map(item => (
-              <Picker.Item
-                label={`${item.carrier_title} : ${item.method_title} : ${currencySymbol + item.amount}`}
-                value={item.carrier_code}
-                key={item.carrier_code}
-              />
-            ))
-          }
-        </Picker>
-      </>
+      <ModalSelect
+        label={translate('shippingScreen.selectShipping')}
+        data={data}
+        style={styles.defaultMargin(theme)}
+        onChange={(itemKey, item) => setShippingCode(itemKey)}
+      />
     );
   };
 
@@ -128,6 +126,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  defaultMargin: theme => ({
+    marginTop: theme.spacing.large,
+  }),
 });
 
 ShippingScreen.navigationOptions = {
