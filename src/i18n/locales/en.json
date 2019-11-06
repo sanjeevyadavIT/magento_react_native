@@ -126,6 +126,7 @@
     "title": "Login",
     "signInButton": "Signin",
     "createAccount": "Create an account(Signup)",
+    "forgotPassword": "Forgot Password",
     "emailHint": "Email",
     "passwordHint": "Password"
   },
@@ -138,5 +139,13 @@
     "lastNameHint": "Last name",
     "emailHint": "Email",
     "passwordHint": "Password"
+  },
+  "forgetPasswordScreen": {
+    "requestEmailId": "Please enter your email address below to receive a password reset link",
+    "title":"Reset Password",
+    "buttonTitle":"Reset My Password",
+    "emailHint": "Email",
+    "passwordRecovery" :"Password Recovery",
+    "emailSent": "Email has been sent, please check your Email."
   }
 }

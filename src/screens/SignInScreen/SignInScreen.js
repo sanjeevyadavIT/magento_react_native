@@ -3,8 +3,8 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signIn, resetAuthState } from '../../store/actions';
-import { Spinner, Text, Button, TextInput } from '../../components';
-import { NAVIGATION_SIGNUP_SCREEN } from '../../navigation/types';
+import { Spinner, Text, Button, TextInput, MessageView } from '../../components';
+import { NAVIGATION_SIGNUP_SCREEN, NAVIGATION_FORGOT_PASSWORD_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -51,18 +51,28 @@ const SignInScreen = ({
         >
           <Text>{translate('signInScreen.createAccount')}</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.defaultMargin(theme), styles.center]}
+          onPress={() => navigation.navigate(NAVIGATION_FORGOT_PASSWORD_SCREEN)}
+        >
+          <Text>{translate('signInScreen.forgotPassword')}</Text>
+        </TouchableOpacity>
       </View>
     );
   };
 
   const handleStatusChange = () => {
-    if (status === Status.ERROR) {
-      return <Text type="subheading" style={styles.errorText(theme)}>{errorMessage}</Text>;
-    }
     if (status === Status.SUCCESS) {
       navigation.popToTop();
     }
-    return null;
+    const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('forgetPasswordScreen.emailSent') : "";
+    const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
+    return (
+      <MessageView
+        message={message}
+        type={type}
+      />
+    );
   };
 
   return (
@@ -72,6 +82,7 @@ const SignInScreen = ({
         keyboardType="email-address"
         autoCorrect={false}
         value={form.email}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, email: value })}
       />
       <TextInput
@@ -80,7 +91,7 @@ const SignInScreen = ({
         textContentType="password"
         placeholder={translate('signInScreen.passwordHint')}
         autoCorrect={false}
-        style={[styles.defaultMargin]}
+        containerStyle={styles.defaultMargin(theme)}
         value={form.password}
         onChangeText={value => setValues({ ...form, password: value })}
       />
@@ -100,9 +111,6 @@ const styles = StyleSheet.create({
   center: {
     alignSelf: 'center',
   },
-  errorText: theme => ({
-    color: theme.colors.error,
-  }),
   linkContainer: {
     flex: 1,
     flexDirection: 'column',

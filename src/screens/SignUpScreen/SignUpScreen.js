@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signUp, resetAuthState } from '../../store/actions';
-import { Spinner, Text, Button, TextInput } from '../../components';
+import { Spinner, Text, Button, TextInput,MessageView } from '../../components';
 import { NAVIGATION_LOGIN_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -59,29 +59,14 @@ const SignUpScreen = ({
   };
 
   const renderMessages = () => {
-    if (status === Status.ERROR) {
-      return (
-        <Text
-          type="subheading"
-          style={[styles.errorText(theme)]}
-        >
-          {errorMessage}
-        </Text>
-      );
-    }
-
-    if (status === Status.SUCCESS) {
-      return (
-        <Text
-          type="subheading"
-          style={[styles.successText(theme)]}
-        >
-          {translate('signUpScreen.successMessage')}
-        </Text>
-      );
-    }
-
-    return null;
+    const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('signUpScreen.successMessage') : "";
+    const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
+    return (
+      <MessageView
+        message={message}
+        type={type}
+      />
+    )
   };
 
   return (
@@ -90,13 +75,14 @@ const SignUpScreen = ({
         placeholder={translate('signUpScreen.firstNameHint')}
         autoCorrect={false}
         value={form.firstName}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, firstName: value })}
       />
       <TextInput
         placeholder={translate('signUpScreen.lastNameHint')}
         autoCorrect={false}
         value={form.lastName}
-        style={[styles.defaultMargin(theme)]}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, lastName: value })}
       />
       <TextInput
@@ -104,7 +90,7 @@ const SignUpScreen = ({
         keyboardType="email-address"
         autoCorrect={false}
         value={form.email}
-        style={[styles.defaultMargin(theme)]}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, email: value })}
       />
       <TextInput
@@ -114,7 +100,7 @@ const SignUpScreen = ({
         placeholder={translate('signUpScreen.passwordHint')}
         autoCorrect={false}
         value={form.password}
-        style={[styles.defaultMargin(theme)]}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, password: value })}
       />
       {renderButtons()}
@@ -138,13 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'stretch'
-  },
-  errorText: theme => ({
-    color: theme.colors.error,
-  }),
-  successText: theme => ({
-    color: theme.colors.success,
-  })
+  }
 });
 
 SignUpScreen.navigationOptions = {

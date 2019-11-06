@@ -40,6 +40,10 @@ class Magento {
     return this.send(path, 'POST', params, data, type);
   }
 
+  put(path, params, data, type = ADMIN_TYPE) {
+    return this.send(path, 'PUT', params, data, type);
+  }
+
   get(path, params, data, type = ADMIN_TYPE) {
     return this.send(path, 'GET', params, data, type);
   }

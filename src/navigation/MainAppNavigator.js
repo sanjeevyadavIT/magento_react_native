@@ -1,5 +1,6 @@
 import { createStackNavigator } from 'react-navigation';
 import {
+  ForgetPasswordScreen,
   HomeScreen,
   ProductScreen,
   SearchScreen,
@@ -20,6 +21,7 @@ import {
 } from '../components';
 import {
   defaultHeader,
+  NAVIGATION_FORGOT_PASSWORD_SCREEN,
   NAVIGATION_HOME_SCREEN,
   NAVIGATION_CATEGORY_LIST_SCREEN,
   NAVIGATION_PRODUCT_SCREEN,
@@ -52,6 +54,7 @@ const MainAppNavigator = createStackNavigator(
     [NAVIGATION_SHIPPING_SCREEN]: ShippingScreen,
     [NAVIGATION_PAYMENT_SCREEN]: PaymentScreen,
     [NAVIGATION_ORDER_CONFIRMATION_SCREEN]: OrderAcknowledgementScreen,
+    [NAVIGATION_FORGOT_PASSWORD_SCREEN]:ForgetPasswordScreen,
   },
   {
     defaultNavigationOptions: defaultHeader,
