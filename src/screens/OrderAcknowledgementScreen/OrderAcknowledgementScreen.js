@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text, Button } from '../../components';
 import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../navigation/types';
+import { resetCheckoutState } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -12,11 +13,17 @@ import { translate } from '../../i18n';
 // TODO: Extract strings in strings.js
 const OrderAcknowledgementScreen = ({
   orderId,
-  navigation
+  navigation,
+  resetCheckoutState: _resetCheckoutState,
 }) => {
   const status = navigation.getParam('status', Status.ERROR);
   const errorMessage = navigation.getParam('errorMessage', translate('orderScreen.orderNotPlace'));
   const theme = useContext(ThemeContext);
+
+  useEffect(() => (() => {
+    // componentDidUnmount: Reset entire checkout state
+    _resetCheckoutState();
+  }), []);
 
   const renderFooter = () => (
     <View>
@@ -59,7 +66,8 @@ OrderAcknowledgementScreen.navigationOptions = {
 };
 
 OrderAcknowledgementScreen.propTypes = {
-  orderId: PropTypes.number.isRequired
+  orderId: PropTypes.number.isRequired,
+  resetCheckoutState: PropTypes.func.isRequired,
 };
 
 OrderAcknowledgementScreen.defaultProps = {};
@@ -71,4 +79,6 @@ const mapStateToProps = ({ checkout }) => {
   };
 };
 
-export default connect(mapStateToProps)(OrderAcknowledgementScreen);
+export default connect(mapStateToProps, {
+  resetCheckoutState,
+})(OrderAcknowledgementScreen);

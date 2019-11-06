@@ -1,12 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addCartShippingInfo } from '../../store/actions';
+import {
+  resetShippingState,
+  addCartShippingInfo,
+} from '../../store/actions';
 import {
   Text,
   Button,
-  Spinner,
   ModalSelect,
   GenericTemplate
 } from '../../components';
@@ -24,9 +26,16 @@ const ShippingScreen = ({
   billingAddress,
   navigation,
   addCartShippingInfo: _addCartShippingInfo,
+  resetShippingState: _resetShippingState
 }) => {
   const theme = useContext(ThemeContext);
   const [shippingCode, setShippingCode] = useState();
+
+  useEffect(() => (() => {
+    // componentDidUnmount: Reset Shipping related logic in Redux
+    _resetShippingState();
+  }), []);
+
 
   const renderShippingMethod = () => {
     if (!shipping || !shipping.length) {
@@ -94,19 +103,17 @@ const ShippingScreen = ({
     }
   };
 
-  const renderButton = () => {
-    if (paymentMethodStatus === Status.LOADING) {
-      return <Spinner />;
-    }
+  const renderButton = () => (
+    <Button
+      loading={paymentMethodStatus === Status.LOADING}
+      onPress={onPress}
+      title={translate('common.continue')}
+    />
+  );
 
-    if (paymentMethodStatus === Status.SUCCESS) {
-      navigation.navigate(NAVIGATION_PAYMENT_SCREEN);
-    }
-
-    return (
-      <Button onPress={onPress} title={translate('common.continue')} />
-    );
-  };
+  if (paymentMethodStatus === Status.SUCCESS) {
+    navigation.navigate(NAVIGATION_PAYMENT_SCREEN);
+  }
 
   return (
     <GenericTemplate
@@ -143,6 +150,7 @@ ShippingScreen.propTypes = {
   currencySymbol: PropTypes.string.isRequired,
   billingAddress: PropTypes.object,
   addCartShippingInfo: PropTypes.func.isRequired,
+  resetShippingState: PropTypes.func.isRequired,
 };
 
 ShippingScreen.defaultProps = {
@@ -170,5 +178,6 @@ const mapStateToProps = ({ checkout, magento, cart }) => {
 };
 
 export default connect(mapStateToProps, {
+  resetShippingState,
   addCartShippingInfo,
 })(ShippingScreen);

@@ -1,13 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
-import { placeCartOrder, createQuoteId } from '../../store/actions';
+import {
+  placeCartOrder,
+  createQuoteId,
+  resetPaymentState,
+} from '../../store/actions';
 import {
   Text,
   Button,
-  Spinner,
   ModalSelect,
   GenericTemplate
 } from '../../components';
@@ -30,9 +33,15 @@ const PaymentScreen = ({
   navigation,
   placeCartOrder: _placeCartOrder,
   createQuoteId: _createQuoteId,
+  resetPaymentState: _resetPaymentState
 }) => {
   const theme = useContext(ThemeContext);
   const [paymentCode, setPaymentCode] = useState();
+
+  useEffect(() => (() => {
+    // componentDidUnmount: Reset Payment related logic in Redux
+    _resetPaymentState();
+  }), []);
 
   const placeOrder = () => {
     if (!paymentCode) return;
@@ -78,32 +87,29 @@ const PaymentScreen = ({
     );
   };
 
-  const renderButton = () => {
-    if (orderStatus === Status.LOADING) {
-      return <Spinner />;
-    }
+  const renderButton = () => (
+    <Button
+      loading={orderStatus === Status.LOADING}
+      title={translate('paymentScreen.placeOrderButton')}
+      onPress={placeOrder}
+    />
+  );
 
-    if (orderStatus === Status.SUCCESS) {
-      _createQuoteId();
-      const resetAction = StackActions.reset({
-        index: 1,
-        actions: [
-          NavigationActions.navigate(
-            { routeName: NAVIGATION_HOME_SCREEN }
-          ),
-          NavigationActions.navigate(
-            { routeName: NAVIGATION_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } },
-          ),
-        ],
-      });
-      navigation.dispatch(resetAction);
-      // navigation.navigate(NAVIGATION_ORDER_CONFIRMATION_SCREEN, { status: Status.SUCCESS });
-    }
-
-    return (
-      <Button title={translate('paymentScreen.placeOrderButton')} onPress={placeOrder} />
-    );
-  };
+  if (orderStatus === Status.SUCCESS) {
+    _createQuoteId();
+    const resetAction = StackActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate(
+          { routeName: NAVIGATION_HOME_SCREEN }
+        ),
+        NavigationActions.navigate(
+          { routeName: NAVIGATION_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } },
+        ),
+      ],
+    });
+    navigation.dispatch(resetAction);
+  }
 
   return (
     <GenericTemplate
@@ -134,6 +140,7 @@ PaymentScreen.propTypes = {
   orderStatus: PropTypes.oneOf(Object.values(Status)).isRequired,
   placeCartOrder: PropTypes.func.isRequired,
   createQuoteId: PropTypes.func.isRequired,
+  resetPaymentState: PropTypes.func.isRequired,
 };
 
 PaymentScreen.defaultProps = {
@@ -143,7 +150,7 @@ PaymentScreen.defaultProps = {
 
 const mapStateToProps = ({ checkout, cart }) => {
   const { payment, orderStatus } = checkout;
-  const { cart: { billing_address: billingAddress }} = cart;
+  const { cart: { billing_address: billingAddress } } = cart;
   return {
     payment,
     orderStatus,
@@ -154,4 +161,5 @@ const mapStateToProps = ({ checkout, cart }) => {
 export default connect(mapStateToProps, {
   placeCartOrder,
   createQuoteId,
+  resetPaymentState,
 })(PaymentScreen);

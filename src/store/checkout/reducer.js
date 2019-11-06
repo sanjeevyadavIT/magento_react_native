@@ -1,15 +1,26 @@
-import { MAGENTO } from '../../constants';
+import {
+  MAGENTO,
+  RESET_PAYMENT_STATE,
+  RESET_SHIPPING_STATE,
+  RESET_CHECKOUT_ADDRESS_STATE,
+  RESET_CHECKOUT_STATE,
+} from '../../constants';
 import Status from '../../magento/Status';
 
 const INITIAL_STATE = {
   status: Status.DEFAULT,
+  //-------------------------------------
   billingAddressStatus: Status.DEFAULT,
+  //-------------------------------------
   shippingMethodStatus: Status.DEFAULT,
+  shipping: null,
+  //-------------------------------------
   paymentMethodStatus: Status.DEFAULT,
+  payment: null,
+  //-------------------------------------
   orderStatus: Status.DEFAULT,
   orderDetailStatus: Status.DEFAULT,
-  shipping: null,
-  payment: null,
+  //-------------------------------------
   errorMessage: '',
 };
 
@@ -100,6 +111,26 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         orderDetailStatus: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
+    case RESET_PAYMENT_STATE:
+      return {
+        ...state,
+        paymentMethodStatus: Status.DEFAULT,
+        payment: null,
+      };
+    case RESET_SHIPPING_STATE:
+      return {
+        ...state,
+        shippingMethodStatus: Status.DEFAULT,
+        billingAddressStatus: Status.DEFAULT,
+        shipping: null,
+      };
+    case RESET_CHECKOUT_ADDRESS_STATE:
+      return {
+        ...state,
+        billingAddressStatus: Status.DEFAULT,
+      };
+    case RESET_CHECKOUT_STATE:
+      return INITIAL_STATE;
     default:
       return state;
   }

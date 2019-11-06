@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Picker, StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   getCountries,
-  addCartBillingAddress,
-  getCurrentCustomer,
-  getShippingMethod,
   getCustomerCart,
+  getShippingMethod,
+  getCurrentCustomer,
+  addCartBillingAddress,
+  resetCheckoutAddressState,
 } from '../../store/actions';
-import { GenericTemplate, Spinner, Text, Button, TextInput, ModalSelect } from '../../components';
+import {
+  Text,
+  Button,
+  Spinner,
+  TextInput,
+  ModalSelect,
+  GenericTemplate,
+} from '../../components';
 import { NAVIGATION_SHIPPING_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -32,6 +40,7 @@ const AddressScreen = ({
   getCurrentCustomer: _getCurrentCustomer,
   getShippingMethod: _getShippingMethod,
   getCustomerCart: _getCustomerCart,
+  resetCheckoutAddressState: _resetCheckoutAddressState
 }) => {
   const [form, setValues] = useState({
     firstName: '',
@@ -63,6 +72,11 @@ const AddressScreen = ({
     if (customerStatus === Status.DEFAULT) {
       _getCurrentCustomer();
     }
+
+    return () => {
+      // componentDidUnmount: Reset Address related logic in Redux
+      _resetCheckoutAddressState();
+    };
   }, []);
 
   useEffect(() => {
@@ -192,19 +206,14 @@ const AddressScreen = ({
     return <></>;
   };
 
-  const renderButtons = () => {
-    if (billingAddressStatus === Status.LOADING) {
-      return <Spinner style={[styles.defaultMargin(theme)]} />;
-    }
-
-    return (
-      <Button
-        title={translate('common.save')}
-        style={[styles.defaultMargin(theme)]}
-        onPress={onSaveAddress}
-      />
-    );
-  };
+  const renderButtons = () => (
+    <Button
+      loading={billingAddressStatus === Status.LOADING}
+      title={translate('common.save')}
+      style={[styles.defaultMargin(theme)]}
+      onPress={onSaveAddress}
+    />
+  );
 
   if (billingAddressStatus === Status.SUCCESS && shippingMethodStatus === Status.DEFAULT) {
     const address = {
@@ -327,6 +336,7 @@ AddressScreen.propTypes = {
   getCurrentCustomer: PropTypes.func.isRequired,
   getShippingMethod: PropTypes.func.isRequired,
   getCustomerCart: PropTypes.func.isRequired,
+  resetCheckoutAddressState: PropTypes.func.isRequired,
 };
 
 AddressScreen.defaultProps = {
@@ -357,4 +367,5 @@ export default connect(mapStateToProps, {
   getCurrentCustomer,
   getShippingMethod,
   getCustomerCart,
+  resetCheckoutAddressState,
 })(AddressScreen);

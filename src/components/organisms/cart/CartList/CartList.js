@@ -2,7 +2,6 @@ import React from 'react';
 import {
   FlatList,
   View,
-  StyleSheet,
   Alert,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -11,7 +10,6 @@ import {
   Text,
   Button,
   MessageView,
-  Spinner
 } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_ADDRESS_SCREEN } from '../../../../navigation/types';
@@ -70,6 +68,7 @@ const CartList = ({
     <View>
       <Text type="heading" bold>{`${translate('common.total')} : ${currencySymbol + renderTotal()}`}</Text>
       <Button
+        loading={!allItemPricesAvailable()}
         title={translate('cartScreen.placeOrderButton')}
         onPress={handlePlaceOrder}
       />
@@ -81,13 +80,13 @@ const CartList = ({
       data={items}
       renderItem={renderRow}
       keyExtractor={item => String(item.item_id)}
-      ListFooterComponent={!!items.length ? (allItemPricesAvailable() ? renderFooter : <Spinner />) : <></>}
+      ListFooterComponent={items.length ? renderFooter : <></>}
       ListEmptyComponent={<MessageView message={translate('cartScreen.cartEmptyMessage')} />}
     />
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = {};
 
 CartList.propTypes = {
   items: PropTypes.array.isRequired,

@@ -1,4 +1,10 @@
-import { MAGENTO } from '../../constants';
+import {
+  MAGENTO,
+  RESET_PAYMENT_STATE,
+  RESET_SHIPPING_STATE,
+  RESET_CHECKOUT_ADDRESS_STATE,
+  RESET_CHECKOUT_STATE,
+} from '../../constants';
 
 export const getCountries = () => ({
   type: MAGENTO.COUNTRIES_REQUEST
@@ -27,4 +33,21 @@ export const placeCartOrder = paymentInformation => ({
 export const getOrderDetail = orderId => ({
   type: MAGENTO.ORDER_DETAIL_REQUEST,
   payload: { orderId },
+});
+
+// reset entire checkout state
+export const resetCheckoutState = () => ({
+  type: RESET_CHECKOUT_STATE,
+});
+
+export const resetCheckoutAddressState = () => ({
+  type: RESET_CHECKOUT_ADDRESS_STATE,
+});
+
+export const resetShippingState = () => ({
+  type: RESET_SHIPPING_STATE,
+});
+
+export const resetPaymentState = () => ({
+  type: RESET_PAYMENT_STATE,
 });
