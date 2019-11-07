@@ -12,7 +12,7 @@ function* createQuoteId() {
   } catch (error) {
     yield put({ type: MAGENTO.CREATE_QUOTE_ID_FAILURE, payload: { errorMessage: error.message } });
   }
-};
+}
 
 // wroker saga: Add description
 // FIXME: Potential infinite loop, cart error => calls create quote => create quote calls again this function
@@ -23,11 +23,11 @@ function* getCustomerCart() {
     yield put({ type: MAGENTO.CUSTOMER_CART_SUCCESS, payload: { cart } });
   } catch (error) {
     yield put({ type: MAGENTO.CUSTOMER_CART_FAILURE, payload: { errorMessage: error.message } });
-    if (error.message === 'No such entity with %fieldName = %fieldValue') {
+    if (error.message.startsWith('No such entity with')) {
       yield put({ type: MAGENTO.CREATE_QUOTE_ID_REQUEST });
     }
   }
-};
+}
 
 // wroker saga: Add description
 function* getCartItemProduct(action) {
@@ -37,7 +37,7 @@ function* getCartItemProduct(action) {
   } catch (error) {
     yield put({ type: MAGENTO.CART_ITEM_PRODUCT_FAILURE, payload: error.message });
   }
-};
+}
 
 // worker saga: Add description
 function* removeItemFromCart({ payload }) {
@@ -49,7 +49,7 @@ function* removeItemFromCart({ payload }) {
   } catch (error) {
     yield put({ type: MAGENTO.REMOVE_ITEM_FROM_CART_FAILURE, payload: error.message });
   }
-};
+}
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {

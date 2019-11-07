@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signUp, resetAuthState } from '../../store/actions';
-import { Spinner, Text, Button, TextInput } from '../../components';
+import { Button, TextInput, MessageView } from '../../components';
 import { NAVIGATION_LOGIN_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -12,8 +12,8 @@ import { translate } from '../../i18n';
 // TODO: Use KeyboardAvoidingView
 const SignUpScreen = ({
   status,
-  errorMessage,
   navigation,
+  errorMessage,
   signUp: _signUp,
   resetAuthState: _resetAuthState,
 }) => {
@@ -37,51 +37,32 @@ const SignUpScreen = ({
     _signUp(payload);
   };
 
-  const renderButtons = () => {
-    if (status === Status.LOADING) {
-      return <Spinner style={[styles.defaultMargin(theme)]} />;
-    }
+  const renderButtons = () => (
+    <>
+      <Button
+        loading={status === Status.LOADING}
+        title={translate('signUpScreen.signUpButton')}
+        onPress={onSignUpPress}
+        style={[styles.defaultMargin(theme)]}
+      />
+      <Button
+        type="clear"
+        style={styles.defaultMargin(theme)}
+        title={translate('signUpScreen.haveAccount')}
+        onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN)}
+      />
+    </>
+  );
+
+  const renderMessage = () => {
+    const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('signUpScreen.successMessage') : "";
+    const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
     return (
-      <View style={styles.linkContainer}>
-        <Button
-          title={translate('signUpScreen.signUpButton')}
-          onPress={onSignUpPress}
-          style={[styles.defaultMargin(theme)]}
-        />
-        <TouchableOpacity
-          style={[styles.defaultMargin(theme), styles.center]}
-          onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN)}
-        >
-          <Text>{translate('signUpScreen.haveAccount')}</Text>
-        </TouchableOpacity>
-      </View>
+      <MessageView
+        message={message}
+        type={type}
+      />
     );
-  };
-
-  const renderMessages = () => {
-    if (status === Status.ERROR) {
-      return (
-        <Text
-          type="subheading"
-          style={[styles.errorText(theme)]}
-        >
-          {errorMessage}
-        </Text>
-      );
-    }
-
-    if (status === Status.SUCCESS) {
-      return (
-        <Text
-          type="subheading"
-          style={[styles.successText(theme)]}
-        >
-          {translate('signUpScreen.successMessage')}
-        </Text>
-      );
-    }
-
-    return null;
   };
 
   return (
@@ -90,13 +71,14 @@ const SignUpScreen = ({
         placeholder={translate('signUpScreen.firstNameHint')}
         autoCorrect={false}
         value={form.firstName}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, firstName: value })}
       />
       <TextInput
         placeholder={translate('signUpScreen.lastNameHint')}
         autoCorrect={false}
         value={form.lastName}
-        style={[styles.defaultMargin(theme)]}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, lastName: value })}
       />
       <TextInput
@@ -104,7 +86,7 @@ const SignUpScreen = ({
         keyboardType="email-address"
         autoCorrect={false}
         value={form.email}
-        style={[styles.defaultMargin(theme)]}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, email: value })}
       />
       <TextInput
@@ -114,11 +96,11 @@ const SignUpScreen = ({
         placeholder={translate('signUpScreen.passwordHint')}
         autoCorrect={false}
         value={form.password}
-        style={[styles.defaultMargin(theme)]}
+        containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, password: value })}
       />
       {renderButtons()}
-      {renderMessages()}
+      {renderMessage()}
     </View>
   );
 };
@@ -131,20 +113,6 @@ const styles = StyleSheet.create({
   defaultMargin: theme => ({
     marginTop: theme.spacing.large,
   }),
-  center: {
-    alignSelf: 'center',
-  },
-  linkContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'stretch'
-  },
-  errorText: theme => ({
-    color: theme.colors.error,
-  }),
-  successText: theme => ({
-    color: theme.colors.success,
-  })
 });
 
 SignUpScreen.navigationOptions = {

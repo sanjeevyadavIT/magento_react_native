@@ -14,6 +14,7 @@ export const NAVIGATION_ADDRESS_SCREEN = 'AddressScreen';
 export const NAVIGATION_SHIPPING_SCREEN = 'ShippingScreen';
 export const NAVIGATION_PAYMENT_SCREEN = 'PaymentScreen';
 export const NAVIGATION_ORDER_CONFIRMATION_SCREEN = 'OrderConfirmationScreen';
+export const NAVIGATION_FORGOT_PASSWORD_SCREEN = 'ForgetPasswordScreen';
 
 export const defaultHeader = {
   headerStyle: {

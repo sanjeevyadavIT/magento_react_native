@@ -5,9 +5,11 @@ import Status from '../../magento/Status';
 const INITIAL_STATE = {
   signInStatus: Status.DEFAULT,
   signUpStatus: Status.DEFAULT,
+  resetPasswordStatus: Status.DEFAULT,
 
   signInErrorMessage: '',
   signUpErrorMessage: '',
+  resetPasswordErrorMessage: '',
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
@@ -49,6 +51,23 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case ACTION_USER_LOGOUT:
     case RESET_AUTH_STATE:
       return INITIAL_STATE;
+    case MAGENTO.RESET_PASSWORD_LOADING:
+      return {
+        ...state,
+        resetPasswordStatus: Status.LOADING,
+        resetPasswordErrorMessage: '',
+      };
+    case MAGENTO.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        resetPasswordStatus: Status.SUCCESS,
+      };
+    case MAGENTO.RESET_PASSWORD_FAILURE:
+      return {
+        ...state,
+        resetPasswordStatus: Status.ERROR,
+        resetPasswordErrorMessage: payload.errorMessage
+      };
     default:
       return state;
   }

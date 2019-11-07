@@ -15,6 +15,7 @@
     "order": "Order",
     "select": "Select",
     "save": "Save",
+    "email": "Email",
     "sortOption": {
       "aToZ": "name: A to Z",
       "zToA": "name: Z to A",
@@ -132,6 +133,7 @@
     "title": "Login",
     "signInButton": "Signin",
     "createAccount": "Create an account(Signup)",
+    "forgotPassword": "Forgot Password",
     "emailHint": "Email",
     "passwordHint": "Password"
   },
@@ -144,5 +146,12 @@
     "lastNameHint": "Last name",
     "emailHint": "Email",
     "passwordHint": "Password"
+  },
+  "forgetPasswordScreen": {
+    "requestEmailId": "Please enter your email address below to receive a password reset link",
+    "title":"Reset Password",
+    "resetButtonTitle":"Reset My Password",
+    "passwordRecovery" :"Password Recovery",
+    "emailSent": "If there is an account associated with your mail, you will receive an email with a link to reset your password."
   }
 }

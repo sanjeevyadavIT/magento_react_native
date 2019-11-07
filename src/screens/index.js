@@ -13,6 +13,7 @@ import PaymentScreen from './PaymentScreen';
 import OrderAcknowledgementScreen from './OrderAcknowledgementScreen';
 import OrderDetailScreen from './OrderDetailScreen';
 import OrdersScreen from './OrdersScreen';
+import ForgetPasswordScreen from './ForgetPasswordScreen';
 
 export {
   HomeScreen,
@@ -30,4 +31,5 @@ export {
   OrderAcknowledgementScreen,
   OrderDetailScreen,
   OrdersScreen,
+  ForgetPasswordScreen,
 };
