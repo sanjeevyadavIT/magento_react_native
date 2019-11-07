@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signUp, resetAuthState } from '../../store/actions';
-import { Spinner, Text, Button, TextInput,MessageView } from '../../components';
+import { Button, TextInput, MessageView } from '../../components';
 import { NAVIGATION_LOGIN_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -12,8 +12,8 @@ import { translate } from '../../i18n';
 // TODO: Use KeyboardAvoidingView
 const SignUpScreen = ({
   status,
-  errorMessage,
   navigation,
+  errorMessage,
   signUp: _signUp,
   resetAuthState: _resetAuthState,
 }) => {
@@ -37,28 +37,24 @@ const SignUpScreen = ({
     _signUp(payload);
   };
 
-  const renderButtons = () => {
-    if (status === Status.LOADING) {
-      return <Spinner style={[styles.defaultMargin(theme)]} />;
-    }
-    return (
-      <View style={styles.linkContainer}>
-        <Button
-          title={translate('signUpScreen.signUpButton')}
-          onPress={onSignUpPress}
-          style={[styles.defaultMargin(theme)]}
-        />
-        <TouchableOpacity
-          style={[styles.defaultMargin(theme), styles.center]}
-          onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN)}
-        >
-          <Text>{translate('signUpScreen.haveAccount')}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+  const renderButtons = () => (
+    <>
+      <Button
+        loading={status === Status.LOADING}
+        title={translate('signUpScreen.signUpButton')}
+        onPress={onSignUpPress}
+        style={[styles.defaultMargin(theme)]}
+      />
+      <Button
+        type="clear"
+        style={styles.defaultMargin(theme)}
+        title={translate('signUpScreen.haveAccount')}
+        onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN)}
+      />
+    </>
+  );
 
-  const renderMessages = () => {
+  const renderMessage = () => {
     const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('signUpScreen.successMessage') : "";
     const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
     return (
@@ -66,7 +62,7 @@ const SignUpScreen = ({
         message={message}
         type={type}
       />
-    )
+    );
   };
 
   return (
@@ -104,7 +100,7 @@ const SignUpScreen = ({
         onChangeText={value => setValues({ ...form, password: value })}
       />
       {renderButtons()}
-      {renderMessages()}
+      {renderMessage()}
     </View>
   );
 };
@@ -117,14 +113,6 @@ const styles = StyleSheet.create({
   defaultMargin: theme => ({
     marginTop: theme.spacing.large,
   }),
-  center: {
-    alignSelf: 'center',
-  },
-  linkContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'stretch'
-  }
 });
 
 SignUpScreen.navigationOptions = {

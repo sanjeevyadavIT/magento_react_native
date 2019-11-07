@@ -15,6 +15,7 @@
     "order": "Order",
     "select": "Select",
     "save": "Save",
+    "email": "Email",
     "sortOption": {
       "aToZ": "name: A to Z",
       "zToA": "name: Z to A",
@@ -143,9 +144,8 @@
   "forgetPasswordScreen": {
     "requestEmailId": "Please enter your email address below to receive a password reset link",
     "title":"Reset Password",
-    "buttonTitle":"Reset My Password",
-    "emailHint": "Email",
+    "resetButtonTitle":"Reset My Password",
     "passwordRecovery" :"Password Recovery",
-    "emailSent": "Email has been sent, please check your Email."
+    "emailSent": "If there is an account associated with your mail, you will receive an email with a link to reset your password."
   }
 }

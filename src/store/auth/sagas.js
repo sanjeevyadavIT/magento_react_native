@@ -36,7 +36,7 @@ function* signUp({ payload }) {
 function* resetPassword({ payload: { email } }) {
   try {
     yield put({ type: MAGENTO.RESET_PASSWORD_LOADING });
-    const response = yield call({ content: magento, fn: magento.guest.resetPassword }, email);
+    const response = yield call({ content: magento, fn: magento.guest.resetPassword }, email, magento.configuration.password_reset_template);
     yield put({ type: MAGENTO.RESET_PASSWORD_SUCCESS, payload: { response } });
   } catch (error) {
     console.log(error);

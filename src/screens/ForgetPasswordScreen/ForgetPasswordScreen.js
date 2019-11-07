@@ -6,8 +6,13 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Status from '../../magento/Status';
-import { MessageView, Button, Text, TextInput } from '../../components'
-import { resetPassword } from '../../store/actions';
+import {
+  Text,
+  Button,
+  TextInput,
+  MessageView,
+} from '../../components';
+import { resetPassword, resetAuthState } from '../../store/actions';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 
@@ -16,9 +21,15 @@ const ForgetPasswordScreen = ({
   errorMessage,
   navigation,
   resetPassword: _resetPassword,
+  resetAuthState: _resetAuthState,
 }) => {
   const theme = useContext(ThemeContext);
   const [email, setEmail] = useState('');
+
+  useEffect(() => (() => {
+    // componentDidUnmount: Reset password state
+    _resetAuthState();
+  }), []);
 
   const onResetPress = () => {
     _resetPassword(email);
@@ -32,7 +43,7 @@ const ForgetPasswordScreen = ({
         message={message}
         type={type}
       />
-    )
+    );
   };
 
   const renderButtons = () => (
@@ -40,7 +51,7 @@ const ForgetPasswordScreen = ({
       loading={status === Status.LOADING}
       disabled={email === ''}
       onPress={onResetPress}
-      title={translate('forgetPasswordScreen.buttonTitle')}
+      title={translate('forgetPasswordScreen.resetButtonTitle')}
     />
   );
 
@@ -55,7 +66,7 @@ const ForgetPasswordScreen = ({
       <TextInput
         autoCapitalize="none"
         keyboardType="email-address"
-        placeholder={translate('forgetPasswordScreen.emailHint')}
+        placeholder={translate('common.email')}
         autoCorrect={false}
         containerStyle={styles.emailOffset(theme)}
         value={email}
@@ -77,10 +88,10 @@ const styles = StyleSheet.create({
   container: theme => ({
     flex: 1,
     backgroundColor: theme.colors.background,
-    alignItems: 'center',
     paddingTop: theme.spacing.extraLarge,
   }),
   title: theme => ({
+    textAlign: 'center',
     marginBottom: theme.spacing.medium,
   }),
   description: {
@@ -98,7 +109,7 @@ ForgetPasswordScreen.propTypes = {
 };
 
 ForgetPasswordScreen.defaultProps = {
-  error: ' ',
+  errorMessage: '',
 };
 
 const mapStateToProps = ({ auth }) => {
@@ -114,5 +125,6 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  resetPassword
+  resetPassword,
+  resetAuthState,
 })(ForgetPasswordScreen);

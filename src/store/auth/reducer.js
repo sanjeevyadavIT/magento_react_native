@@ -65,8 +65,8 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case MAGENTO.RESET_PASSWORD_FAILURE:
       return {
         ...state,
-      resetPasswordStatus: Status.ERROR,
-      resetPasswordErrorMessage: payload.errorMessage
+        resetPasswordStatus: Status.ERROR,
+        resetPasswordErrorMessage: payload.errorMessage
       };
     default:
       return state;

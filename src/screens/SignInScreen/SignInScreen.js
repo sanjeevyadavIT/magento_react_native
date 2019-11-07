@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signIn, resetAuthState } from '../../store/actions';
-import { Spinner, Text, Button, TextInput, MessageView } from '../../components';
+import {
+  Button,
+  TextInput,
+  MessageView
+} from '../../components';
 import { NAVIGATION_SIGNUP_SCREEN, NAVIGATION_FORGOT_PASSWORD_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -24,6 +28,12 @@ const SignInScreen = ({
   });
   const theme = useContext(ThemeContext);
 
+  useEffect(() => {
+    if (status === Status.SUCCESS) {
+      navigation.popToTop();
+    }
+  }, [status]);
+
   useEffect(() => (() => {
     // componentWillUnmount
     _resetAuthState();
@@ -34,38 +44,31 @@ const SignInScreen = ({
     _signIn(form.email, form.password);
   };
 
-  const renderButtons = () => {
-    if (status === Status.LOADING) {
-      return <Spinner style={[styles.defaultMargin(theme)]} />;
-    }
-    return (
-      <View style={styles.linkContainer}>
-        <Button
-          title={translate('signInScreen.signInButton')}
-          style={[styles.defaultMargin(theme)]}
-          onPress={onSignInPress}
-        />
-        <TouchableOpacity
-          style={[styles.defaultMargin(theme), styles.center]}
-          onPress={() => navigation.navigate(NAVIGATION_SIGNUP_SCREEN)}
-        >
-          <Text>{translate('signInScreen.createAccount')}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.defaultMargin(theme), styles.center]}
-          onPress={() => navigation.navigate(NAVIGATION_FORGOT_PASSWORD_SCREEN)}
-        >
-          <Text>{translate('signInScreen.forgotPassword')}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+  const renderButtons = () => (
+    <>
+      <Button
+        loading={status === Status.LOADING}
+        title={translate('signInScreen.signInButton')}
+        style={[styles.defaultMargin(theme)]}
+        onPress={onSignInPress}
+      />
+      <Button
+        type="clear"
+        style={styles.defaultMargin(theme)}
+        title={translate('signInScreen.createAccount')}
+        onPress={() => navigation.navigate(NAVIGATION_SIGNUP_SCREEN)}
+      />
+      <Button
+        type="clear"
+        style={styles.defaultMargin(theme)}
+        title={translate('signInScreen.forgotPassword')}
+        onPress={() => navigation.navigate(NAVIGATION_FORGOT_PASSWORD_SCREEN)}
+      />
+    </>
+  );
 
-  const handleStatusChange = () => {
-    if (status === Status.SUCCESS) {
-      navigation.popToTop();
-    }
-    const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('forgetPasswordScreen.emailSent') : "";
+  const renderMessage = () => {
+    const message = status === Status.ERROR ? errorMessage : (status === Status.SUCCESS ? translate('forgetPasswordScreen.emailSent') : "");
     const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
     return (
       <MessageView
@@ -96,7 +99,7 @@ const SignInScreen = ({
         onChangeText={value => setValues({ ...form, password: value })}
       />
       {renderButtons()}
-      {handleStatusChange()}
+      {renderMessage()}
     </View>
   );
 };
@@ -111,11 +114,6 @@ const styles = StyleSheet.create({
   center: {
     alignSelf: 'center',
   },
-  linkContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'stretch'
-  }
 });
 
 SignInScreen.navigationOptions = {

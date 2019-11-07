@@ -104,11 +104,17 @@ class Magento {
 
   static extractErrorMessage(data) {
     let { message, parameters } = data;
-    if (typeof parameters !== 'undefined' && parameters.length > 0) {
-      data.parameters.forEach((item, index) => {
+
+    if (parameters && Array.isArray(parameters) && parameters.length > 0) {
+      parameters.forEach((item, index) => {
         message = message.replace(`%${index + 1}`, item);
       });
+    } else if (parameters && parameters instanceof Object) {
+      Object.keys(parameters).forEach((parameter) => {
+        message = message.replace(`%${parameter}`, parameters[parameter]);
+      });
     }
+
     return { message };
   }
 
