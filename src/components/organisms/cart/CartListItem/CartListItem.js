@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getCartItemProduct, removeItemFromCart } from '../../../../store/actions';
@@ -11,15 +11,19 @@ import { translate } from '../../../../i18n';
 
 // NOTE: Is it better to create a wapper around CartListItem and extract state in it?
 // It is in organisms folder because it is state aware
-const CartListItem = ({ item, currencySymbol }) => {
+const CartListItem = ({
+  item,
+  product: productDetail,
+  currencySymbol,
+  getCartItemProduct: _getCartItemProduct,
+  removeItemFromCart: _removeItemFromCart,
+}) => {
   const theme = useContext(ThemeContext);
-  const dispatch = useDispatch();
-  const { [item.sku]: product } = useSelector(state => state.cart.products);
 
   useEffect(() => {
     // componentDidMount
-    if (!item.thumbnail && !product) {
-      dispatch(getCartItemProduct(item.sku));
+    if (!item.thumbnail && !productDetail) {
+      _getCartItemProduct(item.sku);
     }
   }, []);
 
@@ -29,13 +33,13 @@ const CartListItem = ({ item, currencySymbol }) => {
       `${translate('cartScreen.removeItemDialogMessage')}: ${item.name}`,
       [
         { text: translate('common.cancel'), onPress: () => console.log('Cancel pressed'), style: 'cancel' },
-        { text: translate('common.ok'), onPress: () => dispatch(removeItemFromCart(item.item_id)) },
+        { text: translate('common.ok'), onPress: () => _removeItemFromCart(item.item_id) },
       ],
       { cancelable: true }
     );
   };
 
-  const getImageUrl = () => (product ? getProductThumbnailFromAttribute(product) : product);
+  const getImageUrl = () => (productDetail ? getProductThumbnailFromAttribute(productDetail) : '');
 
   return (
     <Card style={styles.mainContainer(theme)}>
@@ -46,7 +50,7 @@ const CartListItem = ({ item, currencySymbol }) => {
       />
       <View style={styles.infoContainer}>
         <Text>{item.name}</Text>
-        <Text>{`${translate('common.price')}: ${currencySymbol}${product ? product.price : item.price}`}</Text>
+        <Text>{`${translate('common.price')}: ${currencySymbol}${productDetail ? productDetail.price : item.price}`}</Text>
         <Text>{`${translate('common.quantity')} : ${item.qty}`}</Text>
       </View>
       <Icon name="close" size={30} color="#000" onPress={onPressRemoveItem} />
@@ -76,9 +80,25 @@ const styles = StyleSheet.create({
 
 CartListItem.propTypes = {
   item: PropTypes.object.isRequired,
+  product: PropTypes.object,
   currencySymbol: PropTypes.string.isRequired,
+  getCartItemProduct: PropTypes.func.isRequired,
+  removeItemFromCart: PropTypes.func.isRequired,
 };
 
-CartListItem.defaultProps = {};
+CartListItem.defaultProps = {
+  product: undefined,
+};
 
-export default CartListItem;
+const mapStateToProps = ({ cart }, { item }) => {
+  const products = cart.products || {};
+  const product = products[item.sku];
+  return {
+    product,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getCartItemProduct,
+  removeItemFromCart
+})(CartListItem);
