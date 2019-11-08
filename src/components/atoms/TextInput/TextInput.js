@@ -42,6 +42,10 @@ const TextInput = ({
    * Render right icon
    */
   rightIcon,
+  /**
+   * To access TextInput reference
+   */
+  assignRef,
   ...props
 }) => {
   const theme = useContext(ThemeContext);
@@ -69,6 +73,7 @@ const TextInput = ({
             styles.input(theme),
             inputStyle,
           ]}
+          ref={(component) => { assignRef && assignRef(component); }}
           {...props}
         />
 
@@ -143,7 +148,8 @@ TextInput.propTypes = {
   rightIcon: PropTypes.oneOfType([
     PropTypes.element,
     null
-  ])
+  ]),
+  assignRef: PropTypes.func,
 };
 
 TextInput.defaultProps = {
@@ -154,6 +160,7 @@ TextInput.defaultProps = {
   errorMessage: '',
   leftIcon: null,
   rightIcon: null,
+  assignRef: () => {}
 };
 
 export default TextInput;

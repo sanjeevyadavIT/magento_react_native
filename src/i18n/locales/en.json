@@ -5,6 +5,7 @@
     "cancel": "Cancel",
     "continue": "Continue",
     "back": "Back",
+    "keyboardNext": "next",
     "total": "Total",
     "subTotal": "Subtotal",
     "grandTotal": "Grand Total",
@@ -98,7 +99,8 @@
     "shippingAndHandling": "Shipping & Handling",
     "orderTotal": "Order Total",
     "shipTo": "Ship to",
-    "orderCreated": "Created"
+    "orderCreated": "Created",
+    "orderEmptyMessage": "You haven't placed any order"
   },
   "paymentScreen": {
     "title": "Payment",

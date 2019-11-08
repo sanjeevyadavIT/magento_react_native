@@ -1,9 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+} from 'react';
+import { StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { signUp, resetAuthState } from '../../store/actions';
-import { Button, TextInput, MessageView } from '../../components';
+import {
+  Button,
+  TextInput,
+  MessageView,
+  GenericTemplate
+} from '../../components';
 import { NAVIGATION_LOGIN_SCREEN } from '../../navigation/types';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -23,7 +34,12 @@ const SignUpScreen = ({
     email: '',
     password: '',
   });
+  const [secureEntry, toggleSecureEntry] = useState(true);
   const theme = useContext(ThemeContext);
+  // Reference
+  const lastNameInputRef = useRef();
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
 
   useEffect(() => (() => {
     // componentWillUnmount
@@ -31,6 +47,8 @@ const SignUpScreen = ({
   }), []);
 
   const onSignUpPress = () => {
+    Keyboard.dismiss();
+    if (!(form.firstName && form.lastName && form.email && form.password)) return;
     // TODO: Implement validation
     const customer = { firstname: form.firstName, lastname: form.lastName, email: form.email };
     const payload = { customer, password: form.password };
@@ -41,6 +59,7 @@ const SignUpScreen = ({
     <>
       <Button
         loading={status === Status.LOADING}
+        disabled={!(form.firstName && form.lastName && form.email && form.password)}
         title={translate('signUpScreen.signUpButton')}
         onPress={onSignUpPress}
         style={[styles.defaultMargin(theme)]}
@@ -66,42 +85,70 @@ const SignUpScreen = ({
   };
 
   return (
-    <View style={styles.container}>
+    <GenericTemplate
+      isScrollable
+      status={Status.SUCCESS}
+      style={styles.container}
+    >
       <TextInput
         placeholder={translate('signUpScreen.firstNameHint')}
         autoCorrect={false}
         value={form.firstName}
+        editable={!(status === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, firstName: value })}
+        returnKeyType={translate('common.keyboardNext')}
+        onSubmitEditing={() => lastNameInputRef.current.focus()}
       />
       <TextInput
         placeholder={translate('signUpScreen.lastNameHint')}
         autoCorrect={false}
         value={form.lastName}
+        editable={!(status === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, lastName: value })}
+        assignRef={(component) => { lastNameInputRef.current = component; }}
+        returnKeyType={translate('common.keyboardNext')}
+        onSubmitEditing={() => emailInputRef.current.focus()}
       />
       <TextInput
         placeholder={translate('signUpScreen.emailHint')}
         keyboardType="email-address"
         autoCorrect={false}
+        autoCapitalize="none"
         value={form.email}
+        editable={!(status === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, email: value })}
+        assignRef={(component) => { emailInputRef.current = component; }}
+        returnKeyType={translate('common.keyboardNext')}
+        onSubmitEditing={() => passwordInputRef.current.focus()}
       />
       <TextInput
         autoCapitalize="none"
-        secureTextEntry
+        secureTextEntry={secureEntry}
+        rightIcon={(
+          <Icon
+            name={secureEntry ? 'eye' : 'eye-off'}
+            size={20}
+            style={styles.iconPadding(theme)}
+            color={theme.colors.labelColor}
+            onPress={() => toggleSecureEntry(!secureEntry)}
+          />
+        )}
         textContentType="password"
         placeholder={translate('signUpScreen.passwordHint')}
         autoCorrect={false}
         value={form.password}
+        editable={!(status === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, password: value })}
+        assignRef={(component) => { passwordInputRef.current = component; }}
+        onSubmitEditing={onSignUpPress}
       />
       {renderButtons()}
       {renderMessage()}
-    </View>
+    </GenericTemplate>
   );
 };
 
@@ -113,6 +160,9 @@ const styles = StyleSheet.create({
   defaultMargin: theme => ({
     marginTop: theme.spacing.large,
   }),
+  iconPadding: theme => ({
+    padding: theme.spacing.small
+  })
 });
 
 SignUpScreen.navigationOptions = {
