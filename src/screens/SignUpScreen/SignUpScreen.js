@@ -86,7 +86,7 @@ const SignUpScreen = ({
 
   return (
     <GenericTemplate
-      isScrollable
+      scrollable
       status={Status.SUCCESS}
       style={styles.container}
     >

@@ -28,7 +28,7 @@ import { translate } from '../../i18n';
 const HomeScreen = ({ status, errorMessage }) => {
   const theme = useContext(ThemeContext);
   return (
-    <GenericTemplate isScrollable status={status} errorMessage={errorMessage}>
+    <GenericTemplate scrollable status={status} errorMessage={errorMessage}>
       <View style={styles.imageSliderContainer(theme)}>
         <HomeSliderContainer />
       </View>

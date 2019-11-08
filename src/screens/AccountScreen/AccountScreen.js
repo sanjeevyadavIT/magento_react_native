@@ -33,7 +33,7 @@ const AccountScreen = ({
   };
 
   return (
-    <GenericTemplate isScrollable={false} status={status} errorMessage={errorMessage}>
+    <GenericTemplate scrollable={false} status={status} errorMessage={errorMessage}>
       <Text style={styles.space(theme)}>{customer && `${customer.firstname} ${customer.lastname}`}</Text>
       <Text style={styles.space(theme)}>{customer && customer.email}</Text>
       <Button

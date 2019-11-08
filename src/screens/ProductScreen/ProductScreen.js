@@ -91,7 +91,7 @@ const ProductScreen = ({
 
   return (
     <GenericTemplate
-      isScrollable
+      scrollable
       status={Status.SUCCESS}
       footer={(
         <CTAButtons

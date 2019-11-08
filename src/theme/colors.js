@@ -22,13 +22,13 @@ export default {
   border: '#d9d9d9',
   /**
    * ========================= Primary color : (Brand color) =========================
-   * primaryDark: color for the status bar and for dark tint
+   * statusBar: color for the status bar and for dark tint
    * primary: to be used as a background color for appbar(toolbar)
    * appBarTintColor: to be used for appbar title text, appbar icons color and for back button
    *
    * Example: If primary color is dark, make appbarTintColor light
    */
-  primaryDark: '#0D5DC8',
+  statusBar: '#0D5DC8',
   primary: '#1C6CD1',
   appbarTintColor: '#fff',
   /**

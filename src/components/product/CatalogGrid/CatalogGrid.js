@@ -100,7 +100,7 @@ const CatalogGrid = ({
 
   return (
     <GenericTemplate
-      isScrollable={false}
+      scrollable={false}
       status={status}
       errorMessage={errorMessage}
       style={styles.container(theme)}

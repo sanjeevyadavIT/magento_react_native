@@ -35,7 +35,7 @@ const OrderAcknowledgementScreen = ({
 
   return (
     <GenericTemplate
-      isScrollable={false}
+      scrollable={false}
       status={status}
       errorMessage={errorMessage}
       footer={renderFooter()}

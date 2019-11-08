@@ -26,7 +26,7 @@ const OrdersScreen = ({
   const renderItem = ({ item }) => (<OrderListItem item={item} />);
 
   return (
-    <GenericTemplate isScrollable={false} status={status} errorMessage={errorMessage}>
+    <GenericTemplate scrollable={false} status={status} errorMessage={errorMessage}>
       <FlatList
         data={orders}
         renderItem={renderItem}

@@ -113,7 +113,7 @@ const PaymentScreen = ({
 
   return (
     <GenericTemplate
-      isScrollable={false}
+      scrollable={false}
       footer={renderButton()}
     >
       {renderPaymentMethods()}
