@@ -18,6 +18,11 @@ const ImageSlider = ({
   imageHeight, // Required prop
   slider, // Required prop
   baseUrl, // Required prop
+  /**
+   * Set it to true, for auto rotate of image,
+   * default value is true
+   */
+  autoplay,
   showTitle,
   resizeMode,
   style,
@@ -34,7 +39,10 @@ const ImageSlider = ({
   );
 
   return (
-    <Swiper containerStyle={[{ height: imageHeight }, style]}>
+    <Swiper
+      autoplay={autoplay}
+      containerStyle={[{ height: imageHeight }, style]}
+    >
       {renderImages()}
     </Swiper>
   );
@@ -52,6 +60,7 @@ ImageSlider.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   showTitle: PropTypes.bool,
   resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch', 'repeat', 'center']),
+  autoplay: PropTypes.bool,
   style: PropTypes.object,
 };
 
@@ -59,6 +68,7 @@ ImageSlider.defaultProps = {
   showTitle: false,
   resizeMode: 'cover',
   style: {},
+  autoplay: true,
 };
 
 export default ImageSlider;

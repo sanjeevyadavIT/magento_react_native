@@ -3,13 +3,25 @@ import { ImageSliderItem } from '../components';
 
 export const getProductThumbnailFromAttribute = (product) => {
   let result = magento.getProductMediaUrl();
+  const key = 'thumbnail';
   product.custom_attributes.some((attribute) => {
-    if (attribute.attribute_code === 'thumbnail') {
+    if (attribute.attribute_code === key) {
       result += attribute.value;
       return true;
     }
   });
   return result;
+};
+
+export const getValueFromAttribute = (product, key) => {
+  if (!product || !('custom_attributes' in product) || !Array.isArray(product.custom_attributes)) {
+    return undefined;
+  }
+  const result = product.custom_attributes.find(attribute => attribute.attribute_code === key);
+  if (result) {
+    return result.value;
+  }
+  return undefined;
 };
 
 export const parseImageArray = slider => slider.map(item => new ImageSliderItem(item.label, item.file, ''));

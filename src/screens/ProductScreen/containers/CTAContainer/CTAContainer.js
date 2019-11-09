@@ -12,7 +12,7 @@ import Status from '../../../../magento/Status';
  * add to cart button.
  *
  * If the product is `simple` type product use @param sku to add to cart
- * If the product is `configurable` type use @param selectedProduct.sky to add to cart
+ * If the product is `configurable` type use @param selectedProduct.sku to add to cart
  *
  * @todo Show on screen when product added to cart
  *
@@ -88,7 +88,6 @@ const CTAButtons = ({
   return (
     <Button
       loading={status === Status.LOADING}
-      type="solid"
       title={translate('productScreen.addToCartButton')}
       onPress={onAddToCartClick}
     />
