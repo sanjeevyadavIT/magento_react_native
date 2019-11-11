@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, takeEvery } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento, CUSTOMER_TOKEN } from '../../magento';
 import { MAGENTO, ACTION_USER_LOGOUT } from '../../constants';
@@ -33,9 +33,20 @@ function* getOrdersForCustomer({ payload }) {
   }
 }
 
+
+function* getOrderedProductInfo({ payload }) {
+  try {
+    const product = yield call({ content: magento, fn: magento.admin.getProductBySku }, payload.sku);
+    yield put({ type: MAGENTO.GET_ORDERED_PRODUCT_INFO_SUCCESS, payload: { product, sku: payload.sku } });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
   yield takeLatest(MAGENTO.CURRENT_USER_REQUEST, getCurrentUser);
   yield takeLatest(ACTION_USER_LOGOUT, clearCustomerAccessToken);
   yield takeLatest(MAGENTO.GET_ORDERS_REQUEST, getOrdersForCustomer);
+  yield takeEvery(MAGENTO.GET_ORDERED_PRODUCT_INFO_REQUEST, getOrderedProductInfo);
 }

@@ -56,7 +56,8 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'ADD_CART_SHIPPING_INFO', // Send billing, shipping, shipping method
   'PLACE_CART_ORDER', // Place cart order
   'ORDER_DETAIL', // Fetch order detail, using orderId
-  'RESET_PASSWORD'
+  'RESET_PASSWORD',
+  'GET_ORDERED_PRODUCT_INFO'
 ], suffixTypes);
 
 // Events related to UI interaction
