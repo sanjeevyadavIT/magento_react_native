@@ -8,6 +8,12 @@ const INITIAL_STATE = {
   currency: {
     default_display_currency_code: '',
     default_display_currency_symbol: '',
+    /**
+     * Below three keys will be used in the APP
+     */
+    displayCurrencyCode: '',
+    displayCurrencySymbol: '',
+    displayCurrencyExchangeRate: 1,
   }
 };
 
@@ -35,15 +41,27 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         ...state,
         status: Status.LOADING,
       };
-    case MAGENTO.CURRENCY_SUCCESS:
+    case MAGENTO.CURRENCY_SUCCESS: {
+      const {
+        currencyData,
+        displayCurrency: {
+          code,
+          symbol,
+          rate
+        }
+      } = payload;
       return {
         ...state,
         status: Status.SUCCESS,
         currency: {
           ...state.currency,
-          ...payload.currency
+          ...currencyData,
+          displayCurrencyCode: code,
+          displayCurrencySymbol: symbol,
+          displayCurrencyExchangeRate: rate,
         },
       };
+    }
     case MAGENTO.CURRENCY_FAILURE:
       return {
         ...state,

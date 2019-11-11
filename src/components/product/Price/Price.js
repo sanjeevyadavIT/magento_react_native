@@ -18,11 +18,13 @@ import { ThemeContext } from '../../../theme';
  * @param {number} [props.endingPrice = undefined]   - in case of `configurable` type product, maximum price of it's child
  * @param {number} [props.discountPrice = 0]         - special or discount price for the product
  * @param {string} props.currencySymbol              - currency symbol to append before price
+ * @param {string} props.currencyRate                - currency rate which must be multiply with the actual price.
  *
  * @return React component
  */
 const Price = ({
   currencySymbol,
+  currencyRate,
   basePrice,
   discountPrice,
   startingPrice,
@@ -36,8 +38,8 @@ const Price = ({
     return (
       <View style={styles.container}>
         { !isNumber(endingPrice) ? <Text>From </Text> : null }
-        <Text type="label" bold>{`${currencySymbol}${formatPrice(startingPrice)}`}</Text>
-        { isNumber(endingPrice) ? <Text type="label" bold>{` - ${currencySymbol}${formatPrice(endingPrice)}`}</Text> : null}
+        <Text type="label" bold>{`${currencySymbol}${formatPrice(startingPrice, currencyRate)}`}</Text>
+        { isNumber(endingPrice) ? <Text type="label" bold>{` - ${currencySymbol}${formatPrice(endingPrice, currencyRate)}`}</Text> : null}
       </View>
     );
   }
@@ -45,7 +47,7 @@ const Price = ({
   return (
     <View style={styles.container}>
       {discountPrice ? renderDiscountPrice() : null}
-      <Text type="label" bold={!isBold()} style={styles.basePriceText(basePrice, discountPrice)}>{`${currencySymbol}${formatPrice(basePrice)}`}</Text>
+      <Text type="label" bold={!isBold()} style={styles.basePriceText(basePrice, discountPrice)}>{`${currencySymbol}${formatPrice(basePrice, currencyRate)}`}</Text>
     </View>
   );
 };
@@ -64,6 +66,7 @@ const styles = {
 
 Price.propTypes = {
   currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   basePrice: PropTypes.number,
   discountPrice: PropTypes.number,
   startingPrice: PropTypes.oneOfType([

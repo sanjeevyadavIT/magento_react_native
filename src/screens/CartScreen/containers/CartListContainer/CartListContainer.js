@@ -7,16 +7,19 @@ const CartListContainer = ({
   items,
   extra,
   currencySymbol,
+  currencyRate,
 }) => (
   <CartList
     items={items}
     extra={extra}
     currencySymbol={currencySymbol}
+    currencyRate={currencyRate}
   />
 );
 
 CartListContainer.propTypes = {
   currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   items: PropTypes.array,
   extra: PropTypes.object,
 };
@@ -28,11 +31,15 @@ CartListContainer.defaultProps = {
 
 const mapStateToProps = ({ cart, magento }) => {
   const { cart: { items }, products: extra } = cart;
-  const { default_display_currency_symbol: currencySymbol } = magento.currency;
+  const {
+    displayCurrencySymbol: currencySymbol,
+    displayCurrencyExchangeRate: currencyRate,
+  } = magento.currency;
   return {
     items,
     extra,
-    currencySymbol
+    currencySymbol,
+    currencyRate,
   };
 };
 

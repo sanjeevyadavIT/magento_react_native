@@ -10,6 +10,7 @@ import {
   Text,
   Button,
   MessageView,
+  Price,
 } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_ADDRESS_SCREEN } from '../../../../navigation/types';
@@ -23,9 +24,15 @@ const CartList = ({
   items,
   extra,
   currencySymbol,
+  currencyRate,
 }) => {
   const renderRow = ({ item, index }) => (
-    <CartListItem item={item} index={index} currencySymbol={currencySymbol} />
+    <CartListItem
+      item={item}
+      index={index}
+      currencySymbol={currencySymbol}
+      currencyRate={currencyRate}
+    />
   );
 
   const allItemPricesAvailable = () => {
@@ -53,7 +60,7 @@ const CartList = ({
         sum += price * qty;
       });
     }
-    return sum.toFixed(2);
+    return parseFloat(sum.toFixed(2));
   };
 
   const handlePlaceOrder = () => {
@@ -66,7 +73,16 @@ const CartList = ({
 
   const renderFooter = () => (
     <View>
-      <Text type="heading" bold>{`${translate('common.total')} : ${currencySymbol + renderTotal()}`}</Text>
+      <View style={styles.row}>
+        <Text type="heading" bold>
+          {`${translate('common.total')} : `}
+        </Text>
+        <Price
+          basePrice={renderTotal()}
+          currencyRate={currencyRate}
+          currencySymbol={currencySymbol}
+        />
+      </View>
       <Button
         loading={!allItemPricesAvailable()}
         title={translate('cartScreen.placeOrderButton')}
@@ -81,15 +97,25 @@ const CartList = ({
       renderItem={renderRow}
       keyExtractor={item => String(item.item_id)}
       ListFooterComponent={items.length ? renderFooter : <></>}
-      ListEmptyComponent={<MessageView message={translate('cartScreen.cartEmptyMessage')} />}
+      ListEmptyComponent={(
+        <MessageView
+          message={translate('cartScreen.cartEmptyMessage')}
+        />
+      )}
     />
   );
 };
 
-const styles = {};
+const styles = {
+  row: {
+    flexDirection: 'row'
+  },
+};
 
 CartList.propTypes = {
   items: PropTypes.array.isRequired,
+  currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
 };
 
 CartList.defaultProps = {};

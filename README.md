@@ -18,11 +18,11 @@ MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 RE
 ## :camera: Screenshots
 
 <div style="display:flex;" >
-  <img  src="screenshots/1.png" width="19%" >
-  <img style="margin-left:10px;" src="screenshots/2.png" width="19%" >
-  <img style="margin-left:10px;" src="screenshots/3.png" width="19%" >
-  <img style="margin-left:10px;" src="screenshots/4.png" width="19%" >
-  <img style="margin-left:10px;" src="screenshots/5.png" width="19%" >
+  <img  src=".github/screenshots/1.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/2.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/3.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/4.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/5.png" width="19%" >
 </div>
 
 ## 📲 Getting Started
