@@ -1,9 +1,10 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
-import { magento, CUSTOMER_TOKEN } from '../../magento';
+import { magento, CUSTOMER_TOKEN, CURRENCY_CODE } from '../../magento';
 import Status from '../../magento/Status';
 import { MAGENTO, USER_LOGGED_IN_STATUS } from '../../constants';
 import { magentoOptions } from '../../../config/magento';
+import { priceSignByCode } from '../../utils/price';
 
 // worker saga: Add Description
 function* initMagento() {
@@ -52,16 +53,43 @@ function* getCountries() {
   }
 }
 
-// worker saga: Add Description
+// worker saga: fetch available currency support with their exchange rates.
 function* getCurrency() {
   try {
     yield put({ type: MAGENTO.CURRENCY_LOADING });
-    const currency = yield call({ content: magento, fn: magento.guest.getCurrency });
-    yield put({ type: MAGENTO.CURRENCY_SUCCESS, payload: { currency } });
+    const currencyData = yield call({ content: magento, fn: magento.guest.getCurrency });
+    const displayCurrency = yield getCurrencyToBeDisplayed(currencyData);
+    yield put({ type: MAGENTO.CURRENCY_SUCCESS, payload: { currencyData, displayCurrency } });
   } catch (error) {
     yield put({ type: MAGENTO.CURRENCY_FAILURE, payload: { errorMessage: error.message } });
   }
 }
+
+function* getCurrencyToBeDisplayed(currencyData) {
+  let code = currencyData.default_display_currency_code;
+  let symbol = currencyData.default_display_currency_symbol;
+  let rate = 1;
+
+  if ('available_currency_codes' in currencyData && currencyData.available_currency_codes.length > 0) {
+    const previousSelectedCurrencyCode = yield AsyncStorage.getItem(CURRENCY_CODE);
+    if (previousSelectedCurrencyCode && previousSelectedCurrencyCode !== code && previousSelectedCurrencyCode in currencyData.available_currency_codes) {
+      code = previousSelectedCurrencyCode;
+      symbol = priceSignByCode(code);
+    }
+    // TODO: If not and currency get from RNLocalize is supported, then set that and update AsyncStorage
+  }
+
+  const exchangeRate = currencyData.exchange_rates.find(_exchangeRate => _exchangeRate.currency_to === code);
+  if (exchangeRate && 'rate' in exchangeRate) {
+    rate = exchangeRate.rate;
+  }
+
+  return {
+    code,
+    symbol,
+    rate,
+  };
+};
 
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga

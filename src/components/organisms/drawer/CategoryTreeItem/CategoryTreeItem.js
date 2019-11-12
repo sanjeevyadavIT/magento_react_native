@@ -54,7 +54,7 @@ const CategoryTreeItem = ({ category }) => {
         <Icon
           style={styles.expandIcon(theme)}
           name={icon}
-          color="#888"
+          color={theme.colors.bodyText}
           size={20}
           onPress={() => setExpanded(!expanded)}
         />

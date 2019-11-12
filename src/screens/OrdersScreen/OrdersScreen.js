@@ -3,7 +3,7 @@ import { StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrderList } from '../../store/actions';
-import { GenericTemplate, OrderListItem } from '../../components';
+import { GenericTemplate, OrderListItem, MessageView } from '../../components';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 
@@ -26,11 +26,12 @@ const OrdersScreen = ({
   const renderItem = ({ item }) => (<OrderListItem item={item} />);
 
   return (
-    <GenericTemplate isScrollable={false} status={status} errorMessage={errorMessage}>
+    <GenericTemplate scrollable={false} status={status} errorMessage={errorMessage}>
       <FlatList
         data={orders}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
+        ListEmptyComponent={<MessageView message={translate('orderScreen.orderEmptyMessage')} />}
       />
     </GenericTemplate>
   );

@@ -19,7 +19,7 @@ const CartPage = ({
   }, []);
 
   return (
-    <GenericTemplate isScrollable status={status} errorMessage={errorMessage}>
+    <GenericTemplate scrollable status={status} errorMessage={errorMessage}>
       <CartListContainer />
     </GenericTemplate>
   );

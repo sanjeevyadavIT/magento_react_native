@@ -12,6 +12,7 @@ const CategoryListContainer = ({
   categoryId,
   products,
   currencySymbol,
+  currencyRate,
   totalCount,
   status,
   errorMessage,
@@ -28,6 +29,7 @@ const CategoryListContainer = ({
     <CatalogGrid
       loadFactor={categoryId}
       currencySymbol={currencySymbol}
+      currencyRate={currencyRate}
       stateAccessor={stateAccessor}
       updateItem={getCategoryConfigurableProductOptions}
       products={products}
@@ -50,6 +52,7 @@ CategoryListContainer.propTypes = {
   categoryId: PropTypes.number.isRequired,
   products: PropTypes.arrayOf(ProductType),
   currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   totalCount: PropTypes.number,
   setCurrentProduct: PropTypes.func.isRequired,
   getCategoryProducts: PropTypes.func.isRequired,
@@ -69,13 +72,17 @@ const mapStateToProps = ({ categoryList, magento }) => {
     errorMessage,
     loadingMoreStatus
   } = categoryList;
-  const { default_display_currency_symbol: currencySymbol } = magento.currency;
+  const {
+    displayCurrencySymbol: currencySymbol,
+    displayCurrencyExchangeRate: currencyRate,
+  } = magento.currency;
   return {
     status,
     errorMessage,
     products: items,
     totalCount,
     currencySymbol,
+    currencyRate,
     loadingMoreStatus
   };
 };

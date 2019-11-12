@@ -3,6 +3,7 @@ import {
   number,
   string,
   oneOf,
+  oneOfType,
   arrayOf,
 } from 'prop-types';
 
@@ -16,6 +17,9 @@ export const ProductType = shape({
   type_id: oneOf(['simple', 'virtual', 'bundle', 'downloadable', 'grouped', 'configurable']),
   custom_attributes: arrayOf(shape({
     attribute_code: string,
-    value: string,
+    value: oneOfType([
+      string,
+      arrayOf(string),
+    ])
   }))
 });

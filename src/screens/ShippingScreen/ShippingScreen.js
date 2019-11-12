@@ -23,6 +23,7 @@ const ShippingScreen = ({
   errorMessage,
   shipping,
   currencySymbol,
+  currencyRate,
   billingAddress,
   navigation,
   addCartShippingInfo: _addCartShippingInfo,
@@ -43,12 +44,12 @@ const ShippingScreen = ({
     }
 
     const data = shipping.map(({
-      amount,
+      base_amount: baseAmount,
       carrier_title: carrierTitle,
       method_title: methodTitle,
       carrier_code: carrierCode,
     }) => ({
-      label: `${carrierTitle} : ${methodTitle} : ${currencySymbol + amount}`,
+      label: `${carrierTitle} : ${methodTitle} : ${currencySymbol + (baseAmount * currencyRate).toFixed(2)}`,
       key: carrierCode,
     }));
 
@@ -117,7 +118,7 @@ const ShippingScreen = ({
 
   return (
     <GenericTemplate
-      isScrollable={false}
+      scrollable={false}
       status={status}
       errorMessage={errorMessage}
       style={styles.container}
@@ -148,6 +149,7 @@ ShippingScreen.propTypes = {
   errorMessage: PropTypes.string,
   shipping: PropTypes.object,
   currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   billingAddress: PropTypes.object,
   addCartShippingInfo: PropTypes.func.isRequired,
   resetShippingState: PropTypes.func.isRequired,
@@ -165,7 +167,10 @@ const mapStateToProps = ({ checkout, magento, cart }) => {
     errorMessage,
     shipping, shippingMethodStatus: status
   } = checkout;
-  const { default_display_currency_symbol: currencySymbol } = magento.currency;
+  const {
+    displayCurrencySymbol: currencySymbol,
+    displayCurrencyExchangeRate: currencyRate,
+  } = magento.currency;
   const { cart: { billing_address: billingAddress } } = cart;
   return {
     status,
@@ -173,6 +178,7 @@ const mapStateToProps = ({ checkout, magento, cart }) => {
     errorMessage,
     shipping,
     currencySymbol,
+    currencyRate,
     billingAddress,
   };
 };

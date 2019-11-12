@@ -6,13 +6,21 @@ import { magento } from '../../../../magento';
 import { ImageSlider, ImageSliderItem, GenericTemplate } from '../../../../components';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
+import { ProductType } from '../../../../types';
+import { getValueFromAttribute } from '../../../../utils';
 
 const SliderContainer = ({
   /**
-   * Currently selected product sku
+   * Currently opened product sku
    * used in connect function
    */
   sku,
+  /**
+   * If product type === `configurable`,
+   * and user has selected options, this will
+   * point to one of the children
+   */
+  selectedProduct,
   /**
    * @redux status of the images loaded or not
    */
@@ -33,10 +41,14 @@ const SliderContainer = ({
   console.log('^^^^^^^^^^^^^^^^');
   console.log('SliderContainer', slider);
   const theme = useContext(ThemeContext);
+  const selectedProductImage = selectedProduct && getValueFromAttribute(selectedProduct, 'image');
+  if (selectedProductImage) {
+    slider.unshift(new ImageSliderItem('', selectedProduct));
+  }
 
   return (
     <GenericTemplate
-      isScrollable={false}
+      scrollable={false}
       status={status}
       errorMessage={errorMessage}
       style={style}
@@ -60,6 +72,7 @@ const styles = StyleSheet.create({
 
 SliderContainer.propTypes = {
   sku: PropTypes.string.isRequired,
+  selectedProduct: PropTypes.oneOfType([null, ProductType]),
   status: PropTypes.oneOf(Object.values(Status)).isRequired, // redux
   errorMessage: PropTypes.string, // redux
   slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)), // redux
@@ -70,6 +83,7 @@ SliderContainer.defaultProps = {
   errorMessage: '',
   style: {},
   slider: null,
+  selectedProduct: null,
 };
 
 const mapStateToProps = ({ product }, ownProps) => {

@@ -2,14 +2,16 @@ export const isNumber = input => typeof input === 'number' && /^-?[\d.]+(?:e-?\d
 
 /**
  * If non-number is supplied return 0
- * If Integer is supplied return number as it is
- * If decimal number is supplied format it to two deciaml places
+ * If number is supplied return a number
+ * equal to price multiplied with currencyRate
+ * formatted to two decimall places
  *
  * @param {price} number which need to be formatted
+ * @param {currencyRate} number multiplying factor
  */
-export const formatPrice = (price) => {
+export const formatPrice = (price, currencyRate) => {
   if (!isNumber(price)) {
     return 0;
   }
-  return (Number.isInteger(price) ? price : parseFloat(price.toFixed(2)));
+  return parseFloat((price * currencyRate).toFixed(2));
 };

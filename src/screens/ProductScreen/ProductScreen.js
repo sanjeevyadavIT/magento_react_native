@@ -60,8 +60,6 @@ const ProductScreen = ({
       price,
     }
   } = params;
-  console.log('---');
-  console.log('Selected Product', selectedProduct);
 
   useEffect(() => {
     calculatedSelectedProduct();
@@ -91,20 +89,22 @@ const ProductScreen = ({
 
   return (
     <GenericTemplate
-      isScrollable
+      scrollable
       status={Status.SUCCESS}
       footer={(
         <CTAButtons
           sku={sku}
           productType={productType}
-          selectedProduct={selectedProduct}
           selectedOptions={selectedOptions}
           quantity={quantity}
         />
       )}
     >
       <View style={styles.imageContainer(theme.dimens.productDetailPageSliderHeight)}>
-        <SliderContainer sku={sku} />
+        <SliderContainer
+          sku={sku}
+          selectedProduct={selectedProduct}
+        />
       </View>
       <View style={styles.defaultStyles(theme)}>
         <PriceContainer

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   StyleSheet,
+  Keyboard,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -32,11 +33,13 @@ const ForgetPasswordScreen = ({
   }), []);
 
   const onResetPress = () => {
+    Keyboard.dismiss();
+    if (email === '') return;
     _resetPassword(email);
   };
 
   const renderMessages = () => {
-    const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('forgetPasswordScreen.emailSent'): "";
+    const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('forgetPasswordScreen.emailSent') : "";
     const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
     return (
       <MessageView
@@ -70,7 +73,7 @@ const ForgetPasswordScreen = ({
         autoCorrect={false}
         containerStyle={styles.emailOffset(theme)}
         value={email}
-        editable={!status.LOADING}
+        editable={!(status === status.LOADING)}
         onSubmitEditing={onResetPress}
         onChangeText={setEmail}
       />

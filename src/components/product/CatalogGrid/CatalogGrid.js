@@ -23,6 +23,10 @@ const CatalogGrid = ({
    */
   currencySymbol,
   /**
+   * Exchange rate multiplier as compared to base currency price
+   */
+  currencyRate,
+  /**
    * Show all products in single row
    */
   showHorizontalList,
@@ -80,6 +84,7 @@ const CatalogGrid = ({
       stateAccessor={stateAccessor}
       updateItem={updateItem}
       currencySymbol={currencySymbol}
+      currencyRate={currencyRate}
       onPress={onItemClick}
     />
   );
@@ -100,7 +105,7 @@ const CatalogGrid = ({
 
   return (
     <GenericTemplate
-      isScrollable={false}
+      scrollable={false}
       status={status}
       errorMessage={errorMessage}
       style={styles.container(theme)}
@@ -127,6 +132,7 @@ const styles = StyleSheet.create({
 CatalogGrid.propTypes = {
   products: PropTypes.arrayOf(ProductType),
   currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   stateAccessor: PropTypes.string.isRequired,
   showHorizontalList: PropTypes.bool.isRequired,
   columnCount: PropTypes.number,

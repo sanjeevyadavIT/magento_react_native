@@ -1,7 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+} from 'react';
+import {
+  View,
+  StyleSheet,
+  Keyboard,
+} from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { signIn, resetAuthState } from '../../store/actions';
 import {
   Button,
@@ -26,7 +36,10 @@ const SignInScreen = ({
     email: '',
     password: '',
   });
+  const [secureEntry, toggleSecureEntry] = useState(true);
   const theme = useContext(ThemeContext);
+  // Reference
+  const passwordInputRef = useRef();
 
   useEffect(() => {
     if (status === Status.SUCCESS) {
@@ -40,6 +53,8 @@ const SignInScreen = ({
   }), []);
 
   const onSignInPress = () => {
+    Keyboard.dismiss();
+    if (!(form.email && form.password)) return;
     // TODO: Do validation
     _signIn(form.email, form.password);
   };
@@ -47,6 +62,7 @@ const SignInScreen = ({
   const renderButtons = () => (
     <>
       <Button
+        disabled={!(form.email && form.password)}
         loading={status === Status.LOADING}
         title={translate('signInScreen.signInButton')}
         style={[styles.defaultMargin(theme)]}
@@ -85,18 +101,34 @@ const SignInScreen = ({
         keyboardType="email-address"
         autoCorrect={false}
         value={form.email}
+        autoCapitalize="none"
+        editable={!(status === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, email: value })}
+        returnKeyType={translate('common.keyboardNext')}
+        onSubmitEditing={() => passwordInputRef.current.focus()}
       />
       <TextInput
         autoCapitalize="none"
-        secureTextEntry
+        secureTextEntry={secureEntry}
+        rightIcon={(
+          <Icon
+            name={secureEntry ? 'eye' : 'eye-off'}
+            size={20}
+            style={styles.iconPadding(theme)}
+            color={theme.colors.labelColor}
+            onPress={() => toggleSecureEntry(!secureEntry)}
+          />
+        )}
         textContentType="password"
+        editable={!(status === Status.LOADING)}
         placeholder={translate('signInScreen.passwordHint')}
         autoCorrect={false}
         containerStyle={styles.defaultMargin(theme)}
         value={form.password}
         onChangeText={value => setValues({ ...form, password: value })}
+        assignRef={(component) => { passwordInputRef.current = component; }}
+        onSubmitEditing={onSignInPress}
       />
       {renderButtons()}
       {renderMessage()}
@@ -114,6 +146,9 @@ const styles = StyleSheet.create({
   center: {
     alignSelf: 'center',
   },
+  iconPadding: theme => ({
+    padding: theme.spacing.small
+  })
 });
 
 SignInScreen.navigationOptions = {

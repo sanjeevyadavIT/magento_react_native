@@ -2,16 +2,21 @@ import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import { GenericTemplate, Text, Image, Card } from '../../components';
+import {
+  Text,
+  Card,
+  Image,
+  Price,
+  GenericTemplate,
+} from '../../components';
 import { getOrderDetail, getOrderedProductInfo } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { getProductThumbnailFromAttribute } from '../../utils';
+import { priceSignByCode } from '../../utils/price';
 
 // TODO: Show product image in place of placeholder
-// TODO: Handle orderId, when coming for OrderAcknowledgementPage, fetch data
-// TODO: use currency symbol from magento reducer
 const OrderDetailScreen = ({
   status,
   products,
@@ -23,7 +28,7 @@ const OrderDetailScreen = ({
 }) => {
   const orderId = navigation.getParam('orderId', -1); // Used when coming from OrderAcknowledgementPage
   const item = navigation.getParam('item', null) || orderDetail;
-  const currency = '$';
+  const currencySymbol = priceSignByCode((item && item.order_currency_code) || '$');
   const theme = useContext(ThemeContext);
 
   useEffect(() => {
@@ -48,11 +53,27 @@ const OrderDetailScreen = ({
       <View>
         <Text>{product.name}</Text>
         <Text>{`${translate('common.sku')}: ${product.sku}`}</Text>
-        <Text>
-          {`${translate('common.price')}: ${currency} ${product.price}`}
-        </Text>
+        <View style={styles.row}>
+          <Text>
+            {`${translate('common.price')}: `}
+          </Text>
+          <Price
+            basePrice={product.price}
+            currencySymbol={currencySymbol}
+            currencyRate={1}
+          />
+        </View>
         <Text>{`${translate('common.quantity')}: ${product.qty_ordered}`}</Text>
-        <Text>{`${translate('common.subTotal')}: ${currency} ${product.row_total}`}</Text>
+        <View style={styles.row}>
+          <Text>
+            {`${translate('common.subTotal')}: `}
+          </Text>
+          <Price
+            basePrice={product.row_total}
+            currencySymbol={currencySymbol}
+            currencyRate={1}
+          />
+        </View>
       </View>
     </Card>
   );
@@ -60,14 +81,46 @@ const OrderDetailScreen = ({
   const renderFooter = () => (
     <>
       <Text>{`${translate('orderScreen.orderStatus')}: ${item.status}`}</Text>
-      <Text>
-        {`${translate('common.subTotal')}: ${currency} ${item.subtotal}`}
-      </Text>
-      <Text>{`${translate('orderScreen.shippingAndHandling')}: ${currency} ${item.shipping_amount}`}</Text>
-      <Text>{`${translate('common.discount')}: - ${currency} ${Math.abs(item.discount_amount)}`}</Text>
-      <Text style={{ fontWeight: 'bold' }}>
-        {`${translate('common.grandTotal')}: ${currency} ${item.total_due}`}
-      </Text>
+      <View style={styles.row}>
+        <Text>
+          {`${translate('common.subTotal')}: `}
+        </Text>
+        <Price
+          basePrice={item.subtotal}
+          currencySymbol={currencySymbol}
+          currencyRate={1}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>
+          {`${translate('common.shippingAndHandling')}: `}
+        </Text>
+        <Price
+          basePrice={item.shipping_amount}
+          currencySymbol={currencySymbol}
+          currencyRate={1}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>
+          {`${translate('common.discount')}: - `}
+        </Text>
+        <Price
+          basePrice={Math.abs(item.discount_amount)}
+          currencySymbol={currencySymbol}
+          currencyRate={1}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>
+          {`${translate('common.grandTotal')}: `}
+        </Text>
+        <Price
+          basePrice={item.total_due}
+          currencySymbol={currencySymbol}
+          currencyRate={1}
+        />
+      </View>
     </>
   );
 
@@ -89,7 +142,7 @@ const OrderDetailScreen = ({
 
   return (
     <GenericTemplate
-      isScrollable={false}
+      scrollable={false}
       status={!item ? status : Status.SUCCESS}
       errorMessage={errorMessage}
     >
@@ -110,9 +163,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: theme.dimens.orderDetailImageWidth,
     height: theme.dimens.orderDetailImageHeight,
+    marginRight: theme.spacing.small,
   }),
   infoContainer: {
     flex: 1,
+  },
+  row: {
+    flexDirection: 'row'
   }
 });
 

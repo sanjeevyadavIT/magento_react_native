@@ -18,24 +18,24 @@ MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 RE
 ## :camera: Screenshots
 
 <div style="display:flex;" >
-  <img  src="screenshots/1.png" width="19%" >
-  <img style="margin-left:10px;" src="screenshots/2.png" width="19%" >
-  <img style="margin-left:10px;" src="screenshots/3.png" width="19%" >
-  <img style="margin-left:10px;" src="screenshots/4.png" width="19%" >
-  <img style="margin-left:10px;" src="screenshots/5.png" width="19%" >
+  <img  src=".github/screenshots/1.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/2.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/3.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/4.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/5.png" width="19%" >
 </div>
 
 ## 📲 Getting Started
 
 Follow this [Documentation](https://github.com/alexakasanjeev/magento_react_native/wiki/Setup) for detailed step by step instructions on how to setup project locally and run the project.
 
-## ❤️ Contributing [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
+## 🙋‍ Contribute [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 
-:star: If you like what you see, star us on GitHub.
+If you find a bug, or if you have an idea for this app, please file an issue [here](https://github.com/alexakasanjeev/magento_react_native/issues). We really appreciate feedback and inputs!
 
-Finding bugs, sending pull requests or improving docs - any contribution is welcome and highly appreciated. To get started, head over to our [contribution guidelines](CONTRIBUTING.md). Thanks!
+🇬🇧🇫🇷🇪🇸🇨🇳 You may also contribute with translations with our online tool [crowdin](https://crwd.in/magento-react-native).
 
-See also the list of [contributors](https://github.com/alexakasanjeev/magento_react_native/contributors) who participated in this project.
+More information on contributing, head over to our [contribution guidelines](CONTRIBUTING.md). 
 
 ## 👨‍💻 Contributors ✨
 
@@ -63,6 +63,12 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 * [troublediehard/magento-react-native](https://github.com/troublediehard/magento-react-native) created by [Dmytro Portenko](https://github.com/troublediehard)
 * [README-Template.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) by [Billie Thompson](https://github.com/PurpleBooth)
+
+## ♥️ Donate
+
+If this project help you, or to help acclerate development, you can give me a cup of coffee :smile: :
+
+<a href="https://www.buymeacoffee.com/alexakasanjeev" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ## 🛡 License
 

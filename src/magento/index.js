@@ -171,5 +171,6 @@ function createError(name, message) {
 
 // Constants
 export const CUSTOMER_TOKEN = 'customerToken';
+export const CURRENCY_CODE = 'currencyCode';
 
 export const magento = new Magento();

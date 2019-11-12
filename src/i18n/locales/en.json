@@ -5,6 +5,7 @@
     "cancel": "Cancel",
     "continue": "Continue",
     "back": "Back",
+    "keyboardNext": "next",
     "total": "Total",
     "subTotal": "Subtotal",
     "grandTotal": "Grand Total",
@@ -16,6 +17,7 @@
     "select": "Select",
     "save": "Save",
     "email": "Email",
+    "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
       "aToZ": "name: A to Z",
       "zToA": "name: Z to A",
@@ -95,16 +97,17 @@
     "continueButton": "Continue Shopping",
     "orderPlaced": "Order Confirmed",
     "orderPlacedMessage": "You will receive an order confirmation email shortly.",
-    "shippingAndHandling": "Shipping & Handling",
     "orderTotal": "Order Total",
     "shipTo": "Ship to",
-    "orderCreated": "Created"
+    "orderCreated": "Created",
+    "orderEmptyMessage": "You haven't placed any order"
   },
   "paymentScreen": {
     "title": "Payment",
     "noPaymentAvailable": "Currently no payment method is available!",
     "selectOption": "Select a payment option",
-    "placeOrderButton": "Place order"
+    "placeOrderButton": "Place order",
+    "youWillBeCharged": "You will be charged"
   },
   "productScreen": {
     "title": "Product detail",
@@ -153,5 +156,9 @@
     "resetButtonTitle":"Reset My Password",
     "passwordRecovery" :"Password Recovery",
     "emailSent": "If there is an account associated with your mail, you will receive an email with a link to reset your password."
+  },
+  "settingScreen": {
+    "title": "Settings",
+    "changeCurrency": "Change currency"
   }
 }

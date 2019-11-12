@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getCartItemProduct, removeItemFromCart } from '../../../../store/actions';
 import { getProductThumbnailFromAttribute } from '../../../../utils';
-import { Card, Image, Text } from '../../..';
+import {
+  Card,
+  Image,
+  Text,
+  Price,
+} from '../../..';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 
@@ -15,6 +20,7 @@ const CartListItem = ({
   item,
   product: productDetail,
   currencySymbol,
+  currencyRate,
   getCartItemProduct: _getCartItemProduct,
   removeItemFromCart: _removeItemFromCart,
 }) => {
@@ -50,7 +56,14 @@ const CartListItem = ({
       />
       <View style={styles.infoContainer}>
         <Text>{item.name}</Text>
-        <Text>{`${translate('common.price')}: ${currencySymbol}${productDetail ? productDetail.price : item.price}`}</Text>
+        <View style={styles.row}>
+          <Text>{`${translate('common.price')} : `}</Text>
+          <Price
+            basePrice={productDetail ? productDetail.price : item.price}
+            currencyRate={currencyRate}
+            currencySymbol={currencySymbol}
+          />
+        </View>
         <Text>{`${translate('common.quantity')} : ${item.qty}`}</Text>
       </View>
       <Icon name="close" size={30} color="#000" onPress={onPressRemoveItem} />
@@ -75,13 +88,17 @@ const styles = StyleSheet.create({
   }),
   infoContainer: {
     flex: 1,
-  }
+  },
+  row: {
+    flexDirection: 'row'
+  },
 });
 
 CartListItem.propTypes = {
   item: PropTypes.object.isRequired,
   product: PropTypes.object,
   currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   getCartItemProduct: PropTypes.func.isRequired,
   removeItemFromCart: PropTypes.func.isRequired,
 };

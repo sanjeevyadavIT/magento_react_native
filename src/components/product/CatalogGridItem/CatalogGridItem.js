@@ -16,14 +16,14 @@ import { ProductType } from '../../../types';
 
 const CatalogGridItem = ({
 /**
-   * No of colums in `CatalogGrid` being displayed,
-   * will effect `CatalogGridItem` width.
+   * Number of colums in `CatalogGrid` being displayed,
+   * is specified, will effect `CatalogGridItem` component width.
    *
    * If `CatalogGrid` render items in horizonatl list,
    * then `CatalogGridItem` has fixed width defined by `theme.dimens.catalogGridItemWidth`
    *
    * else if `CatalogGrid` render items in a Grid of row * coulumnCount
-   * then `CataloggridItem` width is (total_screen_width) / (columnCount)
+   * then `CatalogridItem` width is (total_screen_width) / (columnCount)
    */
   columnCount,
   /**
@@ -34,6 +34,10 @@ const CatalogGridItem = ({
    * Currency symbol to be displayed along side price.
    */
   currencySymbol,
+  /**
+   * Exchange rate multiplier as compared to base currency price
+   */
+  currencyRate,
   /**
    * Item Click Handler
    */
@@ -102,7 +106,11 @@ const CatalogGridItem = ({
       />
       <View style={styles.detail(theme)}>
         <Text ellipsizeMode="tail" numberOfLines={2}>{product.name}</Text>
-        <Price {...getPrice()} currencySymbol={currencySymbol} />
+        <Price
+          {...getPrice()}
+          currencyRate={currencyRate}
+          currencySymbol={currencySymbol}
+        />
       </View>
     </Card>
   );
@@ -126,6 +134,7 @@ const styles = StyleSheet.create({
 CatalogGridItem.propTypes = {
   product: ProductType.isRequired,
   currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   stateAccessor: PropTypes.string.isRequired,
   updateItem: PropTypes.func.isRequired,
   onPress: PropTypes.func.isRequired,

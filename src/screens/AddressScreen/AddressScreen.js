@@ -240,7 +240,7 @@ const AddressScreen = ({
 
   return (
     <GenericTemplate
-      isScrollable
+      scrollable
       status={Status.SUCCESS}
       style={styles.container}
       footer={renderButtons()}

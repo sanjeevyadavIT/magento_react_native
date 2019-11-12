@@ -15,13 +15,18 @@ import { ThemeContext } from '../../../theme';
 const GenericTemplate = ({
   children,
   footer,
-  isScrollable,
+  /**
+   * If set true, `ScrollView` would be root element
+   * rather than normal `View`
+   */
+  scrollable,
   status,
   errorMessage,
   style,
 }) => {
   const theme = useContext(ThemeContext);
-  const ViewGroup = isScrollable ? ScrollView : View;
+  const ViewGroup = scrollable ? ScrollView : View;
+
   if (status === Status.ERROR) {
     return <MessageView type="error" message={errorMessage} />;
   }
@@ -33,8 +38,8 @@ const GenericTemplate = ({
   return (
     <SafeAreaView style={styles.container(theme)}>
       <StatusBar
-        barStyle="default"
-        backgroundColor={theme.colors.primaryDark}
+        barStyle={theme.key === 'dark' ? 'light-content' : 'dark-content'}
+        backgroundColor={theme.colors.statusBar}
       />
       <ViewGroup style={[styles.content, style]}>
         {children}
@@ -62,7 +67,7 @@ GenericTemplate.propTypes = {
     PropTypes.arrayOf(PropTypes.element)
   ]).isRequired,
   footer: PropTypes.element,
-  isScrollable: PropTypes.bool.isRequired,
+  scrollable: PropTypes.bool.isRequired,
   status: PropTypes.oneOf(Object.values(Status)),
   errorMessage: PropTypes.string,
   style: PropTypes.object,

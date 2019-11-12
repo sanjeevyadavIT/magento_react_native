@@ -17,6 +17,7 @@ const FeaturedCategoryList = ({
   errorMessage,
   products,
   currencySymbol,
+  currencyRate,
   getFeaturedProducts: loadProducts,
   setCurrentProduct: _setCurrentProduct,
 }) => {
@@ -28,6 +29,7 @@ const FeaturedCategoryList = ({
       showHorizontalList
       products={products}
       currencySymbol={currencySymbol}
+      currencyRate={currencyRate}
       stateAccessor={stateAccessor}
       loadFactor={categoryId}
       status={status}
@@ -46,6 +48,7 @@ FeaturedCategoryList.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,
   currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
   categoryId: PropTypes.number.isRequired,
   setCurrentProduct: PropTypes.func.isRequired,
   getFeaturedProducts: PropTypes.func.isRequired,
@@ -57,13 +60,21 @@ FeaturedCategoryList.defaultProps = {
 };
 
 const mapStateToProps = ({ home, magento }, { categoryId }) => {
-  const { status, errorMessage, items } = home[categoryId];
-  const { default_display_currency_symbol: currencySymbol } = magento.currency;
+  const {
+    status,
+    errorMessage,
+    items,
+  } = home[categoryId];
+  const {
+    displayCurrencySymbol: currencySymbol,
+    displayCurrencyExchangeRate: currencyRate,
+  } = magento.currency;
   return {
     status,
     errorMessage,
     products: items,
     currencySymbol,
+    currencyRate,
   };
 };
 
