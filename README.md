@@ -9,7 +9,7 @@
 ![React Native](https://img.shields.io/badge/react--native-0.61.2-brightgreen)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/alexakasanjeev/magento_react_native/issues)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-informational.svg)](https://join.slack.com/t/magecart/shared_invite/enQtNjU5MTc5ODM4NjE0LTBjZThjMjg3Zjk0MzJlNGE1MDRkMDBlYThjNzA3NzRlMTViMGVhYzY1ZGUyOTIzZWQ1ZjAyMzk1OTIzZTFlMTM)
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 [![Tweet](https://img.shields.io/twitter/url/https/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Falexakasanjeev%2Fmagento_react_native&via=alexakasanjeev&text=MageCart%3A%20E-commerce%20app%20for%20Magento%202.x%20written%20in%20React%20Native)
 
 
@@ -52,6 +52,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/harshitmahendra"><img src="https://avatars0.githubusercontent.com/u/34433141?v=4" width="100px;" alt="harshit mahendra"/><br /><sub><b>harshit mahendra</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Aharshitmahendra" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/imrankhanjoya"><img src="https://avatars3.githubusercontent.com/u/2832270?v=4" width="100px;" alt="imrankhanjoya"/><br /><sub><b>imrankhanjoya</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Aimrankhanjoya" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/MehmoodArib"><img src="https://avatars2.githubusercontent.com/u/32247358?v=4" width="100px;" alt="Mehmood Arib"/><br /><sub><b>Mehmood Arib</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3AMehmoodArib" title="Bug reports">🐛</a> <a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=MehmoodArib" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/piyush9015"><img src="https://avatars2.githubusercontent.com/u/24675931?v=4" width="100px;" alt="piyush9015"/><br /><sub><b>piyush9015</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Apiyush9015" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
