@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { GenericTemplate, CategoryTree } from '../../../../components';
 import { ThemeContext } from '../../../../theme';
+import Status from '../../../../magento/Status';
 
 /**
  * Container to show categories
+ *
+ * Note(For Future): If SettingScreen has extar setting apart from change currency,
+ * showFooter can always be set to true. And no need to access currency
+ * data from reducer.
  *
  * @param {Object} props              -
  * @param {string} props.status       -
@@ -15,12 +21,18 @@ const CategoryTreeContainer = ({
   status,
   errorMessage,
   categories,
+  currencies,
 }) => {
   const theme = useContext(ThemeContext);
 
   const renderChildren = () => {
     if (categories) {
-      return <CategoryTree categories={categories} />;
+      return (
+        <CategoryTree
+          showFooter={currencies.length > 1}
+          categories={categories}
+        />
+      );
     }
     return <></>;
   };
@@ -43,16 +55,33 @@ const styles = {
   })
 };
 
-CategoryTreeContainer.propTypes = {};
+CategoryTreeContainer.propTypes = {
+  status: PropTypes.oneOf(Object.values(Status)).isRequired,
+  errorMessage: PropTypes.string,
+  currencies: PropTypes.arrayOf(PropTypes.string),
+  categories: PropTypes.arrayOf(PropTypes.object),
+};
 
-CategoryTreeContainer.defaultPorps = {};
+CategoryTreeContainer.defaultProps = {
+  currencies: [],
+  categories: [],
+  errorMessage: '',
+};
 
-const mapStateToProps = ({ categoryTree }) => {
-  const { status, errorMessage, children_data: categories } = categoryTree;
+const mapStateToProps = ({ categoryTree, magento }) => {
+  const {
+    status,
+    errorMessage,
+    children_data: categories
+  } = categoryTree;
+  const {
+    available_currency_codes: currencies,
+  } = magento.currency;
   return {
     status,
     errorMessage,
     categories,
+    currencies,
   };
 };
 

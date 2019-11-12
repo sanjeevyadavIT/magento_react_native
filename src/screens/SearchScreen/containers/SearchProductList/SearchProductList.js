@@ -2,14 +2,17 @@ import { connect } from 'react-redux';
 import { CatalogGrid } from '../../../../components';
 import { setCurrentProduct, getSearchProducts } from '../../../../store/actions';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ search, magento }) => {
   const {
     searchText,
     products,
     totalCount,
     loadingMore,
-  } = state.search;
-  const { default_display_currency_symbol: currencySymbol } = state.magento.currency;
+  } = search;
+  const {
+    displayCurrencySymbol: currencySymbol,
+    displayCurrencyExchangeRate: currencyRate,
+  } = magento.currency;
   const canLoadMoreProducts = products ? products.length < totalCount : false;
   const showHorizontalList = false;
   const columnCount = 2;
@@ -20,6 +23,7 @@ const mapStateToProps = (state) => {
     columnCount,
     products,
     currencySymbol,
+    currencyRate,
     canLoadMoreProducts,
     loadingMore,
     stateAccessor: 'search',

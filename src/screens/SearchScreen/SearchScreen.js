@@ -130,13 +130,13 @@ class Search extends React.Component {
               <Text>{translate('common.sortOption.aToZ')}</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('1')}>
-              <Text>{translate('searchScreen.sortOption.zToA')}</Text>
+              <Text>{translate('common.sortOption.zToA')}</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('2')}>
-              <Text>{translate('searchScreen.sortOption.priceLowToHigh')}</Text>
+              <Text>{translate('common.sortOption.priceLowToHigh')}</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('3')}>
-              <Text>{translate('searchScreen.sortOption.priceHighToLow')}</Text>
+              <Text>{translate('common.sortOption.priceHighToLow')}</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -182,7 +182,7 @@ class Search extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         {this.renderContent()}
-        {this.renderSortDialog()}
+        {/* {this.renderSortDialog()} */}
       </View>
     );
   }
@@ -199,14 +199,14 @@ const styles = {
   })
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ search }) => {
   const {
     products,
     totalCount,
     loading,
     loadingMore,
     error
-  } = state.search;
+  } = search;
   const canLoadMoreContent = products ? products.length < totalCount : false;
   return {
     products,

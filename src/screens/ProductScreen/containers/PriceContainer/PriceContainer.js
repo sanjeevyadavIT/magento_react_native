@@ -19,6 +19,7 @@ const PriceContainer = ({
    * @redux currency symbol to display along side price
    */
   currencySymbol,
+  currencyRate,
 }) => {
   const getPriceProps = () => {
     const priceProps = {
@@ -41,7 +42,11 @@ const PriceContainer = ({
   };
 
   return (
-    <Price {...getPriceProps()} currencySymbol={currencySymbol} />
+    <Price
+      {...getPriceProps()}
+      currencySymbol={currencySymbol}
+      currencyRate={currencyRate}
+    />
   );
 };
 
@@ -52,6 +57,7 @@ PriceContainer.propTypes = {
   sku: PropTypes.string.isRequired,
   children: PropTypes.arrayOf(ProductType), // redux
   currencySymbol: PropTypes.string.isRequired, // redux
+  currencyRate: PropTypes.number.isRequired, // redux
 };
 
 PriceContainer.defaultProps = {
@@ -68,10 +74,14 @@ const mapStateToProps = ({ product, magento }, { sku }) => {
       }
     }
   } = product;
-  const { currency: { default_display_currency_symbol: currencySymbol } } = magento;
+  const {
+    displayCurrencySymbol: currencySymbol,
+    displayCurrencyExchangeRate: currencyRate,
+  } = magento.currency;
 
   return {
     currencySymbol,
+    currencyRate,
     children,
   };
 };

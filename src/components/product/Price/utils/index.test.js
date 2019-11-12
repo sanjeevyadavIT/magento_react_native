@@ -75,43 +75,46 @@ describe('Price component util functions', () => {
   });
 
   describe('formatPrice()', () => {
-    test('return same number when Integer number is supplied', () => {
-      // Setup
-      const input = 12345;
-      const expectedResponse = 12345;
-
-      // Exercise
-      const response = formatPrice(input);
-
-      // Verify
-      expect(response).toBe(expectedResponse);
-    });
-
-    test('return decimal fixed at two digit when Floting number supplied', () => {
+    test('return decimal fixed at two digit', () => {
       // Setup
       const input = 101.4523;
+      const currencyRate = 1;
       const expectedResponse = 101.45;
 
       // Exercise
-      const response = formatPrice(input);
+      const response = formatPrice(input, currencyRate);
 
       // Verify
       expect(response).toBe(expectedResponse);
     });
 
-    test('return 0 if string, objects, array passed', () => {
+    test('return twice the value when exchange rate is 2', () => {
+      // Setup
+      const input = 101.4523;
+      const currencyRate = 2;
+      const expectedResponse = 202.90;
+
+      // Exercise
+      const response = formatPrice(input, currencyRate);
+
+      // Verify
+      expect(response).toBe(expectedResponse);
+    });
+
+    test('return 0 if string, objects, array passed as price', () => {
       // Setup
       const integerStrInput = '101';
       const decimalStrInput = '101.4523';
       const objectInput = { price: 123 };
       const arrayInput = [123];
+      const currencyRate = 1;
       const expectedResponse = 0;
 
       // Exercise
-      const integerStrResponse = formatPrice(integerStrInput);
-      const decimalStrResponse = formatPrice(decimalStrInput);
-      const objectResponse = formatPrice(objectInput);
-      const arrayResponse = formatPrice(arrayInput);
+      const integerStrResponse = formatPrice(integerStrInput, currencyRate);
+      const decimalStrResponse = formatPrice(decimalStrInput, currencyRate);
+      const objectResponse = formatPrice(objectInput, currencyRate);
+      const arrayResponse = formatPrice(arrayInput, currencyRate);
 
       // Verify
       expect(integerStrResponse).toBe(expectedResponse);
