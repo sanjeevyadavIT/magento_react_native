@@ -1,4 +1,4 @@
-import { MAGENTO } from '../../constants';
+import { MAGENTO, CHANGE_CURRENCY } from '../../constants';
 import Status from '../../magento/Status';
 
 const INITIAL_STATE = {
@@ -67,6 +67,16 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         ...state,
         status: Status.ERROR,
         errorMessage: payload.errorMessage,
+      };
+    case CHANGE_CURRENCY:
+      return {
+        ...state,
+        currency: {
+          ...state.currency,
+          displayCurrencyCode: payload.currencyCode,
+          displayCurrencySymbol: payload.currencySymbol,
+          displayCurrencyExchangeRate: payload.currencyExchangeRate,
+        }
       };
     case MAGENTO.COUNTRIES_LOADING:
       return {

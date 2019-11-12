@@ -1,9 +1,10 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
-import { magento, CUSTOMER_TOKEN } from '../../magento';
+import { magento, CUSTOMER_TOKEN, CURRENCY_CODE } from '../../magento';
 import Status from '../../magento/Status';
 import { MAGENTO, USER_LOGGED_IN_STATUS } from '../../constants';
 import { magentoOptions } from '../../../config/magento';
+import { priceSignByCode } from '../../utils/price';
 
 // worker saga: Add Description
 function* initMagento() {
@@ -57,28 +58,30 @@ function* getCurrency() {
   try {
     yield put({ type: MAGENTO.CURRENCY_LOADING });
     const currencyData = yield call({ content: magento, fn: magento.guest.getCurrency });
-    const displayCurrency = getCurrencyToBeDisplayed(currencyData);
+    const displayCurrency = yield getCurrencyToBeDisplayed(currencyData);
     yield put({ type: MAGENTO.CURRENCY_SUCCESS, payload: { currencyData, displayCurrency } });
   } catch (error) {
     yield put({ type: MAGENTO.CURRENCY_FAILURE, payload: { errorMessage: error.message } });
   }
 }
 
-const getCurrencyToBeDisplayed = (currencyData) => {
+function* getCurrencyToBeDisplayed(currencyData) {
   let code = currencyData.default_display_currency_code;
   let symbol = currencyData.default_display_currency_symbol;
   let rate = 1;
 
-  if (currencyData.base_currency_code !== currencyData.default_display_currency_code && 'exchange_rates' in currencyData) {
-    const exchangeRate = currencyData.exchange_rates.find(_exchangeRate => _exchangeRate.currency_to === code);
-    if (exchangeRate && 'rate' in exchangeRate) {
-      rate = exchangeRate.rate;
-    }
-  }
   if ('available_currency_codes' in currencyData && currencyData.available_currency_codes.length > 0) {
-    // TODO(1): Check if user has selected any other currency, from AsyncStorage key
-    // and set code, symbol and rate according to that
-    // TODO(2): If not and currency get from RNLocalize is supported, then set that and update AsyncStorage
+    const previousSelectedCurrencyCode = yield AsyncStorage.getItem(CURRENCY_CODE);
+    if (previousSelectedCurrencyCode && previousSelectedCurrencyCode !== code && previousSelectedCurrencyCode in currencyData.available_currency_codes) {
+      code = previousSelectedCurrencyCode;
+      symbol = priceSignByCode(code);
+    }
+    // TODO: If not and currency get from RNLocalize is supported, then set that and update AsyncStorage
+  }
+
+  const exchangeRate = currencyData.exchange_rates.find(_exchangeRate => _exchangeRate.currency_to === code);
+  if (exchangeRate && 'rate' in exchangeRate) {
+    rate = exchangeRate.rate;
   }
 
   return {

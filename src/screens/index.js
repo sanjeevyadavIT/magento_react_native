@@ -14,6 +14,7 @@ import OrderAcknowledgementScreen from './OrderAcknowledgementScreen';
 import OrderDetailScreen from './OrderDetailScreen';
 import OrdersScreen from './OrdersScreen';
 import ForgetPasswordScreen from './ForgetPasswordScreen';
+import SettingScreen from './SettingScreen/SettingScreen';
 
 export {
   HomeScreen,
@@ -32,4 +33,5 @@ export {
   OrderDetailScreen,
   OrdersScreen,
   ForgetPasswordScreen,
+  SettingScreen,
 };

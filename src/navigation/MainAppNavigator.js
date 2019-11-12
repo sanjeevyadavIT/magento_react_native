@@ -15,6 +15,7 @@ import {
   OrdersScreen,
   OrderDetailScreen,
   OrderAcknowledgementScreen,
+  SettingScreen
 } from '../screens';
 import {
 
@@ -35,7 +36,8 @@ import {
   NAVIGATION_ADDRESS_SCREEN,
   NAVIGATION_SHIPPING_SCREEN,
   NAVIGATION_PAYMENT_SCREEN,
-  NAVIGATION_ORDER_CONFIRMATION_SCREEN
+  NAVIGATION_ORDER_CONFIRMATION_SCREEN,
+  NAVIGATION_SETTING_SCREEN,
 } from './types';
 
 const MainAppNavigator = createStackNavigator(
@@ -54,12 +56,14 @@ const MainAppNavigator = createStackNavigator(
     [NAVIGATION_SHIPPING_SCREEN]: ShippingScreen,
     [NAVIGATION_PAYMENT_SCREEN]: PaymentScreen,
     [NAVIGATION_ORDER_CONFIRMATION_SCREEN]: OrderAcknowledgementScreen,
-    [NAVIGATION_FORGOT_PASSWORD_SCREEN]:ForgetPasswordScreen,
+    [NAVIGATION_FORGOT_PASSWORD_SCREEN]: ForgetPasswordScreen,
+    [NAVIGATION_SETTING_SCREEN]: SettingScreen,
   },
   {
     defaultNavigationOptions: defaultHeader,
   }
 );
+
 // Disable drawer on all screen except Home Page
 MainAppNavigator.navigationOptions = ({ navigation }) => {
   let drawerLockMode = 'unlocked';
