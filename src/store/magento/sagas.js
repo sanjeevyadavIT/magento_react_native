@@ -67,7 +67,7 @@ function* getCurrency() {
 
 function* getCurrencyToBeDisplayed(currencyData) {
   let code = currencyData.default_display_currency_code;
-  let symbol = currencyData.default_display_currency_symbol;
+  let symbol = currencyData.default_display_currency_symbol || priceSignByCode(code);
   let rate = 1;
 
   if ('available_currency_codes' in currencyData && currencyData.available_currency_codes.length > 0) {
