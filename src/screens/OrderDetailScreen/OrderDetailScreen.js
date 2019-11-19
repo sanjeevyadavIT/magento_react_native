@@ -39,14 +39,17 @@ const OrderDetailScreen = ({
 
 
   useEffect(() => {
-    item && item.items.forEach((item) => {
-      if (!(item.sku in products)) {
-        _getOrderedProductInfo(item.sku);
-      }
-    });
+    if (item) {
+      item.items.forEach((_item) => {
+        if (!(_item.sku in products)) {
+          _getOrderedProductInfo(_item.sku);
+        }
+      });
+    }
   }, [item]);
 
-  const getImageUrl = (sku) => (sku in products ? getProductThumbnailFromAttribute(products[sku]) : '');
+  const getImageUrl = sku => (sku in products ? getProductThumbnailFromAttribute(products[sku]) : null);
+
   const renderItem = ({ item: product }) => (
     <Card style={styles.card(theme)}>
       <Image style={styles.imageStyle(theme)} source={{ uri: getImageUrl(product.sku) }} />
@@ -187,12 +190,12 @@ OrderDetailScreen.propTypes = {
   errorMessage: PropTypes.string,
   getOrderDetail: PropTypes.func.isRequired,
   getOrderedProductInfo: PropTypes.func.isRequired,
+  products: PropTypes.object.isRequired,
 };
 
 OrderDetailScreen.defaultProps = {
   errorMessage: '',
   orderDetail: null,
-  product: undefined,
 };
 
 const mapStateToProps = ({ checkout, account }) => {
