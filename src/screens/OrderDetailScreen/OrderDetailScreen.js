@@ -9,19 +9,22 @@ import {
   Price,
   GenericTemplate,
 } from '../../components';
-import { getOrderDetail } from '../../store/actions';
+import { getOrderDetail, getOrderedProductInfo } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { getProductThumbnailFromAttribute } from '../../utils';
 import { priceSignByCode } from '../../utils/price';
 
 // TODO: Show product image in place of placeholder
 const OrderDetailScreen = ({
   status,
+  products,
   orderDetail,
   errorMessage,
   navigation,
   getOrderDetail: _getOrderDetail,
+  getOrderedProductInfo: _getOrderedProductInfo,
 }) => {
   const orderId = navigation.getParam('orderId', -1); // Used when coming from OrderAcknowledgementPage
   const item = navigation.getParam('item', null) || orderDetail;
@@ -34,11 +37,22 @@ const OrderDetailScreen = ({
     }
   }, []);
 
-  console.log('^', item);
+
+  useEffect(() => {
+    if (item) {
+      item.items.forEach((_item) => {
+        if (!(_item.sku in products)) {
+          _getOrderedProductInfo(_item.sku);
+        }
+      });
+    }
+  }, [item]);
+
+  const getImageUrl = sku => (sku in products ? getProductThumbnailFromAttribute(products[sku]) : null);
 
   const renderItem = ({ item: product }) => (
     <Card style={styles.card(theme)}>
-      <Image style={styles.imageStyle(theme)} source={{ uri: 'https://via.placeholder.com/100' }} />
+      <Image style={styles.imageStyle(theme)} source={{ uri: getImageUrl(product.sku) }} />
       <View>
         <Text>{product.name}</Text>
         <Text>{`${translate('common.sku')}: ${product.sku}`}</Text>
@@ -147,11 +161,16 @@ const styles = StyleSheet.create({
     marginHorizontal: theme.spacing.small,
     marginBottom: theme.spacing.small
   }),
+
   imageStyle: theme => ({
+    resizeMode: 'contain',
     width: theme.dimens.orderDetailImageWidth,
     height: theme.dimens.orderDetailImageHeight,
     marginRight: theme.spacing.small,
   }),
+  infoContainer: {
+    flex: 1,
+  },
   row: {
     flexDirection: 'row'
   }
@@ -170,6 +189,8 @@ OrderDetailScreen.propTypes = {
   orderDetail: PropTypes.object,
   errorMessage: PropTypes.string,
   getOrderDetail: PropTypes.func.isRequired,
+  getOrderedProductInfo: PropTypes.func.isRequired,
+  products: PropTypes.object.isRequired,
 };
 
 OrderDetailScreen.defaultProps = {
@@ -177,9 +198,11 @@ OrderDetailScreen.defaultProps = {
   orderDetail: null,
 };
 
-const mapStateToProps = ({ checkout }) => {
+const mapStateToProps = ({ checkout, account }) => {
+  const { products } = account;
   const { order: orderDetail, orderDetailStatus: status, errorMessage } = checkout;
   return {
+    products,
     status,
     orderDetail,
     errorMessage,
@@ -188,4 +211,5 @@ const mapStateToProps = ({ checkout }) => {
 
 export default connect(mapStateToProps, {
   getOrderDetail,
+  getOrderedProductInfo,
 })(OrderDetailScreen);

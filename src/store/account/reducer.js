@@ -9,6 +9,7 @@ const initialState = {
   errorMessage: '',
   ordersErrorMessage: '',
 
+  products: {},
   orders: [],
   customer: null,
 };
@@ -51,11 +52,19 @@ export default (state = initialState, { type, payload }) => {
         orderStatus: Status.ERROR,
         ordersErrorMessage: payload.errorMessage,
       };
+    case MAGENTO.GET_ORDERED_PRODUCT_INFO_SUCCESS:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          [payload.sku]: payload.product,
+        }
+      };
     case USER_LOGGED_IN_STATUS:
       return {
         ...state,
         userLoggedInStatus: payload.status,
-      }
+      };
     case ACTION_USER_LOGOUT:
       return initialState;
     default:
