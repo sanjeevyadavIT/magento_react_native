@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`magento actions changeCurrency() 1`] = `
+Object {
+  "payload": Object {
+    "currencyCode": "USD",
+    "currencyExchangeRate": 1,
+    "currencySymbol": "$",
+  },
+  "type": "CHANGE_CURRENCY",
+}
+`;
+
+exports[`magento actions initializeApp() 1`] = `
+Object {
+  "type": "MAGENTO_INIT_APP_REQUEST",
+}
+`;

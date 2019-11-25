@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`categoryList actions getCategoryConfigurableProductOptions() 1`] = `
+Object {
+  "payload": Object {
+    "sku": "WH02-S",
+  },
+  "type": "MAGENTO_CATEGORY_UPDATE_CONF_PRODUCT_REQUEST",
+}
+`;
+
+exports[`categoryList actions getCategoryProducts() 1`] = `
+Object {
+  "payload": Object {
+    "categoryId": "23",
+    "offset": 20,
+    "sortOrder": "",
+  },
+  "type": "MAGENTO_CATEGORY_PRODUCTS_REQUEST",
+}
+`;
+
+exports[`categoryList actions setNewCategory() 1`] = `
+Object {
+  "payload": Object {
+    "categoryId": "23",
+  },
+  "type": "SET_NEW_CATEGORY",
+}
+`;

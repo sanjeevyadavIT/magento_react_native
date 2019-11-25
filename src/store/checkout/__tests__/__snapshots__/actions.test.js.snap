@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`checkout actions addCartBillingAddress() 1`] = `
+Object {
+  "payload": Object {
+    "address": Object {
+      "address": Object {
+        "city": "west world",
+        "country_id": "US",
+        "firstname": "Sanjeev",
+        "lastname": "Yadav",
+        "postcode": 123456,
+        "region": "California",
+        "region_code": "CA",
+        "region_id": 2,
+        "same_as_billing": 1,
+        "street": Array [
+          "Elm street",
+        ],
+        "telephone": 123456789,
+      },
+      "useForShipping": true,
+    },
+  },
+  "type": "MAGENTO_ADD_CART_BILLING_ADDRESS_REQUEST",
+}
+`;
+
+exports[`checkout actions addCartShippingInfo() 1`] = `
+Object {
+  "payload": Object {
+    "address": Object {
+      "addressInformation": Object {
+        "billing_address": Object {
+          "city": "West world",
+          "country_id": "US",
+          "email": "sanjeev@gmail.com",
+          "firstname": "Sanjeev",
+          "lastname": "Yadav",
+          "postcode": 123456,
+          "region": "California",
+          "region_code": "CA",
+          "region_id": 2,
+          "street": "Elm Street",
+          "telephone": 123456789,
+        },
+        "extension_attributes": Object {},
+        "shipping_address": Object {
+          "city": "West world",
+          "country_id": "US",
+          "email": "sanjeev@gmail.com",
+          "firstname": "Sanjeev",
+          "lastname": "Yadav",
+          "postcode": 123456,
+          "region": "California",
+          "region_code": "CA",
+          "region_id": 2,
+          "street": "Elm Street",
+          "telephone": 123456789,
+        },
+        "shipping_carrier_code": "FREE",
+        "shipping_method_code": "FREE",
+      },
+    },
+  },
+  "type": "MAGENTO_ADD_CART_SHIPPING_INFO_REQUEST",
+}
+`;
+
+exports[`checkout actions getCountries() 1`] = `
+Object {
+  "type": "MAGENTO_COUNTRIES_REQUEST",
+}
+`;
+
+exports[`checkout actions getOrderDetail() 1`] = `
+Object {
+  "payload": Object {
+    "orderId": 33,
+  },
+  "type": "MAGENTO_ORDER_DETAIL_REQUEST",
+}
+`;
+
+exports[`checkout actions getShippingMethod() 1`] = `
+Object {
+  "payload": Object {
+    "address": Object {
+      "address": Object {
+        "city": "West world",
+        "country_id": "US",
+        "firstname": "Sanjeev",
+        "lastname": "Yadav",
+        "postcode": 123456,
+        "region": "California",
+        "region_code": "CA",
+        "region_id": 2,
+        "street": Array [
+          "Elm street",
+        ],
+        "telephone": 123456789,
+      },
+    },
+  },
+  "type": "MAGENTO_GET_SHIPPING_METHOD_REQUEST",
+}
+`;
+
+exports[`checkout actions placeCartOrder() 1`] = `
+Object {
+  "payload": Object {
+    "paymentInformation": Object {
+      "billingAddress": Object {
+        "city": "West world",
+        "country_id": "US",
+        "email": "sanjeev@gmail.com",
+        "firstname": "Sanjeev",
+        "lastname": "Yadav",
+        "postcode": 123456,
+        "region": "California",
+        "region_code": "CA",
+        "region_id": 2,
+        "street": "Elm Street",
+        "telephone": 123456789,
+      },
+      "paymentMethod": Object {
+        "method": "COD",
+      },
+    },
+  },
+  "type": "MAGENTO_PLACE_CART_ORDER_REQUEST",
+}
+`;
+
+exports[`checkout actions resetCheckoutAddressState() 1`] = `
+Object {
+  "type": "RESET_CHECKOUT_ADDRESS_STATE",
+}
+`;
+
+exports[`checkout actions resetCheckoutState() 1`] = `
+Object {
+  "type": "RESET_CHECKOUT_STATE",
+}
+`;
+
+exports[`checkout actions resetPaymentState() 1`] = `
+Object {
+  "type": "RESET_PAYMENT_STATE",
+}
+`;
+
+exports[`checkout actions resetShippingState() 1`] = `
+Object {
+  "type": "RESET_SHIPPING_STATE",
+}
+`;

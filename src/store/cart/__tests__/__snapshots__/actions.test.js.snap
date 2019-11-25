@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cart actions createQuoteId() 1`] = `
+Object {
+  "type": "MAGENTO_CREATE_QUOTE_ID_REQUEST",
+}
+`;
+
+exports[`cart actions getCartItemProduct() 1`] = `
+Object {
+  "payload": "WH02-S",
+  "type": "MAGENTO_CART_ITEM_PRODUCT_REQUEST",
+}
+`;
+
+exports[`cart actions getCustomerCart() 1`] = `
+Object {
+  "type": "MAGENTO_CUSTOMER_CART_REQUEST",
+}
+`;
+
+exports[`cart actions removeItemFromCart() 1`] = `
+Object {
+  "payload": Object {
+    "itemId": "WH02-S",
+  },
+  "type": "MAGENTO_REMOVE_ITEM_FROM_CART_REQUEST",
+}
+`;

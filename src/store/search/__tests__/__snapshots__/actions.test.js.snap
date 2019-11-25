@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`search actions getSearchProducts() 1`] = `
+Object {
+  "payload": Object {
+    "offset": 0,
+    "searchInput": "Jacket",
+    "sortOrder": "",
+  },
+  "type": "MAGENTO_SEARCH_PRODUCTS_REQUEST",
+}
+`;

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`product actions addToCart() 1`] = `
+Object {
+  "payload": Object {
+    "cartItem": Object {
+      "qty": 1,
+      "quote_id": 23,
+      "sku": "WH02-S",
+    },
+  },
+  "type": "MAGENTO_ADD_TO_CART_REQUEST",
+}
+`;
+
+exports[`product actions getConfigurableChildren() 1`] = `
+Object {
+  "payload": Object {
+    "sku": "WH02-S",
+  },
+  "type": "MAGENTO_CONFIGURABLE_CHILDREN_REQUEST",
+}
+`;
+
+exports[`product actions getConfigurableProductOptions() 1`] = `
+Object {
+  "payload": Object {
+    "sku": "WH02-S",
+  },
+  "type": "MAGENTO_CONF_OPTIONS_REQUEST",
+}
+`;
+
+exports[`product actions getProductMedia() 1`] = `
+Object {
+  "payload": Object {
+    "sku": "WH02-S",
+  },
+  "type": "MAGENTO_PRODUCT_MEDIA_REQUEST",
+}
+`;
+
+exports[`product actions resetAddToCartState() 1`] = `
+Object {
+  "payload": Object {
+    "sku": "WH02-S",
+  },
+  "type": "RESET_ADD_TO_CART_STATE",
+}
+`;
+
+exports[`product actions setCurrentProduct() 1`] = `
+Object {
+  "payload": Object {
+    "children": null,
+    "productType": "simple",
+    "sku": "WH02-S",
+  },
+  "type": "UI_OPEN_SELECTED_PRODUCT_REQUEST",
+}
+`;

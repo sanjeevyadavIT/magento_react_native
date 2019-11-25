@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`home actions getFeaturedProducts() 1`] = `
+Object {
+  "payload": Object {
+    "categoryId": "2",
+  },
+  "type": "MAGENTO_FEATURED_CATEGORY_PRODUCTS_REQUEST",
+}
+`;
+
+exports[`home actions getHomeConfigurableProductOptions() 1`] = `
+Object {
+  "payload": Object {
+    "sku": "WH02-S",
+  },
+  "type": "MAGENTO_HOME_UPDATE_CONF_PRODUCT_REQUEST",
+}
+`;

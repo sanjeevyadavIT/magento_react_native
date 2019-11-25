@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth actions resetAuthState() 1`] = `
+Object {
+  "type": "RESET_AUTH_STATE",
+}
+`;
+
+exports[`auth actions resetPassword() 1`] = `
+Object {
+  "payload": Object {
+    "email": "sanjeev@gmail.com",
+  },
+  "type": "MAGENTO_RESET_PASSWORD_REQUEST",
+}
+`;
+
+exports[`auth actions signIn() 1`] = `
+Object {
+  "payload": Object {
+    "email": "sanjeev@gmail.com",
+    "password": "123456789",
+  },
+  "type": "MAGENTO_SIGN_IN_REQUEST",
+}
+`;
+
+exports[`auth actions signUp() 1`] = `
+Object {
+  "payload": Object {
+    "customer": Object {
+      "email": "sajeev@gmail.com",
+      "firstname": "Sanjeev",
+      "lastname": "Yadav",
+    },
+    "password": "123456789",
+  },
+  "type": "MAGENTO_SIGN_UP_REQUEST",
+}
+`;

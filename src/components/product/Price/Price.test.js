@@ -1,1 +1,5 @@
-// TODO: Add test for <Price /> component
+describe('<Price />', () => {
+  test.skip('smoke test', () => {
+
+  });
+});

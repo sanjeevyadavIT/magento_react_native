@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account actions getCurrentCustomer() 1`] = `
+Object {
+  "type": "MAGENTO_CURRENT_USER_REQUEST",
+}
+`;
+
+exports[`account actions getOrderList() 1`] = `
+Object {
+  "payload": Object {
+    "customerId": 2,
+  },
+  "type": "MAGENTO_GET_ORDERS_REQUEST",
+}
+`;
+
+exports[`account actions getOrderedProductInfo() 1`] = `
+Object {
+  "payload": Object {
+    "sku": "WH02-S",
+  },
+  "type": "MAGENTO_GET_ORDERED_PRODUCT_INFO_REQUEST",
+}
+`;
+
+exports[`account actions logout() 1`] = `
+Object {
+  "type": "USER_LOGOUT",
+}
+`;
