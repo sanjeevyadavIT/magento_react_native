@@ -23,10 +23,12 @@ import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 import { ThemeContext } from '../../theme';
 import { priceSignByCode } from '../../utils/price';
+import { PaymentTotalProps } from '../../types';
 
 // TODO: Support `Cash On Delivery` Option, its Configuration name is `cashondelivery`
 const PaymentScreen = ({
-  payment,
+  totals,
+  paymentMethods,
   orderStatus,
   billingAddress,
   navigation,
@@ -45,6 +47,27 @@ const PaymentScreen = ({
     // componentDidUnmount: Reset Payment related logic in Redux
     _resetPaymentState();
   }), []);
+
+  useEffect(() => {
+    if (orderStatus === Status.SUCCESS) {
+      _createQuoteId();
+      const resetAction = StackActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate(
+            { routeName: NAVIGATION_HOME_SCREEN }
+          ),
+          NavigationActions.navigate(
+            {
+              routeName: NAVIGATION_ORDER_CONFIRMATION_SCREEN,
+              params: { status: Status.SUCCESS }
+            },
+          ),
+        ],
+      });
+      navigation.dispatch(resetAction);
+    }
+  }, [orderStatus]);
 
   const placeOrder = () => {
     if (!paymentCode) return;
@@ -71,11 +94,11 @@ const PaymentScreen = ({
   };
 
   const renderPaymentMethods = () => {
-    if (!payment || !payment.payment_methods.length) {
+    if (!paymentMethods.length) {
       return <Text>{translate('paymentScreen.noPaymentAvailable')}</Text>;
     }
 
-    const data = payment.payment_methods.map(({ code, title }) => ({
+    const data = paymentMethods.map(({ code, title }) => ({
       label: title,
       key: code
     }));
@@ -92,13 +115,12 @@ const PaymentScreen = ({
 
   const renderOrderSummary = () => {
     const {
-      totals: {
-        base_currency_code: baseCurrencyCode,
-        base_subtotal: baseSubTotal,
-        base_shipping_incl_tax: shippingTotal,
-        base_grand_total: grandTotal,
-      }
-    } = payment;
+      base_currency_code: baseCurrencyCode,
+      base_subtotal: baseSubTotal,
+      base_shipping_incl_tax: shippingTotal,
+      base_tax_amount: taxAmount,
+      base_grand_total: grandTotal,
+    } = totals;
 
     return (
       <View style={styles.defaultMargin(theme)}>
@@ -118,6 +140,18 @@ const PaymentScreen = ({
             currencyRate={currencyRate}
           />
         </View>
+        {
+          taxAmount !== 0 && (
+            <View style={styles.row}>
+              <Text>{`${translate('common.tax')}: `}</Text>
+              <Price
+                basePrice={taxAmount}
+                currencySymbol={currencySymbol}
+                currencyRate={currencyRate}
+              />
+            </View>
+          )
+        }
         <View style={styles.row}>
           <Text>{`${translate('common.grandTotal')}: `}</Text>
           <Price
@@ -150,22 +184,6 @@ const PaymentScreen = ({
     />
   );
 
-  if (orderStatus === Status.SUCCESS) {
-    _createQuoteId();
-    const resetAction = StackActions.reset({
-      index: 1,
-      actions: [
-        NavigationActions.navigate(
-          { routeName: NAVIGATION_HOME_SCREEN }
-        ),
-        NavigationActions.navigate(
-          { routeName: NAVIGATION_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } },
-        ),
-      ],
-    });
-    navigation.dispatch(resetAction);
-  }
-
   return (
     <GenericTemplate
       scrollable={false}
@@ -194,8 +212,29 @@ PaymentScreen.navigationOptions = {
 };
 
 PaymentScreen.propTypes = {
-  billingAddress: PropTypes.object,
-  payment: PropTypes.object,
+  billingAddress: PropTypes.shape({
+    id: PropTypes.number,
+    region: PropTypes.string,
+    region_id: PropTypes.number,
+    region_code: PropTypes.string,
+    country_id: PropTypes.string,
+    street: PropTypes.arrayOf(PropTypes.string),
+    telephone: PropTypes.string,
+    postcode: PropTypes.string,
+    city: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    customer_id: PropTypes.number,
+    email: PropTypes.string,
+    same_as_billing: PropTypes.number,
+    save_in_address_book: PropTypes.number
+  }),
+  paymentMethods: PropTypes.arrayOf(PropTypes.shape({
+    code: PropTypes.string,
+    title: PropTypes.string,
+  })),
+  totals: PaymentTotalProps,
+  navigation: PropTypes.object.isRequired,
   orderStatus: PropTypes.oneOf(Object.values(Status)).isRequired,
   placeCartOrder: PropTypes.func.isRequired,
   createQuoteId: PropTypes.func.isRequired,
@@ -208,12 +247,23 @@ PaymentScreen.propTypes = {
 
 PaymentScreen.defaultProps = {
   billingAddress: {},
-  payment: [],
+  paymentMethods: [],
+  totals: {},
 };
 
 const mapStateToProps = ({ checkout, cart, magento }) => {
-  const { payment, orderStatus } = checkout;
-  const { cart: { billing_address: billingAddress } } = cart;
+  const {
+    payment: {
+      totals,
+      payment_methods: paymentMethods,
+    },
+    orderStatus,
+  } = checkout;
+  const {
+    cart: {
+      billing_address: billingAddress
+    }
+  } = cart;
   const {
     base_currency_symbol: baseCurrencySymbol,
     displayCurrencyCode: currencyCode,
@@ -221,7 +271,8 @@ const mapStateToProps = ({ checkout, cart, magento }) => {
     displayCurrencyExchangeRate: currencyRate,
   } = magento.currency;
   return {
-    payment,
+    totals,
+    paymentMethods,
     orderStatus,
     billingAddress,
     baseCurrencySymbol,

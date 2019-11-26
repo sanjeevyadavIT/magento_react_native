@@ -117,20 +117,20 @@ describe('checkout actions', () => {
     // Setup
     const paymentInformation = {
       billingAddress: {
-        region: 'California',
-        region_id: 2,
-        region_code: 'CA',
-        country_id: 'US',
-        street: 'Elm Street',
-        telephone: 123456789,
-        postcode: 123456,
         city: 'West world',
+        country_id: 'US',
+        email: 'sanjeev@gmail.com',
         firstname: 'Sanjeev',
         lastname: 'Yadav',
-        email: 'sanjeev@gmail.com',
+        postcode: '123456',
+        region: 'California',
+        region_code: 'CA',
+        region_id: 2,
+        street: ['Elm Street'],
+        telephone: '123456789',
       },
       paymentMethod: {
-        method: 'COD'
+        method: 'checkmo'
       }
     };
 

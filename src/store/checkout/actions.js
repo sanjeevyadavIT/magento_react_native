@@ -27,7 +27,9 @@ export const addCartShippingInfo = address => ({
 
 export const placeCartOrder = paymentInformation => ({
   type: MAGENTO.PLACE_CART_ORDER_REQUEST,
-  payload: { paymentInformation },
+  payload: {
+    paymentInformation
+  },
 });
 
 export const getOrderDetail = orderId => ({
