@@ -43,10 +43,21 @@ function* getOrderedProductInfo({ payload }) {
   }
 }
 
+function* addAccountAddress({ payload }) {
+  try {
+    yield put({ type: MAGENTO.ADD_ACCOUNT_ADDRESS_LOADING });
+    const customer = yield call({ content: magento, fn: magento.admin.updateCustomerData }, payload.customerId, payload.customerData);
+    yield put({ type: MAGENTO.ADD_ACCOUNT_ADDRESS_SUCCESS, payload: { customer } });
+  } catch (error) {
+    yield put({ type: MAGENTO.ADD_ACCOUNT_ADDRESS_FAILURE, payload: { errorMessage: error.message } });
+  }
+}
+
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
   yield takeLatest(MAGENTO.CURRENT_USER_REQUEST, getCurrentUser);
   yield takeLatest(ACTION_USER_LOGOUT, clearCustomerAccessToken);
   yield takeLatest(MAGENTO.GET_ORDERS_REQUEST, getOrdersForCustomer);
+  yield takeLatest(MAGENTO.ADD_ACCOUNT_ADDRESS_REQUEST, addAccountAddress);
   yield takeEvery(MAGENTO.GET_ORDERED_PRODUCT_INFO_REQUEST, getOrderedProductInfo);
 }

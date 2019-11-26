@@ -29,7 +29,8 @@
     "homeCmsBlockId": "HOME CMS BLOCK ID ERROR",
     "homeCmsBlockIdMessage": "Please Refer to Step 2 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
     "integrationTokenRequired": "INTEGRATION TOKEN REQUIRED ERROR",
-    "integrationTokenRequiredMessage": "Please refer to Step 1 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup"
+    "integrationTokenRequiredMessage": "Please refer to Step 1 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
+    "emptyFieldsMessage": "Please fill all fields"
   },
   "modalSelect": {
     "scroll": "Scrollable options",
@@ -38,6 +39,7 @@
   "accountScreen": {
     "title": "Account",
     "myOrderButton": "My Orders",
+    "myAddressButton": "My Address",
     "logoutButton": "Logout"
   },
   "addressScreen": {
@@ -60,7 +62,11 @@
     "cityLabel": "City",
     "cityHint": "City",
     "zipCodeLabel": "Zip Code",
-    "zipCodeHint": "Zip Code"
+    "zipCodeHint": "Zip Code",
+    "addressSaveMessage": "Address Saved Successfully!"
+  },
+  "editAddressScreen": {
+    "title": "Edit Address"
   },
   "homeScreen": {
     "title": "MageCart",

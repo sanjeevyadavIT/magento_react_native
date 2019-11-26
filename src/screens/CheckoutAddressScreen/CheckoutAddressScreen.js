@@ -25,7 +25,7 @@ import { translate } from '../../i18n';
 
 // TODO: Use KeyboardAvoidingView
 // TODO: Refactor code and make it optimize, it's higly messy
-const AddressScreen = ({
+const CheckoutAddressScreen = ({
   countries,
   countryStatus,
   countryErrorMessage,
@@ -318,11 +318,11 @@ const styles = StyleSheet.create({
   }
 });
 
-AddressScreen.navigationOptions = {
+CheckoutAddressScreen.navigationOptions = {
   title: translate('addressScreen.title')
 };
 
-AddressScreen.propTypes = {
+CheckoutAddressScreen.propTypes = {
   countries: PropTypes.array,
   countryStatus: PropTypes.oneOf(Object.values(Status)).isRequired,
   countryErrorMessage: PropTypes.string,
@@ -339,7 +339,7 @@ AddressScreen.propTypes = {
   resetCheckoutAddressState: PropTypes.func.isRequired,
 };
 
-AddressScreen.defaultProps = {
+CheckoutAddressScreen.defaultProps = {
   countries: [],
   customer: {},
   errorMessage: '',
@@ -368,4 +368,4 @@ export default connect(mapStateToProps, {
   getShippingMethod,
   getCustomerCart,
   resetCheckoutAddressState,
-})(AddressScreen);
+})(CheckoutAddressScreen);
