@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, ViewPropTypes } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -22,6 +22,11 @@ const ModalSelect = ({
    * when no option is selected
    */
   label,
+  /**
+   * If selectedkey is provided, it will be used to show
+   * selected value in ModalSelect
+   */
+  selectedKey,
   /**
    * Text to append along with the label,
    * when item is selected
@@ -55,11 +60,26 @@ const ModalSelect = ({
     ...data
   ];
 
+  useEffect(() => {
+    if (selectedKey) {
+      const option = dataWithLabel.find(_item => _item.key === selectedKey);
+      if (!option) return; // TODO: Show default first value
+      if (attribute) {
+        setValue(`${attribute}: ${option.label}`);
+      } else {
+        setValue(`${option.label}`);
+      }
+    }
+  }, [selectedKey]);
+
   const _onChange = (option) => {
-    if (attribute) {
-      setValue(`${attribute}: ${option.label}`);
-    } else {
-      setValue(`${option.label}`);
+    if (!selectedKey) {
+      // Manually set the selected value in drop down
+      if (attribute) {
+        setValue(`${attribute}: ${option.label}`);
+      } else {
+        setValue(`${option.label}`);
+      }
     }
     if (onChange) {
       onChange(option.key, option);
@@ -72,6 +92,7 @@ const ModalSelect = ({
       disabled={disabled}
       data={dataWithLabel}
       onChange={_onChange}
+      selectedKey={selectedKey}
       keyExtractor={item => item.id}
       scrollViewAccessibilityLabel={translate('modalSelect.scroll')}
       cancelButtonAccessibilityLabel={translate('modalSelect.cancelButton')}
@@ -117,6 +138,11 @@ ModalSelect.propTypes = {
     ]).isRequired,
     label: PropTypes.string.isRequired,
   })).isRequired,
+  selectedKey: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    null,
+  ]),
   label: PropTypes.string.isRequired,
   attribute: PropTypes.string,
   onChange: PropTypes.func,
@@ -129,6 +155,7 @@ ModalSelect.propTypes = {
 ModalSelect.defaultProps = {
   disabled: false,
   onChange: () => { },
+  selectedKey: null,
   attribute: '',
   style: {},
   textStyle: {},

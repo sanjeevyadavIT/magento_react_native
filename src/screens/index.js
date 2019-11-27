@@ -1,11 +1,12 @@
-import HomeScreen from './HomeScreen';
-import DrawerScreen from './DrawerScreen';
-import ProductScreen from './ProductScreen';
-import SearchScreen from './SearchScreen';
+import AccountScreen from './AccountScreen';
 import CartScreen from './CartScreen';
 import CategoryListScreen from './CategoryListScreen';
-import AccountScreen from './AccountScreen';
-import AddressScreen from './AddressScreen';
+import CheckoutAddressScreen from './CheckoutAddressScreen';
+import DrawerScreen from './DrawerScreen';
+import EditAccountAddressScreen from './EditAccountAddressScreen/EditAccountAddressScreen';
+import HomeScreen from './HomeScreen';
+import ProductScreen from './ProductScreen';
+import SearchScreen from './SearchScreen';
 import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import ShippingScreen from './ShippingScreen';
@@ -17,14 +18,15 @@ import ForgetPasswordScreen from './ForgetPasswordScreen';
 import SettingScreen from './SettingScreen/SettingScreen';
 
 export {
+  AccountScreen,
+  CartScreen,
+  CategoryListScreen,
+  CheckoutAddressScreen,
+  EditAccountAddressScreen,
   HomeScreen,
   DrawerScreen,
   ProductScreen,
   SearchScreen,
-  CartScreen,
-  CategoryListScreen,
-  AccountScreen,
-  AddressScreen,
   SignInScreen,
   SignUpScreen,
   ShippingScreen,

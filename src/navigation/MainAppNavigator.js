@@ -6,8 +6,9 @@ import {
   SearchScreen,
   CartScreen,
   CategoryListScreen,
+  EditAccountAddressScreen,
   AccountScreen,
-  AddressScreen,
+  CheckoutAddressScreen,
   SignInScreen,
   SignUpScreen,
   ShippingScreen,
@@ -17,9 +18,7 @@ import {
   OrderAcknowledgementScreen,
   SettingScreen
 } from '../screens';
-import {
 
-} from '../components';
 import {
   defaultHeader,
   NAVIGATION_FORGOT_PASSWORD_SCREEN,
@@ -33,7 +32,8 @@ import {
   NAVIGATION_ORDERS_SCREEN,
   NAVIGATION_ORDER_DETAIL_SCREEN,
   NAVIGATION_CART_SCREEN,
-  NAVIGATION_ADDRESS_SCREEN,
+  NAVIGATION_CHECKOUT_ADDRESS_SCREEN,
+  NAVIGATION_EDIT_ACCOUNT_ADDRESS_SCREEN,
   NAVIGATION_SHIPPING_SCREEN,
   NAVIGATION_PAYMENT_SCREEN,
   NAVIGATION_ORDER_CONFIRMATION_SCREEN,
@@ -52,12 +52,13 @@ const MainAppNavigator = createStackNavigator(
     [NAVIGATION_ORDER_DETAIL_SCREEN]: OrderDetailScreen,
     [NAVIGATION_PRODUCT_SCREEN]: ProductScreen,
     [NAVIGATION_CART_SCREEN]: CartScreen,
-    [NAVIGATION_ADDRESS_SCREEN]: AddressScreen,
+    [NAVIGATION_CHECKOUT_ADDRESS_SCREEN]: CheckoutAddressScreen,
     [NAVIGATION_SHIPPING_SCREEN]: ShippingScreen,
     [NAVIGATION_PAYMENT_SCREEN]: PaymentScreen,
     [NAVIGATION_ORDER_CONFIRMATION_SCREEN]: OrderAcknowledgementScreen,
     [NAVIGATION_FORGOT_PASSWORD_SCREEN]: ForgetPasswordScreen,
     [NAVIGATION_SETTING_SCREEN]: SettingScreen,
+    [NAVIGATION_EDIT_ACCOUNT_ADDRESS_SCREEN]: EditAccountAddressScreen,
   },
   {
     defaultNavigationOptions: defaultHeader,
