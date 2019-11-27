@@ -1,7 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useContext,
+} from 'react';
+import { Alert, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as RNLocalize from 'react-native-localize';
 import {
   getCountries,
   getCustomerCart,
@@ -52,17 +58,14 @@ const CheckoutAddressScreen = ({
     zipCode: '',
     state: '',
   });
-  const theme = useContext(ThemeContext);
 
-  if (customerStatus === Status.SUCCESS) {
-    if (form.firstName === '' && form.lastName === '') {
-      setValues({
-        ...form,
-        firstName: customer.firstname,
-        lastName: customer.lastname,
-      });
-    }
-  }
+  const lastNameInputRef = useRef();
+  const phoneNumberInputRef = useRef();
+  const streetAddressInputRef = useRef();
+  const cityInputRef = useRef();
+  const zipCodeInputRef = useRef();
+
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     // componentDidMount
@@ -80,15 +83,80 @@ const CheckoutAddressScreen = ({
   }, []);
 
   useEffect(() => {
+    if (customer) {
+      if (customer.addresses.length > 0) {
+        // Pre fill the fields with previous stored address
+        const address = customer.addresses[0]; // Currently the app supports only one address to be saved
+        const streetAddress = address.street[0]; // Only one input field is shown for street
+        console.log('///', address.region.region_code)
+        setValues({
+          ...form,
+          streetAddress,
+          firstName: address.firstname,
+          lastName: address.lastname,
+          phoneNumber: address.telephone,
+          city: address.city,
+          country: address.country_id,
+          zipCode: address.postcode,
+          state: address.region.region_code,
+        });
+      } else {
+        // Get the first and last name from customer object
+        setValues({
+          ...form,
+          firstName: customer.firstname,
+          lastName: customer.lastname,
+        });
+      }
+    }
+  }, [customer]);
+
+  useEffect(() => {
     // If countries is not null, set first country selected
-    if (countries != null && countries.length > 0) {
-      setValues({
-        ...form,
-        country: countries[0].id,
-        state: ''
-      });
+    if (countries && countries.length > 0) {
+      if (customer && customer.addresses.length === 0) {
+        // Get country by locale
+        const userCountryByLocale = RNLocalize.getCountry();
+        const isUserCountrySupported = countries.find(country => country.id === userCountryByLocale);
+        if (isUserCountrySupported) {
+          setValues({
+            ...form,
+            firstName: customer.firstname,
+            lastName: customer.lastname,
+            country: isUserCountrySupported.id,
+            state: '',
+          });
+        }
+      }
     }
   }, [countries]);
+
+  const onSaveAddress = () => {
+    if (!validation()) {
+      Alert.alert(translate('errors.emptyFieldsMessage'));
+      return;
+    }
+    const address = {
+      address: {
+        // id: 0,
+        ...getRegion(),
+        country_id: form.country,
+        street: [form.streetAddress],
+        telephone: form.phoneNumber,
+        postcode: form.zipCode,
+        city: form.city,
+        firstname: form.firstName,
+        lastname: form.lastName,
+        email: '',
+        same_as_billing: 1,
+      },
+      useForShipping: true,
+    };
+    if (customer) {
+      address.address.email = customer.email;
+    }
+    _addCartBillingAddress(address);
+  };
 
   // TODO: Function not optimized
   const getRegion = () => {
@@ -121,34 +189,11 @@ const CheckoutAddressScreen = ({
       || form.city === ''
       || form.zipCode === ''
       || form.state === ''
+      || form.state === undefined
+      || form.state === null
     ) return false;
 
     return true;
-  };
-
-  const onSaveAddress = () => {
-    if (!validation()) {
-      console.log('Enter valid data!');
-      return;
-    }
-    const address = {
-      address: {
-        // id: 0,
-        ...getRegion(),
-        country_id: form.country,
-        street: [form.streetAddress],
-        telephone: form.phoneNumber,
-        postcode: form.zipCode,
-        city: form.city,
-        firstname: form.firstName,
-        lastname: form.lastName,
-        // email
-        same_as_billing: 1,
-      },
-      useForShipping: true,
-    };
-    customer ? address.address.email = customer.email : '';
-    _addCartBillingAddress(address);
   };
 
   // TODO: cache this value
@@ -165,8 +210,10 @@ const CheckoutAddressScreen = ({
     return (
       <ModalSelect
         attribute={translate('addressScreen.country')}
+        disabled={billingAddressStatus === Status.LOADING}
         label={translate('addressScreen.selectCountry')}
         data={countriesData}
+        selectedKey={form.country}
         style={styles.defaultMargin(theme)}
         onChange={(itemKey, item) => setValues({ ...form, country: itemKey, state: '' })}
       />
@@ -184,21 +231,24 @@ const CheckoutAddressScreen = ({
 
         return (
           <ModalSelect
+            selectedKey={form.state}
+            disabled={billingAddressStatus === Status.LOADING}
             attribute={translate('addressScreen.state')}
             label={translate('addressScreen.selectState')}
             data={regionData}
-            style={styles.defaultMargin(theme)}
+            style={styles.lastElement(theme)}
             onChange={(itemKey, item) => setValues({ ...form, state: itemKey })}
           />
         );
       }
       return (
         <TextInput
-          containerStyle={styles.defaultMargin(theme)}
+          containerStyle={styles.lastElement(theme)}
           label={translate('addressScreen.stateLabel')}
           placeholder={translate('addressScreen.stateHint')}
           autoCorrect={false}
           value={form.state}
+          editable={!(billingAddressStatus === Status.LOADING)}
           onChangeText={value => setValues({ ...form, state: value })}
         />
       );
@@ -208,9 +258,9 @@ const CheckoutAddressScreen = ({
 
   const renderButtons = () => (
     <Button
+      disabled={!validation()}
       loading={billingAddressStatus === Status.LOADING}
       title={translate('common.save')}
-      style={[styles.defaultMargin(theme)]}
       onPress={onSaveAddress}
     />
   );
@@ -245,55 +295,76 @@ const CheckoutAddressScreen = ({
       style={styles.container}
       footer={renderButtons()}
     >
-      <Text type="label">{translate('addressScreen.formName')}</Text>
+      <Text type="label">{translate('addressScreen.billingAndShippingAddress')}</Text>
       <TextInput
-        containerStyle={styles.defaultMargin(theme)}
-        label={translate('addressScreen.firstNameLabel')}
-        placeholder={translate('addressScreen.firstNameHint')}
         autoCorrect={false}
         value={form.firstName}
+        containerStyle={styles.defaultMargin(theme)}
+        returnKeyType={translate('common.keyboardNext')}
+        label={translate('addressScreen.firstNameLabel')}
+        editable={!(billingAddressStatus === Status.LOADING)}
+        placeholder={translate('addressScreen.firstNameHint')}
+        onSubmitEditing={() => lastNameInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, firstName: value })}
       />
       <TextInput
-        containerStyle={styles.defaultMargin(theme)}
-        label={translate('addressScreen.lastNameLabel')}
-        placeholder={translate('addressScreen.lastNameHint')}
         autoCorrect={false}
         value={form.lastName}
+        editable={!(billingAddressStatus === Status.LOADING)}
+        containerStyle={styles.defaultMargin(theme)}
+        returnKeyType={translate('common.keyboardNext')}
+        label={translate('addressScreen.lastNameLabel')}
+        placeholder={translate('addressScreen.lastNameHint')}
+        onSubmitEditing={() => phoneNumberInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, lastName: value })}
+        assignRef={(component) => { lastNameInputRef.current = component; }}
       />
       <TextInput
-        containerStyle={styles.defaultMargin(theme)}
-        label={translate('addressScreen.phoneNumberLabel')}
-        placeholder={translate('addressScreen.phoneNumberHint')}
         autoCorrect={false}
         keyboardType="numeric"
         value={form.phoneNumber}
+        editable={!(billingAddressStatus === Status.LOADING)}
+        containerStyle={styles.defaultMargin(theme)}
+        returnKeyType={translate('common.keyboardNext')}
+        label={translate('addressScreen.phoneNumberLabel')}
+        placeholder={translate('addressScreen.phoneNumberHint')}
+        onSubmitEditing={() => streetAddressInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, phoneNumber: value })}
+        assignRef={(component) => { phoneNumberInputRef.current = component; }}
       />
       <TextInput
-        containerStyle={styles.defaultMargin(theme)}
-        label={translate('addressScreen.addressLabel')}
-        placeholder={translate('addressScreen.addressHint')}
         autoCorrect={false}
         value={form.streetAddress}
+        editable={!(billingAddressStatus === Status.LOADING)}
+        containerStyle={styles.defaultMargin(theme)}
+        label={translate('addressScreen.addressLabel')}
+        returnKeyType={translate('common.keyboardNext')}
+        placeholder={translate('addressScreen.addressHint')}
+        onSubmitEditing={() => cityInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, streetAddress: value })}
+        assignRef={(component) => { streetAddressInputRef.current = component; }}
       />
       <TextInput
+        value={form.city}
+        autoCorrect={false}
+        editable={!(billingAddressStatus === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         label={translate('addressScreen.cityLabel')}
+        returnKeyType={translate('common.keyboardNext')}
         placeholder={translate('addressScreen.cityHint')}
-        autoCorrect={false}
-        value={form.city}
+        onSubmitEditing={() => zipCodeInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, city: value })}
+        assignRef={(component) => { cityInputRef.current = component; }}
       />
       <TextInput
+        autoCorrect={false}
+        value={form.zipCode}
+        editable={!(billingAddressStatus === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         label={translate('addressScreen.zipCodeLabel')}
         placeholder={translate('addressScreen.zipCodeHint')}
-        autoCorrect={false}
-        value={form.zipCode}
         onChangeText={value => setValues({ ...form, zipCode: value })}
+        assignRef={(component) => { zipCodeInputRef.current = component; }}
       />
       {renderCountries()}
       {renderState()}
@@ -307,6 +378,9 @@ const styles = StyleSheet.create({
   },
   defaultMargin: theme => ({
     marginTop: theme.spacing.large,
+  }),
+  lastElement: theme => ({
+    marginVertical: theme.spacing.large,
   }),
   center: {
     alignSelf: 'center',

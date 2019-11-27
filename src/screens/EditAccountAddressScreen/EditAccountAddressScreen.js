@@ -175,6 +175,8 @@ const EditAccountAddressScreen = ({
       || form.city === ''
       || form.zipCode === ''
       || form.state === ''
+      || form.state === undefined
+      || form.state === null
     ) return false;
 
     return true;

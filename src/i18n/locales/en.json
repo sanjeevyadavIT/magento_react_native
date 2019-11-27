@@ -50,7 +50,7 @@
     "selectState": "Select State",
     "stateLabel": "Enter State",
     "stateHint": "State",
-    "formName": "Contact Information",
+    "billingAndShippingAddress": "Billing & Shipping Address",
     "firstNameLabel": "First Name",
     "firstNameHint": "First Name",
     "lastNameLabel": "Last Name",
