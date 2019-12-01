@@ -3,7 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentCustomer, logout } from '../../store/actions';
-import { NAVIGATION_ORDERS_SCREEN } from '../../navigation/types';
+import {
+  NAVIGATION_ORDERS_SCREEN,
+  NAVIGATION_EDIT_ACCOUNT_ADDRESS_SCREEN,
+} from '../../navigation/types';
 import { Text, Button, GenericTemplate } from '../../components';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -33,14 +36,43 @@ const AccountScreen = ({
   };
 
   return (
-    <GenericTemplate scrollable={false} status={status} errorMessage={errorMessage}>
-      <Text style={styles.space(theme)}>{customer && `${customer.firstname} ${customer.lastname}`}</Text>
-      <Text style={styles.space(theme)}>{customer && customer.email}</Text>
+    <GenericTemplate
+      status={status}
+      scrollable={false}
+      errorMessage={errorMessage}
+    >
+      {
+        customer && (
+          <>
+            <Text style={styles.space(theme)}>
+              {`${customer.firstname} ${customer.lastname}`}
+            </Text>
+            <Text style={styles.space(theme)}>
+              {customer.email}
+            </Text>
+          </>
+        )
+      }
       <Button
         title={translate('accountScreen.myOrderButton')}
-        onPress={() => navigation.navigate(NAVIGATION_ORDERS_SCREEN, { customerId: customer.id })}
+        onPress={() => {
+          navigation.navigate(
+            NAVIGATION_ORDERS_SCREEN,
+            { customerId: customer.id }
+          );
+        }}
+        style={styles.space(theme)}
       />
-      <View style={styles.space(theme)} />
+      <Button
+        title={translate('accountScreen.myAddressButton')}
+        onPress={() => {
+          navigation.navigate(
+            NAVIGATION_EDIT_ACCOUNT_ADDRESS_SCREEN,
+            { customerId: customer.id }
+          );
+        }}
+        style={styles.space(theme)}
+      />
       <Button
         title={translate('accountScreen.logoutButton')}
         onPress={onLogoutPress}
@@ -82,6 +114,6 @@ const mapStatetoProps = ({ account }) => {
 };
 
 export default connect(mapStatetoProps, {
+  logout,
   getCurrentCustomer,
-  logout
 })(AccountScreen);

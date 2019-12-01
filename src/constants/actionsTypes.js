@@ -57,7 +57,8 @@ export const MAGENTO = createRequestTypes('MAGENTO', [
   'PLACE_CART_ORDER', // Place cart order
   'ORDER_DETAIL', // Fetch order detail, using orderId
   'RESET_PASSWORD',
-  'GET_ORDERED_PRODUCT_INFO'
+  'GET_ORDERED_PRODUCT_INFO',
+  'ADD_ACCOUNT_ADDRESS', // Update Address associated with the account
 ], suffixTypes);
 
 // Events related to UI interaction
@@ -81,3 +82,4 @@ export const RESET_CHECKOUT_ADDRESS_STATE = 'RESET_CHECKOUT_ADDRESS_STATE';
 export const RESET_SHIPPING_STATE = 'RESET_SHIPPING_STATE';
 export const RESET_PAYMENT_STATE = 'RESET_PAYMENT_STATE';
 export const CHANGE_CURRENCY = 'CHANGE_CURRENCY';
+export const RESET_ADDRESS_STATUS = 'RESET_ADDRESS_STATUS';

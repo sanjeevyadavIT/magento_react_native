@@ -90,4 +90,6 @@ export default magento => ({
 
   getOrderDetail: orderId => magento.get(`/V1/orders/${orderId}`, undefined, undefined, ADMIN_TYPE),
 
+  updateCustomerData: (customerId, customerData) => magento.put(`/V1/customers/${customerId}`, undefined, customerData, ADMIN_TYPE),
+
 });
