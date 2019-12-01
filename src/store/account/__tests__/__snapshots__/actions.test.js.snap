@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`account actions addAccountAddress() 1`] = `
+Object {
+  "payload": Object {
+    "customerData": Object {
+      "customer": Object {
+        "addresses": Array [
+          Object {
+            "city": "dark valley",
+            "country_id": "US",
+            "firstname": "Alex",
+            "lastname": "Newman",
+            "postcode": "123456",
+            "region": "Arizona",
+            "region_id": "4",
+            "street": Array [
+              "magical avenue",
+            ],
+            "telephone": "123456789",
+          },
+        ],
+        "created_at": "2019-11-08 09:57:38",
+        "created_in": "Default Store View",
+        "disable_auto_group_change": 0,
+        "email": "Test3@gmail.com",
+        "firstname": "Alex",
+        "group_id": 1,
+        "id": 51,
+        "lastname": "Newman",
+        "store_id": 1,
+        "updated_at": "2019-11-28 10:15:49",
+        "website_id": 1,
+      },
+    },
+    "customerId": 51,
+  },
+  "type": "MAGENTO_ADD_ACCOUNT_ADDRESS_REQUEST",
+}
+`;
+
 exports[`account actions getCurrentCustomer() 1`] = `
 Object {
   "type": "MAGENTO_CURRENT_USER_REQUEST",
@@ -27,5 +66,11 @@ Object {
 exports[`account actions logout() 1`] = `
 Object {
   "type": "USER_LOGOUT",
+}
+`;
+
+exports[`account actions resetAddressStatus() 1`] = `
+Object {
+  "type": "RESET_ADDRESS_STATUS",
 }
 `;
