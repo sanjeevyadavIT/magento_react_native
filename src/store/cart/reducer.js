@@ -1,14 +1,14 @@
 import { MAGENTO, ACTION_USER_LOGOUT } from '../../constants';
 import Status from '../../magento/Status';
 
-const initialState = {
+export const INITIAL_STATE = {
   status: Status.DEFAULT,
   errorMessage: '',
   cart: {},
   products: {},
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     // TODO: Move remove item status somewhere else
     case MAGENTO.REMOVE_ITEM_FROM_CART_LOADING:
@@ -29,6 +29,7 @@ export default (state = initialState, { type, payload }) => {
     case MAGENTO.REMOVE_ITEM_FROM_CART_FAILURE:
     case MAGENTO.CUSTOMER_CART_FAILURE:
       return {
+        ...state,
         status: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
@@ -43,7 +44,7 @@ export default (state = initialState, { type, payload }) => {
       };
     }
     case ACTION_USER_LOGOUT:
-      return initialState;
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cart reducer should handle cart item product info success 1`] = `
+Object {
+  "cart": Object {},
+  "errorMessage": "",
+  "products": Object {
+    "WH02-S": Object {
+      "price": 0,
+      "sku": "WH02-S",
+      "title": "Product Title",
+    },
+  },
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`cart reducer should handle customer cart failure 1`] = `
+Object {
+  "cart": Object {},
+  "errorMessage": "Unable to access cart",
+  "products": Object {},
+  "status": "ERROR",
+}
+`;
+
+exports[`cart reducer should handle customer cart loading 1`] = `
+Object {
+  "cart": Object {},
+  "errorMessage": "",
+  "products": Object {},
+  "status": "LOADING",
+}
+`;
+
+exports[`cart reducer should handle customer cart success 1`] = `
+Object {
+  "cart": Object {
+    "mockCartId": 2,
+  },
+  "errorMessage": "",
+  "products": Object {},
+  "status": "SUCCESS",
+}
+`;
+
+exports[`cart reducer should handle remove item from cart failure 1`] = `
+Object {
+  "cart": Object {},
+  "errorMessage": "Unable to remove item from cart",
+  "products": Object {},
+  "status": "ERROR",
+}
+`;
+
+exports[`cart reducer should handle remove item from cart loading 1`] = `
+Object {
+  "cart": Object {},
+  "errorMessage": "",
+  "products": Object {},
+  "status": "LOADING",
+}
+`;
+
+exports[`cart reducer should handle user logout 1`] = `
+Object {
+  "cart": Object {},
+  "errorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`cart reducer should return the initial state 1`] = `
+Object {
+  "cart": Object {},
+  "errorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+}
+`;
