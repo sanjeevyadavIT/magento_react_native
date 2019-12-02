@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth reducer should handle action user logout 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;
+
+exports[`auth reducer should handle reset auth state 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;
+
+exports[`auth reducer should handle reset password failure 1`] = `
+Object {
+  "resetPasswordErrorMessage": "Unable to reset password, invalid email",
+  "resetPasswordStatus": "ERROR",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;
+
+exports[`auth reducer should handle reset password loading 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "LOADING",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;
+
+exports[`auth reducer should handle reset password success 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "SUCCESS",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;
+
+exports[`auth reducer should handle sign in failure 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "Unable to sign in, wrong credentials",
+  "signInStatus": "ERROR",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;
+
+exports[`auth reducer should handle sign in loading 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "",
+  "signInStatus": "LOADING",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;
+
+exports[`auth reducer should handle sign in success 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "",
+  "signInStatus": "SUCCESS",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;
+
+exports[`auth reducer should handle sign up failure 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "Unable to sign up, invalid credentials",
+  "signUpStatus": "ERROR",
+}
+`;
+
+exports[`auth reducer should handle sign up loading 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "",
+  "signUpStatus": "LOADING",
+}
+`;
+
+exports[`auth reducer should handle sign up success 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "",
+  "signUpStatus": "SUCCESS",
+}
+`;
+
+exports[`auth reducer should return the initial state 1`] = `
+Object {
+  "resetPasswordErrorMessage": "",
+  "resetPasswordStatus": "NOT_STARTED",
+  "signInErrorMessage": "",
+  "signInStatus": "NOT_STARTED",
+  "signUpErrorMessage": "",
+  "signUpStatus": "NOT_STARTED",
+}
+`;

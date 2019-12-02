@@ -2,7 +2,7 @@ import { MAGENTO, ACTION_USER_LOGOUT, RESET_AUTH_STATE } from '../../constants';
 import Status from '../../magento/Status';
 
 // TODO: SignIn need to be reset if user hit back from SignInPage
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   signInStatus: Status.DEFAULT,
   signUpStatus: Status.DEFAULT,
   resetPasswordStatus: Status.DEFAULT,
@@ -48,9 +48,6 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         signUpStatus: Status.ERROR,
         signUpErrorMessage: payload.errorMessage,
       };
-    case ACTION_USER_LOGOUT:
-    case RESET_AUTH_STATE:
-      return INITIAL_STATE;
     case MAGENTO.RESET_PASSWORD_LOADING:
       return {
         ...state,
@@ -68,6 +65,9 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         resetPasswordStatus: Status.ERROR,
         resetPasswordErrorMessage: payload.errorMessage
       };
+    case ACTION_USER_LOGOUT:
+    case RESET_AUTH_STATE:
+      return INITIAL_STATE;
     default:
       return state;
   }
