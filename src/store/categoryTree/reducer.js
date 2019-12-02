@@ -1,7 +1,7 @@
 import { MAGENTO } from '../../constants';
 import Status from '../../magento/Status';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   status: Status.LOADING,
   errorMessage: '',
 };

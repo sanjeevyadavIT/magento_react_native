@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`category tree should handle catgeory tree failure 1`] = `
+Object {
+  "errorMessage": "Unable to fetch category tree",
+  "status": "ERROR",
+}
+`;
+
+exports[`category tree should handle catgeory tree success 1`] = `
+Object {
+  "children_data": Array [],
+  "errorMessage": "",
+  "id": 2,
+  "is_active": true,
+  "level": 1,
+  "name": "Default Category",
+  "parent_id": 1,
+  "position": 1,
+  "product_count": 1181,
+  "status": "SUCCESS",
+}
+`;
+
+exports[`category tree should return the initial state 1`] = `
+Object {
+  "errorMessage": "",
+  "status": "LOADING",
+}
+`;
