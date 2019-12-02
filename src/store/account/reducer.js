@@ -6,7 +6,7 @@ import {
 } from '../../constants';
 import Status from '../../magento/Status';
 
-const initialState = {
+export const initialState = {
   userLoggedInStatus: Status.DEFAULT,
   /**
    * state that store customer data
@@ -59,6 +59,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         customer: payload.customer,
+        addressErrorMessage: '',
         addressStatus: Status.SUCCESS,
       };
     case MAGENTO.ADD_ACCOUNT_ADDRESS_FAILURE:
@@ -81,6 +82,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         orderStatus: Status.SUCCESS,
+        ordersErrorMessage: '',
         ...payload,
       };
     case MAGENTO.GET_ORDERS_FAILURE:

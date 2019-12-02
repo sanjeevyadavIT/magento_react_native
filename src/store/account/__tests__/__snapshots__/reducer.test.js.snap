@@ -1,0 +1,390 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account reducer should handle action user logout 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle add account address failure 1`] = `
+Object {
+  "addressErrorMessage": "Unable to add account address.",
+  "addressStatus": "ERROR",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle add account address loading 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "LOADING",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle add account address success 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "SUCCESS",
+  "customer": Object {
+    "addresses": Array [
+      Object {
+        "city": "dark valley",
+        "country_id": "US",
+        "firstname": "Alex",
+        "lastname": "Newman",
+        "postcode": "123456",
+        "region": "Arizona",
+        "region_id": "4",
+        "street": Array [
+          "magical avenue",
+        ],
+        "telephone": "123456789",
+      },
+    ],
+    "created_at": "2019-11-08 09:57:38",
+    "created_in": "Default Store View",
+    "disable_auto_group_change": 0,
+    "email": "Test3@gmail.com",
+    "firstname": "Alex",
+    "group_id": 1,
+    "id": 51,
+    "lastname": "Newman",
+    "store_id": 1,
+    "updated_at": "2019-11-28 10:15:49",
+    "website_id": 1,
+  },
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle current user failure 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "Unable to acess customer error",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "ERROR",
+  "userLoggedInStatus": "ERROR",
+}
+`;
+
+exports[`account reducer should handle current user loading 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "LOADING",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle current user success 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": Object {
+    "addresses": Array [
+      Object {
+        "city": "dark valley",
+        "country_id": "US",
+        "firstname": "Alex",
+        "lastname": "Newman",
+        "postcode": "123456",
+        "region": "Arizona",
+        "region_id": "4",
+        "street": Array [
+          "magical avenue",
+        ],
+        "telephone": "123456789",
+      },
+    ],
+    "created_at": "2019-11-08 09:57:38",
+    "created_in": "Default Store View",
+    "disable_auto_group_change": 0,
+    "email": "Test3@gmail.com",
+    "firstname": "Alex",
+    "group_id": 1,
+    "id": 51,
+    "lastname": "Newman",
+    "store_id": 1,
+    "updated_at": "2019-11-28 10:15:49",
+    "website_id": 1,
+  },
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "SUCCESS",
+  "userLoggedInStatus": "SUCCESS",
+}
+`;
+
+exports[`account reducer should handle get order product info success 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {
+    "MSH08-33-Blue": Object {
+      "attribute_set_id": 10,
+      "created_at": "2019-03-11 13:20:26",
+      "custom_attributes": Array [
+        Object {
+          "attribute_code": "description",
+          "value": "<p>You're out of excuses not to run, lift, or play when you own a pair of the Orestes Fitness Short. You won't complain about the high-performance polyester wicking fabric, reflective safety trim or seamless built-in comfort brief, either.</p>
+<p>&bull; Black shorts with dark gray accents.<br />&bull; Elasticized waistband with interior drawstring.<br />&bull; Ventilating mesh detailing.<br />&bull; 100% polyester and recycled polyester.<br />&bull; Machine wash cold, tumble dry low.</p>",
+        },
+        Object {
+          "attribute_code": "image",
+          "value": "/m/s/msh08-blue_main.jpg",
+        },
+        Object {
+          "attribute_code": "small_image",
+          "value": "/m/s/msh08-blue_main.jpg",
+        },
+        Object {
+          "attribute_code": "thumbnail",
+          "value": "/m/s/msh08-blue_main.jpg",
+        },
+        Object {
+          "attribute_code": "color",
+          "value": "50",
+        },
+        Object {
+          "attribute_code": "category_ids",
+          "value": Array [
+            "19",
+            "31",
+            "2",
+          ],
+        },
+        Object {
+          "attribute_code": "options_container",
+          "value": "container2",
+        },
+        Object {
+          "attribute_code": "required_options",
+          "value": "0",
+        },
+        Object {
+          "attribute_code": "has_options",
+          "value": "0",
+        },
+        Object {
+          "attribute_code": "msrp_display_actual_price_type",
+          "value": "0",
+        },
+        Object {
+          "attribute_code": "url_key",
+          "value": "orestes-fitness-short-33-blue",
+        },
+        Object {
+          "attribute_code": "tax_class_id",
+          "value": "2",
+        },
+        Object {
+          "attribute_code": "size",
+          "value": "177",
+        },
+      ],
+      "extension_attributes": Object {
+        "stock_item": Object {
+          "backorders": 0,
+          "enable_qty_increments": false,
+          "is_decimal_divided": false,
+          "is_in_stock": true,
+          "is_qty_decimal": false,
+          "item_id": 973,
+          "low_stock_date": null,
+          "manage_stock": true,
+          "max_sale_qty": 10000,
+          "min_qty": 0,
+          "min_sale_qty": 1,
+          "notify_stock_qty": 1,
+          "product_id": 973,
+          "qty": 96,
+          "qty_increments": 0,
+          "show_default_notification_message": false,
+          "stock_id": 1,
+          "stock_status_changed_auto": 0,
+          "use_config_backorders": true,
+          "use_config_enable_qty_inc": true,
+          "use_config_manage_stock": true,
+          "use_config_max_sale_qty": true,
+          "use_config_min_qty": true,
+          "use_config_min_sale_qty": 1,
+          "use_config_notify_stock_qty": true,
+          "use_config_qty_increments": true,
+        },
+      },
+      "id": 973,
+      "media_gallery_entries": Array [
+        Object {
+          "disabled": false,
+          "file": "/m/s/msh08-blue_main.jpg",
+          "id": 1646,
+          "label": "",
+          "media_type": "image",
+          "position": 1,
+          "types": Array [
+            "image",
+            "small_image",
+            "thumbnail",
+          ],
+        },
+      ],
+      "name": "Orestes Fitness Short-33-Blue",
+      "options": Array [],
+      "price": 35,
+      "product_links": Array [],
+      "sku": "MSH08-33-Blue",
+      "status": 1,
+      "tier_prices": Array [],
+      "type_id": "simple",
+      "updated_at": "2019-03-11 13:20:26",
+      "visibility": 1,
+      "weight": 1,
+    },
+  },
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle get orders failure 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "ERROR",
+  "orders": Array [],
+  "ordersErrorMessage": "Unable to get orders.",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle get orders loading 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "LOADING",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle get orders success 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "SUCCESS",
+  "orders": Array [
+    Object {
+      "mockOrderTitle": "Mock Order Title 1",
+    },
+  ],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle reset address status 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
+
+exports[`account reducer should handle user logged in status 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "SUCCESS",
+}
+`;
+
+exports[`account reducer should return the initial state 1`] = `
+Object {
+  "addressErrorMessage": "",
+  "addressStatus": "NOT_STARTED",
+  "customer": null,
+  "errorMessage": "",
+  "orderStatus": "NOT_STARTED",
+  "orders": Array [],
+  "ordersErrorMessage": "",
+  "products": Object {},
+  "status": "NOT_STARTED",
+  "userLoggedInStatus": "NOT_STARTED",
+}
+`;
