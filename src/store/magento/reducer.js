@@ -1,7 +1,7 @@
 import { MAGENTO, CHANGE_CURRENCY } from '../../constants';
 import Status from '../../magento/Status';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   storeConfigStatus: Status.DEFAULT,
   currencyStatus: Status.DEFAULT,
   countryStatus: Status.DEFAULT,
@@ -27,8 +27,8 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case MAGENTO.INIT_APP_SUCCESS:
       return {
         ...state,
-        status: Status.SUCCESS,
-        storeConfigStatus: payload.storeConfig[0],
+        storeConfigStatus: Status.SUCCESS,
+        storeConfig: payload.storeConfig[0],
       };
     case MAGENTO.INIT_APP_FAILURE:
       return {
@@ -39,7 +39,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case MAGENTO.CURRENCY_LOADING:
       return {
         ...state,
-        status: Status.LOADING,
+        currencyStatus: Status.LOADING,
       };
     case MAGENTO.CURRENCY_SUCCESS: {
       const {
@@ -52,7 +52,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       } = payload;
       return {
         ...state,
-        status: Status.SUCCESS,
+        currencyStatus: Status.SUCCESS,
         currency: {
           ...state.currency,
           ...currencyData,
@@ -65,7 +65,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case MAGENTO.CURRENCY_FAILURE:
       return {
         ...state,
-        status: Status.ERROR,
+        currencyStatus: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
     case CHANGE_CURRENCY:

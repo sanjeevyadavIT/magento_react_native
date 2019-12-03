@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`magento reducer should handle country failure 1`] = `
+Object {
+  "countryStatus": "ERROR",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "NOT_STARTED",
+  "errorMessage": "Unable to fetch country data.",
+  "storeConfigStatus": "NOT_STARTED",
+}
+`;
+
+exports[`magento reducer should handle country loading 1`] = `
+Object {
+  "countryStatus": "LOADING",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "NOT_STARTED",
+  "storeConfigStatus": "NOT_STARTED",
+}
+`;
+
+exports[`magento reducer should handle country success 1`] = `
+Object {
+  "countries": Array [
+    Object {
+      "id": "IN",
+    },
+    Object {
+      "id": "US",
+    },
+  ],
+  "countryStatus": "SUCCESS",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "NOT_STARTED",
+  "storeConfigStatus": "NOT_STARTED",
+}
+`;
+
+exports[`magento reducer should handle currency failure 1`] = `
+Object {
+  "countryStatus": "NOT_STARTED",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "ERROR",
+  "errorMessage": "Unable to fetch currency.",
+  "storeConfigStatus": "NOT_STARTED",
+}
+`;
+
+exports[`magento reducer should handle currency loading 1`] = `
+Object {
+  "countryStatus": "NOT_STARTED",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "LOADING",
+  "storeConfigStatus": "NOT_STARTED",
+}
+`;
+
+exports[`magento reducer should handle currency success 1`] = `
+Object {
+  "countryStatus": "NOT_STARTED",
+  "currency": Object {
+    "available_currency_codes": Array [
+      "INR",
+      "USD",
+    ],
+    "base_currency_code": "USD",
+    "base_currency_symbol": "$",
+    "default_display_currency_code": "INR",
+    "default_display_currency_symbol": "₹",
+    "displayCurrencyCode": "USD",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "$",
+    "exchange_rates": Array [],
+  },
+  "currencyStatus": "SUCCESS",
+  "storeConfigStatus": "NOT_STARTED",
+}
+`;
+
+exports[`magento reducer should handle init app failure 1`] = `
+Object {
+  "countryStatus": "NOT_STARTED",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "NOT_STARTED",
+  "errorMessage": "Unable to initialize app.",
+  "storeConfigStatus": "ERROR",
+}
+`;
+
+exports[`magento reducer should handle init app loading 1`] = `
+Object {
+  "countryStatus": "NOT_STARTED",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "NOT_STARTED",
+  "storeConfigStatus": "LOADING",
+}
+`;
+
+exports[`magento reducer should handle init app success 1`] = `
+Object {
+  "countryStatus": "NOT_STARTED",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "NOT_STARTED",
+  "storeConfig": Object {
+    "id": 1,
+  },
+  "storeConfigStatus": "SUCCESS",
+}
+`;
+
+exports[`magento reducer should return the initial state 1`] = `
+Object {
+  "countryStatus": "NOT_STARTED",
+  "currency": Object {
+    "default_display_currency_code": "",
+    "default_display_currency_symbol": "",
+    "displayCurrencyCode": "",
+    "displayCurrencyExchangeRate": 1,
+    "displayCurrencySymbol": "",
+  },
+  "currencyStatus": "NOT_STARTED",
+  "storeConfigStatus": "NOT_STARTED",
+}
+`;
