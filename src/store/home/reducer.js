@@ -2,7 +2,6 @@ import {
   MAGENTO,
 } from '../../constants';
 import Status from '../../magento/Status';
-import { getPriceFromChildren } from '../../utils/products';
 
 const initialState = {
   status: Status.DEFAULT,
@@ -58,12 +57,12 @@ export default (state = initialState, { type, payload }) => {
       };
     }
     case MAGENTO.HOME_UPDATE_CONF_PRODUCT_SUCCESS: {
-      const { sku, children } = payload;
+      const { sku, children, price } = payload;
       const extra = {
         ...state.extra,
         [sku]: {
+          price,
           children,
-          price: getPriceFromChildren(children)
         },
       };
       return {
