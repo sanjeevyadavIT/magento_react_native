@@ -3,14 +3,14 @@ import {
 } from '../../constants';
 import Status from '../../magento/Status';
 
-const initialState = {
+export const INITIAL_STATE = {
   status: Status.DEFAULT,
   slider: [],
   featuredProducts: {},
   extra: {},
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     case MAGENTO.HOME_DATA_LOADING:
       return {
@@ -31,7 +31,7 @@ export default (state = initialState, { type, payload }) => {
         ...payload,
       };
     case MAGENTO.FEATURED_CATEGORY_PRODUCTS_LOADING: {
-      const { categoryId } = payload.categoryId;
+      const { categoryId } = payload;
       const featuredCategory = { ...state[categoryId], status: Status.LOADING };
 
       return {

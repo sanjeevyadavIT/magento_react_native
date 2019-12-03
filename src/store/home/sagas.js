@@ -32,7 +32,6 @@ function* getFeaturedCategoryProducts({ payload }) {
       type: MAGENTO.FEATURED_CATEGORY_PRODUCTS_LOADING,
       payload: {
         categoryId,
-        loading: true,
       }
     });
     const products = yield call({ context: magento, fn: magento.admin.getCategoryProducts }, categoryId, 1, undefined, 20);

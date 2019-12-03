@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`home reducer should handle featured category products failure 1`] = `
+Object {
+  "30": Object {
+    "errorMessage": "Inavlid category Id.",
+    "status": "ERROR",
+  },
+  "extra": Object {},
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`home reducer should handle featured category products loading 1`] = `
+Object {
+  "30": Object {
+    "errorMessage": "",
+    "items": Array [],
+    "status": "LOADING",
+  },
+  "extra": Object {},
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`home reducer should handle featured category products success 1`] = `
+Object {
+  "30": Object {
+    "items": Array [
+      Object {
+        "id": 968,
+      },
+    ],
+    "status": "SUCCESS",
+  },
+  "extra": Object {},
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`home reducer should handle home data failure 1`] = `
+Object {
+  "errorMessage": "23
+Inavlid block id.",
+  "extra": Object {},
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "ERROR",
+}
+`;
+
+exports[`home reducer should handle home data loading 1`] = `
+Object {
+  "extra": Object {},
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "LOADING",
+}
+`;
+
+exports[`home reducer should handle home data success 1`] = `
+Object {
+  "30": Object {},
+  "31": Object {},
+  "extra": Object {},
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "SUCCESS",
+}
+`;
+
+exports[`home reducer should handle home update configurable product detail success 1`] = `
+Object {
+  "extra": Object {
+    "MSH07": Object {
+      "children": Array [
+        Object {},
+        Object {},
+      ],
+      "price": Object {
+        "ending": 35,
+        "starting": 35,
+      },
+    },
+    "MSH12": Object {
+      "children": Array [
+        Object {},
+        Object {},
+        Object {},
+      ],
+      "price": Object {
+        "ending": 27,
+        "starting": 27,
+      },
+    },
+  },
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`home reducer should handle init app failure 1`] = `
+Object {
+  "errorMessage": "Invalid intregation token",
+  "extra": Object {},
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "ERROR",
+}
+`;
+
+exports[`home reducer should return the initial state 1`] = `
+Object {
+  "extra": Object {},
+  "featuredProducts": Object {},
+  "slider": Array [],
+  "status": "NOT_STARTED",
+}
+`;
