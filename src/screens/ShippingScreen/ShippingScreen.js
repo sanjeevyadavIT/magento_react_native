@@ -147,7 +147,7 @@ ShippingScreen.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   paymentMethodStatus: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,
-  shipping: PropTypes.object,
+  shipping: PropTypes.arrayOf(PropTypes.object),
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   billingAddress: PropTypes.object,
@@ -158,14 +158,15 @@ ShippingScreen.propTypes = {
 ShippingScreen.defaultProps = {
   errorMessage: '',
   billingAddress: {},
-  shipping: {},
+  shipping: [],
 };
 
 const mapStateToProps = ({ checkout, magento, cart }) => {
   const {
-    paymentMethodStatus,
+    shipping,
     errorMessage,
-    shipping, shippingMethodStatus: status
+    paymentMethodStatus,
+    shippingMethodStatus: status
   } = checkout;
   const {
     displayCurrencySymbol: currencySymbol,

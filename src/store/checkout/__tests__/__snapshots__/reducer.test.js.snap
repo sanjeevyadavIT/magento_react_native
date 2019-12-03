@@ -1,0 +1,300 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`checkout reducer should handle add cart billing address failure 1`] = `
+Object {
+  "billingAddressStatus": "ERROR",
+  "errorMessage": "Unable to add billing address to cart.",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle add cart billing address loading 1`] = `
+Object {
+  "billingAddressStatus": "LOADING",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle add cart billing address success 1`] = `
+Object {
+  "billingAddressStatus": "SUCCESS",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle add cart shipping info failure 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "Unable to add cart shipping info.",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "ERROR",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle add cart shipping info loading 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "LOADING",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle add cart shipping info success 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": Object {
+    "payment_methods": Array [
+      Object {
+        "code": "COD",
+        "title": "Cash On Delivery",
+      },
+    ],
+    "totals": Object {},
+  },
+  "paymentMethodStatus": "SUCCESS",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle order detail failure 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "Unable to get order detail.",
+  "orderDetailStatus": "ERROR",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle order detail loading 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "LOADING",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle order detail success 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "order": Object {
+    "orderId": 23,
+  },
+  "orderDetailStatus": "SUCCESS",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle place cart order failure 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "Unable to place order, something went wrong.",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "ERROR",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle place cart order loading 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "LOADING",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle place cart order success 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderId": 23,
+  "orderStatus": "SUCCESS",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle reset checkout address state 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle reset entire checkout state 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle reset payment state 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle reset shipping state 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle shipping method failure 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "No shipping method available.",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "ERROR",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle shipping method loading 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "LOADING",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should handle shipping method success 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": Array [
+    Object {
+      "base_amount": 5,
+      "carrier_code": "MST",
+      "carrier_title": "Mock Shipping title",
+      "method_title": "MST",
+    },
+  ],
+  "shippingMethodStatus": "SUCCESS",
+  "status": "NOT_STARTED",
+}
+`;
+
+exports[`checkout reducer should return the initial state 1`] = `
+Object {
+  "billingAddressStatus": "NOT_STARTED",
+  "errorMessage": "",
+  "orderDetailStatus": "NOT_STARTED",
+  "orderStatus": "NOT_STARTED",
+  "payment": null,
+  "paymentMethodStatus": "NOT_STARTED",
+  "shipping": null,
+  "shippingMethodStatus": "NOT_STARTED",
+  "status": "NOT_STARTED",
+}
+`;
