@@ -47,7 +47,7 @@ export default (state = initialState, { type, payload }) => {
         [categoryId]: featuredCategory,
       };
     }
-    case MAGENTO.FEATURED_CATEGORY_PRODUCTS_ERROR: {
+    case MAGENTO.FEATURED_CATEGORY_PRODUCTS_FAILURE: {
       const { categoryId, errorMessage } = payload;
       const featuredCategory = { ...state[categoryId], status: Status.ERROR, errorMessage };
 

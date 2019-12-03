@@ -44,7 +44,7 @@ function* getFeaturedCategoryProducts({ payload }) {
       }
     });
   } catch (error) {
-    yield put({ type: MAGENTO.FEATURED_CATEGORY_PRODUCTS_ERROR, payload: { categoryId: payload, errorMessage: error.message } });
+    yield put({ type: MAGENTO.FEATURED_CATEGORY_PRODUCTS_FAILURE, payload: { categoryId: payload, errorMessage: error.message } });
   }
 }
 
@@ -62,7 +62,7 @@ function* updateConfigurableProductsPrice({ payload }) {
       }
     });
   } catch (error) {
-    yield put({ type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_ERROR, payload: { sku, errorMessage: error.message } });
+    yield put({ type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_FAILURE, payload: { sku, errorMessage: error.message } });
   }
 }
 
