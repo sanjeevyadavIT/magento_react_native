@@ -1,0 +1,462 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`product reducer <product detail data> should handle add to cart failure 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "Unable to add product to the cart.",
+      "addToCartStatus": "ERROR",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle add to cart loading 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "LOADING",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle add to cart success 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "SUCCESS",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle configurable chidlren success 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+        Object {
+          "sku": "WH02-XS-Green",
+        },
+        Object {
+          "sku": "WH02-XS-Orange",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle configurable options failure 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "Unable to load configurable options of the product.",
+      "confOptionsStatus": "ERROR",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle configurable options loading 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "LOADING",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle configurable options success 1`] = `
+Object {
+  "attributes": Object {
+    "141": Object {
+      "attributeCode": "size",
+      "options": Array [],
+    },
+    "93": Object {
+      "attributeCode": "color",
+      "options": Array [],
+    },
+  },
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "SUCCESS",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [
+        Object {
+          "attribute_id": "141",
+          "id": 160,
+          "label": "Size",
+          "values": Array [],
+        },
+        Object {
+          "attribute_id": "93",
+          "id": 161,
+          "label": "Color",
+          "values": Array [],
+        },
+      ],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle open selected product request 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle product media failure 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "Unable to fetch images related to product",
+      "mediaStatus": "ERROR",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle product media loading 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "LOADING",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle product media success 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "SUCCESS",
+      "medias": Array [
+        Object {
+          "callToAction": "",
+          "imageTitle": "First Image",
+          "imageUrl": "/w/h/wh02-blue_main.jpg",
+        },
+      ],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer <product detail data> should handle reset add to cart state 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "WH02": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": Array [
+        Object {
+          "sku": "WH02-XS-Blue",
+        },
+      ],
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;
+
+exports[`product reducer should return the initial state 1`] = `
+Object {
+  "attributes": Object {},
+  "current": Object {
+    "default": Object {
+      "addToCartErrorMessage": "",
+      "addToCartStatus": "NOT_STARTED",
+      "children": undefined,
+      "confOptionsErrorMessage": "",
+      "confOptionsStatus": "NOT_STARTED",
+      "mediaErrorMessage": "",
+      "mediaStatus": "NOT_STARTED",
+      "medias": Array [],
+      "options": Array [],
+    },
+  },
+}
+`;

@@ -5,7 +5,7 @@ import {
 } from '../../constants';
 import Status from '../../magento/Status';
 
-const getInitialState = {
+export const INITIAL_STATE = {
   current: {
     // This is a dummy object, which mimics an open product in ProductScreen
     default: {
@@ -36,7 +36,7 @@ const getInitialState = {
   attributes: {},
 };
 
-export default (state = getInitialState, { type, payload }) => {
+export default (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     case UI.OPEN_SELECTED_PRODUCT_REQUEST: {
       const { sku, children } = payload;
