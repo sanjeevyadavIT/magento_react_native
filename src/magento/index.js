@@ -2,7 +2,7 @@ import axios from 'axios';
 import admin from './lib/admin';
 import guest from './lib/guest';
 import customer from './lib/customer';
-import { isNumber } from '../utils';
+import { isNumber } from '../utils/number';
 import { ADMIN_TYPE, CUSTOMER_TYPE } from './types';
 import { translate } from '../i18n';
 
