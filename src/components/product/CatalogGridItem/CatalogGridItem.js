@@ -12,7 +12,7 @@ import {
 import { NAVIGATION_PRODUCT_SCREEN } from '../../../navigation/types';
 import { getProductThumbnailFromAttribute } from '../../../utils/products';
 import { ThemeContext } from '../../../theme';
-import { ProductType } from '../../../types';
+import { ProductPropType } from '../../../types';
 
 const CatalogGridItem = ({
 /**
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 });
 
 CatalogGridItem.propTypes = {
-  product: ProductType.isRequired,
+  product: ProductPropType.isRequired,
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   stateAccessor: PropTypes.string.isRequired,

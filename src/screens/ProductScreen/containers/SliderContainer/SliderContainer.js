@@ -6,7 +6,7 @@ import { magento } from '../../../../magento';
 import { ImageSlider, ImageSliderItem, GenericTemplate } from '../../../../components';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
-import { ProductType } from '../../../../types';
+import { ProductPropType } from '../../../../types';
 import { getValueFromAttribute } from '../../../../utils';
 
 const SliderContainer = ({
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
 
 SliderContainer.propTypes = {
   sku: PropTypes.string.isRequired,
-  selectedProduct: PropTypes.oneOfType([null, ProductType]),
+  selectedProduct: PropTypes.oneOfType([null, ProductPropType]),
   status: PropTypes.oneOf(Object.values(Status)).isRequired, // redux
   errorMessage: PropTypes.string, // redux
   slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)), // redux

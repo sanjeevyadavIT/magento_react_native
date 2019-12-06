@@ -8,7 +8,7 @@ import {
   getFeaturedProducts,
   getHomeConfigurableProductOptions
 } from '../../../../store/actions';
-import { ProductType } from '../../../../types';
+import { ProductPropType } from '../../../../types';
 
 // NOTE: Here FeaturedCategoriesContainer(connected to redux) is hosting FeaturedCategoryList(connected to redux) which in turn hosting Productlist(dumb component)
 const FeaturedCategoryList = ({
@@ -44,7 +44,7 @@ const FeaturedCategoryList = ({
 };
 
 FeaturedCategoryList.propTypes = {
-  products: PropTypes.arrayOf(ProductType),
+  products: PropTypes.arrayOf(ProductPropType),
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,
   currencySymbol: PropTypes.string.isRequired,

@@ -6,8 +6,9 @@ import {
   oneOfType,
   arrayOf,
 } from 'prop-types';
+import { ColorPropType, Text } from 'react-native';
 
-export const ProductType = shape({
+export const ProductPropType = shape({
   id: number,
   sku: string.isRequired,
   name: string,
@@ -22,4 +23,69 @@ export const ProductType = shape({
       arrayOf(string),
     ])
   }))
+});
+
+export const ThemePropType = shape({
+  key: oneOf(['dark', 'light']).isRequired,
+  colors: shape({
+    appbarTintColor: ColorPropType.isRequired,
+    background: ColorPropType.isRequired,
+    black: ColorPropType.isRequired,
+    bodyText: ColorPropType.isRequired,
+    border: ColorPropType.isRequired,
+    disabled: ColorPropType.isRequired,
+    disabledDark: ColorPropType.isRequired,
+    error: ColorPropType.isRequired,
+    labelText: ColorPropType.isRequired,
+    primary: ColorPropType.isRequired,
+    secondary: ColorPropType.isRequired,
+    secondaryDark: ColorPropType.isRequired,
+    secondaryLight: ColorPropType.isRequired,
+    statusBar: ColorPropType.isRequired,
+    success: ColorPropType.isRequired,
+    surface: ColorPropType.isRequired,
+    titleText: ColorPropType.isRequired,
+    transparent: ColorPropType.isRequired,
+    white: ColorPropType.isRequired,
+  }).isRequired,
+  spacing: shape({
+    tiny: number.isRequired,
+    small: number.isRequired,
+    medium: number.isRequired,
+    large: number.isRequired,
+    extraLarge: number.isRequired,
+  }).isRequired,
+  dimens: shape({
+    WINDOW_WIDTH: number.isRequired,
+    WINDOW_HEIGHT: number.isRequired,
+    borderRadius: number.isRequired,
+    textInputHeight: number.isRequired,
+    catalogGridItemWidth: number.isRequired,
+    catalogGridItemHeight: number.isRequired,
+    catalogGridItemImageHeight: number.isRequired,
+    appbarButtonHeight: number.isRequired,
+    homePageSliderHeight: number.isRequired,
+    headerViewHeight: number.isRequired,
+    productDetailPageSliderHeight: number.isRequired,
+    optionBoxMinHeight: number.isRequired,
+    cartListImageHeight: number.isRequired,
+    cartListImageWidth: number.isRequired,
+    orderDetailImageWidth: number.isRequired,
+    orderDetailImageHeight: number.isRequired,
+  }).isRequired,
+  typography: shape({
+    titleText: Text.propTypes.style.isRequired,
+    titleTextBold: Text.propTypes.style.isRequired,
+    headingText: Text.propTypes.style.isRequired,
+    headingTextBold: Text.propTypes.style.isRequired,
+    subheadingText: Text.propTypes.style.isRequired,
+    subheadingTextBold: Text.propTypes.style.isRequired,
+    bodyText: Text.propTypes.style.isRequired,
+    bodyTextSemiBold: Text.propTypes.style.isRequired,
+    bodyTextBold: Text.propTypes.style.isRequired,
+    labelText: Text.propTypes.style.isRequired,
+    labelTextBold: Text.propTypes.style.isRequired,
+    buttonText: Text.propTypes.style.isRequired,
+    textInput: Text.propTypes.style.isRequired,
+  }).isRequired,
 });

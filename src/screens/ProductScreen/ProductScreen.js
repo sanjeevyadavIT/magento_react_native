@@ -21,7 +21,7 @@ import {
 } from '../../navigation/types';
 import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';
-import { ProductType } from '../../types';
+import { ProductPropType } from '../../types';
 import { translate } from '../../i18n';
 
 /**
@@ -155,7 +155,7 @@ ProductScreen.navigationOptions = ({ navigation }) => ({
 });
 
 ProductScreen.propTypes = {
-  children: PropTypes.arrayOf(ProductType),
+  children: PropTypes.arrayOf(ProductPropType),
   options: PropTypes.arrayOf(PropTypes.shape({
     attribute_id: PropTypes.string,
     id: PropTypes.number,

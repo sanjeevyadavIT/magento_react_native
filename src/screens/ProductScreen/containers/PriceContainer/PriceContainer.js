@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Price } from '../../../../components';
 import { Price as PricePojo, getPriceFromChildren } from '../../../../utils/products';
-import { ProductType } from '../../../../types';
+import { ProductPropType } from '../../../../types';
 
 /**
  * @todo In future PriceContianer can show other information,
@@ -51,11 +51,11 @@ const PriceContainer = ({
 };
 
 PriceContainer.propTypes = {
-  selectedProduct: PropTypes.oneOfType([ProductType, undefined]),
+  selectedProduct: PropTypes.oneOfType([ProductPropType, undefined]),
   productType: PropTypes.string.isRequired,
   price: PropTypes.number,
   sku: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(ProductType), // redux
+  children: PropTypes.arrayOf(ProductPropType), // redux
   currencySymbol: PropTypes.string.isRequired, // redux
   currencyRate: PropTypes.number.isRequired, // redux
 };

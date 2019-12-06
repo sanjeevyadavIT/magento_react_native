@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, ColorPropType } from 'react-native';
 import Spinner from '../../atoms/Spinner';
 import { ThemeContext } from '../../../theme';
 
@@ -36,7 +36,7 @@ const styles = {
 
 LoadingView.propTypes = {
   size: PropTypes.string,
-  backgroundColor: PropTypes.string,
+  backgroundColor: ColorPropType,
 };
 
 LoadingView.defaultProps = {

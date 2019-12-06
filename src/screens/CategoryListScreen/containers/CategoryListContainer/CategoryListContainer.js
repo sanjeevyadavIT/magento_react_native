@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { CatalogGrid } from '../../../../components';
 import { setCurrentProduct, getCategoryProducts, getCategoryConfigurableProductOptions } from '../../../../store/actions';
 import Status from '../../../../magento/Status';
-import { ProductType } from '../../../../types';
+import { ProductPropType } from '../../../../types';
 
 // FIXME: Not optimized, everytime more products will load, items and total_count will change,
 // and compoenent will rerender
@@ -50,7 +50,7 @@ CategoryListContainer.propTypes = {
   loadingMoreStatus: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,
   categoryId: PropTypes.number.isRequired,
-  products: PropTypes.arrayOf(ProductType),
+  products: PropTypes.arrayOf(ProductPropType),
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   totalCount: PropTypes.number,

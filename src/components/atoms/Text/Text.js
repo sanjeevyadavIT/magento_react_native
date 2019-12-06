@@ -73,10 +73,9 @@ const styles = {
 };
 
 Text.propTypes = {
-  theme: PropTypes.object.isRequired,
   type: PropTypes.oneOf([HEADING, SUB_HEADING, BODY, LABEL]),
   bold: PropTypes.bool,
-  style: PropTypes.object,
+  style: RNText.propTypes.style,
 };
 
 Text.defaultProps = {

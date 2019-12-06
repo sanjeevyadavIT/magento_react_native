@@ -5,7 +5,7 @@ import CatalogGridItem from '../CatalogGridItem';
 import { LoadingView, GenericTemplate } from '../../index';
 import Status from '../../../magento/Status';
 import { ThemeContext } from '../../../theme';
-import { ProductType } from '../../../types';
+import { ProductPropType } from '../../../types';
 
 /**
  * This component support rendering catalog, in Horizonatl list
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
 });
 
 CatalogGrid.propTypes = {
-  products: PropTypes.arrayOf(ProductType),
+  products: PropTypes.arrayOf(ProductPropType),
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   stateAccessor: PropTypes.string.isRequired,
