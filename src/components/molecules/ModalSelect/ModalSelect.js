@@ -1,5 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, ViewPropTypes } from 'react-native';
+import {
+  StyleSheet,
+  ViewPropTypes,
+  Text as RNText,
+} from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
@@ -148,7 +152,7 @@ ModalSelect.propTypes = {
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   style: ViewPropTypes.style,
-  textStyle: PropTypes.object,
+  textStyle: RNText.propTypes.style,
   placeholderTextColor: PropTypes.string,
 };
 

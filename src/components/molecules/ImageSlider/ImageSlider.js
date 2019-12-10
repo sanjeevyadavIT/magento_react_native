@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
 import Image from '../../atoms/Image';
@@ -61,7 +61,7 @@ ImageSlider.propTypes = {
   showTitle: PropTypes.bool,
   resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch', 'repeat', 'center']),
   autoplay: PropTypes.bool,
-  style: PropTypes.object,
+  style: ViewPropTypes.style,
 };
 
 ImageSlider.defaultProps = {

@@ -16,10 +16,15 @@ import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_CHECKOUT_ADDRESS_SCREEN } from '../../../../navigation/types';
 import { translate } from '../../../../i18n';
 
-// TODO: Make place order button stick at the bottom
-// TODO: Make ListEmptyComponent center in the view
-// FIXME: For some products the price in items[i] are 0 and for some actual value, hence need to fetch each item price individually
-// FIXME: The logic has become two complex, extract into smaller components
+/**
+ * NOTE: For some products the price in items[i] are 0 and for some actual value,
+ * hence need to fetch each item price individually
+ *
+ * @todo Make place order button stick at the bottom
+ * @todo Make ListEmptyComponent center in the view
+ *
+ * @fixme The logic has become two complex, extract into smaller components
+ */
 const CartList = ({
   items,
   extra,

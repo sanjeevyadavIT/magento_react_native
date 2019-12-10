@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import {
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  StyleSheet,
+  View,
   Platform,
-  View
+  StyleSheet,
+  ViewPropTypes,
+  TouchableOpacity,
+  TouchableNativeFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../../theme';
@@ -62,10 +63,12 @@ const styles = {
 
 Card.propTypes = {
   type: PropTypes.oneOf([CLEAR, OUTLINE, SHADOW]),
-  style: PropTypes.object,
+  style: ViewPropTypes.style,
   onPress: PropTypes.func,
-  // children
-  // theme
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ]).isRequired,
 };
 
 Card.defaultProps = {
