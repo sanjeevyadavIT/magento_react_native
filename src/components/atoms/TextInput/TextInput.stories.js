@@ -6,18 +6,18 @@ import TextInput from '.';
 import { ThemeProvider, theme } from '../../../theme';
 
 const styles = {
-  customInputContainer: _theme => ({
+  customInputContainer: {
     borderWidth: 1,
-  }),
+  },
   centerText: {
     textAlign: 'center',
-  }
+  },
 };
 
 storiesOf('TextInput', module)
   .addDecorator(getStory => (
     <ThemeProvider theme={theme}>
-      <View style={{ borderWidth: 10, borderColor: 'pink'}}>
+      <View>
         {getStory()}
       </View>
     </ThemeProvider>
@@ -58,7 +58,7 @@ storiesOf('TextInput', module)
   ))
   .add('with custom input container style', () => (
     <TextInput
-      inputContainerStyle={styles.customInputContainer(theme)}
+      inputContainerStyle={styles.customInputContainer}
       inputStyle={styles.centerText}
       placeholder="James Arthur"
     />

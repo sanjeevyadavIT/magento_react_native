@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   ViewPropTypes,
+  Text as RNText,
   TextInput as InputComponent
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -73,7 +74,11 @@ const TextInput = ({
             styles.input(theme),
             inputStyle,
           ]}
-          ref={(component) => { assignRef && assignRef(component); }}
+          ref={(component) => {
+            if (assignRef) {
+              assignRef(component);
+            }
+          }}
           {...props}
         />
 
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
 TextInput.propTypes = {
   containerStyle: ViewPropTypes.style,
   inputContainerStyle: ViewPropTypes.style,
-  inputStyle: PropTypes.object,
+  inputStyle: RNText.propTypes.style,
   disabled: PropTypes.bool,
   label: PropTypes.string,
   errorMessage: PropTypes.string,
@@ -149,10 +154,14 @@ TextInput.propTypes = {
     PropTypes.element,
     null
   ]),
-  assignRef: PropTypes.func,
+  assignRef: PropTypes.oneOfType([
+    PropTypes.func,
+    null
+  ]),
 };
 
 TextInput.defaultProps = {
+  inputStyle: {},
   containerStyle: {},
   inputContainerStyle: {},
   disabled: false,
@@ -160,7 +169,7 @@ TextInput.defaultProps = {
   errorMessage: '',
   leftIcon: null,
   rightIcon: null,
-  assignRef: () => {}
+  assignRef: null,
 };
 
 export default TextInput;
