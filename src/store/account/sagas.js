@@ -1,4 +1,9 @@
-import { takeLatest, call, put, takeEvery } from 'redux-saga/effects';
+import {
+  put,
+  call,
+  takeEvery,
+  takeLatest,
+} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento, CUSTOMER_TOKEN } from '../../magento';
 import { MAGENTO, ACTION_USER_LOGOUT } from '../../constants';

@@ -1,4 +1,9 @@
-import { takeLatest, takeEvery, call, put } from 'redux-saga/effects';
+import {
+  put,
+  call,
+  takeEvery,
+  takeLatest,
+} from 'redux-saga/effects';
 
 import { magento } from '../../magento';
 
@@ -68,7 +73,6 @@ function* updateConfigurableProductsPrice({ payload }) {
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
-
   yield takeLatest(MAGENTO.HOME_DATA_REQUEST, getHomeData);
   yield takeEvery(MAGENTO.FEATURED_CATEGORY_PRODUCTS_REQUEST, getFeaturedCategoryProducts);
   yield takeEvery(MAGENTO.HOME_UPDATE_CONF_PRODUCT_REQUEST, updateConfigurableProductsPrice);

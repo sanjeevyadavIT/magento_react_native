@@ -11,7 +11,7 @@ function* getCategoryTree() {
   } catch (error) {
     yield put({ type: MAGENTO.CATEGORY_TREE_FAILURE, payload: { errorMessage: error.message } });
   }
-};
+}
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {

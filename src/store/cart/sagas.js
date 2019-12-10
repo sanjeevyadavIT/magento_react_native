@@ -1,4 +1,9 @@
-import { takeLatest, takeEvery, call, put } from 'redux-saga/effects';
+import {
+  put,
+  call,
+  takeEvery,
+  takeLatest,
+} from 'redux-saga/effects';
 import { magento } from '../../magento';
 import { MAGENTO } from '../../constants';
 

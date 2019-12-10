@@ -47,5 +47,5 @@ function* resetPassword({ payload: { email } }) {
 export default function* watcherSaga() {
   yield takeLatest(MAGENTO.SIGN_IN_REQUEST, signIn);
   yield takeLatest(MAGENTO.SIGN_UP_REQUEST, signUp);
-  yield takeLatest(MAGENTO.RESET_PASSWORD_REQUEST,resetPassword);
+  yield takeLatest(MAGENTO.RESET_PASSWORD_REQUEST, resetPassword);
 }

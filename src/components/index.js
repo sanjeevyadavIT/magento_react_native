@@ -26,7 +26,7 @@ import OrderListItem from './organisms/order/OrderListItem';
 import CatalogGrid from './product/CatalogGrid';
 import CatalogGridItem from './product/CatalogGridItem';
 import Price from './product/Price';
-import ModalSelect from './molecules/ModalSelect'
+import ModalSelect from './molecules/ModalSelect';
 
 
 export {

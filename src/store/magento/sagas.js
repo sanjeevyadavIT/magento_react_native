@@ -89,7 +89,7 @@ function* getCurrencyToBeDisplayed(currencyData) {
     symbol,
     rate,
   };
-};
+}
 
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
