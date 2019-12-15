@@ -1,6 +1,6 @@
 import { runSaga } from 'redux-saga';
 import AsyncStorage from '@react-native-community/async-storage';
-import { magento } from '../../../magento';
+import { magento, CUSTOMER_TOKEN } from '../../../magento';
 import { magentoOptions } from '../../../../config/magento';
 import {
   getCurrentUser,
@@ -58,18 +58,20 @@ describe('account sagas', () => {
       }, getCurrentUser);
 
       // Verify
-      expect(magento.customer.getCurrentCustomer).toHaveBeenCalled();
-      expect(magento.customer.getCurrentCustomer).toHaveBeenCalledTimes(1);
-      expect(dispatched.length).toBe(2);
-      expect(dispatched[0]).toEqual({
-        type: MAGENTO.CURRENT_USER_LOADING
-      });
-      expect(dispatched[1]).toEqual({
-        type: MAGENTO.CURRENT_USER_SUCCESS,
-        payload: {
-          customer: response.success,
+      expect(magento.customer.getCurrentCustomer.mock.calls).toEqual([
+        []
+      ]);
+      expect(dispatched).toEqual([
+        {
+          type: MAGENTO.CURRENT_USER_LOADING
+        },
+        {
+          type: MAGENTO.CURRENT_USER_SUCCESS,
+          payload: {
+            customer: response.success,
+          }
         }
-      });
+      ]);
     });
 
     test('should handle error flow', async () => {
@@ -82,18 +84,21 @@ describe('account sagas', () => {
       }, getCurrentUser);
 
       // Verify
-      expect(magento.customer.getCurrentCustomer).toHaveBeenCalled();
-      expect(magento.customer.getCurrentCustomer).toHaveBeenCalledTimes(2);
-      expect(dispatched.length).toBe(2);
-      expect(dispatched[0]).toEqual({
-        type: MAGENTO.CURRENT_USER_LOADING
-      });
-      expect(dispatched[1]).toEqual({
-        type: MAGENTO.CURRENT_USER_FAILURE,
-        payload: {
-          errorMessage: response.error.message,
+      expect(magento.customer.getCurrentCustomer.mock.calls).toEqual([
+        [],
+        [],
+      ]);
+      expect(dispatched).toEqual([
+        {
+          type: MAGENTO.CURRENT_USER_LOADING
+        },
+        {
+          type: MAGENTO.CURRENT_USER_FAILURE,
+          payload: {
+            errorMessage: response.error.message,
+          }
         }
-      });
+      ]);
     });
   });
 
@@ -107,8 +112,9 @@ describe('account sagas', () => {
 
       // Verify
       expect(magento.customerToken).toBeNull();
-      expect(AsyncStorage.removeItem).toHaveBeenCalled();
-      expect(AsyncStorage.removeItem).toHaveBeenCalledTimes(1);
+      expect(AsyncStorage.removeItem.mock.calls).toEqual([
+        [CUSTOMER_TOKEN]
+      ]);
     });
   });
 
@@ -192,19 +198,20 @@ describe('account sagas', () => {
       }, getOrdersForCustomer, action);
 
       // Verify
-      expect(magento.admin.getOrderList).toHaveBeenCalled();
-      expect(magento.admin.getOrderList).toHaveBeenCalledTimes(1);
-      expect(magento.admin.getOrderList).toBeCalledWith(customerId);
-      expect(dispatched.length).toBe(2);
-      expect(dispatched[0]).toEqual({
-        type: MAGENTO.GET_ORDERS_LOADING
-      });
-      expect(dispatched[1]).toEqual({
-        type: MAGENTO.GET_ORDERS_SUCCESS,
-        payload: {
-          orders: expectedResult,
+      expect(magento.admin.getOrderList.mock.calls).toEqual([
+        [customerId]
+      ]);
+      expect(dispatched).toEqual([
+        {
+          type: MAGENTO.GET_ORDERS_LOADING
+        },
+        {
+          type: MAGENTO.GET_ORDERS_SUCCESS,
+          payload: {
+            orders: expectedResult,
+          }
         }
-      });
+      ]);
     });
 
     test('should handle error flow', async () => {
@@ -217,19 +224,21 @@ describe('account sagas', () => {
       }, getOrdersForCustomer, action);
 
       // Verify
-      expect(magento.admin.getOrderList).toHaveBeenCalled();
-      expect(magento.admin.getOrderList).toHaveBeenCalledTimes(2);
-      expect(magento.admin.getOrderList).toBeCalledWith(customerId);
-      expect(dispatched.length).toBe(2);
-      expect(dispatched[0]).toEqual({
-        type: MAGENTO.GET_ORDERS_LOADING
-      });
-      expect(dispatched[1]).toEqual({
-        type: MAGENTO.GET_ORDERS_FAILURE,
-        payload: {
-          errorMessage: response.error.message,
+      expect(magento.admin.getOrderList.mock.calls).toEqual([
+        [customerId],
+        [customerId]
+      ]);
+      expect(dispatched).toEqual([
+        {
+          type: MAGENTO.GET_ORDERS_LOADING
+        },
+        {
+          type: MAGENTO.GET_ORDERS_FAILURE,
+          payload: {
+            errorMessage: response.error.message,
+          }
         }
-      });
+      ]);
     });
   });
 
@@ -295,17 +304,18 @@ describe('account sagas', () => {
       }, getOrderedProductInfo, action);
 
       // Verify
-      expect(magento.admin.getProductBySku).toHaveBeenCalled();
-      expect(magento.admin.getProductBySku).toHaveBeenCalledTimes(1);
-      expect(magento.admin.getProductBySku).toBeCalledWith(sku);
-      expect(dispatched.length).toBe(1);
-      expect(dispatched[0]).toEqual({
-        type: MAGENTO.GET_ORDERED_PRODUCT_INFO_SUCCESS,
-        payload: {
-          sku,
-          product: response.success,
+      expect(magento.admin.getProductBySku.mock.calls).toEqual([
+        [sku]
+      ]);
+      expect(dispatched).toEqual([
+        {
+          type: MAGENTO.GET_ORDERED_PRODUCT_INFO_SUCCESS,
+          payload: {
+            sku,
+            product: response.success,
+          }
         }
-      });
+      ]);
     });
 
     test('should handle error flow', async () => {
@@ -318,16 +328,18 @@ describe('account sagas', () => {
       }, getOrderedProductInfo, action);
 
       // Verify
-      expect(magento.admin.getProductBySku).toHaveBeenCalled();
-      expect(magento.admin.getProductBySku).toHaveBeenCalledTimes(2);
-      expect(magento.admin.getProductBySku).toBeCalledWith(sku);
-      expect(dispatched.length).toBe(1);
-      expect(dispatched[0]).toEqual({
-        type: MAGENTO.GET_ORDERED_PRODUCT_INFO_FAILURE,
-        payload: {
-          errorMessage: response.error.message,
+      expect(magento.admin.getProductBySku.mock.calls).toEqual([
+        [sku],
+        [sku]
+      ]);
+      expect(dispatched).toEqual([
+        {
+          type: MAGENTO.GET_ORDERED_PRODUCT_INFO_FAILURE,
+          payload: {
+            errorMessage: response.error.message,
+          }
         }
-      });
+      ]);
     });
   });
 
@@ -394,19 +406,20 @@ describe('account sagas', () => {
       }, addAccountAddress, action);
 
       // Verify
-      expect(magento.admin.updateCustomerData).toHaveBeenCalled();
-      expect(magento.admin.updateCustomerData).toHaveBeenCalledTimes(1);
-      expect(magento.admin.updateCustomerData).toBeCalledWith(customerId, { customer });
-      expect(dispatched.length).toBe(2);
-      expect(dispatched[0]).toEqual({
-        type: MAGENTO.ADD_ACCOUNT_ADDRESS_LOADING,
-      });
-      expect(dispatched[1]).toEqual({
-        type: MAGENTO.ADD_ACCOUNT_ADDRESS_SUCCESS,
-        payload: {
-          customer,
-        }
-      });
+      expect(magento.admin.updateCustomerData.mock.calls).toEqual([
+        [customerId, { customer }]
+      ]);
+      expect(dispatched).toEqual([
+        {
+          type: MAGENTO.ADD_ACCOUNT_ADDRESS_LOADING,
+        },
+        {
+          type: MAGENTO.ADD_ACCOUNT_ADDRESS_SUCCESS,
+          payload: {
+            customer,
+          }
+        },
+      ]);
     });
 
     test('should handle error flow', async () => {
@@ -419,19 +432,21 @@ describe('account sagas', () => {
       }, addAccountAddress, action);
 
       // Verify
-      expect(magento.admin.updateCustomerData).toHaveBeenCalled();
-      expect(magento.admin.updateCustomerData).toHaveBeenCalledTimes(2);
-      expect(magento.admin.updateCustomerData).toBeCalledWith(customerId, { customer });
-      expect(dispatched.length).toBe(2);
-      expect(dispatched[0]).toEqual({
-        type: MAGENTO.ADD_ACCOUNT_ADDRESS_LOADING,
-      });
-      expect(dispatched[1]).toEqual({
-        type: MAGENTO.ADD_ACCOUNT_ADDRESS_FAILURE,
-        payload: {
-          errorMessage: response.error.message,
+      expect(magento.admin.updateCustomerData.mock.calls).toEqual([
+        [customerId, { customer }],
+        [customerId, { customer }]
+      ]);
+      expect(dispatched).toEqual([
+        {
+          type: MAGENTO.ADD_ACCOUNT_ADDRESS_LOADING,
+        },
+        {
+          type: MAGENTO.ADD_ACCOUNT_ADDRESS_FAILURE,
+          payload: {
+            errorMessage: response.error.message,
+          }
         }
-      });
+      ]);
     });
   });
 });
