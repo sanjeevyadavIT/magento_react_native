@@ -67,7 +67,11 @@ const Button = ({
   ]);
 
   return (
-    <TouchReceptor onPress={!loading && onPress} disabled={disabled}>
+    <TouchReceptor
+      testID="Button-Touch-Receptor"
+      disabled={disabled}
+      onPress={!loading && onPress}
+    >
       <View
         style={containerStyle}
       >
