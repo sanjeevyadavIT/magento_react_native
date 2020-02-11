@@ -30,6 +30,8 @@
     "homeCmsBlockIdMessage": "Please Refer to Step 2 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
     "integrationTokenRequired": "INTEGRATION TOKEN REQUIRED ERROR",
     "integrationTokenRequiredMessage": "Please refer to Step 1 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
+    "noResponseFromServer": "Could not get any reponse from server.",
+    "noResponseFromServerMessage": "Check the server is running and make sure access token is set properly.",
     "emptyFieldsMessage": "Please fill all fields"
   },
   "modalSelect": {

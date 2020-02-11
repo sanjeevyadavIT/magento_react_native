@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import admin from './lib/admin';
 import guest from './lib/guest';
@@ -91,6 +92,9 @@ class Magento {
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
             // http.ClientRequest in node.js
             console.log('No response received, error.request: ', error.request);
+            const noReponseError = noResponseFromServerError();
+            reject(noReponseError);
+            return;
           } else {
             // Something happened in setting up the request that triggered an Error
             console.log('Unknown error, error.message: ', error.message);
@@ -159,6 +163,12 @@ function homeCmsBlockError() {
 function integrationTokenError() {
   const name = translate('errors.integrationTokenRequired');
   const message = translate('errors.integrationTokenRequiredMessage');
+  return createError(name, message);
+}
+
+function noResponseFromServerError() {
+  const name = translate('errors.noResponseFromServer');
+  const message = translate('errors.noResponseFromServerMessage');
   return createError(name, message);
 }
 
