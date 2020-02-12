@@ -87,6 +87,10 @@ class Magento {
             console.log('error.response.data: ', error.response.data);
             console.log('error.response.status: ', error.response.status);
             console.log('error.response.headers: ', error.response.headers);
+            if (error.response.status === 404) {
+              reject(pageNotFoundError());
+              return;
+            }
           } else if (error.request) {
             // The request was made but no response was received
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -169,6 +173,12 @@ function integrationTokenError() {
 function noResponseFromServerError() {
   const name = translate('errors.noResponseFromServer');
   const message = translate('errors.noResponseFromServerMessage');
+  return createError(name, message);
+}
+
+function pageNotFoundError() {
+  const name = translate('errors.404error');
+  const message = translate('errors.404errorMessage');
   return createError(name, message);
 }
 
