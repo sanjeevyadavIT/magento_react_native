@@ -87,8 +87,8 @@ class Magento {
             console.log('error.response.data: ', error.response.data);
             console.log('error.response.status: ', error.response.status);
             console.log('error.response.headers: ', error.response.headers);
-            if (error.response.status === 404) {
-              reject(pageNotFoundError());
+            if (error.response.status === 404 && error.response.data == null) {
+              reject();
               return;
             }
           } else if (error.request) {
@@ -104,7 +104,12 @@ class Magento {
             console.log('Unknown error, error.message: ', error.message);
           }
           console.log('error.config: ', error.config);
-          const customError = Magento.extractErrorMessage(error.response.data);
+          let customError;
+          if (typeof error.response.data === 'object' && error.response.data !== null) {
+            customError = Magento.extractErrorMessage(error.response.data);
+          } else {
+            customError = pageNotFoundError();
+          }
           reject(customError);
         });
     });
