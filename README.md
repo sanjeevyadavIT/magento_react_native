@@ -6,7 +6,7 @@
 
 # MageCart : Magento 2 React Native eCommerce App
 
-![React Native](https://img.shields.io/badge/react--native-0.61.2-brightgreen)
+![React Native](https://img.shields.io/badge/react--native-0.62.2-brightgreen)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/alexakasanjeev/magento_react_native/issues)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-informational.svg)](https://join.slack.com/t/magecart/shared_invite/enQtNjU5MTc5ODM4NjE0LTBjZThjMjg3Zjk0MzJlNGE1MDRkMDBlYThjNzA3NzRlMTViMGVhYzY1ZGUyOTIzZWQ1ZjAyMzk1OTIzZTFlMTM)
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
