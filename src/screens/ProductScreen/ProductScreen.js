@@ -16,9 +16,9 @@ import {
 } from './containers';
 import { magento } from '../../magento';
 import {
-  NAVIGATION_LOGIN_SCREEN,
-  NAVIGATION_CART_SCREEN,
-} from '../../navigation/types';
+  NAVIGATION_TO_LOGIN_SCREEN,
+  NAVIGATION_TO_CART_SCREEN,
+} from '../../navigation';
 import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';
 import { ProductType } from '../../types';
@@ -149,7 +149,7 @@ ProductScreen.navigationOptions = ({ navigation }) => ({
   title: navigation.getParam('title', translate('productScreen.title')),
   headerRight: (
     <MaterialAppbarButtons>
-      <Item title={translate('productScreen.menu.cart')} iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_CART_SCREEN) : navigation.navigate(NAVIGATION_LOGIN_SCREEN))} />
+      <Item title={translate('productScreen.menu.cart')} iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_TO_CART_SCREEN) : navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN))} />
     </MaterialAppbarButtons>
   ),
 });

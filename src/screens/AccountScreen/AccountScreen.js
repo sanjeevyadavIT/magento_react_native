@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentCustomer, logout } from '../../store/actions';
 import {
-  NAVIGATION_ORDERS_SCREEN,
-  NAVIGATION_EDIT_ACCOUNT_ADDRESS_SCREEN,
-} from '../../navigation/types';
+  NAVIGATION_TO_ORDERS_SCREEN,
+  NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
+} from '../../navigation';
 import { Text, Button, GenericTemplate } from '../../components';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -57,7 +57,7 @@ const AccountScreen = ({
         title={translate('accountScreen.myOrderButton')}
         onPress={() => {
           navigation.navigate(
-            NAVIGATION_ORDERS_SCREEN,
+            NAVIGATION_TO_ORDERS_SCREEN,
             { customerId: customer.id }
           );
         }}
@@ -67,7 +67,7 @@ const AccountScreen = ({
         title={translate('accountScreen.myAddressButton')}
         onPress={() => {
           navigation.navigate(
-            NAVIGATION_EDIT_ACCOUNT_ADDRESS_SCREEN,
+            NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
             { customerId: customer.id }
           );
         }}

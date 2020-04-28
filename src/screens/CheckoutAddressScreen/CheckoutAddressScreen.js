@@ -24,7 +24,7 @@ import {
   ModalSelect,
   GenericTemplate,
 } from '../../components';
-import { NAVIGATION_SHIPPING_SCREEN } from '../../navigation/types';
+import { NAVIGATION_TO_SHIPPING_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -284,7 +284,7 @@ const CheckoutAddressScreen = ({
     _getCustomerCart();
     _getShippingMethod(address);
     if (shippingMethodStatus === Status.DEFAULT) {
-      navigation.navigate(NAVIGATION_SHIPPING_SCREEN);
+      navigation.navigate(NAVIGATION_TO_SHIPPING_SCREEN);
     }
   }
 

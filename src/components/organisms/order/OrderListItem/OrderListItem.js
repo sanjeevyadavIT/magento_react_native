@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Card, Text, Price } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
-import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../../../navigation/types';
+import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../../../navigation';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 import { priceSignByCode } from '../../../../utils/price';
@@ -14,7 +14,7 @@ const OrderListItem = ({ item }) => {
 
   const onPress = () => {
     NavigationService.navigate(
-      NAVIGATION_ORDER_DETAIL_SCREEN,
+      NAVIGATION_TO_ORDER_DETAIL_SCREEN,
       {
         item
       }

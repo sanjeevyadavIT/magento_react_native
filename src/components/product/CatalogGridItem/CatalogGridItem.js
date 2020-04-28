@@ -9,22 +9,22 @@ import {
   Card,
   Price
 } from '../..';
-import { NAVIGATION_PRODUCT_SCREEN } from '../../../navigation/types';
+import { NAVIGATION_TO_PRODUCT_SCREEN } from '../../../navigation';
 import { getProductThumbnailFromAttribute } from '../../../utils/products';
 import { ThemeContext } from '../../../theme';
 import { ProductType } from '../../../types';
 
 const CatalogGridItem = ({
-/**
-   * Number of colums in `CatalogGrid` being displayed,
-   * is specified, will effect `CatalogGridItem` component width.
-   *
-   * If `CatalogGrid` render items in horizonatl list,
-   * then `CatalogGridItem` has fixed width defined by `theme.dimens.catalogGridItemWidth`
-   *
-   * else if `CatalogGrid` render items in a Grid of row * coulumnCount
-   * then `CatalogridItem` width is (total_screen_width) / (columnCount)
-   */
+  /**
+     * Number of colums in `CatalogGrid` being displayed,
+     * is specified, will effect `CatalogGridItem` component width.
+     *
+     * If `CatalogGrid` render items in horizonatl list,
+     * then `CatalogGridItem` has fixed width defined by `theme.dimens.catalogGridItemWidth`
+     *
+     * else if `CatalogGrid` render items in a Grid of row * coulumnCount
+     * then `CatalogridItem` width is (total_screen_width) / (columnCount)
+     */
   columnCount,
   /**
    * Product to dispaly
@@ -64,7 +64,7 @@ const CatalogGridItem = ({
 
   const onItemPress = () => {
     onPress(product.type_id, product.sku, extra ? extra.children : undefined);
-    NavigationService.navigate(NAVIGATION_PRODUCT_SCREEN, {
+    NavigationService.navigate(NAVIGATION_TO_PRODUCT_SCREEN, {
       product,
       title: product.name,
     });
@@ -96,7 +96,7 @@ const CatalogGridItem = ({
   return (
     <Card
       type="outline"
-      style={styles.container(theme,columnCount)}
+      style={styles.container(theme, columnCount)}
       onPress={onItemPress}
     >
       <Image

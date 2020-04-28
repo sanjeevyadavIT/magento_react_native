@@ -18,7 +18,7 @@ import {
   TextInput,
   MessageView
 } from '../../components';
-import { NAVIGATION_SIGNUP_SCREEN, NAVIGATION_FORGOT_PASSWORD_SCREEN } from '../../navigation/types';
+import { NAVIGATION_TO_SIGNUP_SCREEN, NAVIGATION_TO_FORGOT_PASSWORD_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -72,13 +72,13 @@ const SignInScreen = ({
         type="clear"
         style={styles.defaultMargin(theme)}
         title={translate('signInScreen.createAccount')}
-        onPress={() => navigation.navigate(NAVIGATION_SIGNUP_SCREEN)}
+        onPress={() => navigation.navigate(NAVIGATION_TO_SIGNUP_SCREEN)}
       />
       <Button
         type="clear"
         style={styles.defaultMargin(theme)}
         title={translate('signInScreen.forgotPassword')}
-        onPress={() => navigation.navigate(NAVIGATION_FORGOT_PASSWORD_SCREEN)}
+        onPress={() => navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN)}
       />
     </>
   );

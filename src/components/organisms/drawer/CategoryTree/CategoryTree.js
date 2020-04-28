@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CategoryTreeItem, Text, Card } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
-import { NAVIGATION_SETTING_SCREEN } from '../../../../navigation/types';
+import { NAVIGATION_TO_SETTING_SCREEN } from '../../../../navigation';
 import { translate } from '../../../../i18n';
 import { ThemeContext } from '../../../../theme';
 
@@ -20,7 +20,7 @@ const CategoryTree = ({
   const renderFooter = () => (
     <View style={styles.footerContainer(theme)}>
       <Card
-        onPress={() => NavigationService.navigate(NAVIGATION_SETTING_SCREEN)}
+        onPress={() => NavigationService.navigate(NAVIGATION_TO_SETTING_SCREEN)}
         style={styles.card(theme)}
       >
         <Text>{translate('settingScreen.title')}</Text>

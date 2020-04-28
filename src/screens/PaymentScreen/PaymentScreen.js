@@ -16,9 +16,9 @@ import {
   GenericTemplate
 } from '../../components';
 import {
-  NAVIGATION_HOME_SCREEN,
-  NAVIGATION_ORDER_CONFIRMATION_SCREEN
-} from '../../navigation/types';
+  NAVIGATION_TO_HOME_SCREEN,
+  NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN
+} from '../../navigation';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 import { ThemeContext } from '../../theme';
@@ -156,10 +156,10 @@ const PaymentScreen = ({
       index: 1,
       actions: [
         NavigationActions.navigate(
-          { routeName: NAVIGATION_HOME_SCREEN }
+          { routeName: NAVIGATION_TO_HOME_SCREEN }
         ),
         NavigationActions.navigate(
-          { routeName: NAVIGATION_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } },
+          { routeName: NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } },
         ),
       ],
     });

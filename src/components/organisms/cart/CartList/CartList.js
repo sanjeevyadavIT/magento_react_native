@@ -13,7 +13,7 @@ import {
   Price,
 } from '../../..';
 import NavigationService from '../../../../navigation/NavigationService';
-import { NAVIGATION_CHECKOUT_ADDRESS_SCREEN } from '../../../../navigation/types';
+import { NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN } from '../../../../navigation';
 import { translate } from '../../../../i18n';
 
 // TODO: Make place order button stick at the bottom
@@ -65,7 +65,7 @@ const CartList = ({
 
   const handlePlaceOrder = () => {
     if (allItemPricesAvailable()) {
-      NavigationService.navigate(NAVIGATION_CHECKOUT_ADDRESS_SCREEN);
+      NavigationService.navigate(NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN);
     } else {
       Alert.alert(translate('cartScreen.priceNotAvailable'));
     }

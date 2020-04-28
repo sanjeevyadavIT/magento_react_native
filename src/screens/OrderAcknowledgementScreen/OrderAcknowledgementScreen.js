@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text, Button } from '../../components';
-import { NAVIGATION_ORDER_DETAIL_SCREEN } from '../../navigation/types';
+import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../navigation';
 import { resetCheckoutState } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -27,7 +27,7 @@ const OrderAcknowledgementScreen = ({
 
   const renderFooter = () => (
     <View>
-      <Button title={translate('orderScreen.viewOrderButton')} onPress={() => navigation.navigate(NAVIGATION_ORDER_DETAIL_SCREEN, { orderId })} />
+      <Button title={translate('orderScreen.viewOrderButton')} onPress={() => navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, { orderId })} />
       <View style={styles.space(theme)} />
       <Button title={translate('orderScreen.continueButton')} onPress={() => navigation.popToTop()} />
     </View>

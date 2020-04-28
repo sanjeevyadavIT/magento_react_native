@@ -15,7 +15,7 @@ import {
   MessageView,
   GenericTemplate
 } from '../../components';
-import { NAVIGATION_LOGIN_SCREEN } from '../../navigation/types';
+import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -68,7 +68,7 @@ const SignUpScreen = ({
         type="clear"
         style={styles.defaultMargin(theme)}
         title={translate('signUpScreen.haveAccount')}
-        onPress={() => navigation.navigate(NAVIGATION_LOGIN_SCREEN)}
+        onPress={() => navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)}
       />
     </>
   );

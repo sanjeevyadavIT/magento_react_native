@@ -12,7 +12,7 @@ import {
   ModalSelect,
   GenericTemplate
 } from '../../components';
-import { NAVIGATION_PAYMENT_SCREEN } from '../../navigation/types';
+import { NAVIGATION_TO_PAYMENT_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 import { ThemeContext } from '../../theme';
@@ -113,7 +113,7 @@ const ShippingScreen = ({
   );
 
   if (paymentMethodStatus === Status.SUCCESS) {
-    navigation.navigate(NAVIGATION_PAYMENT_SCREEN);
+    navigation.navigate(NAVIGATION_TO_PAYMENT_SCREEN);
   }
 
   return (

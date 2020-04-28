@@ -7,7 +7,7 @@ import { Text } from '../../..';
 import { magento } from '../../../../magento';
 import Status from '../../../../magento/Status';
 import NavigationService from '../../../../navigation/NavigationService';
-import { NAVIGATION_LOGIN_SCREEN, NAVIGATION_ACCOUNT_SCREEN } from '../../../../navigation/types';
+import { NAVIGATION_TO_LOGIN_SCREEN, NAVIGATION_TO_ACCOUNT_SCREEN } from '../../../../navigation';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 
@@ -29,10 +29,10 @@ const DrawerHeader = ({
 
   if (magento.isCustomerLogin()) {
     welcomeText = translate('drawerScreen.welcomeText');
-    NAVIGATION_PATH = NAVIGATION_ACCOUNT_SCREEN;
+    NAVIGATION_PATH = NAVIGATION_TO_ACCOUNT_SCREEN;
   } else {
     welcomeText = translate('drawerScreen.login');
-    NAVIGATION_PATH = NAVIGATION_LOGIN_SCREEN;
+    NAVIGATION_PATH = NAVIGATION_TO_LOGIN_SCREEN;
   }
 
   return (

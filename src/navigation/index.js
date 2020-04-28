@@ -4,3 +4,4 @@ import DrawerNavigator from './DrawerNavigator';
 const Navigator = createAppContainer(DrawerNavigator);
 
 export default Navigator;
+export * from './routes';
