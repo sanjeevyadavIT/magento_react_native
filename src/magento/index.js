@@ -3,13 +3,13 @@ import axios from 'axios';
 import admin from './lib/admin';
 import guest from './lib/guest';
 import customer from './lib/customer';
+import Logger from './apiLogger';
 import { isNumber } from '../utils';
 import { ADMIN_TYPE, CUSTOMER_TYPE } from './types';
 import { translate } from '../i18n';
 
 const defaultOptions = {
   url: null,
-  storeCode: 'default',
   userAgent: 'Sanjeev Yadav Magento Library',
   home_cms_block_id: '',
   authentication: {
@@ -23,7 +23,7 @@ class Magento {
   setOptions(options) {
     this.configuration = { ...defaultOptions, ...options };
     this.base_url = this.configuration.url;
-    this.root_path = `/rest/${this.configuration.storeCode}`;
+    this.root_path = `rest/${this.configuration.store}`;
     this.admin = admin(this);
     this.guest = guest(this);
     this.customer = customer(this);
@@ -68,7 +68,7 @@ class Magento {
     }
 
     return new Promise((resolve, reject) => {
-      console.log({ url, method, headers, data, ...params });
+      Logger.describeRequest({ url, method, headers, params, data });
       axios({
         url,
         method,
@@ -77,16 +77,14 @@ class Magento {
         data,
       })
         .then((response) => {
-          console.log(response);
+          Logger.describeSuccessResponse(response);
           resolve(response.data);
         })
         .catch((error) => {
+          Logger.describeErrorResponse(error);
           if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
-            console.log('error.response.data: ', error.response.data);
-            console.log('error.response.status: ', error.response.status);
-            console.log('error.response.headers: ', error.response.headers);
             if (error.response.status === 404 && error.response.data == null) {
               reject();
               return;
@@ -95,15 +93,12 @@ class Magento {
             // The request was made but no response was received
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
             // http.ClientRequest in node.js
-            console.log('No response received, error.request: ', error.request);
             const noReponseError = noResponseFromServerError();
             reject(noReponseError);
             return;
           } else {
             // Something happened in setting up the request that triggered an Error
-            console.log('Unknown error, error.message: ', error.message);
           }
-          console.log('error.config: ', error.config);
           let customError;
           if (typeof error.response.data === 'object' && error.response.data !== null) {
             customError = Magento.extractErrorMessage(error.response.data);
@@ -139,7 +134,7 @@ class Magento {
     return !!this.customerToken;
   }
 
-  setStoreConfig([config]) {
+  setStoreConfig(config) {
     this.storeConfig = config;
   }
 

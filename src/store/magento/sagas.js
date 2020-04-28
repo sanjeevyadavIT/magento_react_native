@@ -21,7 +21,8 @@ function* initMagento() {
     magento.setCustomerToken(customerToken);
     // Fetch store config, containing base media url path
     const storeConfig = yield call({ context: magento, fn: magento.admin.getStoreConfig });
-    magento.setStoreConfig(storeConfig);
+    const config = storeConfig.find(conf => conf.code === magentoOptions.store);
+    magento.setStoreConfig(config);
     yield put({ type: MAGENTO.INIT_APP_SUCCESS, payload: { storeConfig } });
     // fetch currency data
     yield put({ type: MAGENTO.CURRENCY_REQUEST });
