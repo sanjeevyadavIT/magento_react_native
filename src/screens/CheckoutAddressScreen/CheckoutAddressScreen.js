@@ -392,10 +392,6 @@ const styles = StyleSheet.create({
   }
 });
 
-CheckoutAddressScreen.navigationOptions = {
-  title: translate('addressScreen.title')
-};
-
 CheckoutAddressScreen.propTypes = {
   countries: PropTypes.array,
   countryStatus: PropTypes.oneOf(Object.values(Status)).isRequired,

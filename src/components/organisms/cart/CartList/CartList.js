@@ -5,6 +5,7 @@ import {
   Alert,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
 import {
   CartListItem,
   Text,
@@ -12,7 +13,6 @@ import {
   MessageView,
   Price,
 } from '../../..';
-import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN } from '../../../../navigation';
 import { translate } from '../../../../i18n';
 
@@ -26,6 +26,8 @@ const CartList = ({
   currencySymbol,
   currencyRate,
 }) => {
+  const navigation = useNavigation();
+
   const renderRow = ({ item, index }) => (
     <CartListItem
       item={item}
@@ -65,7 +67,7 @@ const CartList = ({
 
   const handlePlaceOrder = () => {
     if (allItemPricesAvailable()) {
-      NavigationService.navigate(NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN);
+      navigation.navigate(NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN);
     } else {
       Alert.alert(translate('cartScreen.priceNotAvailable'));
     }

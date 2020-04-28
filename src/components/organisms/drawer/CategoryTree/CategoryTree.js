@@ -3,7 +3,6 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CategoryTreeItem, Text, Card } from '../../..';
-import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_TO_SETTING_SCREEN } from '../../../../navigation';
 import { translate } from '../../../../i18n';
 import { ThemeContext } from '../../../../theme';
@@ -12,15 +11,16 @@ const CategoryTree = ({
   categories,
   style,
   showFooter,
+  navigation,
   ...props
 }) => {
   const theme = useContext(ThemeContext);
-  const renderRow = category => <CategoryTreeItem category={category.item} />;
+  const renderRow = category => <CategoryTreeItem navigation={navigation} category={category.item} />;
 
   const renderFooter = () => (
     <View style={styles.footerContainer(theme)}>
       <Card
-        onPress={() => NavigationService.navigate(NAVIGATION_TO_SETTING_SCREEN)}
+        onPress={() => navigation.navigate(NAVIGATION_TO_SETTING_SCREEN)}
         style={styles.card(theme)}
       >
         <Text>{translate('settingScreen.title')}</Text>

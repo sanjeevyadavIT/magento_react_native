@@ -4,15 +4,17 @@ import { DrawerHeader } from '../../components';
 import { CategoryTreeContainer } from './containers';
 import { ThemeContext } from '../../theme';
 
-const DrawerPage = () => {
+const Drawer = ({
+  navigation,
+}) => {
   console.log('Navigation Drawer render!');
   const theme = useContext(ThemeContext);
   return (
     <View style={styles.container}>
       <View style={styles.header(theme)}>
-        <DrawerHeader />
+        <DrawerHeader navigation={navigation} />
       </View>
-      <CategoryTreeContainer />
+      <CategoryTreeContainer navigation={navigation} />
     </View>
   );
 };
@@ -27,8 +29,8 @@ const styles = StyleSheet.create({
 });
 
 
-DrawerPage.propTypes = {};
+Drawer.propTypes = {};
 
-DrawerPage.defaultPorps = {};
+Drawer.defaultPorps = {};
 
-export default DrawerPage;
+export default Drawer;

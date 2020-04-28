@@ -1,5 +1,3 @@
-import { theme } from '../theme';
-
 export const NAVIGATION_TO_HOME_SCREEN = 'HomeScreen';
 export const NAVIGATION_TO_CATEGORY_LIST_SCREEN = 'CategoryListScreen';
 export const NAVIGATION_TO_PRODUCT_SCREEN = 'ProductDetailScreen';
@@ -17,14 +15,3 @@ export const NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN = 'OrderConfirmationScreen'
 export const NAVIGATION_TO_FORGOT_PASSWORD_SCREEN = 'ForgetPasswordScreen';
 export const NAVIGATION_TO_SETTING_SCREEN = 'SettingScreen';
 export const NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN = 'EditAccountAddressScreen';
-
-export const defaultHeader = {
-  headerStyle: {
-    backgroundColor: theme.colors.primary,
-  },
-  headerTitleStyle: {
-    ...theme.typography.titleTextBold,
-  },
-  headerBackTitle: null,
-  headerTintColor: theme.colors.appbarTintColor,
-};

@@ -22,13 +22,16 @@ const CategoryTreeContainer = ({
   errorMessage,
   categories,
   currencies,
+  navigation,
 }) => {
   const theme = useContext(ThemeContext);
+  console.log('----', navigation)
 
   const renderChildren = () => {
     if (categories) {
       return (
         <CategoryTree
+          navigation={navigation}
           showFooter={currencies.length > 1}
           categories={categories}
         />

@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text } from '../../..';
 import { magento } from '../../../../magento';
 import Status from '../../../../magento/Status';
-import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_TO_LOGIN_SCREEN, NAVIGATION_TO_ACCOUNT_SCREEN } from '../../../../navigation';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
@@ -22,6 +21,7 @@ import { translate } from '../../../../i18n';
  */
 const DrawerHeader = ({
   status,
+  navigation,
 }) => {
   let welcomeText = '';
   let NAVIGATION_PATH = null;
@@ -38,7 +38,7 @@ const DrawerHeader = ({
   return (
     <TouchableOpacity
       style={styles.container(theme)}
-      onPress={() => NavigationService.navigate(NAVIGATION_PATH)}
+      onPress={() => navigation.navigate(NAVIGATION_PATH)}
     >
       <View style={styles.lowerContainer(theme)}>
         <Text style={styles.text(theme)}>{welcomeText}</Text>

@@ -1,24 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { MaterialAppbarButtons, Item } from '../../components';
 import { CategoryListContainer } from './containers';
-import { translate } from '../../i18n';
 
+// TODO: Connect sort icon on appbar, with ui to sort products
 const CategoryListScreen = ({
+  route,
   navigation,
 }) => {
-  useEffect(() => {
-    // componentDidMount
-    navigation.setParams({ showSortDialog });
-  }, []);
-
-  const showSortDialog = () => {
-    console.log('WIP: Show short dialog');
-  };
-
+  const { id = -1 } = route.params;
   return (
-    <CategoryListContainer style={styles.container} categoryId={navigation.getParam('id', -1)} />
+    <CategoryListContainer style={styles.container} categoryId={id} />
   );
 };
 
@@ -28,15 +20,9 @@ const styles = StyleSheet.create({
   },
 });
 
-CategoryListScreen.navigationOptions = ({ navigation }) => ({
-  title: navigation.getParam('title', translate('common.brandName')),
-  headerRight: (
-    <MaterialAppbarButtons>
-      <Item title={translate('categoryListScreen.menu.sort')} iconName="sort" onPress={navigation.getParam('showSortDialog')} />
-    </MaterialAppbarButtons>
-  ),
-});
-
-CategoryListScreen.propTypes = {};
+CategoryListScreen.propTypes = {
+  route: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
+};
 
 export default CategoryListScreen;

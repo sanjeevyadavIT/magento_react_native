@@ -14,10 +14,10 @@ import { translate } from '../../i18n';
 const OrderAcknowledgementScreen = ({
   orderId,
   navigation,
+  route,
   resetCheckoutState: _resetCheckoutState,
 }) => {
-  const status = navigation.getParam('status', Status.ERROR);
-  const errorMessage = navigation.getParam('errorMessage', translate('orderScreen.orderNotPlace'));
+  const { status = Status.ERROR, errorMessage = translate('orderScreen.orderNotPlace') } = route.params;
   const theme = useContext(ThemeContext);
 
   useEffect(() => (() => {
@@ -60,10 +60,6 @@ const styles = StyleSheet.create({
     marginTop: theme.spacing.small,
   })
 });
-
-OrderAcknowledgementScreen.navigationOptions = {
-  title: translate('orderScreen.orderPlacedScreenTitle'),
-};
 
 OrderAcknowledgementScreen.propTypes = {
   orderId: PropTypes.number.isRequired,

@@ -165,10 +165,6 @@ const styles = StyleSheet.create({
   })
 });
 
-SignUpScreen.navigationOptions = {
-  title: translate('signUpScreen.title')
-};
-
 SignUpScreen.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,

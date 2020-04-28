@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { SearchProductList } from './containers';
 import { getSearchProducts, setCurrentProduct } from '../../store/actions';
-import { Spinner, MaterialAppbarButtons, Item } from '../../components';
+import { Spinner } from '../../components';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 
@@ -17,27 +17,6 @@ import { translate } from '../../i18n';
 // TODO: using same business logic as in CategoryList, extract common code
 // FIXME: Extremely dirty code
 class Search extends React.Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: (
-      <View>
-        <TextInput
-          autoFocus
-          placeholder={translate('searchScreen.searchHint')}
-          onChangeText={navigation.getParam('setSearchText')}
-          onSubmitEditing={navigation.getParam('onSubmitted')}
-        />
-      </View>
-    ),
-    headerRight: (
-      <MaterialAppbarButtons>
-        <Item
-          iconName="sort"
-          title={translate('searchScreen.menu.sort')}
-          onPress={navigation.getParam('showSortDialog')}
-        />
-      </MaterialAppbarButtons>
-    ),
-  })
 
   static contextType = ThemeContext;
 

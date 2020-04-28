@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import NavigationService from '../../../navigation/NavigationService';
+import { useNavigation } from '@react-navigation/native';
 import {
   Text,
   Image,
@@ -54,6 +54,7 @@ const CatalogGridItem = ({
 }) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const extra = useSelector(state => ([product.sku] in state[stateAccessor].extra ? state[stateAccessor].extra[product.sku] : null));
   useEffect(() => {
     // componentDidMount
@@ -64,7 +65,7 @@ const CatalogGridItem = ({
 
   const onItemPress = () => {
     onPress(product.type_id, product.sku, extra ? extra.children : undefined);
-    NavigationService.navigate(NAVIGATION_TO_PRODUCT_SCREEN, {
+    navigation.navigate(NAVIGATION_TO_PRODUCT_SCREEN, {
       product,
       title: product.name,
     });

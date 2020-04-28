@@ -87,10 +87,6 @@ const styles = StyleSheet.create({
   })
 });
 
-AccountScreen.navigationOptions = {
-  title: translate('accountScreen.title')
-};
-
 AccountScreen.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   getCurrentCustomer: PropTypes.func.isRequired,

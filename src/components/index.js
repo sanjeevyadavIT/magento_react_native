@@ -6,7 +6,7 @@ import Button from './atoms/Button';
 import Image from './atoms/Image';
 import Spinner from './atoms/Spinner';
 // Molecules
-import { MaterialAppbarButtons, Item } from './molecules/AppbarButtons';
+import HeaderButtons from './molecules/HeaderButtons/HeaderButtons';
 import Card from './molecules/Card';
 import ImageSlider, { ImageSliderItem } from './molecules/ImageSlider';
 import MessageView from './molecules/MessageView';
@@ -36,8 +36,7 @@ export {
   Button,
   Image,
   Spinner,
-  MaterialAppbarButtons,
-  Item, // Icon shown in Appbar
+  HeaderButtons,
   Card,
   ImageSlider,
   ImageSliderItem,

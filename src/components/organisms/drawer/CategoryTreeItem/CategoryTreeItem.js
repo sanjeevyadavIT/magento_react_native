@@ -10,13 +10,12 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { CategoryTree, Text, Card } from '../../..';
-import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_TO_CATEGORY_LIST_SCREEN } from '../../../../navigation';
 import { setNewCategory } from '../../../../store/actions';
 import { ThemeContext } from '../../../../theme';
 
 // TODO: Hide category which don't have product and children_data
-const CategoryTreeItem = ({ category }) => {
+const CategoryTreeItem = ({ category, navigation }) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(0);
@@ -38,7 +37,7 @@ const CategoryTreeItem = ({ category }) => {
   const onRowPress = () => {
     if (category.product_count !== 0) {
       dispatch(setNewCategory(category.id));
-      NavigationService.navigate(NAVIGATION_TO_CATEGORY_LIST_SCREEN, {
+      navigation.navigate(NAVIGATION_TO_CATEGORY_LIST_SCREEN, {
         title: category.name,
         id: category.id
       });
@@ -75,7 +74,7 @@ const CategoryTreeItem = ({ category }) => {
 
   const renderChildren = () => {
     if (expanded) {
-      return <CategoryTree categories={category.children_data} />;
+      return <CategoryTree navigation={navigation} categories={category.children_data} />;
     }
     return null;
   };

@@ -22,12 +22,12 @@ const OrderDetailScreen = ({
   products,
   orderDetail,
   errorMessage,
+  route,
   navigation,
   getOrderDetail: _getOrderDetail,
   getOrderedProductInfo: _getOrderedProductInfo,
 }) => {
-  const orderId = navigation.getParam('orderId', -1); // Used when coming from OrderAcknowledgementPage
-  const item = navigation.getParam('item', null) || orderDetail;
+  const { orderId = -1, item = orderDetail } = route.params;
   const currencySymbol = priceSignByCode((item && item.order_currency_code) || '$');
   const theme = useContext(ThemeContext);
 
@@ -175,14 +175,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   }
 });
-
-OrderDetailScreen.navigationOptions = ({ navigation }) => {
-  const item = navigation.getParam('item', null);
-  const orderId = !item ? navigation.getParam('orderId', -1) : item.increment_id;
-  return {
-    title: `${translate('orderScreen.orderDetailScreenTitle')}: ${orderId}`
-  };
-};
 
 OrderDetailScreen.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,

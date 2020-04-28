@@ -354,10 +354,6 @@ const styles = StyleSheet.create({
   }
 });
 
-EditAccountAddressScreen.navigationOptions = {
-  title: translate('editAddressScreen.title')
-};
-
 EditAccountAddressScreen.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,

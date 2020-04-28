@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import {
   ScrollView,
   View,
-  SafeAreaView,
   StatusBar,
   StyleSheet
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import { LoadingView, MessageView } from '../..';
 import Status from '../../../magento/Status';

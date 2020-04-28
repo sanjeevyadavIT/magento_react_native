@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
 import { Card, Text, Price } from '../../..';
-import NavigationService from '../../../../navigation/NavigationService';
 import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../../../navigation';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
@@ -10,10 +10,11 @@ import { priceSignByCode } from '../../../../utils/price';
 
 const OrderListItem = ({ item }) => {
   const theme = useContext(ThemeContext);
+  const navigation = useNavigation();
   const currencySymbol = priceSignByCode(item.order_currency_code);
 
   const onPress = () => {
-    NavigationService.navigate(
+    navigation.navigate(
       NAVIGATION_TO_ORDER_DETAIL_SCREEN,
       {
         item

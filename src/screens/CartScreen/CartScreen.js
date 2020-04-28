@@ -25,10 +25,6 @@ const CartPage = ({
   );
 };
 
-CartPage.navigationOptions = {
-  title: translate('cartScreen.title'),
-};
-
 CartPage.propTypes = {};
 
 CartPage.defaultProps = {};

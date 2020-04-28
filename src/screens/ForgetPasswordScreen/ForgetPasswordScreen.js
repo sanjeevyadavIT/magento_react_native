@@ -83,10 +83,6 @@ const ForgetPasswordScreen = ({
   );
 };
 
-ForgetPasswordScreen.navigationOptions = {
-  title: translate('forgetPasswordScreen.title'),
-};
-
 const styles = StyleSheet.create({
   container: theme => ({
     flex: 1,

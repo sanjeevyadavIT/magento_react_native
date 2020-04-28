@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 SettingScreen.navigationOptions = {
-  title: translate('settingScreen.title')
+  
 };
 
 SettingScreen.propTypes = {

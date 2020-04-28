@@ -1,7 +1,11 @@
-import { createAppContainer } from 'react-navigation';
-import DrawerNavigator from './DrawerNavigator';
+import RootNavigator from './RootNavigator';
 
-const Navigator = createAppContainer(DrawerNavigator);
-
-export default Navigator;
+/**
+ * Only one default export will be there,
+ * which will be a top level navigator.
+ */
+export default RootNavigator;
+/**
+ * All the exports in routes.js will be named exports.
+ */
 export * from './routes';

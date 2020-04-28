@@ -139,10 +139,6 @@ const styles = StyleSheet.create({
   }),
 });
 
-ShippingScreen.navigationOptions = {
-  title: translate('shippingScreen.title')
-};
-
 ShippingScreen.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   paymentMethodStatus: PropTypes.oneOf(Object.values(Status)).isRequired,

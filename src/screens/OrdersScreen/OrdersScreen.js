@@ -11,6 +11,7 @@ import { translate } from '../../i18n';
 const OrdersScreen = ({
   status,
   errorMessage,
+  route,
   navigation,
   orders,
   getOrderList: _getOrderList,
@@ -18,7 +19,7 @@ const OrdersScreen = ({
   useEffect(() => {
     // componentDidMount
     if (status === Status.DEFAULT) {
-      const customerId = navigation.getParam('customerId', -1);
+      const { customerId = -1 } = route.params;
       _getOrderList(customerId);
     }
   }, []);
@@ -40,7 +41,7 @@ const OrdersScreen = ({
 const styles = StyleSheet.create({});
 
 OrdersScreen.navigationOptions = ({ navigation }) => ({
-  title: translate('orderScreen.ordersScreenTitle'),
+
 });
 
 OrdersScreen.propTypes = {

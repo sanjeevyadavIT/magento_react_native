@@ -3,8 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  MaterialAppbarButtons,
-  Item,
   GenericTemplate,
 } from '../../components';
 import {
@@ -44,14 +42,13 @@ const ProductScreen = ({
   children,
   attributes,
   options,
+  route,
   navigation, // From react-navigation
 }) => {
   const theme = useContext(ThemeContext);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState('');
   const [quantity, setQuantity] = useState(1);
-
-  const params = navigation && navigation.state.params ? navigation.state.params : {};
   const {
     product: {
       sku,
@@ -59,7 +56,7 @@ const ProductScreen = ({
       type_id: productType,
       price,
     }
-  } = params;
+  } = route.params;
 
   useEffect(() => {
     calculatedSelectedProduct();
@@ -145,15 +142,6 @@ const styles = StyleSheet.create({
   }),
 });
 
-ProductScreen.navigationOptions = ({ navigation }) => ({
-  title: navigation.getParam('title', translate('productScreen.title')),
-  headerRight: (
-    <MaterialAppbarButtons>
-      <Item title={translate('productScreen.menu.cart')} iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_TO_CART_SCREEN) : navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN))} />
-    </MaterialAppbarButtons>
-  ),
-});
-
 ProductScreen.propTypes = {
   children: PropTypes.arrayOf(ProductType),
   options: PropTypes.arrayOf(PropTypes.shape({
@@ -176,10 +164,10 @@ ProductScreen.defaultProps = {
   attributes: {},
 };
 
-const mapStateToProps = ({ product }, { navigation }) => {
+const mapStateToProps = ({ product }, { route }) => {
   const {
-    state: { params: { product: { sku } } }
-  } = navigation;
+    product: { sku }
+  } = route.params;
   const {
     current: {
       [sku]: {

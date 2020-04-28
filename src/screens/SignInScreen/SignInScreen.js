@@ -151,10 +151,6 @@ const styles = StyleSheet.create({
   })
 });
 
-SignInScreen.navigationOptions = {
-  title: translate('signInScreen.title')
-};
-
 SignInScreen.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,

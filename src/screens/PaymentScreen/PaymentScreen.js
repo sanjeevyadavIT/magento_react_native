@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { StackActions, NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import {
   placeCartOrder,
@@ -152,18 +151,10 @@ const PaymentScreen = ({
 
   if (orderStatus === Status.SUCCESS) {
     _createQuoteId();
-    const resetAction = StackActions.reset({
+    navigation.reset({
       index: 1,
-      actions: [
-        NavigationActions.navigate(
-          { routeName: NAVIGATION_TO_HOME_SCREEN }
-        ),
-        NavigationActions.navigate(
-          { routeName: NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } },
-        ),
-      ],
+      routes: [{ name: NAVIGATION_TO_HOME_SCREEN }, { name: NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } }],
     });
-    navigation.dispatch(resetAction);
   }
 
   return (
@@ -188,10 +179,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
 });
-
-PaymentScreen.navigationOptions = {
-  title: translate('paymentScreen.title')
-};
 
 PaymentScreen.propTypes = {
   billingAddress: PropTypes.object,

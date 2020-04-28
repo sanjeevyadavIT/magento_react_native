@@ -2,22 +2,13 @@ import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate, MaterialAppbarButtons, Item } from '../../components';
+import { GenericTemplate } from '../../components';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from './containers';
 import { ThemeContext } from '../../theme';
-import { magento } from '../../magento';
 import Status from '../../magento/Status';
-import {
-  NAVIGATION_TO_SEARCH_SCREEN,
-  NAVIGATION_TO_LOGIN_SCREEN,
-  NAVIGATION_TO_CART_SCREEN
-} from '../../navigation';
-import { translate } from '../../i18n';
 
 /**
- * First screen which is shown to user, this component is
- * responsible for setting styling and layout.
- * Displays featured content and navigation to browse products
+ * First screen which is shown to user.
  *
  * @param {Object} props              - props related to the component
  * @param {Object} props.status       - (From redux) status of the network
@@ -36,37 +27,6 @@ const HomeScreen = ({ status, errorMessage }) => {
     </GenericTemplate>
   );
 };
-
-HomeScreen.navigationOptions = ({ navigation }) => ({
-  title: translate('homeScreen.title'),
-  headerLeft: (
-    <MaterialAppbarButtons>
-      <Item
-        title={translate('homeScreen.menu.drawer')}
-        iconName="menu"
-        onPress={() => navigation.toggleDrawer()}
-      />
-    </MaterialAppbarButtons>
-  ),
-  headerRight: (
-    <MaterialAppbarButtons>
-      <Item
-        title={translate('homeScreen.menu.search')}
-        iconName="search"
-        onPress={() => navigation.navigate(NAVIGATION_TO_SEARCH_SCREEN)}
-      />
-      <Item
-        title={translate('homeScreen.menu.cart')}
-        iconName="shopping-cart"
-        onPress={() => (
-          magento.isCustomerLogin()
-            ? navigation.navigate(NAVIGATION_TO_CART_SCREEN)
-            : navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)
-        )}
-      />
-    </MaterialAppbarButtons>
-  )
-});
 
 const styles = StyleSheet.create({
   imageSliderContainer: theme => ({
