@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { CURRENCY_CODE } from '../../../../magento';
-import { ModalSelect } from '../../../../components';
+import { ModalSelect } from '../../../../common';
 import { priceSignByCode } from '../../../../utils/price';
 import { changeCurrency } from '../../../../store/actions';
 import { translate } from '../../../../i18n';

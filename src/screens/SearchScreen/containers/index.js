@@ -1,4 +1,4 @@
-import SearchProductList from './SearchProductList';
+import SearchProductList from './SearchProductList/SearchProductList';
 
 export {
   SearchProductList,

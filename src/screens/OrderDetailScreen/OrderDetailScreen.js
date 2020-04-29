@@ -8,7 +8,7 @@ import {
   Image,
   Price,
   GenericTemplate,
-} from '../../components';
+} from '../../common';
 import { getOrderDetail, getOrderedProductInfo } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';

@@ -17,7 +17,7 @@ import {
   Button,
   TextInput,
   MessageView
-} from '../../components';
+} from '../../common';
 import { NAVIGATION_TO_SIGNUP_SCREEN, NAVIGATION_TO_FORGOT_PASSWORD_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';

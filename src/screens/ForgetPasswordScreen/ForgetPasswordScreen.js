@@ -12,7 +12,7 @@ import {
   Button,
   TextInput,
   MessageView,
-} from '../../components';
+} from '../../common';
 import { resetPassword, resetAuthState } from '../../store/actions';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';

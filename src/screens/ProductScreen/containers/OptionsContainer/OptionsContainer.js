@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate, ModalSelect } from '../../../../components';
+import { GenericTemplate, ModalSelect } from '../../../../common';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';

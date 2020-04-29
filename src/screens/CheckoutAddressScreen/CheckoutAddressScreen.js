@@ -23,7 +23,7 @@ import {
   TextInput,
   ModalSelect,
   GenericTemplate,
-} from '../../components';
+} from '../../common';
 import { NAVIGATION_TO_SHIPPING_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';

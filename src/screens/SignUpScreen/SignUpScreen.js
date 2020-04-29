@@ -14,7 +14,7 @@ import {
   TextInput,
   MessageView,
   GenericTemplate
-} from '../../components';
+} from '../../common';
 import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';

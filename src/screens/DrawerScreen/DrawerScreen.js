@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { DrawerHeader } from '../../components';
+import { DrawerHeader } from './components';
 import { CategoryTreeContainer } from './containers';
 import { ThemeContext } from '../../theme';
 

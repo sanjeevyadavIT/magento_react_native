@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { magento } from '../../../../magento';
-import { ImageSlider, ImageSliderItem } from '../../../../components';
+import { ImageSlider, ImageSliderItem } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
 
 /**

@@ -1,4 +1,4 @@
-import { ImageSliderItem } from '../components';
+import { ImageSliderItem } from '../common';
 import Status from '../magento/Status';
 
 const parseSliderData = slider => slider.map(item => new ImageSliderItem(item.title, item.image, ''));

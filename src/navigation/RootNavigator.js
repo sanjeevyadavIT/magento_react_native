@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { HeaderButtons } from '../components';
+import { HeaderButtons } from '../common';
 import { ThemeContext } from '../theme';
 import {
   DrawerScreen,

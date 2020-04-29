@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { WebView } from 'react-native-webview';
-import { Text } from '../../../../components';
+import { Text } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 

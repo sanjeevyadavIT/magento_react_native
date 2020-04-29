@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import FeaturedCategoryList from '../FeaturedCategoryList';
-import { Text } from '../../../../components';
+import FeaturedCategoryList from '../FeaturedCategoryList/FeaturedCategoryList';
+import { Text } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
 
 

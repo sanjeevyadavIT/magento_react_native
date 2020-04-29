@@ -7,7 +7,7 @@ import {
   NAVIGATION_TO_ORDERS_SCREEN,
   NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
 } from '../../navigation';
-import { Text, Button, GenericTemplate } from '../../components';
+import { Text, Button, GenericTemplate } from '../../common';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';

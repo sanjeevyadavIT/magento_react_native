@@ -6,6 +6,9 @@ import RootNavigator from './navigation';
 import store from './store';
 import { initializeApp } from './store/actions';
 
+require('react-native')
+  .unstable_enableLogBox();
+
 store.dispatch(initializeApp());
 
 const App = () => (

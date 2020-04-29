@@ -1,5 +1,5 @@
-import HomeSliderContainer from './HomeSliderContainer';
-import FeaturedCategoriesContainer from './FeaturedCategoriesContainer';
+import HomeSliderContainer from './HomeSliderContainer/HomeSliderContainer';
+import FeaturedCategoriesContainer from './FeaturedCategoriesContainer/FeaturedCategoriesContainer';
 
 export {
   HomeSliderContainer,

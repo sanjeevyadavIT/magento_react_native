@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate } from '../../components';
+import { GenericTemplate } from '../../common';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from './containers';
 import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';

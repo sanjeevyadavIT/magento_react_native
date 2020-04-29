@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate, CategoryTree } from '../../../../components';
+import { GenericTemplate } from '../../../../common';
+import { CategoryTree } from '../../components';
 import { ThemeContext } from '../../../../theme';
 import Status from '../../../../magento/Status';
 

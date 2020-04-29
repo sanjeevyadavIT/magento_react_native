@@ -3,7 +3,8 @@ import { StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrderList } from '../../store/actions';
-import { GenericTemplate, OrderListItem, MessageView } from '../../components';
+import { GenericTemplate, MessageView } from '../../common';
+import { OrderListItem } from './components';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 

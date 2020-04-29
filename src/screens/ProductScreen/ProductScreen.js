@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   GenericTemplate,
-} from '../../components';
+} from '../../common';
 import {
   SliderContainer,
   PriceContainer,

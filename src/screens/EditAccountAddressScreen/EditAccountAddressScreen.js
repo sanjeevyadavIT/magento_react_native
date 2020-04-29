@@ -19,7 +19,7 @@ import {
   TextInput,
   ModalSelect,
   GenericTemplate,
-} from '../../components';
+} from '../../common';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';

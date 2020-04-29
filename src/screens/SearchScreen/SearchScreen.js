@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { SearchProductList } from './containers';
 import { getSearchProducts, setCurrentProduct } from '../../store/actions';
-import { Spinner } from '../../components';
+import { Spinner } from '../../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 

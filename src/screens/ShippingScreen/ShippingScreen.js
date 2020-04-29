@@ -11,7 +11,7 @@ import {
   Button,
   ModalSelect,
   GenericTemplate
-} from '../../components';
+} from '../../common';
 import { NAVIGATION_TO_PAYMENT_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';

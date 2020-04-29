@@ -1,8 +1,8 @@
-import SliderContainer from './SliderContainer';
-import PriceContainer from './PriceContainer';
-import DescriptionContainer from './DescriptionContainer';
-import OptionsContainer from './OptionsContainer';
-import CTAButtons from './CTAContainer';
+import SliderContainer from './SliderContainer/SliderContainer';
+import PriceContainer from './PriceContainer/PriceContainer';
+import DescriptionContainer from './DescriptionContainer/DescriptionContainer';
+import OptionsContainer from './OptionsContainer/OptionsContainer';
+import CTAButtons from './CTAContainer/CTAContainer';
 
 export {
   SliderContainer,

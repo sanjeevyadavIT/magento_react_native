@@ -13,7 +13,7 @@ import {
   Button,
   ModalSelect,
   GenericTemplate
-} from '../../components';
+} from '../../common';
 import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN
