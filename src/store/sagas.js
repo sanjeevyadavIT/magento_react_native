@@ -1,15 +1,15 @@
 import { fork } from 'redux-saga/effects';
 
-import magentoSagas from './magento/sagas';
-import homeSagas from './home/sagas';
-import categoryTreeSagas from './categoryTree/sagas';
-import authSagas from './auth/sagas';
-import accountSagas from './account/sagas';
-import cartSagas from './cart/sagas';
-import categoryListSagas from './categoryList/sagas';
-import checkoutSagas from './checkout/sagas';
-import productSagas from './product/sagas';
-import searchSagas from './search/sagas';
+import accountSagas from './account/accountSagas';
+import authSagas from './auth/authSagas';
+import cartSagas from './cart/cartSagas';
+import magentoSagas from './magento/magentoSagas';
+import homeSagas from './home/homeSagas';
+import categoryTreeSagas from './categoryTree/categoryTreeSagas';
+import categoryListSagas from './categoryList/categoryListSagas';
+import checkoutSagas from './checkout/checkoutSagas';
+import productSagas from './product/productSagas';
+import searchSagas from './search/searchSagas';
 
 /**
  * rootSaga

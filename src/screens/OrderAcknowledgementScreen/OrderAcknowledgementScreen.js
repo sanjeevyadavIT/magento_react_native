@@ -12,12 +12,11 @@ import { translate } from '../../i18n';
 
 // TODO: Extract strings in strings.js
 const OrderAcknowledgementScreen = ({
-  orderId,
   navigation,
   route,
   resetCheckoutState: _resetCheckoutState,
 }) => {
-  const { status = Status.ERROR, errorMessage = translate('orderScreen.orderNotPlace') } = route.params;
+  const { status = Status.ERROR, orderId, errorMessage = translate('orderScreen.orderNotPlace') } = route.params;
   const theme = useContext(ThemeContext);
 
   useEffect(() => (() => {
@@ -68,13 +67,6 @@ OrderAcknowledgementScreen.propTypes = {
 
 OrderAcknowledgementScreen.defaultProps = {};
 
-const mapStateToProps = ({ checkout }) => {
-  const { orderId } = checkout;
-  return {
-    orderId,
-  };
-};
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   resetCheckoutState,
 })(OrderAcknowledgementScreen);
