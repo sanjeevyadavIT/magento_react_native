@@ -15,6 +15,7 @@ import {
 import { NAVIGATION_TO_PAYMENT_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 import { ThemeContext } from '../../theme';
 
 const ShippingScreen = ({
@@ -29,7 +30,7 @@ const ShippingScreen = ({
   addCartShippingInfo: _addCartShippingInfo,
   resetShippingState: _resetShippingState
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [shippingCode, setShippingCode] = useState();
 
   useEffect(() => (() => {
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.large,
+    marginTop: SPACING.large,
   }),
 });
 

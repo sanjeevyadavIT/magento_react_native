@@ -7,6 +7,7 @@ import CatalogGridItem from '../CatalogGridItem/CatalogGridItem';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { ProductType } from '../../types';
+import { SPACING } from '../../constants';
 
 /**
  * This component support rendering catalog, in Horizonatl list
@@ -56,7 +57,7 @@ const CatalogGrid = ({
    */
   stateAccessor,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // componentDidMount
@@ -70,8 +71,8 @@ const CatalogGrid = ({
     if (showHorizontalList) {
       layoutManager.horizontal = true;
       layoutManager.showsHorizontalScrollIndicator = false;
-      layoutManager.ItemSeparatorComponent = () => <View style={{ width: theme.spacing.large }} />;
-      layoutManager.contentContainerStyle = { padding: theme.spacing.large };
+      layoutManager.ItemSeparatorComponent = () => <View style={{ width: SPACING.large }} />;
+      layoutManager.contentContainerStyle = { padding: SPACING.large };
     } else {
       layoutManager.numColumns = columnCount;
     }
@@ -126,7 +127,7 @@ const CatalogGrid = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.white,
   }),
 });
 

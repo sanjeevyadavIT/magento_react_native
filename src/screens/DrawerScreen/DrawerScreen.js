@@ -3,12 +3,13 @@ import { View, StyleSheet } from 'react-native';
 import { DrawerHeader } from './components';
 import { CategoryTreeContainer } from './containers';
 import { ThemeContext } from '../../theme';
+import { DIMENS } from '../../constants';
 
 const Drawer = ({
   navigation,
 }) => {
   console.log('Navigation Drawer render!');
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.container}>
       <View style={styles.header(theme)}>
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: theme => ({
-    height: theme.dimens.headerViewHeight,
+    height: DIMENS.headerViewHeight,
   }),
 });
 

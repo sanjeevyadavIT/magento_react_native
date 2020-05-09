@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import { ThemeContext } from '../../theme';
+import { SPACING } from '../../constants';
 
 const INFO = 'info';
 const SUCCESS = 'success';
@@ -22,7 +23,7 @@ const MessageView = React.memo(({
    */
   type
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.container}>
       <Text type="body" style={styles.text(type, theme)}>{message}</Text>
@@ -33,11 +34,11 @@ const MessageView = React.memo(({
 const getTextColor = (type, theme) => {
   switch (type) {
     case SUCCESS:
-      return theme.colors.success;
+      return theme.successColor;
     case ERROR:
-      return theme.colors.error;
+      return theme.errorColor;
     default:
-      return theme.colors.bodyText;
+      return theme.bodyTextColor;
   }
 };
 
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   text: (type, theme) => ({
     textAlign: 'center',
-    padding: theme.spacing.small,
+    padding: SPACING.small,
     color: getTextColor(type, theme),
   }),
 });

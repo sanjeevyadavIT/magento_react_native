@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TextInput from './TextInput';
-import { ThemeProvider, theme } from '../../theme';
+import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 const styles = {
   customInputContainer: _theme => ({

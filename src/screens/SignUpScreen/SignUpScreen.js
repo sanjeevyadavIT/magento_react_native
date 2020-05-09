@@ -19,6 +19,7 @@ import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 
 // TODO: Use KeyboardAvoidingView
 const SignUpScreen = ({
@@ -35,7 +36,7 @@ const SignUpScreen = ({
     password: '',
   });
   const [secureEntry, toggleSecureEntry] = useState(true);
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   // Reference
   const lastNameInputRef = useRef();
   const emailInputRef = useRef();
@@ -132,7 +133,7 @@ const SignUpScreen = ({
             name={secureEntry ? 'eye' : 'eye-off'}
             size={20}
             style={styles.iconPadding(theme)}
-            color={theme.colors.labelColor}
+            color={theme.labelTextColor}
             onPress={() => toggleSecureEntry(!secureEntry)}
           />
         )}
@@ -158,10 +159,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.large,
+    marginTop: SPACING.large,
   }),
   iconPadding: theme => ({
-    padding: theme.spacing.small
+    padding: SPACING.small
   })
 });
 

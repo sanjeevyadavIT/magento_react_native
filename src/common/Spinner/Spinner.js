@@ -19,12 +19,12 @@ const Spinner = ({
    */
   style
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <ActivityIndicator
       style={style}
       size={size}
-      color={color || theme.colors.secondary}
+      color={color || theme.primaryColor}
     />
   );
 };

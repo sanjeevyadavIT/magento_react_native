@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react-native';
 import ModalSelect from './ModalSelect';
-import { ThemeProvider, theme } from '../../theme';
+import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 const data = [
   { key: 1, label: 'Red Apples' },
@@ -21,8 +21,8 @@ const styles = {
   },
   customModalStyle: {
     borderWidth: 2,
-    borderColor: theme.colors.secondaryDark,
-    backgroundColor: theme.colors.secondary,
+    borderColor: theme.primaryDarkColor,
+    backgroundColor: theme.primaryColor,
   },
   customTextStyle: {
     color: 'white'

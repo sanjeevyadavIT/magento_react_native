@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import Spinner from './Spinner';
-import { ThemeProvider, theme } from '../../theme';
+import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 storiesOf('Spinner', module)
   .addDecorator(getStory => (

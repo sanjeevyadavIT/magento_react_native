@@ -11,6 +11,7 @@ import { Text, Button, GenericTemplate } from '../../common';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 
 // TODO: Disable logout button, once clicked
 const AccountScreen = ({
@@ -21,7 +22,7 @@ const AccountScreen = ({
   getCurrentCustomer: _getCurrentCustomer,
   logout: _logout,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // ComponentDidMount
@@ -83,7 +84,7 @@ const AccountScreen = ({
 
 const styles = StyleSheet.create({
   space: theme => ({
-    marginBottom: theme.spacing.small,
+    marginBottom: SPACING.small,
   })
 });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import Card from './Card';
 import Text from '../Text/Text';
-import { ThemeProvider, theme } from '../../theme';
+import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 storiesOf('Card', module)
   .addDecorator(getStory => (

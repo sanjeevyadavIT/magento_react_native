@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import { isNumber, formatPrice } from './utils';
 import { ThemeContext } from '../../theme';
+import { SPACING } from '../../constants';
 
 /**
  * Component to display price of the product
@@ -30,16 +31,16 @@ const Price = ({
   startingPrice,
   endingPrice,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const isBold = () => discountPrice && discountPrice < basePrice;
   const renderDiscountPrice = () => (discountPrice === basePrice ? null : <Text type="label" bold={isBold()} style={styles.discountPriceText(theme)}>{`${currencySymbol}${formatPrice(discountPrice)}`}</Text>);
 
   if (isNumber(startingPrice)) {
     return (
       <View style={styles.container}>
-        { !isNumber(endingPrice) ? <Text>From </Text> : null }
+        {!isNumber(endingPrice) ? <Text>From </Text> : null}
         <Text type="label" bold>{`${currencySymbol}${formatPrice(startingPrice, currencyRate)}`}</Text>
-        { isNumber(endingPrice) ? <Text type="label" bold>{` - ${currencySymbol}${formatPrice(endingPrice, currencyRate)}`}</Text> : null}
+        {isNumber(endingPrice) ? <Text type="label" bold>{` - ${currencySymbol}${formatPrice(endingPrice, currencyRate)}`}</Text> : null}
       </View>
     );
   }
@@ -57,7 +58,7 @@ const styles = {
     flexDirection: 'row'
   },
   discountPriceText: theme => ({
-    marginEnd: theme.spacing.tiny,
+    marginEnd: SPACING.tiny,
   }),
   basePriceText: (basePrice, discountPrice) => ({
     textDecorationLine: discountPrice && discountPrice < basePrice ? 'line-through' : 'none',

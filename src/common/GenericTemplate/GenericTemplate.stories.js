@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import GenericTemplate from './GenericTemplate';
 import Text from '../Text/Text';
-import { ThemeProvider, theme } from '../../theme';
+import { ThemeProvider, lightTheme as theme } from '../../theme';
 import Status from '../../magento/Status';
 
 storiesOf('GenericTemplate', module)

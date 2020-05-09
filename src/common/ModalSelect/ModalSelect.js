@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../TextInput/TextInput';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { DIMENS } from '../../constants';
 
 const ModalSelect = ({
   /**
@@ -50,7 +51,7 @@ const ModalSelect = ({
   placeholderTextColor
 }) => {
   const [value, setValue] = useState('');
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const dataWithLabel = [
     {
       key: '5d80812e', // Random key
@@ -109,7 +110,7 @@ const ModalSelect = ({
         value={value}
         placeholderTextColor={placeholderTextColor}
         rightIcon={
-          <Icon name="arrow-drop-down" size={30} color={placeholderTextColor || theme.colors.label} />
+          <Icon name="arrow-drop-down" size={30} color={placeholderTextColor || theme.labelTextColor} />
         }
       />
     </ModalSelector>
@@ -123,7 +124,7 @@ const styles = {
   },
   customInputContainer: theme => ({
     borderWidth: 1,
-    borderRadius: theme.dimens.borderRadius,
+    borderRadius: DIMENS.borderRadius,
   }),
   disabledContainer: {
     opacity: 0.5

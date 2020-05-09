@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../theme';
+import { DIMENS } from '../../constants';
 
 const OUTLINE = 'outline';
 const CLEAR = 'clear';
@@ -39,7 +40,7 @@ const Card = ({
   children
 }) => {
   const ViewGroup = onPress ? TouchReceptor : View;
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <ViewGroup onPress={onPress}>
@@ -54,9 +55,9 @@ const styles = {
   conatiner: (type, theme) => ({
     flex: 1,
     borderWidth: type === OUTLINE ? 1 : 0,
-    borderColor: theme.colors.border,
-    borderRadius: theme.dimens.borderRadius,
-    backgroundColor: theme.colors.surface,
+    borderColor: theme.borderColor,
+    borderRadius: DIMENS.borderRadius,
+    backgroundColor: theme.surfaceColor,
   }),
 };
 

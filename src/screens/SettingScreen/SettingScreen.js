@@ -10,7 +10,7 @@ const SettingScreen = ({
   currencies,
   navigation,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <View style={styles.container}>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 SettingScreen.navigationOptions = {
-  
+
 };
 
 SettingScreen.propTypes = {

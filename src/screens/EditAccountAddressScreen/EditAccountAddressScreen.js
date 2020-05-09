@@ -23,6 +23,7 @@ import {
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 
 // TODO: Use KeyboardAvoidingView
 const EditAccountAddressScreen = ({
@@ -53,7 +54,7 @@ const EditAccountAddressScreen = ({
   const cityInputRef = useRef();
   const zipCodeInputRef = useRef();
 
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // componentDidMount
@@ -339,10 +340,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.large,
+    marginTop: SPACING.large,
   }),
   lastElement: theme => ({
-    marginVertical: theme.spacing.large,
+    marginVertical: SPACING.large,
   }),
   center: {
     alignSelf: 'center',

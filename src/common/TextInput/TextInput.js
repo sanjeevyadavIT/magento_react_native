@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import { ThemeContext } from '../../theme';
+import { DIMENS, SPACING, TYPOGRAPHY } from '../../constants';
 
 const TextInput = ({
   /**
@@ -48,7 +49,7 @@ const TextInput = ({
   assignRef,
   ...props
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <View style={StyleSheet.flatten([styles.container(theme), containerStyle])}>
       {!!label && (
@@ -67,7 +68,7 @@ const TextInput = ({
         )}
 
         <InputComponent
-          underlineColorAndroid={theme.colors.transparent}
+          underlineColorAndroid={theme.transparent}
           editable={!disabled}
           style={[
             styles.input(theme),
@@ -102,35 +103,35 @@ const TextInput = ({
 const styles = StyleSheet.create({
   container: theme => ({
     width: '100%',
-    paddingHorizontal: theme.spacing.small,
+    paddingHorizontal: SPACING.small,
   }),
   inputContainer: theme => ({
     flexDirection: 'row',
     borderBottomWidth: 1,
     alignItems: 'center',
-    borderColor: theme.colors.labelColor,
+    borderColor: theme.labelTextColor,
   }),
   input: theme => ({
-    ...theme.typography.textInput,
+    ...TYPOGRAPHY.textInput,
     alignSelf: 'center',
     flex: 1,
-    minHeight: theme.dimens.textInputHeight,
+    minHeight: DIMENS.textInputHeight,
   }),
   error: theme => ({
-    margin: theme.spacing.tiny,
+    margin: SPACING.tiny,
     fontSize: 12,
-    color: theme.colors.error,
+    color: theme.errorColor,
   }),
   iconContainer: theme => ({
-    height: theme.dimens.textInputHeight,
+    height: DIMENS.textInputHeight,
     justifyContent: 'center',
     alignItems: 'center',
   }),
   leftIconContainer: theme => ({
-    marginEnd: theme.spacing.medium
+    marginEnd: SPACING.medium
   }),
   rightIconContainer: theme => ({
-    marginStart: theme.spacing.medium
+    marginStart: SPACING.medium
   })
 });
 
@@ -160,7 +161,7 @@ TextInput.defaultProps = {
   errorMessage: '',
   leftIcon: null,
   rightIcon: null,
-  assignRef: () => {}
+  assignRef: () => { }
 };
 
 export default TextInput;

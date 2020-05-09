@@ -9,6 +9,7 @@ import { resetCheckoutState } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 
 // TODO: Extract strings in strings.js
 const OrderAcknowledgementScreen = ({
@@ -17,7 +18,7 @@ const OrderAcknowledgementScreen = ({
   resetCheckoutState: _resetCheckoutState,
 }) => {
   const { status = Status.ERROR, orderId, errorMessage = translate('orderScreen.orderNotPlace') } = route.params;
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => (() => {
     // componentDidUnmount: Reset entire checkout state
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   },
   space: theme => ({
     flex: 1,
-    marginTop: theme.spacing.small,
+    marginTop: SPACING.small,
   })
 });
 

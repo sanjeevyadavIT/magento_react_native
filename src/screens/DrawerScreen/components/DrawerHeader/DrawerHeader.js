@@ -9,6 +9,7 @@ import Status from '../../../../magento/Status';
 import { NAVIGATION_TO_LOGIN_SCREEN, NAVIGATION_TO_ACCOUNT_SCREEN } from '../../../../navigation';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
+import { DIMENS, SPACING } from '../../../../constants';
 
 /**
  * @param status need to be passed, so that {@link DrawerHeader} can refresh
@@ -25,7 +26,7 @@ const DrawerHeader = ({
 }) => {
   let welcomeText = '';
   let NAVIGATION_PATH = null;
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   if (magento.isCustomerLogin()) {
     welcomeText = translate('drawerScreen.welcomeText');
@@ -42,7 +43,7 @@ const DrawerHeader = ({
     >
       <View style={styles.lowerContainer(theme)}>
         <Text style={styles.text(theme)}>{welcomeText}</Text>
-        <Icon name="chevron-right" size={30} color={theme.colors.white} />
+        <Icon name="chevron-right" size={30} color={theme.white} />
       </View>
     </TouchableOpacity>
   );
@@ -50,18 +51,18 @@ const DrawerHeader = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    height: theme.dimens.headerViewHeight,
-    backgroundColor: theme.colors.primary,
+    height: DIMENS.headerViewHeight,
+    backgroundColor: theme.appbar.backgroundColor,
     borderWidth: 0,
   }),
   lowerContainer: theme => ({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: theme.spacing.large,
+    padding: SPACING.large,
   }),
   text: theme => ({
-    color: theme.colors.white,
+    color: theme.white,
   }),
 });
 

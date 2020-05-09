@@ -28,6 +28,7 @@ import { NAVIGATION_TO_SHIPPING_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 
 // TODO: Use KeyboardAvoidingView
 // TODO: Refactor code and make it optimize, it's higly messy
@@ -65,7 +66,7 @@ const CheckoutAddressScreen = ({
   const cityInputRef = useRef();
   const zipCodeInputRef = useRef();
 
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // componentDidMount
@@ -377,10 +378,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.large,
+    marginTop: SPACING.large,
   }),
   lastElement: theme => ({
-    marginVertical: theme.spacing.large,
+    marginVertical: SPACING.large,
   }),
   center: {
     alignSelf: 'center',

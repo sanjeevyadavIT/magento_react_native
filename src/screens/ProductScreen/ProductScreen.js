@@ -21,6 +21,7 @@ import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';
 import { ProductType } from '../../types';
 import { translate } from '../../i18n';
+import { DIMENS, SPACING } from '../../constants';
 
 /**
  * Screen to display product description and detail.
@@ -45,7 +46,7 @@ const ProductScreen = ({
   route,
   navigation, // From react-navigation
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -97,7 +98,7 @@ const ProductScreen = ({
         />
       )}
     >
-      <View style={styles.imageContainer(theme.dimens.productDetailPageSliderHeight)}>
+      <View style={styles.imageContainer(DIMENS.productDetailPageSliderHeight)}>
         <SliderContainer
           sku={sku}
           selectedProduct={selectedProduct}
@@ -130,15 +131,15 @@ const ProductScreen = ({
 
 const styles = StyleSheet.create({
   defaultStyles: theme => ({
-    backgroundColor: theme.colors.surface,
-    marginTop: theme.spacing.large,
-    padding: theme.spacing.large,
+    backgroundColor: theme.surfaceColor,
+    marginTop: SPACING.large,
+    padding: SPACING.large,
   }),
   imageContainer: height => ({
     height
   }),
   optionsContainer: theme => ({
-    minHeight: theme.dimens.optionBoxMinHeight,
+    minHeight: DIMENS.optionBoxMinHeight,
   }),
 });
 

@@ -17,7 +17,7 @@ const LoadingView = ({
    */
   backgroundColor
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.container(backgroundColor, theme)}>
       <Spinner size={size} />
@@ -30,7 +30,7 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: !backgroundColor ? theme.colors.transparent : backgroundColor,
+    backgroundColor: !backgroundColor ? theme.transparent : backgroundColor,
   }),
 };
 

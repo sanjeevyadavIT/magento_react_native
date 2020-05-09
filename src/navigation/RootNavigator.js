@@ -51,15 +51,15 @@ const Stack = createStackNavigator();
 
 // TODO: access isLogged in from redux state or Aysnc storage, not magento variable
 const StackNavigator = () => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <Stack.Navigator
       initialRouteName={NAVIGATION_TO_HOME_SCREEN}
       screenOptions={({ navigation }) => ({
-        headerTintColor: theme.colors.appbarTintColor,
+        headerTintColor: theme.appbar.tintColor,
         headerStyle: {
-          backgroundColor: theme.colors.primary,
+          backgroundColor: theme.appbar.backgroundColor,
         },
         headerBackTitleVisible: false,
       })}

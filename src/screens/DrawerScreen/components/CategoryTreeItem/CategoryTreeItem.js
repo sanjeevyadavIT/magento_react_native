@@ -14,10 +14,11 @@ import CategoryTree from '../CategoryTree/CategoryTree';
 import { NAVIGATION_TO_CATEGORY_LIST_SCREEN } from '../../../../navigation';
 import { setNewCategory } from '../../../../store/actions';
 import { ThemeContext } from '../../../../theme';
+import { SPACING } from '../../../../constants';
 
 // TODO: Hide category which don't have product and children_data
 const CategoryTreeItem = ({ category, navigation }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const dispatch = useDispatch();
   const [expanded, setExpanded] = useState(0);
 
@@ -54,7 +55,7 @@ const CategoryTreeItem = ({ category, navigation }) => {
         <Icon
           style={styles.expandIcon(theme)}
           name={icon}
-          color={theme.colors.bodyText}
+          color={theme.bodyTextColor}
           size={20}
           onPress={() => setExpanded(!expanded)}
         />
@@ -91,7 +92,7 @@ const CategoryTreeItem = ({ category, navigation }) => {
 
 const styles = StyleSheet.create({
   container: theme => ({
-    marginLeft: theme.spacing.large,
+    marginLeft: SPACING.large,
   }),
   card: theme => ({
     borderWidth: 0,
@@ -100,11 +101,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: theme.colors.border,
+    borderColor: theme.borderColor,
   }),
   expandIcon: theme => ({
     padding: 2,
-    paddingRight: theme.spacing.large
+    paddingRight: SPACING.large
   }),
 });
 

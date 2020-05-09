@@ -7,6 +7,7 @@ import CategoryTreeItem from '../CategoryTreeItem/CategoryTreeItem';
 import { NAVIGATION_TO_SETTING_SCREEN } from '../../../../navigation';
 import { translate } from '../../../../i18n';
 import { ThemeContext } from '../../../../theme';
+import { SPACING } from '../../../../constants';
 
 const CategoryTree = ({
   categories,
@@ -15,7 +16,7 @@ const CategoryTree = ({
   navigation,
   ...props
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const renderRow = category => <CategoryTreeItem navigation={navigation} category={category.item} />;
 
   const renderFooter = () => (
@@ -28,7 +29,7 @@ const CategoryTree = ({
         <Icon
           style={styles.icon(theme)}
           name="settings"
-          color={theme.colors.bodyText}
+          color={theme.bodyTextColor}
           size={20}
         />
       </Card>
@@ -48,7 +49,7 @@ const CategoryTree = ({
 
 const styles = StyleSheet.create({
   footerContainer: theme => ({
-    marginStart: theme.spacing.large
+    marginStart: SPACING.large
   }),
   card: theme => ({
     borderWidth: 0,
@@ -57,11 +58,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: theme.colors.border,
+    borderColor: theme.borderColor,
   }),
   icon: theme => ({
     padding: 2,
-    paddingRight: theme.spacing.large
+    paddingRight: SPACING.large
   }),
 });
 

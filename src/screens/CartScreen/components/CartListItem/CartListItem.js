@@ -13,6 +13,7 @@ import {
 } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
+import { DIMENS, SPACING } from '../../../../constants';
 
 // NOTE: Is it better to create a wapper around CartListItem and extract state in it?
 // It is in organisms folder because it is state aware
@@ -24,7 +25,7 @@ const CartListItem = ({
   getCartItemProduct: _getCartItemProduct,
   removeItemFromCart: _removeItemFromCart,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // componentDidMount
@@ -76,15 +77,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: theme.spacing.small,
-    marginRight: theme.spacing.small,
-    marginBottom: theme.spacing.small,
+    marginLeft: SPACING.small,
+    marginRight: SPACING.small,
+    marginBottom: SPACING.small,
   }),
   image: theme => ({
     flex: 1,
     left: 0,
-    height: theme.dimens.cartListImageHeight,
-    width: theme.dimens.cartListImageWidth,
+    height: DIMENS.cartListImageHeight,
+    width: DIMENS.cartListImageWidth,
   }),
   infoContainer: {
     flex: 1,

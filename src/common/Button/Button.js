@@ -11,13 +11,14 @@ import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import Spinner from '../Spinner/Spinner';
 import { ThemeContext } from '../../theme';
+import { DIMENS, SPACING, TYPOGRAPHY } from '../../constants';
 
 const SOLID = 'solid';
 const OUTLINE = 'outline';
 const CLEAR = 'clear';
 
 const defaultLoadingProps = (type, theme) => ({
-  color: type === 'solid' ? theme.colors.white : theme.colors.secondary,
+  color: type === 'solid' ? theme.white : theme.primaryColor,
   size: 'small',
 });
 
@@ -53,7 +54,7 @@ const Button = ({
    */
   style,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const containerStyle = StyleSheet.flatten([
     styles.button(type, theme),
@@ -89,24 +90,24 @@ const Button = ({
 const styles = StyleSheet.create({
   button: (type, theme) => ({
     flexDirection: 'row',
-    padding: theme.spacing.small,
+    padding: SPACING.small,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: type === SOLID ? theme.colors.secondary : theme.colors.transparent,
+    backgroundColor: type === SOLID ? theme.primaryColor : theme.transparent,
     borderWidth: type === OUTLINE ? StyleSheet.hairlineWidth : 0,
-    borderColor: theme.colors.secondary,
-    borderRadius: theme.dimens.borderRadius,
+    borderColor: theme.primaryColor,
+    borderRadius: DIMENS.borderRadius,
   }),
   disabled: (type, theme) => ({
-    backgroundColor: type === SOLID ? theme.colors.disabled : theme.colors.transparent,
-    borderColor: theme.colors.disabledDark,
+    backgroundColor: type === SOLID ? theme.disabledColor : theme.transparent,
+    borderColor: theme.disabledDarkColor,
   }),
   title: (type, theme) => ({
-    ...theme.typography.buttonText,
-    color: type === SOLID ? theme.colors.white : theme.colors.secondary,
+    ...TYPOGRAPHY.buttonText,
+    color: type === SOLID ? theme.white : theme.primaryColor,
   }),
   disabledTitle: theme => ({
-    color: theme.colors.disabledDark,
+    color: theme.disabledDarkColor,
   }),
   loading: {
     marginVertical: 2,

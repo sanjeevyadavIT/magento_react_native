@@ -6,10 +6,11 @@ import { Card, Text, Price } from '../../../../common';
 import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../../../navigation';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
+import { SPACING } from '../../../../constants';
 import { priceSignByCode } from '../../../../utils/price';
 
 const OrderListItem = ({ item }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const navigation = useNavigation();
   const currencySymbol = priceSignByCode(item.order_currency_code);
 
@@ -51,16 +52,16 @@ const OrderListItem = ({ item }) => {
 
 const styles = StyleSheet.create({
   mainContainer: theme => ({
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.white,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: theme.spacing.small,
-    marginRight: theme.spacing.small,
-    marginBottom: theme.spacing.small,
+    marginLeft: SPACING.small,
+    marginRight: SPACING.small,
+    marginBottom: SPACING.small,
   }),
   infoContainer: theme => ({
     flex: 1,
-    padding: theme.spacing.small,
+    padding: SPACING.small,
   }),
   row: {
     flexDirection: 'row',

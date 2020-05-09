@@ -6,6 +6,7 @@ import { GenericTemplate, ModalSelect } from '../../../../common';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
+import { SPACING } from '../../../../constants';
 import { resetAddToCartState } from '../../../../store/actions';
 
 /**
@@ -31,7 +32,7 @@ const OptionsContainer = ({
   setSelectedOptions,
   resetAddToCartState: _resetAddToCartState,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const onPickerSelect = (attributeId, itemValue, item) => {
     if (itemValue === 'null') return;
@@ -75,10 +76,10 @@ const OptionsContainer = ({
 
 const styles = {
   container: theme => ({
-    backgroundColor: theme.colors.surface,
+    backgroundColor: theme.surfaceColor,
   }),
   optionBox: theme => ({
-    marginBottom: theme.spacing.large,
+    marginBottom: SPACING.large,
   })
 };
 

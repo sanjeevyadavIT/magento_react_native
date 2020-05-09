@@ -11,6 +11,7 @@ import { NAVIGATION_TO_PRODUCT_SCREEN } from '../../navigation';
 import { getProductThumbnailFromAttribute } from '../../utils/products';
 import { ThemeContext } from '../../theme';
 import { ProductType } from '../../types';
+import { DIMENS, SPACING } from '../../constants';
 
 const CatalogGridItem = ({
   /**
@@ -18,7 +19,7 @@ const CatalogGridItem = ({
      * is specified, will effect `CatalogGridItem` component width.
      *
      * If `CatalogGrid` render items in horizonatl list,
-     * then `CatalogGridItem` has fixed width defined by `theme.dimens.catalogGridItemWidth`
+     * then `CatalogGridItem` has fixed width defined by `DIMENS.catalogGridItemWidth`
      *
      * else if `CatalogGrid` render items in a Grid of row * coulumnCount
      * then `CatalogridItem` width is (total_screen_width) / (columnCount)
@@ -50,7 +51,7 @@ const CatalogGridItem = ({
    */
   updateItem,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const extra = useSelector(state => ([product.sku] in state[stateAccessor].extra ? state[stateAccessor].extra[product.sku] : null));
@@ -117,14 +118,14 @@ const CatalogGridItem = ({
 
 const styles = StyleSheet.create({
   container: (theme, columnCount) => ({
-    width: columnCount > 1 ? theme.dimens.WINDOW_WIDTH / columnCount : theme.dimens.catalogGridItemWidth,
-    height: theme.dimens.catalogGridItemHeight,
+    width: columnCount > 1 ? DIMENS.WINDOW_WIDTH / columnCount : DIMENS.catalogGridItemWidth,
+    height: DIMENS.catalogGridItemHeight,
   }),
   imageStyle: theme => ({
-    height: theme.dimens.catalogGridItemImageHeight,
+    height: DIMENS.catalogGridItemImageHeight,
   }),
   detail: theme => ({
-    padding: theme.spacing.small,
+    padding: SPACING.small,
     flex: 1,
     justifyContent: 'space-between',
   })

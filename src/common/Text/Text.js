@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Text as RNText, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import { TYPOGRAPHY } from '../../constants';
 import { ThemeContext } from '../../theme';
 
 // Possible value for prop "type" for Text
@@ -25,21 +26,21 @@ const Text = ({
   /**
    * @bold prop is a boolean, if enabled will use bold version of the
    * type mentioned.
+   *
+   * default value: false
    */
   bold,
   /**
    * @style prop will overwrite the predefined styling for Text defined by
    * @type prop
-   *
-   * default value: false
    */
   style,
   ...props
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <RNText
-      style={StyleSheet.flatten([styles.text(type, bold, theme), style])}
+      style={StyleSheet.flatten([getTextStyle(type, bold, theme), style])}
       {...props}
     />
   );
@@ -63,20 +64,18 @@ const getTextStyle = (type, bold, theme) => {
   if (bold) {
     style += 'Bold';
   }
-  return theme.typography[style];
+  return TYPOGRAPHY[style](theme);
 };
 
-const styles = {
-  text: (type, bold, theme) => ({
-    ...getTextStyle(type, bold, theme),
-  }),
-};
+const styles = StyleSheet.create({});
 
 Text.propTypes = {
-  theme: PropTypes.object.isRequired,
   type: PropTypes.oneOf([HEADING, SUB_HEADING, BODY, LABEL]),
   bold: PropTypes.bool,
-  style: PropTypes.object,
+  style: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object),
+  ]),
 };
 
 Text.defaultProps = {

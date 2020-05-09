@@ -15,7 +15,7 @@ const CurrencyPicker = ({
   selectedCurrencyCode,
   changeCurrency: _changeCurrency,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const data = currencies.map(value => ({
     label: value,
     key: value,
@@ -55,7 +55,7 @@ const styles = {
   currencyContainer: theme => ({
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderColor: theme.colors.border,
+    borderColor: theme.borderColor,
   }),
   textStyle: {
     textAlign: 'left',

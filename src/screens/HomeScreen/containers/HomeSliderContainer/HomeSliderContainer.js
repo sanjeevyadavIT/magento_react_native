@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { magento } from '../../../../magento';
 import { ImageSlider, ImageSliderItem } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
+import { DIMENS } from '../../../../constants';
 
 /**
  * Container component for {@link ImageSlider} mounted to HomeScreen
@@ -14,12 +15,12 @@ import { ThemeContext } from '../../../../theme';
 const HomeSliderContainer = ({
   slider,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <ImageSlider
       slider={slider}
       baseUrl={magento.getMediaUrl()}
-      imageHeight={theme.dimens.homePageSliderHeight}
+      imageHeight={DIMENS.homePageSliderHeight}
     />
   );
 };

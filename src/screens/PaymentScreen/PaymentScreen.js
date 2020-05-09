@@ -20,6 +20,7 @@ import {
 } from '../../navigation';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 import { ThemeContext } from '../../theme';
 import { priceSignByCode } from '../../utils/price';
 
@@ -38,7 +39,7 @@ const PaymentScreen = ({
   createQuoteId: _createQuoteId,
   resetPaymentState: _resetPaymentState
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [paymentCode, setPaymentCode] = useState();
 
   useEffect(() => (() => {
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.large,
+    marginTop: SPACING.large,
   }),
   row: {
     flexDirection: 'row'

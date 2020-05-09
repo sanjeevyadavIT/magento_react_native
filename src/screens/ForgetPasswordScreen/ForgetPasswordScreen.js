@@ -16,6 +16,7 @@ import {
 import { resetPassword, resetAuthState } from '../../store/actions';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 
 const ForgetPasswordScreen = ({
   status,
@@ -24,7 +25,7 @@ const ForgetPasswordScreen = ({
   resetPassword: _resetPassword,
   resetAuthState: _resetAuthState,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [email, setEmail] = useState('');
 
   useEffect(() => (() => {
@@ -86,18 +87,18 @@ const ForgetPasswordScreen = ({
 const styles = StyleSheet.create({
   container: theme => ({
     flex: 1,
-    backgroundColor: theme.colors.background,
-    paddingTop: theme.spacing.extraLarge,
+    backgroundColor: theme.backgroundColor,
+    paddingTop: SPACING.extraLarge,
   }),
   title: theme => ({
     textAlign: 'center',
-    marginBottom: theme.spacing.medium,
+    marginBottom: SPACING.medium,
   }),
   description: {
     textAlign: 'center',
   },
   emailOffset: theme => ({
-    marginVertical: theme.spacing.large,
+    marginVertical: SPACING.large,
   })
 });
 

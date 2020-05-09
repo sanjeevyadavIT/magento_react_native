@@ -25,7 +25,7 @@ const CategoryTreeContainer = ({
   currencies,
   navigation,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   console.log('----', navigation)
 
   const renderChildren = () => {
@@ -55,7 +55,7 @@ const CategoryTreeContainer = ({
 
 const styles = {
   container: theme => ({
-    backgroundColor: theme.colors.white
+    backgroundColor: theme.white
   })
 };
 

@@ -4,6 +4,7 @@ import { WebView } from 'react-native-webview';
 import { Text } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
+import { SPACING } from '../../../../constants';
 
 /**
  * Render description of the product into webview
@@ -14,7 +15,7 @@ import { translate } from '../../../../i18n';
 const DescriptionContainer = ({
   customAttributes,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const getDescriptionString = () => {
     const descriptionAttribute = customAttributes.find(customAttribute => customAttribute.attribute_code === 'description');
     if (descriptionAttribute && descriptionAttribute.value) {
@@ -50,7 +51,7 @@ const DescriptionContainer = ({
 
 const styles = {
   productDetailTitle: theme => ({
-    marginBottom: theme.spacing.tiny,
+    marginBottom: SPACING.tiny,
   }),
 };
 

@@ -25,7 +25,7 @@ const GenericTemplate = ({
   errorMessage,
   style,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const ViewGroup = scrollable ? ScrollView : View;
 
   if (status === Status.ERROR) {
@@ -39,8 +39,8 @@ const GenericTemplate = ({
   return (
     <SafeAreaView style={styles.container(theme)}>
       <StatusBar
-        barStyle={theme.key === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor={theme.colors.statusBar}
+        barStyle={theme.appbar.barStyle}
+        backgroundColor={theme.appbar.statusBarColor}
       />
       <ViewGroup style={[styles.content, style]}>
         {children}
@@ -53,7 +53,7 @@ const GenericTemplate = ({
 const styles = StyleSheet.create({
   container: theme => ({
     flex: 1,
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.backgroundColor,
   }),
   content: {
     flex: 1,
