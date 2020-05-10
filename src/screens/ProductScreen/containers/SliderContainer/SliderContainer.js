@@ -3,11 +3,12 @@ import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { magento } from '../../../../magento';
-import { ImageSlider, ImageSliderItem, GenericTemplate } from '../../../../components';
+import { ImageSlider, ImageSliderItem, GenericTemplate } from '../../../../common';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { ProductType } from '../../../../types';
 import { getValueFromAttribute } from '../../../../utils';
+import { DIMENS } from '../../../../constants';
 
 const SliderContainer = ({
   /**
@@ -40,7 +41,7 @@ const SliderContainer = ({
 }) => {
   console.log('^^^^^^^^^^^^^^^^');
   console.log('SliderContainer', slider);
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const selectedProductImage = selectedProduct && getValueFromAttribute(selectedProduct, 'image');
   if (selectedProductImage) {
     slider.unshift(new ImageSliderItem('', selectedProduct));
@@ -55,7 +56,7 @@ const SliderContainer = ({
     >
       <ImageSlider
         style={styles.imageContainer(theme)}
-        imageHeight={theme.dimens.productDetailPageSliderHeight}
+        imageHeight={DIMENS.productDetailPageSliderHeight}
         slider={slider}
         baseUrl={magento.getProductMediaUrl()}
         resizeMode="contain"
@@ -66,7 +67,7 @@ const SliderContainer = ({
 
 const styles = StyleSheet.create({
   imageContainer: theme => ({
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.white,
   })
 });
 

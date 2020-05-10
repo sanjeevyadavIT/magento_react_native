@@ -13,13 +13,14 @@ import {
   Button,
   ModalSelect,
   GenericTemplate
-} from '../../components';
+} from '../../common';
 import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN
 } from '../../navigation';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 import { ThemeContext } from '../../theme';
 import { priceSignByCode } from '../../utils/price';
 
@@ -27,6 +28,7 @@ import { priceSignByCode } from '../../utils/price';
 const PaymentScreen = ({
   payment,
   orderStatus,
+  orderId,
   billingAddress,
   navigation,
   currencyCode,
@@ -37,13 +39,23 @@ const PaymentScreen = ({
   createQuoteId: _createQuoteId,
   resetPaymentState: _resetPaymentState
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [paymentCode, setPaymentCode] = useState();
 
   useEffect(() => (() => {
     // componentDidUnmount: Reset Payment related logic in Redux
     _resetPaymentState();
   }), []);
+
+  useEffect(() => {
+    if (orderStatus === Status.SUCCESS) {
+      _createQuoteId();
+      navigation.reset({
+        index: 1,
+        routes: [{ name: NAVIGATION_TO_HOME_SCREEN }, { name: NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS, orderId } }],
+      });
+    }
+  }, [orderStatus]);
 
   const placeOrder = () => {
     if (!paymentCode) return;
@@ -149,14 +161,6 @@ const PaymentScreen = ({
     />
   );
 
-  if (orderStatus === Status.SUCCESS) {
-    _createQuoteId();
-    navigation.reset({
-      index: 1,
-      routes: [{ name: NAVIGATION_TO_HOME_SCREEN }, { name: NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS } }],
-    });
-  }
-
   return (
     <GenericTemplate
       scrollable={false}
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.large,
+    marginTop: SPACING.large,
   }),
   row: {
     flexDirection: 'row'
@@ -184,6 +188,7 @@ PaymentScreen.propTypes = {
   billingAddress: PropTypes.object,
   payment: PropTypes.object,
   orderStatus: PropTypes.oneOf(Object.values(Status)).isRequired,
+  orderId: PropTypes.string,
   placeCartOrder: PropTypes.func.isRequired,
   createQuoteId: PropTypes.func.isRequired,
   currencyCode: PropTypes.string.isRequired,
@@ -196,10 +201,11 @@ PaymentScreen.propTypes = {
 PaymentScreen.defaultProps = {
   billingAddress: {},
   payment: [],
+  orderId: -1,
 };
 
 const mapStateToProps = ({ checkout, cart, magento }) => {
-  const { payment, orderStatus } = checkout;
+  const { payment, orderStatus, orderId } = checkout;
   const { cart: { billing_address: billingAddress } } = cart;
   const {
     base_currency_symbol: baseCurrencySymbol,
@@ -210,6 +216,7 @@ const mapStateToProps = ({ checkout, cart, magento }) => {
   return {
     payment,
     orderStatus,
+    orderId,
     billingAddress,
     baseCurrencySymbol,
     currencyCode,

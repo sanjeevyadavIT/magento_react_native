@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
-import { GenericTemplate, Text, Button } from '../../components';
+import { GenericTemplate, Text, Button } from '../../common';
 import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../navigation';
 import { resetCheckoutState } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 
 // TODO: Extract strings in strings.js
 const OrderAcknowledgementScreen = ({
-  orderId,
   navigation,
   route,
   resetCheckoutState: _resetCheckoutState,
 }) => {
-  const { status = Status.ERROR, errorMessage = translate('orderScreen.orderNotPlace') } = route.params;
-  const theme = useContext(ThemeContext);
+  const { status = Status.ERROR, orderId, errorMessage = translate('orderScreen.orderNotPlace') } = route.params;
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => (() => {
     // componentDidUnmount: Reset entire checkout state
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   space: theme => ({
     flex: 1,
-    marginTop: theme.spacing.small,
+    marginTop: SPACING.small,
   })
 });
 
@@ -68,13 +68,6 @@ OrderAcknowledgementScreen.propTypes = {
 
 OrderAcknowledgementScreen.defaultProps = {};
 
-const mapStateToProps = ({ checkout }) => {
-  const { orderId } = checkout;
-  return {
-    orderId,
-  };
-};
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   resetCheckoutState,
 })(OrderAcknowledgementScreen);

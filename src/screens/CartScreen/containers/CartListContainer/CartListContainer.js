@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { CartList } from '../../../../components';
+import { CartList } from '../../components';
 
 const CartListContainer = ({
   items,
@@ -9,13 +9,13 @@ const CartListContainer = ({
   currencySymbol,
   currencyRate,
 }) => (
-  <CartList
-    items={items}
-    extra={extra}
-    currencySymbol={currencySymbol}
-    currencyRate={currencyRate}
-  />
-);
+    <CartList
+      items={items}
+      extra={extra}
+      currencySymbol={currencySymbol}
+      currencyRate={currencyRate}
+    />
+  );
 
 CartListContainer.propTypes = {
   currencySymbol: PropTypes.string.isRequired,

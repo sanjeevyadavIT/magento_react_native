@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getCustomerCart } from '../../store/actions';
-import { GenericTemplate } from '../../components';
+import { GenericTemplate } from '../../common';
 import { CartListContainer } from './containers';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';

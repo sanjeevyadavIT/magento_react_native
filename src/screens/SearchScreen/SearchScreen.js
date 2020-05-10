@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { SearchProductList } from './containers';
 import { getSearchProducts, setCurrentProduct } from '../../store/actions';
-import { Spinner } from '../../components';
+import { Spinner } from '../../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 
@@ -96,7 +96,7 @@ class Search extends React.Component {
   // TODO: Dirty code, need to abstract it into a dialog
   renderSortDialog() {
     const { sortDialogVisible } = this.state;
-    const theme = this.context;
+    const { theme } = this.context;
     return (
       <Modal
         transparent
@@ -174,7 +174,7 @@ const styles = {
     alignItems: 'center',
     padding: 24,
     borderBottomWidth: 1,
-    borderColor: theme.colors.border
+    borderColor: theme.borderColor
   })
 };
 

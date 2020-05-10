@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import FeaturedCategoryList from '../FeaturedCategoryList';
-import { Text } from '../../../../components';
+import FeaturedCategoryList from '../FeaturedCategoryList/FeaturedCategoryList';
+import { Text } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
+import { SPACING } from '../../../../constants';
 
 
 /**
@@ -18,7 +19,7 @@ import { ThemeContext } from '../../../../theme';
 const FeaturedCategoriesContainer = ({
   featuredCategories
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       {Object.keys(featuredCategories).map(key => (
@@ -33,14 +34,14 @@ const FeaturedCategoriesContainer = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    marginTop: theme.spacing.large,
+    marginTop: SPACING.large,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: theme.colors.surface,
+    backgroundColor: theme.surfaceColor,
   }),
   title: theme => ({
-    marginTop: theme.spacing.small,
-    marginLeft: theme.spacing.medium,
+    marginTop: SPACING.small,
+    marginLeft: SPACING.medium,
   }),
 });
 

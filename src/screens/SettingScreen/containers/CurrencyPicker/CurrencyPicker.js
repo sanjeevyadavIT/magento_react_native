@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { CURRENCY_CODE } from '../../../../magento';
-import { ModalSelect } from '../../../../components';
+import { ModalSelect } from '../../../../common';
 import { priceSignByCode } from '../../../../utils/price';
 import { changeCurrency } from '../../../../store/actions';
 import { translate } from '../../../../i18n';
@@ -15,7 +15,7 @@ const CurrencyPicker = ({
   selectedCurrencyCode,
   changeCurrency: _changeCurrency,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const data = currencies.map(value => ({
     label: value,
     key: value,
@@ -55,7 +55,7 @@ const styles = {
   currencyContainer: theme => ({
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderColor: theme.colors.border,
+    borderColor: theme.borderColor,
   }),
   textStyle: {
     textAlign: 'left',

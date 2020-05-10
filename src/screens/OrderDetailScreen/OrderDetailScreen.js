@@ -8,13 +8,14 @@ import {
   Image,
   Price,
   GenericTemplate,
-} from '../../components';
+} from '../../common';
 import { getOrderDetail, getOrderedProductInfo } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { getProductThumbnailFromAttribute } from '../../utils';
 import { priceSignByCode } from '../../utils/price';
+import { DIMENS, SPACING } from '../../constants';
 
 // TODO: Show product image in place of placeholder
 const OrderDetailScreen = ({
@@ -29,7 +30,7 @@ const OrderDetailScreen = ({
 }) => {
   const { orderId = -1, item = orderDetail } = route.params;
   const currencySymbol = priceSignByCode((item && item.order_currency_code) || '$');
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (!item && !orderDetail) {
@@ -158,15 +159,15 @@ const styles = StyleSheet.create({
   card: theme => ({
     flexDirection: 'row',
     flex: 1,
-    marginHorizontal: theme.spacing.small,
-    marginBottom: theme.spacing.small
+    marginHorizontal: SPACING.small,
+    marginBottom: SPACING.small
   }),
 
   imageStyle: theme => ({
     resizeMode: 'contain',
-    width: theme.dimens.orderDetailImageWidth,
-    height: theme.dimens.orderDetailImageHeight,
-    marginRight: theme.spacing.small,
+    width: DIMENS.orderDetailImageWidth,
+    height: DIMENS.orderDetailImageHeight,
+    marginRight: SPACING.small,
   }),
   infoContainer: {
     flex: 1,

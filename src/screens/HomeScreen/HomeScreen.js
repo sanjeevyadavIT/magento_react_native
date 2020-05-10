@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate } from '../../components';
+import { GenericTemplate } from '../../common';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from './containers';
 import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';
+import { DIMENS } from '../../constants';
 
 /**
  * First screen which is shown to user.
@@ -17,7 +18,7 @@ import Status from '../../magento/Status';
  *                                       failed.
  */
 const HomeScreen = ({ status, errorMessage }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <GenericTemplate scrollable status={status} errorMessage={errorMessage}>
       <View style={styles.imageSliderContainer(theme)}>
@@ -30,7 +31,7 @@ const HomeScreen = ({ status, errorMessage }) => {
 
 const styles = StyleSheet.create({
   imageSliderContainer: theme => ({
-    height: theme.dimens.homePageSliderHeight
+    height: DIMENS.homePageSliderHeight
   })
 });
 

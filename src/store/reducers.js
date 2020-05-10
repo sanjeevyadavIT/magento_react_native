@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import magentoReducer from './magento/reducer';
-import homeReducer from './home/reducer';
-import categoryTreeReducer from './categoryTree/reducer';
-import authReducer from './auth/reducer';
-import accountReducer from './account/reducer';
-import cartReducer from './cart/reducer';
-import categoryListReducer from './categoryList/reducer';
-import checkoutReducer from './checkout/reducer';
-import productReducer from './product/reducer';
-import searchReducer from './search/reducer';
+import accountReducer from './account/accountReducer';
+import authReducer from './auth/authReducer';
+import cartReducer from './cart/cartReducer';
+import magentoReducer from './magento/magentoReducer';
+import homeReducer from './home/homeReducer';
+import categoryTreeReducer from './categoryTree/categoryTreeReducer';
+import categoryListReducer from './categoryList/categoryListReducer';
+import checkoutReducer from './checkout/checkoutReducer';
+import productReducer from './product/productReducer';
+import searchReducer from './search/searchReducer';
 
 export default combineReducers({
   magento: magentoReducer,

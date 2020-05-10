@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button } from '../../../../components';
+import { Button } from '../../../../common';
 import { addToCart } from '../../../../store/actions';
 import { translate } from '../../../../i18n';
 import Status from '../../../../magento/Status';

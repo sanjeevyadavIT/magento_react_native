@@ -17,11 +17,12 @@ import {
   Button,
   TextInput,
   MessageView
-} from '../../components';
+} from '../../common';
 import { NAVIGATION_TO_SIGNUP_SCREEN, NAVIGATION_TO_FORGOT_PASSWORD_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { SPACING } from '../../constants';
 
 // TODO: create Button to have a style of no background and border
 // TODO: Use KeyboardAvoidingView
@@ -37,7 +38,7 @@ const SignInScreen = ({
     password: '',
   });
   const [secureEntry, toggleSecureEntry] = useState(true);
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   // Reference
   const passwordInputRef = useRef();
 
@@ -116,7 +117,7 @@ const SignInScreen = ({
             name={secureEntry ? 'eye' : 'eye-off'}
             size={20}
             style={styles.iconPadding(theme)}
-            color={theme.colors.labelColor}
+            color={theme.labelTextColor}
             onPress={() => toggleSecureEntry(!secureEntry)}
           />
         )}
@@ -141,13 +142,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   defaultMargin: theme => ({
-    marginTop: theme.spacing.large,
+    marginTop: SPACING.large,
   }),
   center: {
     alignSelf: 'center',
   },
   iconPadding: theme => ({
-    padding: theme.spacing.small
+    padding: SPACING.small
   })
 });
 

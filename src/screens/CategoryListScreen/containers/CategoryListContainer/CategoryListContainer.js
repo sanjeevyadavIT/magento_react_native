@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { CatalogGrid } from '../../../../components';
+import { CatalogGrid } from '../../../../common';
 import { setCurrentProduct, getCategoryProducts, getCategoryConfigurableProductOptions } from '../../../../store/actions';
 import Status from '../../../../magento/Status';
 import { ProductType } from '../../../../types';

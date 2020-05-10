@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { GenericTemplate, CategoryTree } from '../../../../components';
+import { GenericTemplate } from '../../../../common';
+import { CategoryTree } from '../../components';
 import { ThemeContext } from '../../../../theme';
 import Status from '../../../../magento/Status';
 
@@ -24,7 +25,7 @@ const CategoryTreeContainer = ({
   currencies,
   navigation,
 }) => {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   console.log('----', navigation)
 
   const renderChildren = () => {
@@ -54,7 +55,7 @@ const CategoryTreeContainer = ({
 
 const styles = {
   container: theme => ({
-    backgroundColor: theme.colors.white
+    backgroundColor: theme.white
   })
 };
 
