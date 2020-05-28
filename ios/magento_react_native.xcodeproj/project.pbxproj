@@ -19,6 +19,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* magento_react_nativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* magento_react_nativeTests.m */; };
 		314FBFE513EF2B1FC15D42C1 /* libPods-magento_react_native-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0377463430637860782BBEB /* libPods-magento_react_native-tvOSTests.a */; };
 		546655C4773225B367BDD580 /* libPods-magento_react_native-magento_react_nativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AEF2D6C178D32363815FD6A /* libPods-magento_react_native-magento_react_nativeTests.a */; };
+		666D20F1247FB168002A7ABC /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666D20F0247FB168002A7ABC /* dummy.swift */; };
+		666D20F2247FB16B002A7ABC /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666D20F0247FB168002A7ABC /* dummy.swift */; };
 		B1AA89B9E8414E42CE110913 /* libPods-magento_react_native.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C89A073E0C1650F33AA90783 /* libPods-magento_react_native.a */; };
 		C5635CADF4324F689111C688 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6323AE592E1469AA03C9107 /* libRNGestureHandler-tvOS.a */; };
 		CF277CD79777999C31042F21 /* libPods-magento_react_native-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F2C7F61F5E53A8050D2EE1 /* libPods-magento_react_native-tvOS.a */; };
@@ -66,6 +68,7 @@
 		448DBDD059FC42F8B5C988D4 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		4B914EA274C68CD1129AC88C /* Pods-magento_react_native-magento_react_nativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_native-magento_react_nativeTests.release.xcconfig"; path = "Target Support Files/Pods-magento_react_native-magento_react_nativeTests/Pods-magento_react_native-magento_react_nativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		666D20EC247FABF6002A7ABC /* magento_react_native-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "magento_react_native-Bridging-Header.h"; sourceTree = "<group>"; };
+		666D20F0247FB168002A7ABC /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		749B9FD3AD7E2ADDB6755615 /* Pods-magento_react_native-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_native-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-magento_react_native-tvOSTests/Pods-magento_react_native-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		9AEF2D6C178D32363815FD6A /* libPods-magento_react_native-magento_react_nativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-magento_react_native-magento_react_nativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D9F68A403C06149CD98D752 /* Pods-magento_react_nativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_nativeTests.debug.xcconfig"; path = "Target Support Files/Pods-magento_react_nativeTests/Pods-magento_react_nativeTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 		13B07FAE1A68108700A75B9A /* magento_react_native */ = {
 			isa = PBXGroup;
 			children = (
+				666D20F0247FB168002A7ABC /* dummy.swift */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -628,6 +632,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				666D20F1247FB168002A7ABC /* dummy.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
+				666D20F2247FB16B002A7ABC /* dummy.swift in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -681,6 +687,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2157E635C13DA39776F73A8E /* Pods-magento_react_native-magento_react_nativeTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 24954UJ9B3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -702,6 +709,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4B914EA274C68CD1129AC88C /* Pods-magento_react_native-magento_react_nativeTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 24954UJ9B3;
@@ -856,6 +864,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EEFCF7F5785A12AC581C31A9 /* Pods-magento_react_native-tvOSTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -895,6 +904,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 749B9FD3AD7E2ADDB6755615 /* Pods-magento_react_native-tvOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
