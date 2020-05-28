@@ -18,7 +18,7 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* magento_react_nativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* magento_react_nativeTests.m */; };
 		314FBFE513EF2B1FC15D42C1 /* libPods-magento_react_native-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0377463430637860782BBEB /* libPods-magento_react_native-tvOSTests.a */; };
-		50B676152BF114965EE38753 /* libPods-magento_react_nativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1885E6A09DF05BEC594403C9 /* libPods-magento_react_nativeTests.a */; };
+		546655C4773225B367BDD580 /* libPods-magento_react_native-magento_react_nativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AEF2D6C178D32363815FD6A /* libPods-magento_react_native-magento_react_nativeTests.a */; };
 		B1AA89B9E8414E42CE110913 /* libPods-magento_react_native.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C89A073E0C1650F33AA90783 /* libPods-magento_react_native.a */; };
 		C5635CADF4324F689111C688 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6323AE592E1469AA03C9107 /* libRNGestureHandler-tvOS.a */; };
 		CF277CD79777999C31042F21 /* libPods-magento_react_native-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F2C7F61F5E53A8050D2EE1 /* libPods-magento_react_native-tvOS.a */; };
@@ -56,7 +56,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = magento_react_native/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = magento_react_native/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = magento_react_native/main.m; sourceTree = "<group>"; };
-		1885E6A09DF05BEC594403C9 /* libPods-magento_react_nativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-magento_react_nativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2157E635C13DA39776F73A8E /* Pods-magento_react_native-magento_react_nativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_native-magento_react_nativeTests.debug.xcconfig"; path = "Target Support Files/Pods-magento_react_native-magento_react_nativeTests/Pods-magento_react_native-magento_react_nativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C5937DEE8CDF24A0D133454 /* Pods-magento_react_nativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_nativeTests.release.xcconfig"; path = "Target Support Files/Pods-magento_react_nativeTests/Pods-magento_react_nativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* magento_react_native-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "magento_react_native-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* magento_react_native-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "magento_react_native-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +64,10 @@
 		2D9BD871712616653FDEB6C5 /* Pods-magento_react_native.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_native.release.xcconfig"; path = "Target Support Files/Pods-magento_react_native/Pods-magento_react_native.release.xcconfig"; sourceTree = "<group>"; };
 		32AF362540435EDB45A6B753 /* Pods-magento_react_native-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_native-tvOS.release.xcconfig"; path = "Target Support Files/Pods-magento_react_native-tvOS/Pods-magento_react_native-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		448DBDD059FC42F8B5C988D4 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
+		4B914EA274C68CD1129AC88C /* Pods-magento_react_native-magento_react_nativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_native-magento_react_nativeTests.release.xcconfig"; path = "Target Support Files/Pods-magento_react_native-magento_react_nativeTests/Pods-magento_react_native-magento_react_nativeTests.release.xcconfig"; sourceTree = "<group>"; };
+		666D20EC247FABF6002A7ABC /* magento_react_native-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "magento_react_native-Bridging-Header.h"; sourceTree = "<group>"; };
 		749B9FD3AD7E2ADDB6755615 /* Pods-magento_react_native-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_native-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-magento_react_native-tvOSTests/Pods-magento_react_native-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		9AEF2D6C178D32363815FD6A /* libPods-magento_react_native-magento_react_nativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-magento_react_native-magento_react_nativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D9F68A403C06149CD98D752 /* Pods-magento_react_nativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_nativeTests.debug.xcconfig"; path = "Target Support Files/Pods-magento_react_nativeTests/Pods-magento_react_nativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ABB33846F57F8D20F1CAA410 /* Pods-magento_react_native.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_react_native.debug.xcconfig"; path = "Target Support Files/Pods-magento_react_native/Pods-magento_react_native.debug.xcconfig"; sourceTree = "<group>"; };
 		B287C64D57E1459AB2AC47E7 /* libRNCWebView.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCWebView.a; sourceTree = "<group>"; };
@@ -85,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50B676152BF114965EE38753 /* libPods-magento_react_nativeTests.a in Frameworks */,
+				546655C4773225B367BDD580 /* libPods-magento_react_native-magento_react_nativeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +134,8 @@
 				749B9FD3AD7E2ADDB6755615 /* Pods-magento_react_native-tvOSTests.release.xcconfig */,
 				9D9F68A403C06149CD98D752 /* Pods-magento_react_nativeTests.debug.xcconfig */,
 				2C5937DEE8CDF24A0D133454 /* Pods-magento_react_nativeTests.release.xcconfig */,
+				2157E635C13DA39776F73A8E /* Pods-magento_react_native-magento_react_nativeTests.debug.xcconfig */,
+				4B914EA274C68CD1129AC88C /* Pods-magento_react_native-magento_react_nativeTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -175,7 +180,7 @@
 				C89A073E0C1650F33AA90783 /* libPods-magento_react_native.a */,
 				B4F2C7F61F5E53A8050D2EE1 /* libPods-magento_react_native-tvOS.a */,
 				C0377463430637860782BBEB /* libPods-magento_react_native-tvOSTests.a */,
-				1885E6A09DF05BEC594403C9 /* libPods-magento_react_nativeTests.a */,
+				9AEF2D6C178D32363815FD6A /* libPods-magento_react_native-magento_react_nativeTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				FE23E8AB235D1611006E9B16 /* Recovered References */,
 				00471AD488F9DF83FD9F04C9 /* Pods */,
+				666D20EC247FABF6002A7ABC /* magento_react_native-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -237,6 +243,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				F8473C76B0BF1B8451A06B18 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -322,6 +329,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 24954UJ9B3;
+						LastSwiftMigration = 1150;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -479,7 +487,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-magento_react_nativeTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-magento_react_native-magento_react_nativeTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -556,6 +564,54 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-magento_react_native/Pods-magento_react_native-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F8473C76B0BF1B8451A06B18 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-magento_react_native-magento_react_nativeTests/Pods-magento_react_native-magento_react_nativeTests-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-magento_react_native-magento_react_nativeTests/Pods-magento_react_native-magento_react_nativeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -623,34 +679,19 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D9F68A403C06149CD98D752 /* Pods-magento_react_nativeTests.debug.xcconfig */;
+			baseConfigurationReference = 2157E635C13DA39776F73A8E /* Pods-magento_react_native-magento_react_nativeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 24954UJ9B3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = magento_react_nativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/magento_react_native.app/magento_react_native";
@@ -659,31 +700,15 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C5937DEE8CDF24A0D133454 /* Pods-magento_react_nativeTests.release.xcconfig */;
+			baseConfigurationReference = 4B914EA274C68CD1129AC88C /* Pods-magento_react_native-magento_react_nativeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 24954UJ9B3;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-webview/ios",
-				);
 				INFOPLIST_FILE = magento_react_nativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/magento_react_native.app/magento_react_native";
@@ -695,9 +720,15 @@
 			baseConfigurationReference = ABB33846F57F8D20F1CAA410 /* Pods-magento_react_native.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 24954UJ9B3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"FB_SONARKIT_ENABLED=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/@react-native-community/async-storage/ios",
@@ -706,13 +737,12 @@
 				);
 				INFOPLIST_FILE = magento_react_native/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = magento_react_native;
+				SWIFT_OBJC_BRIDGING_HEADER = "magento_react_native-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -722,6 +752,7 @@
 			baseConfigurationReference = 2D9BD871712616653FDEB6C5 /* Pods-magento_react_native.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 24954UJ9B3;
 				HEADER_SEARCH_PATHS = (
@@ -732,13 +763,11 @@
 				);
 				INFOPLIST_FILE = magento_react_native/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = magento_react_native;
+				SWIFT_OBJC_BRIDGING_HEADER = "magento_react_native-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
