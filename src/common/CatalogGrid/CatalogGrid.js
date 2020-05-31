@@ -9,6 +9,30 @@ import { ThemeContext } from '../../theme';
 import { ProductType } from '../../types';
 import { SPACING } from '../../constants';
 
+const propTypes = {
+  products: PropTypes.arrayOf(ProductType),
+  currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
+  stateAccessor: PropTypes.string.isRequired,
+  showHorizontalList: PropTypes.bool.isRequired,
+  columnCount: PropTypes.number,
+  status: PropTypes.oneOf(Object.values(Status)).isRequired,
+  isLoadingMoreProducts: PropTypes.oneOf(Object.values(Status)).isRequired,
+  canLoadMoreProducts: PropTypes.bool.isRequired,
+  loadProducts: PropTypes.func.isRequired,
+  loadFactor: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  updateItem: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+};
+
+const defaultProps = {
+  products: [],
+  columnCount: 1,
+  errorMessage: null,
+};
+
 /**
  * This component support rendering catalog, in Horizonatl list
  * as well as in a grid.
@@ -118,7 +142,7 @@ const CatalogGrid = ({
         {...getLayoutManager()}
         data={products}
         renderItem={renderRow}
-        keyExtractor={item => String(item.id)}
+        keyExtractor={item => String(item.sku)}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
         ListFooterComponent={renderFooter}
@@ -133,28 +157,8 @@ const styles = StyleSheet.create({
   }),
 });
 
-CatalogGrid.propTypes = {
-  products: PropTypes.arrayOf(ProductType),
-  currencySymbol: PropTypes.string.isRequired,
-  currencyRate: PropTypes.number.isRequired,
-  stateAccessor: PropTypes.string.isRequired,
-  showHorizontalList: PropTypes.bool.isRequired,
-  columnCount: PropTypes.number,
-  status: PropTypes.oneOf(Object.values(Status)).isRequired,
-  isLoadingMoreProducts: PropTypes.oneOf(Object.values(Status)).isRequired,
-  canLoadMoreProducts: PropTypes.bool.isRequired,
-  loadProducts: PropTypes.func.isRequired,
-  loadFactor: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  updateItem: PropTypes.func.isRequired,
-  onItemClick: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string,
-};
+CatalogGrid.propTypes = propTypes;
 
-CatalogGrid.defaultProps = {
-  products: [],
-  columnCount: 1,
-  errorMessage: null,
-};
+CatalogGrid.defaultProps = defaultProps;
 
 export default CatalogGrid;

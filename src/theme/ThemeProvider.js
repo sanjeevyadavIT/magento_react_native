@@ -21,7 +21,7 @@ ThemeProvider.propTypes = {
     borderColor: PropTypes.string.isRequired,
     primaryLightColor: PropTypes.string.isRequired,
     primaryColor: PropTypes.string.isRequired,
-    primaryLightColor: PropTypes.string.isRequired,
+    primaryDarkColor: PropTypes.string.isRequired,
     disabledColor: PropTypes.string.isRequired,
     disabledDarkColor: PropTypes.string.isRequired,
     headingTextColor: PropTypes.string.isRequired,

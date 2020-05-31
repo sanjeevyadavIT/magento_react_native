@@ -114,7 +114,9 @@ function* getCurrencyToBeDisplayed(currencyData) {
   const exchangeRate = currencyData.exchange_rates.find(
     _exchangeRate => _exchangeRate.currency_to === code,
   );
+
   if (exchangeRate && 'rate' in exchangeRate) {
+    // eslint-disable-next-line prefer-destructuring
     rate = exchangeRate.rate;
   }
 

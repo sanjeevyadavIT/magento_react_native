@@ -1,11 +1,36 @@
 import React, { useContext } from 'react';
-import { ScrollView, View, StatusBar, StyleSheet } from 'react-native';
+import {
+  ScrollView,
+  View,
+  ViewPropTypes,
+  StatusBar,
+  StyleSheet,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import LoadingView from '../LoadingView/LoadingView';
 import MessageView from '../MessageView/MessageView';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
+
+const propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+  footer: PropTypes.element,
+  scrollable: PropTypes.bool.isRequired,
+  status: PropTypes.oneOf(Object.values(Status)),
+  errorMessage: PropTypes.string,
+  style: ViewPropTypes.style,
+};
+
+const defaultProps = {
+  status: Status.SUCCESS,
+  errorMessage: '',
+  style: {},
+  footer: <></>,
+};
 
 // NOTE: Can add functionality to show some fallback message in case of empty view
 const GenericTemplate = ({
@@ -54,23 +79,8 @@ const styles = StyleSheet.create({
   stickyFooter: {},
 });
 
-GenericTemplate.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]).isRequired,
-  footer: PropTypes.element,
-  scrollable: PropTypes.bool.isRequired,
-  status: PropTypes.oneOf(Object.values(Status)),
-  errorMessage: PropTypes.string,
-  style: PropTypes.object,
-};
+GenericTemplate.propTypes = propTypes;
 
-GenericTemplate.defaultProps = {
-  status: Status.SUCCESS,
-  errorMessage: '',
-  style: {},
-  footer: <></>,
-};
+GenericTemplate.defaultProps = defaultProps;
 
 export default GenericTemplate;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
 import Image from '../Image/Image';
@@ -14,6 +14,27 @@ class ImageSliderItem {
   }
 }
 
+const propTypes = {
+  imageHeight: PropTypes.number.isRequired,
+  slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired,
+  baseUrl: PropTypes.string.isRequired,
+  resizeMode: PropTypes.oneOf([
+    'cover',
+    'contain',
+    'stretch',
+    'repeat',
+    'center',
+  ]),
+  autoplay: PropTypes.bool,
+  style: ViewPropTypes.style,
+};
+
+const defaultProps = {
+  resizeMode: 'cover',
+  style: {},
+  autoplay: true,
+};
+
 const ImageSlider = ({
   imageHeight, // Required prop
   slider, // Required prop
@@ -23,7 +44,6 @@ const ImageSlider = ({
    * default value is true
    */
   autoplay,
-  showTitle,
   resizeMode,
   style,
 }) => {
@@ -53,28 +73,9 @@ const styles = StyleSheet.create({
   },
 });
 
-ImageSlider.propTypes = {
-  imageHeight: PropTypes.number.isRequired,
-  slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired,
-  baseUrl: PropTypes.string.isRequired,
-  showTitle: PropTypes.bool,
-  resizeMode: PropTypes.oneOf([
-    'cover',
-    'contain',
-    'stretch',
-    'repeat',
-    'center',
-  ]),
-  autoplay: PropTypes.bool,
-  style: PropTypes.object,
-};
+ImageSlider.propTypes = propTypes;
 
-ImageSlider.defaultProps = {
-  showTitle: false,
-  resizeMode: 'cover',
-  style: {},
-  autoplay: true,
-};
+ImageSlider.defaultProps = defaultProps;
 
 export default ImageSlider;
 export { ImageSliderItem };

@@ -1,10 +1,25 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import { isNumber, formatPrice } from './utils';
-import { ThemeContext } from '../../theme';
 import { SPACING } from '../../constants';
+
+const propTypes = {
+  currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
+  basePrice: PropTypes.number,
+  discountPrice: PropTypes.number,
+  startingPrice: PropTypes.oneOfType([PropTypes.number, undefined]),
+  endingPrice: PropTypes.oneOfType([PropTypes.number, undefined]),
+};
+
+const defaultProps = {
+  basePrice: 0,
+  discountPrice: 0,
+  startingPrice: undefined,
+  endingPrice: undefined,
+};
 
 /**
  * Component to display price of the product
@@ -31,14 +46,13 @@ const Price = ({
   startingPrice,
   endingPrice,
 }) => {
-  const { theme } = useContext(ThemeContext);
   const isBold = () => discountPrice && discountPrice < basePrice;
   const renderDiscountPrice = () =>
     discountPrice === basePrice ? null : (
       <Text
         type="label"
         bold={isBold()}
-        style={styles.discountPriceText(theme)}
+        style={styles.discountPriceText}
       >{`${currencySymbol}${formatPrice(discountPrice)}`}</Text>
     );
 
@@ -76,29 +90,17 @@ const styles = {
   container: {
     flexDirection: 'row',
   },
-  discountPriceText: theme => ({
+  discountPriceText: {
     marginEnd: SPACING.tiny,
-  }),
+  },
   basePriceText: (basePrice, discountPrice) => ({
     textDecorationLine:
       discountPrice && discountPrice < basePrice ? 'line-through' : 'none',
   }),
 };
 
-Price.propTypes = {
-  currencySymbol: PropTypes.string.isRequired,
-  currencyRate: PropTypes.number.isRequired,
-  basePrice: PropTypes.number,
-  discountPrice: PropTypes.number,
-  startingPrice: PropTypes.oneOfType([PropTypes.number, undefined]),
-  endingPrice: PropTypes.oneOfType([PropTypes.number, undefined]),
-};
+Price.propTypes = propTypes;
 
-Price.defaultProps = {
-  basePrice: 0,
-  discountPrice: 0,
-  startingPrice: undefined,
-  endingPrice: undefined,
-};
+Price.defaultProps = defaultProps;
 
 export default Price;

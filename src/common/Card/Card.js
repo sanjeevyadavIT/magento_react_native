@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import {
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  StyleSheet,
-  Platform,
   View,
+  Platform,
+  StyleSheet,
+  ViewPropTypes,
+  TouchableOpacity,
+  TouchableNativeFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../theme';
@@ -16,6 +17,22 @@ const SHADOW = 'shadow';
 
 const TouchReceptor =
   Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
+
+const propTypes = {
+  type: PropTypes.oneOf([CLEAR, OUTLINE, SHADOW]),
+  style: ViewPropTypes.style,
+  onPress: PropTypes.func,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.element, null])),
+  ]).isRequired,
+};
+
+const defaultProps = {
+  type: OUTLINE,
+  style: {},
+  onPress: null,
+};
 
 // TODO: TouchReceptor can be extracted into it's own component
 // TODO: Add styling for shadow
@@ -62,18 +79,8 @@ const styles = {
   }),
 };
 
-Card.propTypes = {
-  type: PropTypes.oneOf([CLEAR, OUTLINE, SHADOW]),
-  style: PropTypes.object,
-  onPress: PropTypes.func,
-  // children
-  // theme
-};
+Card.propTypes = propTypes;
 
-Card.defaultProps = {
-  type: OUTLINE,
-  style: {},
-  onPress: null,
-};
+Card.defaultProps = defaultProps;
 
 export default Card;

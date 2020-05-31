@@ -9,6 +9,15 @@ const INFO = 'info';
 const SUCCESS = 'success';
 const ERROR = 'error';
 
+const propTypes = {
+  message: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([INFO, SUCCESS, ERROR]),
+};
+
+const defaultProps = {
+  type: INFO,
+};
+
 const MessageView = React.memo(
   ({
     /**
@@ -60,13 +69,8 @@ const styles = StyleSheet.create({
   }),
 });
 
-MessageView.propTypes = {
-  message: PropTypes.string.isRequired,
-  type: PropTypes.oneOf([INFO, SUCCESS, ERROR]),
-};
+MessageView.propTypes = propTypes;
 
-MessageView.defaultProps = {
-  type: INFO,
-};
+MessageView.defaultProps = defaultProps;
 
 export default MessageView;

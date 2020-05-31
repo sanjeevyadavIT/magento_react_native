@@ -24,6 +24,24 @@ const defaultLoadingProps = (type, theme) => ({
 
 const TouchReceptor =
   Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
+
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([SOLID, OUTLINE, CLEAR]),
+  onPress: PropTypes.func,
+  disabled: PropTypes.bool,
+  loading: PropTypes.bool,
+  style: ViewPropTypes.style,
+};
+
+const defaultProps = {
+  type: SOLID,
+  onPress: () => {},
+  disabled: false,
+  style: {},
+  loading: false,
+};
+
 /**
  * @todo Add different styling of @param disabled is true
  */
@@ -111,21 +129,8 @@ const styles = StyleSheet.create({
   },
 });
 
-Button.propTypes = {
-  title: PropTypes.string.isRequired,
-  type: PropTypes.oneOf([SOLID, OUTLINE, CLEAR]),
-  onPress: PropTypes.func,
-  disabled: PropTypes.bool,
-  loading: PropTypes.bool,
-  style: ViewPropTypes.style,
-};
+Button.propTypes = propTypes;
 
-Button.defaultProps = {
-  type: SOLID,
-  onPress: () => {},
-  disabled: false,
-  style: {},
-  loading: false,
-};
+Button.defaultProps = defaultProps;
 
 export default Button;

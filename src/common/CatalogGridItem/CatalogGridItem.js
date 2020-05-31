@@ -13,6 +13,20 @@ import { ThemeContext } from '../../theme';
 import { ProductType } from '../../types';
 import { DIMENS, SPACING } from '../../constants';
 
+const propTypes = {
+  product: ProductType.isRequired,
+  currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
+  stateAccessor: PropTypes.string.isRequired,
+  updateItem: PropTypes.func.isRequired,
+  onPress: PropTypes.func.isRequired,
+  columnCount: PropTypes.number,
+};
+
+const defaultProps = {
+  columnCount: 1,
+};
+
 const CatalogGridItem = ({
   /**
    * Number of colums in `CatalogGrid` being displayed,
@@ -105,10 +119,10 @@ const CatalogGridItem = ({
     >
       <Image
         source={{ uri: getProductThumbnailFromAttribute(product) }}
-        style={styles.imageStyle(theme)}
+        style={styles.imageStyle}
         resizeMode="contain"
       />
-      <View style={styles.detail(theme)}>
+      <View style={styles.detail}>
         <Text ellipsizeMode="tail" numberOfLines={2}>
           {product.name}
         </Text>
@@ -130,28 +144,18 @@ const styles = StyleSheet.create({
         : DIMENS.catalogGridItemWidth,
     height: DIMENS.catalogGridItemHeight,
   }),
-  imageStyle: theme => ({
+  imageStyle: {
     height: DIMENS.catalogGridItemImageHeight,
-  }),
-  detail: theme => ({
+  },
+  detail: {
     padding: SPACING.small,
     flex: 1,
     justifyContent: 'space-between',
-  }),
+  },
 });
 
-CatalogGridItem.propTypes = {
-  product: ProductType.isRequired,
-  currencySymbol: PropTypes.string.isRequired,
-  currencyRate: PropTypes.number.isRequired,
-  stateAccessor: PropTypes.string.isRequired,
-  updateItem: PropTypes.func.isRequired,
-  onPress: PropTypes.func.isRequired,
-  columnCount: PropTypes.number,
-};
+CatalogGridItem.propTypes = propTypes;
 
-CatalogGridItem.defaultProps = {
-  columnCount: 1,
-};
+CatalogGridItem.defaultProps = defaultProps;
 
 export default CatalogGridItem;

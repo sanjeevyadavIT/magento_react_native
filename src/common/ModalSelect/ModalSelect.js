@@ -3,10 +3,38 @@ import { StyleSheet, ViewPropTypes } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
+import Text from '../Text/Text';
 import TextInput from '../TextInput/TextInput';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { DIMENS } from '../../constants';
+
+const propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  selectedKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, null]),
+  label: PropTypes.string.isRequired,
+  attribute: PropTypes.string,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  style: ViewPropTypes.style,
+  textStyle: Text.propTypes.style,
+  placeholderTextColor: PropTypes.string,
+};
+
+const defaultProps = {
+  disabled: false,
+  onChange: () => {},
+  selectedKey: null,
+  attribute: '',
+  style: {},
+  textStyle: {},
+  placeholderTextColor: '',
+};
 
 const ModalSelect = ({
   /**
@@ -100,7 +128,7 @@ const ModalSelect = ({
     >
       <TextInput
         inputContainerStyle={StyleSheet.flatten([
-          styles.customInputContainer(theme),
+          styles.customInputContainer,
           style,
           disabled && styles.disabledContainer,
         ])}
@@ -126,40 +154,17 @@ const styles = {
   inputStyle: {
     textAlign: 'center',
   },
-  customInputContainer: theme => ({
+  customInputContainer: {
     borderWidth: 1,
     borderRadius: DIMENS.borderRadius,
-  }),
+  },
   disabledContainer: {
     opacity: 0.5,
   },
 };
 
-ModalSelect.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      label: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  selectedKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, null]),
-  label: PropTypes.string.isRequired,
-  attribute: PropTypes.string,
-  onChange: PropTypes.func,
-  disabled: PropTypes.bool,
-  style: ViewPropTypes.style,
-  textStyle: PropTypes.object,
-  placeholderTextColor: PropTypes.string,
-};
+ModalSelect.propTypes = propTypes;
 
-ModalSelect.defaultProps = {
-  disabled: false,
-  onChange: () => {},
-  selectedKey: null,
-  attribute: '',
-  style: {},
-  textStyle: {},
-  placeholderTextColor: '',
-};
+ModalSelect.defaultProps = defaultProps;
 
 export default ModalSelect;

@@ -3,6 +3,18 @@ import { ActivityIndicator, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../theme';
 
+const propTypes = {
+  size: PropTypes.oneOf(['large', 'small']),
+  color: PropTypes.string,
+  style: ViewPropTypes.style,
+};
+
+const defaultProps = {
+  size: 'large',
+  color: '',
+  style: {},
+};
+
 const Spinner = ({
   /**
    * size of the spinner, can be
@@ -29,16 +41,8 @@ const Spinner = ({
   );
 };
 
-Spinner.propTypes = {
-  size: PropTypes.oneOf(['large', 'small']),
-  color: PropTypes.string,
-  style: ViewPropTypes.style,
-};
+Spinner.propTypes = propTypes;
 
-Spinner.defaultProps = {
-  size: 'large',
-  color: '',
-  style: {},
-};
+Spinner.defaultProps = defaultProps;
 
 export default Spinner;

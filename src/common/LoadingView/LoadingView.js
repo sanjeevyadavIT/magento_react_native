@@ -4,6 +4,16 @@ import { View } from 'react-native';
 import Spinner from '../Spinner/Spinner';
 import { ThemeContext } from '../../theme';
 
+const propTypes = {
+  size: PropTypes.string,
+  backgroundColor: PropTypes.string,
+};
+
+const defaultProps = {
+  size: 'large',
+  backgroundColor: null,
+};
+
 const LoadingView = ({
   /**
    * size of the spinner in LoadingView, can be
@@ -34,14 +44,8 @@ const styles = {
   }),
 };
 
-LoadingView.propTypes = {
-  size: PropTypes.string,
-  backgroundColor: PropTypes.string,
-};
+LoadingView.propTypes = propTypes;
 
-LoadingView.defaultProps = {
-  size: 'large',
-  backgroundColor: null,
-};
+LoadingView.defaultProps = defaultProps;
 
 export default LoadingView;

@@ -10,6 +10,21 @@ const SUB_HEADING = 'subheading';
 const BODY = 'body';
 const LABEL = 'label';
 
+const propTypes = {
+  type: PropTypes.oneOf([HEADING, SUB_HEADING, BODY, LABEL]),
+  bold: PropTypes.bool,
+  style: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object),
+  ]),
+};
+
+const defaultProps = {
+  type: BODY,
+  bold: false,
+  style: {},
+};
+
 // NOTE: Improve comments quality
 const Text = ({
   /**
@@ -67,21 +82,8 @@ const getTextStyle = (type, bold, theme) => {
   return TYPOGRAPHY[style](theme);
 };
 
-const styles = StyleSheet.create({});
+Text.propTypes = propTypes;
 
-Text.propTypes = {
-  type: PropTypes.oneOf([HEADING, SUB_HEADING, BODY, LABEL]),
-  bold: PropTypes.bool,
-  style: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.object),
-  ]),
-};
-
-Text.defaultProps = {
-  type: BODY,
-  bold: false,
-  style: {},
-};
+Text.defaultProps = defaultProps;
 
 export default Text;

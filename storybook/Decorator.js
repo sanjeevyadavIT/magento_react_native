@@ -1,10 +1,24 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewPropTypes } from 'react-native';
+import PropTypes from 'prop-types';
 import { Text } from '../src/common';
 
-export const Divider = () => <View style={{ flex: 1, height: 1, backgroundColor: '#d9d9d9' }} />;
+const Divider = () => <View style={{ flex: 1, height: 1, backgroundColor: '#d9d9d9' }} />;
 
-export const StorySection = ({ title, children, style }) => (
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+  style: ViewPropTypes.style,
+}
+
+const defaultProps = {
+  style: {},
+};
+
+const StorySection = ({ title, children, style }) => (
   <>
     <Text type="subheading">{title}</Text>
     <View style={StyleSheet.flatten([styles.card, style])}>{children}</View>
@@ -23,3 +37,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
+
+StorySection.propTypes = propTypes;
+
+StorySection.defaultProps = defaultProps;
+
+export { StorySection, Divider };

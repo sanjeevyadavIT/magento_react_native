@@ -114,7 +114,8 @@ class Magento {
   }
 
   static extractErrorMessage(data) {
-    let { message, parameters } = data;
+    const { parameters } = data;
+    let { message } = data;
 
     if (parameters && Array.isArray(parameters) && parameters.length > 0) {
       parameters.forEach((item, index) => {

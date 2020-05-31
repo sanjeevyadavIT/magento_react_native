@@ -13,7 +13,7 @@ storiesOf('GenericTemplate', module)
     <GenericTemplate status={Status.DEFAULT}>
       <Text>
         This is child component of GenericTemplate, which will be shown if
-        status == 'success'
+        status == &#39success&#39
       </Text>
     </GenericTemplate>
   ))
@@ -21,7 +21,7 @@ storiesOf('GenericTemplate', module)
     <GenericTemplate status={Status.LOADING}>
       <Text>
         This is child component of GenericTemplate, which will be shown if
-        status == 'success'
+        status == &#39success&#39
       </Text>
     </GenericTemplate>
   ))
@@ -29,7 +29,7 @@ storiesOf('GenericTemplate', module)
     <GenericTemplate status={Status.SUCCESS}>
       <Text>
         This is child component of GenericTemplate, which will be shown if
-        status == 'success'
+        status == &#39success&#39
       </Text>
     </GenericTemplate>
   ))
@@ -40,7 +40,7 @@ storiesOf('GenericTemplate', module)
     >
       <Text>
         This is child component of GenericTemplate, which will be shown if
-        status == 'success'
+        status == &#39success&#39
       </Text>
     </GenericTemplate>
   ));
