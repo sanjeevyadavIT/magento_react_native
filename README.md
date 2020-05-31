@@ -42,22 +42,26 @@ More information on contributing, head over to our [contribution guidelines](CON
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://twitter.com/alexakasanjeev"><img src="https://avatars0.githubusercontent.com/u/13250741?v=4" width="100px;" alt="Sanjeev yadav"/><br /><sub><b>Sanjeev yadav</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=alexakasanjeev" title="Code">💻</a> <a href="#maintenance-alexakasanjeev" title="Maintenance">🚧</a></td>
-    <td align="center"><a href="https://github.com/ishansinghania"><img src="https://avatars1.githubusercontent.com/u/25003242?v=4" width="100px;" alt="ishansinghania"/><br /><sub><b>ishansinghania</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=ishansinghania" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/DevDelvo"><img src="https://avatars1.githubusercontent.com/u/32313680?v=4" width="100px;" alt="Kevin Delvo"/><br /><sub><b>Kevin Delvo</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=DevDelvo" title="Documentation">📖</a></td>
-    <td align="center"><a href="http://www.jctobar.com"><img src="https://avatars1.githubusercontent.com/u/21246524?v=4" width="100px;" alt="Jose Tobar"/><br /><sub><b>Jose Tobar</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=josectobar" title="Code">💻</a> <a href="#userTesting-josectobar" title="User Testing">📓</a></td>
-    <td align="center"><a href="https://github.com/harshitmahendra"><img src="https://avatars0.githubusercontent.com/u/34433141?v=4" width="100px;" alt="harshit mahendra"/><br /><sub><b>harshit mahendra</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Aharshitmahendra" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://github.com/imrankhanjoya"><img src="https://avatars3.githubusercontent.com/u/2832270?v=4" width="100px;" alt="imrankhanjoya"/><br /><sub><b>imrankhanjoya</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Aimrankhanjoya" title="Bug reports">🐛</a></td>
-    <td align="center"><a href="https://github.com/MehmoodArib"><img src="https://avatars2.githubusercontent.com/u/32247358?v=4" width="100px;" alt="Mehmood Arib"/><br /><sub><b>Mehmood Arib</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3AMehmoodArib" title="Bug reports">🐛</a> <a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=MehmoodArib" title="Code">💻</a></td>
+    <td align="center"><a href="http://twitter.com/alexakasanjeev"><img src="https://avatars0.githubusercontent.com/u/13250741?v=4" width="100px;" alt=""/><br /><sub><b>Sanjeev yadav</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=alexakasanjeev" title="Code">💻</a> <a href="#maintenance-alexakasanjeev" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/ishansinghania"><img src="https://avatars1.githubusercontent.com/u/25003242?v=4" width="100px;" alt=""/><br /><sub><b>ishansinghania</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=ishansinghania" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/DevDelvo"><img src="https://avatars1.githubusercontent.com/u/32313680?v=4" width="100px;" alt=""/><br /><sub><b>Kevin Delvo</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=DevDelvo" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://www.jctobar.com"><img src="https://avatars1.githubusercontent.com/u/21246524?v=4" width="100px;" alt=""/><br /><sub><b>Jose Tobar</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=josectobar" title="Code">💻</a> <a href="#userTesting-josectobar" title="User Testing">📓</a></td>
+    <td align="center"><a href="https://github.com/harshitmahendra"><img src="https://avatars0.githubusercontent.com/u/34433141?v=4" width="100px;" alt=""/><br /><sub><b>harshit mahendra</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Aharshitmahendra" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/imrankhanjoya"><img src="https://avatars3.githubusercontent.com/u/2832270?v=4" width="100px;" alt=""/><br /><sub><b>imrankhanjoya</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Aimrankhanjoya" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/MehmoodArib"><img src="https://avatars2.githubusercontent.com/u/32247358?v=4" width="100px;" alt=""/><br /><sub><b>Mehmood Arib</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3AMehmoodArib" title="Bug reports">🐛</a> <a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=MehmoodArib" title="Code">💻</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/piyush9015"><img src="https://avatars2.githubusercontent.com/u/24675931?v=4" width="100px;" alt="piyush9015"/><br /><sub><b>piyush9015</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Apiyush9015" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/piyush9015"><img src="https://avatars2.githubusercontent.com/u/24675931?v=4" width="100px;" alt=""/><br /><sub><b>piyush9015</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Apiyush9015" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/balkrishanyadav"><img src="https://avatars2.githubusercontent.com/u/6735695?v=4" width="100px;" alt=""/><br /><sub><b>Balkrishan Yadav</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Abalkrishanyadav" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
