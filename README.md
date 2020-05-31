@@ -57,6 +57,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/piyush9015"><img src="https://avatars2.githubusercontent.com/u/24675931?v=4" width="100px;" alt=""/><br /><sub><b>piyush9015</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Apiyush9015" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/balkrishanyadav"><img src="https://avatars2.githubusercontent.com/u/6735695?v=4" width="100px;" alt=""/><br /><sub><b>Balkrishan Yadav</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/issues?q=author%3Abalkrishanyadav" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/troublediehard"><img src="https://avatars2.githubusercontent.com/u/6594232?v=4" width="100px;" alt=""/><br /><sub><b>Dima Portenko</b></sub></a><br /><a href="https://github.com/alexakasanjeev/magento_react_native/commits?author=troublediehard" title="Code">💻</a></td>
   </tr>
 </table>
 
