@@ -12,9 +12,7 @@ import { DIMENS } from '../../../../constants';
  * @param {Object} props          - props related to component
  * @param {Object[]} props.slider - Array containing image url to be displayed
  */
-const HomeSliderContainer = ({
-  slider,
-}) => {
+const HomeSliderContainer = ({ slider }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <ImageSlider
@@ -32,7 +30,7 @@ HomeSliderContainer.propTypes = {
 const mapStateToProps = ({ home }) => {
   const { slider } = home;
   return {
-    slider
+    slider,
   };
 };
 

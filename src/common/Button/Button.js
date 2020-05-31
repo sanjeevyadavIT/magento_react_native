@@ -22,7 +22,8 @@ const defaultLoadingProps = (type, theme) => ({
   size: 'small',
 });
 
-const TouchReceptor = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
+const TouchReceptor =
+  Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
 /**
  * @todo Add different styling of @param disabled is true
  */
@@ -59,7 +60,7 @@ const Button = ({
   const containerStyle = StyleSheet.flatten([
     styles.button(type, theme),
     style,
-    disabled && styles.disabled(type, theme)
+    disabled && styles.disabled(type, theme),
   ]);
 
   const titleStyle = StyleSheet.flatten([
@@ -69,23 +70,19 @@ const Button = ({
 
   return (
     <TouchReceptor onPress={!loading && onPress} disabled={disabled}>
-      <View
-        style={containerStyle}
-      >
-        {
-          (loading && !disabled) ? (
-            <Spinner style={styles.loading} {...defaultLoadingProps(type, theme)} />
-          ) : (
-              <Text style={titleStyle}>
-                {title}
-              </Text>
-            )
-        }
+      <View style={containerStyle}>
+        {loading && !disabled ? (
+          <Spinner
+            style={styles.loading}
+            {...defaultLoadingProps(type, theme)}
+          />
+        ) : (
+          <Text style={titleStyle}>{title}</Text>
+        )}
       </View>
     </TouchReceptor>
   );
 };
-
 
 const styles = StyleSheet.create({
   button: (type, theme) => ({
@@ -111,7 +108,7 @@ const styles = StyleSheet.create({
   }),
   loading: {
     marginVertical: 2,
-  }
+  },
 });
 
 Button.propTypes = {
@@ -125,7 +122,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   type: SOLID,
-  onPress: () => { },
+  onPress: () => {},
   disabled: false,
   style: {},
   loading: false,

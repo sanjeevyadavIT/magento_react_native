@@ -29,7 +29,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         signInStatus: Status.ERROR,
-        signInErrorMessage: payload.errorMessage
+        signInErrorMessage: payload.errorMessage,
       };
     case MAGENTO.SIGN_UP_LOADING:
       return {
@@ -66,7 +66,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         resetPasswordStatus: Status.ERROR,
-        resetPasswordErrorMessage: payload.errorMessage
+        resetPasswordErrorMessage: payload.errorMessage,
       };
     default:
       return state;

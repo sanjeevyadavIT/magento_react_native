@@ -1,4 +1,5 @@
-export const isNumber = input => typeof input === 'number' && /^-?[\d.]+(?:e-?\d+)?$/.test(input);
+export const isNumber = input =>
+  typeof input === 'number' && /^-?[\d.]+(?:e-?\d+)?$/.test(input);
 
 /**
  * If non-number is supplied return 0

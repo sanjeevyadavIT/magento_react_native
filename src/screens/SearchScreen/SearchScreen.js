@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Modal,
-  TouchableHighlight
-} from 'react-native';
+import { View, Text, TextInput, Modal, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { SearchProductList } from './containers';
 import { getSearchProducts, setCurrentProduct } from '../../store/actions';
@@ -17,7 +11,6 @@ import { translate } from '../../i18n';
 // TODO: using same business logic as in CategoryList, extract common code
 // FIXME: Extremely dirty code
 class Search extends React.Component {
-
   static contextType = ThemeContext;
 
   constructor(props) {
@@ -45,7 +38,13 @@ class Search extends React.Component {
     const { loading, products, error, totalCount } = this.props;
     const { sortDialogVisible } = this.state;
 
-    if (sortDialogVisible !== nextState.sortDialogVisible || loading !== nextProps.loading || products !== nextProps.products || error !== nextProps.error || totalCount !== nextProps.totalCount) {
+    if (
+      sortDialogVisible !== nextState.sortDialogVisible ||
+      loading !== nextProps.loading ||
+      products !== nextProps.products ||
+      error !== nextProps.error ||
+      totalCount !== nextProps.totalCount
+    ) {
       return true;
     }
 
@@ -55,7 +54,6 @@ class Search extends React.Component {
   componentWillUnmount() {
     this.setState({ sortDialogVisible: false });
   }
-
 
   onSubmitted() {
     const { getSearchProducts: _getSearchProducts } = this.props;
@@ -82,7 +80,7 @@ class Search extends React.Component {
   }
 
   performSort(val) {
-    const { getSearchProducts: _getSearchProducts, } = this.props;
+    const { getSearchProducts: _getSearchProducts } = this.props;
     const { searchText } = this.state;
     _getSearchProducts(searchText, null, val);
     this.setState({ sortOrder: val, sortDialogVisible: false });
@@ -98,23 +96,39 @@ class Search extends React.Component {
     const { sortDialogVisible } = this.state;
     const { theme } = this.context;
     return (
-      <Modal
-        transparent
-        animationType="slide"
-        visible={sortDialogVisible}
-      >
-        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#0000004d' }}>
+      <Modal transparent animationType="slide" visible={sortDialogVisible}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#0000004d',
+          }}
+        >
           <View style={{ backgroundColor: '#fff', padding: 8 }}>
-            <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('0')}>
+            <TouchableHighlight
+              style={styles.option(theme)}
+              onPress={() => this.performSort('0')}
+            >
               <Text>{translate('common.sortOption.aToZ')}</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('1')}>
+            <TouchableHighlight
+              style={styles.option(theme)}
+              onPress={() => this.performSort('1')}
+            >
               <Text>{translate('common.sortOption.zToA')}</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('2')}>
+            <TouchableHighlight
+              style={styles.option(theme)}
+              onPress={() => this.performSort('2')}
+            >
               <Text>{translate('common.sortOption.priceLowToHigh')}</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.option(theme)} onPress={() => this.performSort('3')}>
+            <TouchableHighlight
+              style={styles.option(theme)}
+              onPress={() => this.performSort('3')}
+            >
               <Text>{translate('common.sortOption.priceHighToLow')}</Text>
             </TouchableHighlight>
           </View>
@@ -124,12 +138,7 @@ class Search extends React.Component {
   }
 
   renderContent = () => {
-    const {
-      loading,
-      error,
-      totalCount,
-      products,
-    } = this.props;
+    const { loading, error, totalCount, products } = this.props;
 
     const { searchText } = this.state;
 
@@ -146,15 +155,15 @@ class Search extends React.Component {
     }
 
     if (totalCount > 0 && products) {
-      return (
-        <SearchProductList columnCount={2} />
-      );
+      return <SearchProductList columnCount={2} />;
     }
 
     return (
-      <View><Text>{translate('searchScreen.noProduct')}</Text></View>
+      <View>
+        <Text>{translate('searchScreen.noProduct')}</Text>
+      </View>
     );
-  }
+  };
 
   render() {
     console.log('PROBLEM: Rerendering entire Search component');
@@ -174,18 +183,12 @@ const styles = {
     alignItems: 'center',
     padding: 24,
     borderBottomWidth: 1,
-    borderColor: theme.borderColor
-  })
+    borderColor: theme.borderColor,
+  }),
 };
 
 const mapStateToProps = ({ search }) => {
-  const {
-    products,
-    totalCount,
-    loading,
-    loadingMore,
-    error
-  } = search;
+  const { products, totalCount, loading, loadingMore, error } = search;
   const canLoadMoreContent = products ? products.length < totalCount : false;
   return {
     products,

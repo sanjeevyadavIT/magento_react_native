@@ -3,14 +3,12 @@ import { View, Alert, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { getCartItemProduct, removeItemFromCart } from '../../../../store/actions';
-import { getProductThumbnailFromAttribute } from '../../../../utils';
 import {
-  Card,
-  Image,
-  Text,
-  Price,
-} from '../../../../common';
+  getCartItemProduct,
+  removeItemFromCart,
+} from '../../../../store/actions';
+import { getProductThumbnailFromAttribute } from '../../../../utils';
+import { Card, Image, Text, Price } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 import { DIMENS, SPACING } from '../../../../constants';
@@ -39,14 +37,22 @@ const CartListItem = ({
       translate('cartScreen.removeItemDialogTitle'),
       `${translate('cartScreen.removeItemDialogMessage')}: ${item.name}`,
       [
-        { text: translate('common.cancel'), onPress: () => console.log('Cancel pressed'), style: 'cancel' },
-        { text: translate('common.ok'), onPress: () => _removeItemFromCart(item.item_id) },
+        {
+          text: translate('common.cancel'),
+          onPress: () => console.log('Cancel pressed'),
+          style: 'cancel',
+        },
+        {
+          text: translate('common.ok'),
+          onPress: () => _removeItemFromCart(item.item_id),
+        },
       ],
-      { cancelable: true }
+      { cancelable: true },
     );
   };
 
-  const getImageUrl = () => (productDetail ? getProductThumbnailFromAttribute(productDetail) : '');
+  const getImageUrl = () =>
+    productDetail ? getProductThumbnailFromAttribute(productDetail) : '';
 
   return (
     <Card style={styles.mainContainer(theme)}>
@@ -91,7 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
 });
 
@@ -118,5 +124,5 @@ const mapStateToProps = ({ cart }, { item }) => {
 
 export default connect(mapStateToProps, {
   getCartItemProduct,
-  removeItemFromCart
+  removeItemFromCart,
 })(CartListItem);

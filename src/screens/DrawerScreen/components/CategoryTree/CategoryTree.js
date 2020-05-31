@@ -17,7 +17,9 @@ const CategoryTree = ({
   ...props
 }) => {
   const { theme } = useContext(ThemeContext);
-  const renderRow = category => <CategoryTreeItem navigation={navigation} category={category.item} />;
+  const renderRow = category => (
+    <CategoryTreeItem navigation={navigation} category={category.item} />
+  );
 
   const renderFooter = () => (
     <View style={styles.footerContainer(theme)}>
@@ -49,7 +51,7 @@ const CategoryTree = ({
 
 const styles = StyleSheet.create({
   footerContainer: theme => ({
-    marginStart: SPACING.large
+    marginStart: SPACING.large,
   }),
   card: theme => ({
     borderWidth: 0,
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
   }),
   icon: theme => ({
     padding: 2,
-    paddingRight: SPACING.large
+    paddingRight: SPACING.large,
   }),
 });
 

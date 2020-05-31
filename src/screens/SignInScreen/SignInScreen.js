@@ -1,24 +1,14 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-} from 'react';
-import {
-  View,
-  StyleSheet,
-  Keyboard,
-} from 'react-native';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { View, StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { signIn, resetAuthState } from '../../store/actions';
+import { Button, TextInput, MessageView } from '../../common';
 import {
-  Button,
-  TextInput,
-  MessageView
-} from '../../common';
-import { NAVIGATION_TO_SIGNUP_SCREEN, NAVIGATION_TO_FORGOT_PASSWORD_SCREEN } from '../../navigation';
+  NAVIGATION_TO_SIGNUP_SCREEN,
+  NAVIGATION_TO_FORGOT_PASSWORD_SCREEN,
+} from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -48,10 +38,13 @@ const SignInScreen = ({
     }
   }, [status]);
 
-  useEffect(() => (() => {
-    // componentWillUnmount
-    _resetAuthState();
-  }), []);
+  useEffect(
+    () => () => {
+      // componentWillUnmount
+      _resetAuthState();
+    },
+    [],
+  );
 
   const onSignInPress = () => {
     Keyboard.dismiss();
@@ -79,20 +72,27 @@ const SignInScreen = ({
         type="clear"
         style={styles.defaultMargin(theme)}
         title={translate('signInScreen.forgotPassword')}
-        onPress={() => navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN)}
+        onPress={() =>
+          navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN)
+        }
       />
     </>
   );
 
   const renderMessage = () => {
-    const message = status === Status.ERROR ? errorMessage : (status === Status.SUCCESS ? translate('forgetPasswordScreen.emailSent') : "");
-    const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
-    return (
-      <MessageView
-        message={message}
-        type={type}
-      />
-    );
+    const message =
+      status === Status.ERROR
+        ? errorMessage
+        : status === Status.SUCCESS
+        ? translate('forgetPasswordScreen.emailSent')
+        : '';
+    const type =
+      status === Status.ERROR
+        ? 'error'
+        : status === Status.SUCCESS
+        ? 'success'
+        : 'info';
+    return <MessageView message={message} type={type} />;
   };
 
   return (
@@ -112,7 +112,7 @@ const SignInScreen = ({
       <TextInput
         autoCapitalize="none"
         secureTextEntry={secureEntry}
-        rightIcon={(
+        rightIcon={
           <Icon
             name={secureEntry ? 'eye' : 'eye-off'}
             size={20}
@@ -120,7 +120,7 @@ const SignInScreen = ({
             color={theme.labelTextColor}
             onPress={() => toggleSecureEntry(!secureEntry)}
           />
-        )}
+        }
         textContentType="password"
         editable={!(status === Status.LOADING)}
         placeholder={translate('signInScreen.passwordHint')}
@@ -128,7 +128,9 @@ const SignInScreen = ({
         containerStyle={styles.defaultMargin(theme)}
         value={form.password}
         onChangeText={value => setValues({ ...form, password: value })}
-        assignRef={(component) => { passwordInputRef.current = component; }}
+        assignRef={component => {
+          passwordInputRef.current = component;
+        }}
         onSubmitEditing={onSignInPress}
       />
       {renderButtons()}
@@ -148,8 +150,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   iconPadding: theme => ({
-    padding: SPACING.small
-  })
+    padding: SPACING.small,
+  }),
 });
 
 SignInScreen.propTypes = {

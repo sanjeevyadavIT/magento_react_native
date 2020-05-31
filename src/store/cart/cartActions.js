@@ -1,13 +1,12 @@
 import { MAGENTO } from '../../constants';
 
 export const createQuoteId = () => ({
-  type: MAGENTO.CREATE_QUOTE_ID_REQUEST
+  type: MAGENTO.CREATE_QUOTE_ID_REQUEST,
 });
 
 export const getCustomerCart = () => ({
-  type: MAGENTO.CUSTOMER_CART_REQUEST
+  type: MAGENTO.CUSTOMER_CART_REQUEST,
 });
-
 
 export const getCartItemProduct = sku => ({
   type: MAGENTO.CART_ITEM_PRODUCT_REQUEST,

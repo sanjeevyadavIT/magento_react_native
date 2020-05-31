@@ -11,7 +11,9 @@ export const NAVIGATION_TO_CART_SCREEN = 'CartScreen';
 export const NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN = 'CheckoutAddressScreen';
 export const NAVIGATION_TO_SHIPPING_SCREEN = 'ShippingScreen';
 export const NAVIGATION_TO_PAYMENT_SCREEN = 'PaymentScreen';
-export const NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN = 'OrderConfirmationScreen';
+export const NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN =
+  'OrderConfirmationScreen';
 export const NAVIGATION_TO_FORGOT_PASSWORD_SCREEN = 'ForgetPasswordScreen';
 export const NAVIGATION_TO_SETTING_SCREEN = 'SettingScreen';
-export const NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN = 'EditAccountAddressScreen';
+export const NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN =
+  'EditAccountAddressScreen';

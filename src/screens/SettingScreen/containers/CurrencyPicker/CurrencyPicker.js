@@ -21,8 +21,10 @@ const CurrencyPicker = ({
     key: value,
   }));
 
-  const currencyExchangeRateByCode = (code) => {
-    const result = exchangeRates.find(exchangeRate => exchangeRate.currency_to === code);
+  const currencyExchangeRateByCode = code => {
+    const result = exchangeRates.find(
+      exchangeRate => exchangeRate.currency_to === code,
+    );
     if (result) {
       return result.rate;
     }
@@ -41,7 +43,9 @@ const CurrencyPicker = ({
   return (
     <ModalSelect
       disabled={data.length === 0}
-      label={`${translate('settingScreen.changeCurrency')} : ${selectedCurrencyCode}`}
+      label={`${translate(
+        'settingScreen.changeCurrency',
+      )} : ${selectedCurrencyCode}`}
       attribute={translate('settingScreen.changeCurrency')}
       data={data}
       onChange={onChange}
@@ -64,10 +68,12 @@ const styles = {
 
 CurrencyPicker.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string),
-  exchangeRates: PropTypes.arrayOf(PropTypes.shape({
-    currency_to: PropTypes.string.isRequired,
-    rate: PropTypes.number.isRequired,
-  })),
+  exchangeRates: PropTypes.arrayOf(
+    PropTypes.shape({
+      currency_to: PropTypes.string.isRequired,
+      rate: PropTypes.number.isRequired,
+    }),
+  ),
   selectedCurrencyCode: PropTypes.string,
   changeCurrency: PropTypes.func.isRequired,
 };
@@ -82,7 +88,7 @@ const mapStatetoProps = ({ magento }) => {
   const {
     available_currency_codes: currencies,
     exchange_rates: exchangeRates,
-    displayCurrencyCode: selectedCurrencyCode
+    displayCurrencyCode: selectedCurrencyCode,
   } = magento.currency;
   return {
     currencies,

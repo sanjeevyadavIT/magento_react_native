@@ -1,5 +1,3 @@
 import CartListContainer from './CartListContainer';
 
-export {
-  CartListContainer,
-};
+export { CartListContainer };

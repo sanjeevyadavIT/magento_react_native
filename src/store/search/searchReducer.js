@@ -24,7 +24,7 @@ export default (state = getInitialState(false), action) => {
         loading: false,
         loadingMore: false,
         products: [...products, ...action.payload.items],
-        totalCount: action.payload.total_count
+        totalCount: action.payload.total_count,
       };
     }
     case MAGENTO.MORE_SEARCH_PRODUCTS_LOADING:
@@ -39,7 +39,7 @@ export default (state = getInitialState(false), action) => {
         loadingMore: false,
         products: null,
         totalCount: 0,
-        error: action.payload
+        error: action.payload,
       };
     default:
       return state;

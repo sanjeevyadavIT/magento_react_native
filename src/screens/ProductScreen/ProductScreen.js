@@ -2,9 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  GenericTemplate,
-} from '../../common';
+import { GenericTemplate } from '../../common';
 import {
   SliderContainer,
   PriceContainer,
@@ -56,7 +54,7 @@ const ProductScreen = ({
       custom_attributes: customAttributes,
       type_id: productType,
       price,
-    }
+    },
   } = route.params;
 
   useEffect(() => {
@@ -65,7 +63,10 @@ const ProductScreen = ({
 
   function calculatedSelectedProduct() {
     let _selectedProduct = null;
-    if (options.length !== 0 && options.length === Object.keys(selectedOptions).length) {
+    if (
+      options.length !== 0 &&
+      options.length === Object.keys(selectedOptions).length
+    ) {
       _selectedProduct = findSelectedProduct();
     }
     if (_selectedProduct != null) {
@@ -74,35 +75,48 @@ const ProductScreen = ({
   }
 
   function findSelectedProduct() {
-    const selectedOptionsWithNameAsKey = Object.keys(selectedOptions).reduce((total, selectedOptionKey) => ({
-      ...total,
-      [attributes[selectedOptionKey].attributeCode]: selectedOptions[selectedOptionKey],
-    }), {});
-    return children.find(child => Object.keys(selectedOptionsWithNameAsKey).every(attributeKey => isAttributeAndValuePresent(child, attributeKey, selectedOptionsWithNameAsKey[attributeKey])));
+    const selectedOptionsWithNameAsKey = Object.keys(selectedOptions).reduce(
+      (total, selectedOptionKey) => ({
+        ...total,
+        [attributes[selectedOptionKey].attributeCode]:
+          selectedOptions[selectedOptionKey],
+      }),
+      {},
+    );
+    return children.find(child =>
+      Object.keys(selectedOptionsWithNameAsKey).every(attributeKey =>
+        isAttributeAndValuePresent(
+          child,
+          attributeKey,
+          selectedOptionsWithNameAsKey[attributeKey],
+        ),
+      ),
+    );
   }
 
   function isAttributeAndValuePresent(child, attributeCode, attributeValue) {
-    return child.custom_attributes.some(customAttribute => customAttribute.attribute_code === attributeCode && customAttribute.value === attributeValue)
+    return child.custom_attributes.some(
+      customAttribute =>
+        customAttribute.attribute_code === attributeCode &&
+        customAttribute.value === attributeValue,
+    );
   }
 
   return (
     <GenericTemplate
       scrollable
       status={Status.SUCCESS}
-      footer={(
+      footer={
         <CTAButtons
           sku={sku}
           productType={productType}
           selectedOptions={selectedOptions}
           quantity={quantity}
         />
-      )}
+      }
     >
       <View style={styles.imageContainer(DIMENS.productDetailPageSliderHeight)}>
-        <SliderContainer
-          sku={sku}
-          selectedProduct={selectedProduct}
-        />
+        <SliderContainer sku={sku} selectedProduct={selectedProduct} />
       </View>
       <View style={styles.defaultStyles(theme)}>
         <PriceContainer
@@ -113,7 +127,9 @@ const ProductScreen = ({
         />
       </View>
       {productType === 'configurable' && (
-        <View style={[styles.defaultStyles(theme), styles.optionsContainer(theme)]}>
+        <View
+          style={[styles.defaultStyles(theme), styles.optionsContainer(theme)]}
+        >
           <OptionsContainer
             sku={sku}
             selectedOptions={selectedOptions}
@@ -136,7 +152,7 @@ const styles = StyleSheet.create({
     padding: SPACING.large,
   }),
   imageContainer: height => ({
-    height
+    height,
   }),
   optionsContainer: theme => ({
     minHeight: DIMENS.optionBoxMinHeight,
@@ -145,16 +161,20 @@ const styles = StyleSheet.create({
 
 ProductScreen.propTypes = {
   children: PropTypes.arrayOf(ProductType),
-  options: PropTypes.arrayOf(PropTypes.shape({
-    attribute_id: PropTypes.string,
-    id: PropTypes.number,
-    label: PropTypes.string,
-    position: PropTypes.number,
-    product_id: PropTypes.number,
-    values: PropTypes.arrayOf(PropTypes.shape({
-      value_index: PropTypes.number.isRequired,
-    })),
-  })),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      attribute_id: PropTypes.string,
+      id: PropTypes.number,
+      label: PropTypes.string,
+      position: PropTypes.number,
+      product_id: PropTypes.number,
+      values: PropTypes.arrayOf(
+        PropTypes.shape({
+          value_index: PropTypes.number.isRequired,
+        }),
+      ),
+    }),
+  ),
   attributes: PropTypes.object,
   navigation: PropTypes.object.isRequired,
 };
@@ -167,16 +187,13 @@ ProductScreen.defaultProps = {
 
 const mapStateToProps = ({ product }, { route }) => {
   const {
-    product: { sku }
+    product: { sku },
   } = route.params;
   const {
     current: {
-      [sku]: {
-        children,
-        options,
-      }
+      [sku]: { children, options },
     },
-    attributes
+    attributes,
   } = product;
   return {
     children,

@@ -31,24 +31,24 @@ const HomeScreen = ({ status, errorMessage }) => {
 
 const styles = StyleSheet.create({
   imageSliderContainer: theme => ({
-    height: DIMENS.homePageSliderHeight
-  })
+    height: DIMENS.homePageSliderHeight,
+  }),
 });
 
 HomeScreen.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
 };
 
 HomeScreen.defaultProps = {
-  errorMessage: ''
+  errorMessage: '',
 };
 
 const mapStatetoProps = ({ home }) => {
   const { status, errorMessage } = home;
   return {
     status,
-    errorMessage
+    errorMessage,
   };
 };
 

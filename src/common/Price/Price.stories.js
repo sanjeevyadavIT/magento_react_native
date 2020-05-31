@@ -7,9 +7,7 @@ storiesOf('Price', module)
   .addDecorator(getStory => (
     <ThemeProvider theme={theme}>{getStory()}</ThemeProvider>
   ))
-  .add('with basePrice', () => (
-    <Price basePrice={300} currencySymbol="$" />
-  ))
+  .add('with basePrice', () => <Price basePrice={300} currencySymbol="$" />)
   .add('with integer basePrice & discountPrice', () => (
     <Price basePrice={300} discountPrice={200} currencySymbol="$" />
   ))
@@ -25,9 +23,17 @@ storiesOf('Price', module)
   .add('with startingPrice', () => (
     <Price startingPrice={299} currencySymbol="$" />
   ))
-  .add('with startingPrice mentioned, basePrice & discountPrice won\'t render', () => (
-    <Price startingPrice={299} basePrice={299} discountPrice={149} currencySymbol="$" />
-  ))
+  .add(
+    "with startingPrice mentioned, basePrice & discountPrice won't render",
+    () => (
+      <Price
+        startingPrice={299}
+        basePrice={299}
+        discountPrice={149}
+        currencySymbol="$"
+      />
+    ),
+  )
   .add('with startingPrice and endingPrice', () => (
     <Price startingPrice={299} endingPrice={399} currencySymbol="$" />
   ));

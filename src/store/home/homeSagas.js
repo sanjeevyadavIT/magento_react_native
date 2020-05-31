@@ -19,8 +19,8 @@ function* getHomeData() {
       type: MAGENTO.HOME_DATA_FAILURE,
       payload: {
         errorCode: error.name,
-        errorMessage: error.message
-      }
+        errorMessage: error.message,
+      },
     });
   }
 }
@@ -34,18 +34,27 @@ function* getFeaturedCategoryProducts({ payload }) {
       payload: {
         categoryId,
         loading: true,
-      }
+      },
     });
-    const products = yield call({ context: magento, fn: magento.admin.getCategoryProducts }, categoryId, 1, undefined, 20);
+    const products = yield call(
+      { context: magento, fn: magento.admin.getCategoryProducts },
+      categoryId,
+      1,
+      undefined,
+      20,
+    );
     yield put({
       type: MAGENTO.FEATURED_CATEGORY_PRODUCTS_SUCCESS,
       payload: {
         categoryId,
         products,
-      }
+      },
     });
   } catch (error) {
-    yield put({ type: MAGENTO.FEATURED_CATEGORY_PRODUCTS_ERROR, payload: { categoryId: payload, errorMessage: error.message } });
+    yield put({
+      type: MAGENTO.FEATURED_CATEGORY_PRODUCTS_ERROR,
+      payload: { categoryId: payload, errorMessage: error.message },
+    });
   }
 }
 
@@ -53,23 +62,34 @@ function* getFeaturedCategoryProducts({ payload }) {
 function* updateConfigurableProductsPrice({ payload }) {
   const { sku } = payload;
   try {
-    const children = yield call({ context: magento, fn: magento.admin.getConfigurableChildren }, sku);
+    const children = yield call(
+      { context: magento, fn: magento.admin.getConfigurableChildren },
+      sku,
+    );
     yield put({
       type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_SUCCESS,
       payload: {
         sku,
         children,
-      }
+      },
     });
   } catch (error) {
-    yield put({ type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_ERROR, payload: { sku, errorMessage: error.message } });
+    yield put({
+      type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_ERROR,
+      payload: { sku, errorMessage: error.message },
+    });
   }
 }
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
-
   yield takeLatest(MAGENTO.HOME_DATA_REQUEST, getHomeData);
-  yield takeEvery(MAGENTO.FEATURED_CATEGORY_PRODUCTS_REQUEST, getFeaturedCategoryProducts);
-  yield takeEvery(MAGENTO.HOME_UPDATE_CONF_PRODUCT_REQUEST, updateConfigurableProductsPrice);
+  yield takeEvery(
+    MAGENTO.FEATURED_CATEGORY_PRODUCTS_REQUEST,
+    getFeaturedCategoryProducts,
+  );
+  yield takeEvery(
+    MAGENTO.HOME_UPDATE_CONF_PRODUCT_REQUEST,
+    updateConfigurableProductsPrice,
+  );
 }

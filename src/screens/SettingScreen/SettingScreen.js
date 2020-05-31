@@ -6,17 +6,12 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { CurrencyPicker } from './containers';
 
-const SettingScreen = ({
-  currencies,
-  navigation,
-}) => {
+const SettingScreen = ({ currencies, navigation }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
     <View style={styles.container}>
-      {
-        currencies.length > 1 && <CurrencyPicker />
-      }
+      {currencies.length > 1 && <CurrencyPicker />}
     </View>
   );
 };
@@ -27,9 +22,7 @@ const styles = StyleSheet.create({
   },
 });
 
-SettingScreen.navigationOptions = {
-
-};
+SettingScreen.navigationOptions = {};
 
 SettingScreen.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string),
@@ -40,11 +33,9 @@ SettingScreen.defaultProps = {
 };
 
 const mapStateToProps = ({ magento }) => {
-  const {
-    available_currency_codes: currencies,
-  } = magento.currency;
+  const { available_currency_codes: currencies } = magento.currency;
   return {
-    currencies
+    currencies,
   };
 };
 

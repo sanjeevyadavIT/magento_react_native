@@ -10,6 +10,8 @@ storiesOf('Image', module)
   .add('default', () => (
     <Image
       style={{ width: 100, height: 100 }}
-      source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
+      source={{
+        uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png',
+      }}
     />
   ));

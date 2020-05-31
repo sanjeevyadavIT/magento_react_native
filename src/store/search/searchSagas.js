@@ -7,7 +7,10 @@ function* getSearchProducts(action) {
   if (action.payload.offset) {
     yield put({ type: MAGENTO.MORE_SEARCH_PRODUCTS_LOADING, payload: true });
   } else {
-    yield put({ type: MAGENTO.SEARCH_PRODUCTS_LOADING, payload: { loading: true, searchText: action.payload.searchInput } });
+    yield put({
+      type: MAGENTO.SEARCH_PRODUCTS_LOADING,
+      payload: { loading: true, searchText: action.payload.searchInput },
+    });
   }
   try {
     const payload = yield call(
@@ -15,11 +18,14 @@ function* getSearchProducts(action) {
       'name',
       `%${action.payload.searchInput}%`,
       action.payload.offset,
-      action.payload.sortOrder
+      action.payload.sortOrder,
     );
     yield put({ type: MAGENTO.SEARCH_PRODUCTS_SUCCESS, payload });
   } catch (error) {
-    yield put({ type: MAGENTO.SEARCH_PRODUCTS_FAILURE, payload: error.message });
+    yield put({
+      type: MAGENTO.SEARCH_PRODUCTS_FAILURE,
+      payload: error.message,
+    });
   }
 }
 

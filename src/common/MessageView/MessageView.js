@@ -9,27 +9,31 @@ const INFO = 'info';
 const SUCCESS = 'success';
 const ERROR = 'error';
 
-const MessageView = React.memo(({
-  /**
-   * @param {String} message text to be displayed
-   */
-  message,
-  /**
-   * @param {String} type determines styling of the text
-   * type value can be
-   * 1. 'info'
-   * 2. 'success'
-   * 3. 'error'
-   */
-  type
-}) => {
-  const { theme } = useContext(ThemeContext);
-  return (
-    <View style={styles.container}>
-      <Text type="body" style={styles.text(type, theme)}>{message}</Text>
-    </View>
-  );
-});
+const MessageView = React.memo(
+  ({
+    /**
+     * @param {String} message text to be displayed
+     */
+    message,
+    /**
+     * @param {String} type determines styling of the text
+     * type value can be
+     * 1. 'info'
+     * 2. 'success'
+     * 3. 'error'
+     */
+    type,
+  }) => {
+    const { theme } = useContext(ThemeContext);
+    return (
+      <View style={styles.container}>
+        <Text type="body" style={styles.text(type, theme)}>
+          {message}
+        </Text>
+      </View>
+    );
+  },
+);
 
 const getTextColor = (type, theme) => {
   switch (type) {

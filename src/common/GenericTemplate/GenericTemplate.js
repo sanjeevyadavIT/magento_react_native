@@ -1,10 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  ScrollView,
-  View,
-  StatusBar,
-  StyleSheet
-} from 'react-native';
+import { ScrollView, View, StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import LoadingView from '../LoadingView/LoadingView';
@@ -42,9 +37,7 @@ const GenericTemplate = ({
         barStyle={theme.appbar.barStyle}
         backgroundColor={theme.appbar.statusBarColor}
       />
-      <ViewGroup style={[styles.content, style]}>
-        {children}
-      </ViewGroup>
+      <ViewGroup style={[styles.content, style]}>{children}</ViewGroup>
       {footer}
     </SafeAreaView>
   );
@@ -58,14 +51,13 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
-  stickyFooter: {
-  },
+  stickyFooter: {},
 });
 
 GenericTemplate.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
+    PropTypes.arrayOf(PropTypes.element),
   ]).isRequired,
   footer: PropTypes.element,
   scrollable: PropTypes.bool.isRequired,
@@ -78,7 +70,7 @@ GenericTemplate.defaultProps = {
   status: Status.SUCCESS,
   errorMessage: '',
   style: {},
-  footer: <></>
+  footer: <></>,
 };
 
 export default GenericTemplate;

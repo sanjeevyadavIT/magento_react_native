@@ -15,7 +15,7 @@ const LoadingView = ({
    * background that will appear behind spinner,
    * by default: transparent
    */
-  backgroundColor
+  backgroundColor,
 }) => {
   const { theme } = useContext(ThemeContext);
   return (

@@ -12,11 +12,11 @@ import {
   Price,
   Button,
   ModalSelect,
-  GenericTemplate
+  GenericTemplate,
 } from '../../common';
 import {
   NAVIGATION_TO_HOME_SCREEN,
-  NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN
+  NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN,
 } from '../../navigation';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
@@ -37,22 +37,31 @@ const PaymentScreen = ({
   currencyRate,
   placeCartOrder: _placeCartOrder,
   createQuoteId: _createQuoteId,
-  resetPaymentState: _resetPaymentState
+  resetPaymentState: _resetPaymentState,
 }) => {
   const { theme } = useContext(ThemeContext);
   const [paymentCode, setPaymentCode] = useState();
 
-  useEffect(() => (() => {
-    // componentDidUnmount: Reset Payment related logic in Redux
-    _resetPaymentState();
-  }), []);
+  useEffect(
+    () => () => {
+      // componentDidUnmount: Reset Payment related logic in Redux
+      _resetPaymentState();
+    },
+    [],
+  );
 
   useEffect(() => {
     if (orderStatus === Status.SUCCESS) {
       _createQuoteId();
       navigation.reset({
         index: 1,
-        routes: [{ name: NAVIGATION_TO_HOME_SCREEN }, { name: NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN, params: { status: Status.SUCCESS, orderId } }],
+        routes: [
+          { name: NAVIGATION_TO_HOME_SCREEN },
+          {
+            name: NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN,
+            params: { status: Status.SUCCESS, orderId },
+          },
+        ],
       });
     }
   }, [orderStatus]);
@@ -75,8 +84,8 @@ const PaymentScreen = ({
         email: billingAddress.email,
       },
       paymentMethod: {
-        method: paymentCode
-      }
+        method: paymentCode,
+      },
     };
     _placeCartOrder(paymentInformation);
   };
@@ -88,7 +97,7 @@ const PaymentScreen = ({
 
     const data = payment.payment_methods.map(({ code, title }) => ({
       label: title,
-      key: code
+      key: code,
     }));
 
     return (
@@ -108,7 +117,7 @@ const PaymentScreen = ({
         base_subtotal: baseSubTotal,
         base_shipping_incl_tax: shippingTotal,
         base_grand_total: grandTotal,
-      }
+      },
     } = payment;
 
     return (
@@ -137,18 +146,18 @@ const PaymentScreen = ({
             currencyRate={currencyRate}
           />
         </View>
-        {
-          baseCurrencyCode !== currencyCode && (
-            <View style={styles.row}>
-              <Text>{`${translate('paymentScreen.youWillBeCharged')}: `}</Text>
-              <Price
-                basePrice={grandTotal}
-                currencySymbol={baseCurrencySymbol || priceSignByCode(baseCurrencyCode)}
-                currencyRate={1}
-              />
-            </View>
-          )
-        }
+        {baseCurrencyCode !== currencyCode && (
+          <View style={styles.row}>
+            <Text>{`${translate('paymentScreen.youWillBeCharged')}: `}</Text>
+            <Price
+              basePrice={grandTotal}
+              currencySymbol={
+                baseCurrencySymbol || priceSignByCode(baseCurrencyCode)
+              }
+              currencyRate={1}
+            />
+          </View>
+        )}
       </View>
     );
   };
@@ -162,10 +171,7 @@ const PaymentScreen = ({
   );
 
   return (
-    <GenericTemplate
-      scrollable={false}
-      footer={renderButton()}
-    >
+    <GenericTemplate scrollable={false} footer={renderButton()}>
       {renderPaymentMethods()}
       {renderOrderSummary()}
     </GenericTemplate>
@@ -180,7 +186,7 @@ const styles = StyleSheet.create({
     marginTop: SPACING.large,
   }),
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
 });
 
@@ -206,7 +212,9 @@ PaymentScreen.defaultProps = {
 
 const mapStateToProps = ({ checkout, cart, magento }) => {
   const { payment, orderStatus, orderId } = checkout;
-  const { cart: { billing_address: billingAddress } } = cart;
+  const {
+    cart: { billing_address: billingAddress },
+  } = cart;
   const {
     base_currency_symbol: baseCurrencySymbol,
     displayCurrencyCode: currencyCode,

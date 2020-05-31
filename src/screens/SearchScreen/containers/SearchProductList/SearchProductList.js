@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
 import { CatalogGrid } from '../../../../common';
-import { setCurrentProduct, getSearchProducts } from '../../../../store/actions';
+import {
+  setCurrentProduct,
+  getSearchProducts,
+} from '../../../../store/actions';
 
 const mapStateToProps = ({ search, magento }) => {
-  const {
-    searchText,
-    products,
-    totalCount,
-    loadingMore,
-  } = search;
+  const { searchText, products, totalCount, loadingMore } = search;
   const {
     displayCurrencySymbol: currencySymbol,
     displayCurrencyExchangeRate: currencyRate,

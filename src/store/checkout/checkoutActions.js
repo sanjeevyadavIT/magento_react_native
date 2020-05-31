@@ -7,7 +7,7 @@ import {
 } from '../../constants';
 
 export const getCountries = () => ({
-  type: MAGENTO.COUNTRIES_REQUEST
+  type: MAGENTO.COUNTRIES_REQUEST,
 });
 
 export const addCartBillingAddress = address => ({

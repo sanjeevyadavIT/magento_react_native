@@ -42,35 +42,29 @@ const AccountScreen = ({
       scrollable={false}
       errorMessage={errorMessage}
     >
-      {
-        customer && (
-          <>
-            <Text style={styles.space(theme)}>
-              {`${customer.firstname} ${customer.lastname}`}
-            </Text>
-            <Text style={styles.space(theme)}>
-              {customer.email}
-            </Text>
-          </>
-        )
-      }
+      {customer && (
+        <>
+          <Text style={styles.space(theme)}>
+            {`${customer.firstname} ${customer.lastname}`}
+          </Text>
+          <Text style={styles.space(theme)}>{customer.email}</Text>
+        </>
+      )}
       <Button
         title={translate('accountScreen.myOrderButton')}
         onPress={() => {
-          navigation.navigate(
-            NAVIGATION_TO_ORDERS_SCREEN,
-            { customerId: customer.id }
-          );
+          navigation.navigate(NAVIGATION_TO_ORDERS_SCREEN, {
+            customerId: customer.id,
+          });
         }}
         style={styles.space(theme)}
       />
       <Button
         title={translate('accountScreen.myAddressButton')}
         onPress={() => {
-          navigation.navigate(
-            NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
-            { customerId: customer.id }
-          );
+          navigation.navigate(NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN, {
+            customerId: customer.id,
+          });
         }}
         style={styles.space(theme)}
       />
@@ -85,7 +79,7 @@ const AccountScreen = ({
 const styles = StyleSheet.create({
   space: theme => ({
     marginBottom: SPACING.small,
-  })
+  }),
 });
 
 AccountScreen.propTypes = {

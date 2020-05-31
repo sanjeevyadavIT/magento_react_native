@@ -8,16 +8,20 @@ import { ThemeProvider, lightTheme as theme } from '../../theme';
 const data = [
   { key: 1, label: 'Red Apples' },
   { key: 2, label: 'Cherries' },
-  { key: 3, label: 'Cranberries', accessibilityLabel: 'Tap here for cranberries' },
+  {
+    key: 3,
+    label: 'Cranberries',
+    accessibilityLabel: 'Tap here for cranberries',
+  },
   // Can also add additional custom keys which are passed to the onChange callback
-  { key: 4, label: 'Vegetable', customKey: 'Not a fruit' }
+  { key: 4, label: 'Vegetable', customKey: 'Not a fruit' },
 ];
 
 const styles = {
   container: {
     backgroundColor: 'white',
     flex: 1,
-    paddingTop: 40
+    paddingTop: 40,
   },
   customModalStyle: {
     borderWidth: 2,
@@ -25,16 +29,14 @@ const styles = {
     backgroundColor: theme.primaryColor,
   },
   customTextStyle: {
-    color: 'white'
-  }
+    color: 'white',
+  },
 };
 
 storiesOf('ModalSelect', module)
   .addDecorator(getStory => (
     <ThemeProvider theme={theme}>
-      <View style={styles.container}>
-        {getStory()}
-      </View>
+      <View style={styles.container}>{getStory()}</View>
     </ThemeProvider>
   ))
   .add('default', () => (

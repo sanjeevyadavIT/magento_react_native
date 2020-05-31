@@ -3,7 +3,11 @@ import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { magento } from '../../../../magento';
-import { ImageSlider, ImageSliderItem, GenericTemplate } from '../../../../common';
+import {
+  ImageSlider,
+  ImageSliderItem,
+  GenericTemplate,
+} from '../../../../common';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { ProductType } from '../../../../types';
@@ -42,7 +46,8 @@ const SliderContainer = ({
   console.log('^^^^^^^^^^^^^^^^');
   console.log('SliderContainer', slider);
   const { theme } = useContext(ThemeContext);
-  const selectedProductImage = selectedProduct && getValueFromAttribute(selectedProduct, 'image');
+  const selectedProductImage =
+    selectedProduct && getValueFromAttribute(selectedProduct, 'image');
   if (selectedProductImage) {
     slider.unshift(new ImageSliderItem('', selectedProduct));
   }
@@ -68,7 +73,7 @@ const SliderContainer = ({
 const styles = StyleSheet.create({
   imageContainer: theme => ({
     backgroundColor: theme.white,
-  })
+  }),
 });
 
 SliderContainer.propTypes = {
@@ -94,8 +99,8 @@ const mapStateToProps = ({ product }, ownProps) => {
         medias: slider,
         mediaStatus: status,
         mediaErrorMessage: errorMessage,
-      }
-    }
+      },
+    },
   } = product;
   return {
     slider,

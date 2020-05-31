@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -23,7 +23,7 @@ import {
   OrdersScreen,
   OrderDetailScreen,
   OrderAcknowledgementScreen,
-  SettingScreen
+  SettingScreen,
 } from '../screens';
 import {
   NAVIGATION_TO_FORGOT_PASSWORD_SCREEN,
@@ -88,24 +88,32 @@ const StackNavigator = () => {
               <HeaderButtons.Item
                 title={translate('homeScreen.menu.cart')}
                 iconName="shopping-cart"
-                onPress={() => (
+                onPress={() =>
                   magento.isCustomerLogin()
                     ? navigation.navigate(NAVIGATION_TO_CART_SCREEN)
                     : navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)
-                )}
+                }
               />
             </HeaderButtons>
-          )
+          ),
         })}
       />
       <Stack.Screen
         name={NAVIGATION_TO_CATEGORY_LIST_SCREEN}
         component={CategoryListScreen}
-        options={({ route: { params: { title = translate('common.brandName') } } }) => ({
+        options={({
+          route: {
+            params: { title = translate('common.brandName') },
+          },
+        }) => ({
           title,
           headerRight: () => (
             <HeaderButtons>
-              <HeaderButtons.Item title={translate('categoryListScreen.menu.sort')} iconName="sort" onPress={() => console.log('Show Sort dialog')} />
+              <HeaderButtons.Item
+                title={translate('categoryListScreen.menu.sort')}
+                iconName="sort"
+                onPress={() => console.log('Show Sort dialog')}
+              />
             </HeaderButtons>
           ),
         })}
@@ -139,21 +147,21 @@ const StackNavigator = () => {
         name={NAVIGATION_TO_LOGIN_SCREEN}
         component={SignInScreen}
         options={{
-          title: translate('signInScreen.title')
+          title: translate('signInScreen.title'),
         }}
       />
       <Stack.Screen
         name={NAVIGATION_TO_SIGNUP_SCREEN}
         component={SignUpScreen}
         options={{
-          title: translate('signUpScreen.title')
+          title: translate('signUpScreen.title'),
         }}
       />
       <Stack.Screen
         name={NAVIGATION_TO_ACCOUNT_SCREEN}
         component={AccountScreen}
         options={{
-          title: translate('accountScreen.title')
+          title: translate('accountScreen.title'),
         }}
       />
       <Stack.Screen
@@ -169,19 +177,34 @@ const StackNavigator = () => {
         options={({ route }) => {
           const { item, orderId } = route.params;
           const orderNumber = item ? item.increment_id : orderId;
-          return ({
-            title: `${translate('orderScreen.orderDetailScreenTitle')}: ${orderNumber}`
-          })
+          return {
+            title: `${translate(
+              'orderScreen.orderDetailScreenTitle',
+            )}: ${orderNumber}`,
+          };
         }}
       />
       <Stack.Screen
         name={NAVIGATION_TO_PRODUCT_SCREEN}
         component={ProductScreen}
-        options={({ navigation, route: { params: { title = translate('productScreen.title') } } }) => ({
+        options={({
+          navigation,
+          route: {
+            params: { title = translate('productScreen.title') },
+          },
+        }) => ({
           title,
           headerRight: () => (
             <HeaderButtons>
-              <HeaderButtons.Item title={translate('productScreen.menu.cart')} iconName="shopping-cart" onPress={() => (magento.isCustomerLogin() ? navigation.navigate(NAVIGATION_TO_CART_SCREEN) : navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN))} />
+              <HeaderButtons.Item
+                title={translate('productScreen.menu.cart')}
+                iconName="shopping-cart"
+                onPress={() =>
+                  magento.isCustomerLogin()
+                    ? navigation.navigate(NAVIGATION_TO_CART_SCREEN)
+                    : navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)
+                }
+              />
             </HeaderButtons>
           ),
         })}
@@ -197,21 +220,21 @@ const StackNavigator = () => {
         name={NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN}
         component={CheckoutAddressScreen}
         options={{
-          title: translate('addressScreen.title')
+          title: translate('addressScreen.title'),
         }}
       />
       <Stack.Screen
         name={NAVIGATION_TO_SHIPPING_SCREEN}
         component={ShippingScreen}
         options={{
-          title: translate('shippingScreen.title')
+          title: translate('shippingScreen.title'),
         }}
       />
       <Stack.Screen
         name={NAVIGATION_TO_PAYMENT_SCREEN}
         component={PaymentScreen}
         options={{
-          title: translate('paymentScreen.title')
+          title: translate('paymentScreen.title'),
         }}
       />
       <Stack.Screen
@@ -232,31 +255,33 @@ const StackNavigator = () => {
         name={NAVIGATION_TO_SETTING_SCREEN}
         component={SettingScreen}
         options={{
-          title: translate('settingScreen.title')
+          title: translate('settingScreen.title'),
         }}
       />
       <Stack.Screen
         name={NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN}
         component={EditAccountAddressScreen}
         options={{
-          title: translate('editAddressScreen.title')
+          title: translate('editAddressScreen.title'),
         }}
       />
     </Stack.Navigator>
   );
-}
+};
 
 const Drawer = createDrawerNavigator();
 
 const RootNavigator = () => (
   <SafeAreaProvider>
     <NavigationContainer>
-      <Drawer.Navigator
-        drawerContent={props => <DrawerScreen {...props} />}
-      >
-        <Drawer.Screen name="Drawer" component={StackNavigator} options={{
-          swipeEnabled: false,
-        }} />
+      <Drawer.Navigator drawerContent={props => <DrawerScreen {...props} />}>
+        <Drawer.Screen
+          name="Drawer"
+          component={StackNavigator}
+          options={{
+            swipeEnabled: false,
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   </SafeAreaProvider>

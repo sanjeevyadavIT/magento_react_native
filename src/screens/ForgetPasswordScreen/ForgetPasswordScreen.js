@@ -1,18 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  Keyboard,
-} from 'react-native';
+import { View, StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Status from '../../magento/Status';
-import {
-  Text,
-  Button,
-  TextInput,
-  MessageView,
-} from '../../common';
+import { Text, Button, TextInput, MessageView } from '../../common';
 import { resetPassword, resetAuthState } from '../../store/actions';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -28,10 +19,13 @@ const ForgetPasswordScreen = ({
   const { theme } = useContext(ThemeContext);
   const [email, setEmail] = useState('');
 
-  useEffect(() => (() => {
-    // componentDidUnmount: Reset password state
-    _resetAuthState();
-  }), []);
+  useEffect(
+    () => () => {
+      // componentDidUnmount: Reset password state
+      _resetAuthState();
+    },
+    [],
+  );
 
   const onResetPress = () => {
     Keyboard.dismiss();
@@ -40,14 +34,19 @@ const ForgetPasswordScreen = ({
   };
 
   const renderMessages = () => {
-    const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('forgetPasswordScreen.emailSent') : "";
-    const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
-    return (
-      <MessageView
-        message={message}
-        type={type}
-      />
-    );
+    const message =
+      status === Status.ERROR
+        ? errorMessage
+        : status === Status.SUCCESS
+        ? translate('forgetPasswordScreen.emailSent')
+        : '';
+    const type =
+      status === Status.ERROR
+        ? 'error'
+        : status === Status.SUCCESS
+        ? 'success'
+        : 'info';
+    return <MessageView message={message} type={type} />;
   };
 
   const renderButtons = () => (
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
   },
   emailOffset: theme => ({
     marginVertical: SPACING.large,
-  })
+  }),
 });
 
 ForgetPasswordScreen.propTypes = {

@@ -1,3 +1,3 @@
 import CartList from './CartList/CartList';
 
-export { CartList }
+export { CartList };

@@ -65,7 +65,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         addressStatus: Status.ERROR,
-        addressErrorMessage: payload.errorMessage
+        addressErrorMessage: payload.errorMessage,
       };
     case RESET_ADDRESS_STATUS:
       return {
@@ -95,7 +95,7 @@ export default (state = initialState, { type, payload }) => {
         products: {
           ...state.products,
           [payload.sku]: payload.product,
-        }
+        },
       };
     case USER_LOGGED_IN_STATUS:
       return {

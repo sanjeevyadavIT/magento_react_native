@@ -11,8 +11,14 @@ storiesOf('MessageView', module)
     <MessageView type="info" message="This is a normal information!" />
   ))
   .add('success', () => (
-    <MessageView type="success" message="Hurrah! the transaction is successful." />
+    <MessageView
+      type="success"
+      message="Hurrah! the transaction is successful."
+    />
   ))
   .add('error', () => (
-    <MessageView type="error" message="Oh no! Looks like something went wrong." />
+    <MessageView
+      type="error"
+      message="Oh no! Looks like something went wrong."
+    />
   ));

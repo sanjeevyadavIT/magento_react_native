@@ -15,15 +15,15 @@ import { DIMENS, SPACING } from '../../constants';
 
 const CatalogGridItem = ({
   /**
-     * Number of colums in `CatalogGrid` being displayed,
-     * is specified, will effect `CatalogGridItem` component width.
-     *
-     * If `CatalogGrid` render items in horizonatl list,
-     * then `CatalogGridItem` has fixed width defined by `DIMENS.catalogGridItemWidth`
-     *
-     * else if `CatalogGrid` render items in a Grid of row * coulumnCount
-     * then `CatalogridItem` width is (total_screen_width) / (columnCount)
-     */
+   * Number of colums in `CatalogGrid` being displayed,
+   * is specified, will effect `CatalogGridItem` component width.
+   *
+   * If `CatalogGrid` render items in horizonatl list,
+   * then `CatalogGridItem` has fixed width defined by `DIMENS.catalogGridItemWidth`
+   *
+   * else if `CatalogGrid` render items in a Grid of row * coulumnCount
+   * then `CatalogridItem` width is (total_screen_width) / (columnCount)
+   */
   columnCount,
   /**
    * Product to dispaly
@@ -54,7 +54,11 @@ const CatalogGridItem = ({
   const { theme } = useContext(ThemeContext);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const extra = useSelector(state => ([product.sku] in state[stateAccessor].extra ? state[stateAccessor].extra[product.sku] : null));
+  const extra = useSelector(state =>
+    [product.sku] in state[stateAccessor].extra
+      ? state[stateAccessor].extra[product.sku]
+      : null,
+  );
   useEffect(() => {
     // componentDidMount
     if (!extra && product.type_id === 'configurable') {
@@ -105,7 +109,9 @@ const CatalogGridItem = ({
         resizeMode="contain"
       />
       <View style={styles.detail(theme)}>
-        <Text ellipsizeMode="tail" numberOfLines={2}>{product.name}</Text>
+        <Text ellipsizeMode="tail" numberOfLines={2}>
+          {product.name}
+        </Text>
         <Price
           {...getPrice()}
           currencyRate={currencyRate}
@@ -118,7 +124,10 @@ const CatalogGridItem = ({
 
 const styles = StyleSheet.create({
   container: (theme, columnCount) => ({
-    width: columnCount > 1 ? DIMENS.WINDOW_WIDTH / columnCount : DIMENS.catalogGridItemWidth,
+    width:
+      columnCount > 1
+        ? DIMENS.WINDOW_WIDTH / columnCount
+        : DIMENS.catalogGridItemWidth,
     height: DIMENS.catalogGridItemHeight,
   }),
   imageStyle: theme => ({
@@ -128,7 +137,7 @@ const styles = StyleSheet.create({
     padding: SPACING.small,
     flex: 1,
     justifyContent: 'space-between',
-  })
+  }),
 });
 
 CatalogGridItem.propTypes = {

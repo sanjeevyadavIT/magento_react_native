@@ -1,5 +1,3 @@
 import CategoryListContainer from './CategoryListContainer';
 
-export {
-  CategoryListContainer
-};
+export { CategoryListContainer };

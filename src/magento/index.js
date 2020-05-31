@@ -15,8 +15,8 @@ const defaultOptions = {
   authentication: {
     integration: {
       access_token: undefined,
-    }
-  }
+    },
+  },
 };
 
 class Magento {
@@ -76,11 +76,11 @@ class Magento {
         params,
         data,
       })
-        .then((response) => {
+        .then(response => {
           Logger.describeSuccessResponse(response);
           resolve(response.data);
         })
-        .catch((error) => {
+        .catch(error => {
           Logger.describeErrorResponse(error);
           if (error.response) {
             // The request was made and the server responded with a status code
@@ -100,7 +100,10 @@ class Magento {
             // Something happened in setting up the request that triggered an Error
           }
           let customError;
-          if (typeof error.response.data === 'object' && error.response.data !== null) {
+          if (
+            typeof error.response.data === 'object' &&
+            error.response.data !== null
+          ) {
             customError = Magento.extractErrorMessage(error.response.data);
           } else {
             customError = pageNotFoundError();
@@ -118,7 +121,7 @@ class Magento {
         message = message.replace(`%${index + 1}`, item);
       });
     } else if (parameters && parameters instanceof Object) {
-      Object.keys(parameters).forEach((parameter) => {
+      Object.keys(parameters).forEach(parameter => {
         message = message.replace(`%${parameter}`, parameters[parameter]);
       });
     }

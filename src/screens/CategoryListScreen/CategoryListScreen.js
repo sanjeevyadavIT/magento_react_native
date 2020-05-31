@@ -4,14 +4,9 @@ import PropTypes from 'prop-types';
 import { CategoryListContainer } from './containers';
 
 // TODO: Connect sort icon on appbar, with ui to sort products
-const CategoryListScreen = ({
-  route,
-  navigation,
-}) => {
+const CategoryListScreen = ({ route, navigation }) => {
   const { id = -1 } = route.params;
-  return (
-    <CategoryListContainer style={styles.container} categoryId={id} />
-  );
+  return <CategoryListContainer style={styles.container} categoryId={id} />;
 };
 
 const styles = StyleSheet.create({

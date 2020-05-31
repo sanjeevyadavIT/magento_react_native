@@ -27,7 +27,7 @@ const ImageSlider = ({
   resizeMode,
   style,
 }) => {
-  const renderImages = () => (
+  const renderImages = () =>
     slider.map((item, index) => (
       <Image
         key={String(index)}
@@ -35,8 +35,7 @@ const ImageSlider = ({
         resizeMode={resizeMode}
         source={{ uri: `${baseUrl}${item.imageUrl}` }}
       />
-    ))
-  );
+    ));
 
   return (
     <Swiper
@@ -50,8 +49,8 @@ const ImageSlider = ({
 
 const styles = StyleSheet.create({
   imageStyle: {
-    top: 0
-  }
+    top: 0,
+  },
 });
 
 ImageSlider.propTypes = {
@@ -59,7 +58,13 @@ ImageSlider.propTypes = {
   slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired,
   baseUrl: PropTypes.string.isRequired,
   showTitle: PropTypes.bool,
-  resizeMode: PropTypes.oneOf(['cover', 'contain', 'stretch', 'repeat', 'center']),
+  resizeMode: PropTypes.oneOf([
+    'cover',
+    'contain',
+    'stretch',
+    'repeat',
+    'center',
+  ]),
   autoplay: PropTypes.bool,
   style: PropTypes.object,
 };

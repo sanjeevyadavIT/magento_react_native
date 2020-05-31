@@ -2,7 +2,7 @@ import { ADMIN_TYPE } from '../../types';
 
 const PAGE_SIZE = 10;
 
-const getSortFieldName = (sortOrder) => {
+const getSortFieldName = sortOrder => {
   switch (sortOrder) {
     case '0':
     case '1':
@@ -15,7 +15,7 @@ const getSortFieldName = (sortOrder) => {
   }
 };
 
-const getSortDirection = (sortOrder) => {
+const getSortDirection = sortOrder => {
   switch (sortOrder) {
     case '0':
     case '2':
@@ -29,11 +29,21 @@ const getSortDirection = (sortOrder) => {
 };
 
 export default magento => ({
-  getStoreConfig: () => magento.get('/V1/store/storeConfigs', undefined, undefined, ADMIN_TYPE),
+  getStoreConfig: () =>
+    magento.get('/V1/store/storeConfigs', undefined, undefined, ADMIN_TYPE),
 
-  getCategoryTree: () => magento.get('/V1/categories', undefined, undefined, ADMIN_TYPE),
+  getCategoryTree: () =>
+    magento.get('/V1/categories', undefined, undefined, ADMIN_TYPE),
 
-  getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) => magento.admin.getProductsWithAttribute('category_id', id, offset, sortOrder, pageSize, 'eq'),
+  getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) =>
+    magento.admin.getProductsWithAttribute(
+      'category_id',
+      id,
+      offset,
+      sortOrder,
+      pageSize,
+      'eq',
+    ),
 
   getProductsWithAttribute: (
     attributeCode,
@@ -41,7 +51,7 @@ export default magento => ({
     offset = 1,
     sortOrder,
     pageSize = PAGE_SIZE,
-    conditionType = 'like'
+    conditionType = 'like',
   ) => {
     const currentPage = parseInt(offset / pageSize, 10) + 1;
     const params = {
@@ -55,41 +65,74 @@ export default magento => ({
       'searchCriteria[currentPage]': currentPage,
     };
     if (sortOrder) {
-      params['searchCriteria[sortOrders][0][field]'] = getSortFieldName(sortOrder);
-      params['searchCriteria[sortOrders][0][direction]'] = getSortDirection(sortOrder);
+      params['searchCriteria[sortOrders][0][field]'] = getSortFieldName(
+        sortOrder,
+      );
+      params['searchCriteria[sortOrders][0][direction]'] = getSortDirection(
+        sortOrder,
+      );
     }
     return magento.admin.getProductsWithSearchCritaria(params);
   },
 
-  getProductsWithSearchCritaria: params => magento.get('/V1/products', params, undefined, ADMIN_TYPE),
+  getProductsWithSearchCritaria: params =>
+    magento.get('/V1/products', params, undefined, ADMIN_TYPE),
 
-  getProductBySku: sku => magento.get(`/V1/products/${sku}`, undefined, undefined, ADMIN_TYPE),
+  getProductBySku: sku =>
+    magento.get(`/V1/products/${sku}`, undefined, undefined, ADMIN_TYPE),
 
-  getConfigurableChildren: sku => magento.get(`/V1/configurable-products/${sku}/children`, undefined, undefined, ADMIN_TYPE),
+  getConfigurableChildren: sku =>
+    magento.get(
+      `/V1/configurable-products/${sku}/children`,
+      undefined,
+      undefined,
+      ADMIN_TYPE,
+    ),
 
-  getConfigurableProductOptions: sku => magento.get(`/V1/configurable-products/${sku}/options/all`, undefined, undefined, ADMIN_TYPE),
+  getConfigurableProductOptions: sku =>
+    magento.get(
+      `/V1/configurable-products/${sku}/options/all`,
+      undefined,
+      undefined,
+      ADMIN_TYPE,
+    ),
 
-  getAttributeByCode: attributeId => magento.get(`/V1/products/attributes/${attributeId}`, undefined, undefined, ADMIN_TYPE),
+  getAttributeByCode: attributeId =>
+    magento.get(
+      `/V1/products/attributes/${attributeId}`,
+      undefined,
+      undefined,
+      ADMIN_TYPE,
+    ),
 
-  getProductMedia: sku => magento.get(`/V1/products/${sku}/media`, undefined, undefined, ADMIN_TYPE),
+  getProductMedia: sku =>
+    magento.get(`/V1/products/${sku}/media`, undefined, undefined, ADMIN_TYPE),
 
-  getCmsBlock: id => magento.get(`/V1/cmsBlock/${id}`, undefined, undefined, ADMIN_TYPE),
+  getCmsBlock: id =>
+    magento.get(`/V1/cmsBlock/${id}`, undefined, undefined, ADMIN_TYPE),
 
-  getCountries: () => magento.get('/V1/directory/countries', undefined, undefined, ADMIN_TYPE),
+  getCountries: () =>
+    magento.get('/V1/directory/countries', undefined, undefined, ADMIN_TYPE),
 
-  getOrderList: (customerId) => {
+  getOrderList: customerId => {
     const path = '/V1/orders';
 
     const params = {
       'searchCriteria[filterGroups][0][filters][0][field]': 'customer_id',
-      'searchCriteria[filterGroups][0][filters][0][value]': customerId
+      'searchCriteria[filterGroups][0][filters][0][value]': customerId,
     };
 
     return magento.get(path, params, undefined, ADMIN_TYPE);
   },
 
-  getOrderDetail: orderId => magento.get(`/V1/orders/${orderId}`, undefined, undefined, ADMIN_TYPE),
+  getOrderDetail: orderId =>
+    magento.get(`/V1/orders/${orderId}`, undefined, undefined, ADMIN_TYPE),
 
-  updateCustomerData: (customerId, customerData) => magento.put(`/V1/customers/${customerId}`, undefined, customerData, ADMIN_TYPE),
-
+  updateCustomerData: (customerId, customerData) =>
+    magento.put(
+      `/V1/customers/${customerId}`,
+      undefined,
+      customerData,
+      ADMIN_TYPE,
+    ),
 });

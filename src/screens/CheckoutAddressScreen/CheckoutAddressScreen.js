@@ -1,9 +1,4 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useContext,
-} from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -47,7 +42,7 @@ const CheckoutAddressScreen = ({
   getCurrentCustomer: _getCurrentCustomer,
   getShippingMethod: _getShippingMethod,
   getCustomerCart: _getCustomerCart,
-  resetCheckoutAddressState: _resetCheckoutAddressState
+  resetCheckoutAddressState: _resetCheckoutAddressState,
 }) => {
   const [form, setValues] = useState({
     firstName: '',
@@ -89,7 +84,7 @@ const CheckoutAddressScreen = ({
         // Pre fill the fields with previous stored address
         const address = customer.addresses[0]; // Currently the app supports only one address to be saved
         const streetAddress = address.street[0]; // Only one input field is shown for street
-        console.log('///', address.region.region_code)
+        console.log('///', address.region.region_code);
         setValues({
           ...form,
           streetAddress,
@@ -118,7 +113,9 @@ const CheckoutAddressScreen = ({
       if (customer && customer.addresses.length === 0) {
         // Get country by locale
         const userCountryByLocale = RNLocalize.getCountry();
-        const isUserCountrySupported = countries.find(country => country.id === userCountryByLocale);
+        const isUserCountrySupported = countries.find(
+          country => country.id === userCountryByLocale,
+        );
         if (isUserCountrySupported) {
           setValues({
             ...form,
@@ -167,7 +164,9 @@ const CheckoutAddressScreen = ({
     let regionCode;
 
     if (isAvailableRegion) {
-      const stateData = getCountryData().available_regions.find(state => state.code === form.state);
+      const stateData = getCountryData().available_regions.find(
+        state => state.code === form.state,
+      );
       region = stateData.name;
       regionId = stateData.id;
       regionCode = form.state;
@@ -183,26 +182,31 @@ const CheckoutAddressScreen = ({
   };
 
   const validation = () => {
-    if (form.firstName === ''
-      || form.lastName === ''
-      || form.phoneNumber === ''
-      || form.streetAddress === ''
-      || form.city === ''
-      || form.zipCode === ''
-      || form.state === ''
-      || form.state === undefined
-      || form.state === null
-    ) return false;
+    if (
+      form.firstName === '' ||
+      form.lastName === '' ||
+      form.phoneNumber === '' ||
+      form.streetAddress === '' ||
+      form.city === '' ||
+      form.zipCode === '' ||
+      form.state === '' ||
+      form.state === undefined ||
+      form.state === null
+    )
+      return false;
 
     return true;
   };
 
   // TODO: cache this value
-  const getCountryData = () => countries.find(country => country.id === form.country) || {};
+  const getCountryData = () =>
+    countries.find(country => country.id === form.country) || {};
 
   const renderCountries = () => {
-    if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT) return <Spinner size="small" />;
-    if (countryStatus === Status.ERROR) throw new Exception('Unable to fetch country data');
+    if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT)
+      return <Spinner size="small" />;
+    if (countryStatus === Status.ERROR)
+      throw new Exception('Unable to fetch country data');
     const countriesData = countries.map(country => ({
       label: country.full_name_english,
       key: country.id,
@@ -216,7 +220,9 @@ const CheckoutAddressScreen = ({
         data={countriesData}
         selectedKey={form.country}
         style={styles.defaultMargin(theme)}
-        onChange={(itemKey, item) => setValues({ ...form, country: itemKey, state: '' })}
+        onChange={(itemKey, item) =>
+          setValues({ ...form, country: itemKey, state: '' })
+        }
       />
     );
   };
@@ -266,7 +272,10 @@ const CheckoutAddressScreen = ({
     />
   );
 
-  if (billingAddressStatus === Status.SUCCESS && shippingMethodStatus === Status.DEFAULT) {
+  if (
+    billingAddressStatus === Status.SUCCESS &&
+    shippingMethodStatus === Status.DEFAULT
+  ) {
     const address = {
       address: {
         // id: 0,
@@ -281,7 +290,7 @@ const CheckoutAddressScreen = ({
         // email
       },
     };
-    customer ? address.address.email = customer.email : '';
+    customer ? (address.address.email = customer.email) : '';
     _getCustomerCart();
     _getShippingMethod(address);
     if (shippingMethodStatus === Status.DEFAULT) {
@@ -296,7 +305,9 @@ const CheckoutAddressScreen = ({
       style={styles.container}
       footer={renderButtons()}
     >
-      <Text type="label">{translate('addressScreen.billingAndShippingAddress')}</Text>
+      <Text type="label">
+        {translate('addressScreen.billingAndShippingAddress')}
+      </Text>
       <TextInput
         autoCorrect={false}
         value={form.firstName}
@@ -318,7 +329,9 @@ const CheckoutAddressScreen = ({
         placeholder={translate('addressScreen.lastNameHint')}
         onSubmitEditing={() => phoneNumberInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, lastName: value })}
-        assignRef={(component) => { lastNameInputRef.current = component; }}
+        assignRef={component => {
+          lastNameInputRef.current = component;
+        }}
       />
       <TextInput
         autoCorrect={false}
@@ -331,7 +344,9 @@ const CheckoutAddressScreen = ({
         placeholder={translate('addressScreen.phoneNumberHint')}
         onSubmitEditing={() => streetAddressInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, phoneNumber: value })}
-        assignRef={(component) => { phoneNumberInputRef.current = component; }}
+        assignRef={component => {
+          phoneNumberInputRef.current = component;
+        }}
       />
       <TextInput
         autoCorrect={false}
@@ -343,7 +358,9 @@ const CheckoutAddressScreen = ({
         placeholder={translate('addressScreen.addressHint')}
         onSubmitEditing={() => cityInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, streetAddress: value })}
-        assignRef={(component) => { streetAddressInputRef.current = component; }}
+        assignRef={component => {
+          streetAddressInputRef.current = component;
+        }}
       />
       <TextInput
         value={form.city}
@@ -355,7 +372,9 @@ const CheckoutAddressScreen = ({
         placeholder={translate('addressScreen.cityHint')}
         onSubmitEditing={() => zipCodeInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, city: value })}
-        assignRef={(component) => { cityInputRef.current = component; }}
+        assignRef={component => {
+          cityInputRef.current = component;
+        }}
       />
       <TextInput
         autoCorrect={false}
@@ -365,7 +384,9 @@ const CheckoutAddressScreen = ({
         label={translate('addressScreen.zipCodeLabel')}
         placeholder={translate('addressScreen.zipCodeHint')}
         onChangeText={value => setValues({ ...form, zipCode: value })}
-        assignRef={(component) => { zipCodeInputRef.current = component; }}
+        assignRef={component => {
+          zipCodeInputRef.current = component;
+        }}
       />
       {renderCountries()}
       {renderState()}
@@ -389,8 +410,8 @@ const styles = StyleSheet.create({
   linkContainer: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'stretch'
-  }
+    alignItems: 'stretch',
+  },
 });
 
 CheckoutAddressScreen.propTypes = {
@@ -418,7 +439,11 @@ CheckoutAddressScreen.defaultProps = {
 };
 
 const mapStateToProps = ({ magento, checkout, account }) => {
-  const { countries, countryStatus, errorMessage: countryErrorMessage } = magento;
+  const {
+    countries,
+    countryStatus,
+    errorMessage: countryErrorMessage,
+  } = magento;
   const { billingAddressStatus, shippingMethodStatus, errorMessage } = checkout;
   const { customer, status: customerStatus } = account;
   return {

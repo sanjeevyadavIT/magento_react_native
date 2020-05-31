@@ -1,20 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  useRef,
-} from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { signUp, resetAuthState } from '../../store/actions';
-import {
-  Button,
-  TextInput,
-  MessageView,
-  GenericTemplate
-} from '../../common';
+import { Button, TextInput, MessageView, GenericTemplate } from '../../common';
 import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -42,16 +32,24 @@ const SignUpScreen = ({
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  useEffect(() => (() => {
-    // componentWillUnmount
-    _resetAuthState();
-  }), []);
+  useEffect(
+    () => () => {
+      // componentWillUnmount
+      _resetAuthState();
+    },
+    [],
+  );
 
   const onSignUpPress = () => {
     Keyboard.dismiss();
-    if (!(form.firstName && form.lastName && form.email && form.password)) return;
+    if (!(form.firstName && form.lastName && form.email && form.password))
+      return;
     // TODO: Implement validation
-    const customer = { firstname: form.firstName, lastname: form.lastName, email: form.email };
+    const customer = {
+      firstname: form.firstName,
+      lastname: form.lastName,
+      email: form.email,
+    };
     const payload = { customer, password: form.password };
     _signUp(payload);
   };
@@ -60,7 +58,9 @@ const SignUpScreen = ({
     <>
       <Button
         loading={status === Status.LOADING}
-        disabled={!(form.firstName && form.lastName && form.email && form.password)}
+        disabled={
+          !(form.firstName && form.lastName && form.email && form.password)
+        }
         title={translate('signUpScreen.signUpButton')}
         onPress={onSignUpPress}
         style={[styles.defaultMargin(theme)]}
@@ -75,14 +75,19 @@ const SignUpScreen = ({
   );
 
   const renderMessage = () => {
-    const message = status === Status.ERROR ? errorMessage : status === Status.SUCCESS ? translate('signUpScreen.successMessage') : "";
-    const type = status === Status.ERROR ? "error" : status === Status.SUCCESS ? "success" : "info";
-    return (
-      <MessageView
-        message={message}
-        type={type}
-      />
-    );
+    const message =
+      status === Status.ERROR
+        ? errorMessage
+        : status === Status.SUCCESS
+        ? translate('signUpScreen.successMessage')
+        : '';
+    const type =
+      status === Status.ERROR
+        ? 'error'
+        : status === Status.SUCCESS
+        ? 'success'
+        : 'info';
+    return <MessageView message={message} type={type} />;
   };
 
   return (
@@ -108,7 +113,9 @@ const SignUpScreen = ({
         editable={!(status === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, lastName: value })}
-        assignRef={(component) => { lastNameInputRef.current = component; }}
+        assignRef={component => {
+          lastNameInputRef.current = component;
+        }}
         returnKeyType={translate('common.keyboardNext')}
         onSubmitEditing={() => emailInputRef.current.focus()}
       />
@@ -121,14 +128,16 @@ const SignUpScreen = ({
         editable={!(status === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, email: value })}
-        assignRef={(component) => { emailInputRef.current = component; }}
+        assignRef={component => {
+          emailInputRef.current = component;
+        }}
         returnKeyType={translate('common.keyboardNext')}
         onSubmitEditing={() => passwordInputRef.current.focus()}
       />
       <TextInput
         autoCapitalize="none"
         secureTextEntry={secureEntry}
-        rightIcon={(
+        rightIcon={
           <Icon
             name={secureEntry ? 'eye' : 'eye-off'}
             size={20}
@@ -136,7 +145,7 @@ const SignUpScreen = ({
             color={theme.labelTextColor}
             onPress={() => toggleSecureEntry(!secureEntry)}
           />
-        )}
+        }
         textContentType="password"
         placeholder={translate('signUpScreen.passwordHint')}
         autoCorrect={false}
@@ -144,7 +153,9 @@ const SignUpScreen = ({
         editable={!(status === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         onChangeText={value => setValues({ ...form, password: value })}
-        assignRef={(component) => { passwordInputRef.current = component; }}
+        assignRef={component => {
+          passwordInputRef.current = component;
+        }}
         onSubmitEditing={onSignUpPress}
       />
       {renderButtons()}
@@ -156,14 +167,14 @@ const SignUpScreen = ({
 // TODO : Extract common code into a single style
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   defaultMargin: theme => ({
     marginTop: SPACING.large,
   }),
   iconPadding: theme => ({
-    padding: SPACING.small
-  })
+    padding: SPACING.small,
+  }),
 });
 
 SignUpScreen.propTypes = {
@@ -187,5 +198,5 @@ const mapStateToProps = ({ auth }) => {
 
 export default connect(mapStateToProps, {
   signUp,
-  resetAuthState
+  resetAuthState,
 })(SignUpScreen);

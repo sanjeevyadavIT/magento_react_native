@@ -5,9 +5,7 @@ import { CategoryTreeContainer } from './containers';
 import { ThemeContext } from '../../theme';
 import { DIMENS } from '../../constants';
 
-const Drawer = ({
-  navigation,
-}) => {
+const Drawer = ({ navigation }) => {
   console.log('Navigation Drawer render!');
   const { theme } = useContext(ThemeContext);
   return (
@@ -28,7 +26,6 @@ const styles = StyleSheet.create({
     height: DIMENS.headerViewHeight,
   }),
 });
-
 
 Drawer.propTypes = {};
 

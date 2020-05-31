@@ -17,7 +17,7 @@ const Spinner = ({
   /**
    * style containing padding & margin
    */
-  style
+  style,
 }) => {
   const { theme } = useContext(ThemeContext);
   return (

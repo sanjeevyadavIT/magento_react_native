@@ -14,12 +14,12 @@ export const logout = () => ({
 
 export const getOrderList = customerId => ({
   type: MAGENTO.GET_ORDERS_REQUEST,
-  payload: { customerId }
+  payload: { customerId },
 });
 
 export const getOrderedProductInfo = sku => ({
   type: MAGENTO.GET_ORDERED_PRODUCT_INFO_REQUEST,
-  payload: { sku }
+  payload: { sku },
 });
 
 export const addAccountAddress = (customerId, customerData) => ({
@@ -27,7 +27,7 @@ export const addAccountAddress = (customerId, customerData) => ({
   payload: {
     customerId,
     customerData,
-  }
+  },
 });
 
 export const resetAddressStatus = () => ({

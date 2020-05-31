@@ -18,7 +18,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         status: Status.ERROR,
-        errorMessage: payload.errorMessage
+        errorMessage: payload.errorMessage,
       };
     default:
       return state;

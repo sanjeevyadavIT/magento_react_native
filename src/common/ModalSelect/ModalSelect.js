@@ -48,7 +48,7 @@ const ModalSelect = ({
   /**
    * Color for placeholder Text and drop down icon
    */
-  placeholderTextColor
+  placeholderTextColor,
 }) => {
   const [value, setValue] = useState('');
   const { theme } = useContext(ThemeContext);
@@ -58,7 +58,7 @@ const ModalSelect = ({
       section: true,
       label,
     },
-    ...data
+    ...data,
   ];
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const ModalSelect = ({
     }
   }, [selectedKey]);
 
-  const _onChange = (option) => {
+  const _onChange = option => {
     if (!selectedKey) {
       // Manually set the selected value in drop down
       if (attribute) {
@@ -102,7 +102,7 @@ const ModalSelect = ({
         inputContainerStyle={StyleSheet.flatten([
           styles.customInputContainer(theme),
           style,
-          disabled && styles.disabledContainer
+          disabled && styles.disabledContainer,
         ])}
         inputStyle={StyleSheet.flatten([styles.inputStyle, textStyle])}
         editable={false}
@@ -110,7 +110,11 @@ const ModalSelect = ({
         value={value}
         placeholderTextColor={placeholderTextColor}
         rightIcon={
-          <Icon name="arrow-drop-down" size={30} color={placeholderTextColor || theme.labelTextColor} />
+          <Icon
+            name="arrow-drop-down"
+            size={30}
+            color={placeholderTextColor || theme.labelTextColor}
+          />
         }
       />
     </ModalSelector>
@@ -127,23 +131,18 @@ const styles = {
     borderRadius: DIMENS.borderRadius,
   }),
   disabledContainer: {
-    opacity: 0.5
-  }
+    opacity: 0.5,
+  },
 };
 
 ModalSelect.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-    label: PropTypes.string.isRequired,
-  })).isRequired,
-  selectedKey: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    null,
-  ]),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  selectedKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, null]),
   label: PropTypes.string.isRequired,
   attribute: PropTypes.string,
   onChange: PropTypes.func,
@@ -155,7 +154,7 @@ ModalSelect.propTypes = {
 
 ModalSelect.defaultProps = {
   disabled: false,
-  onChange: () => { },
+  onChange: () => {},
   selectedKey: null,
   attribute: '',
   style: {},

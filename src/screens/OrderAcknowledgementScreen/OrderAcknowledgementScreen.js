@@ -17,19 +17,34 @@ const OrderAcknowledgementScreen = ({
   route,
   resetCheckoutState: _resetCheckoutState,
 }) => {
-  const { status = Status.ERROR, orderId, errorMessage = translate('orderScreen.orderNotPlace') } = route.params;
+  const {
+    status = Status.ERROR,
+    orderId,
+    errorMessage = translate('orderScreen.orderNotPlace'),
+  } = route.params;
   const { theme } = useContext(ThemeContext);
 
-  useEffect(() => (() => {
-    // componentDidUnmount: Reset entire checkout state
-    _resetCheckoutState();
-  }), []);
+  useEffect(
+    () => () => {
+      // componentDidUnmount: Reset entire checkout state
+      _resetCheckoutState();
+    },
+    [],
+  );
 
   const renderFooter = () => (
     <View>
-      <Button title={translate('orderScreen.viewOrderButton')} onPress={() => navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, { orderId })} />
+      <Button
+        title={translate('orderScreen.viewOrderButton')}
+        onPress={() =>
+          navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, { orderId })
+        }
+      />
       <View style={styles.space(theme)} />
-      <Button title={translate('orderScreen.continueButton')} onPress={() => navigation.popToTop()} />
+      <Button
+        title={translate('orderScreen.continueButton')}
+        onPress={() => navigation.popToTop()}
+      />
     </View>
   );
 
@@ -42,7 +57,9 @@ const OrderAcknowledgementScreen = ({
     >
       <View style={styles.container}>
         <Icon name="verified-user" size={30} color="#4caf50" />
-        <Text type="subheading" bold>{translate('orderScreen.orderPlaced')}</Text>
+        <Text type="subheading" bold>
+          {translate('orderScreen.orderPlaced')}
+        </Text>
         <Text>{translate('orderScreen.orderPlacedMessage')}</Text>
       </View>
     </GenericTemplate>
@@ -58,7 +75,7 @@ const styles = StyleSheet.create({
   space: theme => ({
     flex: 1,
     marginTop: SPACING.small,
-  })
+  }),
 });
 
 OrderAcknowledgementScreen.propTypes = {

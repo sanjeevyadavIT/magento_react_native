@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import LoadingView from '../LoadingView/LoadingView';
-import GenericTemplate from '../GenericTemplate/GenericTemplate'
+import GenericTemplate from '../GenericTemplate/GenericTemplate';
 import CatalogGridItem from '../CatalogGridItem/CatalogGridItem';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
@@ -71,7 +71,9 @@ const CatalogGrid = ({
     if (showHorizontalList) {
       layoutManager.horizontal = true;
       layoutManager.showsHorizontalScrollIndicator = false;
-      layoutManager.ItemSeparatorComponent = () => <View style={{ width: SPACING.large }} />;
+      layoutManager.ItemSeparatorComponent = () => (
+        <View style={{ width: SPACING.large }} />
+      );
       layoutManager.contentContainerStyle = { padding: SPACING.large };
     } else {
       layoutManager.numColumns = columnCount;
@@ -142,10 +144,8 @@ CatalogGrid.propTypes = {
   isLoadingMoreProducts: PropTypes.oneOf(Object.values(Status)).isRequired,
   canLoadMoreProducts: PropTypes.bool.isRequired,
   loadProducts: PropTypes.func.isRequired,
-  loadFactor: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
+  loadFactor: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   updateItem: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,

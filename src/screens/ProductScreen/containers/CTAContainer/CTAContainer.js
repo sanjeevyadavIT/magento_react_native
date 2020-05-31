@@ -26,7 +26,7 @@ const CTAButtons = ({
   quantity,
   selectedOptions,
   cartQuoteId,
-  addToCart: _addToCart
+  addToCart: _addToCart,
 }) => {
   const handleSimpleTypeProductAdd = (productOptions = {}) => {
     const cartItem = {
@@ -40,7 +40,7 @@ const CTAButtons = ({
 
   const handleConfigurableTypeProductAdd = () => {
     const configurableItemOptions = [];
-    Object.keys(selectedOptions).forEach((key) => {
+    Object.keys(selectedOptions).forEach(key => {
       configurableItemOptions.push({
         option_id: key,
         option_value: selectedOptions[key],
@@ -62,7 +62,11 @@ const CTAButtons = ({
 
   const productTypeNotSupported = () => {
     // product type either virtual, downlodable or bundle
-    Alert.alert(`${translate('productScreen.unsupportedProductType')} ${productType} products`);
+    Alert.alert(
+      `${translate(
+        'productScreen.unsupportedProductType',
+      )} ${productType} products`,
+    );
     console.log(`App doesn't support ${productType} products`);
   };
 
@@ -113,13 +117,12 @@ CTAButtons.defaultProps = {
 const mapStateToProps = ({ cart, product }, { sku }) => {
   const {
     current: {
-      [sku]: {
-        addToCartStatus: status,
-        addToCartErrorMessage: errorMessage,
-      }
-    }
+      [sku]: { addToCartStatus: status, addToCartErrorMessage: errorMessage },
+    },
   } = product;
-  const { cart: { id: cartQuoteId } } = cart;
+  const {
+    cart: { id: cartQuoteId },
+  } = cart;
   return {
     status,
     errorMessage,

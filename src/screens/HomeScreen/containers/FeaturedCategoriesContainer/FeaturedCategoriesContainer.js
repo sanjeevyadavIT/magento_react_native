@@ -7,7 +7,6 @@ import { Text } from '../../../../common';
 import { ThemeContext } from '../../../../theme';
 import { SPACING } from '../../../../constants';
 
-
 /**
  * Container component for featured categories
  *
@@ -16,15 +15,15 @@ import { SPACING } from '../../../../constants';
  * @param {Object} props - props related to the component
  * @param {Object} props.featuredCategories - (From redux) Categories need to be displayed at HomeScreen
  */
-const FeaturedCategoriesContainer = ({
-  featuredCategories
-}) => {
+const FeaturedCategoriesContainer = ({ featuredCategories }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <>
       {Object.keys(featuredCategories).map(key => (
         <View style={styles.container(theme)} key={key}>
-          <Text type="subheading" bold style={styles.title(theme)}>{featuredCategories[key].title}</Text>
+          <Text type="subheading" bold style={styles.title(theme)}>
+            {featuredCategories[key].title}
+          </Text>
           <FeaturedCategoryList categoryId={parseInt(key, 10)} />
         </View>
       ))}
@@ -54,7 +53,7 @@ FeaturedCategoriesContainer.defaultProps = {};
 const mapStateToProps = ({ home }) => {
   const { featuredCategories } = home;
   return {
-    featuredCategories
+    featuredCategories,
   };
 };
 

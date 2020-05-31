@@ -26,7 +26,8 @@ const CategoryTreeItem = ({ category, navigation }) => {
     // componentDidMount
     if (Platform.OS === 'android') {
       // eslint-disable-next-line no-unused-expressions
-      UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+      UIManager.setLayoutAnimationEnabledExperimental &&
+        UIManager.setLayoutAnimationEnabledExperimental(true);
     }
   }, []);
 
@@ -41,7 +42,7 @@ const CategoryTreeItem = ({ category, navigation }) => {
       dispatch(setNewCategory(category.id));
       navigation.navigate(NAVIGATION_TO_CATEGORY_LIST_SCREEN, {
         title: category.name,
-        id: category.id
+        id: category.id,
       });
     } else {
       setExpanded(!expanded);
@@ -65,10 +66,7 @@ const CategoryTreeItem = ({ category, navigation }) => {
   };
 
   const renderItem = () => (
-    <Card
-      onPress={onRowPress}
-      style={styles.card(theme)}
-    >
+    <Card onPress={onRowPress} style={styles.card(theme)}>
       <Text>{category.name}</Text>
       {renderExpandButton()}
     </Card>
@@ -76,11 +74,15 @@ const CategoryTreeItem = ({ category, navigation }) => {
 
   const renderChildren = () => {
     if (expanded) {
-      return <CategoryTree navigation={navigation} categories={category.children_data} />;
+      return (
+        <CategoryTree
+          navigation={navigation}
+          categories={category.children_data}
+        />
+      );
     }
     return null;
   };
-
 
   return (
     <View style={styles.container(theme)}>
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
   }),
   expandIcon: theme => ({
     padding: 2,
-    paddingRight: SPACING.large
+    paddingRight: SPACING.large,
   }),
 });
 

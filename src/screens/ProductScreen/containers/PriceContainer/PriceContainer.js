@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Price } from '../../../../common';
-import { Price as PricePojo, getPriceFromChildren } from '../../../../utils/products';
+import {
+  Price as PricePojo,
+  getPriceFromChildren,
+} from '../../../../utils/products';
 import { ProductType } from '../../../../types';
 
 /**
@@ -69,10 +72,8 @@ PriceContainer.defaultProps = {
 const mapStateToProps = ({ product, magento }, { sku }) => {
   const {
     current: {
-      [sku]: {
-        children
-      }
-    }
+      [sku]: { children },
+    },
   } = product;
   const {
     displayCurrencySymbol: currencySymbol,

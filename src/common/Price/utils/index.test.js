@@ -92,7 +92,7 @@ describe('Price component util functions', () => {
       // Setup
       const input = 101.4523;
       const currencyRate = 2;
-      const expectedResponse = 202.90;
+      const expectedResponse = 202.9;
 
       // Exercise
       const response = formatPrice(input, currencyRate);

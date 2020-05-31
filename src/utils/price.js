@@ -1,6 +1,6 @@
 import { currencySymbols } from '../../config/magento';
 
-export const priceSignByCode = (code) => {
+export const priceSignByCode = code => {
   const sign = currencySymbols[code];
   if (sign) {
     return sign;

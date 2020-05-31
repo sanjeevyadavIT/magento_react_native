@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   ViewPropTypes,
-  TextInput as InputComponent
+  TextInput as InputComponent,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
@@ -53,14 +53,21 @@ const TextInput = ({
   return (
     <View style={StyleSheet.flatten([styles.container(theme), containerStyle])}>
       {!!label && (
-        <Text bold type="label">{label}</Text>
+        <Text bold type="label">
+          {label}
+        </Text>
       )}
-      <View style={StyleSheet.flatten([styles.inputContainer(theme), inputContainerStyle])}>
+      <View
+        style={StyleSheet.flatten([
+          styles.inputContainer(theme),
+          inputContainerStyle,
+        ])}
+      >
         {leftIcon && (
           <View
             style={StyleSheet.flatten([
               styles.iconContainer(theme),
-              styles.leftIconContainer(theme)
+              styles.leftIconContainer(theme),
             ])}
           >
             {leftIcon}
@@ -70,11 +77,10 @@ const TextInput = ({
         <InputComponent
           underlineColorAndroid={theme.transparent}
           editable={!disabled}
-          style={[
-            styles.input(theme),
-            inputStyle,
-          ]}
-          ref={(component) => { assignRef && assignRef(component); }}
+          style={[styles.input(theme), inputStyle]}
+          ref={component => {
+            assignRef && assignRef(component);
+          }}
           {...props}
         />
 
@@ -82,7 +88,7 @@ const TextInput = ({
           <View
             style={StyleSheet.flatten([
               styles.iconContainer(theme),
-              styles.rightIconContainer(theme)
+              styles.rightIconContainer(theme),
             ])}
           >
             {rightIcon}
@@ -90,11 +96,7 @@ const TextInput = ({
         )}
       </View>
       {!!errorMessage && (
-        <Text
-          style={styles.error(theme)}
-        >
-          {errorMessage}
-        </Text>
+        <Text style={styles.error(theme)}>{errorMessage}</Text>
       )}
     </View>
   );
@@ -128,11 +130,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }),
   leftIconContainer: theme => ({
-    marginEnd: SPACING.medium
+    marginEnd: SPACING.medium,
   }),
   rightIconContainer: theme => ({
-    marginStart: SPACING.medium
-  })
+    marginStart: SPACING.medium,
+  }),
 });
 
 TextInput.propTypes = {
@@ -142,14 +144,8 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
   label: PropTypes.string,
   errorMessage: PropTypes.string,
-  leftIcon: PropTypes.oneOfType([
-    PropTypes.element,
-    null
-  ]),
-  rightIcon: PropTypes.oneOfType([
-    PropTypes.element,
-    null
-  ]),
+  leftIcon: PropTypes.oneOfType([PropTypes.element, null]),
+  rightIcon: PropTypes.oneOfType([PropTypes.element, null]),
   assignRef: PropTypes.func,
 };
 
@@ -161,7 +157,7 @@ TextInput.defaultProps = {
   errorMessage: '',
   leftIcon: null,
   rightIcon: null,
-  assignRef: () => { }
+  assignRef: () => {},
 };
 
 export default TextInput;

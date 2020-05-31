@@ -15,29 +15,25 @@ const OrderListItem = ({ item }) => {
   const currencySymbol = priceSignByCode(item.order_currency_code);
 
   const onPress = () => {
-    navigation.navigate(
-      NAVIGATION_TO_ORDER_DETAIL_SCREEN,
-      {
-        item
-      }
-    );
+    navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, {
+      item,
+    });
   };
 
   return (
-    <Card
-      style={styles.mainContainer(theme)}
-      onPress={onPress}
-    >
+    <Card style={styles.mainContainer(theme)} onPress={onPress}>
       <View style={styles.infoContainer(theme)}>
         <Text>{`${translate('common.order')} # ${item.increment_id}`}</Text>
-        <Text>{`${translate('orderScreen.orderCreated')}: ${item.created_at}`}</Text>
+        <Text>{`${translate('orderScreen.orderCreated')}: ${
+          item.created_at
+        }`}</Text>
         <Text>
-          {`${translate('orderScreen.shipTo')} ${item.billing_address.firstname} ${item.billing_address.lastname}`}
+          {`${translate('orderScreen.shipTo')} ${
+            item.billing_address.firstname
+          } ${item.billing_address.lastname}`}
         </Text>
         <View style={styles.row}>
-          <Text>
-            {`${translate('orderScreen.orderTotal')}: `}
-          </Text>
+          <Text>{`${translate('orderScreen.orderTotal')}: `}</Text>
           <Price
             basePrice={item.grand_total}
             currencySymbol={currencySymbol}
@@ -65,7 +61,7 @@ const styles = StyleSheet.create({
   }),
   row: {
     flexDirection: 'row',
-  }
+  },
 });
 
 OrderListItem.propTypes = {

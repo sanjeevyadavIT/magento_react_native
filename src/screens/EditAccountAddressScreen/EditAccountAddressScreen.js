@@ -1,9 +1,4 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useContext,
-} from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -35,7 +30,7 @@ const EditAccountAddressScreen = ({
   navigation,
   getCountries: _getCountries,
   addAccountAddress: _addAccountAddress,
-  resetAddressStatus: _resetAddressStatus
+  resetAddressStatus: _resetAddressStatus,
 }) => {
   const [form, setValues] = useState({
     firstName: '',
@@ -101,7 +96,9 @@ const EditAccountAddressScreen = ({
       if (customer.addresses.length === 0) {
         // Get country by locale
         const userCountryByLocale = RNLocalize.getCountry();
-        const isUserCountrySupported = countries.find(country => country.id === userCountryByLocale);
+        const isUserCountrySupported = countries.find(
+          country => country.id === userCountryByLocale,
+        );
         if (isUserCountrySupported) {
           setValues({
             ...form,
@@ -142,8 +139,8 @@ const EditAccountAddressScreen = ({
             firstname: form.firstName,
             lastname: form.lastName,
           },
-        ]
-      }
+        ],
+      },
     };
     _addAccountAddress(customer.id, customerData);
   };
@@ -155,7 +152,9 @@ const EditAccountAddressScreen = ({
     let regionId;
 
     if (isAvailableRegion) {
-      const stateData = getCountryData().available_regions.find(state => state.code === form.state);
+      const stateData = getCountryData().available_regions.find(
+        state => state.code === form.state,
+      );
       region = stateData.name;
       regionId = stateData.id;
     } else {
@@ -169,26 +168,31 @@ const EditAccountAddressScreen = ({
   };
 
   const validation = () => {
-    if (form.firstName === ''
-      || form.lastName === ''
-      || form.phoneNumber === ''
-      || form.streetAddress === ''
-      || form.city === ''
-      || form.zipCode === ''
-      || form.state === ''
-      || form.state === undefined
-      || form.state === null
-    ) return false;
+    if (
+      form.firstName === '' ||
+      form.lastName === '' ||
+      form.phoneNumber === '' ||
+      form.streetAddress === '' ||
+      form.city === '' ||
+      form.zipCode === '' ||
+      form.state === '' ||
+      form.state === undefined ||
+      form.state === null
+    )
+      return false;
 
     return true;
   };
 
   // TODO: cache this value
-  const getCountryData = () => countries.find(country => country.id === form.country) || {};
+  const getCountryData = () =>
+    countries.find(country => country.id === form.country) || {};
 
   const renderCountries = () => {
-    if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT) return <Spinner size="small" />;
-    if (countryStatus === Status.ERROR) throw new Exception('Unable to fetch country data');
+    if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT)
+      return <Spinner size="small" />;
+    if (countryStatus === Status.ERROR)
+      throw new Exception('Unable to fetch country data');
     const countriesData = countries.map(country => ({
       label: country.full_name_english,
       key: country.id,
@@ -202,7 +206,9 @@ const EditAccountAddressScreen = ({
         data={countriesData}
         selectedKey={form.country}
         style={styles.defaultMargin(theme)}
-        onChange={(itemKey, item) => setValues({ ...form, country: itemKey, state: '' })}
+        onChange={(itemKey, item) =>
+          setValues({ ...form, country: itemKey, state: '' })
+        }
       />
     );
   };
@@ -280,7 +286,9 @@ const EditAccountAddressScreen = ({
         placeholder={translate('addressScreen.lastNameHint')}
         onSubmitEditing={() => phoneNumberInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, lastName: value })}
-        assignRef={(component) => { lastNameInputRef.current = component; }}
+        assignRef={component => {
+          lastNameInputRef.current = component;
+        }}
       />
       <TextInput
         autoCorrect={false}
@@ -293,7 +301,9 @@ const EditAccountAddressScreen = ({
         placeholder={translate('addressScreen.phoneNumberHint')}
         onSubmitEditing={() => streetAddressInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, phoneNumber: value })}
-        assignRef={(component) => { phoneNumberInputRef.current = component; }}
+        assignRef={component => {
+          phoneNumberInputRef.current = component;
+        }}
       />
       <TextInput
         autoCorrect={false}
@@ -305,7 +315,9 @@ const EditAccountAddressScreen = ({
         placeholder={translate('addressScreen.addressHint')}
         onSubmitEditing={() => cityInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, streetAddress: value })}
-        assignRef={(component) => { streetAddressInputRef.current = component; }}
+        assignRef={component => {
+          streetAddressInputRef.current = component;
+        }}
       />
       <TextInput
         value={form.city}
@@ -317,7 +329,9 @@ const EditAccountAddressScreen = ({
         placeholder={translate('addressScreen.cityHint')}
         onSubmitEditing={() => zipCodeInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, city: value })}
-        assignRef={(component) => { cityInputRef.current = component; }}
+        assignRef={component => {
+          cityInputRef.current = component;
+        }}
       />
       <TextInput
         autoCorrect={false}
@@ -327,7 +341,9 @@ const EditAccountAddressScreen = ({
         label={translate('addressScreen.zipCodeLabel')}
         placeholder={translate('addressScreen.zipCodeHint')}
         onChangeText={value => setValues({ ...form, zipCode: value })}
-        assignRef={(component) => { zipCodeInputRef.current = component; }}
+        assignRef={component => {
+          zipCodeInputRef.current = component;
+        }}
       />
       {renderCountries()}
       {renderState()}
@@ -351,18 +367,20 @@ const styles = StyleSheet.create({
   linkContainer: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'stretch'
-  }
+    alignItems: 'stretch',
+  },
 });
 
 EditAccountAddressScreen.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    full_name_english: PropTypes.string,
-    full_name_locale: PropTypes.string,
-    two_letter_abbreviation: PropTypes.string,
-    three_letter_abbreviation: PropTypes.string,
-  })),
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      full_name_english: PropTypes.string,
+      full_name_locale: PropTypes.string,
+      two_letter_abbreviation: PropTypes.string,
+      three_letter_abbreviation: PropTypes.string,
+    }),
+  ),
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   countryStatus: PropTypes.oneOf(Object.values(Status)).isRequired,
   countryErrorMessage: PropTypes.string,
@@ -382,12 +400,9 @@ const mapStateToProps = ({ magento, account }) => {
   const {
     countries,
     countryStatus,
-    errorMessage: countryErrorMessage
+    errorMessage: countryErrorMessage,
   } = magento;
-  const {
-    customer,
-    addressStatus: status,
-  } = account;
+  const { customer, addressStatus: status } = account;
   return {
     status,
     countries,

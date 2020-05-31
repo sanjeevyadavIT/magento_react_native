@@ -22,7 +22,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         status: Status.SUCCESS,
         cart: {
-          ...payload.cart
+          ...payload.cart,
         },
       };
     }

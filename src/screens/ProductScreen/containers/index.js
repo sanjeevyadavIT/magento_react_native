@@ -9,5 +9,5 @@ export {
   PriceContainer,
   DescriptionContainer,
   OptionsContainer,
-  CTAButtons
+  CTAButtons,
 };

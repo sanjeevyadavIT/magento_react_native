@@ -2,16 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  resetShippingState,
-  addCartShippingInfo,
-} from '../../store/actions';
-import {
-  Text,
-  Button,
-  ModalSelect,
-  GenericTemplate
-} from '../../common';
+import { resetShippingState, addCartShippingInfo } from '../../store/actions';
+import { Text, Button, ModalSelect, GenericTemplate } from '../../common';
 import { NAVIGATION_TO_PAYMENT_SCREEN } from '../../navigation';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
@@ -28,31 +20,37 @@ const ShippingScreen = ({
   billingAddress,
   navigation,
   addCartShippingInfo: _addCartShippingInfo,
-  resetShippingState: _resetShippingState
+  resetShippingState: _resetShippingState,
 }) => {
   const { theme } = useContext(ThemeContext);
   const [shippingCode, setShippingCode] = useState();
 
-  useEffect(() => (() => {
-    // componentDidUnmount: Reset Shipping related logic in Redux
-    _resetShippingState();
-  }), []);
-
+  useEffect(
+    () => () => {
+      // componentDidUnmount: Reset Shipping related logic in Redux
+      _resetShippingState();
+    },
+    [],
+  );
 
   const renderShippingMethod = () => {
     if (!shipping || !shipping.length) {
       return <Text>{translate('shippingScreen.noShipping')}</Text>;
     }
 
-    const data = shipping.map(({
-      base_amount: baseAmount,
-      carrier_title: carrierTitle,
-      method_title: methodTitle,
-      carrier_code: carrierCode,
-    }) => ({
-      label: `${carrierTitle} : ${methodTitle} : ${currencySymbol + (baseAmount * currencyRate).toFixed(2)}`,
-      key: carrierCode,
-    }));
+    const data = shipping.map(
+      ({
+        base_amount: baseAmount,
+        carrier_title: carrierTitle,
+        method_title: methodTitle,
+        carrier_code: carrierCode,
+      }) => ({
+        label: `${carrierTitle} : ${methodTitle} : ${
+          currencySymbol + (baseAmount * currencyRate).toFixed(2)
+        }`,
+        key: carrierCode,
+      }),
+    );
 
     return (
       <ModalSelect
@@ -64,7 +62,8 @@ const ShippingScreen = ({
     );
   };
 
-  const getShippingMethod = () => shipping.find(item => item.carrier_code === shippingCode);
+  const getShippingMethod = () =>
+    shipping.find(item => item.carrier_code === shippingCode);
 
   const onPress = () => {
     if (shippingCode) {
@@ -99,7 +98,7 @@ const ShippingScreen = ({
           shipping_method_code: getShippingMethod().method_code,
           shipping_carrier_code: getShippingMethod().carrier_code,
           extension_attributes: {},
-        }
+        },
       };
       _addCartShippingInfo(address);
     }
@@ -129,7 +128,6 @@ const ShippingScreen = ({
     </GenericTemplate>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -162,13 +160,16 @@ const mapStateToProps = ({ checkout, magento, cart }) => {
   const {
     paymentMethodStatus,
     errorMessage,
-    shipping, shippingMethodStatus: status
+    shipping,
+    shippingMethodStatus: status,
   } = checkout;
   const {
     displayCurrencySymbol: currencySymbol,
     displayCurrencyExchangeRate: currencyRate,
   } = magento.currency;
-  const { cart: { billing_address: billingAddress } } = cart;
+  const {
+    cart: { billing_address: billingAddress },
+  } = cart;
   return {
     status,
     paymentMethodStatus,

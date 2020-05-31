@@ -6,7 +6,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text } from '../../../../common';
 import { magento } from '../../../../magento';
 import Status from '../../../../magento/Status';
-import { NAVIGATION_TO_LOGIN_SCREEN, NAVIGATION_TO_ACCOUNT_SCREEN } from '../../../../navigation';
+import {
+  NAVIGATION_TO_LOGIN_SCREEN,
+  NAVIGATION_TO_ACCOUNT_SCREEN,
+} from '../../../../navigation';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 import { DIMENS, SPACING } from '../../../../constants';
@@ -20,10 +23,7 @@ import { DIMENS, SPACING } from '../../../../constants';
  * @param {Object} props        - props related to component
  * @param {string} props.status - Status of whether user is logged in or not
  */
-const DrawerHeader = ({
-  status,
-  navigation,
-}) => {
+const DrawerHeader = ({ status, navigation }) => {
   let welcomeText = '';
   let NAVIGATION_PATH = null;
   const { theme } = useContext(ThemeContext);

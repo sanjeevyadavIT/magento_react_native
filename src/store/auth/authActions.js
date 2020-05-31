@@ -4,8 +4,8 @@ export const signIn = (email, password) => ({
   type: MAGENTO.SIGN_IN_REQUEST,
   payload: {
     email,
-    password
-  }
+    password,
+  },
 });
 
 export const signUp = payload => ({

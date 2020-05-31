@@ -6,7 +6,7 @@ import Status from '../../../../magento/Status';
 import {
   setCurrentProduct,
   getFeaturedProducts,
-  getHomeConfigurableProductOptions
+  getHomeConfigurableProductOptions,
 } from '../../../../store/actions';
 import { ProductType } from '../../../../types';
 
@@ -60,11 +60,7 @@ FeaturedCategoryList.defaultProps = {
 };
 
 const mapStateToProps = ({ home, magento }, { categoryId }) => {
-  const {
-    status,
-    errorMessage,
-    items,
-  } = home[categoryId];
+  const { status, errorMessage, items } = home[categoryId];
   const {
     displayCurrencySymbol: currencySymbol,
     displayCurrencyExchangeRate: currencyRate,

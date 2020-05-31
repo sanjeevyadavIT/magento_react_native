@@ -26,7 +26,7 @@ const CategoryTreeContainer = ({
   navigation,
 }) => {
   const { theme } = useContext(ThemeContext);
-  console.log('----', navigation)
+  console.log('----', navigation);
 
   const renderChildren = () => {
     if (categories) {
@@ -55,8 +55,8 @@ const CategoryTreeContainer = ({
 
 const styles = {
   container: theme => ({
-    backgroundColor: theme.white
-  })
+    backgroundColor: theme.white,
+  }),
 };
 
 CategoryTreeContainer.propTypes = {
@@ -73,14 +73,8 @@ CategoryTreeContainer.defaultProps = {
 };
 
 const mapStateToProps = ({ categoryTree, magento }) => {
-  const {
-    status,
-    errorMessage,
-    children_data: categories
-  } = categoryTree;
-  const {
-    available_currency_codes: currencies,
-  } = magento.currency;
+  const { status, errorMessage, children_data: categories } = categoryTree;
+  const { available_currency_codes: currencies } = magento.currency;
   return {
     status,
     errorMessage,

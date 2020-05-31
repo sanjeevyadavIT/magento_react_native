@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
-  View
+  View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../../theme';
@@ -14,7 +14,8 @@ const OUTLINE = 'outline';
 const CLEAR = 'clear';
 const SHADOW = 'shadow';
 
-const TouchReceptor = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
+const TouchReceptor =
+  Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
 
 // TODO: TouchReceptor can be extracted into it's own component
 // TODO: Add styling for shadow
@@ -37,7 +38,7 @@ const Card = ({
   /**
    * Children to render inside Card
    */
-  children
+  children,
 }) => {
   const ViewGroup = onPress ? TouchReceptor : View;
   const { theme } = useContext(ThemeContext);

@@ -1,10 +1,10 @@
 import { magento } from '../magento';
 import { ImageSliderItem } from '../common';
 
-export const getProductThumbnailFromAttribute = (product) => {
+export const getProductThumbnailFromAttribute = product => {
   let result = magento.getProductMediaUrl();
   const key = 'thumbnail';
-  product.custom_attributes.some((attribute) => {
+  product.custom_attributes.some(attribute => {
     if (attribute.attribute_code === key) {
       result += attribute.value;
       return true;
@@ -14,17 +14,24 @@ export const getProductThumbnailFromAttribute = (product) => {
 };
 
 export const getValueFromAttribute = (product, key) => {
-  if (!product || !('custom_attributes' in product) || !Array.isArray(product.custom_attributes)) {
+  if (
+    !product ||
+    !('custom_attributes' in product) ||
+    !Array.isArray(product.custom_attributes)
+  ) {
     return undefined;
   }
-  const result = product.custom_attributes.find(attribute => attribute.attribute_code === key);
+  const result = product.custom_attributes.find(
+    attribute => attribute.attribute_code === key,
+  );
   if (result) {
     return result.value;
   }
   return undefined;
 };
 
-export const parseImageArray = slider => slider.map(item => new ImageSliderItem(item.label, item.file, ''));
+export const parseImageArray = slider =>
+  slider.map(item => new ImageSliderItem(item.label, item.file, ''));
 
 /**
  * Stores price of the product,
@@ -49,11 +56,11 @@ export class Price {
  * @param {object[]} children all the `simple` child product of a `configurable` type product
  * @return {Price} instance
  */
-export const getPriceFromChildren = (children) => {
+export const getPriceFromChildren = children => {
   let startingPrice;
   let endingPrice;
   if (children) {
-    children.forEach((child) => {
+    children.forEach(child => {
       if (startingPrice === undefined && endingPrice === undefined) {
         startingPrice = child.price;
         endingPrice = startingPrice;

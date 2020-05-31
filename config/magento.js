@@ -18,7 +18,7 @@ export const magentoOptions = {
   password_reset_template: 'email_reset',
   authentication: {
     integration: {
-      access_token: '4sbxpsx5ma21mx7hoj9g96f9xh5msgmk',
+      access_token: 'c81wpzan4pz0zf237sauj36brkxam21q',
     }
   }
 };

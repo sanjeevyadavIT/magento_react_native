@@ -25,15 +25,21 @@ const OrdersScreen = ({
     }
   }, []);
 
-  const renderItem = ({ item }) => (<OrderListItem item={item} />);
+  const renderItem = ({ item }) => <OrderListItem item={item} />;
 
   return (
-    <GenericTemplate scrollable={false} status={status} errorMessage={errorMessage}>
+    <GenericTemplate
+      scrollable={false}
+      status={status}
+      errorMessage={errorMessage}
+    >
       <FlatList
         data={orders}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
-        ListEmptyComponent={<MessageView message={translate('orderScreen.orderEmptyMessage')} />}
+        ListEmptyComponent={
+          <MessageView message={translate('orderScreen.orderEmptyMessage')} />
+        }
       />
     </GenericTemplate>
   );
@@ -41,9 +47,7 @@ const OrdersScreen = ({
 
 const styles = StyleSheet.create({});
 
-OrdersScreen.navigationOptions = ({ navigation }) => ({
-
-});
+OrdersScreen.navigationOptions = ({ navigation }) => ({});
 
 OrdersScreen.propTypes = {
   orders: PropTypes.array,
@@ -58,7 +62,11 @@ OrdersScreen.defaultProps = {
 };
 
 const mapStateToProps = ({ account }) => {
-  const { orders, orderStatus: status, ordersErrorMessage: errorMessage } = account;
+  const {
+    orders,
+    orderStatus: status,
+    ordersErrorMessage: errorMessage,
+  } = account;
   return {
     orders,
     status,

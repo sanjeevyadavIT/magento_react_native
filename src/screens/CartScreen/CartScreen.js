@@ -9,7 +9,7 @@ import { translate } from '../../i18n';
 const CartPage = ({
   status,
   errorMessage,
-  getCustomerCart: _getCustomerCart
+  getCustomerCart: _getCustomerCart,
 }) => {
   useEffect(() => {
     // componentDidMount
@@ -38,5 +38,5 @@ const mapStateToProps = ({ cart }) => {
 };
 
 export default connect(mapStateToProps, {
-  getCustomerCart
+  getCustomerCart,
 })(CartPage);

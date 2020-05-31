@@ -1,17 +1,8 @@
 import React from 'react';
-import {
-  FlatList,
-  View,
-  Alert,
-} from 'react-native';
+import { FlatList, View, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
-import {
-  Text,
-  Button,
-  MessageView,
-  Price,
-} from '../../../../common';
+import { Text, Button, MessageView, Price } from '../../../../common';
 import CartListItem from '../CartListItem/CartListItem';
 import { NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN } from '../../../../navigation';
 import { translate } from '../../../../i18n';
@@ -20,12 +11,7 @@ import { translate } from '../../../../i18n';
 // TODO: Make ListEmptyComponent center in the view
 // FIXME: For some products the price in items[i] are 0 and for some actual value, hence need to fetch each item price individually
 // FIXME: The logic has become two complex, extract into smaller components
-const CartList = ({
-  items,
-  extra,
-  currencySymbol,
-  currencyRate,
-}) => {
+const CartList = ({ items, extra, currencySymbol, currencyRate }) => {
   const navigation = useNavigation();
 
   const renderRow = ({ item, index }) => (
@@ -99,18 +85,16 @@ const CartList = ({
       renderItem={renderRow}
       keyExtractor={item => String(item.item_id)}
       ListFooterComponent={items.length ? renderFooter : <></>}
-      ListEmptyComponent={(
-        <MessageView
-          message={translate('cartScreen.cartEmptyMessage')}
-        />
-      )}
+      ListEmptyComponent={
+        <MessageView message={translate('cartScreen.cartEmptyMessage')} />
+      }
     />
   );
 };
 
 const styles = {
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
 };
 

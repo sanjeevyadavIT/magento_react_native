@@ -12,12 +12,12 @@ import { SPACING } from '../../../../constants';
  * @param {Object} props             - props associated with the component
  * @param {Object[]} props.customAttributes - custom attribute of the product
  */
-const DescriptionContainer = ({
-  customAttributes,
-}) => {
+const DescriptionContainer = ({ customAttributes }) => {
   const { theme } = useContext(ThemeContext);
   const getDescriptionString = () => {
-    const descriptionAttribute = customAttributes.find(customAttribute => customAttribute.attribute_code === 'description');
+    const descriptionAttribute = customAttributes.find(
+      customAttribute => customAttribute.attribute_code === 'description',
+    );
     if (descriptionAttribute && descriptionAttribute.value) {
       return descriptionAttribute.value;
     }
@@ -26,25 +26,27 @@ const DescriptionContainer = ({
 
   const renderDescription = () => (
     <>
-      <Text
-        bold
-        type="subheading"
-        style={styles.productDetailTitle(theme)}
-      >
+      <Text bold type="subheading" style={styles.productDetailTitle(theme)}>
         {translate('productScreen.productDetailLabel')}
       </Text>
       <WebView
         scrollEnabled
         originWhitelist={['*']}
         style={{ height: 200 }}
-        source={{ html: `<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body>${description}</body></html>` }}
+        source={{
+          html: `<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body>${description}</body></html>`,
+        }}
       />
     </>
   );
   const description = getDescriptionString();
   return (
     <>
-      {description ? renderDescription() : <Text>{translate('productScreen.noProductDetail')}</Text>}
+      {description ? (
+        renderDescription()
+      ) : (
+        <Text>{translate('productScreen.noProductDetail')}</Text>
+      )}
     </>
   );
 };
@@ -56,10 +58,12 @@ const styles = {
 };
 
 DescriptionContainer.propTypes = {
-  customAttributes: PropTypes.arrayOf(PropTypes.shape({
-    attribute_code: PropTypes.string,
-    value: PropTypes.string,
-  })),
+  customAttributes: PropTypes.arrayOf(
+    PropTypes.shape({
+      attribute_code: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ),
 };
 
 DescriptionContainer.defaultProps = {

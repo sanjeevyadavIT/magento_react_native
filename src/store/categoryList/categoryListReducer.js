@@ -50,8 +50,8 @@ export default (state = initialState, { type, payload }) => {
         ...state.extra,
         [sku]: {
           children,
-          price: getPriceFromChildren(children)
-        }
+          price: getPriceFromChildren(children),
+        },
       };
       return {
         ...state,

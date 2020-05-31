@@ -1,5 +1,3 @@
 import CategoryTreeContainer from './CategoryTreeContainer';
 
-export {
-  CategoryTreeContainer
-};
+export { CategoryTreeContainer };

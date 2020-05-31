@@ -1,6 +1,4 @@
-import {
-  MAGENTO,
-} from '../../constants';
+import { MAGENTO } from '../../constants';
 import Status from '../../magento/Status';
 import { getPriceFromChildren } from '../../utils/products';
 
@@ -23,7 +21,9 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         status: Status.ERROR,
-        errorMessage: payload.errorCode ? `${payload.errorCode}\n${payload.errorMessage}` : payload.errorMessage,
+        errorMessage: payload.errorCode
+          ? `${payload.errorCode}\n${payload.errorMessage}`
+          : payload.errorMessage,
       };
     case MAGENTO.HOME_DATA_SUCCESS:
       return {
@@ -42,7 +42,11 @@ export default (state = initialState, { type, payload }) => {
     }
     case MAGENTO.FEATURED_CATEGORY_PRODUCTS_SUCCESS: {
       const { categoryId, products } = payload;
-      const featuredCategory = { ...state[categoryId], ...products, status: Status.SUCCESS };
+      const featuredCategory = {
+        ...state[categoryId],
+        ...products,
+        status: Status.SUCCESS,
+      };
       return {
         ...state,
         [categoryId]: featuredCategory,
@@ -50,7 +54,11 @@ export default (state = initialState, { type, payload }) => {
     }
     case MAGENTO.FEATURED_CATEGORY_PRODUCTS_ERROR: {
       const { categoryId, errorMessage } = payload;
-      const featuredCategory = { ...state[categoryId], status: Status.ERROR, errorMessage };
+      const featuredCategory = {
+        ...state[categoryId],
+        status: Status.ERROR,
+        errorMessage,
+      };
 
       return {
         ...state,
@@ -63,7 +71,7 @@ export default (state = initialState, { type, payload }) => {
         ...state.extra,
         [sku]: {
           children,
-          price: getPriceFromChildren(children)
+          price: getPriceFromChildren(children),
         },
       };
       return {

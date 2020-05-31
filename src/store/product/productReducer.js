@@ -1,8 +1,4 @@
-import {
-  MAGENTO,
-  UI,
-  RESET_ADD_TO_CART_STATE,
-} from '../../constants';
+import { MAGENTO, UI, RESET_ADD_TO_CART_STATE } from '../../constants';
 import Status from '../../magento/Status';
 
 const getInitialState = {
@@ -27,7 +23,7 @@ const getInitialState = {
        */
       addToCartStatus: Status.DEFAULT,
       addToCartErrorMessage: '',
-    }
+    },
   },
   /**
    * attributes are cached which conatin attribute code with their name,
@@ -57,8 +53,8 @@ export default (state = getInitialState, { type, payload }) => {
             //-------------------------------
             addToCartStatus: Status.DEFAULT,
             addToCartErrorMessage: '',
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.PRODUCT_MEDIA_LOADING: {
@@ -71,8 +67,8 @@ export default (state = getInitialState, { type, payload }) => {
           [sku]: {
             ...product,
             mediaStatus: Status.LOADING,
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.PRODUCT_MEDIA_SUCCESS: {
@@ -86,8 +82,8 @@ export default (state = getInitialState, { type, payload }) => {
             ...product,
             mediaStatus: Status.SUCCESS,
             medias,
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.PRODUCT_MEDIA_FAILURE: {
@@ -101,8 +97,8 @@ export default (state = getInitialState, { type, payload }) => {
             ...product,
             mediaStatus: Status.ERROR,
             mediaErrorMessage: errorMessage,
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.CONFIGURABLE_CHILDREN_SUCCESS: {
@@ -115,8 +111,8 @@ export default (state = getInitialState, { type, payload }) => {
           [sku]: {
             ...product,
             children,
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.CONF_OPTIONS_LOADING: {
@@ -129,8 +125,8 @@ export default (state = getInitialState, { type, payload }) => {
           [sku]: {
             ...product,
             confOptionsStatus: Status.LOADING,
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.CONF_OPTIONS_SUCCESS: {
@@ -144,12 +140,12 @@ export default (state = getInitialState, { type, payload }) => {
             ...product,
             confOptionsStatus: Status.SUCCESS,
             options,
-          }
+          },
         },
         attributes: {
           ...state.attributes,
           ...attributes,
-        }
+        },
       };
     }
     case MAGENTO.CONF_OPTIONS_FAILURE: {
@@ -163,8 +159,8 @@ export default (state = getInitialState, { type, payload }) => {
             ...product,
             confOptionsStatus: Status.ERROR,
             confOptionsErrorMessage: errorMessage,
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.ADD_TO_CART_LOADING: {
@@ -178,8 +174,8 @@ export default (state = getInitialState, { type, payload }) => {
             ...product,
             addToCartStatus: Status.LOADING,
             addToCartErrorMessage: '',
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.ADD_TO_CART_SUCCESS: {
@@ -193,8 +189,8 @@ export default (state = getInitialState, { type, payload }) => {
             ...product,
             addToCartStatus: Status.SUCCESS,
             addToCartErrorMessage: '',
-          }
-        }
+          },
+        },
       };
     }
     case MAGENTO.ADD_TO_CART_FAILURE: {
@@ -208,8 +204,8 @@ export default (state = getInitialState, { type, payload }) => {
             ...product,
             addToCartStatus: Status.ERROR,
             addToCartErrorMessage: errorMessage,
-          }
-        }
+          },
+        },
       };
     }
     case RESET_ADD_TO_CART_STATE: {
@@ -223,8 +219,8 @@ export default (state = getInitialState, { type, payload }) => {
             ...product,
             addToCartStatus: Status.DEFAULT,
             addToCartErrorMessage: '',
-          }
-        }
+          },
+        },
       };
     }
     default:

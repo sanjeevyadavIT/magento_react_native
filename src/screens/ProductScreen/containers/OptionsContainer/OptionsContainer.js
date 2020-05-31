@@ -43,24 +43,31 @@ const OptionsContainer = ({
     });
   };
 
-  const renderOptions = () => options.sort((first, second) => first.position - second.position).map((option) => {
-    const optionIds = option.values.map(value => String(value.value_index));
-    const values = attributes[option.attribute_id].options.filter(({ value }) => optionIds.includes(value));
-    const data = values.map(({ label, value }) => ({
-      label,
-      key: value
-    }));
-    return (
-      <View style={styles.optionBox(theme)} key={option.attribute_id}>
-        <ModalSelect
-          data={data}
-          label={`${translate('common.select')} ${option.label}`}
-          disabled={values.length === 0}
-          onChange={(itemKey, selectedOption) => onPickerSelect(option.attribute_id, itemKey, selectedOption)}
-        />
-      </View>
-    );
-  });
+  const renderOptions = () =>
+    options
+      .sort((first, second) => first.position - second.position)
+      .map(option => {
+        const optionIds = option.values.map(value => String(value.value_index));
+        const values = attributes[
+          option.attribute_id
+        ].options.filter(({ value }) => optionIds.includes(value));
+        const data = values.map(({ label, value }) => ({
+          label,
+          key: value,
+        }));
+        return (
+          <View style={styles.optionBox(theme)} key={option.attribute_id}>
+            <ModalSelect
+              data={data}
+              label={`${translate('common.select')} ${option.label}`}
+              disabled={values.length === 0}
+              onChange={(itemKey, selectedOption) =>
+                onPickerSelect(option.attribute_id, itemKey, selectedOption)
+              }
+            />
+          </View>
+        );
+      });
 
   return (
     <GenericTemplate
@@ -80,23 +87,27 @@ const styles = {
   }),
   optionBox: theme => ({
     marginBottom: SPACING.large,
-  })
+  }),
 };
 
 OptionsContainer.propTypes = {
   sku: PropTypes.string.isRequired,
   status: PropTypes.oneOf(Object.values(Status)).isRequired, // redux
   errorMessage: PropTypes.string, // redux
-  options: PropTypes.arrayOf(PropTypes.shape({
-    attribute_id: PropTypes.string,
-    id: PropTypes.number,
-    label: PropTypes.string,
-    position: PropTypes.number,
-    product_id: PropTypes.number,
-    values: PropTypes.arrayOf(PropTypes.shape({
-      value_index: PropTypes.number.isRequired,
-    })),
-  })),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      attribute_id: PropTypes.string,
+      id: PropTypes.number,
+      label: PropTypes.string,
+      position: PropTypes.number,
+      product_id: PropTypes.number,
+      values: PropTypes.arrayOf(
+        PropTypes.shape({
+          value_index: PropTypes.number.isRequired,
+        }),
+      ),
+    }),
+  ),
   attributes: PropTypes.object, // redux
   selectedOptions: PropTypes.object,
   setSelectedOptions: PropTypes.func,
@@ -108,7 +119,7 @@ OptionsContainer.defaultProps = {
   options: null,
   attributes: {},
   selectedOptions: null,
-  setSelectedOptions: () => { },
+  setSelectedOptions: () => {},
 };
 
 const mapStateToProps = ({ product }, { sku }) => {
@@ -118,7 +129,7 @@ const mapStateToProps = ({ product }, { sku }) => {
         options,
         confOptionsStatus: status,
         confOptionsErrorMessage: errorMessage,
-      }
+      },
     },
     attributes,
   } = product;
@@ -133,5 +144,5 @@ const mapStateToProps = ({ product }, { sku }) => {
 };
 
 export default connect(mapStateToProps, {
-  resetAddToCartState
+  resetAddToCartState,
 })(OptionsContainer);

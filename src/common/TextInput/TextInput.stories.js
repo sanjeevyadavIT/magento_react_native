@@ -11,25 +11,18 @@ const styles = {
   }),
   centerText: {
     textAlign: 'center',
-  }
+  },
 };
 
 storiesOf('TextInput', module)
   .addDecorator(getStory => (
     <ThemeProvider theme={theme}>
-      <View style={{ borderWidth: 10, borderColor: 'pink'}}>
-        {getStory()}
-      </View>
+      <View style={{ borderWidth: 10, borderColor: 'pink' }}>{getStory()}</View>
     </ThemeProvider>
   ))
-  .add('default', () => (
-    <TextInput placeholder="Enter Name" />
-  ))
+  .add('default', () => <TextInput placeholder="Enter Name" />)
   .add('with label', () => (
-    <TextInput
-      placeholder="James Arthur"
-      label="Enter Name"
-    />
+    <TextInput placeholder="James Arthur" label="Enter Name" />
   ))
   .add('with error Message', () => (
     <TextInput
@@ -42,18 +35,14 @@ storiesOf('TextInput', module)
     <TextInput
       label="Enter Email"
       placeholder="james@gmail.com"
-      leftIcon={
-        <Icon name="email" size={30} color="#4caf50" />
-      }
+      leftIcon={<Icon name="email" size={30} color="#4caf50" />}
     />
   ))
   .add('with right icon', () => (
     <TextInput
       label="Enter Phone number"
       placeholder="123456789"
-      rightIcon={
-        <Icon name="local-phone" size={30} color="#4caf50" />
-      }
+      rightIcon={<Icon name="local-phone" size={30} color="#4caf50" />}
     />
   ))
   .add('with custom input container style', () => (

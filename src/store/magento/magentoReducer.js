@@ -14,7 +14,7 @@ const INITIAL_STATE = {
     displayCurrencyCode: '',
     displayCurrencySymbol: '',
     displayCurrencyExchangeRate: 1,
-  }
+  },
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
@@ -44,11 +44,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case MAGENTO.CURRENCY_SUCCESS: {
       const {
         currencyData,
-        displayCurrency: {
-          code,
-          symbol,
-          rate
-        }
+        displayCurrency: { code, symbol, rate },
       } = payload;
       return {
         ...state,
@@ -76,7 +72,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
           displayCurrencyCode: payload.currencyCode,
           displayCurrencySymbol: payload.currencySymbol,
           displayCurrencyExchangeRate: payload.currencyExchangeRate,
-        }
+        },
       };
     case MAGENTO.COUNTRIES_LOADING:
       return {

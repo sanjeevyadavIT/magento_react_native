@@ -3,19 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CartList } from '../../components';
 
-const CartListContainer = ({
-  items,
-  extra,
-  currencySymbol,
-  currencyRate,
-}) => (
-    <CartList
-      items={items}
-      extra={extra}
-      currencySymbol={currencySymbol}
-      currencyRate={currencyRate}
-    />
-  );
+const CartListContainer = ({ items, extra, currencySymbol, currencyRate }) => (
+  <CartList
+    items={items}
+    extra={extra}
+    currencySymbol={currencySymbol}
+    currencyRate={currencyRate}
+  />
+);
 
 CartListContainer.propTypes = {
   currencySymbol: PropTypes.string.isRequired,
@@ -30,7 +25,10 @@ CartListContainer.defaultProps = {
 };
 
 const mapStateToProps = ({ cart, magento }) => {
-  const { cart: { items }, products: extra } = cart;
+  const {
+    cart: { items },
+    products: extra,
+  } = cart;
   const {
     displayCurrencySymbol: currencySymbol,
     displayCurrencyExchangeRate: currencyRate,
