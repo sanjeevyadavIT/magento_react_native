@@ -79,11 +79,21 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "balkrishanyadav",
+      "name": "Balkrishan Yadav",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6735695?v=4",
+      "profile": "https://github.com/balkrishanyadav",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "magento_react_native",
   "projectOwner": "alexakasanjeev",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
