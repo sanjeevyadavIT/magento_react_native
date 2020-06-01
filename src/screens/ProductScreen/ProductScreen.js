@@ -14,7 +14,7 @@ import { magento } from '../../magento';
 import {
   NAVIGATION_TO_LOGIN_SCREEN,
   NAVIGATION_TO_CART_SCREEN,
-} from '../../navigation';
+} from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';
 import { ProductType } from '../../types';

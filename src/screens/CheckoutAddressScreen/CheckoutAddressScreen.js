@@ -19,7 +19,7 @@ import {
   ModalSelect,
   GenericTemplate,
 } from '../../common';
-import { NAVIGATION_TO_SHIPPING_SCREEN } from '../../navigation';
+import { NAVIGATION_TO_SHIPPING_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';

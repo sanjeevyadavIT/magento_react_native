@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Text, Card } from '../../../../common';
 import CategoryTree from '../CategoryTree/CategoryTree';
-import { NAVIGATION_TO_CATEGORY_LIST_SCREEN } from '../../../../navigation';
+import { NAVIGATION_TO_CATEGORY_LIST_SCREEN } from '../../../../navigation/routes';
 import { setNewCategory } from '../../../../store/actions';
 import { ThemeContext } from '../../../../theme';
 import { SPACING } from '../../../../constants';

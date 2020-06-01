@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Text, Card } from '../../../../common';
 import CategoryTreeItem from '../CategoryTreeItem/CategoryTreeItem';
-import { NAVIGATION_TO_SETTING_SCREEN } from '../../../../navigation';
+import { NAVIGATION_TO_SETTING_SCREEN } from '../../../../navigation/routes';
 import { translate } from '../../../../i18n';
 import { ThemeContext } from '../../../../theme';
 import { SPACING } from '../../../../constants';

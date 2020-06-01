@@ -17,7 +17,7 @@ import {
 import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN,
-} from '../../navigation';
+} from '../../navigation/routes';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';

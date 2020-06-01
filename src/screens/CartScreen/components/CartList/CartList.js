@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { Text, Button, MessageView, Price } from '../../../../common';
 import CartListItem from '../CartListItem/CartListItem';
-import { NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN } from '../../../../navigation';
+import { NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN } from '../../../../navigation/routes';
 import { translate } from '../../../../i18n';
 
 // TODO: Make place order button stick at the bottom

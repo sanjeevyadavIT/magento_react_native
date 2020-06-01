@@ -5,7 +5,3 @@ import RootNavigator from './RootNavigator';
  * which will be a top level navigator.
  */
 export default RootNavigator;
-/**
- * All the exports in routes.js will be named exports.
- */
-export * from './routes';

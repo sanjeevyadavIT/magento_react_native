@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text, Button } from '../../common';
-import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../navigation';
+import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../navigation/routes';
 import { resetCheckoutState } from '../../store/actions';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';

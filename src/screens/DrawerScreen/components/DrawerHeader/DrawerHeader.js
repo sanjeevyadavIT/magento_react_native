@@ -9,7 +9,7 @@ import Status from '../../../../magento/Status';
 import {
   NAVIGATION_TO_LOGIN_SCREEN,
   NAVIGATION_TO_ACCOUNT_SCREEN,
-} from '../../../../navigation';
+} from '../../../../navigation/routes';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 import { DIMENS, SPACING } from '../../../../constants';

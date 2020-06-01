@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { Card, Text, Price } from '../../../../common';
-import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../../../navigation';
+import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../../../navigation/routes';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 import { SPACING } from '../../../../constants';
@@ -26,11 +26,11 @@ const OrderListItem = ({ item }) => {
         <Text>{`${translate('common.order')} # ${item.increment_id}`}</Text>
         <Text>{`${translate('orderScreen.orderCreated')}: ${
           item.created_at
-        }`}</Text>
+          }`}</Text>
         <Text>
           {`${translate('orderScreen.shipTo')} ${
             item.billing_address.firstname
-          } ${item.billing_address.lastname}`}
+            } ${item.billing_address.lastname}`}
         </Text>
         <View style={styles.row}>
           <Text>{`${translate('orderScreen.orderTotal')}: `}</Text>

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { signUp, resetAuthState } from '../../store/actions';
 import { Button, TextInput, MessageView, GenericTemplate } from '../../common';
-import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation';
+import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -79,14 +79,14 @@ const SignUpScreen = ({
       status === Status.ERROR
         ? errorMessage
         : status === Status.SUCCESS
-        ? translate('signUpScreen.successMessage')
-        : '';
+          ? translate('signUpScreen.successMessage')
+          : '';
     const type =
       status === Status.ERROR
         ? 'error'
         : status === Status.SUCCESS
-        ? 'success'
-        : 'info';
+          ? 'success'
+          : 'info';
     return <MessageView message={message} type={type} />;
   };
 

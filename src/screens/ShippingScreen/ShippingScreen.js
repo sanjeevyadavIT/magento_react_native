@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { resetShippingState, addCartShippingInfo } from '../../store/actions';
 import { Text, Button, ModalSelect, GenericTemplate } from '../../common';
-import { NAVIGATION_TO_PAYMENT_SCREEN } from '../../navigation';
+import { NAVIGATION_TO_PAYMENT_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
@@ -47,7 +47,7 @@ const ShippingScreen = ({
       }) => ({
         label: `${carrierTitle} : ${methodTitle} : ${
           currencySymbol + (baseAmount * currencyRate).toFixed(2)
-        }`,
+          }`,
         key: carrierCode,
       }),
     );

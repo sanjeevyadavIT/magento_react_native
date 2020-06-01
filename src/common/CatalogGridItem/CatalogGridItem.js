@@ -7,7 +7,7 @@ import Text from '../Text/Text';
 import Image from '../Image/Image';
 import Card from '../Card/Card';
 import Price from '../Price/Price';
-import { NAVIGATION_TO_PRODUCT_SCREEN } from '../../navigation';
+import { NAVIGATION_TO_PRODUCT_SCREEN } from '../../navigation/routes';
 import { getProductThumbnailFromAttribute } from '../../utils/products';
 import { ThemeContext } from '../../theme';
 import { ProductType } from '../../types';

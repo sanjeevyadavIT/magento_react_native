@@ -6,7 +6,7 @@ import { getCurrentCustomer, logout } from '../../store/actions';
 import {
   NAVIGATION_TO_ORDERS_SCREEN,
   NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
-} from '../../navigation';
+} from '../../navigation/routes';
 import { Text, Button, GenericTemplate } from '../../common';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
