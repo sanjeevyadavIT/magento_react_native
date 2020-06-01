@@ -20,21 +20,18 @@ const defaultOptions = {
 };
 
 class Magento {
-  setOptions(options) {
+  init(options) {
     this.configuration = { ...defaultOptions, ...options };
     this.base_url = this.configuration.url;
     this.root_path = `rest/${this.configuration.store}`;
     this.admin = admin(this);
     this.guest = guest(this);
     this.customer = customer(this);
-  }
-
-  init() {
     if (this.configuration.authentication.integration.access_token) {
       this.access_token = this.configuration.authentication.integration.access_token;
-      return;
+    } else {
+      throw integrationTokenError();
     }
-    throw integrationTokenError();
   }
 
   post(path, params, data, type = ADMIN_TYPE) {

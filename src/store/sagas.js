@@ -3,7 +3,7 @@ import { fork } from 'redux-saga/effects';
 import accountSagas from './account/accountSagas';
 import authSagas from './auth/authSagas';
 import cartSagas from './cart/cartSagas';
-import magentoSagas from './magento/magentoSagas';
+import appSagas from './app/appSagas';
 import homeSagas from './home/homeSagas';
 import categoryTreeSagas from './categoryTree/categoryTreeSagas';
 import categoryListSagas from './categoryList/categoryListSagas';
@@ -15,7 +15,7 @@ import searchSagas from './search/searchSagas';
  * rootSaga
  */
 export default function* root() {
-  yield fork(magentoSagas);
+  yield fork(appSagas);
   yield fork(homeSagas);
   yield fork(categoryTreeSagas);
   yield fork(authSagas);

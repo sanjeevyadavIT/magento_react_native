@@ -47,7 +47,7 @@ const ShippingScreen = ({
       }) => ({
         label: `${carrierTitle} : ${methodTitle} : ${
           currencySymbol + (baseAmount * currencyRate).toFixed(2)
-          }`,
+        }`,
         key: carrierCode,
       }),
     );

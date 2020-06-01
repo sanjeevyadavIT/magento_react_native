@@ -26,11 +26,11 @@ const OrderListItem = ({ item }) => {
         <Text>{`${translate('common.order')} # ${item.increment_id}`}</Text>
         <Text>{`${translate('orderScreen.orderCreated')}: ${
           item.created_at
-          }`}</Text>
+        }`}</Text>
         <Text>
           {`${translate('orderScreen.shipTo')} ${
             item.billing_address.firstname
-            } ${item.billing_address.lastname}`}
+          } ${item.billing_address.lastname}`}
         </Text>
         <View style={styles.row}>
           <Text>{`${translate('orderScreen.orderTotal')}: `}</Text>

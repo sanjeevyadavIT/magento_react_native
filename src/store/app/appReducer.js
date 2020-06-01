@@ -28,7 +28,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         status: Status.SUCCESS,
-        storeConfigStatus: payload.storeConfig[0],
+        storeConfigStatus: Status.SUCCESS,
       };
     case MAGENTO.INIT_APP_FAILURE:
       return {

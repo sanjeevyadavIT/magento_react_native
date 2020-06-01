@@ -12,13 +12,8 @@ function* initMagento() {
 
   try {
     yield put({ type: MAGENTO.INIT_APP_LOADING });
-    // Set magento base url
-    magento.setOptions(magentoOptions);
-    // Set magento integration token
-    magento.init();
-    // Get Customer token from local db
-    const customerToken = yield AsyncStorage.getItem(CUSTOMER_TOKEN);
-    magento.setCustomerToken(customerToken);
+    // Initiliaze magento, with configuration data
+    magento.init(magentoOptions);
     // Fetch store config, containing base media url path
     const storeConfig = yield call({
       context: magento,
@@ -26,11 +21,14 @@ function* initMagento() {
     });
     const config = storeConfig.find(conf => conf.code === magentoOptions.store);
     magento.setStoreConfig(config);
-    yield put({ type: MAGENTO.INIT_APP_SUCCESS, payload: { storeConfig } });
+    yield put({ type: MAGENTO.INIT_APP_SUCCESS, payload: { config } });
     // fetch currency data
     yield put({ type: MAGENTO.CURRENCY_REQUEST });
     // fetch HomeBanner and featured product
     yield put({ type: MAGENTO.HOME_DATA_REQUEST });
+    // Get Customer token from local db
+    const customerToken = yield AsyncStorage.getItem(CUSTOMER_TOKEN);
+    magento.setCustomerToken(customerToken);
     if (customerToken) {
       yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Fetch cart details
       yield put({

@@ -79,14 +79,14 @@ const SignUpScreen = ({
       status === Status.ERROR
         ? errorMessage
         : status === Status.SUCCESS
-          ? translate('signUpScreen.successMessage')
-          : '';
+        ? translate('signUpScreen.successMessage')
+        : '';
     const type =
       status === Status.ERROR
         ? 'error'
         : status === Status.SUCCESS
-          ? 'success'
-          : 'info';
+        ? 'success'
+        : 'info';
     return <MessageView message={message} type={type} />;
   };
 

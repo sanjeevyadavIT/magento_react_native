@@ -84,14 +84,14 @@ const SignInScreen = ({
       status === Status.ERROR
         ? errorMessage
         : status === Status.SUCCESS
-          ? translate('forgetPasswordScreen.emailSent')
-          : '';
+        ? translate('forgetPasswordScreen.emailSent')
+        : '';
     const type =
       status === Status.ERROR
         ? 'error'
         : status === Status.SUCCESS
-          ? 'success'
-          : 'info';
+        ? 'success'
+        : 'info';
     return <MessageView message={message} type={type} />;
   };
 

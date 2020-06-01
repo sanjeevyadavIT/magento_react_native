@@ -1,27 +1,42 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GenericTemplate } from '../../common';
 import { HomeSliderContainer, FeaturedCategoriesContainer } from './containers';
-import { ThemeContext } from '../../theme';
 import Status from '../../magento/Status';
 import { DIMENS } from '../../constants';
 
-/**
- * First screen which is shown to user.
- *
- * @param {Object} props              - props related to the component
- * @param {Object} props.status       - (From redux) status of the network
- *                                      request to fetch store information
- * @param {Object} props.errorMessage - (From redux) error message if network request
- *                                       failed.
- */
+const propTypes = {
+  /**
+   * Tells about the status of the fetch cmsBlockData api call
+   * cmsBlockData contains the data need to be shown in HomeScreen
+   *
+   * if status === Status.DEFAULT => api hasn't been hit yet
+   * if status === Status.LOADING => api is currently being executed
+   * if status === Status.SUCCESS => success response from api
+   * if status === Status.ERROR   => error response from api or error
+   *                                 in initMagento generator function in appSagas.js
+   *
+   * @source redux
+   */
+  status: PropTypes.oneOf(Object.values(Status)).isRequired,
+  /**
+   * error message if status === Status.ERROR
+   *
+   * @source redux
+   */
+  errorMessage: PropTypes.string,
+};
+
+const defaultProps = {
+  errorMessage: '',
+};
+
 const HomeScreen = ({ status, errorMessage }) => {
-  const { theme } = useContext(ThemeContext);
   return (
     <GenericTemplate scrollable status={status} errorMessage={errorMessage}>
-      <View style={styles.imageSliderContainer(theme)}>
+      <View style={styles.imageSliderContainer}>
         <HomeSliderContainer />
       </View>
       <FeaturedCategoriesContainer />
@@ -30,19 +45,14 @@ const HomeScreen = ({ status, errorMessage }) => {
 };
 
 const styles = StyleSheet.create({
-  imageSliderContainer: theme => ({
+  imageSliderContainer: {
     height: DIMENS.homePageSliderHeight,
-  }),
+  },
 });
 
-HomeScreen.propTypes = {
-  status: PropTypes.oneOf(Object.values(Status)).isRequired,
-  errorMessage: PropTypes.string,
-};
+HomeScreen.propTypes = propTypes;
 
-HomeScreen.defaultProps = {
-  errorMessage: '',
-};
+HomeScreen.defaultProps = defaultProps;
 
 const mapStatetoProps = ({ home }) => {
   const { status, errorMessage } = home;

@@ -26,7 +26,6 @@ const CategoryTreeContainer = ({
   navigation,
 }) => {
   const { theme } = useContext(ThemeContext);
-  console.log('----', navigation);
 
   const renderChildren = () => {
     if (categories) {
