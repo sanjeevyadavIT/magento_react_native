@@ -9,7 +9,7 @@
     "test": "jest",
     "prestorybook": "rnstl",
     "storybook": "(adb reverse tcp:7007 tcp:7007 || true) && start-storybook",
-    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx .",
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.jsx .",
     "prettier": "prettier --ignore-path .gitignore \"src/**/*.+(js|json)\"",
     "format": "npm run prettier -- --write",
     "check-format": "npm run prettier -- --list-different"
@@ -41,11 +41,12 @@
     "redux-saga": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/runtime": "^7.10.2",
     "@react-native-community/eslint-config": "^1.1.0",
     "@storybook/addon-actions": "^5.2.1",
     "@storybook/react-native": "^5.2.1",
     "@storybook/react-native-server": "^5.2.1",
-    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "24.3.1",
     "babel-loader": "^8.0.6",
