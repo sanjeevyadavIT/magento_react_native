@@ -16,6 +16,7 @@ import OrderDetailScreen from './OrderDetailScreen/OrderDetailScreen';
 import OrdersScreen from './OrdersScreen/OrdersScreen';
 import ForgetPasswordScreen from './ForgetPasswordScreen/ForgetPasswordScreen';
 import SettingScreen from './SettingScreen/SettingScreen';
+import SplashScreen from './SplashScreen/SplashScreen';
 
 export {
   AccountScreen,
@@ -36,4 +37,5 @@ export {
   OrdersScreen,
   ForgetPasswordScreen,
   SettingScreen,
+  SplashScreen,
 };

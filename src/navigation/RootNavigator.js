@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { HeaderButtons, TextInput } from '../common';
 import { ThemeContext } from '../theme';
 import {
+  SplashScreen,
   DrawerScreen,
   ForgetPasswordScreen,
   HomeScreen,
@@ -27,6 +28,7 @@ import {
   SettingScreen,
 } from '../screens';
 import {
+  NAVIGATION_TO_SPLASH_SCREEN,
   NAVIGATION_TO_FORGOT_PASSWORD_SCREEN,
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_CATEGORY_LIST_SCREEN,
@@ -56,7 +58,7 @@ const StackNavigator = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={NAVIGATION_TO_HOME_SCREEN}
+      initialRouteName={NAVIGATION_TO_SPLASH_SCREEN}
       screenOptions={{
         headerTintColor: theme.appbar.tintColor,
         headerStyle: {
@@ -65,6 +67,13 @@ const StackNavigator = () => {
         headerBackTitleVisible: false,
       }}
     >
+      <Stack.Screen
+        name={NAVIGATION_TO_SPLASH_SCREEN}
+        component={SplashScreen}
+        options={{
+          header: () => null,
+        }}
+      />
       <Stack.Screen
         component={HomeScreen}
         name={NAVIGATION_TO_HOME_SCREEN}
