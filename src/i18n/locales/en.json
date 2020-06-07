@@ -17,6 +17,7 @@
     "select": "Select",
     "save": "Save",
     "email": "Email",
+    "user": "User",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
       "aToZ": "name: A to Z",
@@ -87,7 +88,7 @@
   },
   "drawerScreen": {
     "login": "Login!",
-    "welcomeText": "Hello user!"
+    "welcomeText": "Hello"
   },
   "cartScreen": {
     "title": "Cart",

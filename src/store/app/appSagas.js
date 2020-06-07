@@ -33,7 +33,7 @@ function* initMagento() {
       yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Fetch cart details
       yield put({
         type: USER_LOGGED_IN_STATUS,
-        payload: { status: Status.SUCCESS },
+        payload: { loggedIn: true },
       });
     }
   } catch (error) {

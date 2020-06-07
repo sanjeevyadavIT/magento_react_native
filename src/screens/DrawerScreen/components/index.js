@@ -1,4 +1,4 @@
 import DrawerHeader from './DrawerHeader/DrawerHeader';
-import CategoryTree from './CategoryTree/CategoryTree';
+import CategoryTreeContainer from './CategoryTreeContainer/CategoryTreeContainer';
 
-export { DrawerHeader, CategoryTree };
+export { DrawerHeader, CategoryTreeContainer };

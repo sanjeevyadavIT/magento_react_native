@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text } from '../../../../common';
-import { magento } from '../../../../magento';
-import Status from '../../../../magento/Status';
 import {
   NAVIGATION_TO_LOGIN_SCREEN,
   NAVIGATION_TO_ACCOUNT_SCREEN,
@@ -14,22 +12,36 @@ import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 import { DIMENS, SPACING } from '../../../../constants';
 
-/**
- * @param status need to be passed, so that {@link DrawerHeader} can refresh
- * when user is logged in
- *
- * @todo Show "Welcome logged_in_user_name" instead of "Welcome user" message
- *
- * @param {Object} props        - props related to component
- * @param {string} props.status - Status of whether user is logged in or not
- */
-const DrawerHeader = ({ status, navigation }) => {
+const propTypes = {
+  /**
+   * Tells whether user is logged in or not
+   *
+   * @source redux
+   */
+  loggedIn: PropTypes.bool.isRequired,
+  /**
+   * If logged in, user first name
+   */
+  firstname: PropTypes.string,
+  /**
+   * @source react-navigation
+   */
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired
+};
+
+const defaultProps = {
+  firstname: '',
+};
+
+const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
   let welcomeText = '';
   let NAVIGATION_PATH = null;
   const { theme } = useContext(ThemeContext);
 
-  if (magento.isCustomerLogin()) {
-    welcomeText = translate('drawerScreen.welcomeText');
+  if (loggedIn) {
+    welcomeText = `${translate('drawerScreen.welcomeText')} ${firstname || translate('common.user')}!`;
     NAVIGATION_PATH = NAVIGATION_TO_ACCOUNT_SCREEN;
   } else {
     welcomeText = translate('drawerScreen.login');
@@ -41,7 +53,7 @@ const DrawerHeader = ({ status, navigation }) => {
       style={styles.container(theme)}
       onPress={() => navigation.navigate(NAVIGATION_PATH)}
     >
-      <View style={styles.lowerContainer(theme)}>
+      <View style={styles.lowerContainer}>
         <Text style={styles.text(theme)}>{welcomeText}</Text>
         <Icon name="chevron-right" size={30} color={theme.white} />
       </View>
@@ -55,26 +67,27 @@ const styles = StyleSheet.create({
     backgroundColor: theme.appbar.backgroundColor,
     borderWidth: 0,
   }),
-  lowerContainer: theme => ({
+  lowerContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     padding: SPACING.large,
-  }),
+  },
   text: theme => ({
     color: theme.white,
   }),
 });
 
-DrawerHeader.propTypes = {
-  status: PropTypes.oneOf(Object.values(Status)).isRequired,
-};
+DrawerHeader.propTypes = propTypes;
+
+DrawerHeader.defaultProps = defaultProps;
 
 const mapStatetoProps = ({ account }) => {
-  const { userLoggedInStatus: status } = account;
+  const { loggedIn, customer: { firstname } } = account;
   return {
-    status,
+    loggedIn,
+    firstname,
   };
 };
 
-export default React.memo(connect(mapStatetoProps)(DrawerHeader));
+export default connect(mapStatetoProps)(DrawerHeader);

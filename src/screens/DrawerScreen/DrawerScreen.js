@@ -1,17 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { DrawerHeader } from './components';
-import { CategoryTreeContainer } from './containers';
-import { ThemeContext } from '../../theme';
+import PropTypes from 'prop-types';
+import { DrawerHeader, CategoryTreeContainer } from './components';
 import { DIMENS } from '../../constants';
 
-const Drawer = ({ navigation }) => {
-  console.log('Navigation Drawer render!');
-  const { theme } = useContext(ThemeContext);
+const propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+}
+
+const defaultProps = {};
+
+const DrawerScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.header(theme)}>
-        <DrawerHeader navigation={navigation} />
+      <View style={styles.header}>
+        <DrawerHeader navigation={navigation}/>
       </View>
       <CategoryTreeContainer navigation={navigation} />
     </View>
@@ -22,13 +27,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: theme => ({
+  header: {
     height: DIMENS.headerViewHeight,
-  }),
+  },
 });
 
-Drawer.propTypes = {};
+DrawerScreen.propTypes = propTypes;
 
-Drawer.defaultPorps = {};
+DrawerScreen.defaultPorps = defaultProps;
 
-export default Drawer;
+export default DrawerScreen;

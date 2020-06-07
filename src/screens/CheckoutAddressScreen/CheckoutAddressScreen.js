@@ -79,7 +79,7 @@ const CheckoutAddressScreen = ({
   }, []);
 
   useEffect(() => {
-    if (customer) {
+    if (customerStatus === Status.SUCCESS) {
       if (customer.addresses.length > 0) {
         // Pre fill the fields with previous stored address
         const address = customer.addresses[0]; // Currently the app supports only one address to be saved
@@ -105,12 +105,12 @@ const CheckoutAddressScreen = ({
         });
       }
     }
-  }, [customer]);
+  }, [customerStatus, customer]);
 
   useEffect(() => {
     // If countries is not null, set first country selected
     if (countries && countries.length > 0) {
-      if (customer && customer.addresses.length === 0) {
+      if (customerStatus === Status.SUCCESS && customer.addresses.length === 0) {
         // Get country by locale
         const userCountryByLocale = RNLocalize.getCountry();
         const isUserCountrySupported = countries.find(
@@ -150,7 +150,7 @@ const CheckoutAddressScreen = ({
       },
       useForShipping: true,
     };
-    if (customer) {
+    if (customerStatus === Status.SUCCESS) {
       address.address.email = customer.email;
     }
     _addCartBillingAddress(address);
@@ -206,7 +206,7 @@ const CheckoutAddressScreen = ({
     if (countryStatus === Status.LOADING || countryStatus === Status.DEFAULT)
       return <Spinner size="small" />;
     if (countryStatus === Status.ERROR)
-      throw new Exception('Unable to fetch country data');
+      throw new Error('Unable to fetch country data');
     const countriesData = countries.map(country => ({
       label: country.full_name_english,
       key: country.id,
@@ -290,7 +290,9 @@ const CheckoutAddressScreen = ({
         // email
       },
     };
-    customer ? (address.address.email = customer.email) : '';
+    if(customerStatus === Status.SUCCESS) {
+      address.address.email = customer.email
+    }
     _getCustomerCart();
     _getShippingMethod(address);
     if (shippingMethodStatus === Status.DEFAULT) {
@@ -301,7 +303,7 @@ const CheckoutAddressScreen = ({
   return (
     <GenericTemplate
       scrollable
-      status={Status.SUCCESS}
+      status={customerStatus}
       style={styles.container}
       footer={renderButtons()}
     >
@@ -429,6 +431,9 @@ CheckoutAddressScreen.propTypes = {
   getShippingMethod: PropTypes.func.isRequired,
   getCustomerCart: PropTypes.func.isRequired,
   resetCheckoutAddressState: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 CheckoutAddressScreen.defaultProps = {

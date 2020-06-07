@@ -7,7 +7,12 @@ import {
 import Status from '../../magento/Status';
 
 const initialState = {
-  userLoggedInStatus: Status.DEFAULT,
+  /**
+   * State that tells whether user is logged in or not,
+   * if userLoggedInStatus === true => logged in
+   * else guest user
+   */
+  loggedIn: false,
   /**
    * state that store customer data
    */
@@ -26,11 +31,21 @@ const initialState = {
 
   products: {},
   orders: [],
-  customer: null,
+  customer: {},
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case MAGENTO.SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        loggedIn: true,
+      }
+    case USER_LOGGED_IN_STATUS:
+      return {
+        ...state,
+        loggedIn: payload.loggedIn,
+      };
     case MAGENTO.CURRENT_USER_LOADING:
       return {
         ...state,
@@ -40,14 +55,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         status: Status.SUCCESS,
-        userLoggedInStatus: Status.SUCCESS,
         customer: payload.customer,
       };
     case MAGENTO.CURRENT_USER_FAILURE:
       return {
         ...state,
         status: Status.ERROR,
-        userLoggedInStatus: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
     case MAGENTO.ADD_ACCOUNT_ADDRESS_LOADING:
@@ -96,11 +109,6 @@ export default (state = initialState, { type, payload }) => {
           ...state.products,
           [payload.sku]: payload.product,
         },
-      };
-    case USER_LOGGED_IN_STATUS:
-      return {
-        ...state,
-        userLoggedInStatus: payload.status,
       };
     case ACTION_USER_LOGOUT:
       return initialState;

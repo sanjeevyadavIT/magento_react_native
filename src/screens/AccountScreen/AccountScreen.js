@@ -26,7 +26,7 @@ const AccountScreen = ({
 
   useEffect(() => {
     // ComponentDidMount
-    if (status === Status.DEFAULT && !customer) {
+    if (status === Status.DEFAULT) {
       _getCurrentCustomer();
     }
   }, []);
