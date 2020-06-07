@@ -16,7 +16,7 @@ import {
   CartScreen,
   CategoryListScreen,
   EditAccountAddressScreen,
-  AccountScreen,
+  ProfileScreen,
   CheckoutAddressScreen,
   SignInScreen,
   SignUpScreen,
@@ -36,7 +36,7 @@ import {
   NAVIGATION_TO_SEARCH_SCREEN,
   NAVIGATION_TO_LOGIN_SCREEN,
   NAVIGATION_TO_SIGNUP_SCREEN,
-  NAVIGATION_TO_ACCOUNT_SCREEN,
+  NAVIGATION_TO_PROFILE_SCREEN,
   NAVIGATION_TO_ORDERS_SCREEN,
   NAVIGATION_TO_ORDER_DETAIL_SCREEN,
   NAVIGATION_TO_CART_SCREEN,
@@ -168,8 +168,8 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name={NAVIGATION_TO_ACCOUNT_SCREEN}
-        component={AccountScreen}
+        name={NAVIGATION_TO_PROFILE_SCREEN}
+        component={ProfileScreen}
         options={{
           title: translate('accountScreen.title'),
         }}

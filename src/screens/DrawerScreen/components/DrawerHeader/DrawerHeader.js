@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text } from '../../../../common';
 import {
   NAVIGATION_TO_LOGIN_SCREEN,
-  NAVIGATION_TO_ACCOUNT_SCREEN,
+  NAVIGATION_TO_PROFILE_SCREEN,
 } from '../../../../navigation/routes';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
@@ -42,7 +42,7 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
 
   if (loggedIn) {
     welcomeText = `${translate('drawerScreen.welcomeText')} ${firstname || translate('common.user')}!`;
-    NAVIGATION_PATH = NAVIGATION_TO_ACCOUNT_SCREEN;
+    NAVIGATION_PATH = NAVIGATION_TO_PROFILE_SCREEN;
   } else {
     welcomeText = translate('drawerScreen.login');
     NAVIGATION_PATH = NAVIGATION_TO_LOGIN_SCREEN;

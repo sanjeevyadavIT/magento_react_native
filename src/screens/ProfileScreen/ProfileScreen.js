@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,14 +7,30 @@ import {
   NAVIGATION_TO_ORDERS_SCREEN,
   NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
 } from '../../navigation/routes';
-import { Text, Button, GenericTemplate } from '../../common';
+import { Text, Button, GenericTemplate, MessageView } from '../../common';
 import Status from '../../magento/Status';
-import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
 
+const propTypes = {
+  status: PropTypes.oneOf(Object.values(Status)).isRequired,
+  getCurrentCustomer: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+  customer: PropTypes.object,
+  navigation: PropTypes.shape({
+    popToTop: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+const defaultProps = {
+  errorMessage: '',
+  customer: {},
+};
+
 // TODO: Disable logout button, once clicked
-const AccountScreen = ({
+const ProfileScreen = ({
   status,
   errorMessage,
   customer,
@@ -22,7 +38,6 @@ const AccountScreen = ({
   getCurrentCustomer: _getCurrentCustomer,
   logout: _logout,
 }) => {
-  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // ComponentDidMount
@@ -36,18 +51,29 @@ const AccountScreen = ({
     navigation.popToTop();
   };
 
+  if(status === Status.ERROR) {
+    return (
+      <View style={styles.errorContainer}>
+        <MessageView type="error" message={errorMessage} />
+        <Button
+        title={translate('accountScreen.logoutButton')}
+        onPress={onLogoutPress}
+      />
+      </View>
+    )
+  }
+
   return (
     <GenericTemplate
       status={status}
       scrollable={false}
-      errorMessage={errorMessage}
     >
       {customer && (
         <>
-          <Text style={styles.space(theme)}>
+          <Text style={styles.space}>
             {`${customer.firstname} ${customer.lastname}`}
           </Text>
-          <Text style={styles.space(theme)}>{customer.email}</Text>
+          <Text style={styles.space}>{customer.email}</Text>
         </>
       )}
       <Button
@@ -57,7 +83,7 @@ const AccountScreen = ({
             customerId: customer.id,
           });
         }}
-        style={styles.space(theme)}
+        style={styles.space}
       />
       <Button
         title={translate('accountScreen.myAddressButton')}
@@ -66,7 +92,7 @@ const AccountScreen = ({
             customerId: customer.id,
           });
         }}
-        style={styles.space(theme)}
+        style={styles.space}
       />
       <Button
         title={translate('accountScreen.logoutButton')}
@@ -77,23 +103,20 @@ const AccountScreen = ({
 };
 
 const styles = StyleSheet.create({
-  space: theme => ({
+  space: {
     marginBottom: SPACING.small,
-  }),
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: SPACING.large,
+  }
 });
 
-AccountScreen.propTypes = {
-  status: PropTypes.oneOf(Object.values(Status)).isRequired,
-  getCurrentCustomer: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string,
-  customer: PropTypes.object,
-};
+ProfileScreen.propTypes = propTypes;
 
-AccountScreen.defaultProps = {
-  errorMessage: '',
-  customer: {},
-};
+ProfileScreen.defaultProps = defaultProps;
 
 const mapStatetoProps = ({ account }) => {
   const { status, errorMessage, customer } = account;
@@ -107,4 +130,4 @@ const mapStatetoProps = ({ account }) => {
 export default connect(mapStatetoProps, {
   logout,
   getCurrentCustomer,
-})(AccountScreen);
+})(ProfileScreen);
