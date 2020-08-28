@@ -1,11 +1,11 @@
 /**
- * @TODO Add internet check
  * @TODO If error occured allow user to refresh
  */
 import React, { useContext, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import NetInfo from '@react-native-community/netinfo';
 import { Text } from '../../common';
 import { LIMITS } from '../../constants';
 import { NAVIGATION_TO_HOME_SCREEN } from '../../navigation/routes';
@@ -23,6 +23,7 @@ const propTypes = {
    */
   navigation: PropTypes.shape({
     replace: PropTypes.func.isRequired,
+    pop: PropTypes.func.isRequired,
   }).isRequired,
 };
 
@@ -36,15 +37,37 @@ const SplashScreen = ({
 
   useEffect(() => {
     // componentDidMount
+    internetCheck();
+  }, []);
+
+  const internetCheck = () => NetInfo.fetch().then(state => {
+    if (!state.isConnected) {
+      // No internet connection, alert user
+      Alert.alert(
+        translate('errors.noInternetTitle'),
+        translate('splashScreen.noInternetMessage'),
+        [
+          {
+            text: translate('common.cancel'),
+            onPress: () => BackHandler.exitApp(),
+            style: "cancel"
+          },
+          { text: translate('common.ok'), onPress: () => internetCheck() }
+        ],
+        { cancelable: false }
+      );
+    } else {
+      appStartLogic();
+    }
+  });
+
+  const appStartLogic = () => {
     _initializeApp();
-    const timeout = setTimeout(
+    setTimeout(
       () => navigation.replace(NAVIGATION_TO_HOME_SCREEN),
       LIMITS.splashScreenWaitTime,
     );
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
+  }
 
   return (
     <View style={styles.container(theme)}>

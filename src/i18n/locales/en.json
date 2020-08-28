@@ -35,7 +35,8 @@
     "noResponseFromServerMessage": "Check the server is running and make sure access token is set properly.",
     "404error": "Error 404: Not Found",
     "404errorMessage": "Server can not find requested resource, please check magento store url.",
-    "emptyFieldsMessage": "Please fill all fields"
+    "emptyFieldsMessage": "Please fill all fields",
+    "noInternetTitle": "No Internet!"
   },
   "modalSelect": {
     "scroll": "Scrollable options",
@@ -138,6 +139,10 @@
     },
     "noProduct": "No product found!"
   },
+  "settingScreen": {
+    "title": "Settings",
+    "changeCurrency": "Change currency"
+  },
   "shippingScreen": {
     "title": "Shipping method",
     "noShipping": "Shipping methods not found for selected address",
@@ -161,15 +166,14 @@
     "emailHint": "Email",
     "passwordHint": "Password"
   },
+  "splashScreen": {
+    "noInternetMessage": "Looks like internet connection is off, please turn on internet connection and press ok to continue."
+  },
   "forgetPasswordScreen": {
     "requestEmailId": "Please enter your email address below to receive a password reset link",
     "title": "Reset Password",
     "resetButtonTitle": "Reset My Password",
     "passwordRecovery": "Password Recovery",
     "emailSent": "If there is an account associated with your mail, you will receive an email with a link to reset your password."
-  },
-  "settingScreen": {
-    "title": "Settings",
-    "changeCurrency": "Change currency"
   }
 }
