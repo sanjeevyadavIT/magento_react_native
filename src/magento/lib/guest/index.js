@@ -1,7 +1,7 @@
 import { GUEST_TYPE } from '../../types';
 
 export default magento => ({
-  auth: ({email, password}) =>
+  auth: ({ email, password }) =>
     magento.post(
       '/V1/integration/customer/token',
       undefined,

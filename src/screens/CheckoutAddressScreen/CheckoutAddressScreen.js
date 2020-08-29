@@ -110,7 +110,10 @@ const CheckoutAddressScreen = ({
   useEffect(() => {
     // If countries is not null, set first country selected
     if (countries && countries.length > 0) {
-      if (customerStatus === Status.SUCCESS && customer.addresses.length === 0) {
+      if (
+        customerStatus === Status.SUCCESS &&
+        customer.addresses.length === 0
+      ) {
         // Get country by locale
         const userCountryByLocale = RNLocalize.getCountry();
         const isUserCountrySupported = countries.find(
@@ -290,8 +293,8 @@ const CheckoutAddressScreen = ({
         // email
       },
     };
-    if(customerStatus === Status.SUCCESS) {
-      address.address.email = customer.email
+    if (customerStatus === Status.SUCCESS) {
+      address.address.email = customer.email;
     }
     _getCustomerCart();
     _getShippingMethod(address);

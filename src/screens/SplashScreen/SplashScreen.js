@@ -29,10 +29,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const SplashScreen = ({
-  initializeApp: _initializeApp,
-  navigation,
-}) => {
+const SplashScreen = ({ initializeApp: _initializeApp, navigation }) => {
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -40,26 +37,27 @@ const SplashScreen = ({
     internetCheck();
   }, []);
 
-  const internetCheck = () => NetInfo.fetch().then(state => {
-    if (!state.isConnected) {
-      // No internet connection, alert user
-      Alert.alert(
-        translate('errors.noInternetTitle'),
-        translate('splashScreen.noInternetMessage'),
-        [
-          {
-            text: translate('common.cancel'),
-            onPress: () => BackHandler.exitApp(),
-            style: "cancel"
-          },
-          { text: translate('common.ok'), onPress: () => internetCheck() }
-        ],
-        { cancelable: false }
-      );
-    } else {
-      appStartLogic();
-    }
-  });
+  const internetCheck = () =>
+    NetInfo.fetch().then(state => {
+      if (!state.isConnected) {
+        // No internet connection, alert user
+        Alert.alert(
+          translate('errors.noInternetTitle'),
+          translate('splashScreen.noInternetMessage'),
+          [
+            {
+              text: translate('common.cancel'),
+              onPress: () => BackHandler.exitApp(),
+              style: 'cancel',
+            },
+            { text: translate('common.ok'), onPress: () => internetCheck() },
+          ],
+          { cancelable: false },
+        );
+      } else {
+        appStartLogic();
+      }
+    });
 
   const appStartLogic = () => {
     _initializeApp();
@@ -67,11 +65,13 @@ const SplashScreen = ({
       () => navigation.replace(NAVIGATION_TO_HOME_SCREEN),
       LIMITS.splashScreenWaitTime,
     );
-  }
+  };
 
   return (
     <View style={styles.container(theme)}>
-      <Text type="subheading" bold style={styles.title(theme)}>{translate('common.brandName')}</Text>
+      <Text type="subheading" bold style={styles.title(theme)}>
+        {translate('common.brandName')}
+      </Text>
     </View>
   );
 };

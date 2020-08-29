@@ -1,4 +1,9 @@
-import { isObject, isNumber, isString, isNonEmptyString } from '../primitiveChecks';
+import {
+  isObject,
+  isNumber,
+  isString,
+  isNonEmptyString,
+} from '../primitiveChecks';
 
 describe('primtiveChecks.js', () => {
   describe('isObject()', () => {
@@ -46,9 +51,9 @@ describe('primtiveChecks.js', () => {
         true,
         false,
         {},
-        {a: 1},
+        { a: 1 },
         Infinity,
-        1/0,
+        1 / 0,
         '',
         'AMM',
         function A() {},

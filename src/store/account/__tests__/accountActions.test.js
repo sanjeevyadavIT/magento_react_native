@@ -10,5 +10,5 @@ describe('accountActions', () => {
 
     // Verify
     expect(result).toMatchSnapshot();
-  })
-})
+  });
+});

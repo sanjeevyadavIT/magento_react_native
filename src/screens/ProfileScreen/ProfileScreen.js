@@ -38,7 +38,6 @@ const ProfileScreen = ({
   getCurrentCustomer: _getCurrentCustomer,
   logout: _logout,
 }) => {
-
   useEffect(() => {
     // ComponentDidMount
     if (status === Status.DEFAULT) {
@@ -51,23 +50,20 @@ const ProfileScreen = ({
     navigation.popToTop();
   };
 
-  if(status === Status.ERROR) {
+  if (status === Status.ERROR) {
     return (
       <View style={styles.errorContainer}>
         <MessageView type="error" message={errorMessage} />
         <Button
-        title={translate('accountScreen.logoutButton')}
-        onPress={onLogoutPress}
-      />
+          title={translate('accountScreen.logoutButton')}
+          onPress={onLogoutPress}
+        />
       </View>
-    )
+    );
   }
 
   return (
-    <GenericTemplate
-      status={status}
-      scrollable={false}
-    >
+    <GenericTemplate status={status} scrollable={false}>
       {customer && (
         <>
           <Text style={styles.space}>
@@ -111,7 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: SPACING.large,
-  }
+  },
 });
 
 ProfileScreen.propTypes = propTypes;

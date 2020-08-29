@@ -1,6 +1,5 @@
 import { MAGENTO, RESET_AUTH_STATE } from '../../constants';
 
-
 export const signUp = payload => ({
   type: MAGENTO.SIGN_UP_REQUEST,
   payload,

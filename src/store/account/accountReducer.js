@@ -41,7 +41,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         loggedIn: true,
-      }
+      };
     case USER_LOGGED_IN_STATUS:
       return {
         ...state,

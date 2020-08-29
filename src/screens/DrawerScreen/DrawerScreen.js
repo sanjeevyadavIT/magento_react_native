@@ -8,7 +8,7 @@ const propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
-}
+};
 
 const defaultProps = {};
 
@@ -16,7 +16,7 @@ const DrawerScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <DrawerHeader navigation={navigation}/>
+        <DrawerHeader navigation={navigation} />
       </View>
       <CategoryTreeContainer navigation={navigation} />
     </View>

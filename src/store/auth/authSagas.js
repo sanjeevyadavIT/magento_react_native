@@ -38,7 +38,6 @@ function* resetPassword({ payload: { email } }) {
 }
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
-
   yield takeLatest(MAGENTO.SIGN_UP_REQUEST, signUp);
   yield takeLatest(MAGENTO.RESET_PASSWORD_REQUEST, resetPassword);
 }

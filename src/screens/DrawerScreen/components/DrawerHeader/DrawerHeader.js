@@ -28,7 +28,7 @@ const propTypes = {
    */
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
-  }).isRequired
+  }).isRequired,
 };
 
 const defaultProps = {
@@ -41,7 +41,9 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
   const { theme } = useContext(ThemeContext);
 
   if (loggedIn) {
-    welcomeText = `${translate('drawerScreen.welcomeText')} ${firstname || translate('common.user')}!`;
+    welcomeText = `${translate('drawerScreen.welcomeText')} ${
+      firstname || translate('common.user')
+    }!`;
     NAVIGATION_PATH = NAVIGATION_TO_PROFILE_SCREEN;
   } else {
     welcomeText = translate('drawerScreen.login');
@@ -83,7 +85,10 @@ DrawerHeader.propTypes = propTypes;
 DrawerHeader.defaultProps = defaultProps;
 
 const mapStatetoProps = ({ account }) => {
-  const { loggedIn, customer: { firstname } } = account;
+  const {
+    loggedIn,
+    customer: { firstname },
+  } = account;
   return {
     loggedIn,
     firstname,

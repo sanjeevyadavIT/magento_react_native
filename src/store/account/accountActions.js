@@ -15,8 +15,8 @@ export const loginSuccess = token => ({
   type: LOGIN_SUCCESS,
   payload: {
     token,
-  }
-})
+  },
+});
 
 export const getCurrentCustomer = () => ({
   type: MAGENTO.CURRENT_USER_REQUEST,

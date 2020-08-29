@@ -81,7 +81,7 @@ describe('validations.js', () => {
       const invalidPasswordList = [
         '',
         '        ',
-        'Aa1!sdf',  // Less than 8 character
+        'Aa1!sdf', // Less than 8 character
         'abc123@&', // No capital letter
         'ABC321*&', // No small letter
         'Abc12376', // No Special character
@@ -89,7 +89,9 @@ describe('validations.js', () => {
       ];
 
       // Excerise
-      const resultList = invalidPasswordList.map(password => isPasswordValid(password));
+      const resultList = invalidPasswordList.map(password =>
+        isPasswordValid(password),
+      );
 
       // Verify
       resultList.forEach(result => expect(result).toBe(false));
@@ -97,16 +99,15 @@ describe('validations.js', () => {
 
     test('return true for valid passwords', () => {
       // Setup
-      const invalidPasswordList = [
-        'Aa1abx&e',
-        'Abc!2@31kdn991nkqk'
-      ];
+      const invalidPasswordList = ['Aa1abx&e', 'Abc!2@31kdn991nkqk'];
 
       // Excerise
-      const resultList = invalidPasswordList.map(password => isPasswordValid(password));
+      const resultList = invalidPasswordList.map(password =>
+        isPasswordValid(password),
+      );
 
       // Verify
       resultList.forEach(result => expect(result).toBe(true));
     });
-  })
+  });
 });
