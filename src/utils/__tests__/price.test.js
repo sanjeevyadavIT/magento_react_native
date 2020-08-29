@@ -1,4 +1,4 @@
-import { priceSignByCode } from './price';
+import { priceSignByCode } from '../price';
 
 describe('Price related util functions', () => {
   describe('priceSignByCode', () => {

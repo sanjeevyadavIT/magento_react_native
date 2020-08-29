@@ -1,8 +1,22 @@
 import {
   MAGENTO,
+  LOGIN_SUCCESS,
   ACTION_USER_LOGOUT,
   RESET_ADDRESS_STATUS,
 } from '../../constants';
+
+/**
+ * Dispatch an action, containing logged in user token
+ * token is used as session token in app
+ *
+ * @param {string} token - Logged in user token
+ */
+export const loginSuccess = token => ({
+  type: LOGIN_SUCCESS,
+  payload: {
+    token,
+  }
+})
 
 export const getCurrentCustomer = () => ({
   type: MAGENTO.CURRENT_USER_REQUEST,

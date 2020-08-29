@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`accountActions loginSuccess() 1`] = `
+Object {
+  "payload": Object {
+    "token": "abc123@#$",
+  },
+  "type": "LOGIN_SUCCESS",
+}
+`;

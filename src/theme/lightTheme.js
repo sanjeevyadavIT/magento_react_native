@@ -1,6 +1,7 @@
 /**
  * Colors containing for light theme
  */
+const PRIMARY_COLOR = '#2196F3';
 export default {
   // grey scale
   black: '#000000',
@@ -30,7 +31,7 @@ export default {
    * primaryDarkColor: Darker shade of primary color, (can be used for border color or text color of components)
    */
   primaryLightColor: '#53c3f8',
-  primaryColor: '#2196F3',
+  primaryColor: PRIMARY_COLOR,
   primaryDarkColor: '#1976D2',
   /**
    * Color which will replace primary color,
@@ -64,10 +65,10 @@ export default {
   /**
    * Red shade for error messages and icons
    */
-  error: '#ff190c',
-  //===========================================================
-  //================ Component Specific Style =================
-  //===========================================================
+  errorColor: '#ff190c',
+  // ===========================================================
+  // ================ Component Specific Style =================
+  // ===========================================================
   /**
    * ========================= Appbar =========================
    * appbar.statusBarColor: color for the status bar
@@ -81,7 +82,7 @@ export default {
   appbar: {
     statusBarColor: '#135E99',
     barStyle: 'light-content',
-    backgroundColor: '#2196F3',
+    backgroundColor: PRIMARY_COLOR,
     tintColor: '#fff',
   },
 };

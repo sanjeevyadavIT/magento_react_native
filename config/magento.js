@@ -12,13 +12,13 @@
  *                           app won't work
  */
 export const magentoOptions = {
-  url: 'http://10.0.2.2/magento2/index.php/',
+  url: 'http://10.0.2.2/magento2/index.php/', // make sure you have trail slash in the end
   home_cms_block_id: 19, // required int
   store: 'default',
   password_reset_template: 'email_reset',
   authentication: {
     integration: {
-      access_token: 'c81wpzan4pz0zf237sauj36brkxam21q',
+      access_token: 'j9gyfvge3b9cam4w8ckri2jlm8f1a8j5',
     }
   }
 };

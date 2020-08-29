@@ -18,7 +18,7 @@ import {
   EditAccountAddressScreen,
   ProfileScreen,
   CheckoutAddressScreen,
-  SignInScreen,
+  LoginScreen,
   SignUpScreen,
   ShippingScreen,
   PaymentScreen,
@@ -155,9 +155,9 @@ const StackNavigator = () => {
       />
       <Stack.Screen
         name={NAVIGATION_TO_LOGIN_SCREEN}
-        component={SignInScreen}
+        component={LoginScreen}
         options={{
-          title: translate('signInScreen.title'),
+          title: translate('loginScreen.title'),
         }}
       />
       <Stack.Screen

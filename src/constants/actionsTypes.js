@@ -39,7 +39,6 @@ export const MAGENTO = createRequestTypes(
      * =================== @ ====================
      * ==========================================
      */
-    'SIGN_IN', // Sign in already existing user
     'SIGN_UP', // Create new user account
     'CURRENT_USER', // Fetch details of current logged in user
     'GET_ORDERS', // Fetch all order placed by current customer
@@ -80,6 +79,7 @@ export const UI = createRequestTypes(
   suffixTypes,
 );
 
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const ACTION_USER_LOGOUT = 'USER_LOGOUT';
 export const RESET_ADD_TO_CART_STATE = 'RESET_ADD_TO_CART_STATE';
 export const USER_LOGGED_IN_STATUS = 'IS_USER_LOGGED_IN';

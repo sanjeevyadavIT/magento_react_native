@@ -27,6 +27,7 @@
     }
   },
   "errors": {
+    "genericError": "Something went wrong, please try again!",
     "homeCmsBlockId": "HOME CMS BLOCK ID ERROR",
     "homeCmsBlockIdMessage": "Please Refer to Step 2 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
     "integrationTokenRequired": "INTEGRATION TOKEN REQUIRED ERROR",
@@ -36,7 +37,9 @@
     "404error": "Error 404: Not Found",
     "404errorMessage": "Server can not find requested resource, please check magento store url.",
     "emptyFieldsMessage": "Please fill all fields",
-    "noInternetTitle": "No Internet!"
+    "noInternetTitle": "No Internet!",
+    "invalidEmail": "Please enter a valid email address",
+    "invalidPassword": "Please enter a valid password, miniumum 8 characters & with atleast one small, one capital, one digit & one special character"
   },
   "modalSelect": {
     "scroll": "Scrollable options",
@@ -148,9 +151,9 @@
     "noShipping": "Shipping methods not found for selected address",
     "selectShipping": "Select a shipping method"
   },
-  "signInScreen": {
+  "loginScreen": {
     "title": "Login",
-    "signInButton": "Signin",
+    "loginButton": "Login",
     "createAccount": "Create an account(Signup)",
     "forgotPassword": "Forgot Password",
     "emailHint": "Email",

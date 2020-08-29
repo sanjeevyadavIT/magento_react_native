@@ -1,5 +1,6 @@
 import {
   MAGENTO,
+  LOGIN_SUCCESS,
   ACTION_USER_LOGOUT,
   RESET_ADDRESS_STATUS,
   USER_LOGGED_IN_STATUS,
@@ -36,7 +37,7 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case MAGENTO.SIGN_IN_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         loggedIn: true,

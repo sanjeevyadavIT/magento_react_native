@@ -7,7 +7,7 @@ import EditAccountAddressScreen from './EditAccountAddressScreen/EditAccountAddr
 import HomeScreen from './HomeScreen/HomeScreen';
 import ProductScreen from './ProductScreen/ProductScreen';
 import SearchScreen from './SearchScreen/SearchScreen';
-import SignInScreen from './SignInScreen/SignInScreen';
+import LoginScreen from './LoginScreen/LoginScreen';
 import SignUpScreen from './SignUpScreen/SignUpScreen';
 import ShippingScreen from './ShippingScreen/ShippingScreen';
 import PaymentScreen from './PaymentScreen/PaymentScreen';
@@ -28,7 +28,7 @@ export {
   DrawerScreen,
   ProductScreen,
   SearchScreen,
-  SignInScreen,
+  LoginScreen,
   SignUpScreen,
   ShippingScreen,
   PaymentScreen,
