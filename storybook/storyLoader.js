@@ -7,6 +7,7 @@ function loadStories() {
 	require('../src/common/Button/Button.stories');
 	require('../src/common/Card/Card.stories');
 	require('../src/common/GenericTemplate/GenericTemplate.stories');
+	require('../src/common/Icon/Icon.stories');
 	require('../src/common/Image/Image.stories');
 	require('../src/common/ImageSlider/ImageSlider.stories');
 	require('../src/common/LoadingView/LoadingView.stories');
@@ -22,6 +23,7 @@ const stories = [
 	'../src/common/Button/Button.stories',
 	'../src/common/Card/Card.stories',
 	'../src/common/GenericTemplate/GenericTemplate.stories',
+	'../src/common/Icon/Icon.stories',
 	'../src/common/Image/Image.stories',
 	'../src/common/ImageSlider/ImageSlider.stories',
 	'../src/common/LoadingView/LoadingView.stories',

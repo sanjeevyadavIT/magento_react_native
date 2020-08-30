@@ -1,11 +1,25 @@
 /**
  * Colors containing for light theme
  */
+const WHITE = '#fff';
+const GRAY_100 = '#f9f9f9';
+const GRAY_200 = '#e0e0e0';
+const GRAY_300 = '#ced2d9';
+const GRAY_400 = '#979da0';
+const GRAY_500 = '#6d787e';
+const GRAY_600 = '#354052';
+const BLACK = '#000';
 const PRIMARY_COLOR = '#2196F3';
 export default {
   // grey scale
-  black: '#000000',
-  white: '#ffffff',
+  white: WHITE,
+  gray100: GRAY_100,
+  gray200: GRAY_200,
+  gray300: GRAY_300,
+  gray400: GRAY_400,
+  gray500: GRAY_500,
+  gray600: GRAY_600,
+  black: BLACK,
   /**
    * A helper for making something see-thru. Use sparingly as many layers of transparency
    * can cause older Android devices to slow down due to the excessive compositing required
@@ -15,19 +29,19 @@ export default {
   /**
    * The background color appears behind scrollable content
    */
-  backgroundColor: '#F7F6F4',
+  backgroundColor: GRAY_100,
   /**
    * Surface colors affect surfaces(background) of components, such as cards, sheets, and menus
    */
-  surfaceColor: '#fff',
+  surfaceColor: WHITE,
   /**
    * Use it for card border, InputText border etc.
    */
-  borderColor: '#d9d9d9',
+  borderColor: GRAY_300,
   /**
    * Default icon color
    */
-  iconColor: '#6d787e',
+  iconColor: GRAY_500,
   /**
    * ========================= Primary color : (Brand color) =========================
    * primaryLightColor: Lighter shade of primary color, (can be used for hover effects)
@@ -48,20 +62,20 @@ export default {
   /**
    * To be used for heading text
    */
-  headingTextColor: '#333d47',
+  headingTextColor: BLACK,
   /**
    * To be used for sub-heading text
    */
-  subHeadingTextColor: '#6C718B',
+  subHeadingTextColor: GRAY_600,
   /**
    * The default color of text in many components.
    * To be used for normal text like paragraph
    */
-  bodyTextColor: '#A4A7C5',
+  bodyTextColor: GRAY_500,
   /**
    * To be used for hint/label text component
    */
-  labelTextColor: '#6C718B',
+  labelTextColor: GRAY_400,
   /**
    * Green shade for success messages and icons.
    */

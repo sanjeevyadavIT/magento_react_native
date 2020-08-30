@@ -7,10 +7,16 @@ import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 const styles = {
   customInputContainer: {
-    borderWidth: 1,
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 2,
+    backgroundColor: 'black',
   },
-  centerText: {
+  customInputText: {
     textAlign: 'center',
+    color: '#fff',
+    fontSize: 20,
   },
 };
 
@@ -47,8 +53,9 @@ storiesOf('TextInput', module)
   ))
   .add('with custom input container style', () => (
     <TextInput
-      inputContainerStyle={styles.customInputContainer}
-      inputStyle={styles.centerText}
+      containerStyle={styles.customInputContainer}
+      inputStyle={styles.customInputText}
       placeholder="James Arthur"
+      placeholderTextColor="#ccc"
     />
   ));

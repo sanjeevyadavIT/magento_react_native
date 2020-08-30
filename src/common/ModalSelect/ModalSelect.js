@@ -127,7 +127,7 @@ const ModalSelect = ({
       cancelButtonAccessibilityLabel={translate('modalSelect.cancelButton')}
     >
       <TextInput
-        inputContainerStyle={StyleSheet.flatten([
+        containerStyle={StyleSheet.flatten([
           styles.customInputContainer,
           style,
           disabled && styles.disabledContainer,

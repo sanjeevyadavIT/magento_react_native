@@ -14,6 +14,12 @@ const ThemeProvider = ({ theme: defaultTheme, children }) => {
 ThemeProvider.propTypes = {
   theme: PropTypes.shape({
     black: PropTypes.string.isRequired,
+    gray100: PropTypes.string.isRequired,
+    gray200: PropTypes.string.isRequired,
+    gray300: PropTypes.string.isRequired,
+    gray400: PropTypes.string.isRequired,
+    gray500: PropTypes.string.isRequired,
+    gray600: PropTypes.string.isRequired,
     white: PropTypes.string.isRequired,
     transparent: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,

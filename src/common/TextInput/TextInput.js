@@ -9,16 +9,19 @@ import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import { ThemeContext } from '../../theme';
 import { DIMENS, SPACING, TYPOGRAPHY } from '../../constants';
+import { isNonEmptyString } from '../../utils';
 
 const propTypes = {
   containerStyle: ViewPropTypes.style,
   inputContainerStyle: ViewPropTypes.style,
   inputStyle: Text.propTypes.style,
+  labelStyle: Text.propTypes.style,
   disabled: PropTypes.bool,
   label: PropTypes.string,
   errorMessage: PropTypes.string,
   leftIcon: PropTypes.oneOfType([PropTypes.element, null]),
   rightIcon: PropTypes.oneOfType([PropTypes.element, null]),
+  placeholderTextColor: PropTypes.string,
   assignRef: PropTypes.func,
 };
 
@@ -28,21 +31,19 @@ const defaultProps = {
   inputContainerStyle: {},
   disabled: false,
   label: '',
+  labelStyle: {},
   errorMessage: '',
   leftIcon: null,
   rightIcon: null,
+  placeholderTextColor: '',
   assignRef: () => {},
 };
 
 const TextInput = ({
   /**
-   * Container style that wraps entire TextInput, Erro Text and Label
+   * Container style that wraps entire TextInput
    */
   containerStyle,
-  /**
-   * Container style that wraps only TextInput
-   */
-  inputContainerStyle,
   /**
    * Text Input style
    */
@@ -56,6 +57,10 @@ const TextInput = ({
    */
   label,
   /**
+   * Custom style for label,
+   */
+  labelStyle,
+  /**
    * Error message to be shown
    */
   errorMessage,
@@ -68,6 +73,10 @@ const TextInput = ({
    */
   rightIcon,
   /**
+   * Text color of the placeholder
+   */
+  placeholderTextColor,
+  /**
    * To access TextInput reference
    */
   assignRef,
@@ -75,16 +84,14 @@ const TextInput = ({
 }) => {
   const { theme } = useContext(ThemeContext);
   return (
-    <View style={StyleSheet.flatten([styles.container, containerStyle])}>
-      {!!label && (
-        <Text bold type="label">
-          {label}
-        </Text>
+    <>
+      {isNonEmptyString(label) && (
+        <Text style={[styles.label(theme), labelStyle]}>{label}</Text>
       )}
       <View
         style={StyleSheet.flatten([
           styles.inputContainer(theme),
-          inputContainerStyle,
+          containerStyle,
         ])}
       >
         {leftIcon && (
@@ -99,9 +106,10 @@ const TextInput = ({
         )}
 
         <InputComponent
+          placeholderTextColor={placeholderTextColor || theme.labelTextColor}
           underlineColorAndroid={theme.transparent}
           editable={!disabled}
-          style={[styles.input, inputStyle]}
+          style={[styles.input(theme), inputStyle]}
           ref={component => assignRef && assignRef(component)}
           {...props}
         />
@@ -117,46 +125,49 @@ const TextInput = ({
           </View>
         )}
       </View>
-      {!!errorMessage && (
+      {isNonEmptyString(errorMessage) && (
         <Text style={styles.error(theme)}>{errorMessage}</Text>
       )}
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    paddingHorizontal: SPACING.small,
-  },
+  label: theme => ({
+    ...TYPOGRAPHY.formLabel(theme),
+    marginBottom: SPACING.tiny,
+  }),
   inputContainer: theme => ({
     flexDirection: 'row',
-    borderBottomWidth: 1,
+    backgroundColor: theme.surfaceColor,
+    borderWidth: DIMENS.common.borderWidth,
+    borderRadius: DIMENS.common.borderRadius,
     alignItems: 'center',
     borderColor: theme.labelTextColor,
-  }),
-  input: {
-    ...TYPOGRAPHY.textInput,
-    alignSelf: 'center',
-    flex: 1,
     minHeight: DIMENS.common.textInputHeight,
-  },
-  error: theme => ({
-    margin: SPACING.tiny,
-    fontSize: 12,
-    color: theme.errorColor,
+  }),
+  input: theme => ({
+    ...TYPOGRAPHY.formInput(theme),
+    backgroundColor: 'transparent',
+    paddingVertical: SPACING.small,
+    paddingHorizontal: SPACING.medium,
+    flex: 1,
   }),
   iconContainer: {
-    height: DIMENS.common.textInputHeight,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: SPACING.tiny,
   },
   leftIconContainer: {
-    marginEnd: SPACING.medium,
+    paddingStart: SPACING.small,
   },
   rightIconContainer: {
-    marginStart: SPACING.medium,
+    paddingEnd: SPACING.small,
   },
+  error: theme => ({
+    ...TYPOGRAPHY.formError(theme),
+    margin: SPACING.tiny,
+  }),
 });
 
 TextInput.propTypes = propTypes;

@@ -64,14 +64,14 @@ export default {
    */
   labelText: theme => ({
     fontFamily,
-    color: theme.bodyTextColor,
+    color: theme.labelTextColor,
     fontSize: 12,
     fontStyle: 'normal',
     fontWeight: fontWeightRegular,
   }),
   labelTextBold: theme => ({
     fontFamily,
-    color: theme.bodyTextColor,
+    color: theme.labelTextColor,
     fontSize: 12,
     fontStyle: 'normal',
     fontWeight: fontWeightBold,
@@ -95,9 +95,28 @@ export default {
     textAlign: 'center',
   },
   /**
+   * Form label text style used only in TextInput component
+   */
+  formLabel: theme => ({
+    fontFamily,
+    fontSize: 16,
+    color: theme.labelTextColor,
+    fontWeight: fontWeightBold,
+  }),
+  /**
    * Text style meant only for TextInput component
    */
-  textInput: {
-    fontSize: 15,
-  },
+  formInput: theme => ({
+    fontFamily,
+    fontSize: 16,
+    color: theme.bodyTextColor,
+  }),
+  /**
+   * Form Error text style used only in TextInput component
+   */
+  formError: theme => ({
+    fontFamily,
+    fontSize: 13,
+    color: theme.errorColor,
+  }),
 };

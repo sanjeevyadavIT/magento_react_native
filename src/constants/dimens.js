@@ -11,6 +11,7 @@ export default {
     WINDOW_WIDTH: screenWidth,
     WINDOW_HEIGHT: screenHeight,
     borderRadius: 2,
+    borderWidth: 1,
     iconSize: 23,
     textInputHeight: 40,
   },
