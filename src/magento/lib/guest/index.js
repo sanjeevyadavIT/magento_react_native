@@ -24,13 +24,13 @@ export default magento => ({
   getCurrency: () =>
     magento.get('/V1/directory/currency', undefined, undefined, GUEST_TYPE),
 
-  resetPassword: (email, passwordResetTemplate) =>
+  resetPassword: ({ email }) =>
     magento.put(
       '/V1/customers/password',
       undefined,
       {
         email,
-        template: passwordResetTemplate,
+        template: magento.configuration.password_reset_template,
         websiteId: magento.storeConfig.website_id,
       },
       GUEST_TYPE,

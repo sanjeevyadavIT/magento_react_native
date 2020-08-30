@@ -97,11 +97,11 @@
     "title": "Edit Address"
   },
   "forgetPasswordScreen": {
-    "requestEmailId": "Please enter your email address below to receive a password reset link",
+    "requestEmailId": "Enter your email address and we'll send a link on your email to reset your password.",
     "title": "Reset Password",
-    "resetButtonTitle": "Reset My Password",
     "passwordRecovery": "Password Recovery",
-    "emailSent": "If there is an account associated with your mail, you will receive an email with a link to reset your password."
+    "resetButtonTitle": "Send Link",
+    "emailSent": "If there is an account associated with your email, you will receive an email with a link to reset your password."
   },
   "homeScreen": {
     "title": "MageCart",

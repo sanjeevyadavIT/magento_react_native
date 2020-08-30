@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import accountReducer from './account/accountReducer';
-import authReducer from './auth/authReducer';
 import cartReducer from './cart/cartReducer';
 import appReducer from './app/appReducer';
 import homeReducer from './home/homeReducer';
@@ -14,7 +13,6 @@ export default combineReducers({
   magento: appReducer,
   home: homeReducer,
   categoryTree: categoryTreeReducer,
-  auth: authReducer,
   account: accountReducer,
   cart: cartReducer,
   categoryList: categoryListReducer,

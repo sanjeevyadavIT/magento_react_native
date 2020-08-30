@@ -61,7 +61,13 @@ const Card = ({
 
   return (
     <ViewGroup onPress={onPress}>
-      <View style={StyleSheet.flatten([styles.conatiner(type, theme), shadow, style])}>
+      <View
+        style={StyleSheet.flatten([
+          styles.conatiner(type, theme),
+          shadow,
+          style,
+        ])}
+      >
         {children}
       </View>
     </ViewGroup>

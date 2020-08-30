@@ -15,7 +15,7 @@ export const magentoOptions = {
   url: 'http://10.0.2.2/magento2/index.php/', // make sure you have trail slash in the end
   home_cms_block_id: 19, // required int
   store: 'default',
-  password_reset_template: 'email_reset',
+  password_reset_template: 'email_reset', // This is required in order to reset password link to work
   authentication: {
     integration: {
       access_token: 'j9gyfvge3b9cam4w8ckri2jlm8f1a8j5',

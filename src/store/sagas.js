@@ -1,7 +1,6 @@
 import { fork } from 'redux-saga/effects';
 
 import accountSagas from './account/accountSagas';
-import authSagas from './auth/authSagas';
 import cartSagas from './cart/cartSagas';
 import appSagas from './app/appSagas';
 import homeSagas from './home/homeSagas';
@@ -18,7 +17,6 @@ export default function* root() {
   yield fork(appSagas);
   yield fork(homeSagas);
   yield fork(categoryTreeSagas);
-  yield fork(authSagas);
   yield fork(accountSagas);
   yield fork(cartSagas);
   yield fork(categoryListSagas);

@@ -193,7 +193,9 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
           disabled={apiStatus === Status.LOADING}
           title={translate('loginScreen.forgotPassword')}
           onPress={() => {
-            navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN);
+            navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN, {
+              email: form.email,
+            });
             resetState();
           }}
         />

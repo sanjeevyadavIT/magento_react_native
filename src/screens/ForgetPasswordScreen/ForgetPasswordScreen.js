@@ -1,129 +1,132 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { View, StyleSheet, Keyboard } from 'react-native';
-import { connect } from 'react-redux';
+import React, { useState, useContext } from 'react';
+import { ScrollView, StyleSheet, Keyboard } from 'react-native';
 import PropTypes from 'prop-types';
+import Toast from 'react-native-simple-toast';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Status from '../../magento/Status';
-import { Text, Button, TextInput, MessageView } from '../../common';
-import { resetPassword, resetAuthState } from '../../store/actions';
+import { magento } from '../../magento';
+import { Text, Button, TextInput } from '../../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
+import { isEmailValid } from '../../utils';
 
-const ForgetPasswordScreen = ({
-  status,
-  errorMessage,
-  navigation,
-  resetPassword: _resetPassword,
-  resetAuthState: _resetAuthState,
-}) => {
+const propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      email: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+};
+
+const defaultProps = {};
+
+const ForgetPasswordScreen = ({ route }) => {
+  const { params: { email: _email } = {} } = route;
+  const [apiStatus, setApiStatus] = useState(Status.DEFAULT);
+  const [form, setValues] = useState({
+    email: _email,
+    incorrectEmail: false,
+  });
   const { theme } = useContext(ThemeContext);
-  const [email, setEmail] = useState('');
 
-  useEffect(
-    () => () => {
-      // componentDidUnmount: Reset password state
-      _resetAuthState();
-    },
-    [],
-  );
+  const checkEmail = () => {
+    if (!isEmailValid(form.email)) {
+      setValues(prevState => ({
+        ...prevState,
+        incorrectEmail: true,
+      }));
+      return false;
+    }
+    return true;
+  };
 
   const onResetPress = () => {
     Keyboard.dismiss();
-    if (email === '') return;
-    _resetPassword(email);
+    // Validations
+    if (!checkEmail()) {
+      return;
+    }
+    // Api call
+    setApiStatus(Status.LOADING);
+    magento.guest
+      .resetPassword({
+        email: form.email,
+      })
+      .then(response => {
+        if (response) {
+          Toast.show(translate('forgetPasswordScreen.emailSent'), Toast.LONG);
+          setApiStatus(Status.SUCCESS);
+        } else {
+          // Either password_reset_template is not correctly set in config.js or problem sending email
+          throw new Error(translate('errors.genericError'));
+        }
+      })
+      .catch(error => {
+        Toast.show(
+          error.message || translate('errors.genericError'),
+          Toast.LONG,
+        );
+        setApiStatus(Status.ERROR);
+      });
   };
-
-  const renderMessages = () => {
-    const message =
-      status === Status.ERROR
-        ? errorMessage
-        : status === Status.SUCCESS
-        ? translate('forgetPasswordScreen.emailSent')
-        : '';
-    const type =
-      status === Status.ERROR
-        ? 'error'
-        : status === Status.SUCCESS
-        ? 'success'
-        : 'info';
-    return <MessageView message={message} type={type} />;
-  };
-
-  const renderButtons = () => (
-    <Button
-      loading={status === Status.LOADING}
-      disabled={email === ''}
-      onPress={onResetPress}
-      title={translate('forgetPasswordScreen.resetButtonTitle')}
-    />
-  );
 
   return (
-    <View style={styles.container(theme)}>
-      <Text type="subheading" bold style={styles.title(theme)}>
-        {translate('forgetPasswordScreen.passwordRecovery')}
-      </Text>
-      <Text style={styles.description}>
-        {translate('forgetPasswordScreen.requestEmailId')}
-      </Text>
-      <TextInput
-        autoCapitalize="none"
-        keyboardType="email-address"
-        placeholder={translate('common.email')}
-        autoCorrect={false}
-        containerStyle={styles.emailOffset(theme)}
-        value={email}
-        editable={!(status === status.LOADING)}
-        onSubmitEditing={onResetPress}
-        onChangeText={setEmail}
-      />
-      {renderButtons()}
-      {renderMessages()}
-    </View>
+    <SafeAreaView style={styles.safeAreaView(theme)}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <Text type="heading" bold>
+          {translate('forgetPasswordScreen.passwordRecovery')}
+        </Text>
+        <Text style={styles.defaultMargin}>
+          {translate('forgetPasswordScreen.requestEmailId')}
+        </Text>
+        <TextInput
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder={translate('common.email')}
+          autoCorrect={false}
+          value={form.email}
+          containerStyle={styles.defaultMargin}
+          editable={!(apiStatus === Status.LOADING)}
+          onSubmitEditing={onResetPress}
+          onChangeText={value =>
+            setValues(prevState => ({
+              ...prevState,
+              email: value.trim(),
+              incorrectEmail: false,
+            }))
+          }
+          errorMessage={
+            form.incorrectEmail ? translate('errors.invalidEmail') : ''
+          }
+          onBlur={checkEmail}
+        />
+        <Button
+          loading={apiStatus === Status.LOADING}
+          onPress={onResetPress}
+          style={styles.defaultMargin}
+          title={translate('forgetPasswordScreen.resetButtonTitle')}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: theme => ({
+  safeAreaView: theme => ({
     flex: 1,
     backgroundColor: theme.backgroundColor,
-    paddingTop: SPACING.extraLarge,
   }),
-  title: theme => ({
-    textAlign: 'center',
-    marginBottom: SPACING.medium,
-  }),
-  description: {
-    textAlign: 'center',
+  scrollView: {
+    padding: SPACING.large,
   },
-  emailOffset: theme => ({
-    marginVertical: SPACING.large,
-  }),
+  defaultMargin: {
+    marginTop: SPACING.large,
+  },
 });
 
-ForgetPasswordScreen.propTypes = {
-  status: PropTypes.oneOf(Object.values(Status)).isRequired,
-  errorMessage: PropTypes.string,
-  resetPassword: PropTypes.func.isRequired,
-};
+ForgetPasswordScreen.propTypes = propTypes;
 
-ForgetPasswordScreen.defaultProps = {
-  errorMessage: '',
-};
+ForgetPasswordScreen.defaultProps = defaultProps;
 
-const mapStateToProps = ({ auth }) => {
-  const {
-    resetPasswordStatus: status,
-    resetPasswordErrorMessage: errorMessage,
-  } = auth;
-
-  return {
-    status,
-    errorMessage,
-  };
-};
-
-export default connect(mapStateToProps, {
-  resetPassword,
-  resetAuthState,
-})(ForgetPasswordScreen);
+export default ForgetPasswordScreen;
