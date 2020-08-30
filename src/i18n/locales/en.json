@@ -16,7 +16,10 @@
     "order": "Order",
     "select": "Select",
     "save": "Save",
+    "login": "Login",
+    "signup": "Signup",
     "email": "Email",
+    "password": "Password",
     "user": "User",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
@@ -74,8 +77,31 @@
     "zipCodeHint": "Zip Code",
     "addressSaveMessage": "Address Saved Successfully!"
   },
+  "cartScreen": {
+    "title": "Cart",
+    "priceNotAvailable": "Cannot proceed, price for some product is not available!",
+    "placeOrderButton": "Place order",
+    "cartEmptyMessage": "Cart is empty, Add some products",
+    "removeItemDialogTitle": "You sure?",
+    "removeItemDialogMessage": "Just double-checking you wanted to remove the item"
+  },
+  "categoryListScreen": {
+    "menu": {
+      "sort": "Sort"
+    }
+  },
+  "drawerScreen": {
+    "welcomeText": "Hello"
+  },
   "editAddressScreen": {
     "title": "Edit Address"
+  },
+  "forgetPasswordScreen": {
+    "requestEmailId": "Please enter your email address below to receive a password reset link",
+    "title": "Reset Password",
+    "resetButtonTitle": "Reset My Password",
+    "passwordRecovery": "Password Recovery",
+    "emailSent": "If there is an account associated with your mail, you will receive an email with a link to reset your password."
   },
   "homeScreen": {
     "title": "MageCart",
@@ -85,22 +111,10 @@
       "cart": "Cart"
     }
   },
-  "categoryListScreen": {
-    "menu": {
-      "sort": "Sort"
-    }
-  },
-  "drawerScreen": {
-    "login": "Login!",
-    "welcomeText": "Hello"
-  },
-  "cartScreen": {
-    "title": "Cart",
-    "priceNotAvailable": "Cannot proceed, price for some product is not available!",
-    "placeOrderButton": "Place order",
-    "cartEmptyMessage": "Cart is empty, Add some products",
-    "removeItemDialogTitle": "You sure?",
-    "removeItemDialogMessage": "Just double-checking you wanted to remove the item"
+  "loginScreen": {
+    "title": "Login",
+    "createAccount": "Create an account(Signup)",
+    "forgotPassword": "Forgot Password"
   },
   "orderScreen": {
     "orderPlacedScreenTitle": "Order Confirmation",
@@ -151,35 +165,17 @@
     "noShipping": "Shipping methods not found for selected address",
     "selectShipping": "Select a shipping method"
   },
-  "loginScreen": {
-    "title": "Login",
-    "loginButton": "Login",
-    "createAccount": "Create an account(Signup)",
-    "forgotPassword": "Forgot Password",
-    "emailHint": "Email",
-    "passwordHint": "Password"
-  },
   "signupScreen": {
     "title": "Signup",
-    "signUpButton": "Signup",
     "haveAccount": "Already have an account(Login)",
     "successMessage": "Signup successful, please login!",
     "firstNameHint": "First Name",
-    "lastNameHint": "Last name",
-    "emailHint": "Email",
-    "passwordHint": "Password",
+    "lastNameHint": "Last Name",
     "signupSuccessMessage": "Account created successfully, please login",
     "invalidFirstName": "First name cannot be blank",
     "invalidLastName": "Last name cannot be blank"
   },
   "splashScreen": {
     "noInternetMessage": "Looks like internet connection is off, please turn on internet connection and press ok to continue."
-  },
-  "forgetPasswordScreen": {
-    "requestEmailId": "Please enter your email address below to receive a password reset link",
-    "title": "Reset Password",
-    "resetButtonTitle": "Reset My Password",
-    "passwordRecovery": "Password Recovery",
-    "emailSent": "If there is an account associated with your mail, you will receive an email with a link to reset your password."
   }
 }

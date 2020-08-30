@@ -46,7 +46,7 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
     }!`;
     NAVIGATION_PATH = NAVIGATION_TO_PROFILE_SCREEN;
   } else {
-    welcomeText = translate('drawerScreen.login');
+    welcomeText = translate('common.login');
     NAVIGATION_PATH = NAVIGATION_TO_LOGIN_SCREEN;
   }
 

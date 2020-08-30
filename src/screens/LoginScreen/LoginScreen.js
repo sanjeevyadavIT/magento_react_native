@@ -39,6 +39,7 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
   });
   const [secureEntry, toggleSecureEntry] = useState(true);
   const { theme } = useContext(ThemeContext);
+  const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
   useEffect(() => {
@@ -46,6 +47,23 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
       navigation.popToTop();
     }
   }, [apiStatus]);
+
+  const resetState = () => {
+    setValues(prevState => ({
+      ...prevState,
+      email: '',
+      incorrectEmail: false,
+      password: '',
+      incorrectPassword: false,
+    }));
+    toggleSecureEntry(true);
+    if(emailInputRef.current) {
+      emailInputRef.current.clear();
+    }
+    if(passwordInputRef.current) {
+      passwordInputRef.current.clear();
+    }
+  }
 
   const checkField = (fieldKey, fieldErrorKey, fieldValidator) => {
     if (!fieldValidator(form[fieldKey])) {
@@ -97,7 +115,7 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
     <SafeAreaView style={styles.safeAreaView(theme)}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TextInput
-          placeholder={translate('loginScreen.emailHint')}
+          placeholder={translate('common.email')}
           keyboardType="email-address"
           autoCorrect={false}
           autoCapitalize="none"
@@ -115,6 +133,9 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
           }
           returnKeyType={translate('common.keyboardNext')}
           onSubmitEditing={() => passwordInputRef.current.focus()}
+          assignRef={component => {
+            emailInputRef.current = component;
+          }}
           onBlur={() => checkField('email', 'incorrectEmail', isEmailValid)}
         />
         <TextInput
@@ -131,7 +152,7 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
           }
           textContentType="password"
           editable={!(apiStatus === Status.LOADING)}
-          placeholder={translate('loginScreen.passwordHint')}
+          placeholder={translate('common.password')}
           autoCorrect={false}
           containerStyle={styles.defaultMargin}
           onChangeText={value =>
@@ -151,7 +172,7 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
         />
         <Button
           loading={apiStatus === Status.LOADING}
-          title={translate('loginScreen.loginButton')}
+          title={translate('common.login')}
           titleStyle={styles.loginButtonText}
           style={styles.defaultMargin}
           onPress={onSignInPress}
@@ -161,16 +182,20 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
           style={styles.defaultMargin}
           disabled={apiStatus === Status.LOADING}
           title={translate('loginScreen.createAccount')}
-          onPress={() => navigation.navigate(NAVIGATION_TO_SIGNUP_SCREEN)}
+          onPress={() => {
+            navigation.navigate(NAVIGATION_TO_SIGNUP_SCREEN);
+            resetState();
+          }}
         />
         <Button
           type="clear"
           style={styles.defaultMargin}
           disabled={apiStatus === Status.LOADING}
           title={translate('loginScreen.forgotPassword')}
-          onPress={() =>
-            navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN)
-          }
+          onPress={() => {
+            navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN);
+            resetState();
+          }}
         />
       </ScrollView>
     </SafeAreaView>

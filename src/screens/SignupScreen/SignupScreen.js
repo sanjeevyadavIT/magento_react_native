@@ -154,7 +154,7 @@ const SignupScreen = ({ navigation }) => {
           }
         />
         <TextInput
-          placeholder={translate('signupScreen.emailHint')}
+          placeholder={translate('common.email')}
           keyboardType="email-address"
           autoCorrect={false}
           autoCapitalize="none"
@@ -190,7 +190,7 @@ const SignupScreen = ({ navigation }) => {
             />
           }
           textContentType="password"
-          placeholder={translate('signupScreen.passwordHint')}
+          placeholder={translate('common.password')}
           autoCorrect={false}
           editable={!(apiStatus === Status.LOADING)}
           containerStyle={styles.defaultMargin}
@@ -211,7 +211,7 @@ const SignupScreen = ({ navigation }) => {
         />
         <Button
           loading={apiStatus === Status.LOADING}
-          title={translate('signupScreen.signUpButton')}
+          title={translate('common.signup')}
           onPress={onSignupPress}
           style={styles.defaultMargin}
         />
