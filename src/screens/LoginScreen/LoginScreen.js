@@ -57,13 +57,13 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
       incorrectPassword: false,
     }));
     toggleSecureEntry(true);
-    if(emailInputRef.current) {
+    if (emailInputRef.current) {
       emailInputRef.current.clear();
     }
-    if(passwordInputRef.current) {
+    if (passwordInputRef.current) {
       passwordInputRef.current.clear();
     }
-  }
+  };
 
   const checkField = (fieldKey, fieldErrorKey, fieldValidator) => {
     if (!fieldValidator(form[fieldKey])) {

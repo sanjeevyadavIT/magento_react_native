@@ -56,7 +56,9 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
     >
       <Icon name="person-outline" style={styles.icon(theme)} />
       <View style={styles.lowerContainer}>
-        <Text type="subheading" bold style={styles.text(theme)}>{welcomeText}</Text>
+        <Text type="subheading" bold style={styles.text(theme)}>
+          {welcomeText}
+        </Text>
         <Icon name="chevron-right" color={theme.white} />
       </View>
     </TouchableOpacity>
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     borderRadius: DIMENS.common.borderRadius,
     padding: SPACING.small,
-    marginBottom: SPACING.small
+    marginBottom: SPACING.small,
   }),
   lowerContainer: {
     flex: 1,

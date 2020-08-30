@@ -38,7 +38,7 @@ storiesOf('Icon', module)
       name="face"
       size={100}
       color="pink"
-      style={{ backgroundColor: 'yellow'}}
+      style={{ backgroundColor: 'yellow' }}
       onPress={() => console.log('On Press')}
     />
   ));
