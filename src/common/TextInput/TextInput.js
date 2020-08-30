@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     ...TYPOGRAPHY.textInput,
     alignSelf: 'center',
     flex: 1,
-    minHeight: DIMENS.textInputHeight,
+    minHeight: DIMENS.common.textInputHeight,
   },
   error: theme => ({
     margin: SPACING.tiny,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     color: theme.errorColor,
   }),
   iconContainer: {
-    height: DIMENS.textInputHeight,
+    height: DIMENS.common.textInputHeight,
     justifyContent: 'center',
     alignItems: 'center',
   },

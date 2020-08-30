@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   container: (theme, columnCount) => ({
     width:
       columnCount > 1
-        ? DIMENS.WINDOW_WIDTH / columnCount
+        ? DIMENS.common.WINDOW_WIDTH / columnCount
         : DIMENS.catalogGridItemWidth,
     height: DIMENS.catalogGridItemHeight,
   }),

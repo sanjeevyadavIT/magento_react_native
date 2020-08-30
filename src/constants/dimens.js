@@ -7,25 +7,26 @@ export default {
   /**
    * App level constants
    */
-  WINDOW_WIDTH: screenWidth,
-  WINDOW_HEIGHT: screenHeight,
-  borderRadius: 2,
-  textInputHeight: 40,
+  common: {
+    WINDOW_WIDTH: screenWidth,
+    WINDOW_HEIGHT: screenHeight,
+    borderRadius: 2,
+    iconSize: 23,
+    textInputHeight: 40,
+  },
   catalogGridItemWidth: 150,
   catalogGridItemHeight: 200,
   catalogGridItemImageHeight: 120,
   /**
-   * Appbar constants
+   * Constants related to DrawerScreen
    */
-  appbarButtonHeight: 23,
+  drawerScreen: {
+    headerHeight: 100,
+  },
   /**
    * HomeScreen constnats
    */
   homePageSliderHeight: 200,
-  /**
-   * Drawer Navigation constants
-   */
-  headerViewHeight: 100,
   /**
    * ProductScreen constants
    */

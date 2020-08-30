@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Text } from '../../../../common';
+import { Text, Icon } from '../../../../common';
 import {
   NAVIGATION_TO_LOGIN_SCREEN,
   NAVIGATION_TO_PROFILE_SCREEN,
@@ -55,9 +54,10 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
       style={styles.container(theme)}
       onPress={() => navigation.navigate(NAVIGATION_PATH)}
     >
+      <Icon name="person-outline" style={styles.icon(theme)} />
       <View style={styles.lowerContainer}>
-        <Text style={styles.text(theme)}>{welcomeText}</Text>
-        <Icon name="chevron-right" size={30} color={theme.white} />
+        <Text type="subheading" bold style={styles.text(theme)}>{welcomeText}</Text>
+        <Icon name="chevron-right" color={theme.white} />
       </View>
     </TouchableOpacity>
   );
@@ -65,15 +65,23 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
 
 const styles = StyleSheet.create({
   container: theme => ({
-    height: DIMENS.headerViewHeight,
+    height: DIMENS.drawerScreen.headerHeight,
     backgroundColor: theme.appbar.backgroundColor,
     borderWidth: 0,
+    padding: SPACING.large,
+  }),
+  icon: theme => ({
+    backgroundColor: theme.white,
+    alignSelf: 'flex-start',
+    borderRadius: DIMENS.common.borderRadius,
+    padding: SPACING.small,
+    marginBottom: SPACING.small
   }),
   lowerContainer: {
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: SPACING.large,
   },
   text: theme => ({
     color: theme.white,

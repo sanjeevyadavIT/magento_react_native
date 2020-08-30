@@ -74,7 +74,7 @@ const styles = {
     flex: 1,
     borderWidth: type === OUTLINE ? 1 : 0,
     borderColor: theme.borderColor,
-    borderRadius: DIMENS.borderRadius,
+    borderRadius: DIMENS.common.borderRadius,
     backgroundColor: theme.surfaceColor,
   }),
 };

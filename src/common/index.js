@@ -4,6 +4,7 @@ import CatalogGrid from './CatalogGrid/CatalogGrid';
 import CatalogGridItem from './CatalogGridItem/CatalogGridItem';
 import GenericTemplate from './GenericTemplate/GenericTemplate';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
+import Icon from './Icon/Icon';
 import Image from './Image/Image';
 import ImageSlider, { ImageSliderItem } from './ImageSlider/ImageSlider';
 import LoadingView from './LoadingView/LoadingView';
@@ -21,6 +22,7 @@ export {
   CatalogGridItem,
   GenericTemplate,
   HeaderButtons,
+  Icon,
   Image,
   ImageSlider,
   ImageSliderItem, // not a component, fix later

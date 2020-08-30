@@ -19,6 +19,7 @@ ThemeProvider.propTypes = {
     backgroundColor: PropTypes.string.isRequired,
     surfaceColor: PropTypes.string.isRequired,
     borderColor: PropTypes.string.isRequired,
+    iconColor: PropTypes.string.isRequired,
     primaryLightColor: PropTypes.string.isRequired,
     primaryColor: PropTypes.string.isRequired,
     primaryDarkColor: PropTypes.string.isRequired,

@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { DrawerHeader, CategoryTreeContainer } from './components';
-import { DIMENS } from '../../constants';
 
 const propTypes = {
   navigation: PropTypes.shape({
@@ -15,9 +14,7 @@ const defaultProps = {};
 const DrawerScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <DrawerHeader navigation={navigation} />
-      </View>
+      <DrawerHeader navigation={navigation} />
       <CategoryTreeContainer navigation={navigation} />
     </View>
   );
@@ -26,9 +23,6 @@ const DrawerScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    height: DIMENS.headerViewHeight,
   },
 });
 

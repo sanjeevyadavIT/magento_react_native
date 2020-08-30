@@ -156,7 +156,7 @@ const styles = {
   },
   customInputContainer: {
     borderWidth: 1,
-    borderRadius: DIMENS.borderRadius,
+    borderRadius: DIMENS.common.borderRadius,
   },
   disabledContainer: {
     opacity: 0.5,

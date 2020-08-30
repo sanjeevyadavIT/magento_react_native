@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: type === SOLID ? theme.primaryColor : theme.transparent,
     borderWidth: type === OUTLINE ? StyleSheet.hairlineWidth : 0,
     borderColor: theme.primaryColor,
-    borderRadius: DIMENS.borderRadius,
+    borderRadius: DIMENS.common.borderRadius,
   }),
   disabled: (type, theme) => ({
     backgroundColor: type === SOLID ? theme.disabledColor : theme.transparent,

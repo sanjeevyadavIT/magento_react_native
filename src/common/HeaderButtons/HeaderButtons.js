@@ -13,7 +13,7 @@ const HeaderButton = props => {
   return (
     <HB
       IconComponent={MaterialIcons}
-      iconSize={DIMENS.appbarButtonHeight}
+      iconSize={DIMENS.common.iconSize}
       color={theme.appbar.tintColor}
       {...props}
     />
@@ -28,7 +28,7 @@ const HeaderButtons = props => {
       OverflowIcon={
         <MaterialIcons
           name="more-vert"
-          size={DIMENS.appbarButtonHeight}
+          size={DIMENS.common.iconSize}
           color={theme.appbar.tintColor}
         />
       }

@@ -25,6 +25,10 @@ export default {
    */
   borderColor: '#d9d9d9',
   /**
+   * Default icon color
+   */
+  iconColor: '#6d787e',
+  /**
    * ========================= Primary color : (Brand color) =========================
    * primaryLightColor: Lighter shade of primary color, (can be used for hover effects)
    * primaryColor: To be used as background color for components which denotes primary action
