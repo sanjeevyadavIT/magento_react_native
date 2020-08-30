@@ -32,6 +32,8 @@ const propTypes = {
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   style: ViewPropTypes.style,
+  tintColor: PropTypes.string,
+  titleStyle: Text.propTypes.style,
 };
 
 const defaultProps = {
@@ -39,7 +41,9 @@ const defaultProps = {
   onPress: () => {},
   disabled: false,
   style: {},
+  titleStyle: {},
   loading: false,
+  tintColor: '',
 };
 
 /**
@@ -50,6 +54,7 @@ const Button = ({
    * type can be
    * 1. 'solid'
    * 2. 'outline'
+   * 3. 'clear'
    */
   type,
   /**
@@ -72,22 +77,42 @@ const Button = ({
    * custom style for button
    */
   style,
+  /**
+   * custom style for text
+   */
+  titleStyle: _titleStyle,
+  /**
+   * Overwrite the primary color of the Button used either in background, border or spinner
+   */
+  tintColor,
 }) => {
   const { theme } = useContext(ThemeContext);
 
   const containerStyle = StyleSheet.flatten([
-    styles.button(type, theme),
+    styles.button(type, theme, tintColor),
     style,
     disabled && styles.disabled(type, theme),
   ]);
 
   const titleStyle = StyleSheet.flatten([
-    styles.title(type, theme),
+    styles.title(type, theme, tintColor),
+    _titleStyle,
     disabled && styles.disabledTitle(theme),
   ]);
 
+  const accessibilityState = {
+    disabled,
+    busy: loading,
+  };
+
   return (
-    <TouchReceptor onPress={!loading && onPress} disabled={disabled}>
+    <TouchReceptor
+      accessible
+      accessibilityRole="button"
+      accessibilityState={accessibilityState}
+      onPress={loading || disabled ? () => {} : onPress}
+      disabled={loading || disabled}
+    >
       <View style={containerStyle}>
         {loading && !disabled ? (
           <Spinner
@@ -103,23 +128,24 @@ const Button = ({
 };
 
 const styles = StyleSheet.create({
-  button: (type, theme) => ({
+  button: (type, theme, tintColor) => ({
     flexDirection: 'row',
     padding: SPACING.small,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: type === SOLID ? theme.primaryColor : theme.transparent,
-    borderWidth: type === OUTLINE ? StyleSheet.hairlineWidth : 0,
-    borderColor: theme.primaryColor,
+    backgroundColor:
+      type === SOLID ? tintColor || theme.primaryColor : theme.transparent,
+    borderWidth: type === OUTLINE ? DIMENS.common.borderWidth : 0,
+    borderColor: tintColor || theme.primaryColor,
     borderRadius: DIMENS.common.borderRadius,
   }),
   disabled: (type, theme) => ({
     backgroundColor: type === SOLID ? theme.disabledColor : theme.transparent,
     borderColor: theme.disabledDarkColor,
   }),
-  title: (type, theme) => ({
+  title: (type, theme, tintColor) => ({
     ...TYPOGRAPHY.buttonText,
-    color: type === SOLID ? theme.white : theme.primaryColor,
+    color: type === SOLID ? theme.white : tintColor || theme.primaryColor,
   }),
   disabledTitle: theme => ({
     color: theme.disabledDarkColor,

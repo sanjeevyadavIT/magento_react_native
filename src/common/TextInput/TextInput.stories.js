@@ -1,7 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { StorySection } from '../../../storybook/Decorator';
+import Text from '../Text/Text';
+import Divider from '../Divider/Divider';
 import TextInput from './TextInput';
 import { ThemeProvider, lightTheme as theme } from '../../theme';
 
@@ -25,6 +28,65 @@ storiesOf('TextInput', module)
     <ThemeProvider theme={theme}>
       <View style={{ borderWidth: 10, borderColor: 'pink' }}>{getStory()}</View>
     </ThemeProvider>
+  ))
+  .add('All', () => (
+    <ScrollView>
+      <Text type="h2">Stories</Text>
+      <Divider />
+      {/* ============================================= */}
+      {/* ================ Default ==================== */}
+      {/* ============================================= */}
+      <StorySection title="default" style={styles.cardStyle}>
+        <TextInput placeholder="Enter Name" multiline />
+      </StorySection>
+      {/* ============================================= */}
+      {/* ================ With label ==================== */}
+      {/* ============================================= */}
+      <StorySection title="with label" style={styles.cardStyle}>
+        <TextInput placeholder="James Arthur" label="Enter Name" />
+      </StorySection>
+      {/* ============================================= */}
+      {/* ============ With error message ============= */}
+      {/* ============================================= */}
+      <StorySection title="with error Message" style={styles.cardStyle}>
+        <TextInput
+          placeholder="James Arthur"
+          errorMessage="Enter atleast 3 characters"
+        />
+      </StorySection>
+      {/* ============================================= */}
+      {/* ============ with left icon ============= */}
+      {/* ============================================= */}
+      <StorySection title="with left icon" style={styles.cardStyle}>
+        <TextInput
+          placeholder="Enter email"
+          leftIcon={<Icon name="email" size={30} color="#4caf50" />}
+        />
+      </StorySection>
+      {/* ============================================= */}
+      {/* ============== with right icon ============== */}
+      {/* ============================================= */}
+      <StorySection title="with right icon" style={styles.cardStyle}>
+        <TextInput
+          placeholder="Enter Phone number"
+          rightIcon={<Icon name="local-phone" size={30} color="#4caf50" />}
+        />
+      </StorySection>
+      {/* ============================================= */}
+      {/* ============= with custom style ============= */}
+      {/* ============================================= */}
+      <StorySection
+        title="with custom input & container style"
+        style={styles.cardStyle}
+      >
+        <TextInput
+          containerStyle={styles.customInputContainer}
+          inputStyle={styles.centerText}
+          placeholder="Enter name"
+          placeholderTextColor="red"
+        />
+      </StorySection>
+    </ScrollView>
   ))
   .add('default', () => <TextInput placeholder="Enter Name" />)
   .add('with label', () => (
