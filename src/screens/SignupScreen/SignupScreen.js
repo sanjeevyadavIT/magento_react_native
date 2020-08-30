@@ -1,37 +1,37 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { ScrollView, StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import Toast from 'react-native-simple-toast';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { signUp, resetAuthState } from '../../store/actions';
 import { Button, TextInput } from '../../common';
-import {
-  NAVIGATION_TO_SIGNUP_SCREEN,
-  NAVIGATION_TO_FORGOT_PASSWORD_SCREEN,
-} from '../../navigation/routes';
-import { loginSuccess } from '../../store/actions';
+import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
 import { magento } from '../../magento';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
-import { isEmailValid, isPasswordValid } from '../../utils';
+import { isEmailValid, isPasswordValid, isNonEmptyString } from '../../utils';
 
 const propTypes = {
-  loginSuccess: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
-    popToTop: PropTypes.func.isRequired,
     navigate: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 const defaultProps = {};
 
 // TODO: Check KeyboardAvoidingView behaviour on iOS, on Android it's working fine
-const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
+const SignupScreen = ({ navigation }) => {
   const [apiStatus, setApiStatus] = useState(Status.DEFAULT);
   const [form, setValues] = useState({
+    firstName: '',
+    incorrectFirstName: false,
+    lastName: '',
+    incorrectLastName: false,
     email: '',
     incorrectEmail: false,
     password: '',
@@ -39,11 +39,14 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
   });
   const [secureEntry, toggleSecureEntry] = useState(true);
   const { theme } = useContext(ThemeContext);
+  const lastNameInputRef = useRef();
+  const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
   useEffect(() => {
     if (apiStatus === Status.SUCCESS) {
-      navigation.popToTop();
+      Toast.show(translate('signupScreen.signupSuccessMessage'), Toast.LONG);
+      navigation.goBack();
     }
   }, [apiStatus]);
 
@@ -60,28 +63,33 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
 
   const checkValidation = () => {
     let isValid = true;
+    isValid =
+      isValid &&
+      checkField('firstName', 'incorrectFirstName', isNonEmptyString);
+    isValid =
+      isValid && checkField('lastName', 'incorrectLastName', isNonEmptyString);
     isValid = isValid && checkField('email', 'incorrectEmail', isEmailValid);
     isValid =
       isValid && checkField('password', 'incorrectPassword', isPasswordValid);
     return isValid;
   };
 
-  const onSignInPress = () => {
+  const onSignupPress = () => {
     Keyboard.dismiss();
-    // Validations
     if (!checkValidation()) {
       return;
     }
     // Api call
     setApiStatus(Status.LOADING);
-    const { email, password } = form;
+    const { firstName, lastName, email, password } = form;
     magento.guest
-      .login({
+      .signup({
+        firstName,
+        lastName,
         email,
         password,
       })
-      .then(token => {
-        _loginSuccess(token);
+      .then(() => {
         setApiStatus(Status.SUCCESS);
       })
       .catch(error => {
@@ -97,7 +105,56 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
     <SafeAreaView style={styles.safeAreaView(theme)}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <TextInput
-          placeholder={translate('loginScreen.emailHint')}
+          placeholder={translate('signupScreen.firstNameHint')}
+          autoCorrect={false}
+          editable={!(apiStatus === Status.LOADING)}
+          containerStyle={styles.defaultMargin}
+          onChangeText={value =>
+            setValues(prevState => ({
+              ...prevState,
+              firstName: value.trim(),
+              incorrectFirstName: false,
+            }))
+          }
+          returnKeyType={translate('common.keyboardNext')}
+          onSubmitEditing={() => lastNameInputRef.current.focus()}
+          errorMessage={
+            form.incorrectFirstName
+              ? translate('signupScreen.invalidFirstName')
+              : ''
+          }
+          onBlur={() =>
+            checkField('firstName', 'incorrectFirstName', isNonEmptyString)
+          }
+        />
+        <TextInput
+          placeholder={translate('signupScreen.lastNameHint')}
+          autoCorrect={false}
+          editable={!(apiStatus === Status.LOADING)}
+          containerStyle={styles.defaultMargin}
+          onChangeText={value =>
+            setValues(prevState => ({
+              ...prevState,
+              lastName: value.trim(),
+              incorrectLastName: false,
+            }))
+          }
+          assignRef={component => {
+            lastNameInputRef.current = component;
+          }}
+          returnKeyType={translate('common.keyboardNext')}
+          onSubmitEditing={() => emailInputRef.current.focus()}
+          errorMessage={
+            form.incorrectLastName
+              ? translate('signupScreen.invalidLastName')
+              : ''
+          }
+          onBlur={() =>
+            checkField('lastName', 'incorrectLastName', isNonEmptyString)
+          }
+        />
+        <TextInput
+          placeholder={translate('signupScreen.emailHint')}
           keyboardType="email-address"
           autoCorrect={false}
           autoCapitalize="none"
@@ -110,6 +167,9 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
               incorrectEmail: false,
             }))
           }
+          assignRef={component => {
+            emailInputRef.current = component;
+          }}
           errorMessage={
             form.incorrectEmail ? translate('errors.invalidEmail') : ''
           }
@@ -126,13 +186,13 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
               size={20}
               style={styles.iconPadding}
               color={theme.labelTextColor}
-              onPress={() => toggleSecureEntry(prevState => !prevState)}
+              onPress={() => toggleSecureEntry(!secureEntry)}
             />
           }
           textContentType="password"
-          editable={!(apiStatus === Status.LOADING)}
-          placeholder={translate('loginScreen.passwordHint')}
+          placeholder={translate('signupScreen.passwordHint')}
           autoCorrect={false}
+          editable={!(apiStatus === Status.LOADING)}
           containerStyle={styles.defaultMargin}
           onChangeText={value =>
             setValues(prevState => ({
@@ -147,30 +207,20 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
           assignRef={component => {
             passwordInputRef.current = component;
           }}
-          onSubmitEditing={onSignInPress}
+          onSubmitEditing={onSignupPress}
         />
         <Button
           loading={apiStatus === Status.LOADING}
-          title={translate('loginScreen.loginButton')}
-          titleStyle={styles.loginButtonText}
+          title={translate('signupScreen.signUpButton')}
+          onPress={onSignupPress}
           style={styles.defaultMargin}
-          onPress={onSignInPress}
         />
         <Button
           type="clear"
           style={styles.defaultMargin}
           disabled={apiStatus === Status.LOADING}
-          title={translate('loginScreen.createAccount')}
-          onPress={() => navigation.navigate(NAVIGATION_TO_SIGNUP_SCREEN)}
-        />
-        <Button
-          type="clear"
-          style={styles.defaultMargin}
-          disabled={apiStatus === Status.LOADING}
-          title={translate('loginScreen.forgotPassword')}
-          onPress={() =>
-            navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN)
-          }
+          title={translate('signupScreen.haveAccount')}
+          onPress={() => navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)}
         />
       </ScrollView>
     </SafeAreaView>
@@ -185,19 +235,22 @@ const styles = StyleSheet.create({
   scrollView: {
     padding: SPACING.large,
   },
+  container: {
+    flex: 1,
+  },
   defaultMargin: {
     marginTop: SPACING.large,
-  },
-  loginButtonText: {
-    textTransform: 'uppercase',
   },
   iconPadding: {
     padding: SPACING.small,
   },
 });
 
-LoginScreen.propTypes = propTypes;
+SignupScreen.propTypes = propTypes;
 
-LoginScreen.defaultProps = defaultProps;
+SignupScreen.defaultProps = defaultProps;
 
-export default connect(null, { loginSuccess })(LoginScreen);
+export default connect(null, {
+  signUp,
+  resetAuthState,
+})(SignupScreen);

@@ -1,7 +1,7 @@
 import { GUEST_TYPE } from '../../types';
 
 export default magento => ({
-  auth: ({ email, password }) =>
+  login: ({ email, password }) =>
     magento.post(
       '/V1/integration/customer/token',
       undefined,
@@ -9,8 +9,17 @@ export default magento => ({
       GUEST_TYPE,
     ),
 
-  signup: payload =>
-    magento.post('/V1/customers', undefined, payload, GUEST_TYPE),
+  signup: ({ firstName, lastName, email, password }) => {
+    const requestBody = {
+      customer: {
+        email,
+        firstname: firstName,
+        lastname: lastName,
+      },
+      password,
+    };
+    return magento.post('/V1/customers', undefined, requestBody, GUEST_TYPE);
+  },
 
   getCurrency: () =>
     magento.get('/V1/directory/currency', undefined, undefined, GUEST_TYPE),

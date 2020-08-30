@@ -159,7 +159,7 @@
     "emailHint": "Email",
     "passwordHint": "Password"
   },
-  "signUpScreen": {
+  "signupScreen": {
     "title": "Signup",
     "signUpButton": "Signup",
     "haveAccount": "Already have an account(Login)",
@@ -167,7 +167,10 @@
     "firstNameHint": "First Name",
     "lastNameHint": "Last name",
     "emailHint": "Email",
-    "passwordHint": "Password"
+    "passwordHint": "Password",
+    "signupSuccessMessage": "Account created successfully, please login",
+    "invalidFirstName": "First name cannot be blank",
+    "invalidLastName": "Last name cannot be blank"
   },
   "splashScreen": {
     "noInternetMessage": "Looks like internet connection is off, please turn on internet connection and press ok to continue."
