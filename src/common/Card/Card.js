@@ -34,8 +34,6 @@ const defaultProps = {
   onPress: null,
 };
 
-// TODO: TouchReceptor can be extracted into it's own component
-// TODO: Add styling for shadow
 const Card = ({
   /**
    * type can be
@@ -59,20 +57,32 @@ const Card = ({
 }) => {
   const ViewGroup = onPress ? TouchReceptor : View;
   const { theme } = useContext(ThemeContext);
+  const shadow = type === SHADOW ? shadowStyle(theme) : {};
 
   return (
     <ViewGroup onPress={onPress}>
-      <View style={StyleSheet.flatten([styles.conatiner(type, theme), style])}>
+      <View style={StyleSheet.flatten([styles.conatiner(type, theme), shadow, style])}>
         {children}
       </View>
     </ViewGroup>
   );
 };
 
+const shadowStyle = theme => ({
+  shadowColor: theme.black,
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.1,
+  shadowRadius: 2,
+  elevation: 1,
+});
+
 const styles = {
   conatiner: (type, theme) => ({
     flex: 1,
-    borderWidth: type === OUTLINE ? 1 : 0,
+    borderWidth: type === OUTLINE ? DIMENS.common.borderWidth : 0,
     borderColor: theme.borderColor,
     borderRadius: DIMENS.common.borderRadius,
     backgroundColor: theme.surfaceColor,
