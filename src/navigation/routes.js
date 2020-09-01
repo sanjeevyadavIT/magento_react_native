@@ -1,5 +1,6 @@
 export const NAVIGATION_TO_SPLASH_SCREEN = 'SplashScreen';
 export const NAVIGATION_TO_HOME_SCREEN = 'HomeScreen';
+export const NAVIGATION_TO_CATEGORIES_SCREEN = 'CategoriesScreen';
 export const NAVIGATION_TO_CATEGORY_LIST_SCREEN = 'CategoryListScreen';
 export const NAVIGATION_TO_PRODUCT_SCREEN = 'ProductDetailScreen';
 export const NAVIGATION_TO_SEARCH_SCREEN = 'SearchScreen';

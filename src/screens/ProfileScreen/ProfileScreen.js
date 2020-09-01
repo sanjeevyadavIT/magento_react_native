@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCurrentCustomer, logout } from '../../store/actions';
 import {
+  NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_ORDERS_SCREEN,
   NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
 } from '../../navigation/routes';
@@ -47,7 +48,7 @@ const ProfileScreen = ({
 
   const onLogoutPress = () => {
     _logout();
-    navigation.popToTop();
+    navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
   };
 
   if (status === Status.ERROR) {

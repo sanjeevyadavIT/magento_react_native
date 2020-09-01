@@ -21,13 +21,18 @@
     "email": "Email",
     "password": "Password",
     "user": "User",
+    "home": "Home",
+    "categories": "Categories",
+    "profile": "Profile",
+    "cart": "Cart",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
       "aToZ": "name: A to Z",
       "zToA": "name: Z to A",
       "priceLowToHigh": "price: Low to High",
       "priceHighToLow": "price: High to Low"
-    }
+    },
+    "loginPrompt": "In order to place order and view profile, please login or signup"
   },
   "errors": {
     "genericError": "Something went wrong, please try again!",
@@ -107,8 +112,7 @@
     "title": "MageCart",
     "menu": {
       "drawer": "Main Menu",
-      "search": "Search",
-      "cart": "Cart"
+      "search": "Search"
     }
   },
   "loginScreen": {

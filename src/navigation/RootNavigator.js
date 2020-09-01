@@ -10,13 +10,10 @@ import {
   SplashScreen,
   DrawerScreen,
   ForgetPasswordScreen,
-  HomeScreen,
   ProductScreen,
   SearchScreen,
-  CartScreen,
   CategoryListScreen,
   EditAccountAddressScreen,
-  ProfileScreen,
   CheckoutAddressScreen,
   LoginScreen,
   SignupScreen,
@@ -36,7 +33,6 @@ import {
   NAVIGATION_TO_SEARCH_SCREEN,
   NAVIGATION_TO_LOGIN_SCREEN,
   NAVIGATION_TO_SIGNUP_SCREEN,
-  NAVIGATION_TO_PROFILE_SCREEN,
   NAVIGATION_TO_ORDERS_SCREEN,
   NAVIGATION_TO_ORDER_DETAIL_SCREEN,
   NAVIGATION_TO_CART_SCREEN,
@@ -49,6 +45,7 @@ import {
 } from './routes';
 import { translate } from '../i18n';
 import { magento } from '../magento';
+import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
 
@@ -75,7 +72,7 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        component={HomeScreen}
+        component={BottomTabNavigator}
         name={NAVIGATION_TO_HOME_SCREEN}
         options={({ navigation }) => ({
           title: translate('homeScreen.title'),
@@ -95,15 +92,6 @@ const StackNavigator = () => {
                 iconName="search"
                 onPress={() => navigation.navigate(NAVIGATION_TO_SEARCH_SCREEN)}
               /> */}
-              <HeaderButtons.Item
-                title={translate('homeScreen.menu.cart')}
-                iconName="shopping-cart"
-                onPress={() =>
-                  magento.isCustomerLogin()
-                    ? navigation.navigate(NAVIGATION_TO_CART_SCREEN)
-                    : navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)
-                }
-              />
             </HeaderButtons>
           ),
         })}
@@ -168,13 +156,6 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name={NAVIGATION_TO_PROFILE_SCREEN}
-        component={ProfileScreen}
-        options={{
-          title: translate('accountScreen.title'),
-        }}
-      />
-      <Stack.Screen
         name={NAVIGATION_TO_ORDERS_SCREEN}
         component={OrdersScreen}
         options={{
@@ -218,13 +199,6 @@ const StackNavigator = () => {
             </HeaderButtons>
           ),
         })}
-      />
-      <Stack.Screen
-        name={NAVIGATION_TO_CART_SCREEN}
-        component={CartScreen}
-        options={{
-          title: translate('cartScreen.title'),
-        }}
       />
       <Stack.Screen
         name={NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN}
