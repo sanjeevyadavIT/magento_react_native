@@ -48,10 +48,7 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
   return (
     <Tab.Navigator
     tabBarOptions={{
-      // activeBackgroundColor: theme.bottomBar.activeBackgroundColor,
-      // inactiveBackgroundColor: theme.bottomBar.inactiveBackgroundColor,
       activeTintColor: theme.primaryColor,
-      // inactiveTintColor: theme.bottomBar.inactiveTintColor,
     }}
     >
       <Tab.Screen
@@ -83,14 +80,14 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
         }}
       />
       <Tab.Screen
-        name={NAVIGATION_TO_CART_SCREEN}
-        component={CartScreen}
+        name={NAVIGATION_TO_PROFILE_SCREEN}
+        component={ProfileScreen}
         options={{
-        tabBarLabel: translate('common.cart'),
+          tabBarLabel: translate('common.profile'),
           tabBarIcon: ({ color, focused }) => (
             <Icon
-              type="material-community"
-              name={focused? "cart": "cart-outline"}
+              type="font-awesome"
+              name={focused? "user" : "user-o"}
               color={color}
             />
           ),
@@ -106,14 +103,14 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
         }}
       />
       <Tab.Screen
-        name={NAVIGATION_TO_PROFILE_SCREEN}
-        component={ProfileScreen}
+        name={NAVIGATION_TO_CART_SCREEN}
+        component={CartScreen}
         options={{
-          tabBarLabel: translate('common.profile'),
+        tabBarLabel: translate('common.cart'),
           tabBarIcon: ({ color, focused }) => (
             <Icon
-              type="font-awesome"
-              name={focused? "user" : "user-o"}
+              type="material-community"
+              name={focused? "cart": "cart-outline"}
               color={color}
             />
           ),

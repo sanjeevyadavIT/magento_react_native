@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
 import {
   View,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  Platform,
   StyleSheet,
   ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import Spinner from '../Spinner/Spinner';
+import TouchReceptor from '../TouchReceptor/TouchReceptor';
 import { ThemeContext } from '../../theme';
 import { DIMENS, SPACING, TYPOGRAPHY } from '../../constants';
 
@@ -21,9 +19,6 @@ const defaultLoadingProps = (type, theme) => ({
   color: type === 'solid' ? theme.white : theme.primaryColor,
   size: 'small',
 });
-
-const TouchReceptor =
-  Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
 
 const propTypes = {
   title: PropTypes.string.isRequired,

@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -11,7 +11,7 @@ export default {
     WINDOW_WIDTH: screenWidth,
     WINDOW_HEIGHT: screenHeight,
     borderRadius: 2,
-    borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
     iconSize: 23,
     textInputHeight: 40,
   },

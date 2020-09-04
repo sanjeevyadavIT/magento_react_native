@@ -2,6 +2,7 @@ import Button from './Button/Button';
 import Card from './Card/Card';
 import CatalogGrid from './CatalogGrid/CatalogGrid';
 import CatalogGridItem from './CatalogGridItem/CatalogGridItem';
+import Divider from './Divider/Divider';
 import GenericTemplate from './GenericTemplate/GenericTemplate';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
 import Icon from './Icon/Icon';
@@ -14,12 +15,14 @@ import Price from './Price/Price';
 import Spinner from './Spinner/Spinner';
 import Text from './Text/Text';
 import TextInput from './TextInput/TextInput';
+import TouchReceptor from './TouchReceptor/TouchReceptor';
 
 export {
   Button,
   Card,
   CatalogGrid,
   CatalogGridItem,
+  Divider,
   GenericTemplate,
   HeaderButtons,
   Icon,
@@ -33,4 +36,5 @@ export {
   Spinner,
   Text,
   TextInput,
+  TouchReceptor,
 };

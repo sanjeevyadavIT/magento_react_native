@@ -22,7 +22,6 @@ const CategoryTreeContainer = ({
   status,
   errorMessage,
   categories,
-  currencies,
   navigation,
 }) => {
   const { theme } = useContext(ThemeContext);
@@ -32,7 +31,6 @@ const CategoryTreeContainer = ({
       return (
         <CategoryTree
           navigation={navigation}
-          showFooter={currencies.length > 1}
           categories={categories}
         />
       );
@@ -61,24 +59,21 @@ const styles = {
 CategoryTreeContainer.propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,
-  currencies: PropTypes.arrayOf(PropTypes.string),
+
   categories: PropTypes.arrayOf(PropTypes.object),
 };
 
 CategoryTreeContainer.defaultProps = {
-  currencies: [],
   categories: [],
   errorMessage: '',
 };
 
-const mapStateToProps = ({ categoryTree, magento }) => {
+const mapStateToProps = ({ categoryTree }) => {
   const { status, errorMessage, children_data: categories } = categoryTree;
-  const { available_currency_codes: currencies } = magento.currency;
   return {
     status,
     errorMessage,
     categories,
-    currencies,
   };
 };
 

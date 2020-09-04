@@ -25,6 +25,8 @@
     "categories": "Categories",
     "profile": "Profile",
     "cart": "Cart",
+    "logout": "Logout",
+    "logoutSuccessMessage": "Logout successfully!",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
       "aToZ": "name: A to Z",
@@ -56,8 +58,7 @@
   "accountScreen": {
     "title": "Account",
     "myOrderButton": "My Orders",
-    "myAddressButton": "My Address",
-    "logoutButton": "Logout"
+    "myAddressButton": "My Address"
   },
   "addressScreen": {
     "title": "Address",
@@ -96,7 +97,8 @@
     }
   },
   "drawerScreen": {
-    "welcomeText": "Hello"
+    "welcomeText": "Hello",
+    "shopCategories": "Shop by Categories"
   },
   "editAddressScreen": {
     "title": "Edit Address"

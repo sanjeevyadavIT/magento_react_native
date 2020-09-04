@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Toast from 'react-native-simple-toast';
 import { getCurrentCustomer, logout } from '../../store/actions';
 import {
   NAVIGATION_TO_HOME_SCREEN,
@@ -12,6 +13,7 @@ import { Text, Button, GenericTemplate, MessageView } from '../../common';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
+import { ThemeContext } from '../../theme';
 
 const propTypes = {
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
@@ -39,6 +41,7 @@ const ProfileScreen = ({
   getCurrentCustomer: _getCurrentCustomer,
   logout: _logout,
 }) => {
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     // ComponentDidMount
     if (status === Status.DEFAULT) {
@@ -48,6 +51,7 @@ const ProfileScreen = ({
 
   const onLogoutPress = () => {
     _logout();
+    Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
     navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
   };
 
@@ -56,7 +60,7 @@ const ProfileScreen = ({
       <View style={styles.errorContainer}>
         <MessageView type="error" message={errorMessage} />
         <Button
-          title={translate('accountScreen.logoutButton')}
+          title={translate('common.logout')}
           onPress={onLogoutPress}
         />
       </View>
@@ -92,7 +96,10 @@ const ProfileScreen = ({
         style={styles.space}
       />
       <Button
-        title={translate('accountScreen.logoutButton')}
+        type="outline"
+        title={translate('common.logout')}
+        tintColor={theme.errorColor}
+        style={styles.logout}
         onPress={onLogoutPress}
       />
     </GenericTemplate>
@@ -108,6 +115,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: SPACING.large,
+  },
+  logout: {
+    margin: SPACING.large,
   },
 });
 
