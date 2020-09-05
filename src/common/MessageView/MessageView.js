@@ -55,7 +55,6 @@ const getTextColor = (type, theme) => {
   }
 };
 
-// TODO: Is there any benefit of using StyleSheet when styles are function?
 const styles = StyleSheet.create({
   container: {
     flex: 1,

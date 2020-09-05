@@ -25,6 +25,13 @@ export default {
     headerHeight: 100,
   },
   /**
+   * Constants related to ProfileScreen
+   */
+  profileScreen: {
+    coverImageHeight: 150,
+    profileImageSize: 100,
+  },
+  /**
    * HomeScreen constnats
    */
   homePageSliderHeight: 200,

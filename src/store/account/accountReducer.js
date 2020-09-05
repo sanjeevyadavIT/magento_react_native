@@ -32,7 +32,11 @@ const initialState = {
 
   products: {},
   orders: [],
-  customer: {},
+  customer: {
+    email: '',
+    firstname: '',
+    lastname: '',
+  },
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -51,12 +55,14 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         status: Status.LOADING,
+        errorMessage: '',
       };
     case MAGENTO.CURRENT_USER_SUCCESS:
       return {
         ...state,
         status: Status.SUCCESS,
         customer: payload.customer,
+        errorMessage: '',
       };
     case MAGENTO.CURRENT_USER_FAILURE:
       return {

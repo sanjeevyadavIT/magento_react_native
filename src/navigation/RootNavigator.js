@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -255,20 +255,27 @@ const StackNavigator = () => {
 
 const Drawer = createDrawerNavigator();
 
-const RootNavigator = () => (
-  <SafeAreaProvider>
-    <NavigationContainer>
-      <Drawer.Navigator drawerContent={props => <DrawerScreen {...props} />}>
-        <Drawer.Screen
-          name="Drawer"
-          component={StackNavigator}
-          options={{
-            swipeEnabled: false,
-          }}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  </SafeAreaProvider>
-);
+const RootNavigator = () => {
+  const { theme } = useContext(ThemeContext);
+  return (
+    <SafeAreaProvider>
+      <StatusBar
+        barStyle={theme.appbar.barStyle}
+        backgroundColor={theme.appbar.statusBarColor}
+      />
+      <NavigationContainer>
+        <Drawer.Navigator drawerContent={props => <DrawerScreen {...props} />}>
+          <Drawer.Screen
+            name="Drawer"
+            component={StackNavigator}
+            options={{
+              swipeEnabled: false,
+            }}
+          />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+};
 
 export default RootNavigator;

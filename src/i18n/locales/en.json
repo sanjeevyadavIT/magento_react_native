@@ -26,6 +26,9 @@
     "profile": "Profile",
     "cart": "Cart",
     "logout": "Logout",
+    "pullToRefresh": "",
+    "orders": "Orders",
+    "address": "Address",
     "logoutSuccessMessage": "Logout successfully!",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
@@ -54,11 +57,6 @@
   "modalSelect": {
     "scroll": "Scrollable options",
     "cancelButton": "Cancel Button"
-  },
-  "accountScreen": {
-    "title": "Account",
-    "myOrderButton": "My Orders",
-    "myAddressButton": "My Address"
   },
   "addressScreen": {
     "title": "Address",
@@ -154,6 +152,11 @@
     "productDetailLabel": "Product Details",
     "noProductDetail": "No description available!",
     "addToCartSuccess": "Item Added To Cart!"
+  },
+  "profileScreen": {
+    "title": "Account",
+    "ordersSubtitle": "Check your order status",
+    "addressSubtitle": "Save addresses for a hassle-free checkout"
   },
   "searchScreen": {
     "searchHint": "Search for products",

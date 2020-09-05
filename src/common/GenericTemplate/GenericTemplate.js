@@ -1,11 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  ScrollView,
-  View,
-  ViewPropTypes,
-  StatusBar,
-  StyleSheet,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, ViewPropTypes } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import LoadingView from '../LoadingView/LoadingView';
@@ -14,55 +8,79 @@ import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 
 const propTypes = {
+  /**
+   * If status === Status.DEFAULT || status === Status.LOADING => render loader
+   * If status === Status.SUCCESS                              => render children
+   * If status === Status.ERROR                                => show error message
+   */
+  status: PropTypes.oneOf(Object.values(Status)),
+  /**
+   * Element to be render when status === Status.SUCCESS
+   */
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]).isRequired,
+  /**
+   * Add children in ScrollView
+   */
+  scrollable: PropTypes.bool,
+  /**
+   * Add sticky Footer at bottom
+   */
   footer: PropTypes.element,
-  scrollable: PropTypes.bool.isRequired,
-  status: PropTypes.oneOf(Object.values(Status)),
   errorMessage: PropTypes.string,
   style: ViewPropTypes.style,
+  /**
+   * If scrollable is true, and you want to include pull to refresh,
+   * pass RefreshControl here
+   */
+  refreshControl: PropTypes.element,
 };
 
 const defaultProps = {
   status: Status.SUCCESS,
+  scrollable: false,
   errorMessage: '',
   style: {},
   footer: <></>,
+  refreshControl: undefined,
 };
 
-// NOTE: Can add functionality to show some fallback message in case of empty view
 const GenericTemplate = ({
   children,
   footer,
-  /**
-   * If set true, `ScrollView` would be root element
-   * rather than normal `View`
-   */
   scrollable,
   status,
   errorMessage,
   style,
+  refreshControl,
 }) => {
   const { theme } = useContext(ThemeContext);
   const ViewGroup = scrollable ? ScrollView : View;
+  const props = {};
 
-  if (status === Status.ERROR) {
-    return <MessageView type="error" message={errorMessage} />;
-  }
-
-  if (status === Status.DEFAULT || status === Status.LOADING) {
-    return <LoadingView />;
+  if (scrollable) {
+    props.contentContainerStyle = style;
+    if (refreshControl) {
+      props.refreshControl = refreshControl;
+    }
+  } else {
+    props.style = [styles.content, style];
   }
 
   return (
     <SafeAreaView style={styles.container(theme)}>
-      <StatusBar
-        barStyle={theme.appbar.barStyle}
-        backgroundColor={theme.appbar.statusBarColor}
-      />
-      <ViewGroup style={[styles.content, style]}>{children}</ViewGroup>
+      <ViewGroup {...props}>
+        {!refreshControl &&
+          (status === Status.DEFAULT || status === Status.LOADING) && (
+            <LoadingView />
+          )}
+        {status === Status.ERROR && (
+          <MessageView type="error" message={errorMessage} />
+        )}
+        {status === Status.SUCCESS && children}
+      </ViewGroup>
       {footer}
     </SafeAreaView>
   );

@@ -54,7 +54,7 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
       style={styles.container(theme)}
       onPress={() => navigation.navigate(NAVIGATION_PATH)}
     >
-      <Icon name="person-outline" style={styles.icon(theme)} />
+      <Icon name="person" style={styles.icon(theme)} />
       <View style={styles.lowerContainer}>
         <Text type="subheading" bold style={styles.text(theme)}>
           {welcomeText}

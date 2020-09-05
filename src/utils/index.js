@@ -1,3 +1,6 @@
+import customerType from './custom-prop-types/customerType';
+
+export { customerType };
 export * from './products';
 export * from './order';
 export * from './primitiveChecks';
