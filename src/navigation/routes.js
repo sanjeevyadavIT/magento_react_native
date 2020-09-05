@@ -19,3 +19,4 @@ export const NAVIGATION_TO_FORGOT_PASSWORD_SCREEN = 'ForgetPasswordScreen';
 export const NAVIGATION_TO_SETTING_SCREEN = 'SettingScreen';
 export const NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN =
   'EditAccountAddressScreen';
+export const NAVIGATION_TO_ADDRESS_SCREEN = 'AddressScreen';

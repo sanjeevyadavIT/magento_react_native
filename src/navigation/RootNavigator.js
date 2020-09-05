@@ -23,6 +23,7 @@ import {
   OrderDetailScreen,
   OrderAcknowledgementScreen,
   SettingScreen,
+  AddressScreen,
 } from '../screens';
 import {
   NAVIGATION_TO_SPLASH_SCREEN,
@@ -42,6 +43,7 @@ import {
   NAVIGATION_TO_PAYMENT_SCREEN,
   NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN,
   NAVIGATION_TO_SETTING_SCREEN,
+  NAVIGATION_TO_ADDRESS_SCREEN,
 } from './routes';
 import { translate } from '../i18n';
 import { magento } from '../magento';
@@ -247,6 +249,13 @@ const StackNavigator = () => {
         component={EditAccountAddressScreen}
         options={{
           title: translate('editAddressScreen.title'),
+        }}
+      />
+      <Stack.Screen
+        name={NAVIGATION_TO_ADDRESS_SCREEN}
+        component={AddressScreen}
+        options={{
+          title: translate('addressScreen.title'),
         }}
       />
     </Stack.Navigator>

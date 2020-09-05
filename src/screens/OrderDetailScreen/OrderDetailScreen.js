@@ -133,7 +133,6 @@ const OrderDetailScreen = ({
 
   return (
     <GenericTemplate
-      scrollable={false}
       status={!item ? status : Status.SUCCESS}
       errorMessage={errorMessage}
     >

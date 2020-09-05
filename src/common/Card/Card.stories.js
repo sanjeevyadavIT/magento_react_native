@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Alert, View, StyleSheet } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import Card from './Card';
 import Text from '../Text/Text';
@@ -29,6 +29,11 @@ storiesOf('Card', module)
   .add('with shadow', () => (
     <Card type="shadow" style={styles.card}>
       <Text>This is a basic Card with type=&quot;shadow&quot;</Text>
+    </Card>
+  ))
+  .add('with onPress', () => (
+    <Card style={styles.card} onPress={() => Alert.alert('Clicked!')}>
+      <Text>This is a basic Card on which you can click</Text>
     </Card>
   ));
 

@@ -7,7 +7,7 @@ import { getCurrentCustomer, logout } from '../../store/actions';
 import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_ORDERS_SCREEN,
-  NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
+  NAVIGATION_TO_ADDRESS_SCREEN,
 } from '../../navigation/routes';
 import { Text, Button, GenericTemplate, Image, Icon } from '../../common';
 import Status from '../../magento/Status';
@@ -104,7 +104,7 @@ const ProfileScreen = ({
         <ProfileItem
           title={translate('common.orders')}
           subtitle={translate('profileScreen.ordersSubtitle')}
-          icon={{ name: "logo-dropbox", type: "ionicon"}}
+          icon={{ name: 'logo-dropbox', type: 'ionicon' }}
           onPress={() => {
             navigation.navigate(NAVIGATION_TO_ORDERS_SCREEN, {
               customerId: customer.id,
@@ -114,12 +114,8 @@ const ProfileScreen = ({
         <ProfileItem
           title={translate('common.address')}
           subtitle={translate('profileScreen.addressSubtitle')}
-          icon={{ name: "location-on" }}
-          onPress={() => {
-            navigation.navigate(NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN, {
-              customerId: customer.id,
-            });
-          }}
+          icon={{ name: 'location-on' }}
+          onPress={() => navigation.navigate(NAVIGATION_TO_ADDRESS_SCREEN)}
         />
       </View>
       <Button
@@ -174,7 +170,7 @@ ProfileScreen.propTypes = propTypes;
 
 ProfileScreen.defaultProps = defaultProps;
 
-const mapStatetoProps = ({ account }) => {
+const mapStateToProps = ({ account }) => {
   const { status, errorMessage, customer } = account;
   return {
     customer,
@@ -183,7 +179,7 @@ const mapStatetoProps = ({ account }) => {
   };
 };
 
-export default connect(mapStatetoProps, {
+export default connect(mapStateToProps, {
   logout,
   getCurrentCustomer,
 })(ProfileScreen);

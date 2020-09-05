@@ -307,7 +307,6 @@ const CheckoutAddressScreen = ({
     <GenericTemplate
       scrollable
       status={customerStatus}
-      style={styles.container}
       footer={renderButtons()}
     >
       <Text type="label">
@@ -400,9 +399,6 @@ const CheckoutAddressScreen = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   defaultMargin: theme => ({
     marginTop: SPACING.large,
   }),

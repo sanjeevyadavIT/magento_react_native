@@ -29,7 +29,6 @@ const OrdersScreen = ({
 
   return (
     <GenericTemplate
-      scrollable={false}
       status={status}
       errorMessage={errorMessage}
     >

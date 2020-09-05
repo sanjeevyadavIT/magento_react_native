@@ -29,6 +29,7 @@
     "pullToRefresh": "",
     "orders": "Orders",
     "address": "Address",
+    "mobile": "Mobile",
     "logoutSuccessMessage": "Logout successfully!",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
@@ -79,7 +80,9 @@
     "cityHint": "City",
     "zipCodeLabel": "Zip Code",
     "zipCodeHint": "Zip Code",
-    "addressSaveMessage": "Address Saved Successfully!"
+    "addressSaveMessage": "Address Saved Successfully!",
+    "addNew": "Add new address",
+    "noAddress": "Looks like you don't have any address saved, add new address for quick checkout."
   },
   "cartScreen": {
     "title": "Cart",

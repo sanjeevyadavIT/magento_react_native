@@ -1,3 +1,4 @@
+import AddressScreen from './AddressScreen/AddressScreen';
 import ProfileScreen from './ProfileScreen/ProfileScreen';
 import CartScreen from './CartScreen/CartScreen';
 import CategoryListScreen from './CategoryListScreen/CategoryListScreen';
@@ -19,6 +20,7 @@ import SettingScreen from './SettingScreen/SettingScreen';
 import SplashScreen from './SplashScreen/SplashScreen';
 
 export {
+  AddressScreen,
   ProfileScreen,
   CartScreen,
   CategoryListScreen,

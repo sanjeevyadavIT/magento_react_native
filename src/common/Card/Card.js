@@ -55,12 +55,12 @@ const Card = ({
    */
   children,
 }) => {
-  const ViewGroup = onPress ? TouchReceptor : View;
+  const ViewGroup = onPress ? TouchReceptor : React.Fragment;
   const { theme } = useContext(ThemeContext);
   const shadow = type === SHADOW ? shadowStyle(theme) : {};
 
   return (
-    <ViewGroup onPress={onPress}>
+    <ViewGroup {...(onPress && { onPress })}>
       <View
         style={StyleSheet.flatten([
           styles.conatiner(type, theme),

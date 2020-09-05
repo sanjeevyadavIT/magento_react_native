@@ -262,7 +262,6 @@ const EditAccountAddressScreen = ({
     <GenericTemplate
       scrollable
       status={Status.SUCCESS}
-      style={styles.container}
       footer={renderButtons()}
     >
       <TextInput
@@ -352,9 +351,6 @@ const EditAccountAddressScreen = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   defaultMargin: theme => ({
     marginTop: SPACING.large,
   }),
