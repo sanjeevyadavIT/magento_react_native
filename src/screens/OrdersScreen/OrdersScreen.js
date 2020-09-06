@@ -28,10 +28,7 @@ const OrdersScreen = ({
   const renderItem = ({ item }) => <OrderListItem item={item} />;
 
   return (
-    <GenericTemplate
-      status={status}
-      errorMessage={errorMessage}
-    >
+    <GenericTemplate status={status} errorMessage={errorMessage}>
       <FlatList
         data={orders}
         renderItem={renderItem}

@@ -26,7 +26,9 @@ const address = {
 
 storiesOf('Address', module)
   .addDecorator(getStory => (
-    <ThemeProvider theme={theme}><View style={{ borderWidth: 10, borderColor: 'pink'}}>{getStory()}</View></ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <View style={{ borderWidth: 10, borderColor: 'pink' }}>{getStory()}</View>
+    </ThemeProvider>
   ))
   .add('non-default address', () => <Address address={address} />)
   .add('default address', () => (

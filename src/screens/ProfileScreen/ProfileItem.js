@@ -36,9 +36,13 @@ const ProfileItem = ({ title, subtitle, icon, onPress }) => {
             size={icon.size || DIMENS.common.iconSize}
           />
           <View style={styles.detail}>
-            <Text bold type="subheading" style={styles.text}>{title}</Text>
+            <Text bold type="subheading" style={styles.text}>
+              {title}
+            </Text>
             {isNonEmptyString(subtitle) && (
-              <Text type="label" style={styles.text}>{subtitle}</Text>
+              <Text type="label" style={styles.text}>
+                {subtitle}
+              </Text>
             )}
           </View>
           <Icon name="keyboard-arrow-right" />

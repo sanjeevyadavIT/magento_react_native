@@ -17,6 +17,5 @@ export const NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN =
   'OrderConfirmationScreen';
 export const NAVIGATION_TO_FORGOT_PASSWORD_SCREEN = 'ForgetPasswordScreen';
 export const NAVIGATION_TO_SETTING_SCREEN = 'SettingScreen';
-export const NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN =
-  'AddEditAddressScreen';
+export const NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN = 'AddEditAddressScreen';
 export const NAVIGATION_TO_ADDRESS_SCREEN = 'AddressListScreen';

@@ -28,7 +28,7 @@ export const getCurrentCustomer = () => ({
 /**
  * Update the user details in reducer
  */
-export const updateCustomer = (customer) => ({
+export const updateCustomer = customer => ({
   type: UPDATE_CUSTOMER,
   payload: {
     customer,

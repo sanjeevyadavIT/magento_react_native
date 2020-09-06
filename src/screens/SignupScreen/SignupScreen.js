@@ -119,9 +119,7 @@ const SignupScreen = ({ navigation }) => {
           returnKeyType={translate('common.keyboardNext')}
           onSubmitEditing={() => lastNameInputRef.current.focus()}
           errorMessage={
-            form.incorrectFirstName
-              ? translate('errors.invalidFirstName')
-              : ''
+            form.incorrectFirstName ? translate('errors.invalidFirstName') : ''
           }
           onBlur={() =>
             checkField('firstName', 'incorrectFirstName', isNonEmptyString)
@@ -145,9 +143,7 @@ const SignupScreen = ({ navigation }) => {
           returnKeyType={translate('common.keyboardNext')}
           onSubmitEditing={() => emailInputRef.current.focus()}
           errorMessage={
-            form.incorrectLastName
-              ? translate('errors.invalidLastName')
-              : ''
+            form.incorrectLastName ? translate('errors.invalidLastName') : ''
           }
           onBlur={() =>
             checkField('lastName', 'incorrectLastName', isNonEmptyString)

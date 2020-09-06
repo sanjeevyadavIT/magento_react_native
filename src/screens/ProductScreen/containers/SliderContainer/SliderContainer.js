@@ -53,11 +53,7 @@ const SliderContainer = ({
   }
 
   return (
-    <GenericTemplate
-      status={status}
-      errorMessage={errorMessage}
-      style={style}
-    >
+    <GenericTemplate status={status} errorMessage={errorMessage} style={style}>
       <ImageSlider
         style={styles.imageContainer(theme)}
         imageHeight={DIMENS.productDetailPageSliderHeight}

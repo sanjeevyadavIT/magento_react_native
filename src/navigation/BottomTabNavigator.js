@@ -40,16 +40,15 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
       },
       {
         text: translate('common.ok'),
-        onPress: () =>
-          navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN),
+        onPress: () => navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN),
       },
     ]);
-  }
+  };
   return (
     <Tab.Navigator
-    tabBarOptions={{
-      activeTintColor: theme.primaryColor,
-    }}
+      tabBarOptions={{
+        activeTintColor: theme.primaryColor,
+      }}
     >
       <Tab.Screen
         name={NAVIGATION_TO_HOME_SCREEN}
@@ -59,7 +58,7 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
           tabBarIcon: ({ color, focused }) => (
             <Icon
               type="ionicon"
-              name={focused? "home": "home-outline"}
+              name={focused ? 'home' : 'home-outline'}
               color={color}
             />
           ),
@@ -69,11 +68,11 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
         name={NAVIGATION_TO_CATEGORIES_SCREEN}
         component={() => <CategoryTreeContainer navigation={navigation} />}
         options={{
-        tabBarLabel: translate('common.categories'),
+          tabBarLabel: translate('common.categories'),
           tabBarIcon: ({ color, focused }) => (
             <Icon
               type="antdesign"
-              name={focused? "appstore1": "appstore-o"}
+              name={focused ? 'appstore1' : 'appstore-o'}
               color={color}
             />
           ),
@@ -87,7 +86,7 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
           tabBarIcon: ({ color, focused }) => (
             <Icon
               type="font-awesome"
-              name={focused? "user" : "user-o"}
+              name={focused ? 'user' : 'user-o'}
               color={color}
             />
           ),
@@ -106,11 +105,11 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
         name={NAVIGATION_TO_CART_SCREEN}
         component={CartScreen}
         options={{
-        tabBarLabel: translate('common.cart'),
+          tabBarLabel: translate('common.cart'),
           tabBarIcon: ({ color, focused }) => (
             <Icon
               type="material-community"
-              name={focused? "cart": "cart-outline"}
+              name={focused ? 'cart' : 'cart-outline'}
               color={color}
             />
           ),

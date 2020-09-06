@@ -9,7 +9,11 @@ storiesOf('CheckBox', module)
     <ThemeProvider theme={theme}>{getStory()}</ThemeProvider>
   ))
   .add('disabled', () => (
-    <CheckBox disabled title="This checkbox is disabled" onPress={action('CheckBox Clicked!')} />
+    <CheckBox
+      disabled
+      title="This checkbox is disabled"
+      onPress={action('CheckBox Clicked!')}
+    />
   ))
   .add('with title', () =>
     React.createElement(() => {

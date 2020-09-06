@@ -44,5 +44,8 @@ export function isPasswordValid(password) {
  * @todo Add proper validation for mobile number
  */
 export function isPhoneNumberValid(phoneNumber) {
-  return isNonEmptyString(phoneNumber) && phoneNumber.length >= LIMITS.minPhoneNumberLength;
+  return (
+    isNonEmptyString(phoneNumber) &&
+    phoneNumber.length >= LIMITS.minPhoneNumberLength
+  );
 }

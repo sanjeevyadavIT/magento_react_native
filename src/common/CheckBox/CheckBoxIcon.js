@@ -13,7 +13,13 @@ const propTypes = {
 
 const defaultProps = {};
 
-const CheckBoxIcon = ({ size, iconType, checked, checkedIcon, uncheckedIcon }) => {
+const CheckBoxIcon = ({
+  size,
+  iconType,
+  checked,
+  checkedIcon,
+  uncheckedIcon,
+}) => {
   const { theme } = useContext(ThemeContext);
   return (
     <Icon

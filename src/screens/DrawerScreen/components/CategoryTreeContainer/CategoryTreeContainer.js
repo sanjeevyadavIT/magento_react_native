@@ -28,12 +28,7 @@ const CategoryTreeContainer = ({
 
   const renderChildren = () => {
     if (categories) {
-      return (
-        <CategoryTree
-          navigation={navigation}
-          categories={categories}
-        />
-      );
+      return <CategoryTree navigation={navigation} categories={categories} />;
     }
     return <></>;
   };

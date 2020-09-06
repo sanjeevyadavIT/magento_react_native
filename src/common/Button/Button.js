@@ -1,9 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  View,
-  StyleSheet,
-  ViewPropTypes,
-} from 'react-native';
+import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import Spinner from '../Spinner/Spinner';

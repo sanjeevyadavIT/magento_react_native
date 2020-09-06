@@ -6,11 +6,13 @@ const countryType = shape({
   full_name_locale: string.isRequired,
   two_letter_abbreviation: string.isRequired,
   three_letter_abbreviation: string.isRequired,
-  available_regions: arrayOf(shape({
-    id: string.isRequired,
-    code: string.isRequired,
-    name: string.isRequired
-  }))
+  available_regions: arrayOf(
+    shape({
+      id: string.isRequired,
+      code: string.isRequired,
+      name: string.isRequired,
+    }),
+  ),
 });
 
 export default countryType;

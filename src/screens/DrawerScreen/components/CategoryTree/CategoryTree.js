@@ -3,12 +3,7 @@ import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import CategoryTreeItem from '../CategoryTreeItem/CategoryTreeItem';
 
-const CategoryTree = ({
-  categories,
-  style,
-  navigation,
-  ...props
-}) => {
+const CategoryTree = ({ categories, style, navigation, ...props }) => {
   const renderRow = category => (
     <CategoryTreeItem navigation={navigation} category={category.item} />
   );
@@ -27,7 +22,6 @@ CategoryTree.propTypes = {
   categories: PropTypes.array.isRequired,
 };
 
-CategoryTree.defaultProps = {
-};
+CategoryTree.defaultProps = {};
 
 export default CategoryTree;
