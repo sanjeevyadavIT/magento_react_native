@@ -13,6 +13,7 @@ export default {
     borderRadius: 2,
     borderWidth: StyleSheet.hairlineWidth,
     iconSize: 23,
+    checkboxIconSize: 23,
     textInputHeight: 40,
   },
   catalogGridItemWidth: 150,

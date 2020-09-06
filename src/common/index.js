@@ -2,6 +2,7 @@ import Button from './Button/Button';
 import Card from './Card/Card';
 import CatalogGrid from './CatalogGrid/CatalogGrid';
 import CatalogGridItem from './CatalogGridItem/CatalogGridItem';
+import CheckBox from './CheckBox/CheckBox';
 import Divider from './Divider/Divider';
 import GenericTemplate from './GenericTemplate/GenericTemplate';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
@@ -22,6 +23,7 @@ export {
   Card,
   CatalogGrid,
   CatalogGridItem,
+  CheckBox,
   Divider,
   GenericTemplate,
   HeaderButtons,

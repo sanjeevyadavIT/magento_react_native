@@ -13,7 +13,7 @@ import {
   ProductScreen,
   SearchScreen,
   CategoryListScreen,
-  EditAccountAddressScreen,
+  AddEditAddressScreen,
   CheckoutAddressScreen,
   LoginScreen,
   SignupScreen,
@@ -38,7 +38,7 @@ import {
   NAVIGATION_TO_ORDER_DETAIL_SCREEN,
   NAVIGATION_TO_CART_SCREEN,
   NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN,
-  NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN,
+  NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN,
   NAVIGATION_TO_SHIPPING_SCREEN,
   NAVIGATION_TO_PAYMENT_SCREEN,
   NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN,
@@ -245,11 +245,15 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name={NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN}
-        component={EditAccountAddressScreen}
-        options={{
-          title: translate('editAddressScreen.title'),
-        }}
+        name={NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN}
+        component={AddEditAddressScreen}
+        options={({ route }) => ({
+          title: translate(
+            route.params.mode === 'edit'
+              ? 'addEditAddressScreen.editTitle'
+              : 'addEditAddressScreen.newAddressTitle',
+          ),
+        })}
       />
       <Stack.Screen
         name={NAVIGATION_TO_ADDRESS_SCREEN}

@@ -1,8 +1,8 @@
 import {
   MAGENTO,
   LOGIN_SUCCESS,
+  UPDATE_CUSTOMER,
   ACTION_USER_LOGOUT,
-  RESET_ADDRESS_STATUS,
   USER_LOGGED_IN_STATUS,
 } from '../../constants';
 import Status from '../../magento/Status';
@@ -24,15 +24,11 @@ const initialState = {
    */
   orderStatus: Status.DEFAULT,
   ordersErrorMessage: '',
-  /**
-   * state related to EditAccountAddressScreen
-   */
-  addressStatus: Status.DEFAULT,
-  addressErrorMessage: '',
 
   products: {},
   orders: [],
   customer: {
+    addresses: [],
     email: '',
     firstname: '',
     lastname: '',
@@ -70,27 +66,10 @@ export default (state = initialState, { type, payload }) => {
         status: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
-    case MAGENTO.ADD_ACCOUNT_ADDRESS_LOADING:
-      return {
-        ...state,
-        addressStatus: Status.LOADING,
-      };
-    case MAGENTO.ADD_ACCOUNT_ADDRESS_SUCCESS:
+    case UPDATE_CUSTOMER:
       return {
         ...state,
         customer: payload.customer,
-        addressStatus: Status.SUCCESS,
-      };
-    case MAGENTO.ADD_ACCOUNT_ADDRESS_FAILURE:
-      return {
-        ...state,
-        addressStatus: Status.ERROR,
-        addressErrorMessage: payload.errorMessage,
-      };
-    case RESET_ADDRESS_STATUS:
-      return {
-        ...state,
-        addressStatus: Status.DEFAULT,
       };
     case MAGENTO.GET_ORDERS_LOADING:
       return {

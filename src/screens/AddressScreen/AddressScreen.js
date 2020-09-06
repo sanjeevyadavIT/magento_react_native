@@ -3,7 +3,7 @@ import { FlatList, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Button, MessageView } from '../../common';
-import { NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN } from '../../navigation/routes';
+import { NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
@@ -12,18 +12,16 @@ import Address from './Address';
 
 const propTypes = {
   addresses: PropTypes.arrayOf(addressType),
-  customerId: PropTypes.number,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 const defaultProps = {
-  customerId: -1,
   addresses: [],
 };
 
-const AddressScreen = ({ addresses, customerId, navigation }) => {
+const AddressScreen = ({ addresses, navigation }) => {
   return (
     <GenericTemplate
       status={Status.SUCCESS}
@@ -32,8 +30,8 @@ const AddressScreen = ({ addresses, customerId, navigation }) => {
           style={styles.footer}
           title={translate('addressScreen.addNew')}
           onPress={() => {
-            navigation.navigate(NAVIGATION_TO_EDIT_ACCOUNT_ADDRESS_SCREEN, {
-              customerId,
+            navigation.navigate(NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN, {
+              mode: 'new',
             });
           }}
         />
@@ -41,12 +39,15 @@ const AddressScreen = ({ addresses, customerId, navigation }) => {
     >
       <FlatList
         data={addresses}
+        keyExtractor={item => String(item.id)}
         renderItem={({ item }) => <Address address={item} />}
-        keyExtractor={item => String(item.item_id)}
         ListEmptyComponent={
           <MessageView message={translate('addressScreen.noAddress')} />
         }
-        contentContainerStyle={styles.flatListConatiner}
+        contentContainerStyle={[
+          styles.flatListConatiner,
+          addresses.length === 0 && { flex: 1 },
+        ]}
       />
     </GenericTemplate>
   );
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     borderRadius: 0,
-  }
+  },
 });
 
 AddressScreen.propTypes = propTypes;
@@ -68,10 +69,9 @@ AddressScreen.defaultProps = defaultProps;
 
 const mapStateToProps = ({ account }) => {
   const {
-    customer: { id: customerId, addresses },
+    customer: { addresses },
   } = account;
   return {
-    customerId,
     addresses,
   };
 };

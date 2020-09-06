@@ -53,7 +53,7 @@ function* getCountries() {
     yield put({ type: MAGENTO.COUNTRIES_LOADING });
     const countries = yield call({
       content: magento,
-      fn: magento.admin.getCountries,
+      fn: magento.guest.getCountries,
     });
     yield put({ type: MAGENTO.COUNTRIES_SUCCESS, payload: { countries } });
   } catch (error) {

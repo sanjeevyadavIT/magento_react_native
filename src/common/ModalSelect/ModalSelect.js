@@ -4,10 +4,10 @@ import ModalSelector from 'react-native-modal-selector';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
+import Spinner from '../Spinner/Spinner';
 import TextInput from '../TextInput/TextInput';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-import { DIMENS } from '../../constants';
 
 const propTypes = {
   data: PropTypes.arrayOf(
@@ -21,6 +21,7 @@ const propTypes = {
   attribute: PropTypes.string,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
+  loading: PropTypes.bool,
   style: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
   placeholderTextColor: PropTypes.string,
@@ -28,6 +29,7 @@ const propTypes = {
 
 const defaultProps = {
   disabled: false,
+  loading: false,
   onChange: () => {},
   selectedKey: null,
   attribute: '',
@@ -46,6 +48,10 @@ const ModalSelect = ({
    * Disable the picker
    */
   disabled,
+  /**
+   * Show loader
+   */
+  loading,
   /**
    * Initial placeholder string shown,
    * when no option is selected
@@ -118,7 +124,7 @@ const ModalSelect = ({
   return (
     <ModalSelector
       accessible
-      disabled={disabled}
+      disabled={loading || disabled}
       data={dataWithLabel}
       onChange={_onChange}
       selectedKey={selectedKey}
@@ -128,7 +134,6 @@ const ModalSelect = ({
     >
       <TextInput
         containerStyle={StyleSheet.flatten([
-          styles.customInputContainer,
           style,
           disabled && styles.disabledContainer,
         ])}
@@ -138,11 +143,15 @@ const ModalSelect = ({
         value={value}
         placeholderTextColor={placeholderTextColor}
         rightIcon={
-          <Icon
-            name="arrow-drop-down"
-            size={30}
-            color={placeholderTextColor || theme.labelTextColor}
-          />
+          loading ? (
+            <Spinner size="small" />
+          ) : (
+            <Icon
+              name="arrow-drop-down"
+              size={30}
+              color={placeholderTextColor || theme.labelTextColor}
+            />
+          )
         }
       />
     </ModalSelector>
@@ -153,10 +162,6 @@ const ModalSelect = ({
 const styles = {
   inputStyle: {
     textAlign: 'center',
-  },
-  customInputContainer: {
-    borderWidth: 1,
-    borderRadius: DIMENS.common.borderRadius,
   },
   disabledContainer: {
     opacity: 0.5,

@@ -52,8 +52,11 @@
     "404errorMessage": "Server can not find requested resource, please check magento store url.",
     "emptyFieldsMessage": "Please fill all fields",
     "noInternetTitle": "No Internet!",
+    "invalidInput": "Please provide a valid input",
     "invalidEmail": "Please enter a valid email address",
-    "invalidPassword": "Please enter a valid password, miniumum 8 characters & with atleast one small, one capital, one digit & one special character"
+    "invalidPassword": "Please enter a valid password, miniumum 8 characters & with atleast one small, one capital, one digit & one special character",
+    "invalidFirstName": "First name cannot be blank",
+    "invalidLastName": "Last name cannot be blank"
   },
   "modalSelect": {
     "scroll": "Scrollable options",
@@ -80,9 +83,17 @@
     "cityHint": "City",
     "zipCodeLabel": "Zip Code",
     "zipCodeHint": "Zip Code",
-    "addressSaveMessage": "Address Saved Successfully!",
     "addNew": "Add new address",
-    "noAddress": "Looks like you don't have any address saved, add new address for quick checkout."
+    "noAddress": "Looks like you don't have any address saved, add new address for quick checkout.",
+    "defaultAddress": "Default Address"
+  },
+  "addEditAddressScreen": {
+    "editTitle": "Edit Address",
+    "newAddressTitle": "Add New Address",
+    "addressUpdated": "Address updated!",
+    "newAddressAdded": "New address added!",
+    "makeDefaultAddress": "Make this as my default address",
+    "selectState": "Select a state"
   },
   "cartScreen": {
     "title": "Cart",
@@ -100,9 +111,6 @@
   "drawerScreen": {
     "welcomeText": "Hello",
     "shopCategories": "Shop by Categories"
-  },
-  "editAddressScreen": {
-    "title": "Edit Address"
   },
   "forgetPasswordScreen": {
     "requestEmailId": "Enter your email address and we'll send a link on your email to reset your password.",
@@ -183,9 +191,7 @@
     "successMessage": "Signup successful, please login!",
     "firstNameHint": "First Name",
     "lastNameHint": "Last Name",
-    "signupSuccessMessage": "Account created successfully, please login",
-    "invalidFirstName": "First name cannot be blank",
-    "invalidLastName": "Last name cannot be blank"
+    "signupSuccessMessage": "Account created successfully, please login"
   },
   "splashScreen": {
     "noInternetMessage": "Looks like internet connection is off, please turn on internet connection and press ok to continue."

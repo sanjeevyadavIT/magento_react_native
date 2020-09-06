@@ -111,9 +111,6 @@ export default magento => ({
   getCmsBlock: id =>
     magento.get(`/V1/cmsBlock/${id}`, undefined, undefined, ADMIN_TYPE),
 
-  getCountries: () =>
-    magento.get('/V1/directory/countries', undefined, undefined, ADMIN_TYPE),
-
   getOrderList: customerId => {
     const path = '/V1/orders';
 
@@ -128,7 +125,7 @@ export default magento => ({
   getOrderDetail: orderId =>
     magento.get(`/V1/orders/${orderId}`, undefined, undefined, ADMIN_TYPE),
 
-  updateCustomerData: (customerId, customerData) =>
+  updateCustomerData: ({ customerId, customerData }) =>
     magento.put(
       `/V1/customers/${customerId}`,
       undefined,

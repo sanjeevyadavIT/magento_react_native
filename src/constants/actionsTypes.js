@@ -57,7 +57,6 @@ export const MAGENTO = createRequestTypes(
     'PLACE_CART_ORDER', // Place cart order
     'ORDER_DETAIL', // Fetch order detail, using orderId
     'GET_ORDERED_PRODUCT_INFO',
-    'ADD_ACCOUNT_ADDRESS', // Update Address associated with the account
   ],
   suffixTypes,
 );
@@ -77,15 +76,15 @@ export const UI = createRequestTypes(
   suffixTypes,
 );
 
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const ACTION_USER_LOGOUT = 'USER_LOGOUT';
 export const RESET_ADD_TO_CART_STATE = 'RESET_ADD_TO_CART_STATE';
 export const USER_LOGGED_IN_STATUS = 'IS_USER_LOGGED_IN';
-export const RESET_AUTH_STATE = 'RESET_AUTH_STATE';
 export const SET_NEW_CATEGORY = 'SET_NEW_CATEGORY';
 export const RESET_CHECKOUT_STATE = 'RESET_CHECKOUT_STATE'; // Reset entire checkout reducer
 export const RESET_CHECKOUT_ADDRESS_STATE = 'RESET_CHECKOUT_ADDRESS_STATE';
 export const RESET_SHIPPING_STATE = 'RESET_SHIPPING_STATE';
 export const RESET_PAYMENT_STATE = 'RESET_PAYMENT_STATE';
 export const CHANGE_CURRENCY = 'CHANGE_CURRENCY';
-export const RESET_ADDRESS_STATUS = 'RESET_ADDRESS_STATUS';
+// ---
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const ACTION_USER_LOGOUT = 'USER_LOGOUT';
+export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER';

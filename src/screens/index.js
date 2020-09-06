@@ -4,7 +4,7 @@ import CartScreen from './CartScreen/CartScreen';
 import CategoryListScreen from './CategoryListScreen/CategoryListScreen';
 import CheckoutAddressScreen from './CheckoutAddressScreen/CheckoutAddressScreen';
 import DrawerScreen from './DrawerScreen/DrawerScreen';
-import EditAccountAddressScreen from './EditAccountAddressScreen/EditAccountAddressScreen';
+import AddEditAddressScreen from './AddEditAddressScreen/AddEditAddressScreen';
 import HomeScreen from './HomeScreen/HomeScreen';
 import ProductScreen from './ProductScreen/ProductScreen';
 import SearchScreen from './SearchScreen/SearchScreen';
@@ -25,7 +25,7 @@ export {
   CartScreen,
   CategoryListScreen,
   CheckoutAddressScreen,
-  EditAccountAddressScreen,
+  AddEditAddressScreen,
   HomeScreen,
   DrawerScreen,
   ProductScreen,

@@ -1,7 +1,8 @@
 import customerType from './custom-prop-types/customerType';
 import addressType from './custom-prop-types/addressType';
+import countryType from './custom-prop-types/countryType';
 
-export { customerType, addressType };
+export { customerType, addressType, countryType };
 export * from './products';
 export * from './order';
 export * from './primitiveChecks';

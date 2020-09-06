@@ -1,5 +1,5 @@
 import { magento } from '../magento';
-import { ImageSliderItem } from '../common';
+import { ImageSliderItem } from '../common/ImageSlider/ImageSlider';
 
 export const getProductThumbnailFromAttribute = product => {
   let result = magento.getProductMediaUrl();

@@ -120,7 +120,7 @@ const SignupScreen = ({ navigation }) => {
           onSubmitEditing={() => lastNameInputRef.current.focus()}
           errorMessage={
             form.incorrectFirstName
-              ? translate('signupScreen.invalidFirstName')
+              ? translate('errors.invalidFirstName')
               : ''
           }
           onBlur={() =>
@@ -146,7 +146,7 @@ const SignupScreen = ({ navigation }) => {
           onSubmitEditing={() => emailInputRef.current.focus()}
           errorMessage={
             form.incorrectLastName
-              ? translate('signupScreen.invalidLastName')
+              ? translate('errors.invalidLastName')
               : ''
           }
           onBlur={() =>

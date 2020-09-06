@@ -1,4 +1,5 @@
 import { isNonEmptyString } from './primitiveChecks';
+import { LIMITS } from '../constants';
 
 /**
  * Return true, if email is valid else false
@@ -35,4 +36,13 @@ export function isPasswordValid(password) {
   const passwordregix = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,50}$/;
 
   return Array.isArray(password.match(passwordregix));
+}
+
+/**
+ * Basic validation for phone number
+ *
+ * @todo Add proper validation for mobile number
+ */
+export function isPhoneNumberValid(phoneNumber) {
+  return isNonEmptyString(phoneNumber) && phoneNumber.length >= LIMITS.minPhoneNumberLength;
 }

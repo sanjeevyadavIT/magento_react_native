@@ -63,7 +63,7 @@ const Card = ({
     <ViewGroup {...(onPress && { onPress })}>
       <View
         style={StyleSheet.flatten([
-          styles.conatiner(type, theme),
+          styles.container(type, theme),
           shadow,
           style,
         ])}
@@ -86,8 +86,7 @@ const shadowStyle = theme => ({
 });
 
 const styles = {
-  conatiner: (type, theme) => ({
-    flex: 1,
+  container: (type, theme) => ({
     borderWidth: type === OUTLINE ? DIMENS.common.borderWidth : 0,
     borderColor: theme.borderColor,
     borderRadius: DIMENS.common.borderRadius,

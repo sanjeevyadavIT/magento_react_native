@@ -24,6 +24,9 @@ export default magento => ({
   getCurrency: () =>
     magento.get('/V1/directory/currency', undefined, undefined, GUEST_TYPE),
 
+  getCountries: () =>
+    magento.get('/V1/directory/countries', undefined, undefined, GUEST_TYPE),
+
   resetPassword: ({ email }) =>
     magento.put(
       '/V1/customers/password',
