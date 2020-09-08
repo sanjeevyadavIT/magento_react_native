@@ -1,27 +1,90 @@
-import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { FlatList, StyleSheet, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Toast from 'react-native-simple-toast';
 import { GenericTemplate, Button, MessageView } from '../../common';
 import { NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
+import { updateCustomer} from '../../store/actions';
+import { magento } from '../../magento';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
-import { addressType } from '../../utils';
+import { customerType } from '../../utils';
 import Address from './Address';
+import { ThemeContext } from '../../theme';
 
 const propTypes = {
-  addresses: PropTypes.arrayOf(addressType),
+  customer: customerType.isRequired,
+  updateCustomer: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-const defaultProps = {
-  addresses: [],
-};
+const defaultProps = {};
 
-const AddressScreen = ({ addresses, navigation }) => {
+const AddressScreen = ({ customer, updateCustomer: _updateCustomer, navigation }) => {
+  const { addresses } = customer;
+  const [apiStatus, setApiStatus] = useState(Status.DEFAULT);
+  const [selectedAddress, setSelectedAddress] = useState(-1);
+  const { theme } = useContext(ThemeContext);
+
+  const editAddress = index =>
+    navigation.navigate(NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN, {
+      mode: 'edit',
+      address: addresses[index],
+    });
+
+  const setDefaultAddress = index => {
+    setApiStatus(Status.LOADING);
+    const address = {
+      ...addresses[index],
+      default_billing: true,
+      default_shipping: true,
+    };
+    let addressList = addresses.filter(item => item.id !== address.id);
+    addressList = addressList.map(item => ({
+      ...item,
+      default_billing: false,
+      default_shipping: false,
+    }));
+    updateProfile([...addressList, address]);
+  };
+
+  const onDelete = index => {
+    setApiStatus(Status.LOADING);
+    const addressId = addresses[index].id;
+    const addressList = addresses.filter(item => item.id !== addressId);
+    updateProfile(addressList);
+  };
+
+  const updateProfile = newAddressList => {
+    const customerData = {
+      customer: {
+        ...customer,
+        addresses: newAddressList,
+      },
+    };
+    // Api call
+    magento.admin
+      .updateCustomerData({
+        customerId: customer.id,
+        customerData,
+      })
+      .then(response => {
+        _updateCustomer(response);
+        setApiStatus(Status.SUCCESS);
+      })
+      .catch(error => {
+        Toast.show(
+          error.message || translate('errors.genericError'),
+          Toast.LONG,
+        );
+        setApiStatus(Status.ERROR);
+      });
+  }
+
   return (
     <GenericTemplate
       status={Status.SUCCESS}
@@ -40,7 +103,17 @@ const AddressScreen = ({ addresses, navigation }) => {
       <FlatList
         data={addresses}
         keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => <Address address={item} />}
+        renderItem={({ item, index }) => (
+          <Address
+            address={item}
+            disabled={apiStatus === Status.LOADING}
+            active={selectedAddress === index}
+            onPress={() => setSelectedAddress(index)}
+            onEdit={() => editAddress(index)}
+            onDelete={() => onDelete(index)}
+            setDefaultAddress={() => setDefaultAddress(index)}
+          />
+        )}
         ListEmptyComponent={
           <MessageView message={translate('addressScreen.noAddress')} />
         }
@@ -48,6 +121,13 @@ const AddressScreen = ({ addresses, navigation }) => {
           styles.flatListConatiner,
           addresses.length === 0 && { flex: 1 },
         ]}
+        refreshControl={
+          <RefreshControl
+            refreshing={apiStatus === Status.LOADING}
+            tintColor={theme.primaryColor}
+            colors={[theme.primaryColor]}
+          />
+        }
       />
     </GenericTemplate>
   );
@@ -69,11 +149,11 @@ AddressScreen.defaultProps = defaultProps;
 
 const mapStateToProps = ({ account }) => {
   const {
-    customer: { addresses },
+    customer,
   } = account;
   return {
-    addresses,
+    customer,
   };
 };
 
-export default connect(mapStateToProps)(AddressScreen);
+export default connect(mapStateToProps, { updateCustomer })(AddressScreen);

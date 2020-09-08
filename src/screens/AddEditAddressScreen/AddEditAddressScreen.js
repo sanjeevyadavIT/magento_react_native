@@ -193,6 +193,8 @@ const AddEditAddressScreen = ({
         region_code: state.code,
         region_id: state.id,
       },
+      default_billing: false,
+      default_shipping: false,
     };
 
     let addressList = [...customer.addresses];
@@ -214,6 +216,12 @@ const AddEditAddressScreen = ({
     const customerData = {
       customer: {
         ...customer,
+        ...(mode === EDIT_MODE &&
+          !defaultAddress &&
+          Number(customer.default_billing, 10) === address.id && {
+            default_billing: '',
+            default_shipping: '',
+          }),
         addresses: [...addressList, newAddress],
       },
     };

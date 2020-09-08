@@ -30,6 +30,8 @@
     "orders": "Orders",
     "address": "Address",
     "mobile": "Mobile",
+    "edit": "Edit",
+    "delete": "Delete",
     "logoutSuccessMessage": "Logout successfully!",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
@@ -85,7 +87,8 @@
     "zipCodeHint": "Zip Code",
     "addNew": "Add new address",
     "noAddress": "Looks like you don't have any address saved, add new address for quick checkout.",
-    "defaultAddress": "Default Address"
+    "defaultAddress": "Default Address",
+    "setDefaultAddress": "Set as default address"
   },
   "addEditAddressScreen": {
     "editTitle": "Edit Address",

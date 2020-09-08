@@ -22,6 +22,7 @@ const propTypes = {
   type: PropTypes.oneOf([CLEAR, OUTLINE, SHADOW]),
   style: ViewPropTypes.style,
   onPress: PropTypes.func,
+  disabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.element, null])),
@@ -31,6 +32,7 @@ const propTypes = {
 const defaultProps = {
   type: OUTLINE,
   style: {},
+  disabled: false,
   onPress: null,
 };
 
@@ -51,6 +53,10 @@ const Card = ({
    */
   onPress,
   /**
+   * Disable onPress
+   */
+  disabled,
+  /**
    * Children to render inside Card
    */
   children,
@@ -60,7 +66,7 @@ const Card = ({
   const shadow = type === SHADOW ? shadowStyle(theme) : {};
 
   return (
-    <ViewGroup {...(onPress && { onPress })}>
+    <ViewGroup {...(onPress && { onPress, disabled })}>
       <View
         style={StyleSheet.flatten([
           styles.container(type, theme),
