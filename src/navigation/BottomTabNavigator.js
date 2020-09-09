@@ -20,15 +20,18 @@ const Tab = createBottomTabNavigator();
 
 const propTypes = {
   loggedIn: PropTypes.bool.isRequired,
+  cartItemsCount: PropTypes.number,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  cartItemsCount: 0,
+};
 
 // TODO: Create a New Screen called CategoryScreen
-const BottomTabNavigator = ({ loggedIn, navigation }) => {
+const BottomTabNavigator = ({ loggedIn, cartItemsCount, navigation }) => {
   const { theme } = useContext(ThemeContext);
 
   const showLoginPrompt = () => {
@@ -105,6 +108,9 @@ const BottomTabNavigator = ({ loggedIn, navigation }) => {
         name={NAVIGATION_TO_CART_SCREEN}
         component={CartScreen}
         options={{
+          ...( cartItemsCount > 0 && ({
+            tabBarBadge: cartItemsCount < 10? cartItemsCount : '9+',
+          })),
           tabBarLabel: translate('common.cart'),
           tabBarIcon: ({ color, focused }) => (
             <Icon
@@ -132,10 +138,12 @@ BottomTabNavigator.propTypes = propTypes;
 
 BottomTabNavigator.defaultProps = defaultProps;
 
-const mapStateToProps = ({ account }) => {
+const mapStateToProps = ({ account, cart }) => {
   const { loggedIn } = account;
+  const { cart: { items_qty: cartItemsCount } = {} } = cart;
   return {
     loggedIn,
+    cartItemsCount,
   };
 };
 
