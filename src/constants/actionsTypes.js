@@ -40,7 +40,8 @@ export const MAGENTO = createRequestTypes(
      * ==========================================
      */
     'CURRENT_USER', // Fetch details of current logged in user
-    'GET_ORDERS', // Fetch all order placed by current customer
+    'GET_ORDERS', // Fetch order placed by current customer for page = 1
+    'GET_MORE_ORDERS', // Fetch order placed by current customer for page > 1
     'CATEGORY_PRODUCTS', // Fetch all products in a category
     'CATEGORY_UPDATE_CONF_PRODUCT', // Fetch price of configurable product in category list
     'MORE_CATEGORY_PRODUCTS', // Pagination in category list

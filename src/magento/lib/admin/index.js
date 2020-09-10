@@ -1,4 +1,5 @@
 import { ADMIN_TYPE } from '../../types';
+import { LIMITS } from '../../../constants';
 
 const PAGE_SIZE = 10;
 
@@ -111,12 +112,21 @@ export default magento => ({
   getCmsBlock: id =>
     magento.get(`/V1/cmsBlock/${id}`, undefined, undefined, ADMIN_TYPE),
 
-  getOrderList: customerId => {
+  getOrders: ({
+    customerId,
+    /**
+     * Number of items already fetched
+     */
+    offset = 0,
+    pageSize = LIMITS.ordersPageSize,
+  }) => {
     const path = '/V1/orders';
-
+    const currentPage = parseInt(offset / pageSize, 10) + 1;
     const params = {
       'searchCriteria[filterGroups][0][filters][0][field]': 'customer_id',
       'searchCriteria[filterGroups][0][filters][0][value]': customerId,
+      'searchCriteria[pageSize]': pageSize,
+      'searchCriteria[currentPage]': currentPage,
     };
 
     return magento.get(path, params, undefined, ADMIN_TYPE);

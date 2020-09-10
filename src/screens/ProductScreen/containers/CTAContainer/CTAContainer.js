@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from '../../../../common';
@@ -28,6 +29,15 @@ const CTAButtons = ({
   cartQuoteId,
   addToCart: _addToCart,
 }) => {
+
+  useEffect(() => {
+    if (status === Status.SUCCESS) {
+      Toast.show(translate('productScreen.addToCartSuccess'), Toast.LONG);
+    } else if (status === Status.ERROR) {
+      Toast.show(errorMessage, Toast.LONG);
+    }
+  }, [status]);
+
   const handleSimpleTypeProductAdd = (productOptions = {}) => {
     const cartItem = {
       sku,
@@ -82,12 +92,6 @@ const CTAButtons = ({
         productTypeNotSupported();
     }
   };
-
-  if (status === Status.SUCCESS) {
-    Alert.alert(translate('productScreen.addToCartSuccess'));
-  } else if (status === Status.ERROR) {
-    Alert.alert(errorMessage);
-  }
 
   return (
     <Button

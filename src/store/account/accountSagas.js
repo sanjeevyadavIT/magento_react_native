@@ -45,19 +45,42 @@ function* clearCustomerAccessToken() {
   yield AsyncStorage.removeItem(CUSTOMER_TOKEN);
 }
 
-// worker saga: Add description
-function* getOrdersForCustomer({ payload }) {
+/**
+ * Make an api call to fetch user orders, code handle pagination
+ *
+ * @param {Object} action        - action dispatch by user
+ * @param {number} customerId    - logged in user id
+ * @param {number} offset        - number of items already fetched
+ */
+function* getOrdersForCustomer({ payload: { customerId, offset } }) {
   try {
-    yield put({ type: MAGENTO.GET_ORDERS_LOADING });
-    const data = yield call(
-      { content: magento, fn: magento.admin.getOrderList },
-      payload.customerId,
+    yield put({
+      type:
+        offset === 0
+          ? MAGENTO.GET_ORDERS_LOADING
+          : MAGENTO.GET_MORE_ORDERS_LOADING,
+    });
+    const response = yield call(
+      { content: magento, fn: magento.admin.getOrders },
+      { customerId, offset },
     );
-    const orders = data.items.map(parseOrderDetail);
-    yield put({ type: MAGENTO.GET_ORDERS_SUCCESS, payload: { orders } });
+    const orders = response.items.map(parseOrderDetail);
+    yield put({
+      type:
+        offset === 0
+          ? MAGENTO.GET_ORDERS_SUCCESS
+          : MAGENTO.GET_MORE_ORDERS_SUCCESS,
+      payload: {
+        orders,
+        totalOrders: response.total_count,
+      },
+    });
   } catch (error) {
     yield put({
-      type: MAGENTO.GET_ORDERS_FAILURE,
+      type:
+        offset === 0
+          ? MAGENTO.GET_ORDERS_FAILURE
+          : MAGENTO.GET_MORE_ORDERS_FAILURE,
       payload: { errorMessage: error.message },
     });
   }

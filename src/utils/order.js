@@ -2,6 +2,7 @@
 export const parseOrderDetail = _order => {
   const order = { ..._order };
   const { items } = order;
+  // Items list contain 'simple' & 'configurable' both type of data
   const simpleItems = items.filter(i => i.product_type === 'simple');
   const simpleItemsWithPriceAndName = simpleItems.map(_simpleItem => {
     const simpleItem = { ..._simpleItem };

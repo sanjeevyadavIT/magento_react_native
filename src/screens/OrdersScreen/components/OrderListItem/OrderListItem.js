@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { Card, Text, Price } from '../../../../common';
 import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../../../navigation/routes';
 import { ThemeContext } from '../../../../theme';
 import { translate } from '../../../../i18n';
 import { SPACING } from '../../../../constants';
+import { orderType } from '../../../../utils';
 import { priceSignByCode } from '../../../../utils/price';
 
 const OrderListItem = ({ item }) => {
@@ -22,7 +22,7 @@ const OrderListItem = ({ item }) => {
 
   return (
     <Card style={styles.mainContainer(theme)} onPress={onPress}>
-      <View style={styles.infoContainer(theme)}>
+      <View style={styles.infoContainer}>
         <Text>{`${translate('common.order')} # ${item.increment_id}`}</Text>
         <Text>{`${translate('orderScreen.orderCreated')}: ${
           item.created_at
@@ -51,21 +51,19 @@ const styles = StyleSheet.create({
     backgroundColor: theme.white,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: SPACING.small,
-    marginRight: SPACING.small,
-    marginBottom: SPACING.small,
+    marginBottom: SPACING.large,
   }),
-  infoContainer: theme => ({
+  infoContainer: {
     flex: 1,
     padding: SPACING.small,
-  }),
+  },
   row: {
     flexDirection: 'row',
   },
 });
 
 OrderListItem.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: orderType.isRequired,
 };
 
 OrderListItem.defaultProps = {};

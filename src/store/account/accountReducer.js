@@ -20,13 +20,19 @@ const initialState = {
   status: Status.DEFAULT,
   errorMessage: '',
   /**
-   * state related to OrdersScreen
+   * Api state related to orders api for page = 1
    */
-  orderStatus: Status.DEFAULT,
+  ordersStatus: Status.DEFAULT,
   ordersErrorMessage: '',
-
+  /**
+   * Api state related to orders api for page > 1
+   */
+  moreOrdersStatus: Status.DEFAULT,
+  moreOrdersErrorMessage: '',
+  // ---
   products: {},
   orders: [],
+  totalOrders: 0,
   customer: {
     addresses: [],
     email: '',
@@ -74,19 +80,42 @@ export default (state = initialState, { type, payload }) => {
     case MAGENTO.GET_ORDERS_LOADING:
       return {
         ...state,
-        orderStatus: Status.LOADING,
+        ordersStatus: Status.LOADING,
+        ordersErrorMessage: '',
+        moreOrdersStatus: Status.DEFAULT,
+        moreOrdersErrorMessage: '',
+        totalOrders: 0,
       };
     case MAGENTO.GET_ORDERS_SUCCESS:
       return {
         ...state,
-        orderStatus: Status.SUCCESS,
-        ...payload,
+        ordersStatus: Status.SUCCESS,
+        orders: payload.orders,
+        totalOrders: payload.totalOrders,
       };
     case MAGENTO.GET_ORDERS_FAILURE:
       return {
         ...state,
-        orderStatus: Status.ERROR,
+        ordersStatus: Status.ERROR,
         ordersErrorMessage: payload.errorMessage,
+      };
+      case MAGENTO.GET_MORE_ORDERS_LOADING:
+      return {
+        ...state,
+        moreOrdersStatus: Status.LOADING,
+        moreOrdersErrorMessage: '',
+      };
+    case MAGENTO.GET_MORE_ORDERS_SUCCESS:
+      return {
+        ...state,
+        moreOrdersStatus: Status.SUCCESS,
+        orders: [...state.orders, ...payload.orders],
+      };
+    case MAGENTO.GET_MORE_ORDERS_FAILURE:
+      return {
+        ...state,
+        moreOrdersStatus: Status.ERROR,
+        moreOrdersErrorMessage: payload.errorMessage,
       };
     case MAGENTO.GET_ORDERED_PRODUCT_INFO_SUCCESS:
       return {

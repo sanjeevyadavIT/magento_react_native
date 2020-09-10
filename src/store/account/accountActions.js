@@ -43,9 +43,15 @@ export const logout = () => ({
   type: ACTION_USER_LOGOUT,
 });
 
-export const getOrderList = customerId => ({
+/**
+ * Fetch logged in user orders
+ *
+ * @param {number} customerId  - Logged in user id
+ * @param {number} offset      - Number of items already fetched
+ */
+export const getOrders = (customerId, offset = 0) => ({
   type: MAGENTO.GET_ORDERS_REQUEST,
-  payload: { customerId },
+  payload: { customerId, offset },
 });
 
 export const getOrderedProductInfo = sku => ({

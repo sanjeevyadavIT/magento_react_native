@@ -32,6 +32,7 @@
     "mobile": "Mobile",
     "edit": "Edit",
     "delete": "Delete",
+    "loadMore": "Load more",
     "logoutSuccessMessage": "Logout successfully!",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
