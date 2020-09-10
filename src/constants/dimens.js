@@ -16,9 +16,6 @@ export default {
     checkboxIconSize: 23,
     textInputHeight: 40,
   },
-  catalogGridItemWidth: 150,
-  catalogGridItemHeight: 200,
-  catalogGridItemImageHeight: 120,
   /**
    * Constants related to DrawerScreen
    */
@@ -33,6 +30,16 @@ export default {
     profileImageSize: 100,
   },
   /**
+   * Constants related to OrdersScreen
+   */
+  ordersScreen: {
+    productWidth: 70,
+    productHeight: 100,
+  },
+  catalogGridItemWidth: 150,
+  catalogGridItemHeight: 200,
+  catalogGridItemImageHeight: 120,
+  /**
    * HomeScreen constnats
    */
   homePageSliderHeight: 200,
@@ -46,9 +53,4 @@ export default {
    */
   cartListImageHeight: 120,
   cartListImageWidth: 120,
-  /**
-   * OrderDetailScreen constants
-   */
-  orderDetailImageWidth: 100,
-  orderDetailImageHeight: 100,
 };

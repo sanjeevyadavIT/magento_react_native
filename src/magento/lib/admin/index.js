@@ -125,6 +125,8 @@ export default magento => ({
     const params = {
       'searchCriteria[filterGroups][0][filters][0][field]': 'customer_id',
       'searchCriteria[filterGroups][0][filters][0][value]': customerId,
+      'searchCriteria[sortOrders][0][field]': 'created_at',
+      'searchCriteria[sortOrders][0][direction]': 'DESC',
       'searchCriteria[pageSize]': pageSize,
       'searchCriteria[currentPage]': currentPage,
     };

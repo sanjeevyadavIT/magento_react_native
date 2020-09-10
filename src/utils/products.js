@@ -9,6 +9,7 @@ export const getProductThumbnailFromAttribute = product => {
       result += attribute.value;
       return true;
     }
+    return false;
   });
   return result;
 };

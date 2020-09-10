@@ -161,7 +161,7 @@ const StackNavigator = () => {
         name={NAVIGATION_TO_ORDERS_SCREEN}
         component={OrdersScreen}
         options={{
-          title: translate('orderScreen.ordersScreenTitle'),
+          title: translate('ordersScreen.title'),
         }}
       />
       <Stack.Screen
@@ -172,7 +172,7 @@ const StackNavigator = () => {
           const orderNumber = item ? item.increment_id : orderId;
           return {
             title: `${translate(
-              'orderScreen.orderDetailScreenTitle',
+              'ordersScreen.orderDetailScreenTitle',
             )}: ${orderNumber}`,
           };
         }}
@@ -227,7 +227,7 @@ const StackNavigator = () => {
         name={NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN}
         component={OrderAcknowledgementScreen}
         options={{
-          title: translate('orderScreen.orderPlacedScreenTitle'),
+          title: translate('ordersScreen.orderPlacedScreenTitle'),
         }}
       />
       <Stack.Screen

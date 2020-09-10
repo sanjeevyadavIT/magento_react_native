@@ -9,7 +9,7 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { getProductThumbnailFromAttribute } from '../../utils';
 import { priceSignByCode } from '../../utils/price';
-import { DIMENS, SPACING } from '../../constants';
+import { DIMENS, SPACING, CONFIGURABLE_TYPE_SK } from '../../constants';
 
 // TODO: Show product image in place of placeholder
 const OrderDetailScreen = ({
@@ -48,9 +48,9 @@ const OrderDetailScreen = ({
     sku in products ? getProductThumbnailFromAttribute(products[sku]) : null;
 
   const renderItem = ({ item: product }) => (
-    <Card style={styles.card(theme)}>
+    <Card style={styles.card}>
       <Image
-        style={styles.imageStyle(theme)}
+        style={styles.imageStyle}
         source={{ uri: getImageUrl(product.sku) }}
       />
       <View>
@@ -79,7 +79,7 @@ const OrderDetailScreen = ({
 
   const renderFooter = () => (
     <>
-      <Text>{`${translate('orderScreen.orderStatus')}: ${item.status}`}</Text>
+      <Text>{`${translate('ordersScreen.orderStatus')}: ${item.status}`}</Text>
       <View style={styles.row}>
         <Text>{`${translate('common.subTotal')}: `}</Text>
         <Price
@@ -123,7 +123,7 @@ const OrderDetailScreen = ({
     return (
       <FlatList
         style={styles.container}
-        data={item.items}
+        data={item.items.filter(entity => entity.product_type !== CONFIGURABLE_TYPE_SK)}
         renderItem={renderItem}
         ListFooterComponent={renderFooter}
         keyExtractor={_item => _item.sku}
@@ -142,19 +142,19 @@ const OrderDetailScreen = ({
 };
 
 const styles = StyleSheet.create({
-  card: theme => ({
+  card: {
     flexDirection: 'row',
     flex: 1,
     marginHorizontal: SPACING.small,
     marginBottom: SPACING.small,
-  }),
+  },
 
-  imageStyle: theme => ({
+  imageStyle: {
     resizeMode: 'contain',
-    width: DIMENS.orderDetailImageWidth,
-    height: DIMENS.orderDetailImageHeight,
+    width: DIMENS.ordersScreen.productWidth,
+    height: DIMENS.ordersScreen.productHeight,
     marginRight: SPACING.small,
-  }),
+  },
   infoContainer: {
     flex: 1,
   },

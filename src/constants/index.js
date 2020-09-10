@@ -5,3 +5,4 @@ import LIMITS from './limits';
 
 export { DIMENS, SPACING, TYPOGRAPHY, LIMITS };
 export * from './actionsTypes';
+export * from './stringsConstants';

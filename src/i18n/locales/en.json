@@ -13,7 +13,6 @@
     "quantity": "Qty",
     "sku": "SKU",
     "discount": "Discount",
-    "order": "Order",
     "select": "Select",
     "save": "Save",
     "login": "Login",
@@ -27,7 +26,10 @@
     "cart": "Cart",
     "logout": "Logout",
     "pullToRefresh": "",
+    "order": "Order",
     "orders": "Orders",
+    "orderNumber": "Order no",
+    "placedOn": "Placed On",
     "address": "Address",
     "mobile": "Mobile",
     "edit": "Edit",
@@ -135,19 +137,17 @@
     "createAccount": "Create an account(Signup)",
     "forgotPassword": "Forgot Password"
   },
-  "orderScreen": {
+  "ordersScreen": {
+    "title": "Orders",
     "orderPlacedScreenTitle": "Order Confirmation",
     "orderDetailScreenTitle": "Order no",
-    "ordersScreenTitle": "My Orders",
     "orderStatus": "Status",
     "orderNotPlace": "Sorry for the inconvenience, unable to place your order!",
     "viewOrderButton": "View Order",
     "continueButton": "Continue Shopping",
     "orderPlaced": "Order Confirmed",
-    "orderPlacedMessage": "You will receive an order confirmation email shortly.",
     "orderTotal": "Order Total",
     "shipTo": "Ship to",
-    "orderCreated": "Created",
     "orderEmptyMessage": "You haven't placed any order"
   },
   "paymentScreen": {

@@ -20,7 +20,7 @@ const OrderAcknowledgementScreen = ({
   const {
     status = Status.ERROR,
     orderId,
-    errorMessage = translate('orderScreen.orderNotPlace'),
+    errorMessage = translate('ordersScreen.orderNotPlace'),
   } = route.params;
   const { theme } = useContext(ThemeContext);
 
@@ -35,14 +35,14 @@ const OrderAcknowledgementScreen = ({
   const renderFooter = () => (
     <View>
       <Button
-        title={translate('orderScreen.viewOrderButton')}
+        title={translate('ordersScreen.viewOrderButton')}
         onPress={() =>
           navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, { orderId })
         }
       />
       <View style={styles.space(theme)} />
       <Button
-        title={translate('orderScreen.continueButton')}
+        title={translate('ordersScreen.continueButton')}
         onPress={() => navigation.popToTop()}
       />
     </View>
@@ -57,9 +57,9 @@ const OrderAcknowledgementScreen = ({
       <View style={styles.container}>
         <Icon name="verified-user" size={30} color="#4caf50" />
         <Text type="subheading" bold>
-          {translate('orderScreen.orderPlaced')}
+          {translate('ordersScreen.orderPlaced')}
         </Text>
-        <Text>{translate('orderScreen.orderPlacedMessage')}</Text>
+        <Text>{translate('ordersScreen.orderPlacedMessage')}</Text>
       </View>
     </GenericTemplate>
   );
