@@ -1,7 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { magento } from '../../magento';
 import { MAGENTO } from '../../constants';
-import { parseOrderDetail } from '../../utils';
 
 // worker saga: Add Description
 function* addCartBillingAddress({ payload }) {
@@ -80,24 +79,6 @@ function* placeCartOrder({ payload }) {
   }
 }
 
-// worker saga: Add Description
-function* getOrderDetail({ payload }) {
-  try {
-    yield put({ type: MAGENTO.ORDER_DETAIL_LOADING });
-    const data = yield call(
-      { content: magento, fn: magento.admin.getOrderDetail },
-      payload.orderId,
-    );
-    const order = parseOrderDetail(data);
-    yield put({ type: MAGENTO.ORDER_DETAIL_SUCCESS, payload: { order } });
-  } catch (error) {
-    yield put({
-      type: MAGENTO.ORDER_DETAIL_FAILURE,
-      payload: { errorMessage: error.message },
-    });
-  }
-}
-
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
   yield takeLatest(
@@ -107,5 +88,4 @@ export default function* watcherSaga() {
   yield takeLatest(MAGENTO.GET_SHIPPING_METHOD_REQUEST, getShippingMethod);
   yield takeLatest(MAGENTO.ADD_CART_SHIPPING_INFO_REQUEST, addCartShippingInfo);
   yield takeLatest(MAGENTO.PLACE_CART_ORDER_REQUEST, placeCartOrder);
-  yield takeLatest(MAGENTO.ORDER_DETAIL_REQUEST, getOrderDetail);
 }

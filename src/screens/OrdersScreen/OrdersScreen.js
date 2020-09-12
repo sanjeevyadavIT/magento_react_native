@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrders } from '../../store/actions';
 import { GenericTemplate, MessageView, Spinner, Button } from '../../common';
-import { OrderListItem } from './components';
+import OrderListItem from './OrderListItem';
 import Status from '../../magento/Status';
 import { SPACING } from '../../constants';
 import { translate } from '../../i18n';

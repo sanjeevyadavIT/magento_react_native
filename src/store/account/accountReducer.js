@@ -30,7 +30,6 @@ const initialState = {
   moreOrdersStatus: Status.DEFAULT,
   moreOrdersErrorMessage: '',
   // ---
-  products: {},
   orders: [],
   totalOrders: 0,
   customer: {
@@ -116,14 +115,6 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         moreOrdersStatus: Status.ERROR,
         moreOrdersErrorMessage: payload.errorMessage,
-      };
-    case MAGENTO.GET_ORDERED_PRODUCT_INFO_SUCCESS:
-      return {
-        ...state,
-        products: {
-          ...state.products,
-          [payload.sku]: payload.product,
-        },
       };
     case ACTION_USER_LOGOUT:
       return initialState;

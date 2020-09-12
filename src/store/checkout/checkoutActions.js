@@ -30,11 +30,6 @@ export const placeCartOrder = paymentInformation => ({
   payload: { paymentInformation },
 });
 
-export const getOrderDetail = orderId => ({
-  type: MAGENTO.ORDER_DETAIL_REQUEST,
-  payload: { orderId },
-});
-
 // reset entire checkout state
 export const resetCheckoutState = () => ({
   type: RESET_CHECKOUT_STATE,

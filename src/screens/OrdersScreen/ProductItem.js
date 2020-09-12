@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
-import { Text, Price, Image } from '../../../../common';
-import { translate } from '../../../../i18n';
-import { SPACING, DIMENS } from '../../../../constants';
-import { isObject } from '../../../../utils';
+import { Text, Price } from '../../common';
+import { translate } from '../../i18n';
+import { SPACING, DIMENS } from '../../constants';
+import { isObject } from '../../utils';
 
 const propTypes = {
   item: PropTypes.shape({
@@ -18,12 +18,16 @@ const propTypes = {
     }),
   }).isRequired,
   currencySymbol: PropTypes.string.isRequired,
+  containerStyle: ViewPropTypes.style,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  containerStyle: {},
+};
 
-const ProductItem = ({ item: product, currencySymbol = '$' }) => {
-  let { name, price, rowTotal } = product;
+// TODO: Fetch Media of each product and show image
+const ProductItem = ({ item: product, currencySymbol = '$', containerStyle }) => {
+  let { name, price, row_total: rowTotal } = product;
 
   if (isObject(product.parent_item)) {
     name = product.parent_item.name || name;
@@ -34,11 +38,12 @@ const ProductItem = ({ item: product, currencySymbol = '$' }) => {
   }
 
   return (
-    <View style={styles.card}>
-      <Image
+    <View style={[styles.card, containerStyle]}>
+      {/* Will be done in future */}
+      {/* <Image
         style={styles.imageStyle}
         source={{ uri: 'https://via.placeholder.com/150' }}
-      />
+      /> */}
       <View style={styles.detailContainer}>
         <Text bold>{name}</Text>
         <Text>{`${translate('common.sku')}: ${product.sku}`}</Text>

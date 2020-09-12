@@ -1,198 +1,207 @@
-import React, { useContext, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useMemo, useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import { Text, Card, Image, Price, GenericTemplate } from '../../common';
-import { getOrderDetail, getOrderedProductInfo } from '../../store/actions';
+import {
+  Card,
+  Text,
+  Icon,
+  Price,
+  GenericTemplate,
+  Divider,
+} from '../../common';
 import Status from '../../magento/Status';
-import { ThemeContext } from '../../theme';
+import { magento } from '../../magento';
 import { translate } from '../../i18n';
-import { getProductThumbnailFromAttribute } from '../../utils';
+import { ThemeContext } from '../../theme';
+import {
+  orderType,
+  isDateValid,
+  getFormattedDate,
+  stringToDate,
+} from '../../utils';
 import { priceSignByCode } from '../../utils/price';
-import { DIMENS, SPACING, CONFIGURABLE_TYPE_SK } from '../../constants';
+import { SPACING, CONFIGURABLE_TYPE_SK } from '../../constants';
+import ProductItem from '../OrdersScreen/ProductItem';
+
+const propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      orderId: PropTypes.number,
+      order: orderType,
+    }),
+  }).isRequired,
+};
+
+const defaultProps = {};
 
 // TODO: Show product image in place of placeholder
 const OrderDetailScreen = ({
-  status,
-  products,
-  orderDetail,
-  errorMessage,
-  route,
-  navigation,
-  getOrderDetail: _getOrderDetail,
-  getOrderedProductInfo: _getOrderedProductInfo,
+  route: {
+    params: { orderId = -1, order = {} },
+  },
 }) => {
-  const { orderId = -1, item = orderDetail } = route.params;
-  const currencySymbol = priceSignByCode(
-    (item && item.order_currency_code) || '$',
+  const [apiStatus, setApiStatus] = useState(
+    orderId === -1 ? Status.SUCCESS : Status.DEFAULT,
   );
+  const [errorMessage, setErrorMessage] = useState('');
+  const [orderDetail, setOrderDetail] = useState(order);
   const { theme } = useContext(ThemeContext);
+  const listItemStyle = useMemo(() => styles.listItem(theme), [theme]);
+  const currencySymbol =
+    priceSignByCode(orderDetail.order_currency_code) || '$';
+  const placedOn = stringToDate(order.created_at);
 
   useEffect(() => {
-    if (!item && !orderDetail) {
-      _getOrderDetail(orderId);
+    if (orderId !== -1) {
+      magento.admin.getOrderDetail(orderId)
+        .then(orderResponse => {
+          setOrderDetail(orderResponse);
+          setApiStatus(Status.SUCCESS);
+        })
+        .catch(error => {
+          setApiStatus(Status.ERROR);
+          setErrorMessage(error.message);
+        });
     }
   }, []);
 
-  useEffect(() => {
-    if (item) {
-      item.items.forEach(_item => {
-        if (!(_item.sku in products)) {
-          _getOrderedProductInfo(_item.sku);
-        }
-      });
-    }
-  }, [item]);
-
-  const getImageUrl = sku =>
-    sku in products ? getProductThumbnailFromAttribute(products[sku]) : null;
-
-  const renderItem = ({ item: product }) => (
-    <Card style={styles.card}>
-      <Image
-        style={styles.imageStyle}
-        source={{ uri: getImageUrl(product.sku) }}
-      />
-      <View>
-        <Text>{product.name}</Text>
-        <Text>{`${translate('common.sku')}: ${product.sku}`}</Text>
-        <View style={styles.row}>
-          <Text>{`${translate('common.price')}: `}</Text>
-          <Price
-            basePrice={product.price}
-            currencySymbol={currencySymbol}
-            currencyRate={1}
-          />
-        </View>
-        <Text>{`${translate('common.quantity')}: ${product.qty_ordered}`}</Text>
+  const renderHeader = () => (
+    <>
+      <Card type="clear" style={styles.headerContainer}>
+        <Text>{`${translate('common.status')}: ${
+          orderDetail.status
+        }`}</Text>
+        <Text>{`${translate('common.placedOn')}: ${
+          isDateValid(placedOn) ? getFormattedDate(placedOn) : order.created_at
+        }`}</Text>
         <View style={styles.row}>
           <Text>{`${translate('common.subTotal')}: `}</Text>
           <Price
-            basePrice={product.row_total}
+            basePrice={orderDetail.subtotal}
             currencySymbol={currencySymbol}
             currencyRate={1}
           />
         </View>
-      </View>
-    </Card>
-  );
-
-  const renderFooter = () => (
-    <>
-      <Text>{`${translate('ordersScreen.orderStatus')}: ${item.status}`}</Text>
-      <View style={styles.row}>
-        <Text>{`${translate('common.subTotal')}: `}</Text>
-        <Price
-          basePrice={item.subtotal}
-          currencySymbol={currencySymbol}
-          currencyRate={1}
-        />
-      </View>
-      <View style={styles.row}>
-        <Text>{`${translate('common.shippingAndHandling')}: `}</Text>
-        <Price
-          basePrice={item.shipping_amount}
-          currencySymbol={currencySymbol}
-          currencyRate={1}
-        />
-      </View>
-      <View style={styles.row}>
-        <Text>{`${translate('common.discount')}: - `}</Text>
-        <Price
-          basePrice={Math.abs(item.discount_amount)}
-          currencySymbol={currencySymbol}
-          currencyRate={1}
-        />
-      </View>
-      <View style={styles.row}>
-        <Text>{`${translate('common.grandTotal')}: `}</Text>
-        <Price
-          basePrice={item.total_due}
-          currencySymbol={currencySymbol}
-          currencyRate={1}
-        />
-      </View>
+        <View style={styles.row}>
+          <Text>{`${translate('common.shippingAndHandling')}: `}</Text>
+          <Price
+            basePrice={orderDetail.shipping_amount}
+            currencySymbol={currencySymbol}
+            currencyRate={1}
+          />
+        </View>
+        <View style={styles.row}>
+          <Text>{`${translate('common.discount')}: - `}</Text>
+          <Price
+            basePrice={Math.abs(orderDetail.discount_amount)}
+            currencySymbol={currencySymbol}
+            currencyRate={1}
+          />
+        </View>
+        <View style={styles.row}>
+          <Text>{`${translate('common.grandTotal')}: `}</Text>
+          <Price
+            basePrice={orderDetail.total_due}
+            currencySymbol={currencySymbol}
+            currencyRate={1}
+          />
+        </View>
+        <Divider style={styles.divider} />
+        <Text style={styles.label} type="label">
+          {translate('orderDetailScreen.updatesSentOn')}
+        </Text>
+        <View style={styles.row}>
+          <Icon
+            name="phone"
+            type="antdesign"
+            size={14}
+            color={theme.successColor}
+            style={styles.iconStyle}
+          />
+          <Text>{orderDetail.billing_address.telephone}</Text>
+        </View>
+        <View style={styles.row}>
+          <Icon
+            name="email"
+            type="fontisto"
+            size={14}
+            color={theme.errorColor}
+            style={styles.iconStyle}
+          />
+          <Text>{orderDetail.billing_address.email}</Text>
+        </View>
+        <Divider style={styles.divider} />
+        <Text style={styles.label} type="label">
+          {translate('addressScreen.billingAndShippingAddress')}
+        </Text>
+        <Text bold>{`${orderDetail.billing_address.firstname} ${
+          orderDetail.billing_address.lastname || ''
+        }`}</Text>
+        <Text>{`${orderDetail.billing_address.street.reduce(
+          (total, part) => `${total}${part}, `,
+          '',
+        )}${orderDetail.billing_address.city}, ${
+          orderDetail.billing_address.region
+        } - ${orderDetail.billing_address.postcode}`}</Text>
+      </Card>
+      <Text style={styles.listLabel} bold>
+        {translate('orderDetailScreen.itemsOrdered')}
+      </Text>
     </>
   );
 
-  const renderChildren = () => {
-    if (!item) {
-      return <></>;
-    }
-
-    return (
+  return (
+    <GenericTemplate status={apiStatus} errorMessage={errorMessage}>
       <FlatList
-        style={styles.container}
-        data={item.items.filter(entity => entity.product_type !== CONFIGURABLE_TYPE_SK)}
-        renderItem={renderItem}
-        ListFooterComponent={renderFooter}
+        data={(orderDetail.items || []).filter(
+          entity => entity.product_type !== CONFIGURABLE_TYPE_SK,
+        )}
+        renderItem={({ item }) => (
+          <ProductItem
+            item={item}
+            currencySymbol={currencySymbol}
+            containerStyle={listItemStyle}
+          />
+        )}
+        ListHeaderComponent={renderHeader}
         keyExtractor={_item => _item.sku}
       />
-    );
-  };
-
-  return (
-    <GenericTemplate
-      status={!item ? status : Status.SUCCESS}
-      errorMessage={errorMessage}
-    >
-      {renderChildren()}
     </GenericTemplate>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    flex: 1,
-    marginHorizontal: SPACING.small,
-    marginBottom: SPACING.small,
-  },
-
-  imageStyle: {
-    resizeMode: 'contain',
-    width: DIMENS.ordersScreen.productWidth,
-    height: DIMENS.ordersScreen.productHeight,
-    marginRight: SPACING.small,
-  },
-  infoContainer: {
-    flex: 1,
+  headerContainer: {
+    padding: SPACING.large,
+    marginBottom: SPACING.large,
   },
   row: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
+  divider: {
+    marginVertical: SPACING.large,
+  },
+  label: {
+    marginBottom: SPACING.tiny,
+  },
+  iconStyle: {
+    marginEnd: SPACING.small,
+  },
+  listLabel: {
+    paddingHorizontal: SPACING.large,
+    marginBottom: SPACING.small,
+  },
+  listItem: theme => ({
+    backgroundColor: theme.surfaceColor,
+    paddingHorizontal: SPACING.large,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: theme.borderColor,
+  }),
 });
 
-OrderDetailScreen.propTypes = {
-  status: PropTypes.oneOf(Object.values(Status)).isRequired,
-  orderDetail: PropTypes.object,
-  errorMessage: PropTypes.string,
-  getOrderDetail: PropTypes.func.isRequired,
-  getOrderedProductInfo: PropTypes.func.isRequired,
-  products: PropTypes.object.isRequired,
-};
+OrderDetailScreen.propTypes = propTypes;
 
-OrderDetailScreen.defaultProps = {
-  errorMessage: '',
-  orderDetail: null,
-};
+OrderDetailScreen.defaultProps = defaultProps;
 
-const mapStateToProps = ({ checkout, account }) => {
-  const { products } = account;
-  const {
-    order: orderDetail,
-    orderDetailStatus: status,
-    errorMessage,
-  } = checkout;
-  return {
-    products,
-    status,
-    orderDetail,
-    errorMessage,
-  };
-};
-
-export default connect(mapStateToProps, {
-  getOrderDetail,
-  getOrderedProductInfo,
-})(OrderDetailScreen);
+export default OrderDetailScreen;

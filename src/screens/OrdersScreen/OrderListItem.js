@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { Card, Text, Price, Divider } from '../../../../common';
-import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../../../navigation/routes';
-import { translate } from '../../../../i18n';
-import { SPACING, CONFIGURABLE_TYPE_SK } from '../../../../constants';
+import { Card, Text, Divider } from '../../common';
+import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../navigation/routes';
+import { translate } from '../../i18n';
+import { SPACING, CONFIGURABLE_TYPE_SK } from '../../constants';
 import {
   orderType,
   isDateValid,
   stringToDate,
   getFormattedDate,
-} from '../../../../utils';
-import { priceSignByCode } from '../../../../utils/price';
+} from '../../utils';
+import { priceSignByCode } from '../../utils/price';
 import ProductItem from './ProductItem';
 
 const propTypes = {
@@ -36,7 +36,7 @@ const OrderListItem = ({ item: order, navigation }) => {
 
   const onPress = () => {
     navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, {
-      item: order,
+      order,
     });
   };
 
@@ -44,36 +44,26 @@ const OrderListItem = ({ item: order, navigation }) => {
     <Card style={styles.container} onPress={onPress}>
       <View style={styles.orderDetailsContainer}>
         <View style={styles.orderNumberContainer}>
-          <Text>{`${translate('common.orderNumber')}: `}</Text>
-          <Text bold>{order.increment_id}</Text>
+          <Text type="subheading">{`${translate('common.orderNumber')}: `}</Text>
+          <Text type="subheading" bold>{order.increment_id}</Text>
         </View>
         <Text>{`${translate('common.placedOn')}: ${
           isDateValid(placedOn) ? getFormattedDate(placedOn) : order.created_at
         }`}</Text>
-        <Text>
-          {`${translate('ordersScreen.shipTo')}: ${
-            order.billing_address.firstname
-          } ${order.billing_address.lastname}`}
-        </Text>
-        <View style={styles.row}>
-          <Text>{`${translate('ordersScreen.orderTotal')}: `}</Text>
-          <Price
-            basePrice={order.grand_total}
-            currencySymbol={currencySymbol}
-            currencyRate={1}
-          />
-        </View>
-        <Text>{`${translate('ordersScreen.orderStatus')}: ${
+        <Text>{`${translate('common.status')}: ${
           order.status
         }`}</Text>
       </View>
       {order.items
         .filter(item => item.product_type !== CONFIGURABLE_TYPE_SK)
         .map(item => (
-          <>
+          <View key={item.sku}>
             <Divider />
-            <ProductItem key={item.sku} item={item} />
-          </>
+            <ProductItem
+              item={item}
+              currencySymbol={currencySymbol}
+            />
+          </View>
         ))}
     </Card>
   );

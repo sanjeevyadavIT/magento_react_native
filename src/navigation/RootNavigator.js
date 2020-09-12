@@ -48,6 +48,7 @@ import {
 import { translate } from '../i18n';
 import { magento } from '../magento';
 import BottomTabNavigator from './BottomTabNavigator';
+import { isObject } from '../utils';
 
 const Stack = createStackNavigator();
 
@@ -168,11 +169,14 @@ const StackNavigator = () => {
         name={NAVIGATION_TO_ORDER_DETAIL_SCREEN}
         component={OrderDetailScreen}
         options={({ route }) => {
-          const { item, orderId } = route.params;
-          const orderNumber = item ? item.increment_id : orderId;
+          const { order, orderId } = route.params;
+          const orderNumber =
+            isObject(order) && Object.keys(order).length > 0
+              ? order.increment_id
+              : orderId;
           return {
             title: `${translate(
-              'ordersScreen.orderDetailScreenTitle',
+              'orderDetailScreen.title',
             )}: ${orderNumber}`,
           };
         }}
@@ -227,7 +231,7 @@ const StackNavigator = () => {
         name={NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN}
         component={OrderAcknowledgementScreen}
         options={{
-          title: translate('ordersScreen.orderPlacedScreenTitle'),
+          title: translate('orderAcknowledgementScreen.title'),
         }}
       />
       <Stack.Screen

@@ -19,7 +19,6 @@ const INITIAL_STATE = {
   payment: null,
   //-------------------------------------
   orderStatus: Status.DEFAULT,
-  orderDetailStatus: Status.DEFAULT,
   //-------------------------------------
   errorMessage: '',
 };
@@ -92,23 +91,6 @@ export default (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         orderStatus: Status.ERROR,
-        errorMessage: payload.errorMessage,
-      };
-    case MAGENTO.ORDER_DETAIL_LOADING:
-      return {
-        ...state,
-        orderDetailStatus: Status.LOADING,
-      };
-    case MAGENTO.ORDER_DETAIL_SUCCESS:
-      return {
-        ...state,
-        orderDetailStatus: Status.SUCCESS,
-        order: payload.order,
-      };
-    case MAGENTO.ORDER_DETAIL_FAILURE:
-      return {
-        ...state,
-        orderDetailStatus: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
     case RESET_PAYMENT_STATE:

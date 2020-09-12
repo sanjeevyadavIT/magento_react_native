@@ -53,8 +53,3 @@ export const getOrders = (customerId, offset = 0) => ({
   type: MAGENTO.GET_ORDERS_REQUEST,
   payload: { customerId, offset },
 });
-
-export const getOrderedProductInfo = sku => ({
-  type: MAGENTO.GET_ORDERED_PRODUCT_INFO_REQUEST,
-  payload: { sku },
-});

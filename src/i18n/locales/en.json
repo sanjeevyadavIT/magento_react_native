@@ -35,6 +35,7 @@
     "edit": "Edit",
     "delete": "Delete",
     "loadMore": "Load more",
+    "status": "Status",
     "logoutSuccessMessage": "Logout successfully!",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
@@ -137,17 +138,21 @@
     "createAccount": "Create an account(Signup)",
     "forgotPassword": "Forgot Password"
   },
+  "orderAcknowledgementScreen": {
+    "title": "Order Confirmation",
+    "orderPlaced": "Order Confirmed",
+    "orderNotPlace": "Sorry for the inconvenience, unable to place your order!",
+    "orderPlacedMessage": "Your order has been placed, you will shortly recieve an email regarding order detail",
+    "continueButton": "Continue Shopping",
+    "viewOrderButton": "View Order"
+  },
+  "orderDetailScreen": {
+    "title": "Order no",
+    "updatesSentOn": "Updates sent on",
+    "itemsOrdered": "Items in this order"
+  },
   "ordersScreen": {
     "title": "Orders",
-    "orderPlacedScreenTitle": "Order Confirmation",
-    "orderDetailScreenTitle": "Order no",
-    "orderStatus": "Status",
-    "orderNotPlace": "Sorry for the inconvenience, unable to place your order!",
-    "viewOrderButton": "View Order",
-    "continueButton": "Continue Shopping",
-    "orderPlaced": "Order Confirmed",
-    "orderTotal": "Order Total",
-    "shipTo": "Ship to",
     "orderEmptyMessage": "You haven't placed any order"
   },
   "paymentScreen": {

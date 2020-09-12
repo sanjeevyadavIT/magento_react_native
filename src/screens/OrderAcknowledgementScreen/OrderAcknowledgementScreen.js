@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -7,9 +7,27 @@ import { GenericTemplate, Text, Button } from '../../common';
 import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../navigation/routes';
 import { resetCheckoutState } from '../../store/actions';
 import Status from '../../magento/Status';
-import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { ThemeContext } from '../../theme';
 import { SPACING } from '../../constants';
+
+const propTypes = {
+  orderId: PropTypes.number.isRequired,
+  resetCheckoutState: PropTypes.func.isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      status: PropTypes.oneOf(Object.values(Status)).isRequired,
+      orderId: PropTypes.number,
+      errorMessage: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  navigation: PropTypes.shape({
+    popToTop: PropTypes.func.isRequired,
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+const defaultProps = {};
 
 // TODO: Extract strings in strings.js
 const OrderAcknowledgementScreen = ({
@@ -20,7 +38,7 @@ const OrderAcknowledgementScreen = ({
   const {
     status = Status.ERROR,
     orderId,
-    errorMessage = translate('ordersScreen.orderNotPlace'),
+    errorMessage = translate('orderAcknowledgementScreen.orderNotPlace'),
   } = route.params;
   const { theme } = useContext(ThemeContext);
 
@@ -32,34 +50,34 @@ const OrderAcknowledgementScreen = ({
     [],
   );
 
-  const renderFooter = () => (
-    <View>
-      <Button
-        title={translate('ordersScreen.viewOrderButton')}
-        onPress={() =>
-          navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, { orderId })
-        }
-      />
-      <View style={styles.space(theme)} />
-      <Button
-        title={translate('ordersScreen.continueButton')}
-        onPress={() => navigation.popToTop()}
-      />
-    </View>
-  );
-
   return (
     <GenericTemplate
       status={status}
       errorMessage={errorMessage}
-      footer={renderFooter()}
+      footer={
+        <View>
+          <Button
+            title={translate('orderAcknowledgementScreen.viewOrderButton')}
+            onPress={() =>
+              navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, { orderId })
+            }
+          />
+          <View style={styles.space} />
+          <Button
+            title={translate('orderAcknowledgementScreen.continueButton')}
+            onPress={() => navigation.popToTop()}
+          />
+        </View>
+      }
     >
       <View style={styles.container}>
-        <Icon name="verified-user" size={30} color="#4caf50" />
+        <Icon size={30} name="verified-user" color={theme.successColor} />
         <Text type="subheading" bold>
-          {translate('ordersScreen.orderPlaced')}
+          {translate('orderAcknowledgementScreen.orderPlaced')}
         </Text>
-        <Text>{translate('ordersScreen.orderPlacedMessage')}</Text>
+        <Text style={styles.text}>
+          {translate('orderAcknowledgementScreen.orderPlacedMessage')}
+        </Text>
       </View>
     </GenericTemplate>
   );
@@ -70,19 +88,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: SPACING.large,
   },
-  space: theme => ({
+  space: {
     flex: 1,
     marginTop: SPACING.small,
-  }),
+  },
+  text: {
+    textAlign: 'center',
+  }
 });
 
-OrderAcknowledgementScreen.propTypes = {
-  orderId: PropTypes.number.isRequired,
-  resetCheckoutState: PropTypes.func.isRequired,
-};
+OrderAcknowledgementScreen.propTypes = propTypes;
 
-OrderAcknowledgementScreen.defaultProps = {};
+OrderAcknowledgementScreen.defaultProps = defaultProps;
 
 export default connect(null, {
   resetCheckoutState,
