@@ -49,6 +49,7 @@ const BottomTabNavigator = ({ loggedIn, cartItemsCount, navigation }) => {
   };
   return (
     <Tab.Navigator
+      lazy
       tabBarOptions={{
         activeTintColor: theme.primaryColor,
       }}
@@ -69,7 +70,7 @@ const BottomTabNavigator = ({ loggedIn, cartItemsCount, navigation }) => {
       />
       <Tab.Screen
         name={NAVIGATION_TO_CATEGORIES_SCREEN}
-        component={() => <CategoryTreeContainer navigation={navigation} />}
+        component={CategoryTreeContainer}
         options={{
           tabBarLabel: translate('common.categories'),
           tabBarIcon: ({ color, focused }) => (

@@ -90,7 +90,8 @@
     "zipCodeLabel": "Zip Code",
     "zipCodeHint": "Zip Code",
     "addNew": "Add new address",
-    "noAddress": "Looks like you don't have any address saved, add new address for quick checkout.",
+    "noAddressTitle": "Save your addresses now!",
+    "noAddressMessage": "Add your addresses and enjoy faster checkout.",
     "defaultAddress": "Default Address",
     "setDefaultAddress": "Set as default address"
   },
@@ -106,7 +107,8 @@
     "title": "Cart",
     "priceNotAvailable": "Cannot proceed, price for some product is not available!",
     "placeOrderButton": "Place order",
-    "cartEmptyMessage": "Cart is empty, Add some products",
+    "cartEmptyTitle": "Hey, it feels so light!",
+    "cartEmptyMessage": "There is nothing in your bag. Let's add some items.",
     "removeItemDialogTitle": "You sure?",
     "removeItemDialogMessage": "Just double-checking you wanted to remove the item"
   },

@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { ScrollView, StyleSheet, Keyboard } from 'react-native';
+import { StyleSheet, Keyboard, View } from 'react-native';
 import { connect } from 'react-redux';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Button, TextInput } from '../../common';
+import { GenericTemplate, Button, TextInput, Icon } from '../../common';
 import {
   NAVIGATION_TO_SIGNUP_SCREEN,
   NAVIGATION_TO_FORGOT_PASSWORD_SCREEN,
@@ -15,8 +13,9 @@ import Status from '../../magento/Status';
 import { magento } from '../../magento';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-import { SPACING } from '../../constants';
+import { SPACING, DIMENS } from '../../constants';
 import { isEmailValid, isPasswordValid } from '../../utils';
+import LoginImage from '../../assets/images/login.svg';
 
 const propTypes = {
   loginSuccess: PropTypes.func.isRequired,
@@ -112,105 +111,110 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaView(theme)}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <TextInput
-          placeholder={translate('common.email')}
-          keyboardType="email-address"
-          autoCorrect={false}
-          autoCapitalize="none"
-          editable={!(apiStatus === Status.LOADING)}
-          containerStyle={styles.defaultMargin}
-          onChangeText={value =>
-            setValues(prevState => ({
-              ...prevState,
-              email: value.trim(),
-              incorrectEmail: false,
-            }))
-          }
-          errorMessage={
-            form.incorrectEmail ? translate('errors.invalidEmail') : ''
-          }
-          returnKeyType={translate('common.keyboardNext')}
-          onSubmitEditing={() => passwordInputRef.current.focus()}
-          assignRef={component => {
-            emailInputRef.current = component;
-          }}
-          onBlur={() => checkField('email', 'incorrectEmail', isEmailValid)}
+    <GenericTemplate scrollable style={styles.container}>
+      <View style={styles.imageContainer}>
+        <LoginImage
+          width={DIMENS.loginScreen.loginImageSize}
+          height={DIMENS.loginScreen.loginImageSize}
         />
-        <TextInput
-          autoCapitalize="none"
-          secureTextEntry={secureEntry}
-          rightIcon={
-            <Icon
-              name={secureEntry ? 'eye' : 'eye-off'}
-              size={20}
-              style={styles.iconPadding}
-              color={theme.labelTextColor}
-              onPress={() => toggleSecureEntry(prevState => !prevState)}
-            />
-          }
-          textContentType="password"
-          editable={!(apiStatus === Status.LOADING)}
-          placeholder={translate('common.password')}
-          autoCorrect={false}
-          containerStyle={styles.defaultMargin}
-          onChangeText={value =>
-            setValues(prevState => ({
-              ...prevState,
-              password: value.trim(),
-              incorrectPassword: false,
-            }))
-          }
-          errorMessage={
-            form.incorrectPassword ? translate('errors.invalidPassword') : ''
-          }
-          assignRef={component => {
-            passwordInputRef.current = component;
-          }}
-          onSubmitEditing={onSignInPress}
-        />
-        <Button
-          loading={apiStatus === Status.LOADING}
-          title={translate('common.login')}
-          titleStyle={styles.loginButtonText}
-          style={styles.defaultMargin}
-          onPress={onSignInPress}
-        />
-        <Button
-          type="clear"
-          style={styles.defaultMargin}
-          disabled={apiStatus === Status.LOADING}
-          title={translate('loginScreen.createAccount')}
-          onPress={() => {
-            navigation.navigate(NAVIGATION_TO_SIGNUP_SCREEN);
-            resetState();
-          }}
-        />
-        <Button
-          type="clear"
-          style={styles.defaultMargin}
-          disabled={apiStatus === Status.LOADING}
-          title={translate('loginScreen.forgotPassword')}
-          onPress={() => {
-            navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN, {
-              email: form.email,
-            });
-            resetState();
-          }}
-        />
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+      <TextInput
+        placeholder={translate('common.email')}
+        keyboardType="email-address"
+        autoCorrect={false}
+        autoCapitalize="none"
+        editable={!(apiStatus === Status.LOADING)}
+        containerStyle={styles.defaultMargin}
+        onChangeText={value =>
+          setValues(prevState => ({
+            ...prevState,
+            email: value.trim(),
+            incorrectEmail: false,
+          }))
+        }
+        errorMessage={
+          form.incorrectEmail ? translate('errors.invalidEmail') : ''
+        }
+        returnKeyType={translate('common.keyboardNext')}
+        onSubmitEditing={() => passwordInputRef.current.focus()}
+        assignRef={component => {
+          emailInputRef.current = component;
+        }}
+        onBlur={() => checkField('email', 'incorrectEmail', isEmailValid)}
+      />
+      <TextInput
+        autoCapitalize="none"
+        secureTextEntry={secureEntry}
+        rightIcon={
+          <Icon
+            type="material-community"
+            name={secureEntry ? 'eye' : 'eye-off'}
+            size={20}
+            style={styles.iconPadding}
+            color={theme.labelTextColor}
+            onPress={() => toggleSecureEntry(prevState => !prevState)}
+          />
+        }
+        textContentType="password"
+        editable={!(apiStatus === Status.LOADING)}
+        placeholder={translate('common.password')}
+        autoCorrect={false}
+        containerStyle={styles.defaultMargin}
+        onChangeText={value =>
+          setValues(prevState => ({
+            ...prevState,
+            password: value.trim(),
+            incorrectPassword: false,
+          }))
+        }
+        errorMessage={
+          form.incorrectPassword ? translate('errors.invalidPassword') : ''
+        }
+        assignRef={component => {
+          passwordInputRef.current = component;
+        }}
+        onSubmitEditing={onSignInPress}
+      />
+      <Button
+        loading={apiStatus === Status.LOADING}
+        title={translate('common.login')}
+        titleStyle={styles.loginButtonText}
+        style={styles.defaultMargin}
+        onPress={onSignInPress}
+      />
+      <Button
+        type="clear"
+        style={styles.defaultMargin}
+        disabled={apiStatus === Status.LOADING}
+        title={translate('loginScreen.createAccount')}
+        onPress={() => {
+          navigation.navigate(NAVIGATION_TO_SIGNUP_SCREEN);
+          resetState();
+        }}
+      />
+      <Button
+        type="clear"
+        style={styles.defaultMargin}
+        disabled={apiStatus === Status.LOADING}
+        title={translate('loginScreen.forgotPassword')}
+        onPress={() => {
+          navigation.navigate(NAVIGATION_TO_FORGOT_PASSWORD_SCREEN, {
+            email: form.email,
+          });
+          resetState();
+        }}
+      />
+    </GenericTemplate>
   );
 };
 
 const styles = StyleSheet.create({
-  safeAreaView: theme => ({
-    flex: 1,
-    backgroundColor: theme.backgroundColor,
-  }),
-  scrollView: {
+  container: {
     padding: SPACING.large,
+  },
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   defaultMargin: {
     marginTop: SPACING.large,

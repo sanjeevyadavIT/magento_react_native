@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StorySection } from '../../../storybook/Decorator';
 import Text from '../Text/Text';
 import Divider from '../Divider/Divider';
 import TextInput from './TextInput';
+import Icon from '../Icon/Icon';
 import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 const styles = {

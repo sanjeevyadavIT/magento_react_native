@@ -16,11 +16,13 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         status: Status.LOADING,
+        errorMessage: '',
       };
     case MAGENTO.CUSTOMER_CART_SUCCESS: {
       return {
         ...state,
         status: Status.SUCCESS,
+        errorMessage: '',
         cart: {
           ...payload.cart,
         },

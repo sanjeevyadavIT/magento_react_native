@@ -131,10 +131,6 @@ class Magento {
     return this.access_token != null;
   }
 
-  isCustomerLogin() {
-    return !!this.customerToken;
-  }
-
   setStoreConfig(config) {
     this.storeConfig = config;
   }

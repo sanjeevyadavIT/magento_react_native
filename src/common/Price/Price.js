@@ -12,6 +12,7 @@ const propTypes = {
   discountPrice: PropTypes.number,
   startingPrice: PropTypes.oneOfType([PropTypes.number, undefined]),
   endingPrice: PropTypes.oneOfType([PropTypes.number, undefined]),
+  basePriceStyle: Text.propTypes.style,
 };
 
 const defaultProps = {
@@ -19,6 +20,7 @@ const defaultProps = {
   discountPrice: 0,
   startingPrice: undefined,
   endingPrice: undefined,
+  basePriceStyle: {},
 };
 
 /**
@@ -45,6 +47,7 @@ const Price = ({
   discountPrice,
   startingPrice,
   endingPrice,
+  basePriceStyle,
 }) => {
   const isBold = () => discountPrice && discountPrice < basePrice;
   const renderDiscountPrice = () =>
@@ -80,7 +83,7 @@ const Price = ({
       <Text
         type="label"
         bold={!isBold()}
-        style={styles.basePriceText(basePrice, discountPrice)}
+        style={[styles.basePriceText(basePrice, discountPrice), basePriceStyle]}
       >{`${currencySymbol}${formatPrice(basePrice, currencyRate)}`}</Text>
     </View>
   );

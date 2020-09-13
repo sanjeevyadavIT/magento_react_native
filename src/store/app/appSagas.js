@@ -1,7 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento, CUSTOMER_TOKEN, CURRENCY_CODE } from '../../magento';
-import Status from '../../magento/Status';
 import { MAGENTO, USER_LOGGED_IN_STATUS } from '../../constants';
 import { magentoOptions } from '../../../config/magento';
 import { priceSignByCode } from '../../utils/price';

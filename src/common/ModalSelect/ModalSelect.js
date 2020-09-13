@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, ViewPropTypes } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
+import Icon from '../Icon/Icon';
 import Spinner from '../Spinner/Spinner';
 import TextInput from '../TextInput/TextInput';
 import { ThemeContext } from '../../theme';

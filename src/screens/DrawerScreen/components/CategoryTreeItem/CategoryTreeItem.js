@@ -2,14 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
   UIManager,
   Platform,
-  LayoutAnimation,
   View,
   StyleSheet,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Text, Card } from '../../../../common';
+import { Text, Card, Icon } from '../../../../common';
 import CategoryTree from '../CategoryTree/CategoryTree';
 import { NAVIGATION_TO_CATEGORY_LIST_SCREEN } from '../../../../navigation/routes';
 import { setNewCategory } from '../../../../store/actions';
@@ -51,10 +49,10 @@ const CategoryTreeItem = ({ category, navigation }) => {
 
   const renderExpandButton = () => {
     if (category.children_data.length) {
-      const icon = expanded ? 'caret-up' : 'caret-down';
+      const icon = expanded ? 'arrow-drop-up' : 'arrow-drop-down';
       return (
         <Icon
-          style={styles.expandIcon(theme)}
+          style={styles.expandIcon}
           name={icon}
           color={theme.bodyTextColor}
           size={20}
@@ -85,7 +83,7 @@ const CategoryTreeItem = ({ category, navigation }) => {
   };
 
   return (
-    <View style={styles.container(theme)}>
+    <View style={styles.container}>
       {renderItem()}
       {renderChildren()}
     </View>
@@ -93,9 +91,9 @@ const CategoryTreeItem = ({ category, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: theme => ({
+  container: {
     marginLeft: SPACING.large,
-  }),
+  },
   card: theme => ({
     borderWidth: 0,
     height: 40,
@@ -105,14 +103,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: theme.borderColor,
   }),
-  expandIcon: theme => ({
+  expandIcon: {
     padding: 2,
     paddingRight: SPACING.large,
-  }),
+  },
 });
 
 CategoryTreeItem.propTypes = {
   category: PropTypes.object.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired
 };
 
 CategoryTreeItem.defaultProps = {};

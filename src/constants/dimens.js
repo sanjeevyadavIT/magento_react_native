@@ -17,10 +17,30 @@ export default {
     textInputHeight: 40,
   },
   /**
+   * Constants related to AddressScreen
+   */
+  addressScreen: {
+    emptyImageSize: 150,
+  },
+  /**
+   * Constants related to CartScreen
+   */
+  cartScreen: {
+    imageSize: 120,
+    emptyCartImageSize: 150,
+    totalPriceFontSize: 18,
+  },
+  /**
    * Constants related to DrawerScreen
    */
   drawerScreen: {
     headerHeight: 100,
+  },
+  /**
+   * Constants related to LoginScreen
+   */
+  loginScreen: {
+    loginImageSize: 150,
   },
   /**
    * Constants related to ProfileScreen
@@ -28,6 +48,12 @@ export default {
   profileScreen: {
     coverImageHeight: 150,
     profileImageSize: 100,
+  },
+  /**
+   * Constants related to OrderAcknowledgementScreen
+   */
+  orderAcknowledgementScreen: {
+    orderImageSize: 180,
   },
   /**
    * Constants related to OrdersScreen
@@ -48,9 +74,4 @@ export default {
    */
   productDetailPageSliderHeight: 300,
   optionBoxMinHeight: 100,
-  /**
-   * CartScreen constants
-   */
-  cartListImageHeight: 120,
-  cartListImageWidth: 120,
 };

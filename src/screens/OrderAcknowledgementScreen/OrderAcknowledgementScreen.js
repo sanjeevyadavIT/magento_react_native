@@ -1,15 +1,14 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Text, Button } from '../../common';
 import { NAVIGATION_TO_ORDER_DETAIL_SCREEN } from '../../navigation/routes';
 import { resetCheckoutState } from '../../store/actions';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
-import { ThemeContext } from '../../theme';
-import { SPACING } from '../../constants';
+import { DIMENS, SPACING } from '../../constants';
+import OrderCompleteScreen from '../../assets/images/order_complete.svg';
 
 const propTypes = {
   orderId: PropTypes.number.isRequired,
@@ -29,19 +28,17 @@ const propTypes = {
 
 const defaultProps = {};
 
-// TODO: Extract strings in strings.js
 const OrderAcknowledgementScreen = ({
   navigation,
-  route,
+  route: {
+    params: {
+      orderId,
+      status = Status.ERROR,
+      errorMessage = translate('orderAcknowledgementScreen.orderNotPlace'),
+    }
+  },
   resetCheckoutState: _resetCheckoutState,
 }) => {
-  const {
-    status = Status.ERROR,
-    orderId,
-    errorMessage = translate('orderAcknowledgementScreen.orderNotPlace'),
-  } = route.params;
-  const { theme } = useContext(ThemeContext);
-
   useEffect(
     () => () => {
       // componentDidUnmount: Reset entire checkout state
@@ -54,31 +51,32 @@ const OrderAcknowledgementScreen = ({
     <GenericTemplate
       status={status}
       errorMessage={errorMessage}
+      style={styles.container}
       footer={
-        <View>
+        <View style={styles.footer}>
           <Button
             title={translate('orderAcknowledgementScreen.viewOrderButton')}
             onPress={() =>
-              navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, { orderId })
+              navigation.navigate(NAVIGATION_TO_ORDER_DETAIL_SCREEN, {
+                orderId,
+              })
             }
           />
-          <View style={styles.space} />
           <Button
+            style={styles.button}
             title={translate('orderAcknowledgementScreen.continueButton')}
-            onPress={() => navigation.popToTop()}
+            onPress={navigation.popToTop}
           />
         </View>
       }
     >
-      <View style={styles.container}>
-        <Icon size={30} name="verified-user" color={theme.successColor} />
-        <Text type="subheading" bold>
-          {translate('orderAcknowledgementScreen.orderPlaced')}
-        </Text>
-        <Text style={styles.text}>
-          {translate('orderAcknowledgementScreen.orderPlacedMessage')}
-        </Text>
-      </View>
+      <OrderCompleteScreen width={DIMENS.orderAcknowledgementScreen.orderImageSize} height={DIMENS.orderAcknowledgementScreen.orderImageSize} />
+      <Text style={styles.title} type="heading" bold>
+        {translate('orderAcknowledgementScreen.orderPlaced')}
+      </Text>
+      <Text style={styles.message}>
+        {translate('orderAcknowledgementScreen.orderPlacedMessage')}
+      </Text>
     </GenericTemplate>
   );
 };
@@ -90,13 +88,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: SPACING.large,
   },
-  space: {
-    flex: 1,
+  footer: {
+    padding: SPACING.small
+  },
+  button: {
     marginTop: SPACING.small,
   },
-  text: {
+  title: {
     textAlign: 'center',
-  }
+    marginTop: SPACING.large,
+  },
+  message: {
+    marginTop: SPACING.tiny,
+    textAlign: 'center',
+  },
 });
 
 OrderAcknowledgementScreen.propTypes = propTypes;

@@ -1,18 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { FlatList, StyleSheet, RefreshControl } from 'react-native';
+import { View, FlatList, StyleSheet, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
-import { GenericTemplate, Button, MessageView } from '../../common';
+import { GenericTemplate, Button, Text } from '../../common';
 import { NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
 import { updateCustomer} from '../../store/actions';
 import { magento } from '../../magento';
 import { translate } from '../../i18n';
-import { SPACING } from '../../constants';
+import { SPACING, DIMENS } from '../../constants';
 import { customerType } from '../../utils';
 import Address from './Address';
 import { ThemeContext } from '../../theme';
+import AddressImage from '../../assets/images/address.svg';
 
 const propTypes = {
   customer: customerType.isRequired,
@@ -115,8 +116,20 @@ const AddressScreen = ({ customer, updateCustomer: _updateCustomer, navigation }
           />
         )}
         ListEmptyComponent={
-          <MessageView message={translate('addressScreen.noAddress')} />
-        }
+          (
+            <View style={styles.emptyContainer}>
+              <AddressImage
+                width={DIMENS.addressScreen.emptyImageSize}
+                height={DIMENS.addressScreen.emptyImageSize}
+              />
+              <Text style={styles.centerText} type="heading" bold>
+                {translate('addressScreen.noAddressTitle')}
+              </Text>
+              <Text style={styles.centerText}>
+              {translate('addressScreen.noAddressMessage')}
+              </Text>
+            </View>
+          )}
         contentContainerStyle={[
           styles.flatListConatiner,
           addresses.length === 0 && { flex: 1 },
@@ -140,6 +153,15 @@ const styles = StyleSheet.create({
   },
   footer: {
     borderRadius: 0,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  centerText: {
+    textAlign: 'center',
+    marginTop: SPACING.small,
   },
 });
 

@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { ScrollView, StyleSheet, Keyboard } from 'react-native';
+import { StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { signUp, resetAuthState } from '../../store/actions';
-import { Button, TextInput } from '../../common';
+import { GenericTemplate, Button, TextInput, Icon } from '../../common';
 import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
 import { magento } from '../../magento';
@@ -102,137 +100,129 @@ const SignupScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaView(theme)}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <TextInput
-          placeholder={translate('signupScreen.firstNameHint')}
-          autoCorrect={false}
-          editable={!(apiStatus === Status.LOADING)}
-          containerStyle={styles.defaultMargin}
-          onChangeText={value =>
-            setValues(prevState => ({
-              ...prevState,
-              firstName: value.trim(),
-              incorrectFirstName: false,
-            }))
-          }
-          returnKeyType={translate('common.keyboardNext')}
-          onSubmitEditing={() => lastNameInputRef.current.focus()}
-          errorMessage={
-            form.incorrectFirstName ? translate('errors.invalidFirstName') : ''
-          }
-          onBlur={() =>
-            checkField('firstName', 'incorrectFirstName', isNonEmptyString)
-          }
-        />
-        <TextInput
-          placeholder={translate('signupScreen.lastNameHint')}
-          autoCorrect={false}
-          editable={!(apiStatus === Status.LOADING)}
-          containerStyle={styles.defaultMargin}
-          onChangeText={value =>
-            setValues(prevState => ({
-              ...prevState,
-              lastName: value.trim(),
-              incorrectLastName: false,
-            }))
-          }
-          assignRef={component => {
-            lastNameInputRef.current = component;
-          }}
-          returnKeyType={translate('common.keyboardNext')}
-          onSubmitEditing={() => emailInputRef.current.focus()}
-          errorMessage={
-            form.incorrectLastName ? translate('errors.invalidLastName') : ''
-          }
-          onBlur={() =>
-            checkField('lastName', 'incorrectLastName', isNonEmptyString)
-          }
-        />
-        <TextInput
-          placeholder={translate('common.email')}
-          keyboardType="email-address"
-          autoCorrect={false}
-          autoCapitalize="none"
-          editable={!(apiStatus === Status.LOADING)}
-          containerStyle={styles.defaultMargin}
-          onChangeText={value =>
-            setValues(prevState => ({
-              ...prevState,
-              email: value.trim(),
-              incorrectEmail: false,
-            }))
-          }
-          assignRef={component => {
-            emailInputRef.current = component;
-          }}
-          errorMessage={
-            form.incorrectEmail ? translate('errors.invalidEmail') : ''
-          }
-          returnKeyType={translate('common.keyboardNext')}
-          onSubmitEditing={() => passwordInputRef.current.focus()}
-          onBlur={() => checkField('email', 'incorrectEmail', isEmailValid)}
-        />
-        <TextInput
-          autoCapitalize="none"
-          secureTextEntry={secureEntry}
-          rightIcon={
-            <Icon
-              name={secureEntry ? 'eye' : 'eye-off'}
-              size={20}
-              style={styles.iconPadding}
-              color={theme.labelTextColor}
-              onPress={() => toggleSecureEntry(!secureEntry)}
-            />
-          }
-          textContentType="password"
-          placeholder={translate('common.password')}
-          autoCorrect={false}
-          editable={!(apiStatus === Status.LOADING)}
-          containerStyle={styles.defaultMargin}
-          onChangeText={value =>
-            setValues(prevState => ({
-              ...prevState,
-              password: value.trim(),
-              incorrectPassword: false,
-            }))
-          }
-          errorMessage={
-            form.incorrectPassword ? translate('errors.invalidPassword') : ''
-          }
-          assignRef={component => {
-            passwordInputRef.current = component;
-          }}
-          onSubmitEditing={onSignupPress}
-        />
-        <Button
-          loading={apiStatus === Status.LOADING}
-          title={translate('common.signup')}
-          onPress={onSignupPress}
-          style={styles.defaultMargin}
-        />
-        <Button
-          type="clear"
-          style={styles.defaultMargin}
-          disabled={apiStatus === Status.LOADING}
-          title={translate('signupScreen.haveAccount')}
-          onPress={() => navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)}
-        />
-      </ScrollView>
-    </SafeAreaView>
+    <GenericTemplate scrollable style={styles.container}>
+      <TextInput
+        placeholder={translate('signupScreen.firstNameHint')}
+        autoCorrect={false}
+        editable={!(apiStatus === Status.LOADING)}
+        containerStyle={styles.defaultMargin}
+        onChangeText={value =>
+          setValues(prevState => ({
+            ...prevState,
+            firstName: value.trim(),
+            incorrectFirstName: false,
+          }))
+        }
+        returnKeyType={translate('common.keyboardNext')}
+        onSubmitEditing={() => lastNameInputRef.current.focus()}
+        errorMessage={
+          form.incorrectFirstName ? translate('errors.invalidFirstName') : ''
+        }
+        onBlur={() =>
+          checkField('firstName', 'incorrectFirstName', isNonEmptyString)
+        }
+      />
+      <TextInput
+        placeholder={translate('signupScreen.lastNameHint')}
+        autoCorrect={false}
+        editable={!(apiStatus === Status.LOADING)}
+        containerStyle={styles.defaultMargin}
+        onChangeText={value =>
+          setValues(prevState => ({
+            ...prevState,
+            lastName: value.trim(),
+            incorrectLastName: false,
+          }))
+        }
+        assignRef={component => {
+          lastNameInputRef.current = component;
+        }}
+        returnKeyType={translate('common.keyboardNext')}
+        onSubmitEditing={() => emailInputRef.current.focus()}
+        errorMessage={
+          form.incorrectLastName ? translate('errors.invalidLastName') : ''
+        }
+        onBlur={() =>
+          checkField('lastName', 'incorrectLastName', isNonEmptyString)
+        }
+      />
+      <TextInput
+        placeholder={translate('common.email')}
+        keyboardType="email-address"
+        autoCorrect={false}
+        autoCapitalize="none"
+        editable={!(apiStatus === Status.LOADING)}
+        containerStyle={styles.defaultMargin}
+        onChangeText={value =>
+          setValues(prevState => ({
+            ...prevState,
+            email: value.trim(),
+            incorrectEmail: false,
+          }))
+        }
+        assignRef={component => {
+          emailInputRef.current = component;
+        }}
+        errorMessage={
+          form.incorrectEmail ? translate('errors.invalidEmail') : ''
+        }
+        returnKeyType={translate('common.keyboardNext')}
+        onSubmitEditing={() => passwordInputRef.current.focus()}
+        onBlur={() => checkField('email', 'incorrectEmail', isEmailValid)}
+      />
+      <TextInput
+        autoCapitalize="none"
+        secureTextEntry={secureEntry}
+        rightIcon={
+          <Icon
+            type="material-community"
+            name={secureEntry ? 'eye' : 'eye-off'}
+            size={20}
+            style={styles.iconPadding}
+            color={theme.labelTextColor}
+            onPress={() => toggleSecureEntry(!secureEntry)}
+          />
+        }
+        textContentType="password"
+        placeholder={translate('common.password')}
+        autoCorrect={false}
+        editable={!(apiStatus === Status.LOADING)}
+        containerStyle={styles.defaultMargin}
+        onChangeText={value =>
+          setValues(prevState => ({
+            ...prevState,
+            password: value.trim(),
+            incorrectPassword: false,
+          }))
+        }
+        errorMessage={
+          form.incorrectPassword ? translate('errors.invalidPassword') : ''
+        }
+        assignRef={component => {
+          passwordInputRef.current = component;
+        }}
+        onSubmitEditing={onSignupPress}
+      />
+      <Button
+        loading={apiStatus === Status.LOADING}
+        title={translate('common.signup')}
+        onPress={onSignupPress}
+        style={styles.defaultMargin}
+      />
+      <Button
+        type="clear"
+        style={styles.defaultMargin}
+        disabled={apiStatus === Status.LOADING}
+        title={translate('signupScreen.haveAccount')}
+        onPress={() => navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)}
+      />
+    </GenericTemplate>
   );
 };
 
 const styles = StyleSheet.create({
-  safeAreaView: theme => ({
-    flex: 1,
-    backgroundColor: theme.backgroundColor,
-  }),
-  scrollView: {
-    padding: SPACING.large,
-  },
   container: {
-    flex: 1,
+    padding: SPACING.large,
   },
   defaultMargin: {
     marginTop: SPACING.large,
