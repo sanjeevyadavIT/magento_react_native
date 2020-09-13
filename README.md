@@ -25,6 +25,14 @@ MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 RE
   <img style="margin-left:10px;" src=".github/screenshots/5.png" width="19%" >
 </div>
 
+<div style="display:flex;" >
+  <img  src=".github/screenshots/6.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/7.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/8.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/9.png" width="19%" >
+  <img style="margin-left:10px;" src=".github/screenshots/10.png" width="19%" >
+</div>
+
 ## 📲 Getting Started
 
 Follow this [Documentation](https://github.com/alexakasanjeev/magento_react_native/wiki/Setup) for detailed step by step instructions on how to setup project locally and run the project.
@@ -70,6 +78,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## 📣 Acknowledgements
 
 * [troublediehard/magento-react-native](https://github.com/troublediehard/magento-react-native) created by [Dmytro Portenko](https://github.com/troublediehard)
+* [Drawkit](https://www.drawkit.io/) for beautiful free illustrations
 * [README-Template.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) by [Billie Thompson](https://github.com/PurpleBooth)
 
 ## ♥️ Donate
