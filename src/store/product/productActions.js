@@ -1,5 +1,15 @@
 import { MAGENTO, UI, RESET_ADD_TO_CART_STATE } from '../../constants';
 
+/**
+ * Make an api call, to fetch product data
+ *
+ * @param {string} sku - Id of the product whose detail need to be fetched
+ */
+export const getProductDetail = sku => ({
+  type: MAGENTO.PRODUCT_DETAIL_REQUEST,
+  payload: { sku },
+});
+
 export const setCurrentProduct = (productType, sku, children) => ({
   type: UI.OPEN_SELECTED_PRODUCT_REQUEST,
   payload: {

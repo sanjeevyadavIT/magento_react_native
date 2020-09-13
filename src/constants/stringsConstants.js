@@ -9,3 +9,7 @@
 // ============================================================
 export const CONFIGURABLE_TYPE_SK = 'configurable';
 export const SIMPLE_TYPE_SK = 'simple';
+// ============================================================
+// ==================== Product Detail Key ====================
+// ============================================================
+export const THUMBNAIL_SK = 'thumbnail';

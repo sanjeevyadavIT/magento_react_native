@@ -175,8 +175,36 @@ function* addToCart({ payload }) {
   }
 }
 
+/**
+ * Fetch product detail using it's sku
+ *
+ * @param {object} action - Redux action object
+ * @param {string} sku    - Id of the product whose details need to be fetched
+ */
+function* getProductDetail({ payload: { sku } }) {
+  try {
+    const productDetail = yield call(
+      { content: magento, fn: magento.admin.getProductBySku },
+      sku,
+    );
+    yield put({
+      type: MAGENTO.PRODUCT_DETAIL_SUCCESS,
+      payload: {
+        sku,
+        productDetail,
+      },
+    });
+  } catch (error) {
+    yield put({
+      type: MAGENTO.PRODUCT_DETAIL_FAILURE,
+      payload: error.message,
+    });
+  }
+}
+
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
   yield takeEvery(UI.OPEN_SELECTED_PRODUCT_REQUEST, fetchProductDetails);
   yield takeEvery(MAGENTO.ADD_TO_CART_REQUEST, addToCart);
+  yield takeEvery(MAGENTO.PRODUCT_DETAIL_REQUEST, getProductDetail);
 }

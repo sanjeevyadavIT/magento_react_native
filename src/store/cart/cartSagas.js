@@ -41,22 +41,6 @@ function* getCustomerCart() {
   }
 }
 
-// wroker saga: Add description
-function* getCartItemProduct(action) {
-  try {
-    const payload = yield call(
-      { content: magento, fn: magento.admin.getProductBySku },
-      action.payload,
-    );
-    yield put({ type: MAGENTO.CART_ITEM_PRODUCT_SUCCESS, payload });
-  } catch (error) {
-    yield put({
-      type: MAGENTO.CART_ITEM_PRODUCT_FAILURE,
-      payload: error.message,
-    });
-  }
-}
-
 // worker saga: Add description
 function* removeItemFromCart({ payload }) {
   try {
@@ -82,6 +66,5 @@ function* removeItemFromCart({ payload }) {
 export default function* watcherSaga() {
   yield takeLatest(MAGENTO.CREATE_QUOTE_ID_REQUEST, createQuoteId);
   yield takeLatest(MAGENTO.CUSTOMER_CART_REQUEST, getCustomerCart);
-  yield takeEvery(MAGENTO.CART_ITEM_PRODUCT_REQUEST, getCartItemProduct);
   yield takeEvery(MAGENTO.REMOVE_ITEM_FROM_CART_REQUEST, removeItemFromCart);
 }

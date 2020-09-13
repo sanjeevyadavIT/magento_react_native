@@ -1,12 +1,11 @@
-import { magento } from '../magento';
+import { THUMBNAIL_SK } from '../constants';
 import { ImageSliderItem } from '../common/ImageSlider/ImageSlider';
 
 export const getProductThumbnailFromAttribute = product => {
-  let result = magento.getProductMediaUrl();
-  const key = 'thumbnail';
+  let result = '';
   product.custom_attributes.some(attribute => {
-    if (attribute.attribute_code === key) {
-      result += attribute.value;
+    if (attribute.attribute_code === THUMBNAIL_SK) {
+      result = attribute.value;
       return true;
     }
     return false;

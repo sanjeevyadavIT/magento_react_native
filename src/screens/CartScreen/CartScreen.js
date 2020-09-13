@@ -1,20 +1,18 @@
-import React, { useEffect, useContext } from 'react';
-import { StyleSheet, FlatList, View, Alert } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCustomerCart } from '../../store/actions';
 import {
   GenericTemplate,
   Text,
-  Button,
-  Price,
 } from '../../common';
 import { DIMENS, SPACING } from '../../constants';
 import CartListItem from './CartListItem';
-import { NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN } from '../../navigation/routes';
+import CartFooter from './CartFooter';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
-import { ThemeContext } from '../../theme';
+import { cartItemType } from '../../utils';
 import EmptyCartImage from '../../assets/images/empty_cart.svg';
 
 const propTypes = {
@@ -36,11 +34,13 @@ const propTypes = {
   /**
    * Redux action to fetch customer cart
    */
+  /**
+   * Products in cart
+   */
+  items: PropTypes.arrayOf(cartItemType),
   getCustomerCart: PropTypes.func.isRequired,
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
-  items: PropTypes.array,
-  extra: PropTypes.object,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
@@ -49,7 +49,6 @@ const propTypes = {
 const defaultProps = {
   errorMessage: '',
   items: [],
-  extra: {},
 };
 
 // FIXME: For some products the price in items[i] are 0 and for some actual value, hence need to fetch each item price individually
@@ -59,12 +58,9 @@ const CartScreen = ({
   errorMessage,
   getCustomerCart: _getCustomerCart,
   items,
-  extra,
   currencySymbol,
   currencyRate,
-  navigation,
 }) => {
-  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     // componentDidMount
     if (status === Status.DEFAULT) {
@@ -72,67 +68,12 @@ const CartScreen = ({
     }
   }, []);
 
-  const allItemPricesAvailable = () => {
-    for (let i = 0; i < items.length; i += 1) {
-      const { [items[i].sku]: product } = extra;
-      if (!items[i].price) {
-        // don't nest below if with above if
-        if (!product || !product.price) {
-          return false;
-        }
-      }
-    }
-    return true;
-  };
-
-  const renderTotal = () => {
-    let sum = 0;
-    if (items) {
-      items.forEach(({ price, sku, qty }) => {
-        const { [sku]: product } = extra;
-        if (!price && product && product.price) {
-          price = product.price;
-        }
-
-        sum += price * qty;
-      });
-    }
-    return parseFloat(sum.toFixed(2));
-  };
-
-  const handlePlaceOrder = () => {
-    if (allItemPricesAvailable()) {
-      navigation.navigate(NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN);
-    } else {
-      Alert.alert(translate('cartScreen.priceNotAvailable'));
-    }
-  };
-
   return (
     <GenericTemplate
       status={status}
       errorMessage={errorMessage}
       footer={
-        items.length > 0 && (
-          <View style={styles.footer(theme)}>
-            <Text type="heading" bold>
-              {`${translate('common.total')} : `}
-            </Text>
-            <Price
-              basePrice={renderTotal()}
-              basePriceStyle={styles.totalPrice}
-              currencyRate={currencyRate}
-              currencySymbol={currencySymbol}
-            />
-            <Button
-              disabled={status === Status.LOADING}
-              style={styles.placeOrder}
-              loading={!allItemPricesAvailable()}
-              title={translate('cartScreen.placeOrderButton')}
-              onPress={handlePlaceOrder}
-            />
-          </View>
-        )
+        items.length > 0 && <CartFooter />
       }
     >
       <FlatList
@@ -175,21 +116,6 @@ const styles = StyleSheet.create({
   fullScreen: {
     flex: 1,
   },
-  footer: theme => ({
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: SPACING.small,
-    borderTopWidth: DIMENS.common.borderWidth,
-    borderColor: theme.borderColor,
-    backgroundColor: theme.surfaceColor,
-  }),
-  totalPrice: {
-    fontSize: DIMENS.cartScreen.totalPriceFontSize,
-  },
-  placeOrder: {
-    flex: 1,
-    marginStart: SPACING.large,
-  },
   flatListConatiner: {
     paddingHorizontal: SPACING.large,
     paddingTop: SPACING.large,
@@ -214,7 +140,6 @@ const mapStateToProps = ({ cart, magento }) => {
     status,
     errorMessage,
     cart: { items },
-    products: extra,
   } = cart;
   const {
     displayCurrencySymbol: currencySymbol,
@@ -224,7 +149,6 @@ const mapStateToProps = ({ cart, magento }) => {
     status,
     errorMessage,
     items,
-    extra,
     currencySymbol,
     currencyRate,
   };

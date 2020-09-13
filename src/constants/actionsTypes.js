@@ -25,6 +25,7 @@ export const MAGENTO = createRequestTypes(
     'FEATURED_CATEGORY_PRODUCTS', // Fetch featured categories for home page
     'HOME_UPDATE_CONF_PRODUCT', // For each configurable product in featured category, fetch it's children, to calculate price
     'CATEGORY_TREE', // Fetch category tree
+    'PRODUCT_DETAIL', // fetch details of product given it's sku
     /**
      * ======================================================
      * ===== {@link ProductDetailPage} related actions ======
@@ -49,7 +50,6 @@ export const MAGENTO = createRequestTypes(
     'MORE_SEARCH_PRODUCTS', // pagination in search
     'CREATE_QUOTE_ID', // Create new quote id for cart
     'CUSTOMER_CART', // Get cart of logged in user
-    'CART_ITEM_PRODUCT', // fetch details of items present in cart
     'REMOVE_ITEM_FROM_CART', // Remove an item from a cart
     'COUNTRIES', // Get all available countries along with their state
     'ADD_CART_BILLING_ADDRESS', // Add new billing address for a cart

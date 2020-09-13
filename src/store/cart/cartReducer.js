@@ -5,7 +5,6 @@ const initialState = {
   status: Status.DEFAULT,
   errorMessage: '',
   cart: {},
-  products: {},
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -34,16 +33,6 @@ export default (state = initialState, { type, payload }) => {
         status: Status.ERROR,
         errorMessage: payload.errorMessage,
       };
-    case MAGENTO.CART_ITEM_PRODUCT_SUCCESS: {
-      const products = {
-        ...state.products,
-        [payload.sku]: payload,
-      };
-      return {
-        ...state,
-        products,
-      };
-    }
     case ACTION_USER_LOGOUT:
       return initialState;
     default:

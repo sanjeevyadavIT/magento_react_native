@@ -30,6 +30,10 @@ const getInitialState = {
    * so if attribute set is fetched, it will be used from here.
    */
   attributes: {},
+  /**
+   * Cache of product detail, used in cart currently
+   */
+  cachedProductDetails: {},
 };
 
 export default (state = getInitialState, { type, payload }) => {
@@ -221,6 +225,16 @@ export default (state = getInitialState, { type, payload }) => {
             addToCartErrorMessage: '',
           },
         },
+      };
+    }
+    case MAGENTO.PRODUCT_DETAIL_SUCCESS: {
+      const { sku, productDetail } = payload;
+      return {
+        ...state,
+        cachedProductDetails: {
+          ...state.cachedProductDetails,
+          [sku]: productDetail,
+        }
       };
     }
     default:

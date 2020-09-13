@@ -1,46 +1,48 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  getCartItemProduct,
-  removeItemFromCart,
-} from '../../store/actions';
-import { getProductThumbnailFromAttribute } from '../../utils';
+import { magento } from '../../magento';
+import { getProductDetail, removeItemFromCart } from '../../store/actions';
 import { Card, Image, Text, Price, Icon } from '../../common';
-import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { DIMENS, SPACING } from '../../constants';
+import { getProductThumbnailFromAttribute, cartItemType } from '../../utils';
 
 const propTypes = {
-  item: PropTypes.object.isRequired,
-  product: PropTypes.object,
+  /**
+   * Contaning product name, price & sku
+   */
+  item: cartItemType.isRequired,
+  /**
+   * Product detail contain more data about product reprsented by item object
+   *
+   * @source redux
+   */
+  productDetail: PropTypes.object,
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
-  getCartItemProduct: PropTypes.func.isRequired,
+  getProductDetail: PropTypes.func.isRequired,
   removeItemFromCart: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-  product: undefined,
+  productDetail: undefined,
 };
 
-// NOTE: Is it better to create a wapper around CartListItem and extract state in it?
-// It is in organisms folder because it is state aware
 const CartListItem = ({
   item,
-  product: productDetail,
+  productDetail,
   currencySymbol,
   currencyRate,
-  getCartItemProduct: _getCartItemProduct,
+  getProductDetail: _getProductDetail,
   removeItemFromCart: _removeItemFromCart,
 }) => {
-  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // componentDidMount
-    if (!item.thumbnail && !productDetail) {
-      _getCartItemProduct(item.sku);
+    if (!productDetail) {
+      _getProductDetail(item.sku);
     }
   }, []);
 
@@ -63,18 +65,24 @@ const CartListItem = ({
     );
   };
 
-  const getImageUrl = () =>
-    productDetail ? getProductThumbnailFromAttribute(productDetail) : '';
-
   return (
     <Card style={styles.mainContainer}>
       <Image
         style={styles.image}
         resizeMode="contain"
-        source={{ uri: getImageUrl() }}
+        source={{
+          uri: productDetail
+            ? `${magento.getProductMediaUrl()}${getProductThumbnailFromAttribute(
+                productDetail,
+              )}`
+            : '',
+        }}
       />
       <View style={styles.infoContainer}>
-        <Text>{item.name}</Text>
+        <Text numberOfLines={2} bold>
+          {item.name}
+        </Text>
+        <Text>{`${translate('common.quantity')} : ${item.qty}`}</Text>
         <View style={styles.row}>
           <Text>{`${translate('common.price')} : `}</Text>
           <Price
@@ -83,9 +91,12 @@ const CartListItem = ({
             currencySymbol={currencySymbol}
           />
         </View>
-        <Text>{`${translate('common.quantity')} : ${item.qty}`}</Text>
       </View>
-      <Icon style={styles.deleteIcon} name="delete" onPress={onPressRemoveItem} />
+      <Icon
+        style={styles.deleteIcon}
+        name="delete"
+        onPress={onPressRemoveItem}
+      />
     </Card>
   );
 };
@@ -95,38 +106,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginBottom: SPACING.large,
+    overflow: 'hidden',
   },
   image: {
-    flex: 1,
-    left: 0,
     height: DIMENS.cartScreen.imageSize,
     width: DIMENS.cartScreen.imageSize,
   },
   infoContainer: {
     flex: 1,
+    paddingStart: SPACING.medium,
+    padding: SPACING.small,
   },
   row: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   deleteIcon: {
-    paddingTop: SPACING.tiny,
-    paddingEnd: SPACING.tiny
-  }
+    paddingTop: SPACING.small,
+    paddingEnd: SPACING.tiny,
+  },
 });
 
 CartListItem.propTypes = propTypes;
 
 CartListItem.defaultProps = defaultProps;
 
-const mapStateToProps = ({ cart }, { item }) => {
-  const products = cart.products || {};
-  const product = products[item.sku];
+const mapStateToProps = ({ product }, { item }) => {
+  const {
+    cachedProductDetails: { [item.sku]: productDetail },
+  } = product;
   return {
-    product,
+    productDetail,
   };
 };
 
 export default connect(mapStateToProps, {
-  getCartItemProduct,
+  getProductDetail,
   removeItemFromCart,
 })(CartListItem);

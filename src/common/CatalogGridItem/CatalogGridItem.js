@@ -7,6 +7,7 @@ import Text from '../Text/Text';
 import Image from '../Image/Image';
 import Card from '../Card/Card';
 import Price from '../Price/Price';
+import { magento } from '../../magento';
 import { NAVIGATION_TO_PRODUCT_SCREEN } from '../../navigation/routes';
 import { getProductThumbnailFromAttribute } from '../../utils/products';
 import { ThemeContext } from '../../theme';
@@ -118,7 +119,7 @@ const CatalogGridItem = ({
       onPress={onItemPress}
     >
       <Image
-        source={{ uri: getProductThumbnailFromAttribute(product) }}
+        source={{ uri: product? `${magento.getProductMediaUrl()}${getProductThumbnailFromAttribute(product)}`: '' }}
         style={styles.imageStyle}
         resizeMode="contain"
       />
