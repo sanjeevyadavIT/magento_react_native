@@ -23,6 +23,12 @@ export default {
     emptyImageSize: 150,
   },
   /**
+   * Constants related to AlertDialog
+   */
+  alertDialog: {
+    descriptionFontSize: 16,
+  },
+  /**
    * Constants related to CartScreen
    */
   cartScreen: {

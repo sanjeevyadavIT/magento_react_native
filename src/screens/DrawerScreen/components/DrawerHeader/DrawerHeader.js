@@ -40,7 +40,7 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
   const { theme } = useContext(ThemeContext);
 
   if (loggedIn) {
-    welcomeText = `${translate('drawerScreen.welcomeText')} ${
+    welcomeText = `${translate('common.hello')} ${
       firstname || translate('common.user')
     }!`;
     NAVIGATION_PATH = NAVIGATION_TO_PROFILE_SCREEN;

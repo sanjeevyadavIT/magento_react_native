@@ -7,6 +7,7 @@ import Toast from 'react-native-simple-toast';
 import { DrawerHeader, DrawerItem } from './components';
 import {
   NAVIGATION_TO_HOME_SCREEN,
+  NAVIGATION_TO_ALERT_DIALOG,
   NAVIGATION_TO_SETTING_SCREEN,
   NAVIGATION_TO_CATEGORIES_SCREEN,
 } from '../../navigation/routes';
@@ -44,12 +45,19 @@ const DrawerScreen = ({
   const { theme } = useContext(ThemeContext);
 
   function onLogoutPress() {
-    _logout();
-    Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
-    navigation.navigate(NAVIGATION_TO_HOME_SCREEN, {
-      screen: NAVIGATION_TO_HOME_SCREEN,
-      params: {
-        screen: NAVIGATION_TO_HOME_SCREEN,
+    navigation.navigate(NAVIGATION_TO_ALERT_DIALOG, {
+      description: translate('profileScreen.logoutConfirmationMessage'),
+      positiveButtonTitle: translate('common.yes'),
+      negativeButtonTitle: translate('common.no'),
+      positiveButtonCallback: () => {
+        _logout();
+        Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
+        navigation.navigate(NAVIGATION_TO_HOME_SCREEN, {
+          screen: NAVIGATION_TO_HOME_SCREEN,
+          params: {
+            screen: NAVIGATION_TO_HOME_SCREEN,
+          },
+        });
       },
     });
   }

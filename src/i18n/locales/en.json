@@ -3,8 +3,12 @@
     "brandName": "MageCart",
     "ok": "OK!",
     "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No",
     "continue": "Continue",
     "back": "Back",
+    "hello": "Hello",
+    "attention": "Attention",
     "keyboardNext": "next",
     "total": "Total",
     "subTotal": "Subtotal",
@@ -43,8 +47,7 @@
       "zToA": "name: Z to A",
       "priceLowToHigh": "price: Low to High",
       "priceHighToLow": "price: High to Low"
-    },
-    "loginPrompt": "In order to place order and view profile, please login or signup"
+    }
   },
   "errors": {
     "genericError": "Something went wrong, please try again!",
@@ -93,7 +96,8 @@
     "noAddressTitle": "Save your addresses now!",
     "noAddressMessage": "Add your addresses and enjoy faster checkout.",
     "defaultAddress": "Default Address",
-    "setDefaultAddress": "Set as default address"
+    "setDefaultAddress": "Set as default address",
+    "removeAddressMessage": "Are you sure you want to remove this address?"
   },
   "addEditAddressScreen": {
     "editTitle": "Edit Address",
@@ -102,6 +106,10 @@
     "newAddressAdded": "New address added!",
     "makeDefaultAddress": "Make this as my default address",
     "selectState": "Select a state"
+  },
+  "alertDialog": {
+    "loginPromptDialogTitle": "Dear user,",
+    "loginPromptDialogMessage": "In order to proceed further and use all app features, you must login to your user account or signup to create a new account. \n\nWould you like to proceed further?"
   },
   "cartScreen": {
     "title": "Cart",
@@ -118,7 +126,6 @@
     }
   },
   "drawerScreen": {
-    "welcomeText": "Hello",
     "shopCategories": "Shop by Categories"
   },
   "forgetPasswordScreen": {
@@ -173,12 +180,14 @@
     "unsupportedProductType": "App doesn't support",
     "productDetailLabel": "Product Details",
     "noProductDetail": "No description available!",
-    "addToCartSuccess": "Item Added To Cart!"
+    "addToCartSuccess": "Item Added To Cart!",
+    "loginPromptMessage": "In order to add products to cart, you must login into your account, proceed to Login?"
   },
   "profileScreen": {
     "title": "Account",
     "ordersSubtitle": "Check your order status",
-    "addressSubtitle": "Save addresses for a hassle-free checkout"
+    "addressSubtitle": "Save addresses for a hassle-free checkout",
+    "logoutConfirmationMessage": "Are you sure you want to logout?"
   },
   "searchScreen": {
     "searchHint": "Search for products",

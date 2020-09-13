@@ -1,10 +1,11 @@
+import AddEditAddressScreen from './AddEditAddressScreen/AddEditAddressScreen';
 import AddressScreen from './AddressScreen/AddressScreen';
+import AlertDialog from './AlertDialog/AlertDialog';
 import ProfileScreen from './ProfileScreen/ProfileScreen';
 import CartScreen from './CartScreen/CartScreen';
 import CategoryListScreen from './CategoryListScreen/CategoryListScreen';
 import CheckoutAddressScreen from './CheckoutAddressScreen/CheckoutAddressScreen';
 import DrawerScreen from './DrawerScreen/DrawerScreen';
-import AddEditAddressScreen from './AddEditAddressScreen/AddEditAddressScreen';
 import HomeScreen from './HomeScreen/HomeScreen';
 import ProductScreen from './ProductScreen/ProductScreen';
 import SearchScreen from './SearchScreen/SearchScreen';
@@ -20,12 +21,13 @@ import SettingScreen from './SettingScreen/SettingScreen';
 import SplashScreen from './SplashScreen/SplashScreen';
 
 export {
+  AddEditAddressScreen,
   AddressScreen,
+  AlertDialog,
   ProfileScreen,
   CartScreen,
   CategoryListScreen,
   CheckoutAddressScreen,
-  AddEditAddressScreen,
   HomeScreen,
   DrawerScreen,
   ProductScreen,

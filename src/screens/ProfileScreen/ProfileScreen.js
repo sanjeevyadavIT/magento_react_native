@@ -6,6 +6,7 @@ import Toast from 'react-native-simple-toast';
 import { getCurrentCustomer, logout } from '../../store/actions';
 import {
   NAVIGATION_TO_HOME_SCREEN,
+  NAVIGATION_TO_ALERT_DIALOG,
   NAVIGATION_TO_ORDERS_SCREEN,
   NAVIGATION_TO_ADDRESS_SCREEN,
 } from '../../navigation/routes';
@@ -67,11 +68,16 @@ const ProfileScreen = ({
     }
   }, []);
 
-  const onLogoutPress = () => {
-    _logout();
-    Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
-    navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
-  };
+  const onLogoutPress = () => navigation.navigate(NAVIGATION_TO_ALERT_DIALOG, {
+    description: translate('profileScreen.logoutConfirmationMessage'),
+    positiveButtonTitle: translate('common.yes'),
+    negativeButtonTitle: translate('common.no'),
+    positiveButtonCallback: () => {
+      _logout();
+      Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
+      navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
+    },
+  });
 
   return (
     <GenericTemplate

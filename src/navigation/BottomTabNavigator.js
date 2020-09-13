@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Alert } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,7 +11,7 @@ import {
   NAVIGATION_TO_CART_SCREEN,
   NAVIGATION_TO_CATEGORIES_SCREEN,
   NAVIGATION_TO_PROFILE_SCREEN,
-  NAVIGATION_TO_LOGIN_SCREEN,
+  NAVIGATION_TO_ALERT_DIALOG,
 } from './routes';
 import { translate } from '../i18n';
 
@@ -34,19 +33,11 @@ const defaultProps = {
 const BottomTabNavigator = ({ loggedIn, cartItemsCount, navigation }) => {
   const { theme } = useContext(ThemeContext);
 
-  const showLoginPrompt = () => {
-    Alert.alert('', translate('common.loginPrompt'), [
-      {
-        text: translate(''),
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {
-        text: translate('common.ok'),
-        onPress: () => navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN),
-      },
-    ]);
-  };
+  const showLoginPrompt = () =>
+    navigation.navigate(NAVIGATION_TO_ALERT_DIALOG, {
+      loginMode: true,
+    });
+
   return (
     <Tab.Navigator
       lazy
@@ -109,9 +100,9 @@ const BottomTabNavigator = ({ loggedIn, cartItemsCount, navigation }) => {
         name={NAVIGATION_TO_CART_SCREEN}
         component={CartScreen}
         options={{
-          ...( cartItemsCount > 0 && ({
-            tabBarBadge: cartItemsCount < 10? cartItemsCount : '9+',
-          })),
+          ...(cartItemsCount > 0 && {
+            tabBarBadge: cartItemsCount < 10 ? cartItemsCount : '9+',
+          }),
           tabBarLabel: translate('common.cart'),
           tabBarIcon: ({ color, focused }) => (
             <Icon

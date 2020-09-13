@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GenericTemplate, Button, Text } from '../../common';
-import { NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN } from '../../navigation/routes';
+import {
+  NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN,
+  NAVIGATION_TO_ALERT_DIALOG,
+} from '../../navigation/routes';
 import Status from '../../magento/Status';
-import { updateCustomer} from '../../store/actions';
+import { updateCustomer } from '../../store/actions';
 import { magento } from '../../magento';
 import { translate } from '../../i18n';
 import { SPACING, DIMENS } from '../../constants';
@@ -25,7 +28,11 @@ const propTypes = {
 
 const defaultProps = {};
 
-const AddressScreen = ({ customer, updateCustomer: _updateCustomer, navigation }) => {
+const AddressScreen = ({
+  customer,
+  updateCustomer: _updateCustomer,
+  navigation,
+}) => {
   const { addresses } = customer;
   const [apiStatus, setApiStatus] = useState(Status.DEFAULT);
   const [selectedAddress, setSelectedAddress] = useState(-1);
@@ -84,7 +91,7 @@ const AddressScreen = ({ customer, updateCustomer: _updateCustomer, navigation }
         );
         setApiStatus(Status.ERROR);
       });
-  }
+  };
 
   return (
     <GenericTemplate
@@ -111,25 +118,30 @@ const AddressScreen = ({ customer, updateCustomer: _updateCustomer, navigation }
             active={selectedAddress === index}
             onPress={() => setSelectedAddress(index)}
             onEdit={() => editAddress(index)}
-            onDelete={() => onDelete(index)}
+            onDelete={() =>
+              navigation.navigate(NAVIGATION_TO_ALERT_DIALOG, {
+                dismissible: true,
+                description: translate('addressScreen.removeAddressMessage'),
+                positiveButtonCallback: () => onDelete(index),
+              })
+            }
             setDefaultAddress={() => setDefaultAddress(index)}
           />
         )}
         ListEmptyComponent={
-          (
-            <View style={styles.emptyContainer}>
-              <AddressImage
-                width={DIMENS.addressScreen.emptyImageSize}
-                height={DIMENS.addressScreen.emptyImageSize}
-              />
-              <Text style={styles.centerText} type="heading" bold>
-                {translate('addressScreen.noAddressTitle')}
-              </Text>
-              <Text style={styles.centerText}>
+          <View style={styles.emptyContainer}>
+            <AddressImage
+              width={DIMENS.addressScreen.emptyImageSize}
+              height={DIMENS.addressScreen.emptyImageSize}
+            />
+            <Text style={styles.centerText} type="heading" bold>
+              {translate('addressScreen.noAddressTitle')}
+            </Text>
+            <Text style={styles.centerText}>
               {translate('addressScreen.noAddressMessage')}
-              </Text>
-            </View>
-          )}
+            </Text>
+          </View>
+        }
         contentContainerStyle={[
           styles.flatListConatiner,
           addresses.length === 0 && { flex: 1 },
@@ -170,9 +182,7 @@ AddressScreen.propTypes = propTypes;
 AddressScreen.defaultProps = defaultProps;
 
 const mapStateToProps = ({ account }) => {
-  const {
-    customer,
-  } = account;
+  const { customer } = account;
   return {
     customer,
   };

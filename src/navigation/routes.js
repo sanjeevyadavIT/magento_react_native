@@ -1,3 +1,4 @@
+export const NAVIGATION_TO_ALERT_DIALOG = 'AlertDialog';
 export const NAVIGATION_TO_SPLASH_SCREEN = 'SplashScreen';
 export const NAVIGATION_TO_HOME_SCREEN = 'HomeScreen';
 export const NAVIGATION_TO_CATEGORIES_SCREEN = 'CategoriesScreen';

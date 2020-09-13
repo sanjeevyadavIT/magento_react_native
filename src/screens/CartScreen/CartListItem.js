@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, Alert, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { magento } from '../../magento';
 import { getProductDetail, removeItemFromCart } from '../../store/actions';
+import { NAVIGATION_TO_ALERT_DIALOG } from '../../navigation/routes';
 import { Card, Image, Text, Price, Icon } from '../../common';
 import { translate } from '../../i18n';
 import { DIMENS, SPACING } from '../../constants';
@@ -38,7 +40,7 @@ const CartListItem = ({
   getProductDetail: _getProductDetail,
   removeItemFromCart: _removeItemFromCart,
 }) => {
-
+  const navigation = useNavigation();
   useEffect(() => {
     // componentDidMount
     if (!productDetail) {
@@ -46,24 +48,14 @@ const CartListItem = ({
     }
   }, []);
 
-  const onPressRemoveItem = () => {
-    Alert.alert(
-      translate('cartScreen.removeItemDialogTitle'),
-      `${translate('cartScreen.removeItemDialogMessage')}: ${item.name}`,
-      [
-        {
-          text: translate('common.cancel'),
-          onPress: () => console.log('Cancel pressed'),
-          style: 'cancel',
-        },
-        {
-          text: translate('common.ok'),
-          onPress: () => _removeItemFromCart(item.item_id),
-        },
-      ],
-      { cancelable: true },
-    );
-  };
+  const onPressRemoveItem = () =>
+    navigation.navigate(NAVIGATION_TO_ALERT_DIALOG, {
+      title: translate('cartScreen.removeItemDialogTitle'),
+      description: `${translate('cartScreen.removeItemDialogMessage')}: ${
+        item.name
+      }`,
+      positiveButtonCallback: () => _removeItemFromCart(item.item_id),
+    });
 
   return (
     <Card style={styles.mainContainer}>

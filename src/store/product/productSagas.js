@@ -148,22 +148,18 @@ function* addToCart({ payload }) {
   const { sku } = payload.cartItem;
   try {
     yield put({ type: MAGENTO.ADD_TO_CART_LOADING, payload: { sku } });
-    if (payload.cartItem.quote_id) {
-      const response = yield call(
-        { content: magento, fn: magento.customer.addItemToCart },
-        payload,
-      );
-      yield put({
-        type: MAGENTO.ADD_TO_CART_SUCCESS,
-        payload: {
-          response,
-          sku,
-        },
-      });
-      yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // refresh cart
-    } else {
-      throw new Error('Guest cart not implemented');
-    }
+    const response = yield call(
+      { content: magento, fn: magento.customer.addItemToCart },
+      payload,
+    );
+    yield put({
+      type: MAGENTO.ADD_TO_CART_SUCCESS,
+      payload: {
+        response,
+        sku,
+      },
+    });
+    yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // refresh cart
   } catch (error) {
     yield put({
       type: MAGENTO.ADD_TO_CART_FAILURE,
