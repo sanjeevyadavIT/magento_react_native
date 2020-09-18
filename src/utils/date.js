@@ -2,7 +2,7 @@ const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "O
 
 /**
  * Check wether date is valid or not
- * 
+ *
  * @param {Date} date - date which needs to be check
  */
 export function isDateValid(date) {

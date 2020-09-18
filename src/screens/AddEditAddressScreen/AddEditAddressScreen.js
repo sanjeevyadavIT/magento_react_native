@@ -341,7 +341,7 @@ const AddEditAddressScreen = ({
         value={form.firstName}
         containerStyle={styles.defaultMargin}
         returnKeyType={translate('common.keyboardNext')}
-        placeholder={`${translate('addressScreen.firstNameHint')} *`}
+        placeholder={`${translate('common.firstName')} *`}
         onSubmitEditing={() => lastNameInputRef.current.focus()}
         onChangeText={value =>
           setValues(prevState => ({
@@ -363,7 +363,7 @@ const AddEditAddressScreen = ({
         editable={!(apiStatus === Status.LOADING)}
         containerStyle={styles.defaultMargin}
         returnKeyType={translate('common.keyboardNext')}
-        placeholder={`${translate('addressScreen.lastNameHint')} *`}
+        placeholder={`${translate('common.lastName')} *`}
         onSubmitEditing={() => phoneNumberInputRef.current.focus()}
         onChangeText={value =>
           setValues(prevState => ({

@@ -22,6 +22,7 @@ import {
   OrderAcknowledgementScreen,
   SettingScreen,
   AddressScreen,
+  EditProfileScreen,
 } from '../screens';
 import {
   NAVIGATION_TO_SPLASH_SCREEN,
@@ -42,6 +43,7 @@ import {
   NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN,
   NAVIGATION_TO_SETTING_SCREEN,
   NAVIGATION_TO_ADDRESS_SCREEN,
+  NAVIGATION_TO_EDIT_PROFILE_SCREEN
 } from './routes';
 import { translate } from '../i18n';
 import { isObject } from '../utils';
@@ -265,6 +267,13 @@ const StackNavigator = ({ loggedIn }) => {
       <Stack.Screen
         name={NAVIGATION_TO_ADDRESS_SCREEN}
         component={AddressScreen}
+        options={{
+          title: translate('addressScreen.title'),
+        }}
+      />
+      <Stack.Screen
+        name={NAVIGATION_TO_EDIT_PROFILE_SCREEN}
+        component={EditProfileScreen}
         options={{
           title: translate('addressScreen.title'),
         }}

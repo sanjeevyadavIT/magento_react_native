@@ -6,6 +6,7 @@ import CartScreen from './CartScreen/CartScreen';
 import CategoryListScreen from './CategoryListScreen/CategoryListScreen';
 import CheckoutAddressScreen from './CheckoutAddressScreen/CheckoutAddressScreen';
 import DrawerScreen from './DrawerScreen/DrawerScreen';
+import EditProfileScreen from './EditProfileScreen/EditProfileScreen';
 import HomeScreen from './HomeScreen/HomeScreen';
 import ProductScreen from './ProductScreen/ProductScreen';
 import SearchScreen from './SearchScreen/SearchScreen';
@@ -30,6 +31,7 @@ export {
   CheckoutAddressScreen,
   HomeScreen,
   DrawerScreen,
+  EditProfileScreen,
   ProductScreen,
   SearchScreen,
   LoginScreen,

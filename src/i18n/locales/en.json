@@ -3,6 +3,7 @@
     "brandName": "MageCart",
     "ok": "OK!",
     "cancel": "Cancel",
+    "done": "Done",
     "yes": "Yes",
     "no": "No",
     "continue": "Continue",
@@ -40,6 +41,8 @@
     "delete": "Delete",
     "loadMore": "Load more",
     "status": "Status",
+    "firstName": "First Name",
+    "lastName": "Last Name",
     "logoutSuccessMessage": "Logout successfully!",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
@@ -80,10 +83,6 @@
     "stateLabel": "Enter State",
     "stateHint": "State",
     "billingAndShippingAddress": "Billing & Shipping Address",
-    "firstNameLabel": "First Name",
-    "firstNameHint": "First Name",
-    "lastNameLabel": "Last Name",
-    "lastNameHint": "Last Name",
     "phoneNumberLabel": "Phone Number",
     "phoneNumberHint": "Phone Number",
     "addressLabel": "Address",
@@ -127,6 +126,11 @@
   },
   "drawerScreen": {
     "shopCategories": "Shop by Categories"
+  },
+  "editProfileScreen": {
+    "title": "Edit Profile",
+    "detailsUpdated": "Details Updated successfully!",
+    "setBirthday": "Set Birthday"
   },
   "forgetPasswordScreen": {
     "requestEmailId": "Enter your email address and we'll send a link on your email to reset your password.",
@@ -187,7 +191,9 @@
     "title": "Account",
     "ordersSubtitle": "Check your order status",
     "addressSubtitle": "Save addresses for a hassle-free checkout",
-    "logoutConfirmationMessage": "Are you sure you want to logout?"
+    "logoutConfirmationMessage": "Are you sure you want to logout?",
+    "profileDetails": "Profile Details",
+    "profileDetailsSubtitle": "Change your profile details"
   },
   "searchScreen": {
     "searchHint": "Search for products",
@@ -209,8 +215,6 @@
     "title": "Signup",
     "haveAccount": "Already have an account(Login)",
     "successMessage": "Signup successful, please login!",
-    "firstNameHint": "First Name",
-    "lastNameHint": "Last Name",
     "signupSuccessMessage": "Account created successfully, please login"
   },
   "splashScreen": {

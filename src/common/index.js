@@ -3,6 +3,7 @@ import Card from './Card/Card';
 import CatalogGrid from './CatalogGrid/CatalogGrid';
 import CatalogGridItem from './CatalogGridItem/CatalogGridItem';
 import CheckBox from './CheckBox/CheckBox';
+import DateTimePicker from './DateTimePicker/DateTimePicker';
 import Divider from './Divider/Divider';
 import GenericTemplate from './GenericTemplate/GenericTemplate';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
@@ -24,6 +25,7 @@ export {
   CatalogGrid,
   CatalogGridItem,
   CheckBox,
+  DateTimePicker,
   Divider,
   GenericTemplate,
   HeaderButtons,

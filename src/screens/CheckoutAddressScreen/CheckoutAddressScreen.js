@@ -317,9 +317,9 @@ const CheckoutAddressScreen = ({
         value={form.firstName}
         containerStyle={styles.defaultMargin(theme)}
         returnKeyType={translate('common.keyboardNext')}
-        label={translate('addressScreen.firstNameLabel')}
+        label={translate('common.firstName')}
         editable={!(billingAddressStatus === Status.LOADING)}
-        placeholder={translate('addressScreen.firstNameHint')}
+        placeholder={translate('common.firstName')}
         onSubmitEditing={() => lastNameInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, firstName: value })}
       />
@@ -329,8 +329,8 @@ const CheckoutAddressScreen = ({
         editable={!(billingAddressStatus === Status.LOADING)}
         containerStyle={styles.defaultMargin(theme)}
         returnKeyType={translate('common.keyboardNext')}
-        label={translate('addressScreen.lastNameLabel')}
-        placeholder={translate('addressScreen.lastNameHint')}
+        label={translate('common.lastName')}
+        placeholder={translate('common.lastName')}
         onSubmitEditing={() => phoneNumberInputRef.current.focus()}
         onChangeText={value => setValues({ ...form, lastName: value })}
         assignRef={component => {

@@ -90,7 +90,7 @@ const TextInput = ({
       )}
       <View
         style={StyleSheet.flatten([
-          styles.inputContainer(theme),
+          styles.inputContainer(disabled, theme),
           containerStyle,
         ])}
       >
@@ -109,7 +109,7 @@ const TextInput = ({
           placeholderTextColor={placeholderTextColor || theme.labelTextColor}
           underlineColorAndroid={theme.transparent}
           editable={!disabled}
-          style={[styles.input(theme), inputStyle]}
+          style={[styles.input(theme), disabled && styles.disabledInput(theme), inputStyle]}
           ref={component => assignRef && assignRef(component)}
           {...props}
         />
@@ -137,13 +137,13 @@ const styles = StyleSheet.create({
     ...TYPOGRAPHY.formLabel(theme),
     marginBottom: SPACING.tiny,
   }),
-  inputContainer: theme => ({
+  inputContainer: (disabled, theme) => ({
     flexDirection: 'row',
     backgroundColor: theme.surfaceColor,
     borderWidth: DIMENS.common.borderWidth,
     borderRadius: DIMENS.common.borderRadius,
     alignItems: 'center',
-    borderColor: theme.labelTextColor,
+    borderColor: disabled? theme.disabledDarkColor : theme.labelTextColor,
     minHeight: DIMENS.common.textInputHeight,
   }),
   input: theme => ({
@@ -152,6 +152,9 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.small,
     paddingHorizontal: SPACING.medium,
     flex: 1,
+  }),
+  disabledInput: theme => ({
+    color: theme.disabledColor
   }),
   iconContainer: {
     justifyContent: 'center',

@@ -102,7 +102,7 @@ const SignupScreen = ({ navigation }) => {
   return (
     <GenericTemplate scrollable style={styles.container}>
       <TextInput
-        placeholder={translate('signupScreen.firstNameHint')}
+        placeholder={translate('common.firstName')}
         autoCorrect={false}
         editable={!(apiStatus === Status.LOADING)}
         containerStyle={styles.defaultMargin}
@@ -123,7 +123,7 @@ const SignupScreen = ({ navigation }) => {
         }
       />
       <TextInput
-        placeholder={translate('signupScreen.lastNameHint')}
+        placeholder={translate('common.lastName')}
         autoCorrect={false}
         editable={!(apiStatus === Status.LOADING)}
         containerStyle={styles.defaultMargin}
