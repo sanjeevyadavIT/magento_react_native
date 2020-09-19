@@ -130,7 +130,6 @@ const AddEditAddressScreen = ({
         phoneNumber: address.telephone,
         city: address.city,
         zipCode: address.postcode,
-        // state: address.region.region_code,
       });
       setDefaultAddress(address.default_billing && address.default_shipping);
     }
@@ -161,7 +160,24 @@ const AddEditAddressScreen = ({
       const countryObject = countriesData.find(item => item.id === countryCode);
       if (isObject(countryObject)) {
         setCountry(countryObject);
-        // TODO: Set state in case of edit mode and available region
+        if (mode === EDIT_MODE) {
+          if ('available_regions' in countryObject) {
+            const stateObject = countryObject.available_regions.find(
+              item => item.code === address.region.region_code,
+            );
+            if (isObject(stateObject)) {
+              setState({
+                ...stateObject,
+                label: stateObject.name, // for picker
+                key: stateObject.code, // for picker
+              });
+            }
+          } else {
+            setState({
+              customRegionName: address.region.region,
+            });
+          }
+        }
       }
     }
   }, [countryStatus]);
@@ -353,6 +369,7 @@ const AddEditAddressScreen = ({
         errorMessage={
           form.incorrectFirstName ? translate('errors.invalidFirstName') : ''
         }
+        maxLength={LIMITS.maxFirstNameLength}
         onBlur={() =>
           checkField('firstName', 'incorrectFirstName', isNonEmptyString)
         }
@@ -375,6 +392,7 @@ const AddEditAddressScreen = ({
         assignRef={component => {
           lastNameInputRef.current = component;
         }}
+        maxLength={LIMITS.maxLastNameLength}
         errorMessage={
           form.incorrectLastName ? translate('errors.invalidLastName') : ''
         }
