@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Text, Icon } from '../../../../common';
+import { Text, Icon } from '../../common';
 import {
   NAVIGATION_TO_LOGIN_SCREEN,
   NAVIGATION_TO_PROFILE_SCREEN,
-} from '../../../../navigation/routes';
-import { ThemeContext } from '../../../../theme';
-import { translate } from '../../../../i18n';
-import { DIMENS, SPACING } from '../../../../constants';
+} from '../../navigation/routes';
+import { ThemeContext } from '../../theme';
+import { translate } from '../../i18n';
+import { DIMENS, SPACING } from '../../constants';
 
 const propTypes = {
   /**

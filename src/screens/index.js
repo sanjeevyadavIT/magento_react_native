@@ -3,6 +3,7 @@ import AddressScreen from './AddressScreen/AddressScreen';
 import AlertDialog from './AlertDialog/AlertDialog';
 import ProfileScreen from './ProfileScreen/ProfileScreen';
 import CartScreen from './CartScreen/CartScreen';
+import CategoriesScreen from './CategoriesScreen/CategoriesScreen';
 import CategoryListScreen from './CategoryListScreen/CategoryListScreen';
 import CheckoutAddressScreen from './CheckoutAddressScreen/CheckoutAddressScreen';
 import DrawerScreen from './DrawerScreen/DrawerScreen';
@@ -28,6 +29,7 @@ export {
   AlertDialog,
   ProfileScreen,
   CartScreen,
+  CategoriesScreen,
   CategoryListScreen,
   CheckoutAddressScreen,
   HomeScreen,

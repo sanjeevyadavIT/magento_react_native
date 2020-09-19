@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon } from '../common';
 import { ThemeContext } from '../theme';
-import { HomeScreen, ProfileScreen, CartScreen } from '../screens';
-import { CategoryTreeContainer } from '../screens/DrawerScreen/components';
+import { HomeScreen, ProfileScreen, CartScreen, CategoriesScreen } from '../screens';
 import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_CART_SCREEN,
@@ -61,7 +60,7 @@ const BottomTabNavigator = ({ loggedIn, cartItemsCount, navigation }) => {
       />
       <Tab.Screen
         name={NAVIGATION_TO_CATEGORIES_SCREEN}
-        component={CategoryTreeContainer}
+        component={CategoriesScreen}
         options={{
           tabBarLabel: translate('common.categories'),
           tabBarIcon: ({ color, focused }) => (

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Icon, Text, Divider, TouchReceptor } from '../../../../common';
-import { ThemeContext } from '../../../../theme';
-import { SPACING, DIMENS } from '../../../../constants';
+import { Icon, Text, Divider, TouchReceptor } from '../../common';
+import { ThemeContext } from '../../theme';
+import { SPACING, DIMENS } from '../../constants';
 
 const propTypes = {
   title: PropTypes.string.isRequired,

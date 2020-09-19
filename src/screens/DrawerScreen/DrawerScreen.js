@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-simple-toast';
-import { DrawerHeader, DrawerItem } from './components';
+import DrawerHeader from './DrawerHeader';
+import DrawerItem from './DrawerItem';
 import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_ALERT_DIALOG,
