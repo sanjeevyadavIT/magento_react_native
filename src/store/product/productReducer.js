@@ -34,6 +34,10 @@ const getInitialState = {
    * Cache of product detail, used in cart currently
    */
   cachedProductDetails: {},
+  /**
+   * Cache product media, used in Order screen
+   */
+  cachedProductMedia: {},
 };
 
 export default (state = getInitialState, { type, payload }) => {
@@ -234,6 +238,16 @@ export default (state = getInitialState, { type, payload }) => {
         cachedProductDetails: {
           ...state.cachedProductDetails,
           [sku]: productDetail,
+        }
+      };
+    }
+    case MAGENTO.GET_PRODUCT_MEDIA_SUCCESS: {
+      const { sku, media } = payload;
+      return {
+        ...state,
+        cachedProductMedia: {
+          ...state.cachedProductMedia,
+          [sku]: media,
         }
       };
     }

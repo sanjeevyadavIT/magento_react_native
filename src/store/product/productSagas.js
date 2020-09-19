@@ -198,9 +198,30 @@ function* getProductDetail({ payload: { sku } }) {
   }
 }
 
+// TODO: Make this function offical function
+function* newGetProductMedia({ payload: { sku }}) {
+  try {
+    yield put({ type: MAGENTO.GET_PRODUCT_MEDIA_LOADING, payload: { sku } });
+    const response = yield call(
+      { content: magento, fn: magento.admin.getProductMedia },
+      sku,
+    );
+    yield put({
+      type: MAGENTO.GET_PRODUCT_MEDIA_SUCCESS,
+      payload: { sku, media: response },
+    });
+  } catch (error) {
+    yield put({
+      type: MAGENTO.GET_PRODUCT_MEDIA_FAILURE,
+      payload: { sku, errorMessage: error.message },
+    });
+  }
+}
+
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
   yield takeEvery(UI.OPEN_SELECTED_PRODUCT_REQUEST, fetchProductDetails);
   yield takeEvery(MAGENTO.ADD_TO_CART_REQUEST, addToCart);
   yield takeEvery(MAGENTO.PRODUCT_DETAIL_REQUEST, getProductDetail);
+  yield takeEvery(MAGENTO.GET_PRODUCT_MEDIA_REQUEST, newGetProductMedia);
 }

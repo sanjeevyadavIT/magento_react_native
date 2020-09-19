@@ -33,6 +33,7 @@ export const MAGENTO = createRequestTypes(
      */
     'CONF_OPTIONS', // Product is configurable type, fetch all options
     'PRODUCT_MEDIA', // Fetch images related to products
+    'GET_PRODUCT_MEDIA', // This is the new code, will replace above
     'CONFIGURABLE_CHILDREN', // Fetch child products of configurable product
     'ADD_TO_CART', // Add item to cart
     /**

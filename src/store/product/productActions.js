@@ -30,7 +30,7 @@ export const getConfigurableChildren = sku => ({
 });
 
 export const getProductMedia = sku => ({
-  type: MAGENTO.PRODUCT_MEDIA_REQUEST,
+  type: MAGENTO.GET_PRODUCT_MEDIA_REQUEST,
   payload: { sku },
 });
 
