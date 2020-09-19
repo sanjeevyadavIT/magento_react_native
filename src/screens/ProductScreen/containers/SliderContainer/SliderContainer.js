@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { magento } from '../../../../magento';
 import {
   ImageSlider,
   ImageSliderItem,
   GenericTemplate,
 } from '../../../../common';
+import { NAVIGATION_TO_MEDIA_VIEWER } from '../../../../navigation/routes';
 import Status from '../../../../magento/Status';
 import { ThemeContext } from '../../../../theme';
 import { ProductType } from '../../../../types';
@@ -46,11 +48,23 @@ const SliderContainer = ({
   console.log('^^^^^^^^^^^^^^^^');
   console.log('SliderContainer', slider);
   const { theme } = useContext(ThemeContext);
+  const navigation = useNavigation();
   const selectedProductImage =
     selectedProduct && getValueFromAttribute(selectedProduct, 'image');
   if (selectedProductImage) {
-    slider.unshift(new ImageSliderItem('', selectedProduct));
+    slider.unshift(new ImageSliderItem('', selectedProductImage));
   }
+
+  const openMediaViewer = useMemo(() => index => {
+    navigation.navigate(NAVIGATION_TO_MEDIA_VIEWER, {
+      index,
+      media: slider.map(slide => ({
+        source: {
+          uri: `${magento.getProductMediaUrl()}${slide.imageUrl}`
+        }
+      }))
+    })
+  }, [navigation, slider]);
 
   return (
     <GenericTemplate status={status} errorMessage={errorMessage} style={style}>
@@ -60,6 +74,7 @@ const SliderContainer = ({
         slider={slider}
         baseUrl={magento.getProductMediaUrl()}
         resizeMode="contain"
+        onPress={index => openMediaViewer(index)}
       />
     </GenericTemplate>
   );

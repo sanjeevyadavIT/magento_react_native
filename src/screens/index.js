@@ -11,6 +11,7 @@ import HomeScreen from './HomeScreen/HomeScreen';
 import ProductScreen from './ProductScreen/ProductScreen';
 import SearchScreen from './SearchScreen/SearchScreen';
 import LoginScreen from './LoginScreen/LoginScreen';
+import MediaViewer from './MediaViewer/MediaViewer';
 import SignupScreen from './SignupScreen/SignupScreen';
 import ShippingScreen from './ShippingScreen/ShippingScreen';
 import PaymentScreen from './PaymentScreen/PaymentScreen';
@@ -35,6 +36,7 @@ export {
   ProductScreen,
   SearchScreen,
   LoginScreen,
+  MediaViewer,
   SignupScreen,
   ShippingScreen,
   PaymentScreen,

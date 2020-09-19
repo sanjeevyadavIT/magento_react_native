@@ -49,6 +49,13 @@ export default {
     loginImageSize: 150,
   },
   /**
+   * Constants related to MediaViewer
+   */
+  mediaViewer: {
+    closeIconSize: 30,
+    paginationFontSize: 12,
+  },
+  /**
    * Constants related to ProfileScreen
    */
   profileScreen: {

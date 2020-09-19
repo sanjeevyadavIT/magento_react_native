@@ -1,5 +1,9 @@
 import React from 'react';
-import { StyleSheet, ViewPropTypes } from 'react-native';
+import {
+  TouchableWithoutFeedback,
+  StyleSheet,
+  ViewPropTypes,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
 import Image from '../Image/Image';
@@ -27,12 +31,14 @@ const propTypes = {
   ]),
   autoplay: PropTypes.bool,
   style: ViewPropTypes.style,
+  onPress: PropTypes.func,
 };
 
 const defaultProps = {
   resizeMode: 'cover',
   style: {},
   autoplay: true,
+  onPress: () => {},
 };
 
 const ImageSlider = ({
@@ -46,15 +52,18 @@ const ImageSlider = ({
   autoplay,
   resizeMode,
   style,
+  onPress,
 }) => {
   const renderImages = () =>
     slider.map((item, index) => (
-      <Image
-        key={String(index)}
-        style={[styles.imageStyle, { height: imageHeight }]}
-        resizeMode={resizeMode}
-        source={{ uri: `${baseUrl}${item.imageUrl}` }}
-      />
+      <TouchableWithoutFeedback onPress={() => onPress(index)}>
+        <Image
+          key={String(index)}
+          style={[styles.imageStyle, { height: imageHeight }]}
+          resizeMode={resizeMode}
+          source={{ uri: `${baseUrl}${item.imageUrl}` }}
+        />
+      </TouchableWithoutFeedback>
     ));
 
   return (

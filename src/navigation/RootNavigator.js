@@ -5,8 +5,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeContext } from '../theme';
-import { NAVIGATION_TO_ALERT_DIALOG } from './routes';
-import { DrawerScreen, AlertDialog } from '../screens';
+import { NAVIGATION_TO_ALERT_DIALOG, NAVIGATION_TO_MEDIA_VIEWER } from './routes';
+import { DrawerScreen, AlertDialog, MediaViewer } from '../screens';
 import StackNavigator from './StackNavigator';
 
 const Drawer = createDrawerNavigator();
@@ -56,6 +56,10 @@ const RootNavigator = () => {
           <Stack.Screen
             name={NAVIGATION_TO_ALERT_DIALOG}
             component={AlertDialog}
+          />
+          <Stack.Screen
+            name={NAVIGATION_TO_MEDIA_VIEWER}
+            component={MediaViewer}
           />
         </Stack.Navigator>
       </NavigationContainer>
