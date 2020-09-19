@@ -10,7 +10,7 @@ import Status from '../../magento/Status';
 import { magento } from '../../magento';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-import { SPACING } from '../../constants';
+import { SPACING, LIMITS } from '../../constants';
 import { isEmailValid, isPasswordValid, isNonEmptyString } from '../../utils';
 
 const propTypes = {
@@ -115,6 +115,7 @@ const SignupScreen = ({ navigation }) => {
         }
         returnKeyType={translate('common.keyboardNext')}
         onSubmitEditing={() => lastNameInputRef.current.focus()}
+        maxLength={LIMITS.maxFirstNameLength}
         errorMessage={
           form.incorrectFirstName ? translate('errors.invalidFirstName') : ''
         }
@@ -139,6 +140,7 @@ const SignupScreen = ({ navigation }) => {
         }}
         returnKeyType={translate('common.keyboardNext')}
         onSubmitEditing={() => emailInputRef.current.focus()}
+        maxLength={LIMITS.maxLastNameLength}
         errorMessage={
           form.incorrectLastName ? translate('errors.invalidLastName') : ''
         }

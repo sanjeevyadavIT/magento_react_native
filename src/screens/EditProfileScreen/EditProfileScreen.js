@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
@@ -9,13 +9,16 @@ import {
   TextInput,
   DateTimePicker,
 } from '../../common';
+import { magento } from '../../magento';
 import Status from '../../magento/Status';
 import { translate } from '../../i18n';
-import { SPACING, DIMENS, TYPOGRAPHY } from '../../constants';
+import { updateCustomer } from '../../store/actions';
+import { SPACING, DIMENS, TYPOGRAPHY, LIMITS } from '../../constants';
 import {
   customerType,
   isNonEmptyString,
   stringToDate,
+  getFormattedDateForApi,
 } from '../../utils';
 import { ThemeContext } from '../../theme';
 import ProfileHeader from '../ProfileScreen/ProfileHeader';
@@ -24,6 +27,7 @@ const CURRENT_DATE = new Date();
 
 const propTypes = {
   customer: customerType.isRequired,
+  updateCustomer: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
   }).isRequired,
@@ -31,7 +35,11 @@ const propTypes = {
 
 const defaultProps = {};
 
-const CartScreen = ({ customer, navigation }) => {
+const CartScreen = ({
+  customer,
+  updateCustomer: _updateCustomer,
+  navigation,
+}) => {
   const [apiStatus, setApiStatus] = useState(Status.DEFAULT);
   const [form, setValues] = useState({
     firstName: customer.firstname,
@@ -63,8 +71,47 @@ const CartScreen = ({ customer, navigation }) => {
     return true;
   };
 
+  const checkValidation = () => {
+    let isValid = true;
+    isValid =
+      isValid &&
+      checkField('firstName', 'incorrectFirstName', isNonEmptyString);
+    isValid =
+      isValid && checkField('lastName', 'incorrectLastName', isNonEmptyString);
+    return isValid;
+  };
+
   const handleSave = () => {
-    console.log({ ...form, dob: dateOfBirth });
+    Keyboard.dismiss();
+    if (!checkValidation()) {
+      return;
+    }
+    setApiStatus(Status.LOADING);
+    const customerData = {
+      customer: {
+        ...customer,
+        firstname: form.firstName,
+        lastname: form.lastName,
+        dob: !dateOfBirth ? '' : getFormattedDateForApi(dateOfBirth),
+      },
+    };
+    // Api call
+    magento.admin
+      .updateCustomerData({
+        customerId: customer.id,
+        customerData,
+      })
+      .then(response => {
+        _updateCustomer(response);
+        setApiStatus(Status.SUCCESS);
+      })
+      .catch(error => {
+        Toast.show(
+          error.message || translate('errors.genericError'),
+          Toast.LONG,
+        );
+        setApiStatus(Status.ERROR);
+      });
   };
 
   return (
@@ -74,6 +121,7 @@ const CartScreen = ({ customer, navigation }) => {
       style={styles.container(theme)}
       footer={
         <Button
+          loading={apiStatus === Status.LOADING}
           style={styles.footer}
           title={translate('common.save')}
           onPress={handleSave}
@@ -96,6 +144,7 @@ const CartScreen = ({ customer, navigation }) => {
           }
           returnKeyType={translate('common.keyboardNext')}
           onSubmitEditing={() => lastNameInputRef.current.focus()}
+          maxLength={LIMITS.maxFirstNameLength}
           errorMessage={
             form.incorrectFirstName ? translate('errors.invalidFirstName') : ''
           }
@@ -120,7 +169,7 @@ const CartScreen = ({ customer, navigation }) => {
             lastNameInputRef.current = component;
           }}
           returnKeyType={translate('common.keyboardNext')}
-          // onSubmitEditing={() => emailInputRef.current.focus()}
+          maxLength={LIMITS.maxLastNameLength}
           errorMessage={
             form.incorrectLastName ? translate('errors.invalidLastName') : ''
           }
@@ -191,4 +240,4 @@ const mapStateToProps = ({ account }) => {
   };
 };
 
-export default connect(mapStateToProps, {})(CartScreen);
+export default connect(mapStateToProps, { updateCustomer })(CartScreen);
