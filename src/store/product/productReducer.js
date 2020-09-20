@@ -7,12 +7,6 @@ const getInitialState = {
     default: {
       children: undefined,
       /**
-       * Product image are stored in medias
-       */
-      medias: [],
-      mediaStatus: Status.DEFAULT,
-      mediaErrorMessage: '',
-      /**
        * Product configurable options, if product type is `configurable`
        */
       options: [],
@@ -61,50 +55,6 @@ export default (state = getInitialState, { type, payload }) => {
             //-------------------------------
             addToCartStatus: Status.DEFAULT,
             addToCartErrorMessage: '',
-          },
-        },
-      };
-    }
-    case MAGENTO.PRODUCT_MEDIA_LOADING: {
-      const { sku } = payload;
-      const product = state.current[sku];
-      return {
-        ...state,
-        current: {
-          ...state.current,
-          [sku]: {
-            ...product,
-            mediaStatus: Status.LOADING,
-          },
-        },
-      };
-    }
-    case MAGENTO.PRODUCT_MEDIA_SUCCESS: {
-      const { sku, medias } = payload;
-      const product = state.current[sku];
-      return {
-        ...state,
-        current: {
-          ...state.current,
-          [sku]: {
-            ...product,
-            mediaStatus: Status.SUCCESS,
-            medias,
-          },
-        },
-      };
-    }
-    case MAGENTO.PRODUCT_MEDIA_FAILURE: {
-      const { sku, errorMessage } = payload;
-      const product = state.current[sku];
-      return {
-        ...state,
-        current: {
-          ...state.current,
-          [sku]: {
-            ...product,
-            mediaStatus: Status.ERROR,
-            mediaErrorMessage: errorMessage,
           },
         },
       };

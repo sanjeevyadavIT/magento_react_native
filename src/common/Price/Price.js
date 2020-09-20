@@ -1,8 +1,9 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useContext } from 'react';
+import { View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import { isNumber, formatPrice } from './utils';
+import { ThemeContext } from '../../theme';
 import { SPACING } from '../../constants';
 
 const propTypes = {
@@ -10,6 +11,7 @@ const propTypes = {
   currencyRate: PropTypes.number.isRequired,
   basePrice: PropTypes.number,
   discountPrice: PropTypes.number,
+  containerStyle: ViewPropTypes.style,
   startingPrice: PropTypes.oneOfType([PropTypes.number, undefined]),
   endingPrice: PropTypes.oneOfType([PropTypes.number, undefined]),
   basePriceStyle: Text.propTypes.style,
@@ -21,6 +23,7 @@ const defaultProps = {
   startingPrice: undefined,
   endingPrice: undefined,
   basePriceStyle: {},
+  containerStyle: {},
 };
 
 /**
@@ -48,12 +51,13 @@ const Price = ({
   startingPrice,
   endingPrice,
   basePriceStyle,
+  containerStyle,
 }) => {
+  const { theme } = useContext(ThemeContext);
   const isBold = () => discountPrice && discountPrice < basePrice;
   const renderDiscountPrice = () =>
     discountPrice === basePrice ? null : (
       <Text
-        type="label"
         bold={isBold()}
         style={styles.discountPriceText}
       >{`${currencySymbol}${formatPrice(discountPrice)}`}</Text>
@@ -78,12 +82,11 @@ const Price = ({
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       {discountPrice ? renderDiscountPrice() : null}
       <Text
-        type="label"
         bold={!isBold()}
-        style={[styles.basePriceText(basePrice, discountPrice), basePriceStyle]}
+        style={[styles.basePriceText(basePrice, discountPrice, theme), basePriceStyle]}
       >{`${currencySymbol}${formatPrice(basePrice, currencyRate)}`}</Text>
     </View>
   );
@@ -96,7 +99,8 @@ const styles = {
   discountPriceText: {
     marginEnd: SPACING.tiny,
   },
-  basePriceText: (basePrice, discountPrice) => ({
+  basePriceText: (basePrice, discountPrice, theme) => ({
+    color: theme.gray600,
     textDecorationLine:
       discountPrice && discountPrice < basePrice ? 'line-through' : 'none',
   }),

@@ -13,3 +13,6 @@ export const SIMPLE_TYPE_SK = 'simple';
 // ==================== Product Detail Key ====================
 // ============================================================
 export const THUMBNAIL_SK = 'thumbnail';
+export const DESCRIPTION_SK = 'description';
+export const CUSTOM_ATTRIBUTES_SK = 'custom_attributes';
+

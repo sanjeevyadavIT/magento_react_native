@@ -46,7 +46,7 @@ const HomeScreen = ({ status, errorMessage }) => {
 
 const styles = StyleSheet.create({
   imageSliderContainer: {
-    height: DIMENS.homePageSliderHeight,
+    height: DIMENS.homeScreen.sliderHeight,
   },
 });
 

@@ -43,6 +43,12 @@ export default {
     headerHeight: 100,
   },
   /**
+   * Constants related to HomeScreen
+   */
+  homeScreen: {
+    sliderHeight: 200,
+  },
+  /**
    * Constants related to LoginScreen
    */
   loginScreen: {
@@ -54,6 +60,13 @@ export default {
   mediaViewer: {
     closeIconSize: 30,
     paginationFontSize: 12,
+  },
+  /**
+   * Constants related to ProductScreen
+   */
+  productScreen: {
+    imageSliderHeight: 300,
+    priceFontSize: 18,
   },
   /**
    * Constants related to ProfileScreen
@@ -78,13 +91,5 @@ export default {
   catalogGridItemWidth: 150,
   catalogGridItemHeight: 200,
   catalogGridItemImageHeight: 120,
-  /**
-   * HomeScreen constnats
-   */
-  homePageSliderHeight: 200,
-  /**
-   * ProductScreen constants
-   */
-  productDetailPageSliderHeight: 300,
   optionBoxMinHeight: 100,
 };

@@ -24,6 +24,7 @@ import {
   AddressScreen,
   EditProfileScreen,
 } from '../screens';
+import ProductScreen2 from '../screens/ProductScreen/ProductScreen2';
 import {
   NAVIGATION_TO_SPLASH_SCREEN,
   NAVIGATION_TO_FORGOT_PASSWORD_SCREEN,
@@ -188,7 +189,7 @@ const StackNavigator = ({ loggedIn }) => {
       />
       <Stack.Screen
         name={NAVIGATION_TO_PRODUCT_SCREEN}
-        component={ProductScreen}
+        component={ProductScreen2}
         options={({
           navigation,
           route: {

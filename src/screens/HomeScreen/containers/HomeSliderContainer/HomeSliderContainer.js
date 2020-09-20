@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { magento } from '../../../../magento';
-import { ImageSlider, ImageSliderItem } from '../../../../common';
-import { ThemeContext } from '../../../../theme';
+import { ImageSlider } from '../../../../common';
 import { DIMENS } from '../../../../constants';
 
 /**
@@ -13,18 +12,24 @@ import { DIMENS } from '../../../../constants';
  * @param {Object[]} props.slider - Array containing image url to be displayed
  */
 const HomeSliderContainer = ({ slider }) => {
-  const { theme } = useContext(ThemeContext);
   return (
     <ImageSlider
-      slider={slider}
-      baseUrl={magento.getMediaUrl()}
-      imageHeight={DIMENS.homePageSliderHeight}
+      autoplay
+      media={slider.map(slide => ({
+        source: { uri: `${magento.getMediaUrl()}${slide.image}` },
+      }))}
+      height={DIMENS.homeScreen.sliderHeight}
     />
   );
 };
 
 HomeSliderContainer.propTypes = {
-  slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired,
+  slider: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      image: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 const mapStateToProps = ({ home }) => {

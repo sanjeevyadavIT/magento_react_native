@@ -9,7 +9,7 @@ import GenericTemplate from './GenericTemplate/GenericTemplate';
 import HeaderButtons from './HeaderButtons/HeaderButtons';
 import Icon from './Icon/Icon';
 import Image from './Image/Image';
-import ImageSlider, { ImageSliderItem } from './ImageSlider/ImageSlider';
+import ImageSlider from './ImageSlider/ImageSlider';
 import LoadingView from './LoadingView/LoadingView';
 import MessageView from './MessageView/MessageView';
 import ModalSelect from './ModalSelect/ModalSelect';
@@ -32,7 +32,6 @@ export {
   Icon,
   Image,
   ImageSlider,
-  ImageSliderItem, // not a component, fix later
   LoadingView,
   MessageView,
   ModalSelect,

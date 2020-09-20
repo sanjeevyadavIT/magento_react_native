@@ -85,6 +85,7 @@ const CatalogGridItem = ({
     onPress(product.type_id, product.sku, extra ? extra.children : undefined);
     navigation.navigate(NAVIGATION_TO_PRODUCT_SCREEN, {
       product,
+      sku: product.sku,
       title: product.name,
     });
   };

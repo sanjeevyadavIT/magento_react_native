@@ -1,27 +1,24 @@
 import React from 'react';
 import {
-  TouchableWithoutFeedback,
+  View,
   StyleSheet,
   ViewPropTypes,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
 import Image from '../Image/Image';
 
-// TODO: Show title over the image
-// TODO: Open url, when image pressed
-class ImageSliderItem {
-  constructor(title, image, onPressLink) {
-    this.imageTitle = title;
-    this.imageUrl = image;
-    this.callToAction = onPressLink;
-  }
-}
-
 const propTypes = {
-  imageHeight: PropTypes.number.isRequired,
-  slider: PropTypes.arrayOf(PropTypes.instanceOf(ImageSliderItem)).isRequired,
-  baseUrl: PropTypes.string.isRequired,
+  height: PropTypes.number.isRequired,
+  media: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      source: PropTypes.shape({
+        uri: PropTypes.string.isRequired,
+      }).isRequired,
+    }),
+  ).isRequired,
   resizeMode: PropTypes.oneOf([
     'cover',
     'contain',
@@ -29,50 +26,51 @@ const propTypes = {
     'repeat',
     'center',
   ]),
+  /**
+   * Set it to true, for auto rotate of image,
+   * default value is false
+   */
   autoplay: PropTypes.bool,
-  style: ViewPropTypes.style,
+  containerStyle: ViewPropTypes.style,
   onPress: PropTypes.func,
 };
 
 const defaultProps = {
   resizeMode: 'cover',
-  style: {},
-  autoplay: true,
-  onPress: () => {},
+  containerStyle: {},
+  autoplay: false,
+  onPress: null,
 };
 
+// Documentation: https://github.com/leecade/react-native-swiper
 const ImageSlider = ({
-  imageHeight, // Required prop
-  slider, // Required prop
-  baseUrl, // Required prop
-  /**
-   * Set it to true, for auto rotate of image,
-   * default value is true
-   */
+  height,
+  media,
   autoplay,
   resizeMode,
-  style,
+  containerStyle,
   onPress,
+  /**
+   * Rest of the props from 'react-native-swiper'
+   */
+  ...props
 }) => {
-  const renderImages = () =>
-    slider.map((item, index) => (
-      <TouchableWithoutFeedback onPress={() => onPress(index)}>
-        <Image
-          key={String(index)}
-          style={[styles.imageStyle, { height: imageHeight }]}
-          resizeMode={resizeMode}
-          source={{ uri: `${baseUrl}${item.imageUrl}` }}
-        />
-      </TouchableWithoutFeedback>
-    ));
-
+  const ViewGroup = onPress ? TouchableWithoutFeedback : React.Fragment;
   return (
-    <Swiper
-      autoplay={autoplay}
-      containerStyle={[{ height: imageHeight }, style]}
-    >
-      {renderImages()}
-    </Swiper>
+    <View style={[{ height }, containerStyle]}>
+      <Swiper height={height} autoplay={autoplay} {...props}>
+        {media.map((item, index) => (
+          <ViewGroup {...(onPress && { onPress: () => onPress(index) })}>
+            <Image
+              key={String(item.id)}
+              style={[styles.imageStyle, { height }]}
+              resizeMode={resizeMode}
+              source={item.source}
+            />
+          </ViewGroup>
+        ))}
+      </Swiper>
+    </View>
   );
 };
 
@@ -87,4 +85,3 @@ ImageSlider.propTypes = propTypes;
 ImageSlider.defaultProps = defaultProps;
 
 export default ImageSlider;
-export { ImageSliderItem };

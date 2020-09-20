@@ -27,6 +27,12 @@ const PASTEL_COLORS = [
   '#fef4f3',
 ];
 
+const propTypes = {
+  category: PropTypes.object.isRequired,
+};
+
+const defaultProps = {};
+
 const CategoryTreeItem = ({ category }) => {
   const [expanded, setExpanded] = useState(0);
   const { theme } = useContext(ThemeContext);
@@ -129,13 +135,8 @@ const styles = StyleSheet.create({
   },
 });
 
-CategoryTreeItem.propTypes = {
-  category: PropTypes.object.isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
-};
+CategoryTreeItem.propTypes = propTypes;
 
-CategoryTreeItem.defaultProps = {};
+CategoryTreeItem.defaultProps = defaultProps;
 
 export default CategoryTreeItem;

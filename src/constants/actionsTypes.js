@@ -26,14 +26,13 @@ export const MAGENTO = createRequestTypes(
     'HOME_UPDATE_CONF_PRODUCT', // For each configurable product in featured category, fetch it's children, to calculate price
     'CATEGORY_TREE', // Fetch category tree
     'PRODUCT_DETAIL', // fetch details of product given it's sku
+    'GET_PRODUCT_MEDIA', // If product detail doesn't contain images, use this
     /**
      * ======================================================
-     * ===== {@link ProductDetailPage} related actions ======
+     * ===== {@link ProductScreen} related actions ======
      * ======================================================
      */
     'CONF_OPTIONS', // Product is configurable type, fetch all options
-    'PRODUCT_MEDIA', // Fetch images related to products
-    'GET_PRODUCT_MEDIA', // This is the new code, will replace above
     'CONFIGURABLE_CHILDREN', // Fetch child products of configurable product
     'ADD_TO_CART', // Add item to cart
     /**

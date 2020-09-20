@@ -1,5 +1,4 @@
 import { THUMBNAIL_SK } from '../constants';
-import { ImageSliderItem } from '../common/ImageSlider/ImageSlider';
 
 export const getProductThumbnailFromAttribute = product => {
   let result = '';
@@ -29,9 +28,6 @@ export const getValueFromAttribute = (product, key) => {
   }
   return undefined;
 };
-
-export const parseImageArray = slider =>
-  slider.map(item => new ImageSliderItem(item.label, item.file, ''));
 
 /**
  * Stores price of the product,

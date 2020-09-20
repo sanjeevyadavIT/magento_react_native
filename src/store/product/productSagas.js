@@ -1,7 +1,6 @@
 import { takeEvery, all, call, put, select } from 'redux-saga/effects';
 import { magento } from '../../magento';
 import { MAGENTO, UI } from '../../constants';
-import { parseImageArray } from '../../utils';
 
 /*
  * Selector. Access attributes from the store
@@ -32,7 +31,6 @@ export const getProductInfoFromStore = state => {
 function* fetchProductDetails({ payload: { productType, sku, children } }) {
   try {
     yield all([
-      getProductMedia(sku),
       productType === 'configurable' &&
         !children &&
         getConfigurableChildren(sku),
@@ -41,28 +39,6 @@ function* fetchProductDetails({ payload: { productType, sku, children } }) {
   } catch (error) {
     yield put({
       type: UI.OPEN_SELECTED_PRODUCT_FAILURE,
-      payload: { sku, errorMessage: error.message },
-    });
-  }
-}
-
-// TODO: don't fetch medias if already cached
-// worker saga: Add Description
-function* getProductMedia(sku) {
-  try {
-    yield put({ type: MAGENTO.PRODUCT_MEDIA_LOADING, payload: { sku } });
-    const response = yield call(
-      { content: magento, fn: magento.admin.getProductMedia },
-      sku,
-    );
-    const imageArray = parseImageArray(response);
-    yield put({
-      type: MAGENTO.PRODUCT_MEDIA_SUCCESS,
-      payload: { sku, medias: imageArray },
-    });
-  } catch (error) {
-    yield put({
-      type: MAGENTO.PRODUCT_MEDIA_FAILURE,
       payload: { sku, errorMessage: error.message },
     });
   }

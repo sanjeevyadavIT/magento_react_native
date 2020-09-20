@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { GenericTemplate } from '../../common';
 import {
-  SliderContainer,
   PriceContainer,
   OptionsContainer,
-  DescriptionContainer,
   CTAButtons,
 } from './containers';
 import { magento } from '../../magento';
@@ -115,9 +113,6 @@ const ProductScreen = ({
         />
       }
     >
-      <View style={styles.imageContainer(DIMENS.productDetailPageSliderHeight)}>
-        <SliderContainer sku={sku} selectedProduct={selectedProduct} />
-      </View>
       <View style={styles.defaultStyles(theme)}>
         <PriceContainer
           sku={sku}
@@ -138,9 +133,6 @@ const ProductScreen = ({
           />
         </View>
       )}
-      <View style={styles.defaultStyles(theme)}>
-        <DescriptionContainer customAttributes={customAttributes} />
-      </View>
     </GenericTemplate>
   );
 };
