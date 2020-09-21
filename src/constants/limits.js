@@ -9,4 +9,9 @@ export default {
    * in orders api
    */
   ordersPageSize: 10,
+  /**
+   * Maximum quanity user is allwed to add item to cart
+   * at one go
+   */
+  MAX_QUANITY_ALLOW_TO_CART: 10,
 };

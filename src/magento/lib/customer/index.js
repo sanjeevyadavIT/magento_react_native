@@ -4,8 +4,8 @@ export default magento => ({
   getCurrentCustomer: () =>
     magento.get('/V1/customers/me', undefined, undefined, CUSTOMER_TYPE),
 
-  addItemToCart: payload =>
-    magento.post('/V1/carts/mine/items', undefined, payload, CUSTOMER_TYPE),
+  addItemToCart: request =>
+    magento.post('/V1/carts/mine/items', undefined, request, CUSTOMER_TYPE),
 
   createQuoteId: () =>
     magento.post('/V1/carts/mine', undefined, undefined, CUSTOMER_TYPE),

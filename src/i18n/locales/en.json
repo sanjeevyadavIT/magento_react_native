@@ -181,7 +181,7 @@
       "cart": "Cart"
     },
     "addToCartButton": "Add To Cart",
-    "unsupportedProductType": "App doesn't support",
+    "unsupportedProductType": "App doesn't support %s product type currently. Sorry for the inconvenience.",
     "productDetailLabel": "Product Details",
     "noProductDetail": "No description available!",
     "addToCartSuccess": "Item Added To Cart!",
