@@ -34,7 +34,6 @@ function* fetchProductDetails({ payload: { productType, sku, children } }) {
       productType === 'configurable' &&
         !children &&
         getConfigurableChildren(sku),
-      productType === 'configurable' && getConfigurableProductOptions(sku),
     ]);
   } catch (error) {
     yield put({
@@ -66,7 +65,7 @@ function* getConfigurableChildren(sku) {
 }
 
 // worker saga: Add Description
-// TODO: Function not optimized
+// TODO: Remove this
 function* getConfigurableProductOptions(sku) {
   try {
     yield put({ type: MAGENTO.CONF_OPTIONS_LOADING, payload: { sku } });

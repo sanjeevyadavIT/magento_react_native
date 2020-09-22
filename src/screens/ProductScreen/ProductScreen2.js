@@ -8,6 +8,7 @@ import {
   Price,
   ImageSlider,
   Button,
+  ModalSelect,
 } from '../../common';
 import Status from '../../magento/Status';
 import { magento } from '../../magento';
@@ -20,11 +21,12 @@ import {
   CUSTOM_ATTRIBUTES_SK,
   SIMPLE_TYPE_SK,
   CONFIGURABLE_TYPE_SK,
-  LIMITS,
 } from '../../constants';
 import ProductDescription from './ProductDescription';
 
 const propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  attributes: PropTypes.object.isRequired,
   cartQuoteId: PropTypes.number.isRequired,
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
@@ -60,20 +62,60 @@ const ProductScreen = ({
   route: {
     params: { sku, product },
   },
+  attributes,
   cartQuoteId,
   currencySymbol,
   currencyRate,
   navigation,
 }) => {
-  console.log({ sku, product }); // delete later
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [optionsApiStatus, setOptionsApiStatus] = useState(Status.DEFAULT);
+  const [optionsApiErrorMessage, setOptionsApiErrorMessage] = useState('');
   const [addToCartStatus, setAddToCartStatus] = useState(Status.DEFAULT);
   const [quantity, setQuantity] = useState(1);
+  const [addToCartAvailable, setAddToCartAvailable] = useState(true); // In case something went wrong, set false
   const { theme } = useContext(ThemeContext);
   const media = product?.media_gallery_entries.map(entry => ({
     source: {
       uri: `${magento.getProductMediaUrl()}${entry.file}`,
     },
   }));
+  console.log({ sku, product, media, options, selectedOptions }); // delete later
+
+  useEffect(() => {
+    if (product.type_id === CONFIGURABLE_TYPE_SK) {
+      setOptionsApiStatus(Status.LOADING);
+      magento.admin
+        .getConfigurableProductOptions(sku)
+        .then(response => {
+          setOptions(
+            [...response].sort(
+              (first, second) => first.position - second.position,
+            ),
+          );
+          setOptionsApiStatus(Status.SUCCESS);
+        })
+        .catch(error => {
+          setOptionsApiErrorMessage(
+            error.message || translate('errors.genericError'),
+          );
+          setOptionsApiStatus(Status.ERROR);
+          setAddToCartAvailable(true);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    // WIP
+    if(optionsApiStatus === Status.SUCCESS) {
+      options.forEach(option => {
+        magento.admin.getAttributeByCode(option.attribute_id)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+      })
+    }
+  }, [optionsApiStatus]);
 
   useEffect(() => {
     if (addToCartStatus === Status.SUCCESS) {
@@ -92,8 +134,11 @@ const ProductScreen = ({
   );
 
   const onAddToCartClick = () => {
-    // Add validation if needed
-    if (product.type_id !== SIMPLE_TYPE_SK) {
+    // TODO: Show Toast if all options are not selected, in case of configurable product
+    if (
+      !(product.type_id === SIMPLE_TYPE_SK ||
+      product.type_id === CONFIGURABLE_TYPE_SK)
+    ) {
       Toast.show(
         translate('productScreen.unsupportedProductType').replace(
           '%s',
@@ -111,10 +156,20 @@ const ProductScreen = ({
         quote_id: cartQuoteId,
       },
     };
+    if (product.type_id === CONFIGURABLE_TYPE_SK) {
+      request.cartItem.extension_attributes = {};
+      request.cartItem.product_option = {
+        extension_attributes: {
+          configurable_item_options: Object.keys(selectedOptions).map(key => ({
+            option_id: key,
+            option_value: selectedOptions[key],
+          })),
+        },
+      };
+    }
     magento.customer
       .addItemToCart(request)
-      .then(response => {
-        console.log(response);
+      .then(() => {
         setAddToCartStatus(Status.SUCCESS);
       })
       .catch(error => {
@@ -132,6 +187,7 @@ const ProductScreen = ({
       footer={
         <Button
           style={styles.addToCart}
+          disabled={!addToCartAvailable}
           loading={addToCartStatus === Status.LOADING}
           title={translate('productScreen.addToCartButton')}
           onPress={onAddToCartClick}
@@ -152,21 +208,37 @@ const ProductScreen = ({
           currencyRate={currencyRate}
           basePrice={product.price}
         />
-        {/* <TextInput
-          value={quantity}
-          containerStyle={{ width: 40 }}
-          keyboardType="numeric"
-          disabled={addToCartStatus === Status.LOADING}
-          onChangeText={setQuantity}
-          onBlur={() => {
-            if (quantity < 1) {
-              setQuantity(1);
-            } else if (quantity > LIMITS.MAX_QUANITY_ALLOW_TO_CART) {
-              setQuantity(LIMITS.MAX_QUANITY_ALLOW_TO_CART);
-            }
-          }}
-        /> */}
+        {/* TODO: Add logic to increase quantity, but quantitiy should not increase over the stocks remaning */}
       </View>
+      {product.type_id === CONFIGURABLE_TYPE_SK && (
+        <GenericTemplate
+          status={optionsApiStatus}
+          errorMessage={optionsApiErrorMessage}
+          style={styles.optionsContainer(theme)}
+        >
+          {options.map((option, index) => (
+            // TODO: Show label for valueIndex by fetching `/V1/products/attributes/${attributeId}` api
+            <ModalSelect
+              key={option.attribute_id}
+              data={option.values.map(({ value_index: valueIndex }) => ({
+                label: valueIndex,
+                key: valueIndex,
+              }))}
+              label={`${translate('common.select')} ${option.label}`}
+              disabled={
+                option.values.length === 0 || addToCartStatus === Status.LOADING
+              }
+              onChange={itemKey =>
+                setSelectedOptions(prevState => ({
+                  ...prevState,
+                  [option.attribute_id]: itemKey,
+                }))
+              }
+              style={index < options.length - 1 ? styles.optionContainer : {}}
+            />
+          ))}
+        </GenericTemplate>
+      )}
       <ProductDescription customAttributes={product[CUSTOM_ATTRIBUTES_SK]} />
     </GenericTemplate>
   );
@@ -186,6 +258,14 @@ const styles = StyleSheet.create({
     padding: SPACING.large,
     marginBottom: SPACING.large,
   }),
+  optionsContainer: theme => ({
+    backgroundColor: theme.surfaceColor,
+    padding: SPACING.large,
+    marginBottom: SPACING.large,
+  }),
+  optionContainer: {
+    marginBottom: SPACING.large,
+  },
   price: {
     fontSize: DIMENS.productScreen.priceFontSize,
   },
@@ -195,7 +275,7 @@ ProductScreen.propTypes = propTypes;
 
 ProductScreen.defaultProps = defaultProps;
 
-const mapStateToProps = ({ magento: magentoReducer, cart }) => {
+const mapStateToProps = ({ magento: magentoReducer, cart, product }) => {
   const {
     currency: {
       displayCurrencySymbol: currencySymbol,
@@ -205,7 +285,11 @@ const mapStateToProps = ({ magento: magentoReducer, cart }) => {
   const {
     cart: { id: cartQuoteId },
   } = cart;
+  const {
+    cachedAttributes: attributes
+  } = product;
   return {
+    attributes,
     cartQuoteId,
     currencySymbol,
     currencyRate,
