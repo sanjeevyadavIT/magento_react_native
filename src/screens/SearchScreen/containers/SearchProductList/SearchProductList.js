@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { CatalogGrid } from '../../../../common';
+import { ProductList } from '../../../../common';
 import {
   setCurrentProduct,
   getSearchProducts,
@@ -32,6 +32,6 @@ const mapStateToProps = ({ search, magento }) => {
 const SearchProductList = connect(mapStateToProps, {
   setCurrentProduct,
   loadProducts: getSearchProducts,
-})(CatalogGrid);
+})(ProductList);
 
 export default SearchProductList;

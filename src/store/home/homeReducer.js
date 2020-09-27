@@ -1,12 +1,10 @@
 import { MAGENTO } from '../../constants';
 import Status from '../../magento/Status';
-import { getPriceFromChildren } from '../../utils/products';
 
 const initialState = {
   status: Status.DEFAULT,
   slider: [],
   featuredProducts: {},
-  extra: {},
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -63,20 +61,6 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         [categoryId]: featuredCategory,
-      };
-    }
-    case MAGENTO.HOME_UPDATE_CONF_PRODUCT_SUCCESS: {
-      const { sku, children } = payload;
-      const extra = {
-        ...state.extra,
-        [sku]: {
-          children,
-          price: getPriceFromChildren(children),
-        },
-      };
-      return {
-        ...state,
-        extra,
       };
     }
     default:

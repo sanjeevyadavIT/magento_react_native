@@ -7,12 +7,10 @@ import {
   LayoutAnimation,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Text, Card, Icon } from '../../common';
 import CategoryTree from './CategoryTree';
-import { NAVIGATION_TO_CATEGORY_LIST_SCREEN } from '../../navigation/routes';
-import { setNewCategory } from '../../store/actions';
+import { NAVIGATION_TO_CATEGORY_PRODUCT_LIST_SCREEN } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { SPACING, DIMENS } from '../../constants';
 
@@ -37,7 +35,6 @@ const CategoryTreeItem = ({ category }) => {
   const [expanded, setExpanded] = useState(0);
   const { theme } = useContext(ThemeContext);
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     // componentDidMount
@@ -54,8 +51,7 @@ const CategoryTreeItem = ({ category }) => {
 
   const onRowPress = () => {
     if (category.children_data.length === 0) {
-      dispatch(setNewCategory(category.id));
-      navigation.navigate(NAVIGATION_TO_CATEGORY_LIST_SCREEN, {
+      navigation.navigate(NAVIGATION_TO_CATEGORY_PRODUCT_LIST_SCREEN, {
         title: category.name,
         id: category.id,
       });

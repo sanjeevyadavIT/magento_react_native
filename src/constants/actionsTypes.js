@@ -23,7 +23,6 @@ export const MAGENTO = createRequestTypes(
     'CURRENCY', // Default currency, currency symbol, exchange rates
     'HOME_DATA', // Fetch HomeBanner and featured products for home page
     'FEATURED_CATEGORY_PRODUCTS', // Fetch featured categories for home page
-    'HOME_UPDATE_CONF_PRODUCT', // For each configurable product in featured category, fetch it's children, to calculate price
     'CATEGORY_TREE', // Fetch category tree
     'PRODUCT_DETAIL', // fetch details of product given it's sku
     'GET_PRODUCT_MEDIA', // If product detail doesn't contain images, use this
@@ -43,9 +42,6 @@ export const MAGENTO = createRequestTypes(
     'CURRENT_USER', // Fetch details of current logged in user
     'GET_ORDERS', // Fetch order placed by current customer for page = 1
     'GET_MORE_ORDERS', // Fetch order placed by current customer for page > 1
-    'CATEGORY_PRODUCTS', // Fetch all products in a category
-    'CATEGORY_UPDATE_CONF_PRODUCT', // Fetch price of configurable product in category list
-    'MORE_CATEGORY_PRODUCTS', // Pagination in category list
     'SEARCH_PRODUCTS', // Load search products
     'MORE_SEARCH_PRODUCTS', // pagination in search
     'CREATE_QUOTE_ID', // Create new quote id for cart

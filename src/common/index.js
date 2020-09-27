@@ -1,7 +1,7 @@
 import Button from './Button/Button';
 import Card from './Card/Card';
-import CatalogGrid from './CatalogGrid/CatalogGrid';
-import CatalogGridItem from './CatalogGridItem/CatalogGridItem';
+import ProductList from './ProductList/ProductList';
+import ProductListItem from './ProductListItem/ProductListItem';
 import CheckBox from './CheckBox/CheckBox';
 import DateTimePicker from './DateTimePicker/DateTimePicker';
 import Divider from './Divider/Divider';
@@ -22,8 +22,8 @@ import TouchReceptor from './TouchReceptor/TouchReceptor';
 export {
   Button,
   Card,
-  CatalogGrid,
-  CatalogGridItem,
+  ProductList,
+  ProductListItem,
   CheckBox,
   DateTimePicker,
   Divider,

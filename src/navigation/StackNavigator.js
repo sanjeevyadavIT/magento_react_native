@@ -8,9 +8,8 @@ import { ThemeContext } from '../theme';
 import {
   SplashScreen,
   ForgetPasswordScreen,
-  ProductScreen,
   SearchScreen,
-  CategoryListScreen,
+  CategoryProductsScreen,
   AddEditAddressScreen,
   CheckoutAddressScreen,
   LoginScreen,
@@ -29,7 +28,7 @@ import {
   NAVIGATION_TO_SPLASH_SCREEN,
   NAVIGATION_TO_FORGOT_PASSWORD_SCREEN,
   NAVIGATION_TO_HOME_SCREEN,
-  NAVIGATION_TO_CATEGORY_LIST_SCREEN,
+  NAVIGATION_TO_CATEGORY_PRODUCT_LIST_SCREEN,
   NAVIGATION_TO_PRODUCT_SCREEN,
   NAVIGATION_TO_SEARCH_SCREEN,
   NAVIGATION_TO_LOGIN_SCREEN,
@@ -108,8 +107,8 @@ const StackNavigator = ({ loggedIn }) => {
         })}
       />
       <Stack.Screen
-        name={NAVIGATION_TO_CATEGORY_LIST_SCREEN}
-        component={CategoryListScreen}
+        name={NAVIGATION_TO_CATEGORY_PRODUCT_LIST_SCREEN}
+        component={CategoryProductsScreen}
         options={({
           route: {
             params: { title = translate('common.brandName') },

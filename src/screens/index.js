@@ -4,7 +4,7 @@ import AlertDialog from './AlertDialog/AlertDialog';
 import ProfileScreen from './ProfileScreen/ProfileScreen';
 import CartScreen from './CartScreen/CartScreen';
 import CategoriesScreen from './CategoriesScreen/CategoriesScreen';
-import CategoryListScreen from './CategoryListScreen/CategoryListScreen';
+import CategoryProductsScreen from './CategoryProductsScreen/CategoryProductsScreen';
 import CheckoutAddressScreen from './CheckoutAddressScreen/CheckoutAddressScreen';
 import DrawerScreen from './DrawerScreen/DrawerScreen';
 import EditProfileScreen from './EditProfileScreen/EditProfileScreen';
@@ -30,7 +30,7 @@ export {
   ProfileScreen,
   CartScreen,
   CategoriesScreen,
-  CategoryListScreen,
+  CategoryProductsScreen,
   CheckoutAddressScreen,
   HomeScreen,
   DrawerScreen,

@@ -139,7 +139,7 @@ const mapStateToProps = ({ cart, magento }) => {
   const {
     status,
     errorMessage,
-    cart: { items },
+    cart: { items = [] } = {},
   } = cart;
   const {
     displayCurrencySymbol: currencySymbol,

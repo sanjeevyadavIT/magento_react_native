@@ -3,7 +3,6 @@ export * from './cart/cartActions';
 export * from './app/appActions';
 export * from './home/homeActions';
 export * from './categoryTree/categoryTreeActions';
-export * from './categoryList/categoryListActions';
 export * from './checkout/checkoutActions';
 export * from './product/productActions';
 export * from './search/searchActions';

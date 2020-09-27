@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { CatalogGrid } from '../../../../common';
+import { ProductList } from '../../../../common';
 import Status from '../../../../magento/Status';
 import {
-  setCurrentProduct,
   getFeaturedProducts,
-  getHomeConfigurableProductOptions,
 } from '../../../../store/actions';
 import { ProductType } from '../../../../types';
 
@@ -19,26 +17,21 @@ const FeaturedCategoryList = ({
   currencySymbol,
   currencyRate,
   getFeaturedProducts: loadProducts,
-  setCurrentProduct: _setCurrentProduct,
 }) => {
   const canLoadMoreProducts = false;
   const isLoadingMoreProducts = Status.SUCCESS;
-  const stateAccessor = 'home';
   return (
-    <CatalogGrid
+    <ProductList
       showHorizontalList
       products={products}
       currencySymbol={currencySymbol}
       currencyRate={currencyRate}
-      stateAccessor={stateAccessor}
       loadFactor={categoryId}
       status={status}
       errorMessage={errorMessage}
       canLoadMoreProducts={canLoadMoreProducts}
       isLoadingMoreProducts={isLoadingMoreProducts}
-      onItemClick={_setCurrentProduct}
       loadProducts={loadProducts}
-      updateItem={getHomeConfigurableProductOptions}
     />
   );
 };
@@ -50,7 +43,6 @@ FeaturedCategoryList.propTypes = {
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   categoryId: PropTypes.number.isRequired,
-  setCurrentProduct: PropTypes.func.isRequired,
   getFeaturedProducts: PropTypes.func.isRequired,
 };
 
@@ -76,5 +68,4 @@ const mapStateToProps = ({ home, magento }, { categoryId }) => {
 
 export default connect(mapStateToProps, {
   getFeaturedProducts,
-  setCurrentProduct,
 })(FeaturedCategoryList);

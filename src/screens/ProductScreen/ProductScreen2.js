@@ -22,6 +22,7 @@ import {
   SIMPLE_TYPE_SK,
   CONFIGURABLE_TYPE_SK,
 } from '../../constants';
+import { getPriceFromChildren } from '../../utils/products';
 import ProductDescription from './ProductDescription';
 
 const propTypes = {
@@ -49,6 +50,11 @@ const propTypes = {
           }),
         ),
       }),
+      children: PropTypes.arrayOf(
+        PropTypes.shape({
+          price: PropTypes.number,
+        }),
+      ),
     }).isRequired,
   }).isRequired,
   navigation: PropTypes.shape({
@@ -60,7 +66,7 @@ const defaultProps = {};
 
 const ProductScreen = ({
   route: {
-    params: { sku, product },
+    params: { sku, product, children: _children },
   },
   attributes,
   cartQuoteId,
@@ -69,11 +75,15 @@ const ProductScreen = ({
   navigation,
 }) => {
   const [options, setOptions] = useState([]);
+  const [children, setChildren] = useState(_children);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [optionsApiStatus, setOptionsApiStatus] = useState(Status.DEFAULT);
   const [optionsApiErrorMessage, setOptionsApiErrorMessage] = useState('');
   const [addToCartStatus, setAddToCartStatus] = useState(Status.DEFAULT);
   const [quantity, setQuantity] = useState(1);
+  const [price, setPrice] = useState({
+    basePrice: product.price,
+  });
   const [addToCartAvailable, setAddToCartAvailable] = useState(true); // In case something went wrong, set false
   const { theme } = useContext(ThemeContext);
   const media = product?.media_gallery_entries.map(entry => ({
@@ -103,17 +113,42 @@ const ProductScreen = ({
           setOptionsApiStatus(Status.ERROR);
           setAddToCartAvailable(true);
         });
+      if (!Array.isArray(children) || children.length < 1) {
+        magento.admin
+          .getConfigurableChildren(product.sku)
+          .then(response => setChildren(response))
+          .catch(error => console.log(error));
+      }
     }
   }, []);
 
   useEffect(() => {
+    if (
+      product.type_id === CONFIGURABLE_TYPE_SK &&
+      Array.isArray(children) &&
+      children.length > 0
+    ) {
+      const priceObject = getPriceFromChildren(children);
+      if (priceObject.starting === priceObject.ending) {
+        setPrice({ basePrice: priceObject.starting });
+      } else {
+        setPrice({
+          startingPrice: priceObject.starting,
+          endingPrice: priceObject.ending,
+        });
+      }
+    }
+  }, [children]);
+
+  useEffect(() => {
     // WIP
-    if(optionsApiStatus === Status.SUCCESS) {
+    if (optionsApiStatus === Status.SUCCESS) {
       options.forEach(option => {
-        magento.admin.getAttributeByCode(option.attribute_id)
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
-      })
+        magento.admin
+          .getAttributeByCode(option.attribute_id)
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
+      });
     }
   }, [optionsApiStatus]);
 
@@ -136,8 +171,10 @@ const ProductScreen = ({
   const onAddToCartClick = () => {
     // TODO: Show Toast if all options are not selected, in case of configurable product
     if (
-      !(product.type_id === SIMPLE_TYPE_SK ||
-      product.type_id === CONFIGURABLE_TYPE_SK)
+      !(
+        product.type_id === SIMPLE_TYPE_SK ||
+        product.type_id === CONFIGURABLE_TYPE_SK
+      )
     ) {
       Toast.show(
         translate('productScreen.unsupportedProductType').replace(
@@ -206,7 +243,7 @@ const ProductScreen = ({
           basePriceStyle={styles.price}
           currencySymbol={currencySymbol}
           currencyRate={currencyRate}
-          basePrice={product.price}
+          {...price}
         />
         {/* TODO: Add logic to increase quantity, but quantitiy should not increase over the stocks remaning */}
       </View>
@@ -282,12 +319,8 @@ const mapStateToProps = ({ magento: magentoReducer, cart, product }) => {
       displayCurrencyExchangeRate: currencyRate,
     },
   } = magentoReducer;
-  const {
-    cart: { id: cartQuoteId },
-  } = cart;
-  const {
-    cachedAttributes: attributes
-  } = product;
+  const { cart: { id: cartQuoteId } = {} } = cart;
+  const { cachedAttributes: attributes } = product;
   return {
     attributes,
     cartQuoteId,

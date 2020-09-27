@@ -1,7 +1,5 @@
 import { takeLatest, takeEvery, call, put } from 'redux-saga/effects';
-
 import { magento } from '../../magento';
-
 import { MAGENTO } from '../../constants';
 import { formatHomeData } from '../../utils/home';
 
@@ -58,38 +56,11 @@ function* getFeaturedCategoryProducts({ payload }) {
   }
 }
 
-// worker saga: Add Description
-function* updateConfigurableProductsPrice({ payload }) {
-  const { sku } = payload;
-  try {
-    const children = yield call(
-      { context: magento, fn: magento.admin.getConfigurableChildren },
-      sku,
-    );
-    yield put({
-      type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_SUCCESS,
-      payload: {
-        sku,
-        children,
-      },
-    });
-  } catch (error) {
-    yield put({
-      type: MAGENTO.HOME_UPDATE_CONF_PRODUCT_ERROR,
-      payload: { sku, errorMessage: error.message },
-    });
-  }
-}
-
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
   yield takeLatest(MAGENTO.HOME_DATA_REQUEST, getHomeData);
   yield takeEvery(
     MAGENTO.FEATURED_CATEGORY_PRODUCTS_REQUEST,
     getFeaturedCategoryProducts,
-  );
-  yield takeEvery(
-    MAGENTO.HOME_UPDATE_CONF_PRODUCT_REQUEST,
-    updateConfigurableProductsPrice,
   );
 }

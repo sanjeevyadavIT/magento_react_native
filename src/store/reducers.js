@@ -4,7 +4,6 @@ import cartReducer from './cart/cartReducer';
 import appReducer from './app/appReducer';
 import homeReducer from './home/homeReducer';
 import categoryTreeReducer from './categoryTree/categoryTreeReducer';
-import categoryListReducer from './categoryList/categoryListReducer';
 import checkoutReducer from './checkout/checkoutReducer';
 import productReducer from './product/productReducer';
 import searchReducer from './search/searchReducer';
@@ -15,7 +14,6 @@ export default combineReducers({
   categoryTree: categoryTreeReducer,
   account: accountReducer,
   cart: cartReducer,
-  categoryList: categoryListReducer,
   checkout: checkoutReducer,
   product: productReducer,
   search: searchReducer,

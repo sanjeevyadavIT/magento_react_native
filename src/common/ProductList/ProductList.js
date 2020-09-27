@@ -3,7 +3,7 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import LoadingView from '../LoadingView/LoadingView';
 import GenericTemplate from '../GenericTemplate/GenericTemplate';
-import CatalogGridItem from '../CatalogGridItem/CatalogGridItem';
+import ProductListItem from '../ProductListItem/ProductListItem';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
 import { ProductType } from '../../types';
@@ -13,7 +13,6 @@ const propTypes = {
   products: PropTypes.arrayOf(ProductType),
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
-  stateAccessor: PropTypes.string.isRequired,
   showHorizontalList: PropTypes.bool.isRequired,
   columnCount: PropTypes.number,
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
@@ -34,12 +33,10 @@ const defaultProps = {
 };
 
 /**
- * This component support rendering catalog, in Horizonatl list
+ * This component support rendering catalog, in Horizontal list
  * as well as in a grid.
- *
- * @todo Remove @param stateAccessor
  */
-const CatalogGrid = ({
+const ProductList = ({
   /**
    * Products to display in the grid.
    */
@@ -62,10 +59,6 @@ const CatalogGrid = ({
    * this value will not be considered.
    */
   columnCount,
-  /**
-   * Item click handler, called upon `CatalogGridItem` clicked.
-   */
-  onItemClick,
   //------------------------------------------------------------
   status,
   isLoadingMoreProducts,
@@ -74,12 +67,6 @@ const CatalogGrid = ({
   updateItem,
   loadFactor,
   errorMessage,
-  //-----------------------------------------------------------
-  /**
-   * This is a temp solution, tells which reducer to look for,
-   * when searching for children of `configurable` type product.
-   */
-  stateAccessor,
 }) => {
   const { theme } = useContext(ThemeContext);
 
@@ -106,14 +93,11 @@ const CatalogGrid = ({
   };
 
   const renderRow = ({ item }) => (
-    <CatalogGridItem
+    <ProductListItem
       columnCount={columnCount}
       product={item}
-      stateAccessor={stateAccessor}
-      updateItem={updateItem}
       currencySymbol={currencySymbol}
       currencyRate={currencyRate}
-      onPress={onItemClick}
     />
   );
 
@@ -156,8 +140,8 @@ const styles = StyleSheet.create({
   }),
 });
 
-CatalogGrid.propTypes = propTypes;
+ProductList.propTypes = propTypes;
 
-CatalogGrid.defaultProps = defaultProps;
+ProductList.defaultProps = defaultProps;
 
-export default CatalogGrid;
+export default ProductList;
