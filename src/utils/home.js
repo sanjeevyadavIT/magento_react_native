@@ -1,21 +1,17 @@
 import Status from '../magento/Status';
 
-// eslint-disable-next-line import/prefer-default-export
 export const formatHomeData = payload => {
-  const formattedData = {
-    ...payload,
-  };
   const content = JSON.parse(
-    formattedData.content.replace(/<\/?[^>]+(>|$)/g, ''),
+    payload.content.replace(/<\/?[^>]+(>|$)/g, ''),
   );
+  const featuredCategories = {};
   Object.keys(content.featuredCategories).forEach(key => {
-    formattedData[key] = {};
-    formattedData[key].status = Status.DEFAULT;
-    formattedData[key].items = [];
-    formattedData[key].errorMessage = '';
+    featuredCategories[key] = {};
+    featuredCategories[key].status = Status.DEFAULT;
+    featuredCategories[key].items = [];
+    featuredCategories[key].errorMessage = '';
+    featuredCategories[key].title = content.featuredCategories[key].title;
   });
-  formattedData.slider = content.slider;
-  formattedData.featuredCategories = content.featuredCategories;
-  delete formattedData.content;
-  return formattedData;
+  content.featuredCategories= featuredCategories;
+  return content;
 };

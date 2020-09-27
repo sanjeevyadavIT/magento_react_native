@@ -8,10 +8,9 @@ function* getHomeData() {
   try {
     yield put({ type: MAGENTO.HOME_DATA_LOADING });
     // Fetch the cms block
-    const payload = yield call({ context: magento, fn: magento.getHomeData });
-    const formattedPayload = formatHomeData(payload);
-    yield put({ type: MAGENTO.HOME_DATA_SUCCESS, payload: formattedPayload });
-    yield put({ type: MAGENTO.CATEGORY_TREE_REQUEST }); // fetch category tree
+    const response = yield call({ context: magento, fn: magento.getHomeData });
+    const formattedResponse = formatHomeData(response);
+    yield put({ type: MAGENTO.HOME_DATA_SUCCESS, payload: formattedResponse });
   } catch (error) {
     yield put({
       type: MAGENTO.HOME_DATA_FAILURE,
@@ -34,7 +33,7 @@ function* getFeaturedCategoryProducts({ payload }) {
         loading: true,
       },
     });
-    const products = yield call(
+    const response = yield call(
       { context: magento, fn: magento.admin.getCategoryProducts },
       categoryId,
       1,
@@ -45,7 +44,7 @@ function* getFeaturedCategoryProducts({ payload }) {
       type: MAGENTO.FEATURED_CATEGORY_PRODUCTS_SUCCESS,
       payload: {
         categoryId,
-        products,
+        items: response.items,
       },
     });
   } catch (error) {

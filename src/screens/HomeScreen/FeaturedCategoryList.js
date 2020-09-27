@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ProductList } from '../../../../common';
-import Status from '../../../../magento/Status';
-import {
-  getFeaturedProducts,
-} from '../../../../store/actions';
-import { ProductType } from '../../../../types';
+import { ProductList } from '../../common';
+import Status from '../../magento/Status';
+import { getFeaturedProducts } from '../../store/actions';
+import { ProductType } from '../../types';
 
-// NOTE: Here FeaturedCategoriesContainer(connected to redux) is hosting FeaturedCategoryList(connected to redux) which in turn hosting Productlist(dumb component)
 const FeaturedCategoryList = ({
   categoryId,
   status,
@@ -20,6 +17,7 @@ const FeaturedCategoryList = ({
 }) => {
   const canLoadMoreProducts = false;
   const isLoadingMoreProducts = Status.SUCCESS;
+
   return (
     <ProductList
       showHorizontalList
@@ -52,7 +50,11 @@ FeaturedCategoryList.defaultProps = {
 };
 
 const mapStateToProps = ({ home, magento }, { categoryId }) => {
-  const { status, errorMessage, items } = home[categoryId];
+  const {
+    featuredCategories: {
+      [categoryId]: { status, errorMessage, items },
+    },
+  } = home;
   const {
     displayCurrencySymbol: currencySymbol,
     displayCurrencyExchangeRate: currencyRate,

@@ -4,7 +4,7 @@ import Status from '../../magento/Status';
 const initialState = {
   status: Status.DEFAULT,
   slider: [],
-  featuredProducts: {},
+  featuredCategories: {},
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -30,37 +30,47 @@ export default (state = initialState, { type, payload }) => {
         ...payload,
       };
     case MAGENTO.FEATURED_CATEGORY_PRODUCTS_LOADING: {
-      const { categoryId } = payload.categoryId;
-      const featuredCategory = { ...state[categoryId], status: Status.LOADING };
-
+      const { categoryId } = payload;
+      const featuredCategory = {
+        ...state.featuredCategories[categoryId],
+        status: Status.LOADING,
+      };
       return {
         ...state,
-        [categoryId]: featuredCategory,
+        featuredCategories: {
+          ...state.featuredCategories,
+          [categoryId]: featuredCategory,
+        },
       };
     }
     case MAGENTO.FEATURED_CATEGORY_PRODUCTS_SUCCESS: {
-      const { categoryId, products } = payload;
+      const { categoryId, items } = payload;
       const featuredCategory = {
-        ...state[categoryId],
-        ...products,
+        ...state.featuredCategories[categoryId],
+        items: [...state.featuredCategories[categoryId].items, ...items],
         status: Status.SUCCESS,
       };
       return {
         ...state,
-        [categoryId]: featuredCategory,
+        featuredCategories: {
+          ...state.featuredCategories,
+          [categoryId]: featuredCategory,
+        },
       };
     }
     case MAGENTO.FEATURED_CATEGORY_PRODUCTS_ERROR: {
       const { categoryId, errorMessage } = payload;
       const featuredCategory = {
-        ...state[categoryId],
-        status: Status.ERROR,
+        ...state.featuredCategories[categoryId],
         errorMessage,
+        status: Status.ERROR,
       };
-
       return {
         ...state,
-        [categoryId]: featuredCategory,
+        featuredCategories: {
+          ...state.featuredCategories,
+          [categoryId]: featuredCategory,
+        },
       };
     }
     default:

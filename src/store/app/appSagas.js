@@ -25,6 +25,8 @@ function* initMagento() {
     yield put({ type: MAGENTO.CURRENCY_REQUEST });
     // fetch HomeBanner and featured product
     yield put({ type: MAGENTO.HOME_DATA_REQUEST });
+    // fetch category tree
+    yield put({ type: MAGENTO.CATEGORY_TREE_REQUEST });
     // Get Customer token from local db
     const customerToken = yield AsyncStorage.getItem(CUSTOMER_TOKEN);
     magento.setCustomerToken(customerToken);
