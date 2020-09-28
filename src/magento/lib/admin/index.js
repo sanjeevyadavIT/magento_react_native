@@ -98,7 +98,7 @@ export default magento => ({
       ADMIN_TYPE,
     ),
 
-  getAttributeByCode: attributeId =>
+  getAttributeById: attributeId =>
     magento.get(
       `/V1/products/attributes/${attributeId}`,
       undefined,

@@ -22,7 +22,7 @@ import {
   SIMPLE_TYPE_SK,
   CONFIGURABLE_TYPE_SK,
 } from '../../constants';
-import { getCustomerCart } from '../../store/actions';
+import { getCustomerCart, getAttributeById } from '../../store/actions';
 import { getPriceFromChildren } from '../../utils/products';
 import ProductDescription from './ProductDescription';
 
@@ -33,6 +33,7 @@ const propTypes = {
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   getCustomerCart: PropTypes.func.isRequired,
+  getAttributeById: PropTypes.func.isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({
       sku: PropTypes.string.isRequired,
@@ -74,6 +75,7 @@ const ProductScreen = ({
   cartQuoteId,
   currencySymbol,
   currencyRate,
+  getAttributeById: _getAttributeById,
   getCustomerCart: refreshCustomerCart,
   navigation,
 }) => {
@@ -144,14 +146,12 @@ const ProductScreen = ({
   }, [children]);
 
   useEffect(() => {
-    // WIP
     if (optionsApiStatus === Status.SUCCESS) {
-      options.forEach(option => {
-        magento.admin
-          .getAttributeByCode(option.attribute_id)
-          .then(response => console.log(response))
-          .catch(error => console.log(error));
-      });
+      options.forEach(
+        option =>
+          !attributes[option.attribute_id] &&
+          _getAttributeById(option.attribute_id),
+      );
     }
   }, [optionsApiStatus]);
 
@@ -262,7 +262,10 @@ const ProductScreen = ({
             <ModalSelect
               key={option.attribute_id}
               data={option.values.map(({ value_index: valueIndex }) => ({
-                label: valueIndex,
+                label:
+                  option.attribute_id in attributes
+                    ? attributes[option.attribute_id][valueIndex]
+                    : valueIndex,
                 key: valueIndex,
               }))}
               label={`${translate('common.select')} ${option.label}`}
@@ -324,7 +327,7 @@ const mapStateToProps = ({ magento: magentoReducer, cart, product }) => {
     },
   } = magentoReducer;
   const { cart: { id: cartQuoteId } = {} } = cart;
-  const { cachedAttributes: attributes } = product;
+  const { attributes } = product;
   return {
     attributes,
     cartQuoteId,
@@ -333,4 +336,6 @@ const mapStateToProps = ({ magento: magentoReducer, cart, product }) => {
   };
 };
 
-export default connect(mapStateToProps, { getCustomerCart })(ProductScreen);
+export default connect(mapStateToProps, { getCustomerCart, getAttributeById })(
+  ProductScreen,
+);

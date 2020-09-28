@@ -9,57 +9,36 @@ import { MAGENTO } from '../../constants';
 
 // worker saga: Add Description
 // TODO: Remove this
-// function* getConfigurableProductOptions(sku) {
-//   try {
-//     yield put({ type: MAGENTO.CONF_OPTIONS_LOADING, payload: { sku } });
-//     const options = yield call(
-//       { content: magento, fn: magento.admin.getConfigurableProductOptions },
-//       sku,
-//     );
-
-//     const attributes = yield select(getAttributesFromStore);
-
-//     const attributesToBeFetched = options.filter(
-//       option => !(option.attribute_id in attributes),
-//     );
-//     let attributesResponse = [];
-//     if (attributesToBeFetched.length > 0) {
-//       attributesResponse = yield all(
-//         attributesToBeFetched.map(attribute =>
-//           call(
-//             { content: magento, fn: magento.admin.getAttributeByCode },
-//             attribute.attribute_id,
-//           ),
-//         ),
-//       );
-//     }
-//     yield put({
-//       type: MAGENTO.CONF_OPTIONS_SUCCESS,
-//       payload: {
-//         sku,
-//         options,
-//         attributes: formatAttributesResponse(attributesResponse),
-//       },
-//     });
-//   } catch (error) {
-//     yield put({
-//       type: MAGENTO.CONF_OPTIONS_FAILURE,
-//       payload: { sku, errorMessage: error.message },
-//     });
-//   }
-// }
+function* getAttributeById({ payload: { id } }) {
+  try {
+    yield put({ type: MAGENTO.GET_ATTRIBUTE_LOADING, payload: { id } });
+    const response = yield call(
+      { content: magento, fn: magento.admin.getAttributeById },
+      id,
+    );
+    yield put({
+      type: MAGENTO.GET_ATTRIBUTE_SUCCESS,
+      payload: {
+        id,
+        options: formatAttributesResponse(response),
+      },
+    });
+  } catch (error) {
+    yield put({
+      type: MAGENTO.GET_ATTRIBUTE_FAILURE,
+      payload: { id, errorMessage: error.message },
+    });
+  }
+}
 
 // Helper function to format array reponse into key value pairs in object
-// function formatAttributesResponse(attribtesArray) {
-//   const attributes = {};
-//   attribtesArray.forEach(attribute => {
-//     attributes[attribute.attribute_id] = {
-//       attributeCode: attribute.attribute_code,
-//       options: attribute.options,
-//     };
-//   });
-//   return attributes;
-// }
+function formatAttributesResponse(response) {
+  const options = {};
+  response.options.forEach(item => {
+    options[item.value] = item.label;
+  });
+  return options;
+}
 
 /**
  * Fetch product detail using it's sku
@@ -88,7 +67,7 @@ function* getProductDetail({ payload: { sku } }) {
   }
 }
 
-function* getProductMedia({ payload: { sku }}) {
+function* getProductMedia({ payload: { sku } }) {
   try {
     yield put({ type: MAGENTO.GET_PRODUCT_MEDIA_LOADING, payload: { sku } });
     const response = yield call(
@@ -109,6 +88,7 @@ function* getProductMedia({ payload: { sku }}) {
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 export default function* watcherSaga() {
+  yield takeEvery(MAGENTO.GET_ATTRIBUTE_REQUEST, getAttributeById);
   yield takeEvery(MAGENTO.PRODUCT_DETAIL_REQUEST, getProductDetail);
   yield takeEvery(MAGENTO.GET_PRODUCT_MEDIA_REQUEST, getProductMedia);
 }

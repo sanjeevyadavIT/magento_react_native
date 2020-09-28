@@ -18,6 +18,16 @@ const getInitialState = {
 
 export default (state = getInitialState, { type, payload }) => {
   switch (type) {
+    case MAGENTO.GET_ATTRIBUTE_SUCCESS: {
+      const { id, options } = payload;
+      return {
+        ...state,
+        attributes: {
+          ...state.attributes,
+          [id]: options,
+        },
+      };
+    }
     case MAGENTO.PRODUCT_DETAIL_SUCCESS: {
       const { sku, productDetail } = payload;
       return {
@@ -25,7 +35,7 @@ export default (state = getInitialState, { type, payload }) => {
         cachedProductDetails: {
           ...state.cachedProductDetails,
           [sku]: productDetail,
-        }
+        },
       };
     }
     case MAGENTO.GET_PRODUCT_MEDIA_SUCCESS: {
@@ -35,7 +45,7 @@ export default (state = getInitialState, { type, payload }) => {
         cachedProductMedia: {
           ...state.cachedProductMedia,
           [sku]: media,
-        }
+        },
       };
     }
     default:

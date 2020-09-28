@@ -26,6 +26,7 @@ export const MAGENTO = createRequestTypes(
     'CATEGORY_TREE', // Fetch category tree
     'PRODUCT_DETAIL', // fetch details of product given it's sku
     'GET_PRODUCT_MEDIA', // If product detail doesn't contain images, use this
+    'GET_ATTRIBUTE', // required in configurable product type, do display option label
     /**
      * ==========================================
      * =================== @ ====================
