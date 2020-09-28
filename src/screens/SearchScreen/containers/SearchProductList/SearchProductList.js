@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { ProductList } from '../../../../common';
 import {
-  setCurrentProduct,
   getSearchProducts,
 } from '../../../../store/actions';
 
@@ -30,7 +29,6 @@ const mapStateToProps = ({ search, magento }) => {
 };
 
 const SearchProductList = connect(mapStateToProps, {
-  setCurrentProduct,
   loadProducts: getSearchProducts,
 })(ProductList);
 

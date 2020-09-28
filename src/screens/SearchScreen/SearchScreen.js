@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, Modal, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { SearchProductList } from './containers';
-import { getSearchProducts, setCurrentProduct } from '../../store/actions';
+import { getSearchProducts } from '../../store/actions';
 import { Spinner } from '../../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -202,5 +202,4 @@ const mapStateToProps = ({ search }) => {
 
 export default connect(mapStateToProps, {
   getSearchProducts,
-  setCurrentProduct,
 })(Search);

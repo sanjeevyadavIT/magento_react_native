@@ -22,6 +22,7 @@ import {
   SIMPLE_TYPE_SK,
   CONFIGURABLE_TYPE_SK,
 } from '../../constants';
+import { getCustomerCart } from '../../store/actions';
 import { getPriceFromChildren } from '../../utils/products';
 import ProductDescription from './ProductDescription';
 
@@ -31,6 +32,7 @@ const propTypes = {
   cartQuoteId: PropTypes.number.isRequired,
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
+  getCustomerCart: PropTypes.func.isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({
       sku: PropTypes.string.isRequired,
@@ -72,6 +74,7 @@ const ProductScreen = ({
   cartQuoteId,
   currencySymbol,
   currencyRate,
+  getCustomerCart: refreshCustomerCart,
   navigation,
 }) => {
   const [options, setOptions] = useState([]);
@@ -155,6 +158,7 @@ const ProductScreen = ({
   useEffect(() => {
     if (addToCartStatus === Status.SUCCESS) {
       Toast.show(translate('productScreen.addToCartSuccess'), Toast.LONG);
+      refreshCustomerCart();
     }
   }, [addToCartStatus]);
 
@@ -329,4 +333,4 @@ const mapStateToProps = ({ magento: magentoReducer, cart, product }) => {
   };
 };
 
-export default connect(mapStateToProps)(ProductScreen);
+export default connect(mapStateToProps, { getCustomerCart })(ProductScreen);

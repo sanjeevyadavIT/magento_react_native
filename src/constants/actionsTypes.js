@@ -27,14 +27,6 @@ export const MAGENTO = createRequestTypes(
     'PRODUCT_DETAIL', // fetch details of product given it's sku
     'GET_PRODUCT_MEDIA', // If product detail doesn't contain images, use this
     /**
-     * ======================================================
-     * ===== {@link ProductScreen} related actions ======
-     * ======================================================
-     */
-    'CONF_OPTIONS', // Product is configurable type, fetch all options
-    'CONFIGURABLE_CHILDREN', // Fetch child products of configurable product
-    'ADD_TO_CART', // Add item to cart
-    /**
      * ==========================================
      * =================== @ ====================
      * ==========================================
@@ -56,22 +48,6 @@ export const MAGENTO = createRequestTypes(
   suffixTypes,
 );
 
-// Events related to UI interaction
-export const UI = createRequestTypes(
-  'UI',
-  [
-    /**
-     * ======================================================
-     * ===== {@link ProductDetailPage} related actions ======
-     * ======================================================
-     */
-    'OPEN_SELECTED_PRODUCT', // Fetch details regarding current selected product for viewing
-    'CHANGE_PRODUCT_OPTIONS', // Set options of `configurable` type product from picker into store
-  ],
-  suffixTypes,
-);
-
-export const RESET_ADD_TO_CART_STATE = 'RESET_ADD_TO_CART_STATE';
 export const USER_LOGGED_IN_STATUS = 'IS_USER_LOGGED_IN';
 export const SET_NEW_CATEGORY = 'SET_NEW_CATEGORY';
 export const RESET_CHECKOUT_STATE = 'RESET_CHECKOUT_STATE'; // Reset entire checkout reducer
