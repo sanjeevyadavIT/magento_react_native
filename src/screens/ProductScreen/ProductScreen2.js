@@ -52,6 +52,20 @@ const propTypes = {
             types: PropTypes.arrayOf(PropTypes.string),
           }),
         ),
+        extension_attributes: PropTypes.shape({
+          configurable_product_options: PropTypes.arrayOf(
+            PropTypes.shape({
+              attribute_id: PropTypes.string,
+              id: PropTypes.number,
+              label: PropTypes.string,
+              position: PropTypes.number,
+              product_id: PropTypes.number,
+              values: PropTypes.arrayOf(
+                PropTypes.shape({ value_index: PropTypes.number }).isRequired,
+              ),
+            }).isRequired,
+          ),
+        }),
       }),
       children: PropTypes.arrayOf(
         PropTypes.shape({
@@ -96,28 +110,42 @@ const ProductScreen = ({
       uri: `${magento.getProductMediaUrl()}${entry.file}`,
     },
   }));
-  console.log({ sku, product, media, options, selectedOptions }); // delete later
+  console.log({ sku, product, media, options, selectedOptions, children }); // delete later
 
   useEffect(() => {
     if (product.type_id === CONFIGURABLE_TYPE_SK) {
-      setOptionsApiStatus(Status.LOADING);
-      magento.admin
-        .getConfigurableProductOptions(sku)
-        .then(response => {
-          setOptions(
-            [...response].sort(
-              (first, second) => first.position - second.position,
-            ),
-          );
-          setOptionsApiStatus(Status.SUCCESS);
-        })
-        .catch(error => {
-          setOptionsApiErrorMessage(
-            error.message || translate('errors.genericError'),
-          );
-          setOptionsApiStatus(Status.ERROR);
-          setAddToCartAvailable(true);
-        });
+      if (
+        'extension_attributes' in product &&
+        'configurable_product_options' in product.extension_attributes &&
+        product.extension_attributes.configurable_product_options.length > 0
+      ) {
+        setOptions(
+          [...product.extension_attributes.configurable_product_options].sort(
+            (first, second) => first.position - second.position,
+          ),
+        );
+        setOptionsApiStatus(Status.SUCCESS);
+      } else {
+        // Fetch the options manually
+        setOptionsApiStatus(Status.LOADING);
+        magento.admin
+          .getConfigurableProductOptions(sku)
+          .then(response => {
+            setOptions(
+              [...response].sort(
+                (first, second) => first.position - second.position,
+              ),
+            );
+            setOptionsApiStatus(Status.SUCCESS);
+          })
+          .catch(error => {
+            setOptionsApiErrorMessage(
+              error.message || translate('errors.genericError'),
+            );
+            setOptionsApiStatus(Status.ERROR);
+            setAddToCartAvailable(true);
+          });
+      }
       if (!Array.isArray(children) || children.length < 1) {
         magento.admin
           .getConfigurableChildren(product.sku)
