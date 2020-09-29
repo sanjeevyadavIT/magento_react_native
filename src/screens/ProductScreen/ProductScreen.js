@@ -1,197 +1,441 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useMemo, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { GenericTemplate } from '../../common';
+import Toast from 'react-native-simple-toast';
 import {
-  PriceContainer,
-  OptionsContainer,
-  CTAButtons,
-} from './containers';
-import { magento } from '../../magento';
-import {
-  NAVIGATION_TO_LOGIN_SCREEN,
-  NAVIGATION_TO_CART_SCREEN,
-} from '../../navigation/routes';
-import { ThemeContext } from '../../theme';
+  GenericTemplate,
+  Price,
+  ImageSlider,
+  Button,
+  ModalSelect,
+} from '../../common';
 import Status from '../../magento/Status';
-import { ProductType } from '../../types';
+import { magento } from '../../magento';
+import { NAVIGATION_TO_MEDIA_VIEWER } from '../../navigation/routes';
+import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-import { DIMENS, SPACING } from '../../constants';
+import {
+  SPACING,
+  DIMENS,
+  CUSTOM_ATTRIBUTES_SK,
+  SIMPLE_TYPE_SK,
+  CONFIGURABLE_TYPE_SK,
+} from '../../constants';
+import { getCustomerCart, getAttributeById } from '../../store/actions';
+import {
+  getPriceFromChildren,
+  getValueFromAttribute,
+  isAttributeAndValuePresent,
+} from '../../utils/products';
+import ProductDescription from './ProductDescription';
+import { isObject, isNonEmptyString } from '../../utils';
 
-/**
- * Screen to display product description and detail.
- *
- * @todo - Fix WebView height
- *
- * @todo - No check in `configurable` type product to disable certain
- *         options which are not available
- *         Example: suppose in size `s` color `red` is not avilable,
- *         so when user select size `s`, `red` option should be disabled.
- *
- * @todo - No check written to check whether product is out of stock or not,
- *         if out of stock, disable `add-to-cart` button
- *
- * @todo - Add input box to let user enter quantity of that product for cart
- *         currently defaults to 1
- */
+const propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  attributes: PropTypes.object.isRequired,
+  cartQuoteId: PropTypes.number.isRequired,
+  currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
+  getCustomerCart: PropTypes.func.isRequired,
+  getAttributeById: PropTypes.func.isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      sku: PropTypes.string.isRequired,
+      product: PropTypes.shape({
+        sku: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        type_id: PropTypes.oneOf([SIMPLE_TYPE_SK, CONFIGURABLE_TYPE_SK]),
+        media_gallery_entries: PropTypes.arrayOf(
+          PropTypes.shape({
+            disabled: PropTypes.bool,
+            file: PropTypes.string,
+            id: PropTypes.number,
+            label: PropTypes.string,
+            media_type: PropTypes.oneOf(['image', 'video']),
+            position: PropTypes.number,
+            types: PropTypes.arrayOf(PropTypes.string),
+          }),
+        ),
+        extension_attributes: PropTypes.shape({
+          configurable_product_options: PropTypes.arrayOf(
+            PropTypes.shape({
+              attribute_id: PropTypes.string,
+              id: PropTypes.number,
+              label: PropTypes.string,
+              position: PropTypes.number,
+              product_id: PropTypes.number,
+              values: PropTypes.arrayOf(
+                PropTypes.shape({ value_index: PropTypes.number }).isRequired,
+              ),
+            }).isRequired,
+          ),
+        }),
+      }),
+      children: PropTypes.arrayOf(
+        PropTypes.shape({
+          price: PropTypes.number,
+        }),
+      ),
+    }).isRequired,
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+const defaultProps = {};
+
 const ProductScreen = ({
-  children,
+  route: {
+    params: { sku, product, children: _children },
+  },
   attributes,
-  options,
-  route,
-  navigation, // From react-navigation
+  cartQuoteId,
+  currencySymbol,
+  currencyRate,
+  getAttributeById: _getAttributeById,
+  getCustomerCart: refreshCustomerCart,
+  navigation,
 }) => {
-  const { theme } = useContext(ThemeContext);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedOptions, setSelectedOptions] = useState('');
+  const [options, setOptions] = useState([]);
+  const [children, setChildren] = useState(_children);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [selectedProduct, setSelectedProduct] = useState(null); // In case of configurable
+  const [media, setMedia] = useState([]);
+  const [optionsApiStatus, setOptionsApiStatus] = useState(Status.DEFAULT);
+  const [optionsApiErrorMessage, setOptionsApiErrorMessage] = useState('');
+  const [addToCartStatus, setAddToCartStatus] = useState(Status.DEFAULT);
   const [quantity, setQuantity] = useState(1);
-  const {
-    product: {
-      sku,
-      custom_attributes: customAttributes,
-      type_id: productType,
-      price,
-    },
-  } = route.params;
+  const [price, setPrice] = useState({
+    basePrice: product.price,
+  });
+  const [addToCartAvailable, setAddToCartAvailable] = useState(true); // In case something went wrong, set false
+  const { theme } = useContext(ThemeContext);
+
+  console.log({
+    sku,
+    product,
+    media,
+    options,
+    selectedOptions,
+    children,
+    attributes,
+  }); // delete later
 
   useEffect(() => {
-    calculatedSelectedProduct();
-  }, [selectedOptions]);
+    if (product.type_id === CONFIGURABLE_TYPE_SK) {
+      if (
+        'extension_attributes' in product &&
+        'configurable_product_options' in product.extension_attributes &&
+        product.extension_attributes.configurable_product_options.length > 0
+      ) {
+        setOptions(
+          [...product.extension_attributes.configurable_product_options].sort(
+            (first, second) => first.position - second.position,
+          ),
+        );
+        setOptionsApiStatus(Status.SUCCESS);
+      } else {
+        // Fetch the options manually
+        setOptionsApiStatus(Status.LOADING);
+        magento.admin
+          .getConfigurableProductOptions(sku)
+          .then(response => {
+            setOptions(
+              [...response].sort(
+                (first, second) => first.position - second.position,
+              ),
+            );
+            setOptionsApiStatus(Status.SUCCESS);
+          })
+          .catch(error => {
+            setOptionsApiErrorMessage(
+              error.message || translate('errors.genericError'),
+            );
+            setOptionsApiStatus(Status.ERROR);
+            setAddToCartAvailable(true);
+          });
+      }
+      if (!Array.isArray(children) || children.length < 1) {
+        magento.admin
+          .getConfigurableChildren(product.sku)
+          .then(response => setChildren(response))
+          .catch(error => console.log(error));
+      }
+    }
+    setMedia(
+      product?.media_gallery_entries.map(entry => ({
+        source: {
+          uri: `${magento.getProductMediaUrl()}${entry.file}`,
+        },
+      })),
+    );
+  }, []);
 
-  function calculatedSelectedProduct() {
-    let _selectedProduct = null;
+  useEffect(() => {
     if (
+      product.type_id === CONFIGURABLE_TYPE_SK &&
+      Array.isArray(children) &&
+      children.length > 0
+    ) {
+      const priceObject = getPriceFromChildren(children);
+      if (priceObject.starting === priceObject.ending) {
+        setPrice({ basePrice: priceObject.starting });
+      } else {
+        setPrice({
+          startingPrice: priceObject.starting,
+          endingPrice: priceObject.ending,
+        });
+      }
+    }
+  }, [children]);
+
+  useEffect(() => {
+    if (optionsApiStatus === Status.SUCCESS) {
+      options.forEach(
+        option =>
+          !attributes[option.attribute_id] &&
+          _getAttributeById(option.attribute_id),
+      );
+    }
+  }, [optionsApiStatus]);
+
+  useEffect(() => {
+    /**
+     * Logic to extract particular product, based on user selected options
+     * the selected product will be used to show price & thumbnail if available
+     */
+    if (
+      product.type_id === CONFIGURABLE_TYPE_SK &&
       options.length !== 0 &&
       options.length === Object.keys(selectedOptions).length
     ) {
-      _selectedProduct = findSelectedProduct();
-    }
-    if (_selectedProduct != null) {
-      setSelectedProduct(_selectedProduct);
-    }
-  }
-
-  function findSelectedProduct() {
-    const selectedOptionsWithNameAsKey = Object.keys(selectedOptions).reduce(
-      (total, selectedOptionKey) => ({
-        ...total,
-        [attributes[selectedOptionKey].attributeCode]:
-          selectedOptions[selectedOptionKey],
-      }),
-      {},
-    );
-    return children.find(child =>
-      Object.keys(selectedOptionsWithNameAsKey).every(attributeKey =>
-        isAttributeAndValuePresent(
-          child,
-          attributeKey,
-          selectedOptionsWithNameAsKey[attributeKey],
+      const selectedOptionsWithNameAsKey = Object.keys(selectedOptions).reduce(
+        (total, selectedOptionKey) => ({
+          ...total,
+          [attributes[selectedOptionKey].code]:
+            selectedOptions[selectedOptionKey],
+        }),
+        {},
+      );
+      const _child = children.find(child =>
+        Object.keys(selectedOptionsWithNameAsKey).every(attributeKey =>
+          isAttributeAndValuePresent(
+            child,
+            attributeKey,
+            selectedOptionsWithNameAsKey[attributeKey],
+          ),
         ),
-      ),
-    );
-  }
+      );
+      if (isObject(_child)) {
+        setSelectedProduct(_child);
+      }
+    }
+  }, [selectedOptions]);
 
-  function isAttributeAndValuePresent(child, attributeCode, attributeValue) {
-    return child.custom_attributes.some(
-      customAttribute =>
-        customAttribute.attribute_code === attributeCode &&
-        customAttribute.value === attributeValue,
-    );
-  }
+  useEffect(() => {
+    if (
+      product.type_id === CONFIGURABLE_TYPE_SK &&
+      isObject(selectedProduct) &&
+      'price' in selectedProduct
+    ) {
+      setPrice({ basePrice: selectedProduct.price });
+      const image = getValueFromAttribute(selectedProduct, 'image');
+      if (isNonEmptyString(image)) {
+        setMedia([
+          { source: { uri: `${magento.getProductMediaUrl()}${image}` } },
+          ...product?.media_gallery_entries.map(entry => ({
+            source: {
+              uri: `${magento.getProductMediaUrl()}${entry.file}`,
+            },
+          })),
+        ]);
+      }
+    }
+  }, [selectedProduct]);
+
+  useEffect(() => {
+    if (addToCartStatus === Status.SUCCESS) {
+      Toast.show(translate('productScreen.addToCartSuccess'), Toast.LONG);
+      refreshCustomerCart();
+    }
+  }, [addToCartStatus]);
+
+  const openMediaViewer = useMemo(
+    () => index => {
+      navigation.navigate(NAVIGATION_TO_MEDIA_VIEWER, {
+        index,
+        media,
+      });
+    },
+    [navigation, media],
+  );
+
+  const onAddToCartClick = () => {
+    // TODO: Show Toast if all options are not selected, in case of configurable product
+    if (
+      !(
+        product.type_id === SIMPLE_TYPE_SK ||
+        product.type_id === CONFIGURABLE_TYPE_SK
+      )
+    ) {
+      Toast.show(
+        translate('productScreen.unsupportedProductType').replace(
+          '%s',
+          product.type_id,
+        ),
+        Toast.LONG,
+      );
+      return;
+    }
+    setAddToCartStatus(Status.LOADING);
+    const request = {
+      cartItem: {
+        sku,
+        qty: quantity,
+        quote_id: cartQuoteId,
+      },
+    };
+    if (product.type_id === CONFIGURABLE_TYPE_SK) {
+      request.cartItem.extension_attributes = {};
+      request.cartItem.product_option = {
+        extension_attributes: {
+          configurable_item_options: Object.keys(selectedOptions).map(key => ({
+            option_id: key,
+            option_value: selectedOptions[key],
+          })),
+        },
+      };
+    }
+    magento.customer
+      .addItemToCart(request)
+      .then(() => {
+        setAddToCartStatus(Status.SUCCESS);
+      })
+      .catch(error => {
+        Toast.show(
+          error.message || translate('errors.genericError'),
+          Toast.LONG,
+        );
+        setAddToCartStatus(Status.ERROR);
+      });
+  };
 
   return (
     <GenericTemplate
       scrollable
-      status={Status.SUCCESS}
       footer={
-        <CTAButtons
-          sku={sku}
-          productType={productType}
-          selectedOptions={selectedOptions}
-          quantity={quantity}
+        <Button
+          style={styles.addToCart}
+          disabled={!addToCartAvailable}
+          loading={addToCartStatus === Status.LOADING}
+          title={translate('productScreen.addToCartButton')}
+          onPress={onAddToCartClick}
         />
       }
     >
-      <View style={styles.defaultStyles(theme)}>
-        <PriceContainer
-          sku={sku}
-          productType={productType}
-          price={price}
-          selectedProduct={selectedProduct}
+      <ImageSlider
+        media={media}
+        resizeMode="contain"
+        containerStyle={styles.imageContainer(theme)}
+        height={DIMENS.productScreen.imageSliderHeight}
+        onPress={openMediaViewer}
+      />
+      <View style={styles.priceContainer(theme)}>
+        <Price
+          basePriceStyle={styles.price}
+          currencySymbol={currencySymbol}
+          currencyRate={currencyRate}
+          {...price}
         />
+        {/* TODO: Add logic to increase quantity, but quantitiy should not increase over the stocks remaning */}
       </View>
-      {productType === 'configurable' && (
-        <View
-          style={[styles.defaultStyles(theme), styles.optionsContainer(theme)]}
+      {product.type_id === CONFIGURABLE_TYPE_SK && (
+        <GenericTemplate
+          status={optionsApiStatus}
+          errorMessage={optionsApiErrorMessage}
+          style={styles.optionsContainer(theme)}
         >
-          <OptionsContainer
-            sku={sku}
-            selectedOptions={selectedOptions}
-            setSelectedOptions={setSelectedOptions}
-            setSelectedProduct={setSelectedProduct}
-          />
-        </View>
+          {options.map((option, index) => (
+            // TODO: Show label for valueIndex by fetching `/V1/products/attributes/${attributeId}` api
+            <ModalSelect
+              key={option.attribute_id}
+              data={option.values.map(({ value_index: valueIndex }) => ({
+                label:
+                  option.attribute_id in attributes
+                    ? attributes[option.attribute_id].options[valueIndex]
+                    : valueIndex,
+                key: valueIndex,
+              }))}
+              label={`${translate('common.select')} ${option.label}`}
+              disabled={
+                option.values.length === 0 || addToCartStatus === Status.LOADING
+              }
+              onChange={itemKey =>
+                setSelectedOptions(prevState => ({
+                  ...prevState,
+                  [option.attribute_id]: itemKey,
+                }))
+              }
+              style={index < options.length - 1 ? styles.optionContainer : {}}
+            />
+          ))}
+        </GenericTemplate>
       )}
+      <ProductDescription customAttributes={product[CUSTOM_ATTRIBUTES_SK]} />
     </GenericTemplate>
   );
 };
 
 const styles = StyleSheet.create({
-  defaultStyles: theme => ({
+  addToCart: {
+    borderRadius: 0,
+  },
+  imageContainer: theme => ({
     backgroundColor: theme.surfaceColor,
-    marginTop: SPACING.large,
-    padding: SPACING.large,
+    marginBottom: SPACING.large,
   }),
-  imageContainer: height => ({
-    height,
+  priceContainer: theme => ({
+    flexDirection: 'row',
+    backgroundColor: theme.surfaceColor,
+    padding: SPACING.large,
+    marginBottom: SPACING.large,
   }),
   optionsContainer: theme => ({
-    minHeight: DIMENS.optionBoxMinHeight,
+    backgroundColor: theme.surfaceColor,
+    padding: SPACING.large,
+    marginBottom: SPACING.large,
   }),
+  optionContainer: {
+    marginBottom: SPACING.large,
+  },
+  price: {
+    fontSize: DIMENS.productScreen.priceFontSize,
+  },
 });
 
-ProductScreen.propTypes = {
-  children: PropTypes.arrayOf(ProductType),
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      attribute_id: PropTypes.string,
-      id: PropTypes.number,
-      label: PropTypes.string,
-      position: PropTypes.number,
-      product_id: PropTypes.number,
-      values: PropTypes.arrayOf(
-        PropTypes.shape({
-          value_index: PropTypes.number.isRequired,
-        }),
-      ),
-    }),
-  ),
-  attributes: PropTypes.object,
-  navigation: PropTypes.object.isRequired,
-};
+ProductScreen.propTypes = propTypes;
 
-ProductScreen.defaultProps = {
-  children: [],
-  options: [],
-  attributes: {},
-};
+ProductScreen.defaultProps = defaultProps;
 
-const mapStateToProps = ({ product }, { route }) => {
+const mapStateToProps = ({ magento: magentoReducer, cart, product }) => {
   const {
-    product: { sku },
-  } = route.params;
-  const {
-    current: {
-      [sku]: { children, options },
+    currency: {
+      displayCurrencySymbol: currencySymbol,
+      displayCurrencyExchangeRate: currencyRate,
     },
-    attributes,
-  } = product;
+  } = magentoReducer;
+  const { cart: { id: cartQuoteId } = {} } = cart;
+  const { attributes } = product;
   return {
-    children,
-    options,
     attributes,
+    cartQuoteId,
+    currencySymbol,
+    currencyRate,
   };
 };
 
-export default connect(mapStateToProps)(ProductScreen);
+export default connect(mapStateToProps, { getCustomerCart, getAttributeById })(
+  ProductScreen,
+);

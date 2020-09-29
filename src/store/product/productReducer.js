@@ -19,12 +19,12 @@ const getInitialState = {
 export default (state = getInitialState, { type, payload }) => {
   switch (type) {
     case MAGENTO.GET_ATTRIBUTE_SUCCESS: {
-      const { id, options } = payload;
+      const { id, data } = payload;
       return {
         ...state,
         attributes: {
           ...state.attributes,
-          [id]: options,
+          [id]: data,
         },
       };
     }

@@ -20,7 +20,7 @@ function* getAttributeById({ payload: { id } }) {
       type: MAGENTO.GET_ATTRIBUTE_SUCCESS,
       payload: {
         id,
-        options: formatAttributesResponse(response),
+        data: formatAttributesResponse(response),
       },
     });
   } catch (error) {
@@ -33,11 +33,15 @@ function* getAttributeById({ payload: { id } }) {
 
 // Helper function to format array reponse into key value pairs in object
 function formatAttributesResponse(response) {
-  const options = {};
+  const newResponse = {
+    code: response.attribute_code,
+    label: response.default_frontend_label,
+    options: {}
+  };
   response.options.forEach(item => {
-    options[item.value] = item.label;
+    newResponse.options[item.value] = item.label;
   });
-  return options;
+  return newResponse;
 }
 
 /**

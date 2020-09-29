@@ -29,6 +29,18 @@ export const getValueFromAttribute = (product, key) => {
   return undefined;
 };
 
+export function isAttributeAndValuePresent(
+  child,
+  attributeCode,
+  attributeValue,
+) {
+  return child.custom_attributes.some(
+    item =>
+      item.attribute_code === attributeCode &&
+      parseInt(item.value, 10) === attributeValue,
+  );
+}
+
 /**
  * Stores price of the product,
  * in case of `simple` product, starting and ending will be same
