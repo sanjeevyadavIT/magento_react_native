@@ -68,16 +68,17 @@ const ProfileScreen = ({
     }
   }, []);
 
-  const onLogoutPress = () => navigation.navigate(NAVIGATION_TO_ALERT_DIALOG, {
-    description: translate('profileScreen.logoutConfirmationMessage'),
-    positiveButtonTitle: translate('common.yes'),
-    negativeButtonTitle: translate('common.no'),
-    positiveButtonCallback: () => {
-      _logout();
-      Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
-      navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
-    },
-  });
+  const onLogoutPress = () =>
+    navigation.navigate(NAVIGATION_TO_ALERT_DIALOG, {
+      description: translate('profileScreen.logoutConfirmationMessage'),
+      positiveButtonTitle: translate('common.yes'),
+      negativeButtonTitle: translate('common.no'),
+      positiveButtonCallback: () => {
+        _logout();
+        Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
+        navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
+      },
+    });
 
   return (
     <GenericTemplate
@@ -94,7 +95,10 @@ const ProfileScreen = ({
         />
       }
     >
-      <ProfileHeader firstName={customer.firstname} lastName={customer.lastname} />
+      <ProfileHeader
+        firstName={customer.firstname}
+        lastName={customer.lastname}
+      />
       <View style={styles.actionContainer(theme)}>
         <ProfileItem
           title={translate('common.orders')}

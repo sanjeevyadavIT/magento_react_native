@@ -5,7 +5,10 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeContext } from '../theme';
-import { NAVIGATION_TO_ALERT_DIALOG, NAVIGATION_TO_MEDIA_VIEWER } from './routes';
+import {
+  NAVIGATION_TO_ALERT_DIALOG,
+  NAVIGATION_TO_MEDIA_VIEWER,
+} from './routes';
 import { DrawerScreen, AlertDialog, MediaViewer } from '../screens';
 import StackNavigator from './StackNavigator';
 
@@ -49,10 +52,7 @@ const RootNavigator = () => {
             cardOverlayEnabled: false,
           }}
         >
-          <Stack.Screen
-            name="modal"
-            component={DrawerNavigator}
-          />
+          <Stack.Screen name="modal" component={DrawerNavigator} />
           <Stack.Screen
             name={NAVIGATION_TO_ALERT_DIALOG}
             component={AlertDialog}

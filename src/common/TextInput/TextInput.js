@@ -109,7 +109,11 @@ const TextInput = ({
           placeholderTextColor={placeholderTextColor || theme.labelTextColor}
           underlineColorAndroid={theme.transparent}
           editable={!disabled}
-          style={[styles.input(theme), disabled && styles.disabledInput(theme), inputStyle]}
+          style={[
+            styles.input(theme),
+            disabled && styles.disabledInput(theme),
+            inputStyle,
+          ]}
           ref={component => assignRef && assignRef(component)}
           {...props}
         />
@@ -143,7 +147,7 @@ const styles = StyleSheet.create({
     borderWidth: DIMENS.common.borderWidth,
     borderRadius: DIMENS.common.borderRadius,
     alignItems: 'center',
-    borderColor: disabled? theme.disabledDarkColor : theme.labelTextColor,
+    borderColor: disabled ? theme.disabledDarkColor : theme.labelTextColor,
     minHeight: DIMENS.common.textInputHeight,
   }),
   input: theme => ({
@@ -154,7 +158,7 @@ const styles = StyleSheet.create({
     flex: 1,
   }),
   disabledInput: theme => ({
-    color: theme.disabledColor
+    color: theme.disabledColor,
   }),
   iconContainer: {
     justifyContent: 'center',

@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   },
   headingContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   heading: {
     flex: 1,

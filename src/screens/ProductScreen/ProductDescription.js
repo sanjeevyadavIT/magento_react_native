@@ -27,7 +27,7 @@ const propTypes = {
 
 const defaultProps = {
   customAttributes: [],
-}
+};
 
 /**
  * Render description of the product into webview
@@ -47,7 +47,7 @@ const ProductDescription = ({ customAttributes }) => {
           </Text>
           <HTML
             html={description}
-            imagesMaxWidth={DIMENS.common.WINDOW_WIDTH - 2*SPACING.large}
+            imagesMaxWidth={DIMENS.common.WINDOW_WIDTH - 2 * SPACING.large}
           />
         </Card>
       ) : (

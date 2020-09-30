@@ -1,4 +1,4 @@
-import {any, arrayOf, number, shape, string} from 'prop-types';
+import { any, arrayOf, number, shape, string } from 'prop-types';
 
 const billingAddressType = shape({
   address_type: string,
@@ -98,25 +98,27 @@ const orderType = shape({
   discount_tax_compensation_amount: number,
   entity_id: number,
   extension_attributes: shape({
-    shipping_assignments: arrayOf(shape({
-      items: arrayOf(itemType),
-      shipping: shape({
-        address: billingAddressType,
-        method: string,
-        total: shape({
-          base_shipping_amount: number,
-          base_shipping_discount_amount: number,
-          base_shipping_discount_tax_compensation_amnt: number,
-          base_shipping_incl_tax: number,
-          base_shipping_tax_amount: number,
-          shipping_amount: number,
-          shipping_discount_amount: number,
-          shipping_discount_tax_compensation_amount: number,
-          shipping_incl_tax: number,
-          shipping_tax_amount: number,
+    shipping_assignments: arrayOf(
+      shape({
+        items: arrayOf(itemType),
+        shipping: shape({
+          address: billingAddressType,
+          method: string,
+          total: shape({
+            base_shipping_amount: number,
+            base_shipping_discount_amount: number,
+            base_shipping_discount_tax_compensation_amnt: number,
+            base_shipping_incl_tax: number,
+            base_shipping_tax_amount: number,
+            shipping_amount: number,
+            shipping_discount_amount: number,
+            shipping_discount_tax_compensation_amount: number,
+            shipping_incl_tax: number,
+            shipping_tax_amount: number,
+          }),
         }),
       }),
-    })),
+    ),
   }),
   global_currency_code: string,
   grand_total: number,

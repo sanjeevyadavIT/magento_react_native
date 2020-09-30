@@ -98,7 +98,7 @@ export default (state = initialState, { type, payload }) => {
         ordersStatus: Status.ERROR,
         ordersErrorMessage: payload.errorMessage,
       };
-      case MAGENTO.GET_MORE_ORDERS_LOADING:
+    case MAGENTO.GET_MORE_ORDERS_LOADING:
       return {
         ...state,
         moreOrdersStatus: Status.LOADING,

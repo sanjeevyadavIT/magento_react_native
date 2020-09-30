@@ -133,11 +133,11 @@ const styles = StyleSheet.create({
   modal: {
     width: '100%',
     borderBottomRightRadius: 0,
-    borderBottomLeftRadius: 0
+    borderBottomLeftRadius: 0,
   },
   done: {
     alignSelf: 'flex-end',
-  }
+  },
 });
 
 DateTimePicker.propTypes = propTypes;

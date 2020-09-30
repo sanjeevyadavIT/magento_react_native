@@ -53,7 +53,8 @@ const OrderDetailScreen = ({
 
   useEffect(() => {
     if (orderId !== -1) {
-      magento.admin.getOrderDetail(orderId)
+      magento.admin
+        .getOrderDetail(orderId)
         .then(orderResponse => {
           setOrderDetail(orderResponse);
           setApiStatus(Status.SUCCESS);
@@ -68,9 +69,7 @@ const OrderDetailScreen = ({
   const renderHeader = () => (
     <>
       <Card type="clear" style={styles.headerContainer}>
-        <Text>{`${translate('common.status')}: ${
-          orderDetail.status
-        }`}</Text>
+        <Text>{`${translate('common.status')}: ${orderDetail.status}`}</Text>
         <Text>{`${translate('common.placedOn')}: ${
           isDateValid(placedOn) ? getFormattedDate(placedOn) : order.created_at
         }`}</Text>

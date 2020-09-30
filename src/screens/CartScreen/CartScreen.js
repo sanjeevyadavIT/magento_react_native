@@ -3,10 +3,7 @@ import { StyleSheet, FlatList, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getCustomerCart } from '../../store/actions';
-import {
-  GenericTemplate,
-  Text,
-} from '../../common';
+import { GenericTemplate, Text } from '../../common';
 import { DIMENS, SPACING } from '../../constants';
 import CartListItem from './CartListItem';
 import CartFooter from './CartFooter';
@@ -72,9 +69,7 @@ const CartScreen = ({
     <GenericTemplate
       status={status}
       errorMessage={errorMessage}
-      footer={
-        items.length > 0 && <CartFooter />
-      }
+      footer={items.length > 0 && <CartFooter />}
     >
       <FlatList
         data={items}
@@ -136,11 +131,7 @@ CartScreen.propTypes = propTypes;
 CartScreen.defaultProps = defaultProps;
 
 const mapStateToProps = ({ cart, magento }) => {
-  const {
-    status,
-    errorMessage,
-    cart: { items = [] } = {},
-  } = cart;
+  const { status, errorMessage, cart: { items = [] } = {} } = cart;
   const {
     displayCurrencySymbol: currencySymbol,
     displayCurrencyExchangeRate: currencyRate,

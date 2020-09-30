@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   card: (level, position, theme) => ({
     backgroundColor:
       level === 2
-        ? PASTEL_COLORS[position%PASTEL_COLORS.length]
+        ? PASTEL_COLORS[position % PASTEL_COLORS.length]
         : theme.surfaceColor,
     paddingStart: (level - 1) * SPACING.large,
     paddingEnd: SPACING.large,

@@ -7,8 +7,7 @@ const propTypes = {
   categories: PropTypes.array.isRequired,
 };
 
-const defaultProps = {
-};
+const defaultProps = {};
 
 const CategoryTree = ({ categories, ...props }) => {
   const renderRow = category => <CategoryTreeItem category={category.item} />;

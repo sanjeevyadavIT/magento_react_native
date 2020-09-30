@@ -2,7 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento, CUSTOMER_TOKEN } from '../../magento';
 import { MAGENTO, LOGIN_SUCCESS, ACTION_USER_LOGOUT } from '../../constants';
-import { getProductsSkuFromOrders } from  '../../utils';
+import { getProductsSkuFromOrders } from '../../utils';
 
 /**
  * worker saga: After successful login, dispatch actions
@@ -81,7 +81,7 @@ function* getOrdersForCustomer({ payload: { customerId, offset } }) {
      */
     const productSkuList = getProductsSkuFromOrders(response.items);
     // TODO: Fetch product media of each sku in productSkuList
-    console.log(productSkuList)
+    console.log(productSkuList);
   } catch (error) {
     yield put({
       type:

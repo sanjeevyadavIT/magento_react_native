@@ -43,7 +43,7 @@ import {
   NAVIGATION_TO_ORDER_CONFIRMATION_SCREEN,
   NAVIGATION_TO_SETTING_SCREEN,
   NAVIGATION_TO_ADDRESS_SCREEN,
-  NAVIGATION_TO_EDIT_PROFILE_SCREEN
+  NAVIGATION_TO_EDIT_PROFILE_SCREEN,
 } from './routes';
 import { translate } from '../i18n';
 import { isObject } from '../utils';
@@ -289,7 +289,7 @@ StackNavigator.defaultProps = defaultProps;
 const mapStateToProps = ({ account }) => {
   const { loggedIn } = account;
   return {
-    loggedIn
+    loggedIn,
   };
 };
 

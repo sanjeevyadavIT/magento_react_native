@@ -26,13 +26,15 @@ const propTypes = {
   /**
    * Array contaning product media, if fetch is successful
    */
-  media: PropTypes.arrayOf(PropTypes.shape({
-    file: PropTypes.string,
-    id: PropTypes.number,
-    label: PropTypes.string,
-    media_type: PropTypes.string,
-    types: PropTypes.arrayOf(PropTypes.string),
-  })).isRequired,
+  media: PropTypes.arrayOf(
+    PropTypes.shape({
+      file: PropTypes.string,
+      id: PropTypes.number,
+      label: PropTypes.string,
+      media_type: PropTypes.string,
+      types: PropTypes.arrayOf(PropTypes.string),
+    }),
+  ).isRequired,
   /**
    * Order Item doesn't contain product media,
    * so in order to show image, we have to
@@ -75,7 +77,12 @@ const ProductItem = ({
     <View style={[styles.card, containerStyle]}>
       <Image
         style={styles.imageStyle}
-        source={{ uri: Array.isArray(media) && media.length > 0? `${magento.getProductMediaUrl()}${media[0].file}` : '' }}
+        source={{
+          uri:
+            Array.isArray(media) && media.length > 0
+              ? `${magento.getProductMediaUrl()}${media[0].file}`
+              : '',
+        }}
       />
       <View style={styles.detailContainer}>
         <Text bold>{name}</Text>

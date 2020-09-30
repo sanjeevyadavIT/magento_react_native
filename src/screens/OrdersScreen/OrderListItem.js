@@ -44,25 +44,24 @@ const OrderListItem = ({ item: order, navigation }) => {
     <Card style={styles.container} onPress={onPress}>
       <View style={styles.orderDetailsContainer}>
         <View style={styles.orderNumberContainer}>
-          <Text type="subheading">{`${translate('common.orderNumber')}: `}</Text>
-          <Text type="subheading" bold>{order.increment_id}</Text>
+          <Text type="subheading">{`${translate(
+            'common.orderNumber',
+          )}: `}</Text>
+          <Text type="subheading" bold>
+            {order.increment_id}
+          </Text>
         </View>
         <Text>{`${translate('common.placedOn')}: ${
           isDateValid(placedOn) ? getFormattedDate(placedOn) : order.created_at
         }`}</Text>
-        <Text>{`${translate('common.status')}: ${
-          order.status
-        }`}</Text>
+        <Text>{`${translate('common.status')}: ${order.status}`}</Text>
       </View>
       {order.items
         .filter(item => item.product_type !== CONFIGURABLE_TYPE_SK)
         .map(item => (
           <View key={item.sku}>
             <Divider />
-            <ProductItem
-              item={item}
-              currencySymbol={currencySymbol}
-            />
+            <ProductItem item={item} currencySymbol={currencySymbol} />
           </View>
         ))}
     </Card>

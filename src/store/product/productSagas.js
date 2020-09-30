@@ -36,7 +36,7 @@ function formatAttributesResponse(response) {
   const newResponse = {
     code: response.attribute_code,
     label: response.default_frontend_label,
-    options: {}
+    options: {},
   };
   response.options.forEach(item => {
     newResponse.options[item.value] = item.label;

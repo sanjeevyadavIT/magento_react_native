@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { getCustomerCart } from '../../store/actions';
-import {
-  Text,
-  Button,
-  Price,
-} from '../../common';
+import { Text, Button, Price } from '../../common';
 import { DIMENS, SPACING } from '../../constants';
 import { NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN } from '../../navigation/routes';
 import Status from '../../magento/Status';
@@ -40,13 +36,7 @@ const defaultProps = {
   extra: {},
 };
 
-const CartFooter = ({
-  status,
-  items,
-  extra,
-  currencySymbol,
-  currencyRate,
-}) => {
+const CartFooter = ({ status, items, extra, currencySymbol, currencyRate }) => {
   const navigation = useNavigation();
   const { theme } = useContext(ThemeContext);
 
@@ -105,7 +95,7 @@ const CartFooter = ({
         onPress={handlePlaceOrder}
       />
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
@@ -135,9 +125,7 @@ const mapStateToProps = ({ cart, product, magento }) => {
     status,
     cart: { items },
   } = cart;
-  const {
-    cachedProductDetails: extra
-  } = product;
+  const { cachedProductDetails: extra } = product;
   const {
     displayCurrencySymbol: currencySymbol,
     displayCurrencyExchangeRate: currencyRate,

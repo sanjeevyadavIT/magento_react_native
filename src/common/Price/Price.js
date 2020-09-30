@@ -86,7 +86,10 @@ const Price = ({
       {discountPrice ? renderDiscountPrice() : null}
       <Text
         bold={!isBold()}
-        style={[styles.basePriceText(basePrice, discountPrice, theme), basePriceStyle]}
+        style={[
+          styles.basePriceText(basePrice, discountPrice, theme),
+          basePriceStyle,
+        ]}
       >{`${currencySymbol}${formatPrice(basePrice, currencyRate)}`}</Text>
     </View>
   );

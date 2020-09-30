@@ -35,7 +35,7 @@ const OrderAcknowledgementScreen = ({
       orderId,
       status = Status.ERROR,
       errorMessage = translate('orderAcknowledgementScreen.orderNotPlace'),
-    }
+    },
   },
   resetCheckoutState: _resetCheckoutState,
 }) => {
@@ -70,7 +70,10 @@ const OrderAcknowledgementScreen = ({
         </View>
       }
     >
-      <OrderCompleteScreen width={DIMENS.orderAcknowledgementScreen.orderImageSize} height={DIMENS.orderAcknowledgementScreen.orderImageSize} />
+      <OrderCompleteScreen
+        width={DIMENS.orderAcknowledgementScreen.orderImageSize}
+        height={DIMENS.orderAcknowledgementScreen.orderImageSize}
+      />
       <Text style={styles.title} type="heading" bold>
         {translate('orderAcknowledgementScreen.orderPlaced')}
       </Text>
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.large,
   },
   footer: {
-    padding: SPACING.small
+    padding: SPACING.small,
   },
   button: {
     marginTop: SPACING.small,

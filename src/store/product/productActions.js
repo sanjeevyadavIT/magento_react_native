@@ -17,5 +17,5 @@ export const getProductMedia = sku => ({
 
 export const getAttributeById = id => ({
   type: MAGENTO.GET_ATTRIBUTE_REQUEST,
-  payload: { id }
-})
+  payload: { id },
+});

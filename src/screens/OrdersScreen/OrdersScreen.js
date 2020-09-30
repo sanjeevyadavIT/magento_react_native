@@ -25,8 +25,8 @@ const propTypes = {
     }).isRequired,
   }).isRequired,
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const defaultProps = {
@@ -62,7 +62,9 @@ const OrdersScreen = ({
     _getOrders(customerId, offset);
   };
 
-  const renderItem = ({ item }) => <OrderListItem item={item} navigation={navigation} />;
+  const renderItem = ({ item }) => (
+    <OrderListItem item={item} navigation={navigation} />
+  );
 
   const renderFooter = () => {
     if (moreOrdersStatus === Status.LOADING) {
@@ -95,7 +97,9 @@ const OrdersScreen = ({
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={
           ordersStatus === Status.SUCCESS && (
-            <MessageView message={translate('ordersScreen.orderEmptyMessage')} />
+            <MessageView
+              message={translate('ordersScreen.orderEmptyMessage')}
+            />
           )
         }
         ListFooterComponent={renderFooter}

@@ -1,9 +1,7 @@
 import Status from '../magento/Status';
 
 export const formatHomeData = payload => {
-  const content = JSON.parse(
-    payload.content.replace(/<\/?[^>]+(>|$)/g, ''),
-  );
+  const content = JSON.parse(payload.content.replace(/<\/?[^>]+(>|$)/g, ''));
   const featuredCategories = {};
   Object.keys(content.featuredCategories).forEach(key => {
     featuredCategories[key] = {};
@@ -12,6 +10,6 @@ export const formatHomeData = payload => {
     featuredCategories[key].errorMessage = '';
     featuredCategories[key].title = content.featuredCategories[key].title;
   });
-  content.featuredCategories= featuredCategories;
+  content.featuredCategories = featuredCategories;
   return content;
 };
