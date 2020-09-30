@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useMemo, useState } from 'react';
+import React, { useEffect, useContext, useMemo, useState, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -110,18 +110,10 @@ const ProductScreen = ({
   const [price, setPrice] = useState({
     basePrice: product.price,
   });
+  const [optionContainerYCord, setOptionContainerYCord] = useState(0);
   const [addToCartAvailable, setAddToCartAvailable] = useState(true); // In case something went wrong, set false
+  const scrollViewRef = useRef();
   const { theme } = useContext(ThemeContext);
-
-  console.log({
-    sku,
-    product,
-    media,
-    options,
-    selectedOptions,
-    children,
-    attributes,
-  }); // delete later
 
   useEffect(() => {
     if (product.type_id === CONFIGURABLE_TYPE_SK) {
@@ -154,7 +146,7 @@ const ProductScreen = ({
               error.message || translate('errors.genericError'),
             );
             setOptionsApiStatus(Status.ERROR);
-            setAddToCartAvailable(true);
+            setAddToCartAvailable(false);
           });
       }
       if (!Array.isArray(children) || children.length < 1) {
@@ -289,6 +281,20 @@ const ProductScreen = ({
       );
       return;
     }
+    if (
+      product.type_id === CONFIGURABLE_TYPE_SK &&
+      options.length !== Object.keys(selectedOptions).length
+    ) {
+      Toast.show(translate('productScreen.noOptionSelected'), Toast.LONG);
+      if (scrollViewRef && scrollViewRef.current) {
+        scrollViewRef.current.scrollTo({
+          x: 0,
+          y: optionContainerYCord,
+          animated: true,
+        });
+      }
+      return;
+    }
     setAddToCartStatus(Status.LOADING);
     const request = {
       cartItem: {
@@ -324,6 +330,9 @@ const ProductScreen = ({
 
   return (
     <GenericTemplate
+      assignRef={component => {
+        scrollViewRef.current = component;
+      }}
       scrollable
       footer={
         <Button
@@ -356,6 +365,12 @@ const ProductScreen = ({
           status={optionsApiStatus}
           errorMessage={optionsApiErrorMessage}
           style={styles.optionsContainer(theme)}
+          onLayout={event => {
+            const {
+              nativeEvent: { layout },
+            } = event;
+            setOptionContainerYCord(layout.y);
+          }}
         >
           {options.map((option, index) => (
             // TODO: Show label for valueIndex by fetching `/V1/products/attributes/${attributeId}` api

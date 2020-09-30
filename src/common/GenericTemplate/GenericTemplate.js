@@ -36,6 +36,8 @@ const propTypes = {
    * pass RefreshControl here
    */
   refreshControl: PropTypes.element,
+  onLayout: PropTypes.func,
+  assignRef: PropTypes.func,
 };
 
 const defaultProps = {
@@ -45,6 +47,8 @@ const defaultProps = {
   style: {},
   footer: <></>,
   refreshControl: undefined,
+  onLayout: undefined,
+  assignRef: undefined,
 };
 
 const GenericTemplate = ({
@@ -55,6 +59,8 @@ const GenericTemplate = ({
   errorMessage,
   style,
   refreshControl,
+  onLayout,
+  assignRef,
 }) => {
   const { theme } = useContext(ThemeContext);
   const ViewGroup = scrollable ? ScrollView : View;
@@ -70,8 +76,14 @@ const GenericTemplate = ({
   }
 
   return (
-    <SafeAreaView style={styles.container(theme)}>
-      <ViewGroup {...props}>
+    <SafeAreaView
+      {...(onLayout && { onLayout })}
+      style={styles.container(theme)}
+    >
+      <ViewGroup
+        ref={component => assignRef && assignRef(component)}
+        {...props}
+      >
         {!refreshControl &&
           (status === Status.DEFAULT || status === Status.LOADING) && (
             <LoadingView />

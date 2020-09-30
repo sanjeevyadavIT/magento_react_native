@@ -185,7 +185,8 @@
     "productDetailLabel": "Product Details",
     "noProductDetail": "No description available!",
     "addToCartSuccess": "Item Added To Cart!",
-    "loginPromptMessage": "In order to add products to cart, you must login into your account, proceed to Login?"
+    "loginPromptMessage": "In order to add products to cart, you must login into your account, proceed to Login?",
+    "noOptionSelected": "You need to choose options for your item"
   },
   "profileScreen": {
     "title": "Account",
