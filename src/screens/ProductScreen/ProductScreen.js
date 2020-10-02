@@ -1,18 +1,31 @@
-import React, { useEffect, useContext, useMemo, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useContext,
+  useLayoutEffect,
+  useState,
+  useRef,
+  useCallback,
+} from 'react';
 import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Share from 'react-native-share';
 import Toast from 'react-native-simple-toast';
 import {
   GenericTemplate,
   Price,
   ImageSlider,
   Button,
+  HeaderButtons,
   ModalSelect,
 } from '../../common';
 import Status from '../../magento/Status';
 import { magento } from '../../magento';
-import { NAVIGATION_TO_MEDIA_VIEWER } from '../../navigation/routes';
+import {
+  NAVIGATION_TO_MEDIA_VIEWER,
+  NAVIGATION_TO_ALERT_DIALOG,
+  NAVIGATION_TO_CART_SCREEN,
+} from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import {
@@ -20,6 +33,7 @@ import {
   DIMENS,
   CUSTOM_ATTRIBUTES_SK,
   SIMPLE_TYPE_SK,
+  URL_KEY_SK,
   CONFIGURABLE_TYPE_SK,
 } from '../../constants';
 import { getCustomerCart, getAttributeById } from '../../store/actions';
@@ -39,11 +53,16 @@ const propTypes = {
   currencyRate: PropTypes.number.isRequired,
   getCustomerCart: PropTypes.func.isRequired,
   getAttributeById: PropTypes.func.isRequired,
+  /**
+   * Whether current user is logged in or not
+   */
+  loggedIn: PropTypes.bool.isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({
       sku: PropTypes.string.isRequired,
       product: PropTypes.shape({
         sku: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         type_id: PropTypes.oneOf([SIMPLE_TYPE_SK, CONFIGURABLE_TYPE_SK]),
         media_gallery_entries: PropTypes.arrayOf(
@@ -81,6 +100,7 @@ const propTypes = {
   }).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    setOptions: PropTypes.func.isRequired,
   }).isRequired,
 };
 
@@ -90,6 +110,7 @@ const ProductScreen = ({
   route: {
     params: { sku, product, children: _children },
   },
+  loggedIn,
   attributes,
   cartQuoteId,
   currencySymbol,
@@ -164,6 +185,52 @@ const ProductScreen = ({
       })),
     );
   }, []);
+
+  useLayoutEffect(() => {
+    const url = getValueFromAttribute(product, URL_KEY_SK);
+    const completeUrl = `${magento.getBaseUrl()}${url}.html`;
+    const title = translate('productScreen.shareTitle').replace(
+      '%s',
+      translate('common.brandName'),
+    );
+    const message = translate('productScreen.shareMessage')
+      .replace('%s', product.name)
+      .replace('%w', completeUrl)
+      .replace('%r', translate('common.brandName'));
+
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons>
+          {isNonEmptyString(url) && (
+            <HeaderButtons.Item
+              title={translate('productScreen.menu.share')}
+              iconName="share"
+              onPress={() =>
+                Share.open({
+                  title,
+                  message,
+                }).catch(err => {
+                  if ('message' in err) {
+                    Toast.show(err.message, Toast.LONG);
+                  }
+                  console.log(err);
+                })
+              }
+            />
+          )}
+          <HeaderButtons.Item
+            title={translate('productScreen.menu.cart')}
+            iconName="shopping-cart"
+            onPress={() =>
+              loggedIn
+                ? navigation.navigate(NAVIGATION_TO_CART_SCREEN)
+                : showLoginPrompt()
+            }
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
 
   useEffect(() => {
     if (
@@ -254,8 +321,14 @@ const ProductScreen = ({
     }
   }, [addToCartStatus]);
 
-  const openMediaViewer = useMemo(
-    () => index => {
+  const showLoginPrompt = description =>
+    navigation.navigate(NAVIGATION_TO_ALERT_DIALOG, {
+      description,
+      loginMode: true,
+    });
+
+  const openMediaViewer = useCallback(
+    index => {
       navigation.navigate(NAVIGATION_TO_MEDIA_VIEWER, {
         index,
         media,
@@ -265,7 +338,10 @@ const ProductScreen = ({
   );
 
   const onAddToCartClick = () => {
-    // TODO: Show Toast if all options are not selected, in case of configurable product
+    if (!loggedIn) {
+      showLoginPrompt(translate('productScreen.loginPromptMessage')); // Guest cart not iplemented
+      return;
+    }
     if (
       !(
         product.type_id === SIMPLE_TYPE_SK ||
@@ -434,7 +510,12 @@ ProductScreen.propTypes = propTypes;
 
 ProductScreen.defaultProps = defaultProps;
 
-const mapStateToProps = ({ magento: magentoReducer, cart, product }) => {
+const mapStateToProps = ({
+  magento: magentoReducer,
+  cart,
+  product,
+  account,
+}) => {
   const {
     currency: {
       displayCurrencySymbol: currencySymbol,
@@ -443,7 +524,9 @@ const mapStateToProps = ({ magento: magentoReducer, cart, product }) => {
   } = magentoReducer;
   const { cart: { id: cartQuoteId } = {} } = cart;
   const { attributes } = product;
+  const { loggedIn } = account;
   return {
+    loggedIn,
     attributes,
     cartQuoteId,
     currencySymbol,

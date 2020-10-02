@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import { View } from 'react-native';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HeaderButtons, TextInput } from '../common';
 import { ThemeContext } from '../theme';
@@ -35,7 +33,6 @@ import {
   NAVIGATION_TO_SIGNUP_SCREEN,
   NAVIGATION_TO_ORDERS_SCREEN,
   NAVIGATION_TO_ORDER_DETAIL_SCREEN,
-  NAVIGATION_TO_CART_SCREEN,
   NAVIGATION_TO_CHECKOUT_ADDRESS_SCREEN,
   NAVIGATION_TO_ADD_EDIT_ADDRESS_SCREEN,
   NAVIGATION_TO_SHIPPING_SCREEN,
@@ -51,17 +48,11 @@ import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createStackNavigator();
 
-const propTypes = {
-  /**
-   * Whether current user is logged in or not
-   */
-  loggedIn: PropTypes.bool.isRequired,
-};
+const propTypes = {};
 
 const defaultProps = {};
 
-// TODO: access isLogged in from redux state or Aysnc storage, not magento variable
-const StackNavigator = ({ loggedIn }) => {
+const StackNavigator = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <Stack.Navigator
@@ -190,25 +181,11 @@ const StackNavigator = ({ loggedIn }) => {
         name={NAVIGATION_TO_PRODUCT_SCREEN}
         component={ProductScreen}
         options={({
-          navigation,
           route: {
             params: { title = translate('productScreen.title') },
           },
         }) => ({
           title,
-          headerRight: () => (
-            <HeaderButtons>
-              <HeaderButtons.Item
-                title={translate('productScreen.menu.cart')}
-                iconName="shopping-cart"
-                onPress={() =>
-                  loggedIn
-                    ? navigation.navigate(NAVIGATION_TO_CART_SCREEN)
-                    : navigation.navigate(NAVIGATION_TO_LOGIN_SCREEN)
-                }
-              />
-            </HeaderButtons>
-          ),
         })}
       />
       <Stack.Screen
@@ -286,11 +263,4 @@ StackNavigator.propTypes = propTypes;
 
 StackNavigator.defaultProps = defaultProps;
 
-const mapStateToProps = ({ account }) => {
-  const { loggedIn } = account;
-  return {
-    loggedIn,
-  };
-};
-
-export default connect(mapStateToProps)(StackNavigator);
+export default StackNavigator;

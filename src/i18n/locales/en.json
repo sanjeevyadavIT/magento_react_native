@@ -186,7 +186,9 @@
     "noProductDetail": "No description available!",
     "addToCartSuccess": "Item Added To Cart!",
     "loginPromptMessage": "In order to add products to cart, you must login into your account, proceed to Login?",
-    "noOptionSelected": "You need to choose options for your item"
+    "noOptionSelected": "You need to choose options for your item",
+    "shareTitle": "Checkout what I found on %s",
+    "shareMessage": "Check this out\n%s\n%w on %r"
   },
   "profileScreen": {
     "title": "Account",
@@ -199,7 +201,8 @@
   "searchScreen": {
     "searchHint": "Search for products",
     "menu": {
-      "sort": "Sort"
+      "sort": "Sort",
+      "share": "Share"
     },
     "noProduct": "No product found!"
   },
