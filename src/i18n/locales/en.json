@@ -200,6 +200,7 @@
   },
   "searchScreen": {
     "searchHint": "Search for products",
+    "pleaseTypeSomething": "Search text cannot be empty!",
     "menu": {
       "sort": "Sort",
       "share": "Share"

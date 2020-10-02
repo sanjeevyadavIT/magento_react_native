@@ -7,7 +7,6 @@ import homeSagas from './home/homeSagas';
 import categoryTreeSagas from './categoryTree/categoryTreeSagas';
 import checkoutSagas from './checkout/checkoutSagas';
 import productSagas from './product/productSagas';
-import searchSagas from './search/searchSagas';
 
 /**
  * rootSaga
@@ -20,5 +19,4 @@ export default function* root() {
   yield fork(cartSagas);
   yield fork(checkoutSagas);
   yield fork(productSagas);
-  yield fork(searchSagas);
 }

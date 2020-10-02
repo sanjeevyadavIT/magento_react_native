@@ -5,4 +5,3 @@ export * from './home/homeActions';
 export * from './categoryTree/categoryTreeActions';
 export * from './checkout/checkoutActions';
 export * from './product/productActions';
-export * from './search/searchActions';

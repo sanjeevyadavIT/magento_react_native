@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HeaderButtons, TextInput } from '../common';
+import { HeaderButtons } from '../common';
 import { ThemeContext } from '../theme';
 import {
   SplashScreen,
@@ -86,15 +85,15 @@ const StackNavigator = () => {
               />
             </HeaderButtons>
           ),
-          // headerRight: () => (
-          //   <HeaderButtons>
-          //     <HeaderButtons.Item
-          //       title={translate('homeScreen.menu.search')}
-          //       iconName="search"
-          //       onPress={() => navigation.navigate(NAVIGATION_TO_SEARCH_SCREEN)}
-          //     />
-          //   </HeaderButtons>
-          // ),
+          headerRight: () => (
+            <HeaderButtons>
+              <HeaderButtons.Item
+                title={translate('homeScreen.menu.search')}
+                iconName="search"
+                onPress={() => navigation.navigate(NAVIGATION_TO_SEARCH_SCREEN)}
+              />
+            </HeaderButtons>
+          ),
         })}
       />
       <Stack.Screen
@@ -120,27 +119,9 @@ const StackNavigator = () => {
       <Stack.Screen
         name={NAVIGATION_TO_SEARCH_SCREEN}
         component={SearchScreen}
-        options={({ route }) => ({
-          headerTitle: () => (
-            <View>
-              <TextInput
-                autoFocus
-                placeholder={translate('searchScreen.searchHint')}
-                onChangeText={route.params.setSearchText}
-                onSubmitEditing={route.params.onSubmitted}
-              />
-            </View>
-          ),
-          headerRight: () => (
-            <HeaderButtons>
-              <HeaderButtons.Item
-                iconName="sort"
-                title={translate('searchScreen.menu.sort')}
-                onPress={route.params.showSortDialog}
-              />
-            </HeaderButtons>
-          ),
-        })}
+        options={{
+          header: () => null,
+        }}
       />
       <Stack.Screen
         name={NAVIGATION_TO_LOGIN_SCREEN}

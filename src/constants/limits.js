@@ -5,6 +5,10 @@ export default {
   maxFirstNameLength: 30,
   maxLastNameLength: 30,
   /**
+   * Max length string user can search on Search Screen
+   */
+  maxSearchTextLength: 30,
+  /**
    * Number of orders to fetch for 1 page
    * in orders api
    */

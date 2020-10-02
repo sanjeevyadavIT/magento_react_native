@@ -36,7 +36,7 @@ export default magento => ({
   getCategoryTree: () =>
     magento.get('/V1/categories', undefined, undefined, ADMIN_TYPE),
 
-  getCategoryProducts: (id, offset = 1, sortOrder, pageSize = PAGE_SIZE) =>
+  getCategoryProducts: (id, offset = 0, sortOrder, pageSize = PAGE_SIZE) =>
     magento.admin.getProductsWithAttribute(
       'category_id',
       id,
@@ -49,7 +49,7 @@ export default magento => ({
   getProductsWithAttribute: (
     attributeCode,
     attributeValue,
-    offset = 1,
+    offset = 0,
     sortOrder,
     pageSize = PAGE_SIZE,
     conditionType = 'like',

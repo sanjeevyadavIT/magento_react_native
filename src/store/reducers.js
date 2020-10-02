@@ -6,7 +6,6 @@ import homeReducer from './home/homeReducer';
 import categoryTreeReducer from './categoryTree/categoryTreeReducer';
 import checkoutReducer from './checkout/checkoutReducer';
 import productReducer from './product/productReducer';
-import searchReducer from './search/searchReducer';
 
 export default combineReducers({
   magento: appReducer,
@@ -16,5 +15,4 @@ export default combineReducers({
   cart: cartReducer,
   checkout: checkoutReducer,
   product: productReducer,
-  search: searchReducer,
 });

@@ -3,7 +3,7 @@ import { StyleSheet, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Toast from 'react-native-simple-toast';
-import { GenericTemplate, Spinner, ProductListItem } from '../../common';
+import { GenericTemplate, Spinner, ProductListItem, Text } from '../../common';
 import { magento } from '../../magento';
 import { SPACING } from '../../constants';
 import Status from '../../magento/Status';
@@ -111,6 +111,13 @@ const CategoryProductsScreen = ({
         onEndReached={onEndReached}
         onEndReachedThreshold={1}
         ListFooterComponent={renderFooter}
+        ListEmptyComponent={
+          apiStatus === Status.SUCCESS && (
+            <Text style={styles.empty}>
+              {translate('searchScreen.noProduct')}
+            </Text>
+          )
+        }
       />
     </GenericTemplate>
   );
@@ -119,6 +126,12 @@ const CategoryProductsScreen = ({
 const styles = StyleSheet.create({
   spinner: {
     margin: SPACING.small,
+  },
+  empty: {
+    textAlign: 'center',
+    flex: 1,
+    marginVertical: SPACING.extraLarge,
+    marginHorizontal: SPACING.large,
   },
 });
 
