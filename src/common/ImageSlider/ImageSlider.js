@@ -60,7 +60,10 @@ const ImageSlider = ({
     <View style={[{ height }, containerStyle]}>
       <Swiper height={height} autoplay={autoplay} {...props}>
         {media.map((item, index) => (
-          <ViewGroup {...(onPress && { onPress: () => onPress(index) })}>
+          <ViewGroup
+            key={String(item.id)}
+            {...(onPress && { onPress: () => onPress(index) })}
+          >
             <Image
               key={String(item.id)}
               style={[styles.imageStyle, { height }]}

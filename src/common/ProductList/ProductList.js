@@ -6,11 +6,11 @@ import GenericTemplate from '../GenericTemplate/GenericTemplate';
 import ProductListItem from '../ProductListItem/ProductListItem';
 import Status from '../../magento/Status';
 import { ThemeContext } from '../../theme';
-import { ProductType } from '../../types';
+import { productType } from '../../utils';
 import { SPACING } from '../../constants';
 
 const propTypes = {
-  products: PropTypes.arrayOf(ProductType),
+  products: PropTypes.arrayOf(productType),
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   showHorizontalList: PropTypes.bool.isRequired,
@@ -21,8 +21,6 @@ const propTypes = {
   loadProducts: PropTypes.func.isRequired,
   loadFactor: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
-  updateItem: PropTypes.func.isRequired,
-  onItemClick: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };
 
@@ -38,7 +36,7 @@ const defaultProps = {
  */
 const ProductList = ({
   /**
-   * Products to display in the grid.
+   * Products to display in the list.
    */
   products,
   /**
@@ -64,7 +62,6 @@ const ProductList = ({
   isLoadingMoreProducts,
   canLoadMoreProducts,
   loadProducts,
-  updateItem,
   loadFactor,
   errorMessage,
 }) => {

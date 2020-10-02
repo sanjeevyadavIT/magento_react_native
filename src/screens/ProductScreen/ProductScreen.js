@@ -43,7 +43,7 @@ import {
   isAttributeAndValuePresent,
 } from '../../utils/products';
 import ProductDescription from './ProductDescription';
-import { isObject, isNonEmptyString } from '../../utils';
+import { productType, isObject, isNonEmptyString } from '../../utils';
 
 const propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
@@ -60,37 +60,7 @@ const propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({
       sku: PropTypes.string.isRequired,
-      product: PropTypes.shape({
-        sku: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        type_id: PropTypes.oneOf([SIMPLE_TYPE_SK, CONFIGURABLE_TYPE_SK]),
-        media_gallery_entries: PropTypes.arrayOf(
-          PropTypes.shape({
-            disabled: PropTypes.bool,
-            file: PropTypes.string,
-            id: PropTypes.number,
-            label: PropTypes.string,
-            media_type: PropTypes.oneOf(['image', 'video']),
-            position: PropTypes.number,
-            types: PropTypes.arrayOf(PropTypes.string),
-          }),
-        ),
-        extension_attributes: PropTypes.shape({
-          configurable_product_options: PropTypes.arrayOf(
-            PropTypes.shape({
-              attribute_id: PropTypes.string,
-              id: PropTypes.number,
-              label: PropTypes.string,
-              position: PropTypes.number,
-              product_id: PropTypes.number,
-              values: PropTypes.arrayOf(
-                PropTypes.shape({ value_index: PropTypes.number }).isRequired,
-              ),
-            }).isRequired,
-          ),
-        }),
-      }),
+      product: productType,
       children: PropTypes.arrayOf(
         PropTypes.shape({
           price: PropTypes.number,
@@ -456,7 +426,7 @@ const ProductScreen = ({
                 label:
                   option.attribute_id in attributes
                     ? attributes[option.attribute_id].options[valueIndex]
-                    : valueIndex,
+                    : String(valueIndex),
                 key: valueIndex,
               }))}
               label={`${translate('common.select')} ${option.label}`}

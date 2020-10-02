@@ -32,7 +32,7 @@ const propTypes = {
 const defaultProps = {};
 
 const CategoryTreeItem = ({ category }) => {
-  const [expanded, setExpanded] = useState(0);
+  const [expanded, setExpanded] = useState(false);
   const { theme } = useContext(ThemeContext);
   const navigation = useNavigation();
 

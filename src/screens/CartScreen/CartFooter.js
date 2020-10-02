@@ -26,9 +26,6 @@ const propTypes = {
   extra: PropTypes.object,
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 const defaultProps = {

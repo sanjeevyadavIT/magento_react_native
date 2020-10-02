@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ProductList } from '../../common';
 import Status from '../../magento/Status';
 import { getFeaturedProducts } from '../../store/actions';
-import { ProductType } from '../../types';
+import { productType } from '../../utils';
 
 const FeaturedCategoryList = ({
   categoryId,
@@ -35,7 +35,7 @@ const FeaturedCategoryList = ({
 };
 
 FeaturedCategoryList.propTypes = {
-  products: PropTypes.arrayOf(ProductType),
+  products: PropTypes.arrayOf(productType),
   status: PropTypes.oneOf(Object.values(Status)).isRequired,
   errorMessage: PropTypes.string,
   currencySymbol: PropTypes.string.isRequired,

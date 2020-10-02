@@ -13,11 +13,11 @@ import {
   getPriceFromChildren,
 } from '../../utils/products';
 import { ThemeContext } from '../../theme';
-import { ProductType } from '../../types';
+import { productType } from '../../utils';
 import { DIMENS, SPACING, CONFIGURABLE_TYPE_SK } from '../../constants';
 
 const propTypes = {
-  product: ProductType.isRequired,
+  product: productType.isRequired,
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   columnCount: PropTypes.number,

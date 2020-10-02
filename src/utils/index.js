@@ -3,8 +3,16 @@ import addressType from './custom-prop-types/addressType';
 import countryType from './custom-prop-types/countryType';
 import orderType from './custom-prop-types/orderType';
 import cartItemType from './custom-prop-types/cartItemType';
+import productType from './custom-prop-types/productType';
 
-export { customerType, addressType, countryType, orderType, cartItemType };
+export {
+  customerType,
+  addressType,
+  countryType,
+  orderType,
+  cartItemType,
+  productType,
+};
 export * from './products';
 export * from './order';
 export * from './primitiveChecks';

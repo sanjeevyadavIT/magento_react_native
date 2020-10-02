@@ -28,7 +28,9 @@ const propTypes = {
    * @source redux
    */
   errorMessage: PropTypes.string,
-  slider: PropTypes.arrayOf({ image: PropTypes.string.isRequired }),
+  slider: PropTypes.arrayOf(
+    PropTypes.shape({ image: PropTypes.string.isRequired }),
+  ),
   // eslint-disable-next-line react/forbid-prop-types
   featuredCategories: PropTypes.object,
 };
