@@ -17,13 +17,40 @@ const defaultLoadingProps = (type, theme) => ({
 });
 
 const propTypes = {
-  title: PropTypes.string.isRequired,
+  /**
+   * type can be
+   * 1. 'solid'
+   * 2. 'outline'
+   * 3. 'clear'
+   */
   type: PropTypes.oneOf([SOLID, OUTLINE, CLEAR]),
+  /**
+   * text to be shown in button
+   */
+  title: PropTypes.string.isRequired,
+  /**
+   * click listener
+   */
   onPress: PropTypes.func,
+  /**
+   * set true to disable onPress and custom style
+   */
   disabled: PropTypes.bool,
+  /**
+   *  If true, show spinner
+   */
   loading: PropTypes.bool,
+  /**
+   * custom style for button
+   */
   style: ViewPropTypes.style,
+  /**
+   * Overwrite the primary color of the Button used either in background, border or spinner
+   */
   tintColor: PropTypes.string,
+  /**
+   * custom style for text
+   */
   titleStyle: Text.propTypes.style,
 };
 
@@ -37,44 +64,14 @@ const defaultProps = {
   tintColor: '',
 };
 
-/**
- * @todo Add different styling of @param disabled is true
- */
 const Button = ({
-  /**
-   * type can be
-   * 1. 'solid'
-   * 2. 'outline'
-   * 3. 'clear'
-   */
   type,
-  /**
-   * text to be shown in button
-   */
   title,
-  /**
-   * click listener
-   */
   onPress,
-  /**
-   * set true to disable onPress and custom style
-   */
   disabled,
-  /**
-   *  If true, show spinner
-   */
   loading,
-  /**
-   * custom style for button
-   */
   style,
-  /**
-   * custom style for text
-   */
   titleStyle: _titleStyle,
-  /**
-   * Overwrite the primary color of the Button used either in background, border or spinner
-   */
   tintColor,
 }) => {
   const { theme } = useContext(ThemeContext);
@@ -142,7 +139,7 @@ const styles = StyleSheet.create({
     color: theme.disabledDarkColor,
   }),
   loading: {
-    marginVertical: 2,
+    marginVertical: SPACING.tiny / 2,
   },
 });
 

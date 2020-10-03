@@ -12,23 +12,51 @@ import { DIMENS, SPACING, TYPOGRAPHY } from '../../constants';
 import { isNonEmptyString } from '../../utils';
 
 const propTypes = {
+  /**
+   * Container style that wraps entire TextInput
+   */
   containerStyle: ViewPropTypes.style,
-  inputContainerStyle: ViewPropTypes.style,
+  /**
+   * Text Input style
+   */
   inputStyle: Text.propTypes.style,
-  labelStyle: Text.propTypes.style,
+  /**
+   * If set true, TextInput will not be editable
+   */
   disabled: PropTypes.bool,
+  /**
+   * Label text shown above TextInput
+   */
   label: PropTypes.string,
+  /**
+   * Custom style for label,
+   */
+  labelStyle: Text.propTypes.style,
+  /**
+   * Error message to be shown
+   */
   errorMessage: PropTypes.string,
+  /**
+   * Render left icon
+   */
   leftIcon: PropTypes.oneOfType([PropTypes.element, null]),
+  /**
+   * Render right icon
+   */
   rightIcon: PropTypes.oneOfType([PropTypes.element, null]),
+  /**
+   * Text color of the placeholder
+   */
   placeholderTextColor: PropTypes.string,
+  /**
+   * To access TextInput reference
+   */
   assignRef: PropTypes.func,
 };
 
 const defaultProps = {
   containerStyle: {},
   inputStyle: {},
-  inputContainerStyle: {},
   disabled: false,
   label: '',
   labelStyle: {},
@@ -40,45 +68,15 @@ const defaultProps = {
 };
 
 const TextInput = ({
-  /**
-   * Container style that wraps entire TextInput
-   */
   containerStyle,
-  /**
-   * Text Input style
-   */
   inputStyle,
-  /**
-   * If set true, TextInput will not be editable
-   */
   disabled,
-  /**
-   * Label text shown above TextInput
-   */
   label,
-  /**
-   * Custom style for label,
-   */
   labelStyle,
-  /**
-   * Error message to be shown
-   */
   errorMessage,
-  /**
-   * Render left icon
-   */
   leftIcon,
-  /**
-   * Render right icon
-   */
   rightIcon,
-  /**
-   * Text color of the placeholder
-   */
   placeholderTextColor,
-  /**
-   * To access TextInput reference
-   */
   assignRef,
   ...props
 }) => {

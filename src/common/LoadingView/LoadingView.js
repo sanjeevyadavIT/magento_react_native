@@ -5,7 +5,16 @@ import Spinner from '../Spinner/Spinner';
 import { ThemeContext } from '../../theme';
 
 const propTypes = {
+  /**
+   * size of the spinner in LoadingView, can be
+   * 1. 'large'
+   * 2. 'small'
+   */
   size: PropTypes.string,
+  /**
+   * background that will appear behind spinner,
+   * by default: transparent
+   */
   backgroundColor: PropTypes.string,
 };
 
@@ -14,19 +23,7 @@ const defaultProps = {
   backgroundColor: null,
 };
 
-const LoadingView = ({
-  /**
-   * size of the spinner in LoadingView, can be
-   * 1. 'large'
-   * 2. 'small'
-   */
-  size,
-  /**
-   * background that will appear behind spinner,
-   * by default: transparent
-   */
-  backgroundColor,
-}) => {
+const LoadingView = ({ size, backgroundColor }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <View style={styles.container(backgroundColor, theme)}>

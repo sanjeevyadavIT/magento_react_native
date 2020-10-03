@@ -5,8 +5,16 @@ import { ThemeContext } from '../../theme';
 import { DIMENS } from '../../constants';
 
 const propTypes = {
-  style: ViewPropTypes.style,
+  /**
+   * Make divider vertical
+   *
+   * default value is false
+   */
   vertical: PropTypes.bool,
+  /**
+   * customm style to divider
+   */
+  style: ViewPropTypes.style,
 };
 
 const defaultProps = {
@@ -14,18 +22,7 @@ const defaultProps = {
   vertical: false,
 };
 
-const Divider = ({
-  /**
-   * Make divider vertical
-   *
-   * default value is false
-   */
-  vertical,
-  /**
-   * customm style to divider
-   */
-  style,
-}) => {
+const Divider = ({ vertical, style }) => {
   const { theme } = useContext(ThemeContext);
   return <View style={[styles.divider(vertical, theme), style]} />;
 };

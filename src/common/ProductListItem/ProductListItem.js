@@ -17,17 +17,18 @@ import { productType } from '../../utils';
 import { DIMENS, SPACING, CONFIGURABLE_TYPE_SK } from '../../constants';
 
 const propTypes = {
+  /**
+   * Product to dispaly
+   */
   product: productType.isRequired,
+  /**
+   * Currency symbol to be displayed along side price.
+   */
   currencySymbol: PropTypes.string.isRequired,
+  /**
+   * Exchange rate multiplier as compared to base currency price
+   */
   currencyRate: PropTypes.number.isRequired,
-  columnCount: PropTypes.number,
-};
-
-const defaultProps = {
-  columnCount: 1,
-};
-
-const ProductListItem = ({
   /**
    * Number of colums in `ProductList` being displayed,
    * is specified, will effect `ProductListItem` component width.
@@ -38,18 +39,17 @@ const ProductListItem = ({
    * else if `ProductList` render items in a Grid of row * coulumnCount
    * then `CatalogridItem` width is (total_screen_width) / (columnCount)
    */
+  columnCount: PropTypes.number,
+};
+
+const defaultProps = {
+  columnCount: 1,
+};
+
+const ProductListItem = ({
   columnCount,
-  /**
-   * Product to dispaly
-   */
   product,
-  /**
-   * Currency symbol to be displayed along side price.
-   */
   currencySymbol,
-  /**
-   * Exchange rate multiplier as compared to base currency price
-   */
   currencyRate,
 }) => {
   const { theme } = useContext(ThemeContext);

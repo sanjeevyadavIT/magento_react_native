@@ -10,20 +10,54 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 
 const propTypes = {
+  /**
+   * Possible option to choose from,
+   * NOTE: don't add heading or dummy item in begining
+   */
   data: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       label: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  /**
+   * If selectedkey is provided, it will be used to show
+   * selected value in ModalSelect
+   */
   selectedKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, null]),
+  /**
+   * Initial placeholder string shown,
+   * when no option is selected
+   */
   label: PropTypes.string.isRequired,
+  /**
+   * Text to append along with the label,
+   * when item is selected
+   */
   attribute: PropTypes.string,
+  /**
+   * Function to get called when item is selected
+   */
   onChange: PropTypes.func,
+  /**
+   * Disable the picker
+   */
   disabled: PropTypes.bool,
+  /**
+   * Show loader
+   */
   loading: PropTypes.bool,
+  /**
+   * Container style
+   */
   style: ViewPropTypes.style,
+  /**
+   * Text style
+   */
   textStyle: Text.propTypes.style,
+  /**
+   * Color for placeholder Text and drop down icon
+   */
   placeholderTextColor: PropTypes.string,
 };
 
@@ -39,49 +73,15 @@ const defaultProps = {
 };
 
 const ModalSelect = ({
-  /**
-   * Possible option to choose from,
-   * NOTE: don't add heading or dummy item in begining
-   */
   data,
-  /**
-   * Disable the picker
-   */
   disabled,
-  /**
-   * Show loader
-   */
   loading,
-  /**
-   * Initial placeholder string shown,
-   * when no option is selected
-   */
   label,
-  /**
-   * If selectedkey is provided, it will be used to show
-   * selected value in ModalSelect
-   */
   selectedKey,
-  /**
-   * Text to append along with the label,
-   * when item is selected
-   */
   attribute,
-  /**
-   * Function to get called when item is selected
-   */
   onChange,
-  /**
-   * Container style
-   */
   style,
-  /**
-   * Text style
-   */
   textStyle,
-  /**
-   * Color for placeholder Text and drop down icon
-   */
   placeholderTextColor,
 }) => {
   const [value, setValue] = useState('');

@@ -25,26 +25,12 @@ export const IconTypes = [
 ];
 
 const propTypes = {
+  /**
+   * Name of the icon to be shown
+   *
+   * Search here: https://oblador.github.io/react-native-vector-icons/
+   */
   name: PropTypes.string,
-  type: PropTypes.oneOf(IconTypes),
-  disabled: PropTypes.bool,
-  size: PropTypes.number,
-  color: PropTypes.string,
-  onPress: PropTypes.func,
-  style: Text.propTypes.style,
-};
-
-const defaultProps = {
-  name: '',
-  type: 'material',
-  onPress: null,
-  disabled: false,
-  size: DIMENS.common.iconSize,
-  color: null,
-  style: {},
-};
-
-const Icon = ({
   /**
    * type of icon set. Available Icon set are
    * - material
@@ -64,36 +50,42 @@ const Icon = ({
    *
    * Default value is 'material'
    */
-  type,
+  type: PropTypes.oneOf(IconTypes),
   /**
    * size of icon (optional)
    */
-  size,
-  /**
-   * Name of the icon to be shown
-   *
-   * Search here: https://oblador.github.io/react-native-vector-icons/
-   */
-  name,
+  size: PropTypes.number,
   /**
    * color of icon (optional)
    *
    * If provided, it will be used for icon and Image tint color, if not, then default theme.iconColor for only icon
    */
-  color,
-  /**
-   * additional styling to icon (optional)
-   */
-  style,
+  color: PropTypes.string,
   /**
    * Callback to call when Icon is clicked
    */
-  onPress,
+  onPress: PropTypes.func,
   /**
    * If true, the onPress callback won't be called
    */
-  disabled,
-}) => {
+  disabled: PropTypes.bool,
+  /**
+   * additional styling to icon (optional)
+   */
+  style: Text.propTypes.style,
+};
+
+const defaultProps = {
+  name: '',
+  type: 'material',
+  onPress: null,
+  disabled: false,
+  size: DIMENS.common.iconSize,
+  color: null,
+  style: {},
+};
+
+const Icon = ({ name, type, size, color, style, onPress, disabled }) => {
   const { theme } = useContext(ThemeContext);
 
   const Component = onPress ? TouchableOpacity : React.Fragment;

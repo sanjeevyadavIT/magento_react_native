@@ -1,13 +1,7 @@
 import React, { useContext } from 'react';
-import {
-  View,
-  Platform,
-  StyleSheet,
-  ViewPropTypes,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-} from 'react-native';
+import { View, StyleSheet, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
+import TouchReceptor from '../TouchReceptor/TouchReceptor';
 import { ThemeContext } from '../../theme';
 import { DIMENS } from '../../constants';
 
@@ -15,14 +9,29 @@ const OUTLINE = 'outline';
 const CLEAR = 'clear';
 const SHADOW = 'shadow';
 
-const TouchReceptor =
-  Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
-
 const propTypes = {
+  /**
+   * type can be
+   * 1. 'outline' : border with width
+   * 2. 'clear'   : no border, no shadow
+   * 3. 'shadow'  : with shadow
+   */
   type: PropTypes.oneOf([CLEAR, OUTLINE, SHADOW]),
+  /**
+   * Custom style property for Card
+   */
   style: ViewPropTypes.style,
+  /**
+   * Action to perform on Card click
+   */
   onPress: PropTypes.func,
+  /**
+   * Disable onPress
+   */
   disabled: PropTypes.bool,
+  /**
+   * Children to render inside Card
+   */
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.element, null])),
@@ -36,31 +45,7 @@ const defaultProps = {
   onPress: null,
 };
 
-const Card = ({
-  /**
-   * type can be
-   * 1. 'outline' : border with width
-   * 2. 'clear'   : no border, no shadow
-   * 3. 'shadow'  : with shadow
-   */
-  type,
-  /**
-   * Custom style property for Card
-   */
-  style,
-  /**
-   * Action to perform on Card click
-   */
-  onPress,
-  /**
-   * Disable onPress
-   */
-  disabled,
-  /**
-   * Children to render inside Card
-   */
-  children,
-}) => {
+const Card = ({ type, style, onPress, disabled, children }) => {
   const ViewGroup = onPress ? TouchReceptor : React.Fragment;
   const { theme } = useContext(ThemeContext);
   const shadow = type === SHADOW ? shadowStyle(theme) : {};

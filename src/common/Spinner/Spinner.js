@@ -4,8 +4,19 @@ import PropTypes from 'prop-types';
 import { ThemeContext } from '../../theme';
 
 const propTypes = {
+  /**
+   * size of the spinner, can be
+   * 1. 'large'
+   * 2. 'small'
+   */
   size: PropTypes.oneOf(['large', 'small']),
+  /**
+   * custom color for the spinner
+   */
   color: PropTypes.string,
+  /**
+   * style containing padding & margin
+   */
   style: ViewPropTypes.style,
 };
 
@@ -15,22 +26,7 @@ const defaultProps = {
   style: {},
 };
 
-const Spinner = ({
-  /**
-   * size of the spinner, can be
-   * 1. 'large'
-   * 2. 'small'
-   */
-  size,
-  /**
-   * custom color for the spinner
-   */
-  color,
-  /**
-   * style containing padding & margin
-   */
-  style,
-}) => {
+const Spinner = ({ size, color, style }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <ActivityIndicator

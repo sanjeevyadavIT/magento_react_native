@@ -22,14 +22,20 @@ const propTypes = {
     PropTypes.arrayOf(PropTypes.element),
   ]).isRequired,
   /**
-   * Add children in ScrollView
+   * Add children in ScrollView component
    */
   scrollable: PropTypes.bool,
   /**
    * Add sticky Footer at bottom
    */
   footer: PropTypes.element,
+  /**
+   * in case of status === Status.ERROR, the error message to be shown
+   */
   errorMessage: PropTypes.string,
+  /**
+   * Container style
+   */
   style: ViewPropTypes.style,
   /**
    * If scrollable is true, and you want to include pull to refresh,

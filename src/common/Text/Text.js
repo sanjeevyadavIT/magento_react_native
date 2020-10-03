@@ -10,9 +10,30 @@ const SUB_HEADING = 'subheading';
 const BODY = 'body';
 const LABEL = 'label';
 
+// NOTE: Improve comments quality
 const propTypes = {
+  /**
+   * @type prop helps style Text with pre default styling define in
+   * typography.js. Possible value of type can be:
+   * 1. 'heading'
+   * 2. 'subheading'
+   * 3. 'body'
+   * 4. 'label'
+   *
+   * default value: 'body'
+   */
   type: PropTypes.oneOf([HEADING, SUB_HEADING, BODY, LABEL]),
+  /**
+   * @bold prop is a boolean, if enabled will use bold version of the
+   * type mentioned.
+   *
+   * default value: false
+   */
   bold: PropTypes.bool,
+  /**
+   * @style prop will overwrite the predefined styling for Text defined by
+   * @type prop
+   */
   style: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.object),
@@ -25,33 +46,7 @@ const defaultProps = {
   style: {},
 };
 
-// NOTE: Improve comments quality
-const Text = ({
-  /**
-   * @type prop helps style Text with pre default styling define in
-   * typography.js. Possible value of type can be:
-   * 1. 'heading'
-   * 2. 'subheading'
-   * 3. 'body'
-   * 4. 'label'
-   *
-   * default value: 'body'
-   */
-  type,
-  /**
-   * @bold prop is a boolean, if enabled will use bold version of the
-   * type mentioned.
-   *
-   * default value: false
-   */
-  bold,
-  /**
-   * @style prop will overwrite the predefined styling for Text defined by
-   * @type prop
-   */
-  style,
-  ...props
-}) => {
+const Text = ({ type, bold, style, ...props }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <RNText
