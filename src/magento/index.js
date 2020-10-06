@@ -139,6 +139,10 @@ class Magento {
     this.customerToken = token;
   }
 
+  getBaseUrl() {
+    return this.base_url || '';
+  }
+
   getMediaUrl() {
     return `${this.storeConfig.base_media_url}`;
   }
