@@ -1,9 +1,3 @@
-<hr>
-<p align="center">
-  <b>MAGECART IS CURRENTLY IN EARLY DEVELOPMENT, NOT READY TO BE USED!</b>
-</p>
-<hr>
-
 # MageCart : Magento 2 React Native eCommerce App
 
 ![React Native](https://img.shields.io/badge/react--native-0.62.2-brightgreen)
@@ -14,6 +8,8 @@
 
 
 MageCart is an e-commerce app for Magento 2.1 onwards. It consumes [Magento 2 REST API](https://devdocs.magento.com/guides/v2.3/get-started/rest_front.html) to display catalog, products, add products to cart and let you place order.
+
+> [New project which uses Magento GraphQL api instead of REST api](https://github.com/alexakasanjeev/magento_react_native_graphql)
 
 ## :camera: Screenshots
 
@@ -77,6 +73,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## 📣 Acknowledgements
 
+* [React Native Magento 2 graphQL client](https://github.com/alexakasanjeev/magento_react_native_graphql)
 * [troublediehard/magento-react-native](https://github.com/troublediehard/magento-react-native) created by [Dmytro Portenko](https://github.com/troublediehard)
 * [Drawkit](https://www.drawkit.io/) for beautiful free illustrations
 * [README-Template.md](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) by [Billie Thompson](https://github.com/PurpleBooth)
