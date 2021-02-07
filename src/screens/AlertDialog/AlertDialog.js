@@ -12,7 +12,10 @@ import PropTypes from 'prop-types';
 import { Text, Button, Card, Icon } from '../../common';
 import { DIMENS, SPACING } from '../../constants';
 import { translate } from '../../i18n';
-import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation/routes';
+import {
+  NAVIGATION_TO_LOGIN_SCREEN,
+  NAVIGATION_TO_SIGNUP_SCREEN,
+} from '../../navigation/routes';
 import { isNonEmptyString } from '../../utils';
 
 const propTypes = {
@@ -114,8 +117,17 @@ const AlertDialog = ({
           },
         }),
       );
-    positiveButtonTitle = translate('common.yes');
-    negativeButtonTitle = translate('common.no');
+    negativeButtonCallback = () =>
+      navigation.dispatch(
+        CommonActions.navigate('modal', {
+          screen: 'drawer',
+          params: {
+            screen: NAVIGATION_TO_SIGNUP_SCREEN,
+          },
+        }),
+      );
+    positiveButtonTitle = translate('common.login');
+    negativeButtonTitle = translate('common.signup');
     dismissible = true;
   }
 

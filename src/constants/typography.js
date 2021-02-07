@@ -119,4 +119,8 @@ export default {
     fontSize: 13,
     color: theme.errorColor,
   }),
+  flashMessageTitle: {
+    fontSize: 16,
+    fontWeight: fontWeightBold,
+  },
 };

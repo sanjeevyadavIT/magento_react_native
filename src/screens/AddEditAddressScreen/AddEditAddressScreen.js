@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as RNLocalize from 'react-native-localize';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import { getCountries, updateCustomer } from '../../store/actions';
 import {
   Button,
@@ -137,14 +137,14 @@ const AddEditAddressScreen = ({
 
   useEffect(() => {
     if (apiStatus === Status.SUCCESS) {
-      Toast.show(
-        translate(
+      showMessage({
+        message: translate(
           mode === EDIT_MODE
             ? 'addEditAddressScreen.addressUpdated'
             : 'addEditAddressScreen.newAddressAdded',
         ),
-        Toast.LONG,
-      );
+        type: 'success',
+      });
       navigation.goBack();
     }
   }, [apiStatus]);
@@ -252,10 +252,11 @@ const AddEditAddressScreen = ({
         setApiStatus(Status.SUCCESS);
       })
       .catch(error => {
-        Toast.show(
-          error.message || translate('errors.genericError'),
-          Toast.LONG,
-        );
+        showMessage({
+          message: translate('common.error'),
+          description: error.message || translate('errors.genericError'),
+          type: 'danger',
+        });
         setApiStatus(Status.ERROR);
       });
   };

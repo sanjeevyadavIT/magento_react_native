@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import DrawerHeader from './DrawerHeader';
 import DrawerItem from './DrawerItem';
 import {
@@ -52,7 +52,10 @@ const DrawerScreen = ({
       negativeButtonTitle: translate('common.no'),
       positiveButtonCallback: () => {
         _logout();
-        Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
+        showMessage({
+          message: translate('common.logoutSuccessMessage'),
+          type: 'success',
+        });
         navigation.navigate(NAVIGATION_TO_HOME_SCREEN, {
           screen: NAVIGATION_TO_HOME_SCREEN,
           params: {

@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { StyleSheet, RefreshControl, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import { getCurrentCustomer, logout } from '../../store/actions';
 import {
   NAVIGATION_TO_HOME_SCREEN,
@@ -75,7 +75,10 @@ const ProfileScreen = ({
       negativeButtonTitle: translate('common.no'),
       positiveButtonCallback: () => {
         _logout();
-        Toast.show(translate('common.logoutSuccessMessage'), Toast.LONG);
+        showMessage({
+          message: translate('common.logoutSuccessMessage'),
+          type: 'success',
+        });
         navigation.navigate(NAVIGATION_TO_HOME_SCREEN);
       },
     });

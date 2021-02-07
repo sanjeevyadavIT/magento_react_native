@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import { GenericTemplate, Spinner, ProductListItem, Text } from '../../common';
 import { magento } from '../../magento';
 import { SPACING } from '../../constants';
@@ -66,10 +66,11 @@ const CategoryProductsScreen = ({
           setErrorMessage(error.message);
         } else {
           setMoreApiStatus(Status.ERROR);
-          Toast.show(
-            error.message || translate('errors.genericError'),
-            Toast.LONG,
-          );
+          showMessage({
+            message: translate('common.error'),
+            description: error.message || translate('errors.genericError'),
+            type: 'danger',
+          });
         }
       });
   };

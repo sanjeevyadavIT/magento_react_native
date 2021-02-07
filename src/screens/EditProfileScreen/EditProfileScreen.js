@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { StyleSheet, View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import {
   GenericTemplate,
   Button,
@@ -55,7 +55,11 @@ const CartScreen = ({
 
   useEffect(() => {
     if (apiStatus === Status.SUCCESS) {
-      Toast.show(translate('editProfileScreen.detailsUpdated'), Toast.LONG);
+      showMessage({
+        message: translate('common.success'),
+        description: translate('editProfileScreen.detailsUpdated'),
+        type: 'success',
+      });
       navigation.goBack();
     }
   }, [apiStatus]);
@@ -106,10 +110,11 @@ const CartScreen = ({
         setApiStatus(Status.SUCCESS);
       })
       .catch(error => {
-        Toast.show(
-          error.message || translate('errors.genericError'),
-          Toast.LONG,
-        );
+        showMessage({
+          message: translate('common.error'),
+          description: error.message || translate('errors.genericError'),
+          type: 'danger',
+        });
         setApiStatus(Status.ERROR);
       });
   };

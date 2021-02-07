@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import { signUp, resetAuthState } from '../../store/actions';
 import { GenericTemplate, Button, TextInput, Icon } from '../../common';
 import { NAVIGATION_TO_LOGIN_SCREEN } from '../../navigation/routes';
@@ -16,7 +16,7 @@ import { isEmailValid, isPasswordValid, isNonEmptyString } from '../../utils';
 const propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
-    goBack: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
   }).isRequired,
 };
 
@@ -43,8 +43,12 @@ const SignupScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (apiStatus === Status.SUCCESS) {
-      Toast.show(translate('signupScreen.signupSuccessMessage'), Toast.LONG);
-      navigation.goBack();
+      showMessage({
+        message: translate('common.success'),
+        description: translate('signupScreen.signupSuccessMessage'),
+        type: 'success',
+      });
+      navigation.replace(NAVIGATION_TO_LOGIN_SCREEN);
     }
   }, [apiStatus]);
 
@@ -91,10 +95,11 @@ const SignupScreen = ({ navigation }) => {
         setApiStatus(Status.SUCCESS);
       })
       .catch(error => {
-        Toast.show(
-          error.message || translate('errors.genericError'),
-          Toast.LONG,
-        );
+        showMessage({
+          message: translate('common.error'),
+          description: error.message || translate('errors.genericError'),
+          type: 'danger',
+        });
         setApiStatus(Status.ERROR);
       });
   };

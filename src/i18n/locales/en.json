@@ -43,7 +43,9 @@
     "status": "Status",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "logoutSuccessMessage": "Logout successfully!",
+    "error": "Error",
+    "success": "Success",
+    "logoutSuccessMessage": "You have been logged out of your account!",
     "shippingAndHandling": "Shipping & Handling",
     "sortOption": {
       "aToZ": "name: A to Z",
@@ -149,7 +151,8 @@
   "loginScreen": {
     "title": "Login",
     "createAccount": "Create an account(Signup)",
-    "forgotPassword": "Forgot Password"
+    "forgotPassword": "Forgot Password",
+    "loginSuccessMessage": "You are now logged in!"
   },
   "orderAcknowledgementScreen": {
     "title": "Order Confirmation",
@@ -181,14 +184,14 @@
       "cart": "Cart"
     },
     "addToCartButton": "Add To Cart",
-    "unsupportedProductType": "App doesn't support %s product type currently. Sorry for the inconvenience.",
+    "unsupportedProductType": "App doesn't support %{productType} product type currently. Sorry for the inconvenience.",
     "productDetailLabel": "Product Details",
     "noProductDetail": "No description available!",
     "addToCartSuccess": "Item Added To Cart!",
     "loginPromptMessage": "In order to add products to cart, you must login into your account, proceed to Login?",
     "noOptionSelected": "You need to choose options for your item",
-    "shareTitle": "Checkout what I found on %s",
-    "shareMessage": "Check this out\n%s\n%w on %r"
+    "shareTitle": "Checkout what I found on %{title}",
+    "shareMessage": "Check this out\n%{productName}\n%{url} on %{subTitle}"
   },
   "profileScreen": {
     "title": "Account",

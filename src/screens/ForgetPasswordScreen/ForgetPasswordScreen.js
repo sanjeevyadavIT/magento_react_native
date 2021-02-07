@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { ScrollView, StyleSheet, Keyboard } from 'react-native';
 import PropTypes from 'prop-types';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Status from '../../magento/Status';
 import { magento } from '../../magento';
@@ -55,7 +55,11 @@ const ForgetPasswordScreen = ({ route }) => {
       })
       .then(response => {
         if (response) {
-          Toast.show(translate('forgetPasswordScreen.emailSent'), Toast.LONG);
+          showMessage({
+            message: translate('common.attention'),
+            description: translate('forgetPasswordScreen.emailSent'),
+            type: 'info',
+          });
           setApiStatus(Status.SUCCESS);
         } else {
           // Either password_reset_template is not correctly set in config.js or problem sending email
@@ -63,10 +67,11 @@ const ForgetPasswordScreen = ({ route }) => {
         }
       })
       .catch(error => {
-        Toast.show(
-          error.message || translate('errors.genericError'),
-          Toast.LONG,
-        );
+        showMessage({
+          message: translate('common.error'),
+          description: error.message || translate('errors.genericError'),
+          type: 'danger',
+        });
         setApiStatus(Status.ERROR);
       });
   };

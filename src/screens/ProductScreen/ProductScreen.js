@@ -10,7 +10,7 @@ import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Share from 'react-native-share';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import {
   GenericTemplate,
   Price,
@@ -159,14 +159,14 @@ const ProductScreen = ({
   useLayoutEffect(() => {
     const url = getValueFromAttribute(product, URL_KEY_SK);
     const completeUrl = `${magento.getBaseUrl()}${url}.html`;
-    const title = translate('productScreen.shareTitle').replace(
-      '%s',
-      translate('common.brandName'),
-    );
-    const message = translate('productScreen.shareMessage')
-      .replace('%s', product.name)
-      .replace('%w', completeUrl)
-      .replace('%r', translate('common.brandName'));
+    const title = translate('productScreen.shareTitle', {
+      title: translate('common.brandName'),
+    });
+    const message = translate('productScreen.shareMessage', {
+      productName: product.name,
+      url: completeUrl,
+      subTitle: translate('common.brandName'),
+    });
 
     navigation.setOptions({
       headerRight: () => (
@@ -181,7 +181,12 @@ const ProductScreen = ({
                   message,
                 }).catch(err => {
                   if ('message' in err) {
-                    Toast.show(err.message, Toast.LONG);
+                    showMessage({
+                      message: translate('common.error'),
+                      description:
+                        err.message || translate('errors.genericError'),
+                      type: 'danger',
+                    });
                   }
                   console.log(err);
                 })
@@ -286,7 +291,11 @@ const ProductScreen = ({
 
   useEffect(() => {
     if (addToCartStatus === Status.SUCCESS) {
-      Toast.show(translate('productScreen.addToCartSuccess'), Toast.LONG);
+      showMessage({
+        message: translate('common.success'),
+        description: translate('productScreen.addToCartSuccess'),
+        type: 'success',
+      });
       refreshCustomerCart();
     }
   }, [addToCartStatus]);
@@ -318,20 +327,24 @@ const ProductScreen = ({
         product.type_id === CONFIGURABLE_TYPE_SK
       )
     ) {
-      Toast.show(
-        translate('productScreen.unsupportedProductType').replace(
-          '%s',
-          product.type_id,
-        ),
-        Toast.LONG,
-      );
+      showMessage({
+        message: translate('common.attention'),
+        description: translate('productScreen.unsupportedProductType', {
+          productType: product.type_id,
+        }),
+        type: 'warning',
+      });
       return;
     }
     if (
       product.type_id === CONFIGURABLE_TYPE_SK &&
       options.length !== Object.keys(selectedOptions).length
     ) {
-      Toast.show(translate('productScreen.noOptionSelected'), Toast.LONG);
+      showMessage({
+        message: translate('common.attention'),
+        description: translate('productScreen.noOptionSelected'),
+        type: 'warning',
+      });
       if (scrollViewRef && scrollViewRef.current) {
         scrollViewRef.current.scrollTo({
           x: 0,
@@ -366,10 +379,11 @@ const ProductScreen = ({
         setAddToCartStatus(Status.SUCCESS);
       })
       .catch(error => {
-        Toast.show(
-          error.message || translate('errors.genericError'),
-          Toast.LONG,
-        );
+        showMessage({
+          message: translate('common.error'),
+          description: error.message || translate('errors.genericError'),
+          type: 'danger',
+        });
         setAddToCartStatus(Status.ERROR);
       });
   };

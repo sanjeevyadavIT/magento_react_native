@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { StyleSheet, Keyboard, View } from 'react-native';
 import { connect } from 'react-redux';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import PropTypes from 'prop-types';
 import { GenericTemplate, Button, TextInput, Icon } from '../../common';
 import {
@@ -43,6 +43,11 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
 
   useEffect(() => {
     if (apiStatus === Status.SUCCESS) {
+      showMessage({
+        message: translate('common.success'),
+        description: translate('loginScreen.loginSuccessMessage'),
+        type: 'success',
+      });
       navigation.popToTop();
     }
   }, [apiStatus]);
@@ -102,10 +107,11 @@ const LoginScreen = ({ loginSuccess: _loginSuccess, navigation }) => {
         setApiStatus(Status.SUCCESS);
       })
       .catch(error => {
-        Toast.show(
-          error.message || translate('errors.genericError'),
-          Toast.LONG,
-        );
+        showMessage({
+          message: translate('common.error'),
+          description: error.message || translate('errors.genericError'),
+          type: 'danger',
+        });
         setApiStatus(Status.ERROR);
       });
   };
