@@ -40,10 +40,10 @@ const RootNavigator = () => {
   return (
     <SafeAreaProvider>
       <StatusBar
-        barStyle={theme.appbar.barStyle}
+        barStyle={'light-content'}
         backgroundColor={theme.appbar.statusBarColor}
       />
-      <NavigationContainer>
+      <NavigationContainer theme={theme.navigation}>
         <Stack.Navigator
           mode="modal"
           headerMode="none"

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import HTML from 'react-native-render-html';
 import { Card, Text } from '../../common';
 import { translate } from '../../i18n';
 import { isObject } from '../../utils';
 import { SPACING, DIMENS, DESCRIPTION_SK } from '../../constants';
+import { ThemeContext } from '../../theme';
 
 const getDescriptionString = (customAttributes = []) => {
   const descriptionAttribute = customAttributes.find(
@@ -36,6 +37,7 @@ const defaultProps = {
  * @param {Object[]} props.customAttributes - custom attribute of the product
  */
 const ProductDescription = ({ customAttributes }) => {
+  const { theme } = useContext(ThemeContext);
   const description = getDescriptionString(customAttributes);
 
   return (
@@ -47,6 +49,7 @@ const ProductDescription = ({ customAttributes }) => {
           </Text>
           <HTML
             html={description}
+            baseFontStyle={{ color: theme.colors.gray600 }}
             imagesMaxWidth={DIMENS.common.WINDOW_WIDTH - 2 * SPACING.large}
           />
         </Card>

@@ -150,8 +150,8 @@ const AddressScreen = ({
         refreshControl={
           <RefreshControl
             refreshing={apiStatus === Status.LOADING}
-            tintColor={theme.primaryColor}
-            colors={[theme.primaryColor]}
+            tintColor={theme.colors.primary}
+            colors={[theme.colors.primary]}
           />
         }
       />

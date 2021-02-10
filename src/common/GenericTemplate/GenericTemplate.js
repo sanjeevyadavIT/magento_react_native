@@ -82,10 +82,7 @@ const GenericTemplate = ({
   }
 
   return (
-    <SafeAreaView
-      {...(onLayout && { onLayout })}
-      style={styles.container(theme)}
-    >
+    <SafeAreaView {...(onLayout && { onLayout })} style={styles.container}>
       <ViewGroup
         ref={component => assignRef && assignRef(component)}
         {...props}
@@ -105,10 +102,9 @@ const GenericTemplate = ({
 };
 
 const styles = StyleSheet.create({
-  container: theme => ({
+  container: {
     flex: 1,
-    backgroundColor: theme.backgroundColor,
-  }),
+  },
   content: {
     flex: 1,
   },

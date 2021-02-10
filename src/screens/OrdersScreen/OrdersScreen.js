@@ -114,8 +114,8 @@ const OrdersScreen = ({
             }
             onRefresh={() => refreshList()}
             title={translate('common.pullToRefresh')}
-            tintColor={theme.primaryColor}
-            colors={[theme.primaryColor]}
+            tintColor={theme.colors.primary}
+            colors={[theme.colors.primary]}
           />
         }
       />

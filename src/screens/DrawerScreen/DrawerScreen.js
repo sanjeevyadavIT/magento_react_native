@@ -67,7 +67,7 @@ const DrawerScreen = ({
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container(theme)}>
       <DrawerHeader navigation={navigation} />
       <DrawerItem
         title={translate('drawerScreen.shopCategories')}
@@ -85,7 +85,7 @@ const DrawerScreen = ({
         <Button
           type="outline"
           title={translate('common.logout')}
-          tintColor={theme.errorColor}
+          tintColor={theme.colors.error}
           style={styles.logout}
           onPress={onLogoutPress}
         />
@@ -95,9 +95,10 @@ const DrawerScreen = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: theme => ({
     flex: 1,
-  },
+    backgroundColor: theme.colors.surface,
+  }),
   logout: {
     margin: SPACING.large,
   },

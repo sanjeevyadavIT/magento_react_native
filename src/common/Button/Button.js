@@ -12,7 +12,7 @@ const OUTLINE = 'outline';
 const CLEAR = 'clear';
 
 const defaultLoadingProps = (type, theme) => ({
-  color: type === 'solid' ? theme.white : theme.primaryColor,
+  color: type === 'solid' ? '#fff' : theme.colors.primary,
   size: 'small',
 });
 
@@ -122,21 +122,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor:
-      type === SOLID ? tintColor || theme.primaryColor : theme.transparent,
+      type === SOLID
+        ? tintColor || theme.colors.primary
+        : theme.colors.transparent,
     borderWidth: type === OUTLINE ? DIMENS.common.borderWidth : 0,
-    borderColor: tintColor || theme.primaryColor,
+    borderColor: tintColor || theme.colors.primary,
     borderRadius: DIMENS.common.borderRadius,
   }),
   disabled: (type, theme) => ({
-    backgroundColor: type === SOLID ? theme.disabledColor : theme.transparent,
-    borderColor: theme.disabledDarkColor,
+    backgroundColor:
+      type === SOLID ? theme.colors.disabled : theme.colors.transparent,
+    borderColor: theme.colors.disabledDark,
   }),
   title: (type, theme, tintColor) => ({
     ...TYPOGRAPHY.buttonText,
-    color: type === SOLID ? theme.white : tintColor || theme.primaryColor,
+    color: type === SOLID ? '#fff' : tintColor || theme.colors.primary,
   }),
   disabledTitle: theme => ({
-    color: theme.disabledDarkColor,
+    color: theme.colors.disabledDark,
   }),
   loading: {
     marginVertical: SPACING.tiny / 2,

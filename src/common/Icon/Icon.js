@@ -58,7 +58,7 @@ const propTypes = {
   /**
    * color of icon (optional)
    *
-   * If provided, it will be used for icon and Image tint color, if not, then default theme.iconColor for only icon
+   * If provided, it will be used for icon and Image tint color, if not, then default theme.colors.icon for only icon
    */
   color: PropTypes.string,
   /**
@@ -103,7 +103,9 @@ const Icon = ({ name, type, size, color, style, onPress, disabled }) => {
         testID="icon"
         size={size}
         name={name}
-        color={disabled ? theme.disabledDarkColor : color || theme.iconColor}
+        color={
+          disabled ? theme.colors.disabledDark : color || theme.colors.icon
+        }
         style={StyleSheet.flatten([styles.iconStyle, style])}
       />
     </Component>

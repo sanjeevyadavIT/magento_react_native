@@ -57,10 +57,6 @@ const StackNavigator = () => {
     <Stack.Navigator
       initialRouteName={NAVIGATION_TO_SPLASH_SCREEN}
       screenOptions={{
-        headerTintColor: theme.appbar.tintColor,
-        headerStyle: {
-          backgroundColor: theme.appbar.backgroundColor,
-        },
         headerBackTitleVisible: false,
       }}
     >

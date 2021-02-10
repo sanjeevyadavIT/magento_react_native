@@ -26,7 +26,7 @@ const CheckBoxIcon = ({
       name={checked ? checkedIcon : uncheckedIcon}
       type={iconType}
       size={size}
-      color={checked ? theme.primaryColor : theme.iconColor}
+      color={checked ? theme.colors.primary : theme.colors.icon}
     />
   );
 };

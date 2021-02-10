@@ -1,12 +1,10 @@
-import React, { useState, useContext } from 'react';
-import { ScrollView, StyleSheet, Keyboard } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Keyboard } from 'react-native';
 import PropTypes from 'prop-types';
 import { showMessage } from 'react-native-flash-message';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Status from '../../magento/Status';
 import { magento } from '../../magento';
-import { Text, Button, TextInput } from '../../common';
-import { ThemeContext } from '../../theme';
+import { Text, Button, TextInput, GenericTemplate } from '../../common';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
 import { isEmailValid } from '../../utils';
@@ -28,7 +26,6 @@ const ForgetPasswordScreen = ({ route }) => {
     email: _email,
     incorrectEmail: false,
   });
-  const { theme } = useContext(ThemeContext);
 
   const checkEmail = () => {
     if (!isEmailValid(form.email)) {
@@ -77,52 +74,46 @@ const ForgetPasswordScreen = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeAreaView(theme)}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        <Text type="heading" bold>
-          {translate('forgetPasswordScreen.passwordRecovery')}
-        </Text>
-        <Text style={styles.defaultMargin}>
-          {translate('forgetPasswordScreen.requestEmailId')}
-        </Text>
-        <TextInput
-          autoCapitalize="none"
-          keyboardType="email-address"
-          placeholder={translate('common.email')}
-          autoCorrect={false}
-          value={form.email}
-          containerStyle={styles.defaultMargin}
-          editable={!(apiStatus === Status.LOADING)}
-          onSubmitEditing={onResetPress}
-          onChangeText={value =>
-            setValues(prevState => ({
-              ...prevState,
-              email: value.trim(),
-              incorrectEmail: false,
-            }))
-          }
-          errorMessage={
-            form.incorrectEmail ? translate('errors.invalidEmail') : ''
-          }
-          onBlur={checkEmail}
-        />
-        <Button
-          loading={apiStatus === Status.LOADING}
-          onPress={onResetPress}
-          style={styles.defaultMargin}
-          title={translate('forgetPasswordScreen.resetButtonTitle')}
-        />
-      </ScrollView>
-    </SafeAreaView>
+    <GenericTemplate scrollable style={styles.container}>
+      <Text type="heading" bold>
+        {translate('forgetPasswordScreen.passwordRecovery')}
+      </Text>
+      <Text style={styles.defaultMargin}>
+        {translate('forgetPasswordScreen.requestEmailId')}
+      </Text>
+      <TextInput
+        autoCapitalize="none"
+        keyboardType="email-address"
+        placeholder={translate('common.email')}
+        autoCorrect={false}
+        value={form.email}
+        containerStyle={styles.defaultMargin}
+        editable={!(apiStatus === Status.LOADING)}
+        onSubmitEditing={onResetPress}
+        onChangeText={value =>
+          setValues(prevState => ({
+            ...prevState,
+            email: value.trim(),
+            incorrectEmail: false,
+          }))
+        }
+        errorMessage={
+          form.incorrectEmail ? translate('errors.invalidEmail') : ''
+        }
+        onBlur={checkEmail}
+      />
+      <Button
+        loading={apiStatus === Status.LOADING}
+        onPress={onResetPress}
+        style={styles.defaultMargin}
+        title={translate('forgetPasswordScreen.resetButtonTitle')}
+      />
+    </GenericTemplate>
   );
 };
 
 const styles = StyleSheet.create({
-  safeAreaView: theme => ({
-    flex: 1,
-    backgroundColor: theme.backgroundColor,
-  }),
-  scrollView: {
+  container: {
     padding: SPACING.large,
   },
   defaultMargin: {

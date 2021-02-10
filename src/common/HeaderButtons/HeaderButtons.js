@@ -14,7 +14,7 @@ const HeaderButton = props => {
     <HB
       IconComponent={MaterialIcons}
       iconSize={DIMENS.common.iconSize}
-      color={theme.appbar.tintColor}
+      color={theme.navigation.colors.text}
       {...props}
     />
   );
@@ -29,7 +29,7 @@ const HeaderButtons = props => {
         <MaterialIcons
           name="more-vert"
           size={DIMENS.common.iconSize}
-          color={theme.appbar.tintColor}
+          color={theme.navigation.colors.text}
         />
       }
       {...props}

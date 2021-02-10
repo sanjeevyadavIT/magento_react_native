@@ -42,11 +42,11 @@ const MessageView = ({ message, type }) => {
 const getTextColor = (type, theme) => {
   switch (type) {
     case SUCCESS:
-      return theme.successColor;
+      return theme.colors.success;
     case ERROR:
-      return theme.errorColor;
+      return theme.colors.error;
     default:
-      return theme.bodyTextColor;
+      return theme.colors.gray500;
   }
 };
 

@@ -1,9 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react-native';
 import ModalSelect from './ModalSelect';
-import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 const data = [
   { key: 1, label: 'Red Apples' },
@@ -25,8 +23,8 @@ const styles = {
   },
   customModalStyle: {
     borderWidth: 2,
-    borderColor: theme.primaryDarkColor,
-    backgroundColor: theme.primaryColor,
+    borderColor: 'blue',
+    backgroundColor: 'blue',
   },
   customTextStyle: {
     color: 'white',
@@ -34,11 +32,6 @@ const styles = {
 };
 
 storiesOf('ModalSelect', module)
-  .addDecorator(getStory => (
-    <ThemeProvider theme={theme}>
-      <View style={styles.container}>{getStory()}</View>
-    </ThemeProvider>
-  ))
   .add('default', () => (
     <ModalSelect
       data={data}

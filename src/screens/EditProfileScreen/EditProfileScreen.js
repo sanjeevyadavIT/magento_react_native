@@ -203,7 +203,7 @@ const CartScreen = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
   }),
   innerContainer: {
     paddingHorizontal: SPACING.large,
@@ -217,11 +217,11 @@ const styles = StyleSheet.create({
   },
   dateContainer: theme => ({
     flexDirection: 'row',
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
     borderWidth: DIMENS.common.borderWidth,
     borderRadius: DIMENS.common.borderRadius,
     alignItems: 'center',
-    borderColor: theme.labelTextColor,
+    borderColor: theme.colors.gray400,
     minHeight: DIMENS.common.textInputHeight,
     marginTop: SPACING.large,
   }),

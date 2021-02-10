@@ -1,5 +1,8 @@
 package com.magento_react_native;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
@@ -25,4 +28,12 @@ public class MainActivity extends ReactActivity {
        }
      };
    }
+
+   @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    Intent intent = new Intent("onConfigurationChanged");
+    intent.putExtra("newConfig", newConfig);
+    sendBroadcast(intent);
+  }
 }

@@ -56,10 +56,10 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
     >
       <Icon name="person" style={styles.icon(theme)} />
       <View style={styles.lowerContainer}>
-        <Text type="subheading" bold style={styles.text(theme)}>
+        <Text type="subheading" bold style={styles.text}>
           {welcomeText}
         </Text>
-        <Icon name="chevron-right" color={theme.white} />
+        <Icon name="chevron-right" color="#fff" />
       </View>
     </TouchableOpacity>
   );
@@ -68,12 +68,12 @@ const DrawerHeader = ({ loggedIn, firstname, navigation }) => {
 const styles = StyleSheet.create({
   container: theme => ({
     height: DIMENS.drawerScreen.headerHeight,
-    backgroundColor: theme.appbar.backgroundColor,
+    backgroundColor: theme.colors.primary,
     borderWidth: 0,
     padding: SPACING.large,
   }),
   icon: theme => ({
-    backgroundColor: theme.white,
+    backgroundColor: theme.colors.white,
     alignSelf: 'flex-start',
     borderRadius: DIMENS.common.borderRadius,
     padding: SPACING.small,
@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  text: theme => ({
-    color: theme.white,
-  }),
+  text: {
+    color: '#fff',
+  },
 });
 
 DrawerHeader.propTypes = propTypes;

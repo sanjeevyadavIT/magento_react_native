@@ -32,7 +32,7 @@ const Spinner = ({ size, color, style }) => {
     <ActivityIndicator
       style={style}
       size={size}
-      color={color || theme.primaryColor}
+      color={color || theme.colors.primary}
     />
   );
 };

@@ -37,7 +37,9 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: !backgroundColor ? theme.transparent : backgroundColor,
+    backgroundColor: !backgroundColor
+      ? theme.colors.transparent
+      : backgroundColor,
   }),
 };
 

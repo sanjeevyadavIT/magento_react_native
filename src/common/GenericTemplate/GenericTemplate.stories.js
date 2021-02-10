@@ -3,15 +3,10 @@ import { storiesOf } from '@storybook/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import GenericTemplate from './GenericTemplate';
 import Text from '../Text/Text';
-import { ThemeProvider, lightTheme as theme } from '../../theme';
 import Status from '../../magento/Status';
 
 storiesOf('GenericTemplate', module)
-  .addDecorator(getStory => (
-    <SafeAreaProvider>
-      <ThemeProvider theme={theme}>{getStory()}</ThemeProvider>
-    </SafeAreaProvider>
-  ))
+  .addDecorator(getStory => <SafeAreaProvider>{getStory()}</SafeAreaProvider>)
   .add('default', () => (
     <GenericTemplate status={Status.DEFAULT}>
       <Text>

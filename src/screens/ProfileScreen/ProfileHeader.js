@@ -55,13 +55,13 @@ const styles = StyleSheet.create({
   backdrop: theme => ({
     ...StyleSheet.absoluteFill,
     top: DIMENS.profileScreen.profileImageSize / 2,
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
   }),
   profileImage: theme => ({
-    backgroundColor: theme.white,
+    backgroundColor: theme.colors.white,
     borderWidth: DIMENS.common.borderWidth,
     borderRadius: DIMENS.common.borderRadius,
-    borderColor: theme.borderColor,
+    borderColor: theme.colors.border,
     marginBottom: SPACING.small,
   }),
 });

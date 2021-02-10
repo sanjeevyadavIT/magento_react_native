@@ -1,15 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import Icon from './Icon';
-import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 storiesOf('Icon', module)
-  .addDecorator(getStory => (
-    <ThemeProvider theme={theme}>
-      <View style={{ padding: 16 }}>{getStory()}</View>
-    </ThemeProvider>
-  ))
   .add('default(material icons)', () => <Icon name="account-circle" />)
   .add('AntDesign icons', () => <Icon type="antdesign" name="meh" />)
   .add('Entypo icons', () => <Icon type="entypo" name="emoji-flirt" />)

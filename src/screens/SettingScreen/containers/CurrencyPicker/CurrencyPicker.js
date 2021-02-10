@@ -59,7 +59,7 @@ const styles = {
   currencyContainer: theme => ({
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderColor: theme.borderColor,
+    borderColor: theme.colors.border,
   }),
   textStyle: {
     textAlign: 'left',

@@ -89,9 +89,7 @@ const CategoryTreeItem = ({ category }) => {
           <Icon
             name={expanded ? 'arrow-drop-up' : 'arrow-drop-down'}
             color={
-              category.level === 2
-                ? theme.headingTextColor
-                : theme.bodyTextColor
+              category.level === 2 ? theme.colors.gray600 : theme.colors.gray500
             }
             onPress={() => setExpanded(prevState => !prevState)}
           />
@@ -103,12 +101,15 @@ const CategoryTreeItem = ({ category }) => {
   );
 };
 
+// FIX: Remove nested ternary operator
 const styles = StyleSheet.create({
   card: (level, position, theme) => ({
     backgroundColor:
       level === 2
-        ? PASTEL_COLORS[position % PASTEL_COLORS.length]
-        : theme.surfaceColor,
+        ? theme.navigation.dark
+          ? theme.colors.surface
+          : PASTEL_COLORS[position % PASTEL_COLORS.length]
+        : theme.colors.surface,
     paddingStart: (level - 1) * SPACING.large,
     paddingEnd: SPACING.large,
     paddingVertical: level === 2 ? 2 * SPACING.large : SPACING.medium,
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: level === 2 ? 0 : DIMENS.common.borderWidth,
-    borderColor: theme.borderColor,
+    borderColor: theme.colors.border,
     overflow: 'hidden',
     borderRadius: 0,
   }),

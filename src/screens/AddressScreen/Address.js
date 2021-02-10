@@ -134,10 +134,10 @@ const styles = StyleSheet.create({
   },
   default: theme => ({
     fontSize: 10,
-    color: theme.successColor,
+    color: theme.colors.success,
     textAlign: 'center',
     borderWidth: DIMENS.common.borderWidth,
-    borderColor: theme.successColor,
+    borderColor: theme.colors.success,
     paddingHorizontal: SPACING.tiny,
     marginTop: SPACING.tiny,
     borderRadius: 5,

@@ -49,7 +49,7 @@ const MediaViever = ({
           size={DIMENS.mediaViewer.closeIconSize}
           name="close-circle"
           type="material-community"
-          color={theme.primaryColor}
+          color={theme.colors.primary}
           onPress={() => navigation.pop()}
         />
         {media.length > 1 && (
