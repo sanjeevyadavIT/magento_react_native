@@ -468,17 +468,17 @@ const styles = StyleSheet.create({
     borderRadius: 0,
   },
   imageContainer: theme => ({
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
     marginBottom: SPACING.large,
   }),
   priceContainer: theme => ({
     flexDirection: 'row',
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
     padding: SPACING.large,
     marginBottom: SPACING.large,
   }),
   optionsContainer: theme => ({
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
     padding: SPACING.large,
     marginBottom: SPACING.large,
   }),

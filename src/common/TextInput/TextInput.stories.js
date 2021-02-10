@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { StorySection } from '../../../storybook/Decorator';
 import Text from '../Text/Text';
 import Divider from '../Divider/Divider';
 import TextInput from './TextInput';
 import Icon from '../Icon/Icon';
-import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 const styles = {
   customInputContainer: {
@@ -24,11 +23,6 @@ const styles = {
 };
 
 storiesOf('TextInput', module)
-  .addDecorator(getStory => (
-    <ThemeProvider theme={theme}>
-      <View style={{ borderWidth: 10, borderColor: 'pink' }}>{getStory()}</View>
-    </ThemeProvider>
-  ))
   .add('All', () => (
     <ScrollView>
       <Text type="h2">Stories</Text>

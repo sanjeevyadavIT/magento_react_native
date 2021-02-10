@@ -43,12 +43,7 @@ const BottomTabNavigator = ({ loggedIn, cartItemsCount, navigation }) => {
     });
 
   return (
-    <Tab.Navigator
-      lazy
-      tabBarOptions={{
-        activeTintColor: theme.primaryColor,
-      }}
-    >
+    <Tab.Navigator lazy tabBarOptions={theme.bottomBar}>
       <Tab.Screen
         name={NAVIGATION_TO_HOME_SCREEN}
         component={HomeScreen}

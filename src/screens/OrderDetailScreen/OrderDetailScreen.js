@@ -114,7 +114,7 @@ const OrderDetailScreen = ({
             name="phone"
             type="antdesign"
             size={14}
-            color={theme.successColor}
+            color={theme.colors.success}
             style={styles.iconStyle}
           />
           <Text>{orderDetail.billing_address.telephone}</Text>
@@ -124,7 +124,7 @@ const OrderDetailScreen = ({
             name="email"
             type="fontisto"
             size={14}
-            color={theme.errorColor}
+            color={theme.colors.error}
             style={styles.iconStyle}
           />
           <Text>{orderDetail.billing_address.email}</Text>
@@ -192,10 +192,10 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.small,
   },
   listItem: theme => ({
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
     paddingHorizontal: SPACING.large,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.borderColor,
+    borderColor: theme.colors.border,
   }),
 });
 

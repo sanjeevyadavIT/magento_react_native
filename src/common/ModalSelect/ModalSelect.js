@@ -149,7 +149,7 @@ const ModalSelect = ({
             <Icon
               name="arrow-drop-down"
               size={30}
-              color={placeholderTextColor || theme.labelTextColor}
+              color={placeholderTextColor || theme.colors.gray400}
             />
           )
         }

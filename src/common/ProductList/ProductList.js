@@ -133,7 +133,7 @@ const ProductList = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    backgroundColor: theme.white,
+    backgroundColor: theme.colors.white,
   }),
 });
 

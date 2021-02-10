@@ -93,8 +93,8 @@ const ProfileScreen = ({
           refreshing={status === Status.DEFAULT || status === Status.LOADING}
           onRefresh={_getCurrentCustomer}
           title={translate('common.pullToRefresh')}
-          tintColor={theme.primaryColor}
-          colors={[theme.primaryColor]}
+          tintColor={theme.colors.primary}
+          colors={[theme.colors.primary]}
         />
       }
     >
@@ -129,7 +129,7 @@ const ProfileScreen = ({
       <Button
         type="outline"
         title={translate('common.logout')}
-        tintColor={theme.errorColor}
+        tintColor={theme.colors.error}
         style={styles.logout}
         onPress={onLogoutPress}
       />
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   actionContainer: theme => ({
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
     marginBottom: SPACING.small,
   }),
   logout: {

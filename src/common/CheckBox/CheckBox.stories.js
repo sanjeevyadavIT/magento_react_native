@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react-native';
 import { action } from '@storybook/addon-actions';
 import CheckBox from './CheckBox';
-import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 storiesOf('CheckBox', module)
-  .addDecorator(getStory => (
-    <ThemeProvider theme={theme}>{getStory()}</ThemeProvider>
-  ))
   .add('disabled', () => (
     <CheckBox
       disabled

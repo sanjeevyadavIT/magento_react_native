@@ -3,7 +3,6 @@ import { ScrollView } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { StorySection, Divider } from '../../../storybook/Decorator';
 import Text from './Text';
-import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 const styles = {
   customText: {
@@ -16,9 +15,6 @@ const styles = {
 };
 
 storiesOf('Text', module)
-  .addDecorator(getStory => (
-    <ThemeProvider theme={theme}>{getStory()}</ThemeProvider>
-  ))
   .add('All', () => (
     <ScrollView>
       <Text bold type="heading">

@@ -1,18 +1,18 @@
-import { DefaultTheme } from '@react-navigation/native';
+import { DarkTheme } from '@react-navigation/native';
 
 /**
  * Colors containing for light theme
  */
-const WHITE = '#fff';
-const GRAY_100 = '#f9f9f9';
-const GRAY_200 = '#e0e0e0';
-const GRAY_300 = '#ced2d9';
-const GRAY_400 = '#979da0';
-const GRAY_500 = '#6d787e';
-const GRAY_600 = '#354052';
-const BLACK = '#000';
+const WHITE = '#000';
+const GRAY_100 = '#354052';
+const GRAY_200 = '#6d787e';
+const GRAY_300 = '#979da0';
+const GRAY_400 = '#ced2d9';
+const GRAY_500 = '#e0e0e0';
+const GRAY_600 = '#f9f9f9';
+const BLACK = '#fff';
 const PRIMARY_COLOR = '#2196F3';
-const ERROR_COLOR = '#ff190c';
+const ERROR_COLOR = '#CC0000';
 export default {
   colors: {
     white: WHITE,
@@ -30,23 +30,19 @@ export default {
     disabledDark: '#99A1A8',
     icon: GRAY_500,
     primary: PRIMARY_COLOR,
-    success: '#52c41a',
+    success: '#007E33',
     error: ERROR_COLOR,
-    warning: '#ffbb33',
-    info: '#33b5e5',
+    warning: '#33b5e5',
+    info: '#0099CC',
   },
   // ===========================================================
   // ============ GLOBAL React Navigation Theme ================
   // ===========================================================
   navigation: {
-    dark: false,
+    dark: true,
     colors: {
-      ...DefaultTheme.colors,
-      primary: PRIMARY_COLOR,
-      background: GRAY_100,
-      text: WHITE,
-      card: PRIMARY_COLOR,
-      border: GRAY_300,
+      ...DarkTheme.colors,
+      primary: '#fff',
       notification: ERROR_COLOR,
     },
   },
@@ -54,12 +50,6 @@ export default {
   // ================ Component Specific Style =================
   // ===========================================================
   appbar: {
-    statusBarColor: '#135E99',
-  },
-  bottomBar: {
-    activeTintColor: PRIMARY_COLOR,
-    inactiveTintColor: GRAY_400,
-    activeBackgroundColor: WHITE,
-    inactiveBackgroundColor: WHITE,
+    statusBarColor: '#000',
   },
 };

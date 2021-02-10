@@ -1,11 +1,11 @@
 import React from 'react';
+import { View } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import Price from './Price';
-import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 storiesOf('Price', module)
   .addDecorator(getStory => (
-    <ThemeProvider theme={theme}>{getStory()}</ThemeProvider>
+    <View style={{ backgroundColor: 'pink', padding: 16 }}>{getStory()}</View>
   ))
   .add('with basePrice', () => <Price basePrice={300} currencySymbol="$" />)
   .add('with integer basePrice & discountPrice', () => (

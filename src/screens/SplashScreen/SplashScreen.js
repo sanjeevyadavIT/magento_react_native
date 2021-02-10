@@ -69,7 +69,7 @@ const SplashScreen = ({ initializeApp: _initializeApp, navigation }) => {
 
   return (
     <View style={styles.container(theme)}>
-      <Text type="subheading" bold style={styles.title(theme)}>
+      <Text type="subheading" bold style={styles.title}>
         {translate('common.brandName')}
       </Text>
     </View>
@@ -79,14 +79,14 @@ const SplashScreen = ({ initializeApp: _initializeApp, navigation }) => {
 const styles = StyleSheet.create({
   container: theme => ({
     flex: 1,
-    backgroundColor: theme.primaryColor,
+    backgroundColor: theme.colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
   }),
-  title: theme => ({
+  title: {
     textAlign: 'center',
-    color: theme.white,
-  }),
+    color: '#fff',
+  },
 });
 
 SplashScreen.propTypes = propTypes;

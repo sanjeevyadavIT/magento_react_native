@@ -32,7 +32,7 @@ const ProfileItem = ({ title, subtitle, icon, onPress }) => {
           <Icon
             name={icon.name}
             type={icon.type || 'material'}
-            color={icon.color || theme.iconColor}
+            color={icon.color || theme.colors.icon}
             size={icon.size || DIMENS.common.iconSize}
           />
           <View style={styles.detail}>

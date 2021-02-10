@@ -104,8 +104,8 @@ const TextInput = ({
         )}
 
         <InputComponent
-          placeholderTextColor={placeholderTextColor || theme.labelTextColor}
-          underlineColorAndroid={theme.transparent}
+          placeholderTextColor={placeholderTextColor || theme.colors.gray400}
+          underlineColorAndroid={theme.colors.transparent}
           editable={!disabled}
           style={[
             styles.input(theme),
@@ -141,11 +141,11 @@ const styles = StyleSheet.create({
   }),
   inputContainer: (disabled, theme) => ({
     flexDirection: 'row',
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
     borderWidth: DIMENS.common.borderWidth,
     borderRadius: DIMENS.common.borderRadius,
     alignItems: 'center',
-    borderColor: disabled ? theme.disabledDarkColor : theme.labelTextColor,
+    borderColor: disabled ? theme.colors.disabledDark : theme.colors.gray400,
     minHeight: DIMENS.common.textInputHeight,
   }),
   input: theme => ({
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     flex: 1,
   }),
   disabledInput: theme => ({
-    color: theme.disabledColor,
+    color: theme.colors.disabled,
   }),
   iconContainer: {
     justifyContent: 'center',

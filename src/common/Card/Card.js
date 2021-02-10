@@ -66,7 +66,7 @@ const Card = ({ type, style, onPress, disabled, children }) => {
 };
 
 const shadowStyle = theme => ({
-  shadowColor: theme.black,
+  shadowColor: theme.colors.black,
   shadowOffset: {
     width: 0,
     height: 2,
@@ -79,9 +79,9 @@ const shadowStyle = theme => ({
 const styles = {
   container: (type, theme) => ({
     borderWidth: type === OUTLINE ? DIMENS.common.borderWidth : 0,
-    borderColor: theme.borderColor,
+    borderColor: theme.colors.border,
     borderRadius: DIMENS.common.borderRadius,
-    backgroundColor: theme.surfaceColor,
+    backgroundColor: theme.colors.surface,
   }),
 };
 

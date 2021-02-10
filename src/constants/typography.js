@@ -10,14 +10,14 @@ export default {
    */
   headingText: theme => ({
     fontFamily,
-    color: theme.headingTextColor,
+    color: theme.colors.gray600,
     fontSize: 18,
     fontStyle: 'normal',
     fontWeight: fontWeightRegular,
   }),
   headingTextBold: theme => ({
     fontFamily,
-    color: theme.headingTextColor,
+    color: theme.colors.gray600,
     fontSize: 18,
     fontStyle: 'normal',
     fontWeight: fontWeightBold,
@@ -27,14 +27,14 @@ export default {
    */
   subheadingText: theme => ({
     fontFamily,
-    color: theme.subHeadingTextColor,
+    color: theme.colors.gray500,
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: fontWeightRegular,
   }),
   subheadingTextBold: theme => ({
     fontFamily,
-    color: theme.subHeadingTextColor,
+    color: theme.colors.gray500,
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: fontWeightBold,
@@ -46,14 +46,14 @@ export default {
    */
   bodyText: theme => ({
     fontFamily,
-    color: theme.bodyTextColor,
+    color: theme.colors.gray500,
     fontSize: 14,
     fontStyle: 'normal',
     fontWeight: fontWeightRegular,
   }),
   bodyTextBold: theme => ({
     fontFamily,
-    color: theme.bodyTextColor,
+    color: theme.colors.gray500,
     fontSize: 14,
     fontStyle: 'normal',
     fontWeight: fontWeightBold,
@@ -64,14 +64,14 @@ export default {
    */
   labelText: theme => ({
     fontFamily,
-    color: theme.labelTextColor,
+    color: theme.colors.gray400,
     fontSize: 12,
     fontStyle: 'normal',
     fontWeight: fontWeightRegular,
   }),
   labelTextBold: theme => ({
     fontFamily,
-    color: theme.labelTextColor,
+    color: theme.colors.gray400,
     fontSize: 12,
     fontStyle: 'normal',
     fontWeight: fontWeightBold,
@@ -100,7 +100,7 @@ export default {
   formLabel: theme => ({
     fontFamily,
     fontSize: 16,
-    color: theme.labelTextColor,
+    color: theme.colors.gray400,
     fontWeight: fontWeightBold,
   }),
   /**
@@ -109,7 +109,7 @@ export default {
   formInput: theme => ({
     fontFamily,
     fontSize: 16,
-    color: theme.bodyTextColor,
+    color: theme.colors.gray500,
   }),
   /**
    * Form Error text style used only in TextInput component
@@ -117,7 +117,7 @@ export default {
   formError: theme => ({
     fontFamily,
     fontSize: 13,
-    color: theme.errorColor,
+    color: theme.colors.error,
   }),
   flashMessageTitle: {
     fontSize: 16,

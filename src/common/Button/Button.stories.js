@@ -6,12 +6,8 @@ import { StorySection } from '../../../storybook/Decorator';
 import Button from './Button';
 import Text from '../Text/Text';
 import Divider from '../Divider/Divider';
-import { ThemeProvider, lightTheme as theme } from '../../theme';
 
 storiesOf('Button', module)
-  .addDecorator(getStory => (
-    <ThemeProvider theme={theme}>{getStory()}</ThemeProvider>
-  ))
   .add('All', () => (
     <ScrollView>
       <Text type="h2">Stories</Text>

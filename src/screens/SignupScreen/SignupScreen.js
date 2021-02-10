@@ -186,7 +186,7 @@ const SignupScreen = ({ navigation }) => {
             name={secureEntry ? 'eye' : 'eye-off'}
             size={20}
             style={styles.iconPadding}
-            color={theme.labelTextColor}
+            color={theme.colors.gray400}
             onPress={() => toggleSecureEntry(!secureEntry)}
           />
         }

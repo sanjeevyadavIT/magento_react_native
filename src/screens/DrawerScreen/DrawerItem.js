@@ -29,7 +29,7 @@ const DrawerItem = ({ title, icon, onPress }) => {
           <Icon
             name={icon.name}
             type={icon.type || 'material'}
-            color={icon.color || theme.iconColor}
+            color={icon.color || theme.colors.icon}
             size={icon.size || DIMENS.common.iconSize}
           />
           <Text style={styles.title}>{title}</Text>

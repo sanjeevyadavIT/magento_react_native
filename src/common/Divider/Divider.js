@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: vertical ? '100%' : DIMENS.common.borderWidth,
     width: vertical ? DIMENS.common.borderWidth : '100%',
-    backgroundColor: theme.borderColor,
+    backgroundColor: theme.colors.border,
   }),
 });
 

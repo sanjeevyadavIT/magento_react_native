@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: SPACING.small,
     borderTopWidth: DIMENS.common.borderWidth,
-    borderColor: theme.borderColor,
-    backgroundColor: theme.surfaceColor,
+    borderColor: theme.colors.border,
+    backgroundColor: theme.colors.surface,
   }),
   totalPrice: {
     fontSize: DIMENS.cartScreen.totalPriceFontSize,

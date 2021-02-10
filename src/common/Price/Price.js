@@ -103,7 +103,7 @@ const styles = {
     marginEnd: SPACING.tiny,
   },
   basePriceText: (basePrice, discountPrice, theme) => ({
-    color: theme.gray600,
+    color: theme.colors.gray600,
     textDecorationLine:
       discountPrice && discountPrice < basePrice ? 'line-through' : 'none',
   }),

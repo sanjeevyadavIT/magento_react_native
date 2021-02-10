@@ -36,7 +36,7 @@ const CategoriesScreen = ({ status, errorMessage, categories }) => {
 
 const styles = StyleSheet.create({
   container: theme => ({
-    backgroundColor: theme.white,
+    backgroundColor: theme.colors.white,
   }),
 });
 
