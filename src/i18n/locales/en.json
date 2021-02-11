@@ -57,9 +57,9 @@
   "errors": {
     "genericError": "Something went wrong, please try again!",
     "homeCmsBlockId": "HOME CMS BLOCK ID ERROR",
-    "homeCmsBlockIdMessage": "Please Refer to Step 2 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
+    "homeCmsBlockIdMessage": "Please Refer to Step 2 in setup documentation.\n https://github.com/sanjeevyadavit/magento_react_native/wiki/Setup",
     "integrationTokenRequired": "INTEGRATION TOKEN REQUIRED ERROR",
-    "integrationTokenRequiredMessage": "Please refer to Step 1 in setup documentation.\n https://github.com/alexakasanjeev/magento_react_native/wiki/Setup",
+    "integrationTokenRequiredMessage": "Please refer to Step 1 in setup documentation.\n https://github.com/sanjeevyadavit/magento_react_native/wiki/Setup",
     "noResponseFromServer": "No reponse from Server",
     "noResponseFromServerMessage": "Check the server is running and make sure access token is set properly.",
     "404error": "Error 404: Not Found",
