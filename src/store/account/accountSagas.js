@@ -1,8 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import AsyncStorage from '@react-native-community/async-storage';
-import { magento, CUSTOMER_TOKEN } from '../../magento';
+import { magento } from '../../magento';
 import { MAGENTO, LOGIN_SUCCESS, ACTION_USER_LOGOUT } from '../../constants';
-import { getProductsSkuFromOrders } from '../../utils';
+import { getProductsSkuFromOrders, saveCustomerToken } from '../../utils';
 
 /**
  * worker saga: After successful login, dispatch actions
@@ -16,7 +15,7 @@ function* onLoginSuccess({ payload: { token } }) {
     magento.setCustomerToken(token);
     yield put({ type: MAGENTO.CURRENT_USER_REQUEST }); // Fetch details of current user
     yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Fetch current user cart
-    yield AsyncStorage.setItem(CUSTOMER_TOKEN, token);
+    yield saveCustomerToken(token);
   } catch (error) {
     console.log(error);
   }
@@ -42,7 +41,7 @@ function* getCurrentUser() {
 // worker saga: Add description
 function* clearCustomerAccessToken() {
   magento.setCustomerToken(null);
-  yield AsyncStorage.removeItem(CUSTOMER_TOKEN);
+  yield saveCustomerToken(null);
 }
 
 /**

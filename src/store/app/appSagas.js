@@ -1,9 +1,9 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import AsyncStorage from '@react-native-community/async-storage';
-import { magento, CUSTOMER_TOKEN, CURRENCY_CODE } from '../../magento';
+import { magento } from '../../magento';
 import { MAGENTO, USER_LOGGED_IN_STATUS } from '../../constants';
 import { magentoOptions } from '../../../config/magento';
 import { priceSignByCode } from '../../utils/price';
+import { loadCurrencyCode, loadCustomerToken } from '../../utils';
 
 // worker saga: Add Description
 function* initMagento() {
@@ -28,7 +28,7 @@ function* initMagento() {
     // fetch category tree
     yield put({ type: MAGENTO.CATEGORY_TREE_REQUEST });
     // Get Customer token from local db
-    const customerToken = yield AsyncStorage.getItem(CUSTOMER_TOKEN);
+    const customerToken = yield loadCustomerToken();
     magento.setCustomerToken(customerToken);
     if (customerToken) {
       yield put({ type: MAGENTO.CUSTOMER_CART_REQUEST }); // Fetch cart details
@@ -96,9 +96,7 @@ function* getCurrencyToBeDisplayed(currencyData) {
     'available_currency_codes' in currencyData &&
     currencyData.available_currency_codes.length > 0
   ) {
-    const previousSelectedCurrencyCode = yield AsyncStorage.getItem(
-      CURRENCY_CODE,
-    );
+    const previousSelectedCurrencyCode = yield loadCurrencyCode();
     if (
       previousSelectedCurrencyCode &&
       previousSelectedCurrencyCode !== code &&

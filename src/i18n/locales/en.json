@@ -212,7 +212,11 @@
   },
   "settingScreen": {
     "title": "Settings",
-    "changeCurrency": "Change currency"
+    "changeCurrency": "Change Currency",
+    "changeTheme": "Change Theme",
+    "systemDefault": "System Default",
+    "lightTheme": "light",
+    "darkTheme": "dark"
   },
   "shippingScreen": {
     "title": "Shipping method",
