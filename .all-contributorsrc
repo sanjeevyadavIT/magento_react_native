@@ -6,10 +6,10 @@
   "commit": false,
   "contributors": [
     {
-      "login": "alexakasanjeev",
+      "login": "sanjeevyadavit",
       "name": "Sanjeev yadav",
       "avatar_url": "https://avatars0.githubusercontent.com/u/13250741?v=4",
-      "profile": "http://twitter.com/alexakasanjeev",
+      "profile": "http://twitter.com/sanjeevyadavit",
       "contributions": [
         "code",
         "maintenance"
@@ -102,7 +102,7 @@
   ],
   "contributorsPerLine": 7,
   "projectName": "magento_react_native",
-  "projectOwner": "alexakasanjeev",
+  "projectOwner": "sanjeevyadavit",
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true

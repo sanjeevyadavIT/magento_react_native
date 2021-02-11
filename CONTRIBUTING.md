@@ -32,10 +32,10 @@ All API are imported into [Postman](https://www.getpostman.com/) as a collection
 
 ## <a name="management"></a> Project Management
 
-We use [Github issues](https://github.com/alexakasanjeev/magento_react_native/issues) to track all the features and bug. We follow this project management strategy.
+We use [Github issues](https://github.com/sanjeevyadavit/magento_react_native/issues) to track all the features and bug. We follow this project management strategy.
 
-1. Each new feature or bug, first get listed in [Github issues](https://github.com/alexakasanjeev/magento_react_native/issues).
-2. The issue card is imported into [Github Project board](https://github.com/alexakasanjeev/magento_react_native/projects/1).
+1. Each new feature or bug, first get listed in [Github issues](https://github.com/sanjeevyadavit/magento_react_native/issues).
+2. The issue card is imported into [Github Project board](https://github.com/sanjeevyadavit/magento_react_native/projects/1).
 3. By default, card is imported into `To do` column of the project board.
 4. If a feature/bug is being worked on, the card is moved into `In progress` column, and a corresponding `feature/awesome-feature-title` or `hotfix/terrible-bug-title` branch is created.
 5. Once completed
@@ -60,22 +60,22 @@ We follow [Git branch strategy](https://www.youtube.com/watch?v=aJnFGMclhU8). Th
 
 ### <a name="issue"></a> Reporting Bugs
 
-- **Ensure the bug was not already reported** by [searching all issues.](https://github.com/alexakasanjeev/magento_react_native/issues)
-- If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/alexakasanjeev/magento_react_native/issues/new?labels=bug&template=bug_report.md&title=). When you are creating a bug report, please include as many details as possible. Fill out the [required template](.github/ISSUE_TEMPLATE/bug_report.md), the information it asks for helps us resolve issues faster.
+- **Ensure the bug was not already reported** by [searching all issues.](https://github.com/sanjeevyadavit/magento_react_native/issues)
+- If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/sanjeevyadavit/magento_react_native/issues/new?labels=bug&template=bug_report.md&title=). When you are creating a bug report, please include as many details as possible. Fill out the [required template](.github/ISSUE_TEMPLATE/bug_report.md), the information it asks for helps us resolve issues faster.
 
 You can help the team even more and [submit a Pull Request with a fix](#pull-requests).
 
 ### <a name="feature"></a> Suggesting Enhancements
 
-Feature suggestions are tracked as [GitHub issues](https://github.com/alexakasanjeev/magento_react_native/issues). Feature requests are welcome. **But first, already open issues marked as [`Type: enhancement`](https://github.com/alexakasanjeev/magento_react_native/issues?q=is%3Aopen+is%3Aissue+label%3A%22Type%3A+Enhancement%22) will take priority**. So take a moment to find out whether your idea fits with the scope and aims of the project. Please provide as much detail and [context](.github/ISSUE_TEMPLATE/feature_request.md) as possible.
+Feature suggestions are tracked as [GitHub issues](https://github.com/sanjeevyadavit/magento_react_native/issues). Feature requests are welcome. **But first, already open issues marked as [`Type: enhancement`](https://github.com/sanjeevyadavit/magento_react_native/issues?q=is%3Aopen+is%3Aissue+label%3A%22Type%3A+Enhancement%22) will take priority**. So take a moment to find out whether your idea fits with the scope and aims of the project. Please provide as much detail and [context](.github/ISSUE_TEMPLATE/feature_request.md) as possible.
 
-- Make a [new feature request](https://github.com/alexakasanjeev/magento_react_native/issues/new?&labels=enhancement&template=feature_request.md&title=)
+- Make a [new feature request](https://github.com/sanjeevyadavit/magento_react_native/issues/new?&labels=enhancement&template=feature_request.md&title=)
 
 ### <a name="first-contribution"></a> Your First Code Contribution
 
-To help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issues](https://github.com/alexakasanjeev/magento_react_native/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) that contain small functionality/bug that have a relatively limited scope. This is a great place to get started.
+To help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issues](https://github.com/sanjeevyadavit/magento_react_native/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) that contain small functionality/bug that have a relatively limited scope. This is a great place to get started.
 
-If you are familiar with the codebase and has hands on experienced in Magento 2 or React Native, checkout [Help wanted issues](https://github.com/alexakasanjeev/magento_react_native/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)
+If you are familiar with the codebase and has hands on experienced in Magento 2 or React Native, checkout [Help wanted issues](https://github.com/sanjeevyadavit/magento_react_native/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)
 
 If you decide to fix an issue, please be sure to check the comment thread in case somebody is already working on a fix. If nobody is working on it at the moment, please leave a comment stating that you intend to work on it so other people don’t accidentally duplicate your effort.
 
@@ -87,7 +87,7 @@ Good pull requests - patches, improvements, new features - are a fantastic help.
 
 Please ask first before embarking on any significant pull request (e.g. implementing features, refactoring code), otherwise you risk spending a lot of time working on something that the project's developers might not want to merge into the project.
 
-1. Search [GitHub](https://github.com/alexakasanjeev/magento_react_native/pulls) for an open or closed PR that relates to your submission. You don't want to duplicate effort.
+1. Search [GitHub](https://github.com/sanjeevyadavit/magento_react_native/pulls) for an open or closed PR that relates to your submission. You don't want to duplicate effort.
 
 2. [Fork](http://help.github.com/fork-a-repo/) the project, clone your fork, and configure the remotes:
 
@@ -97,7 +97,7 @@ Please ask first before embarking on any significant pull request (e.g. implemen
     # Navigate to the newly cloned directory
     cd <repo-name>
     # Assign the original repo to a remote called "upstream"
-    git remote add upstream https://github.com/alexakasanjeev/magento_react_native.git
+    git remote add upstream https://github.com/sanjeevyadavit/magento_react_native.git
     ```
 
 3. If you cloned a while ago, get the latest changes from upstream:
