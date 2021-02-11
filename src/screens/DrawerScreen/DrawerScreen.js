@@ -21,10 +21,6 @@ import { translate } from '../../i18n';
 const propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   /**
-   * Number of currency website supports
-   */
-  currencies: PropTypes.arrayOf(PropTypes.string),
-  /**
    * Redux action to dispatch logout action
    */
   logout: PropTypes.func.isRequired,
@@ -33,16 +29,9 @@ const propTypes = {
   }).isRequired,
 };
 
-const defaultProps = {
-  currencies: [],
-};
+const defaultProps = {};
 
-const DrawerScreen = ({
-  loggedIn,
-  currencies,
-  logout: _logout,
-  navigation,
-}) => {
+const DrawerScreen = ({ loggedIn, logout: _logout, navigation }) => {
   const { theme } = useContext(ThemeContext);
 
   function onLogoutPress() {
@@ -74,13 +63,11 @@ const DrawerScreen = ({
         icon={{ name: 'appstore-o', type: 'antdesign' }}
         onPress={() => navigation.navigate(NAVIGATION_TO_CATEGORIES_SCREEN)}
       />
-      {currencies.length > 1 && (
-        <DrawerItem
-          title={translate('settingScreen.title')}
-          icon={{ name: 'settings' }}
-          onPress={() => navigation.navigate(NAVIGATION_TO_SETTING_SCREEN)}
-        />
-      )}
+      <DrawerItem
+        title={translate('settingScreen.title')}
+        icon={{ name: 'settings' }}
+        onPress={() => navigation.navigate(NAVIGATION_TO_SETTING_SCREEN)}
+      />
       {loggedIn && (
         <Button
           type="outline"
@@ -108,12 +95,10 @@ DrawerScreen.propTypes = propTypes;
 
 DrawerScreen.defaultProps = defaultProps;
 
-const mapStateToProps = ({ magento, account }) => {
-  const { currency: { available_currency_codes: currencies } = {} } = magento;
+const mapStateToProps = ({ account }) => {
   const { loggedIn } = account;
   return {
     loggedIn,
-    currencies,
   };
 };
 

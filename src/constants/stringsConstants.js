@@ -16,3 +16,8 @@ export const THUMBNAIL_SK = 'thumbnail';
 export const URL_KEY_SK = 'url_key';
 export const DESCRIPTION_SK = 'description';
 export const CUSTOM_ATTRIBUTES_SK = 'custom_attributes';
+// ============================================================
+// ========================= UI THEME =========================
+// ============================================================
+export const LIGHT_THEME_LK = 'light';
+export const DARK_THEME_LK = 'dark';

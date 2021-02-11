@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ThemeContext from './ThemeContext';
 
-const ThemeProvider = ({ theme, children }) => {
+const ThemeProvider = ({ theme: initialTheme, children }) => {
+  const [theme, setTheme] = useState(initialTheme);
+  const value = {
+    theme,
+    setTheme,
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
@@ -45,11 +51,11 @@ ThemeProvider.propTypes = {
        * Color which will replace primary color,
        * when component is in disabled state
        */
-      disabledColor: PropTypes.string.isRequired,
+      disabled: PropTypes.string.isRequired,
       /**
        * disabledDark: to be used for border color & text color of disabled component
        */
-      disabledDarkColor: PropTypes.string.isRequired,
+      disabledDark: PropTypes.string.isRequired,
       /**
        * Green shade for success messages and icons.
        */

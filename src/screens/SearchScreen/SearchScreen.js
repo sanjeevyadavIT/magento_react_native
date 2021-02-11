@@ -27,7 +27,6 @@ const SearchScreen = ({ currencySymbol, currencyRate }) => {
   const [moreApiStatus, setMoreApiStatus] = useState(Status.DEFAULT);
   const [products, setProducts] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
-  console.log({ searchText });
 
   useEffect(() => {
     if (searchText.trim() === '' || searchText.endsWith(ESCAPE_CLAUSE)) return;

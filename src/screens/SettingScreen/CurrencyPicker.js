@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import AsyncStorage from '@react-native-community/async-storage';
-import { CURRENCY_CODE } from '../../../../magento';
-import { ModalSelect } from '../../../../common';
-import { priceSignByCode } from '../../../../utils/price';
-import { changeCurrency } from '../../../../store/actions';
-import { translate } from '../../../../i18n';
-import { ThemeContext } from '../../../../theme';
+import { ModalSelect } from '../../common';
+import { priceSignByCode } from '../../utils/price';
+import { changeCurrency } from '../../store/actions';
+import { translate } from '../../i18n';
+import { ThemeContext } from '../../theme';
+import { saveCurrencyCode } from '../../utils';
 
 const CurrencyPicker = ({
   currencies,
@@ -32,8 +31,9 @@ const CurrencyPicker = ({
   };
 
   const onChange = (itemKey, item) => {
-    AsyncStorage.setItem(CURRENCY_CODE, itemKey);
+    saveCurrencyCode(itemKey); // In AsyncStorage
     _changeCurrency(
+      // In redux
       itemKey,
       priceSignByCode(itemKey),
       currencyExchangeRateByCode(itemKey, exchangeRates),

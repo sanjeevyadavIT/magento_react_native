@@ -1,58 +1,80 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Provider as StoreProvider } from 'react-redux';
 import { Appearance, AppearanceProvider } from 'react-native-appearance';
 import FlashMessage from 'react-native-flash-message';
-import { TYPOGRAPHY } from './constants';
-import { ThemeProvider, lightTheme, darkTheme } from './theme';
-import { Spinner } from './common';
+import { DARK_THEME_LK, TYPOGRAPHY } from './constants';
+import { ThemeContext, ThemeProvider, lightTheme, darkTheme } from './theme';
+import { loadThemeType } from './utils';
 import RootNavigator from './navigation';
 import store from './store';
 
 const App = () => {
-  const [ready, setReady] = useState(false);
-  const [colorScheme, setColorScheme] = useState();
+  const { setTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    async function initializeTheme() {
+      try {
+        const userThemePreference = await loadThemeType(); // has user manually set theme
+        const appearance = Appearance.getColorScheme(); // system current color preference
+        let theme;
+        if (userThemePreference) {
+          theme =
+            userThemePreference === DARK_THEME_LK ? darkTheme : lightTheme;
+        } else {
+          theme = appearance === DARK_THEME_LK ? darkTheme : lightTheme;
+        }
+        handleThemeChange(theme);
+      } catch (error) {
+        // Something went wrong
+      }
+    }
+
+    initializeTheme();
+  }, []);
 
   useEffect(() => {
     const subscription = Appearance.addChangeListener(
-      ({ colorScheme: newColorScheme }) => {
-        setColorScheme(newColorScheme);
-        const theme = newColorScheme === 'dark' ? darkTheme : lightTheme;
-        FlashMessage.setColorTheme({
-          success: theme.colors.success,
-          info: theme.colors.info,
-          warning: theme.colors.warning,
-          danger: theme.colors.error,
-        });
+      async ({ colorScheme: newColorScheme }) => {
+        const userThemePreference = await loadThemeType();
+        if (userThemePreference == null) {
+          const theme = newColorScheme === 'dark' ? darkTheme : lightTheme;
+          handleThemeChange(theme);
+        }
       },
     );
 
     return () => subscription.remove();
   }, []);
 
-  useEffect(() => {
-    setColorScheme(Appearance.getColorScheme());
-    setReady(true);
-  }, []);
+  const handleThemeChange = theme => {
+    FlashMessage.setColorTheme({
+      success: theme.colors.success,
+      info: theme.colors.info,
+      warning: theme.colors.warning,
+      danger: theme.colors.error,
+    });
+    setTheme(theme);
+  };
 
-  if (ready) {
-    return (
-      <StoreProvider store={store}>
-        <ThemeProvider theme={colorScheme === 'dark' ? darkTheme : lightTheme}>
-          <AppearanceProvider>
-            <RootNavigator />
-          </AppearanceProvider>
-          <FlashMessage
-            position="top"
-            titleStyle={TYPOGRAPHY.flashMessageTitle}
-          />
-        </ThemeProvider>
-      </StoreProvider>
-    );
-  }
-
-  // TODO: SplashScreen logic
-  return <Spinner />;
+  return (
+    <>
+      <RootNavigator />
+      <FlashMessage position="top" titleStyle={TYPOGRAPHY.flashMessageTitle} />
+    </>
+  );
 };
 
-export default App;
+const RootWrapper = () => {
+  return (
+    <StoreProvider store={store}>
+      <AppearanceProvider>
+        <ThemeProvider theme={lightTheme}>
+          <App />
+        </ThemeProvider>
+      </AppearanceProvider>
+    </StoreProvider>
+  );
+};
+
+export default RootWrapper;

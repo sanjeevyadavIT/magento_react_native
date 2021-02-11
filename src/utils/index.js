@@ -18,5 +18,4 @@ export * from './order';
 export * from './primitiveChecks';
 export * from './validations';
 export * from './date';
-
-export const delay = ms => new Promise(res => setTimeout(res, ms));
+export * from './storage';
