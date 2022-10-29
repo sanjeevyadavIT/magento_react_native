@@ -39,7 +39,7 @@
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.7.0",
     "react-native-share": "^4.0.1",
-    "react-native-svg": "^12.1.0",
+    "react-native-svg": "12.1.0",
     "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "^7.0.0",
     "react-native-webview": "^10.9.0",
