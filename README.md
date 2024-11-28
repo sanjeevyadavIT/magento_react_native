@@ -1,4 +1,6 @@
-# MageCart : Magento 2 React Native eCommerce App
+# MageCart : Magento 2 React Native eCommerce App [OLD]
+
+> Checkout `main` branch for new version
 
 ![React Native](https://img.shields.io/badge/react--native-0.62.2-brightgreen)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/sanjeevyadavit/magento_react_native/issues)
