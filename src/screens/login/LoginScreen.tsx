@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { loginUser } from '../../api/magentoApi';
+import { RootStackParamList } from '../../navigation/types';
 
-const LoginScreen = (): React.JSX.Element => {
+interface Props {}
+
+const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, "Login"> & Props> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -45,6 +49,11 @@ const LoginScreen = (): React.JSX.Element => {
       <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
         <Text style={styles.buttonText}>{loading ? 'Logging in...' : 'Login'}</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.signupContainer} onPress={() => {
+        navigation.navigate("Signup")
+      }}>
+        <Text style={styles.signupText}>Don't have an account? Signup</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -79,6 +88,17 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
+  signupContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    marginBottom: 32
+  },
+  signupText: {
+    textAlign: 'center',
+    textDecorationLine: 'underline'
+  }
 });
 
 export default LoginScreen;
