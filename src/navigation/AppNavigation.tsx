@@ -14,15 +14,32 @@ import {
 import LoginScreen from '../screens/login/LoginScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import SignupScreen from '../screens/signup/SignupScreen';
+import Ionicons from '../components/icon/Icon';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabNavigation = (): React.JSX.Element => {
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = focused ? 'home' : 'home-outline';
+          } else if (route.name === 'Categories') {
+            iconName = focused ? 'apps' : 'apps-outline';
+          } else {
+            iconName = focused ? 'cart' : 'cart-outline';
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
         headerShown: false,
-      }}>
+        tabBarActiveTintColor: 'black', // TODO: Use Brand color here
+        tabBarInactiveTintColor: 'gray',
+      })}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Categories" component={CategoriesScreen} />
       <Tab.Screen name="Cart" component={CartScreen} />
@@ -63,7 +80,13 @@ const RootNavigation = (): React.JSX.Element => {
         component={BottomTabNavigation}
         options={({route}) => ({
           headerTitle: getHeaderTitle(route),
-          headerRight: () => <Button title="Profile" onPress={openProfile} />,
+          headerRight: () => (
+            <Ionicons
+              onPress={openProfile}
+              name="person-circle-outline"
+              size={30}
+            />
+          ),
         })}
       />
       {isLoggedIn ? (
