@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { loginUser } from '../../api/magentoApi';
-import { RootStackParamList } from '../../navigation/types';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+import {useTranslation} from 'react-i18next';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {loginUser} from '../../api/magentoApi';
+import {RootStackParamList} from '../../navigation/types';
 import useUserStore from '../../store/useUserStore';
 
 interface Props {}
 
-const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, "Login"> & Props> = ({ navigation }) => {
+const LoginScreen: React.FC<
+  NativeStackScreenProps<RootStackParamList, 'Login'> & Props
+> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const login = useUserStore(state => state.login);
+  const {t} = useTranslation();
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Error', 'Please fill out all fields');
+      Alert.alert(t('common.error'), t('login.fillDetails'));
       return;
     }
 
@@ -23,11 +34,11 @@ const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, "Login"> 
     try {
       const token = await loginUser(email, password);
       login(token);
-      navigation.navigate("BottomTab", {
-        screen: "Home"
-      })
+      navigation.navigate('BottomTab', {
+        screen: 'Home',
+      });
     } catch (error) {
-      Alert.alert('Login Failed', error.message);
+      Alert.alert(t('login.failedMsg'), error.message);
     } finally {
       setLoading(false);
     }
@@ -35,10 +46,10 @@ const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, "Login"> 
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>{t('login.title')}</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder={t('login.email')}
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
@@ -46,18 +57,25 @@ const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, "Login"> 
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder={t('login.password')}
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
-        <Text style={styles.buttonText}>{loading ? 'Logging in...' : 'Login'}</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleLogin}
+        disabled={loading}>
+        <Text style={styles.buttonText}>
+          {t(loading ? 'login.loginLoadingMsg' : 'login.title')}
+        </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.signupContainer} onPress={() => {
-        navigation.navigate("Signup")
-      }}>
-        <Text style={styles.signupText}>Don't have an account? Signup</Text>
+      <TouchableOpacity
+        style={styles.signupContainer}
+        onPress={() => {
+          navigation.navigate('Signup');
+        }}>
+        <Text style={styles.signupText}>{t('login.signupMsg')}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -98,12 +116,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    marginBottom: 32
+    marginBottom: 32,
   },
   signupText: {
     textAlign: 'center',
-    textDecorationLine: 'underline'
-  }
+    textDecorationLine: 'underline',
+  },
 });
 
 export default LoginScreen;

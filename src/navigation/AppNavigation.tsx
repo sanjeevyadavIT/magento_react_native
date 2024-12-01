@@ -16,10 +16,12 @@ import ProfileScreen from '../screens/profile/ProfileScreen';
 import SignupScreen from '../screens/signup/SignupScreen';
 import Ionicons from '../components/icon/Ionicons';
 import useUserStore from '../store/useUserStore';
+import {useTranslation} from 'react-i18next';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabNavigation = (): React.JSX.Element => {
+  const {t} = useTranslation();
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -41,9 +43,21 @@ const BottomTabNavigation = (): React.JSX.Element => {
         tabBarActiveTintColor: 'black', // TODO: Use Brand color here
         tabBarInactiveTintColor: 'gray',
       })}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Categories" component={CategoriesScreen} />
-      <Tab.Screen name="Cart" component={CartScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{title: t('common.home')}}
+      />
+      <Tab.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{title: t('categories.title', { count: 2 })}}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{title: t('cart.title')}}
+      />
     </Tab.Navigator>
   );
 };
@@ -51,9 +65,10 @@ const BottomTabNavigation = (): React.JSX.Element => {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation = (): React.JSX.Element => {
-  const userToken = useUserStore(state => state.userToken)
+  const userToken = useUserStore(state => state.userToken);
   const navigation = useNavigation();
-  const isLoggedIn = !!userToken
+  const {t} = useTranslation();
+  const isLoggedIn = !!userToken;
 
   const openProfile = () => {
     navigation?.navigate(isLoggedIn ? 'Profile' : 'Login');
@@ -62,16 +77,16 @@ const RootNavigation = (): React.JSX.Element => {
   function getHeaderTitle(route: any) {
     // If the focused route is not found, we need to assume it's the initial screen
     // This can happen during if there hasn't been any navigation inside the screen
-    // In our case, it's "Feed" as that's the first screen inside the navigator
+    // In our case, it's "Home" as that's the first screen inside the navigator
     const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
 
     switch (routeName) {
       case 'Home':
-        return 'MageCart';
+        return t('common.appName');
       case 'Categories':
-        return 'Categories';
+        return t('categories.title', { count: 2 });
       case 'Cart':
-        return 'Cart';
+        return t('cart.title');
     }
   }
 

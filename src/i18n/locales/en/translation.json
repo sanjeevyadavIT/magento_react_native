@@ -1,0 +1,23 @@
+{
+    "common": {
+        "appName": "MageCart",
+        "home": "Home",
+        "error": "Error"
+    },
+    "categories": {
+        "title_one": "Category",
+        "title_other": "Categories"
+    },
+    "cart": {
+        "title": "Cart"
+    },
+    "login": {
+       "title": "Login",
+       "email": "Email",
+       "password": "Password",
+       "signupMsg": "Don't have an account? Signup",
+       "fillDetails": "Please fill out all fields",
+       "failedMsg": "Login failed",
+       "loginLoadingMsg": "Logging in..."
+    }
+}
