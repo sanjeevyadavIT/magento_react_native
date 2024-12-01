@@ -51,11 +51,12 @@ const BottomTabNavigation = (): React.JSX.Element => {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation = (): React.JSX.Element => {
-  const isLoggedIn = useUserStore(state => state.isLoggedIn)
+  const userToken = useUserStore(state => state.userToken)
   const navigation = useNavigation();
+  const isLoggedIn = !!userToken
 
   const openProfile = () => {
-    navigation?.navigate(isLoggedIn() ? 'Profile' : 'Login');
+    navigation?.navigate(isLoggedIn ? 'Profile' : 'Login');
   };
 
   function getHeaderTitle(route: any) {
@@ -90,7 +91,7 @@ const RootNavigation = (): React.JSX.Element => {
           ),
         })}
       />
-      {isLoggedIn() ? (
+      {isLoggedIn ? (
         <RootStack.Group>
           <RootStack.Screen name="Profile" component={ProfileScreen} />
         </RootStack.Group>

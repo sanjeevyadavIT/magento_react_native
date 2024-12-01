@@ -12,7 +12,7 @@ const createPersistentStore = <T>({
   storeInitializer,
   persistStoreName,
 }: GetStoreCreatorTypes<T>) => {
-  let createdStore = create(
+  let createdStore = create<T>()(
     persist(immer(storeInitializer), {
       name: persistStoreName,
       storage: createJSONStorage(() => AsyncStorage),
