@@ -14,7 +14,8 @@ import {
 import LoginScreen from '../screens/login/LoginScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import SignupScreen from '../screens/signup/SignupScreen';
-import Ionicons from '../components/icon/Icon';
+import Ionicons from '../components/icon/Ionicons';
+import useUserStore from '../store/useUserStore';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -50,11 +51,11 @@ const BottomTabNavigation = (): React.JSX.Element => {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation = (): React.JSX.Element => {
-  const isLoggedIn = false; // TODO: Dynamically update this value
+  const { isLoggedIn } = useUserStore()
   const navigation = useNavigation();
 
   const openProfile = () => {
-    navigation?.navigate(isLoggedIn ? 'Profile' : 'Login');
+    navigation?.navigate(isLoggedIn() ? 'Profile' : 'Login');
   };
 
   function getHeaderTitle(route: any) {
@@ -89,7 +90,7 @@ const RootNavigation = (): React.JSX.Element => {
           ),
         })}
       />
-      {isLoggedIn ? (
+      {isLoggedIn() ? (
         <RootStack.Group>
           <RootStack.Screen name="Profile" component={ProfileScreen} />
         </RootStack.Group>

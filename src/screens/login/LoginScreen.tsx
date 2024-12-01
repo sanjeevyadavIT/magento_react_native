@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'reac
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { loginUser } from '../../api/magentoApi';
 import { RootStackParamList } from '../../navigation/types';
+import useUserStore from '../../store/useUserStore';
 
 interface Props {}
 
@@ -10,6 +11,7 @@ const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, "Login"> 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const { login } = useUserStore();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -20,7 +22,10 @@ const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, "Login"> 
     setLoading(true);
     try {
       const token = await loginUser(email, password);
-      Alert.alert('Success', `Logged in! Token: ${token}`);
+      login(token);
+      navigation.navigate("BottomTab", {
+        screen: "Home"
+      })
     } catch (error) {
       Alert.alert('Login Failed', error.message);
     } finally {

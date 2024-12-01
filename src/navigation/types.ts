@@ -5,7 +5,9 @@ export type BottomTabParamList = {
 };
 
 export type RootStackParamList = {
-	BottomTab?: BottomTabParamList;
+	BottomTab?: {
+		screen: keyof BottomTabParamList;
+	};
 	Profile: undefined;
 	Login: undefined;
 	Signup: undefined;
