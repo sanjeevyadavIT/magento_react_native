@@ -1,13 +1,16 @@
 import createPersistentStore from './createPersistentStore';
 
-interface UserStore {
+type UserState = {
   userToken: string | undefined;
+}
+
+type UserAction = {
   login: (token: string) => void;
   logout: () => void;
   isLoggedIn: () => boolean;
 }
 
-const useUserStore = createPersistentStore<UserStore>({
+const useUserStore = createPersistentStore<UserState & UserAction>({
   storeInitializer: (set, get) => ({
     userToken: undefined,
     login: (token: string) => set({userToken: token}),

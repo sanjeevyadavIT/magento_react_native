@@ -11,7 +11,7 @@ const LoginScreen: React.FC<NativeStackScreenProps<RootStackParamList, "Login"> 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useUserStore();
+  const login = useUserStore(state => state.login);
 
   const handleLogin = async () => {
     if (!email || !password) {

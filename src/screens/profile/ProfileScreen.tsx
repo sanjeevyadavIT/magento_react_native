@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ProfileScreen: React.FC<Props> = ({ title = 'Profile Screen' }) => {
-  const { logout } = useUserStore();
+  const logout = useUserStore(state => state.logout);
   return (
     <View>
       <Text>{title}</Text>

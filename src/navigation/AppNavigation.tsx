@@ -51,7 +51,7 @@ const BottomTabNavigation = (): React.JSX.Element => {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation = (): React.JSX.Element => {
-  const { isLoggedIn } = useUserStore()
+  const isLoggedIn = useUserStore(state => state.isLoggedIn)
   const navigation = useNavigation();
 
   const openProfile = () => {
