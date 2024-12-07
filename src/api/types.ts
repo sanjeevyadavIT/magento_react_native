@@ -1,15 +1,25 @@
+import { AxiosError } from 'axios';
+
 export interface ApiService {
-  login({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }): Promise<NetworkResult<LoginResponse>>;
+    login({
+        email,
+        password,
+    }: {
+        email: string;
+        password: string;
+    }): Promise<ApiResponse<LoginResponse>>;
 }
 
-export type NetworkResult<T> =
-  | {status: 'SUCCESS'; data: T}
-  | {status: 'ERROR'; message: string};
+export interface ApiErrorResponse<T> {
+    ok: false;
+    originalError: AxiosError;
+}
+
+export interface ApiOkResponse<T> {
+    ok: true;
+    data?: T;
+}
+
+export type ApiResponse<T, U = T> = ApiErrorResponse<U> | ApiOkResponse<T>;
 
 export type LoginResponse = string;

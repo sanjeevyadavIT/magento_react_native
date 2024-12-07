@@ -6,7 +6,11 @@
         "android": "react-native run-android",
         "ios": "react-native run-ios",
         "lint": "eslint .",
+        "set:dev": "shx echo \"const environment: 'staging' | 'production' = 'staging';\n\nexport default environment;\"> config/active.env.ts",
+        "set:prod": "shx echo \"const environment: 'staging' | 'production' = 'production';\n\nexport default environment;\"> config/active.env.ts",
         "start": "react-native start",
+        "start:dev": "npm run set:dev; npm start",
+        "start:prod": "npm run set:prod; npm start",
         "test": "jest"
     },
     "dependencies": {
@@ -47,6 +51,7 @@
         "jest": "^29.6.3",
         "prettier": "2.8.8",
         "react-test-renderer": "18.3.1",
+        "shx": "^0.3.4",
         "typescript": "5.0.4"
     },
     "engines": {

@@ -1,80 +1,77 @@
 import apiClient from './apiClient';
-import { ApiService, LoginResponse, NetworkResult } from './types';
+import { ApiResponse } from './types';
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type MagentoUserType = 'ADMIN' | 'CLIENT' | 'GUEST';
 
-class RestApiService implements ApiService {
+class RestApiService {
     private async send<T, U>(
-        url: string,
+        endPoint: string,
         method: HttpMethod,
+        type: MagentoUserType,
         payload?: U,
         params?: Record<string, any>,
-    ): Promise<NetworkResult<T>> {
+    ): Promise<ApiResponse<T>> {
         try {
+            // TODO: based on type change authorization token
             const response = await apiClient.request<T>({
-                url,
+                url: endPoint,
                 method,
                 ...(method === 'GET' && { params }), // Attach query parameters for GET
                 ...(method !== 'GET' && { data: payload }), // Attach body payload for non-GET
+                headers: {
+                    magentoUserType: type,
+                },
             });
 
             return {
-                status: 'SUCCESS',
+                ok: true,
                 data: response.data,
             };
-        } catch (error) {
+        } catch (error: any) {
             return {
-                status: 'ERROR',
-                message:
-                    error instanceof Error
-                        ? error.message
-                        : 'An unexpected error occurred',
+                ok: false,
+                originalError: error,
             };
         }
     }
 
-    private async get<T>(
-        url: string,
+    async get<T>(
+        endPoint: string,
+        type: MagentoUserType,
         params?: Record<string, any>,
-    ): Promise<NetworkResult<T>> {
-        return this.send<T, undefined>(url, 'GET', undefined, params);
-    }
-
-    private async post<T, U>(
-        url: string,
-        payload: U,
-    ): Promise<NetworkResult<T>> {
-        return this.send<T, U>(url, 'POST', payload);
-    }
-
-    private async put<T, U>(
-        url: string,
-        payload: U,
-    ): Promise<NetworkResult<T>> {
-        return this.send<T, U>(url, 'PUT', payload);
-    }
-
-    private async delete<T, U>(
-        url: string,
-        payload?: U,
-    ): Promise<NetworkResult<T>> {
-        return this.send<T, U>(url, 'DELETE', payload);
-    }
-
-    async login({
-        email,
-        password,
-    }: {
-        email: string;
-        password: string;
-    }): Promise<NetworkResult<LoginResponse>> {
-        return this.post<LoginResponse, { username: string; password: string }>(
-            '/integration/customer/token',
-            {
-                username: email,
-                password,
-            },
+    ): Promise<ApiResponse<T>> {
+        return this.send<T, undefined>(
+            endPoint,
+            'GET',
+            type,
+            undefined,
+            params,
         );
+    }
+
+    async post<T, U>(
+        endPoint: string,
+        type: MagentoUserType,
+        payload: U,
+    ): Promise<ApiResponse<T>> {
+        return this.send<T, U>(endPoint, 'POST', type, payload);
+    }
+
+    async put<T, U>(
+        endPoint: string,
+        type: MagentoUserType,
+        payload: U,
+    ): Promise<ApiResponse<T>> {
+        return this.send<T, U>(endPoint, 'PUT', type, payload);
+    }
+
+    async delete<T, U>(
+        endPoint: string,
+        type: MagentoUserType,
+        payload?: U,
+    ): Promise<ApiResponse<T>> {
+        return this.send<T, U>(endPoint, 'DELETE', type, payload);
     }
 }
 

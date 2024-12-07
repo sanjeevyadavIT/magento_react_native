@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import useUserStore from '../../store/useUserStore';
-import { apiService } from '../../api';
+import { login } from '../../api';
 
 interface Props {}
 
@@ -21,7 +21,7 @@ const LoginScreen: React.FC<
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const login = useUserStore(state => state.login);
+    const saveCustomerToken = useUserStore(state => state.login);
     const { t } = useTranslation();
 
     const handleLogin = async () => {
@@ -32,18 +32,18 @@ const LoginScreen: React.FC<
 
         setLoading(true);
         try {
-            const response = await apiService.login({ email, password });
+            const response = await login({ email, password });
 
-            if (response.status === 'SUCCESS') {
-                login(response.data);
+            if (response.ok && response.data) {
+                saveCustomerToken(response.data);
                 navigation.navigate('BottomTab', {
                     screen: 'Home',
                 });
-            } else if (response.status === 'ERROR') {
-                throw new Error(response.message);
+            } else if(!response.ok){
+                throw response.originalError;
             }
-        } catch (error) {
-            Alert.alert(t('login.failedMsg'), error.message);
+        } catch (error: any) {
+            Alert.alert(t('login.failedMsg'), error?.message);
         } finally {
             setLoading(false);
         }
